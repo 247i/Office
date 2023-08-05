@@ -173,6 +173,7 @@
                     </child>
                     <child>
                       <object class="GtkLabel" id="searchlabel">
+                        <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="no-show-all">True</property>
                         <property name="hexpand">True</property>
@@ -181,7 +182,7 @@
                         <property name="xalign">0</property>
                         <child internal-child="accessible">
                           <object class="AtkObject" id="searchlabel-atkobject">
-                            <property name="AtkObject::accessible-role" translatable="no">static</property>
+                            <property name="AtkObject::accessible-role" translatable="no">notification</property>
                           </object>
                         </child>
                       </object>
@@ -525,6 +526,9 @@
                         <property name="AtkObject::accessible-description" translatable="yes" context="findreplacedialog|extended_tip|search">Finds and selects the next occurrence of the text or format that you are searching for in the document.</property>
                       </object>
                     </child>
+                    <style>
+                      <class name="suggested-action"/>
+                    </style>
                   </object>
                   <packing>
                     <property name="expand">False</property>

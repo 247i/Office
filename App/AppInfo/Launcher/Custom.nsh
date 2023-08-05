@@ -107,6 +107,12 @@ ${SegmentInit}
 	${EndIf}
 !macroend
 
+${SegmentPre}
+	ReadEnvStr $0 "JAVA_HOME"
+	${WordReplace} $0 "\" "/" "+" $1
+	System::Call 'Kernel32::SetEnvironmentVariable(t, t) i("JAVA_HOME_FORWARDSLASH", "$1").r0'
+!macroend
+
 ${SegmentPrePrimary}
 	;=== START INTEGRITY CHECK 1.1 PrePrimary
 	${If} $bolCustomIntegrityCheckStartUnsupported == true

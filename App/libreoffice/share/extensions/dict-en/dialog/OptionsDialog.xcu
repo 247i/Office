@@ -87,7 +87,7 @@
             	<value xml:lang="pl">Ustawienia językowe</value>
             	<value xml:lang="pt">Definições de idioma</value>
             	<value xml:lang="pt-BR">Configurações de idioma</value>
-            	<value xml:lang="ro">Setări de limbă</value>
+            	<value xml:lang="ro">Setări lingvistice</value>
             	<value xml:lang="ru">Настройки языка</value>
             	<value xml:lang="rw">Language Settings</value>
             	<value xml:lang="sa-IN">भाषा निर्धारणानि</value>
@@ -202,7 +202,7 @@
                     	<value xml:lang="my">English Sentence Checking</value>
                     	<value xml:lang="nb">Engelsk setningskontroll</value>
                     	<value xml:lang="ne">English Sentence Checking</value>
-                    	<value xml:lang="nl">Nakijken van Engelse zin</value>
+                    	<value xml:lang="nl">Engelse zin controleren</value>
                     	<value xml:lang="nn">Engelsk setningskontroll</value>
                     	<value xml:lang="nr">English Sentence Checking</value>
                     	<value xml:lang="nso">English Sentence Checking</value>
@@ -239,7 +239,7 @@
                     	<value xml:lang="tr">İngilizce Cümle Kontrolü</value>
                     	<value xml:lang="ts">English Sentence Checking</value>
                     	<value xml:lang="tt">English Sentence Checking</value>
-                    	<value xml:lang="ug">English Sentence Checking</value>
+                    	<value xml:lang="ug">ئىنگلىزچە جۈملە تەكشۈرۈش</value>
                     	<value xml:lang="uk">Перевірка граматики (англійська)</value>
                     	<value xml:lang="uz">English Sentence Checking</value>
                     	<value xml:lang="ve">English Sentence Checking</value>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <description xmlns="http://openoffice.org/extensions/description/2006" xmlns:d="http://openoffice.org/extensions/description/2006" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <version value="2022.04.14" />
+    <version value="2022.07.28" />
     <identifier value="dict-mn" />
     <display-name>
         <name lang="en-US">Mongolian spelling and hyphenation dictionaries</name>
@@ -31,7 +31,7 @@
         <name lang="en-GB">Mongolian spelling and hyphenation dictionaries</name>
         <name lang="en-ZA">Mongolian spelling and hyphenation dictionaries</name>
         <name lang="eo">Literumada kaj vortdivida vortaroj por la mongola</name>
-        <name lang="es">Mongol: corrector ortográfico y reglas de división de palabras</name>
+        <name lang="es">Mongol: corrector ortográfico y reglas de corte de palabras</name>
         <name lang="et">Mongoli keele õigekirjakontrolli sõnastik ja poolitusreeglid</name>
         <name lang="eu">Mongolieraren ortografia-egiaztatzailea eta hitzak zatitzeko arauak</name>
         <name lang="fa">واژه‌نامه‌های املایی و  خط‌فاصله‌گذاری مغولی</name>
@@ -112,11 +112,11 @@
         <name lang="tr">Moğolca imla ve heceleme sözlükleri</name>
         <name lang="ts">Mongolian spelling and hyphenation dictionaries</name>
         <name lang="tt">Mongolian spelling and hyphenation dictionaries</name>
-        <name lang="ug">Mongolian spelling and hyphenation dictionaries</name>
+        <name lang="ug">موڭغۇلچە ئىملا ۋە ھەرپ ئۇلاش قائىدىسى لۇغىتى</name>
         <name lang="uk">Монгольські словники орфографії та переносів</name>
         <name lang="uz">Mongolian spelling and hyphenation dictionaries</name>
         <name lang="ve">Mongolian spelling and hyphenation dictionaries</name>
-        <name lang="vec">Mongolian spelling and hyphenation dictionaries</name>
+        <name lang="vec">Coretor ortogràfego e règołe de siłabasion de'l Móngoło</name>
         <name lang="vi">Mongolian spelling and hyphenation dictionaries</name>
         <name lang="xh">Mongolian spelling and hyphenation dictionaries</name>
         <name lang="zh-CN">蒙古语拼写词典与断词规则</name>

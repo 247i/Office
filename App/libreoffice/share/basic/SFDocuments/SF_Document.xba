@@ -766,7 +766,7 @@ End Function	&apos;	SFDocuments.SF_Document.Properties
 REM -----------------------------------------------------------------------------
 Public Function RemoveMenu(Optional ByVal MenuHeader As Variant _
 							, Optional ByRef _Document As Variant _
-) As Boolean
+							) As Boolean
 &apos;&apos;&apos; Remove a menu entry in the document&apos;s menubar
 &apos;&apos;&apos;	The removal is not intended to be saved neither in the LibreOffice global environment, nor in the document
 &apos;&apos;&apos;	Args:
@@ -864,7 +864,9 @@ Check:
 	&apos;	When called from a subclass (Calc, Writer, ..) the arguments are gathered into one single array item
 	vArgs = Args
 	If IsArray(Args) Then
-		If UBound(Args) &gt;= 0 And IsArray(Args(0)) Then vArgs = Args(0)
+		If UBound(Args) &gt;= 0 Then
+			If IsArray(Args(0)) Then vArgs = Args(0)
+		End If
 	End If
 	If ScriptForge.SF_Utils._EnterFunction(cstThisSub, cstSubArgs) Then
 		If Not _IsStillAlive() Then GoTo Finally
@@ -1279,7 +1281,8 @@ Private Function _FileIdent() As String
 &apos;&apos;&apos;	Returns a file identification from the information that is currently available
 &apos;&apos;&apos;	Useful e.g. for display in error messages
 
-	_FileIdent = Iif(Len(_WindowFileName) &gt; 0, SF_FileSystem._ConvertFromUrl(_WindowFileName), _WindowTitle)
+	&apos;	OS notation is used to avoid presence of &quot;%nn&quot; in error messages and wrong parameter substitutions
+	_FileIdent = Iif(Len(_WindowFileName) &gt; 0, ConvertFromUrl(_WindowFileName), _WindowTitle)
 
 End Function	&apos;	SFDocuments.SF_Document._FileIdent
 
@@ -1317,9 +1320,9 @@ Try:
 
 	For Each sFilter In vAllFilters
 		vFilter = oFilterFactory.getByName(sFilter)
-		sType = vFilter(12).Value		&apos;	Hard-coded index for document types
+		sType = ScriptForge.SF_Utils._GetPropertyValue(vFilter, &quot;DocumentService&quot;)
 		If sType = sIdentifier Then
-			lFlags = vFilter(10).Value	&apos;	Hard-coded index for flags
+			lFlags = ScriptForge.SF_Utils._GetPropertyValue(vFilter, &quot;Flags&quot;)
 			&apos;	export: flag is even
 			&apos;	import: flag is odd and flag/2 is even
 			&apos;	import/export: flag is odd and flag/2 is odd

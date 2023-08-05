@@ -82,7 +82,7 @@
         	<value xml:lang="id">Operasi &apos;Kirim ke MediaWiki&apos; tidak dapat diselesaikan dengan baik.</value>
         	<value xml:lang="is">Ekki var hægt að ljúka aðgerðinni &apos;Senda á MediaWiki&apos;.</value>
         	<value xml:lang="it">L&apos;operazione &apos;Invia a Media Wiki&apos; non è stata completata correttamente.</value>
-        	<value xml:lang="ja">「MediaWikiへ送信」を正常に完了できませんでした。</value>
+        	<value xml:lang="ja">[MediaWikiへ送信]を正常に完了できませんでした。</value>
         	<value xml:lang="ka">The operation &apos;Send to MediaWiki&apos; could not be completed successfully.</value>
         	<value xml:lang="kab">Tamhelt &apos;Azen ɣer MediaWiki&apos; ulamek ara teddu akken iwata.</value>
         	<value xml:lang="kk">MediaWiki-ге жіберу әрекетін аяқтау мүмкін емес.</value>
@@ -200,10 +200,10 @@
         	<value xml:lang="hr">Nije moguće pronaći izvozni MediaWiki filter. Za instalaciju filtra odaberite &apos;Alati-&gt;Postavke XML filtera&apos; ili koristite program za instalaciju komponente.</value>
         	<value xml:lang="hsb">Eksportowy filter MediaWiki njeda so namakać. Wubjerće &apos;Nastroje - Filtrowe nastajenja XML&apos;, zo byšće filter instalował, abo instalujće komponentu.</value>
         	<value xml:lang="hu">A MediaWiki-exportszűrő nem található. Az „Eszközök - XML-szűrő beállításai” menüparancs használatával telepítse a szűrőt, vagy a telepítővel telepítse a komponenst.</value>
-        	<value xml:lang="id">Penyaring ekspor MediaWiki tidak ditemukan. Pilih &apos;Perkakas-Pengaturan Penyaring XML&apos; untuk memasang penyaring tersebut, atau gunakan setup untuk memasang komponen itu.</value>
+        	<value xml:lang="id">Penapis ekspor MediaWiki tidak ditemukan. Pilih &apos;Perkakas-Pengaturan Penapis XML&apos; untuk memasang penapis tersebut, atau gunakan penata untuk memasang komponen tersebut.</value>
         	<value xml:lang="is">MediaWiki útflutningssían fannst ekki. Farðu í &apos;Verkfæri-&gt;Stillingar XML síu&apos; til að setja upp síuna, eða notaðu uppsetningarforritið til að setja upp þessa einingu.</value>
         	<value xml:lang="it">Impossibile trovare il filtro di esportazione di MediaWiki. Fai clic su &apos;Strumenti - Impostazioni filtro XML&apos; per installare il filtro, oppure installa il componente tramite la configurazione iniziale.</value>
-        	<value xml:lang="ja">MediaWiki エクスポートフィルターが見つかりません。[ツール]&gt;[XMLフィルターの設定]を選択してフィルターをインストールするか、セットアップを実行してコンポーネントをインストールしてください。</value>
+        	<value xml:lang="ja">MediaWiki エクスポートフィルターが見つかりません。[ツール]&gt;[マクロ]&gt;[XMLフィルターの設定]を選択してフィルターをインストールするか、セットアップを実行してコンポーネントをインストールしてください。</value>
         	<value xml:lang="ka">The MediaWiki export filter cannot be found. Choose &apos;Tools-XML Filter Settings&apos; to install the filter, or use the setup to install the component.</value>
         	<value xml:lang="kab">Tastayt n usifeḍ MediaWiki ulac-itt. Fren &apos;Ifecka - Iɣewwaren n testayt XML&apos; iwakken ad tesbeddeḍ tastayt, neɣ seqdec setup iwakken ad tesbeddeḍ isger.</value>
         	<value xml:lang="kk">MediaWiki экспорттау сүзгісі табылмады. Сүзгіні орнату үшін «Саймандар - XML сүзгілерін баптау» мәзірін ашыңыз, немесе, орнату бағдарламасын қолданып, сәйкес құрауышты таңдаңыз.</value>
@@ -324,7 +324,7 @@
         	<value xml:lang="hr">Nije se bilo moguće povezati na MediaWiki sustav na &apos;$ARG1&apos;.</value>
         	<value xml:lang="hsb">Zwisk ze systemom MediaWiki na &apos;$ARG1&apos; njeda so wutworić.</value>
         	<value xml:lang="hu">Nem sikerült kapcsolatot teremteni a következő helyen található MediaWiki-rendszerrel: „$ARG1”.</value>
-        	<value xml:lang="id">Koneksi ke sistem MediaWiki pada &apos;$ARG1&apos; tak dapat dibuat.</value>
+        	<value xml:lang="id">Sambungan ke sistem MediaWiki pada &apos;$ARG1&apos; tak dapat dibuat.</value>
         	<value xml:lang="is">Ekki tókst að koma á tengingu við MediaWiki-kerfið á &apos;$ARG1&apos;.</value>
         	<value xml:lang="it">Impossibile creare una connessione con il sistema MediaWiki a &quot;$ARG1&quot;.</value>
         	<value xml:lang="ja">&apos;$ARG1&apos;のMediaWikiシステムへの接続を作成できませんでした。</value>
@@ -445,7 +445,7 @@
         	<value xml:lang="hr">Neispravno korisničko ime ili lozinka. Pokušajte ponovno ili za anonimno spajanje ostavite prazna polja.</value>
         	<value xml:lang="hsb">Wužiwarske mjeno abo hesło je wopačne. Spytajće prošu hišće raz abo wostajće pola prózdne za anonymny zwisk.</value>
         	<value xml:lang="hu">A felhasználónév vagy a jelszó hibás. Próbálkozzon újra, vagy hagyja üresen ezeket a mezőket az anonim csatlakozáshoz.</value>
-        	<value xml:lang="id">Nama pengguna atau sandi tidak benar. Harap coba kembali, atau biarkan ruasnya kosong untuk koneksi anonim.</value>
+        	<value xml:lang="id">Nama pengguna atau sandi tidak benar. Harap coba kembali, atau kosongkan ruasnya untuk sambungan anonim.</value>
         	<value xml:lang="is">Notandanafn eða lykilorð voru ekki rétt. Reyndu aftur, eða skildu reitina eftir auða til að tengjast nafnlaust.</value>
         	<value xml:lang="it">Nome utente o password non corretti. Riprova oppure lascia i comandi di campo vuoti per eseguire una connessione anonima.</value>
         	<value xml:lang="ja">ユーザー名またはパスワードが正しくありません。もう一度入力してください。匿名で接続する場合は両方のフィールドを空白にしてください。</value>
@@ -568,7 +568,7 @@
         	<value xml:lang="hr">Konekcija nije mogla biti uspostavljena jer je URL neispravan.</value>
         	<value xml:lang="hsb">Zwisk njeda so wutworić, dokelž URL je njepłaćiwy.</value>
         	<value xml:lang="hu">A kapcsolat nem jött létre, mert az URL érvénytelen.</value>
-        	<value xml:lang="id">Koneksi tak dapat dibuat, karena URL tidak sah.</value>
+        	<value xml:lang="id">Sambungan tak dapat dibuat, karena URL tidak sah.</value>
         	<value xml:lang="is">Ekki hægt að setja upp tengingu því slóðin var ekki gild.</value>
         	<value xml:lang="it">Impossibile stabilire una connessione, URL non valido.</value>
         	<value xml:lang="ja">接続を作成できませんでした。URL が正しくありません。</value>
@@ -671,7 +671,7 @@
         	<value xml:lang="en-GB">Specify a MediaWiki server by providing a URL.</value>
         	<value xml:lang="en-ZA">Specify a MediaWiki server by providing a URL.</value>
         	<value xml:lang="eo">Indiku MediVikian servilon provizante URL-on.</value>
-        	<value xml:lang="es">Especifique un servidor MediaWiki proporcionando una URL.</value>
+        	<value xml:lang="es">Especifique un servidor MediaWiki proporcionando un URL.</value>
         	<value xml:lang="et">Määra MediaWiki server, andes selle URL-i.</value>
         	<value xml:lang="eu">Zehaztu MediaWiki zerbitzaria URLa emanez.</value>
         	<value xml:lang="fa">با ارائه آدرس اینترنتی، یک سرور مدیا ویکی را مشخص کنید.</value>
@@ -689,7 +689,7 @@
         	<value xml:lang="hr">Navedite MediaWiki poslužitelj definirajući URL.</value>
         	<value xml:lang="hsb">Zapodajće URL, zo by serwer MediaWiki podał.</value>
         	<value xml:lang="hu">URL megadásával határozzon meg egy MediaWiki-kiszolgálót.</value>
-        	<value xml:lang="id">Tentukan server MediaWiki dengan menyediakan sebuah URL.</value>
+        	<value xml:lang="id">Tentukan peladen MediaWiki dengan menyediakan sebuah URL.</value>
         	<value xml:lang="is">Tilgreindu MediaWiki-miðlara með því að gefa upp slóð (URL).</value>
         	<value xml:lang="it">Indica un server MediaWiki inserendo un URL.</value>
         	<value xml:lang="ja">URLを入力してMediaWikiサーバーを指定してください。</value>
@@ -727,7 +727,7 @@
         	<value xml:lang="pt">Especifique um servidor MediaWiki indicando um URL.</value>
         	<value xml:lang="pt-BR">Especifique um servidor MediaWiki fornecendo um URL.</value>
         	<value xml:lang="ro">Specificați un server MediaWiki furnizând o adresă URL.</value>
-        	<value xml:lang="ru">Определите сервер MediWiki, используя URL.</value>
+        	<value xml:lang="ru">Укажите сервер MediWiki, используя URL.</value>
         	<value xml:lang="rw">Specify a MediaWiki server by providing a URL.</value>
         	<value xml:lang="sa-IN"> URL प्रदानेन मीडियाविकीसर्वर् निर्दिश।</value>
         	<value xml:lang="sat">URL एम दाराय ते मिडिया विकी सर्वर ठा़वका़य मे.</value>
@@ -2507,7 +2507,7 @@
         	<value xml:lang="hr">Poslužitelj Media~Wiki</value>
         	<value xml:lang="hsb">Serwer Media~Wiki</value>
         	<value xml:lang="hu">Media~Wiki-kiszolgáló</value>
-        	<value xml:lang="id">Server Media~Wiki</value>
+        	<value xml:lang="id">Peladen Media~Wiki</value>
         	<value xml:lang="is">~MediaWiki netþjónn</value>
         	<value xml:lang="it">Server Media~Wiki</value>
         	<value xml:lang="ja">Media~Wikiサーバー</value>
@@ -3112,7 +3112,7 @@
         	<value xml:lang="hr">Nepoznati certifikat označenih internetskih stranica.</value>
         	<value xml:lang="hsb">Certifikat wubraneho sydła je njeznaty.</value>
         	<value xml:lang="hu">A kiválasztott webhely tanúsítványa ismeretlen.</value>
-        	<value xml:lang="id">Sertifikat dari situs yang dipilih tidak diketahui.</value>
+        	<value xml:lang="id">Sertifikat dari situs terpilih tidak diketahui.</value>
         	<value xml:lang="is">Skilríki valda vefsvæðisins er óþekkt.</value>
         	<value xml:lang="it">Il certificato del sito selezionato è sconosciuto.</value>
         	<value xml:lang="ja">選択されているサイトの証明書が不明です。</value>
@@ -3475,7 +3475,7 @@
         	<value xml:lang="hr">Poslužitelj MediaWiki</value>
         	<value xml:lang="hsb">Serwer MediaWiki</value>
         	<value xml:lang="hu">MediaWiki-kiszolgáló</value>
-        	<value xml:lang="id">Server MediaWiki</value>
+        	<value xml:lang="id">Peladen MediaWiki</value>
         	<value xml:lang="is">MediaWiki netþjónn</value>
         	<value xml:lang="it">Server MediaWiki</value>
         	<value xml:lang="ja">MediaWikiサーバー</value>
@@ -3830,7 +3830,7 @@
         	<value xml:lang="fy">In wiki artikel mei de titel &apos;$ARG1&apos; bestiet al.&amp;#13;&amp;#13;Wolle jo it aktuele artikel ferfange mei jo artikel?&amp;#13;&amp;#13;</value>
         	<value xml:lang="ga">Tá vicí-alt leis an ainm &apos;$ARG1&apos; ann cheana.&amp;#13;&amp;#13;An bhfuil fonn ort d&apos;alt féin a chur in ionad an ailt reatha?&amp;#13;&amp;#13;</value>
         	<value xml:lang="gd">Tha artaigil air an Uicipeid air a bheil &apos;$ARG1&apos; mu thràth.&amp;#13;&amp;#13;A bheil thu airson na sgrìobh thusa a chur an àite na tha ann an-dràsta?&amp;#13;&amp;#13;</value>
-        	<value xml:lang="gl">Xa existe un artigo wiki co título &apos;$ARG1&apos;..&amp;#13;&amp;#13;Quere substituír o artigo actual co seu novo artigo?&amp;#13;&amp;#13;</value>
+        	<value xml:lang="gl">Xa existe un artigo wiki co título «$ARG1».&amp;#13;&amp;#13;Quere substituír o artigo actual co seu novo artigo?&amp;#13;&amp;#13;</value>
         	<value xml:lang="gu">વિકી લેખ શીર્ષક &apos;$ARG1&apos; સાથે પહેલેથી જ અસ્તિત્વ ધરાવે છે. &amp;#13;&amp;#13; શું તમારા લેખ સાથે હાલનાં લેખને બદલવા માંગો છો?&amp;#13;&amp;#13;</value>
         	<value xml:lang="gug">A wiki article with the title &apos;$ARG1&apos; already exists.&amp;#13;&amp;#13;Do you want to replace the current article with your article?&amp;#13;&amp;#13;</value>
         	<value xml:lang="he">כבר קיים ערך בוויקי בשם &apos;$ARG1&apos;.#13;&amp;#13;האם ברצונך להחליף את הערך הנוכחי בערך שלך?&amp;#13;&amp;#13;</value>

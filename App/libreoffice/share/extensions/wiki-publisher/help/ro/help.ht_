@@ -9,7 +9,7 @@
 30 com.sun.star.wiki.MediaWiki.EditSetting.UrlField 3e Enter the URL of a MediaWiki server, starting with "https://".
 35 com.sun.star.wiki.MediaWiki.EditSetting.UsernameField 6b Introduceți numele dumneavoastră de utilizator al serverului MediaWiki. Lăsați gol pentru acces anonim.
 2f com.sun.star.wiki.MediaWiki.EditSetting.SaveBox b5 Activați această opțiune pentru a vă stoca parola între sesiuni. Parola principală trebuie să fie activată; vedeți Instrumente ▸ Opțiuni ▸ %PRODUCTNAME ▸ Securitate.
-20 vnd.com.sun.star.wiki%3Aaboutbox a7 By using the Wiki Publisher you can upload your current Writer text document to a MediaWiki server. After uploading, all wiki users can read your document on the wiki.
+20 vnd.com.sun.star.wiki%3Aaboutbox ad Pri folosirea Wiki Publisher puteți încărca texte direct din Writer pe un server MediaWiki. După încărcare, toți utilizatorii Wiki vă pot citi documentul încărcat.
 1c vnd.com.sun.star.wiki%3Asend 73 Selectați Fișier - Trimite - La MediaWiki pentru a încărca documentul curent din Writer pe un server MediaWiki.
 20 vnd.com.sun.star.wiki%3Asettings f8 Dați clic pe butonul Adaugă pentru a adăuga un nou server wiki.Selectați o intrare și dați clic pe butonul Editare pentru a edita setările contului.Selectați o intrare și dați clic pe butonul Elimină pentru a elimina intrarea din listă.
 31 com.sun.star.wiki.MediaWiki.Settings.RemoveButton 28 Elimină intrarea selectată din listă.

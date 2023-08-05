@@ -56,6 +56,7 @@
         <menu:menuitem menu:id=".uno:InsertMenuLegend"/>
         <menu:menuitem menu:id=".uno:InsertMenuAxes"/>
         <menu:menuitem menu:id=".uno:InsertMenuGrids"/>
+        <menu:menuitem menu:id=".uno:InsertMenuDataTable"/>
       <menu:menuseparator/>
         <menu:menuitem menu:id=".uno:InsertMenuDataLabels"/>
         <menu:menuitem menu:id=".uno:InsertMenuTrendlines"/>
@@ -139,10 +140,9 @@
           <menu:menuseparator/>
           <menu:menuitem menu:id=".uno:MacroSignature"/>
           <menu:menuitem menu:id=".uno:MacroOrganizer?TabId:short=1"/>
-          <menu:menuseparator/>
-          <menu:menuitem menu:id=".uno:OpenXMLFilterSettings"/>
         </menu:menupopup>
       </menu:menu>
+      <menu:menuitem menu:id=".uno:OpenXMLFilterSettings"/>
       <menu:menuitem menu:id="service:com.sun.star.deployment.ui.PackageManagerDialog" menu:style="text"/>
       <menu:menuitem menu:id=".uno:ConfigureDialog" menu:style="text"/>
       <menu:menuitem menu:id=".uno:OptionsTreeDialog"/>

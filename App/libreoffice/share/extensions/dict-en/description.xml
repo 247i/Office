@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <description xmlns="http://openoffice.org/extensions/description/2006" xmlns:d="http://openoffice.org/extensions/description/2006"  xmlns:xlink="http://www.w3.org/1999/xlink">
-    <version value="2022.05.01" />
+    <version value="2022.11.01" />
     <identifier value="org.openoffice.en.hunspell.dictionaries" />
     <display-name>
         <name lang="en-US">English spelling dictionaries, hyphenation rules, thesaurus, and grammar checker</name>
@@ -31,7 +31,7 @@
         <name lang="en-GB">English spelling dictionaries, hyphenation rules, thesaurus, and grammar checker</name>
         <name lang="en-ZA">English spelling dictionaries, hyphenation rules, thesaurus, and grammar checker</name>
         <name lang="eo">Literumada kaj vortdivida vortaroj, tezaŭro kaj gramatikokontrolilo por la angla</name>
-        <name lang="es">Inglés: correctores ortográficos y gramaticales, sinónimos y reglas de división de palabras</name>
+        <name lang="es">Inglés: correctores ortográficos y gramaticales, sinónimos y reglas de corte de palabras</name>
         <name lang="et">Inglise keele õigekirjakontrolli sõnastikud, poolitusreeglid, tesaurus ja grammatikakontroll</name>
         <name lang="eu">Ingelesaren ortografia-egiaztatzaileak, hitzak zatitzeko arauak, thesaurusa eta gramatika-egiaztatzailea</name>
         <name lang="fa">واژه‌نامه املایی، قواعد خط‌فاصله‌گذاری، اصطلاح‌نامه و بررسی کننده دستور زبان انگلیسی</name>
@@ -49,7 +49,7 @@
         <name lang="hr">Provjera pravopisa, rastavljanje riječi, rječnik sinonima i provjera gramatike engleskog jezika</name>
         <name lang="hsb">Jendźelski prawopisny słownik, prawidła dźělenja złóžkow, tezawrus a gramatikowa kontrola</name>
         <name lang="hu">Angol helyesírási szótárak, elválasztási szabályok, szinonimaszótár és nyelvi ellenőrző</name>
-        <name lang="id">Kamus ejaan, aturan pemutusan suku kata, thesaurus, dan pemeriksa tata bahasa Inggris</name>
+        <name lang="id">Kamus ejaan, aturan pemutusan suku kata, tesaurus, dan pemeriksa tata bahasa Inggris</name>
         <name lang="is">Ensk stafsetningarorðasöfn, orðskiptireglur, samheitaorðasafn og málfræðiyfirferð</name>
         <name lang="it">Dizionari ortografici inglesi, regole di sillabazione, dizionario di sinonimi e analizzatore grammaticale</name>
         <name lang="ja">英語スペル辞書、ハイフネーション規則、類義語辞典と文法チェッカー</name>

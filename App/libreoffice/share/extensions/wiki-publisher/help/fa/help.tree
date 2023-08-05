@@ -10,7 +10,7 @@
 <tree_view>
 <help_section application="swriter" id="02" title="مدیاویکی">
     <node id="0224" title="مدیاویکی">
-        <topic id="help/com.sun.wiki-publisher/wiki.xhp">Wiki Publisher</topic>
+        <topic id="help/com.sun.wiki-publisher/wiki.xhp">انتشارگر ویکی</topic>
         <topic id="help/com.sun.wiki-publisher/wikiaccount.xhp">مدیاویکی</topic>
         <topic id="help/com.sun.wiki-publisher/wikiformats.xhp">MediaWiki Formats</topic>
         <topic id="help/com.sun.wiki-publisher/wikisend.xhp">ارسال به مدیاویکی</topic>

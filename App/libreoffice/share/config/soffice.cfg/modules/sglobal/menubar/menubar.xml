@@ -719,6 +719,9 @@
       </menu:menu>
       <menu:menuitem menu:id=".uno:WordCountDialog" menu:style="text"/>
       <menu:menuitem menu:id=".uno:AccessibilityCheck"/>
+      <menu:menuitem menu:id=".uno:AccessibilityCheckOnline"/>
+      <menu:menuseparator/>
+      <menu:menuitem menu:id=".uno:Translate" menu:style="text"/>
       <menu:menuseparator/>
       <menu:menu menu:id=".uno:AutoFormatMenu">
         <menu:menupopup>
@@ -764,12 +767,11 @@
           <menu:menuseparator/>
           <menu:menuitem menu:id=".uno:MacroSignature"/>
           <menu:menuitem menu:id=".uno:MacroOrganizer?TabId:short=1"/>
-          <menu:menuseparator/>
-          <menu:menuitem menu:id=".uno:OpenXMLFilterSettings"/>
         </menu:menupopup>
       </menu:menu>
       <menu:menuitem menu:id=".uno:DevelopmentToolsDockingWindow"/>
       <menu:menuseparator/>
+      <menu:menuitem menu:id=".uno:OpenXMLFilterSettings"/>
       <menu:menuitem menu:id="service:com.sun.star.deployment.ui.PackageManagerDialog" menu:style="text"/>
       <menu:menuitem menu:id=".uno:ConfigureDialog" menu:style="text"/>
       <menu:menuitem menu:id=".uno:OptionsTreeDialog"/>

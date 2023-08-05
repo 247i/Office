@@ -8,13 +8,13 @@
  *
 -->
 <tree_view>
-<help_section application="swriter" id="02" title="MediaWiki">
-    <node id="0224" title="MediaWiki">
+<help_section application="swriter" id="02" title="מדיה־ויקי">
+    <node id="0224" title="מדיה־ויקי">
         <topic id="help/com.sun.wiki-publisher/wiki.xhp">מפרסם ויקי</topic>
-        <topic id="help/com.sun.wiki-publisher/wikiaccount.xhp">MediaWiki</topic>
-        <topic id="help/com.sun.wiki-publisher/wikiformats.xhp">תבניות MediaWiki</topic>
-        <topic id="help/com.sun.wiki-publisher/wikisend.xhp">שליחה ל־MediaWiki</topic>
-        <topic id="help/com.sun.wiki-publisher/wikisettings.xhp">אפשרויות MediaWiki</topic>
+        <topic id="help/com.sun.wiki-publisher/wikiaccount.xhp">מדיה־ויקי</topic>
+        <topic id="help/com.sun.wiki-publisher/wikiformats.xhp">תבניות מדיה־ויקי</topic>
+        <topic id="help/com.sun.wiki-publisher/wikisend.xhp">שליחה למדיה־ויקי</topic>
+        <topic id="help/com.sun.wiki-publisher/wikisettings.xhp">אפשרויות מדיה־ויקי</topic>
     </node>
 </help_section>
 </tree_view>

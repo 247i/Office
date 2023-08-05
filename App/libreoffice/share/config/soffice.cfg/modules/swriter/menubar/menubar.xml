@@ -713,8 +713,10 @@
       <menu:menu menu:id=".uno:ContentControlsMenu">
         <menu:menupopup>
           <menu:menuitem menu:id=".uno:InsertContentControl"/>
+          <menu:menuitem menu:id=".uno:InsertPlainTextContentControl"/>
           <menu:menuitem menu:id=".uno:InsertPictureContentControl"/>
           <menu:menuitem menu:id=".uno:InsertCheckboxContentControl"/>
+          <menu:menuitem menu:id=".uno:InsertComboBoxContentControl"/>
           <menu:menuitem menu:id=".uno:InsertDropdownContentControl"/>
           <menu:menuitem menu:id=".uno:InsertDateContentControl"/>
           <menu:menuitem menu:id=".uno:ContentControlProperties"/>
@@ -742,6 +744,9 @@
       </menu:menu>
       <menu:menuitem menu:id=".uno:WordCountDialog"/>
       <menu:menuitem menu:id=".uno:AccessibilityCheck"/>
+      <menu:menuitem menu:id=".uno:AccessibilityCheckOnline"/>
+      <menu:menuseparator/>
+      <menu:menuitem menu:id=".uno:Translate"/>
       <menu:menuseparator/>
       <menu:menu menu:id=".uno:AutoFormatMenu">
         <menu:menupopup>
@@ -796,12 +801,11 @@
           <menu:menuseparator/>
           <menu:menuitem menu:id=".uno:MacroSignature"/>
           <menu:menuitem menu:id=".uno:MacroOrganizer?TabId:short=1"/>
-          <menu:menuseparator/>
-          <menu:menuitem menu:id=".uno:OpenXMLFilterSettings"/>
         </menu:menupopup>
       </menu:menu>
       <menu:menuitem menu:id=".uno:DevelopmentToolsDockingWindow"/>
       <menu:menuseparator/>
+      <menu:menuitem menu:id=".uno:OpenXMLFilterSettings"/>
       <menu:menuitem menu:id="service:com.sun.star.deployment.ui.PackageManagerDialog" menu:style="text"/>
       <menu:menuitem menu:id=".uno:ConfigureDialog" menu:style="text"/>
       <menu:menuitem menu:id=".uno:OptionsTreeDialog"/>

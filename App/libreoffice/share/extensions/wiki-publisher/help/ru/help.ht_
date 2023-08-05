@@ -2,7 +2,7 @@
 34 com.sun.star.wiki.MediaWiki.SendToMediaWiki.WikiList d5 Выберите сервер MediaWiki, на который требуется опубликовать документ. Для добавления нового сервера щёлкните Добавить.
 36 com.sun.star.wiki.MediaWiki.SendToMediaWiki.MinorCheck e2 Выберите этот параметр для пометки загружаемой страницы как незначительного изменения уже готовой существующей страницы.
 37 com.sun.star.wiki.MediaWiki.SendToMediaWiki.ArticleText 1a3 Введите название вашей Wiki-статьи. Оно станет её заголовком. Для новой статьи название должно быть уникальным в пределах этой Wiki. Если вы укажете существующее название, то при загрузке существующая Wiki-страница будет перезаписана.
-38 com.sun.star.wiki.MediaWiki.SendToMediaWiki.BrowserCheck 98 Отметьте этот параметр для открытия веб-браузера и показа загруженной Wiki-страницы.
+38 com.sun.star.wiki.MediaWiki.SendToMediaWiki.BrowserCheck 91 Отметьте этот параметр для открытия браузера и показа загруженной Wiki-страницы.
 37 com.sun.star.wiki.MediaWiki.SendToMediaWiki.CommentText 7b Введите необязательное краткое описание страницы или комментарий.
 1f vnd.com.sun.star.wiki%3Aaccount 4c Введите URL сервера MediaWiki, начиная с «https://».
 35 com.sun.star.wiki.MediaWiki.EditSetting.PasswordField 70 Введите пароль MediaWiki. Для анонимного доступа оставьте пустым.

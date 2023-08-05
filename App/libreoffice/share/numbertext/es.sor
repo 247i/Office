@@ -32,14 +32,12 @@
 80 ochenta
 90 noventa
 (\d)(\d) $(\10) y $2
-100 cien
-1(\d\d) ciento $1
+1(\d\d) cien[to $1]
 500 quinientos
 700 setecientos
 900 novecientos
 ([579])(\d\d) $(\100) $2
-(\d)00 $1cientos
-(\d)(\d\d) $1cientos $2
+(\d)(\d\d) $1cientos[ $2]
 1(\d{3}) mil[ $1]
 (\d{1,3})(\d{3}) $1 mil[ $2]
 1(\d{6}) un millón[ $1]
@@ -92,10 +90,13 @@ HNL:(\D+) $(\1: lempira, lempiras, centavo, centavos)
 JPY:(\D+) $(\1: yen, yenes, sen, sen)
 MXN:(\D+) $(\1: peso mexicano, pesos mexicanos, centavo, centavos)
 NIO:(\D+) $(\1: córdoba, córdobas, centavo, centavos)
+PAB:(\D+) $(\1: balboa, balboas, céntimo, céntimos)
 PEN:(\D+) $(\1: sol, soles, centavo, centavos)
 PYG:(\D+) $(\1: guaraní, guaraníes, céntimo, céntimos)
+SVC:(\D+) $(\1: colón salvadoreño, colones salvadoreños, céntimo, céntimos)
 USD:(\D+) $(\1: dólar estadounidense, dólares estadounidenses, centavo, centavos)
 UYU:(\D+) $(\1: peso uruguayo, pesos uruguayos, centésimo, centésimos)
+VE[DS]:(\D+) $(\1: bolívar venezolano, bolívares venezolanos, centavo, centavos)
 VEF:(\D+) $(\1: bolívar fuerte, bolívares fuertes, céntimo, céntimos)
 
 # masculine to feminine conversion of "un" after millions,

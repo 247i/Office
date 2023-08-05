@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.38.2 -->
+<!-- Generated with glade 3.40.0 -->
 <interface domain="cui">
   <requires lib="gtk+" version="3.20"/>
   <object class="GtkBox" id="ColorConfigWindow">
@@ -48,6 +48,7 @@
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
                 <property name="hexpand">True</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -83,6 +84,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -123,6 +125,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -158,6 +161,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -201,6 +205,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -241,6 +246,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -276,6 +282,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -319,6 +326,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -344,7 +352,7 @@
                 <property name="can-focus">False</property>
                 <property name="halign">start</property>
                 <property name="valign">center</property>
-                <property name="label" translatable="yes" context="colorconfigwin|autospellcheck">AutoSpellcheck</property>
+                <property name="label" translatable="yes" context="colorconfigwin|autospellcheck">Spelling mistakes</property>
                 <property name="use-underline">True</property>
                 <property name="mnemonic-widget">autospellcheck_lb</property>
               </object>
@@ -359,6 +367,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -391,6 +400,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -426,6 +436,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -471,7 +482,7 @@
         <property name="label-xalign">0</property>
         <property name="shadow-type">none</property>
         <child>
-          <!-- n-columns=2 n-rows=8 -->
+          <!-- n-columns=2 n-rows=9 -->
           <object class="GtkGrid">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
@@ -501,6 +512,7 @@
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
                 <property name="hexpand">True</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -536,6 +548,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -579,6 +592,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -610,7 +624,7 @@
               </object>
               <packing>
                 <property name="left-attach">0</property>
-                <property name="top-attach">3</property>
+                <property name="top-attach">4</property>
               </packing>
             </child>
             <child>
@@ -619,6 +633,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -627,7 +642,7 @@
               </object>
               <packing>
                 <property name="left-attach">1</property>
-                <property name="top-attach">3</property>
+                <property name="top-attach">4</property>
               </packing>
             </child>
             <child>
@@ -645,7 +660,7 @@
               </object>
               <packing>
                 <property name="left-attach">0</property>
-                <property name="top-attach">4</property>
+                <property name="top-attach">5</property>
               </packing>
             </child>
             <child>
@@ -654,6 +669,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -670,7 +686,7 @@
               </object>
               <packing>
                 <property name="left-attach">1</property>
-                <property name="top-attach">4</property>
+                <property name="top-attach">5</property>
               </packing>
             </child>
             <child>
@@ -685,7 +701,7 @@
               </object>
               <packing>
                 <property name="left-attach">0</property>
-                <property name="top-attach">5</property>
+                <property name="top-attach">6</property>
               </packing>
             </child>
             <child>
@@ -694,6 +710,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -702,7 +719,7 @@
               </object>
               <packing>
                 <property name="left-attach">1</property>
-                <property name="top-attach">5</property>
+                <property name="top-attach">6</property>
               </packing>
             </child>
             <child>
@@ -717,7 +734,7 @@
               </object>
               <packing>
                 <property name="left-attach">0</property>
-                <property name="top-attach">6</property>
+                <property name="top-attach">7</property>
               </packing>
             </child>
             <child>
@@ -726,6 +743,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -734,7 +752,7 @@
               </object>
               <packing>
                 <property name="left-attach">1</property>
-                <property name="top-attach">6</property>
+                <property name="top-attach">7</property>
               </packing>
             </child>
             <child>
@@ -749,7 +767,7 @@
               </object>
               <packing>
                 <property name="left-attach">0</property>
-                <property name="top-attach">7</property>
+                <property name="top-attach">8</property>
               </packing>
             </child>
             <child>
@@ -758,6 +776,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -766,7 +785,40 @@
               </object>
               <packing>
                 <property name="left-attach">1</property>
-                <property name="top-attach">7</property>
+                <property name="top-attach">8</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="grammarcheck">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="halign">start</property>
+                <property name="valign">center</property>
+                <property name="label" translatable="yes" context="colorconfigwin|autospellcheck">Grammar mistakes</property>
+                <property name="use-underline">True</property>
+                <property name="mnemonic-widget">grammarcheck_lb</property>
+              </object>
+              <packing>
+                <property name="left-attach">0</property>
+                <property name="top-attach">3</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkMenuButton" id="grammarcheck_lb">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">False</property>
+                <property name="halign">end</property>
+                <property name="xalign">0</property>
+                <property name="draw-indicator">True</property>
+                <property name="label" translatable="no"></property>
+                <child>
+                  <placeholder/>
+                </child>
+              </object>
+              <packing>
+                <property name="left-attach">1</property>
+                <property name="top-attach">3</property>
               </packing>
             </child>
           </object>
@@ -825,6 +877,7 @@
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
                 <property name="hexpand">True</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -857,6 +910,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -889,6 +943,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -921,6 +976,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -953,6 +1009,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -970,6 +1027,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -1002,6 +1060,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -1034,6 +1093,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -1066,6 +1126,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -1098,6 +1159,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -1130,6 +1192,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -1162,6 +1225,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -1212,6 +1276,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -1272,6 +1337,7 @@
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
                 <property name="hexpand">True</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -1339,6 +1405,7 @@
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
                 <property name="hexpand">True</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -1371,6 +1438,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -1403,6 +1471,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -1435,6 +1504,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -1467,6 +1537,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -1499,6 +1570,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -1531,6 +1603,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -1598,6 +1671,7 @@
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
                 <property name="hexpand">True</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -1630,6 +1704,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -1662,6 +1737,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -1694,6 +1770,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -1726,6 +1803,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -1758,6 +1836,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -1790,6 +1869,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -1857,6 +1937,7 @@
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
                 <property name="hexpand">True</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -1904,6 +1985,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -1936,6 +2018,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>
@@ -1968,6 +2051,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="halign">end</property>
+                <property name="xalign">0</property>
                 <property name="draw-indicator">True</property>
                 <property name="label" translatable="no"></property>
                 <child>

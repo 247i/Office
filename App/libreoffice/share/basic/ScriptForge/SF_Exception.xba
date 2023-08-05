@@ -125,6 +125,7 @@ Const DIALOGNOTFOUNDERROR		=	&quot;DIALOGNOTFOUNDERROR&quot;
 Const DIALOGDEADERROR			=	&quot;DIALOGDEADERROR&quot;
 Const CONTROLTYPEERROR			=	&quot;CONTROLTYPEERROR&quot;
 Const TEXTFIELDERROR			=	&quot;TEXTFIELDERROR&quot;
+Const PAGEMANAGERERROR			=	&quot;PAGEMANAGERERROR&quot;
 
 &apos;	SF_Database
 Const DBREADONLYERROR			=	&quot;DBREADONLYERROR&quot;
@@ -962,7 +963,7 @@ Try:
 				pvArgs(0) = _RightCase(pvArgs(0))	:	pvArgs(2) = _RightCase(pvArgs(2))
 				sMessage = sLocation _
 					&amp; &quot;\n&quot; &amp; &quot;\n&quot; &amp; &quot;\n&quot; &amp; .GetText(&quot;VALIDATEERROR&quot;, pvArgs(0)) _
-					&amp; &quot;\n&quot; &amp; &quot;\n&quot; &amp; .GetText(&quot;CALCADDRESS&quot; &amp; Iif(pvArgs(0) = &quot;Sheet&quot;, &quot;1&quot;, &quot;2&quot;), pvArgs(0), pvArgs(1), pvArgs(2), pvArgs(3))
+					&amp; &quot;\n&quot; &amp; &quot;\n&quot; &amp; .GetText(&quot;CALCADDRESS&quot; &amp; Iif(Left(pvArgs(0), 5) = &quot;Sheet&quot;, &quot;1&quot;, &quot;2&quot;), pvArgs(0), pvArgs(1), pvArgs(2), pvArgs(3))
 			Case DUPLICATESHEETERROR	&apos;	SF_Calc.InsertSheet(arg, SheetName, Document)
 				pvArgs(0) = _RightCase(pvArgs(0))
 				sMessage = sLocation _
@@ -1020,6 +1021,9 @@ Try:
 			Case TEXTFIELDERROR	&apos;	SF_DialogControl.WriteLine(ControlName, DialogName)
 				sMessage = sLocation _
 					&amp; &quot;\n&quot; &amp; &quot;\n&quot; &amp; .GetText(&quot;TEXTFIELD&quot;, pvArgs(0), pvArgs(1))
+			Case PAGEMANAGERERROR	&apos;	SF_Dialog.SetPageManager(PilotsList, TabsList, WizardsList)
+				sMessage = sLocation _
+					&amp; &quot;\n&quot; &amp; &quot;\n&quot; &amp; .GetText(&quot;PAGEMANAGER&quot;, pvArgs(0), pvArgs(1), pvArgs(2), pvArgs(3), pvArgs(4), pvArgs(5))
 			Case DBREADONLYERROR	&apos;	SF_Database.RunSql()
 				sMessage = sLocation _
 					&amp; &quot;\n&quot; &amp; &quot;\n&quot; &amp; .GetText(&quot;DBREADONLY&quot;, vLocation(2))

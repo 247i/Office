@@ -14,10 +14,10 @@
 35 com.sun.star.wiki.MediaWiki.EditSetting.UsernameField 4e 3com.sun.wiki-publisher/wikiaccount.xhp#bm_id4558245help.jarمدیاویکی
 35 com.sun.star.wiki.MediaWiki.EditSetting.PasswordField 4e 3com.sun.wiki-publisher/wikiaccount.xhp#bm_id4558246help.jarمدیاویکی
 2f com.sun.star.wiki.MediaWiki.EditSetting.SaveBox 4e 3com.sun.wiki-publisher/wikiaccount.xhp#bm_id4558247help.jarمدیاویکی
-21 com.sun.wiki-publisher%2Fwiki.xhp 38 com.sun.wiki-publisher/wiki.xhphelp.jarWiki Publisher
-20 vnd.com.sun.star.wiki%3Aaboutbox 45 ,com.sun.wiki-publisher/wiki.xhp#bm_id3159252help.jarWiki Publisher
-1c vnd.com.sun.star.wiki%3Asend 45 ,com.sun.wiki-publisher/wiki.xhp#bm_id3159253help.jarWiki Publisher
-21 com.sun.wiki-publisher%2Fwiki.xhp 45 ,com.sun.wiki-publisher/wiki.xhp#bm_id3154408help.jarWiki Publisher
+21 com.sun.wiki-publisher%2Fwiki.xhp 43 com.sun.wiki-publisher/wiki.xhphelp.jarانتشارگر ویکی
+20 vnd.com.sun.star.wiki%3Aaboutbox 50 ,com.sun.wiki-publisher/wiki.xhp#bm_id3159252help.jarانتشارگر ویکی
+1c vnd.com.sun.star.wiki%3Asend 50 ,com.sun.wiki-publisher/wiki.xhp#bm_id3159253help.jarانتشارگر ویکی
+21 com.sun.wiki-publisher%2Fwiki.xhp 50 ,com.sun.wiki-publisher/wiki.xhp#bm_id3154408help.jarانتشارگر ویکی
 29 com.sun.wiki-publisher%2Fwikisettings.xhp 43 'com.sun.wiki-publisher/wikisettings.xhphelp.jarMediaWiki Options
 20 vnd.com.sun.star.wiki%3Asettings 50 4com.sun.wiki-publisher/wikisettings.xhp#bm_id7021088help.jarMediaWiki Options
 2d com.sun.star.wiki.MediaWiki.Settings.WikiList 50 4com.sun.wiki-publisher/wikisettings.xhp#bm_id6402783help.jarMediaWiki Options

@@ -1,6 +1,6 @@
 
 ======================================================================
-LibreOffice 7.4 ReadMe
+LibreOffice 7.5 ReadMe
 ======================================================================
 
 
@@ -85,7 +85,7 @@ Notes Concerning Desktop Integration for Linux Distributions Not Covered in the 
 
 It should be easily possible to install LibreOffice on other Linux distributions not specifically covered in these installation instructions. The main aspect for which differences might be encountered is desktop integration.
 
-The RPMS (or DEBS, respectively) directory also contains a package named libreoffice7.4-freedesktop-menus-7.4.0.1-1.noarch.rpm (or libreoffice7.4-debian-menus_7.4.0.1-1_all.deb, respectively, or similar). This is a package for all Linux distributions that support the Freedesktop.org specifications/recommendations (https://en.wikipedia.org/wiki/Freedesktop.org), and is provided for installation on other Linux distributions not covered in the aforementioned instructions.
+The RPMS (or DEBS, respectively) directory also contains a package named libreoffice7.5-freedesktop-menus-7.5.0.1-1.noarch.rpm (or libreoffice7.5-debian-menus_7.5.0.1-1_all.deb, respectively, or similar). This is a package for all Linux distributions that support the Freedesktop.org specifications/recommendations (https://en.wikipedia.org/wiki/Freedesktop.org), and is provided for installation on other Linux distributions not covered in the aforementioned instructions.
 
 Installing a Language Pack
 ----------------------------------------------------------------------
@@ -198,7 +198,7 @@ Joining one or more Projects
 
 You can make major contributions to this important open source project even if you have limited software design or coding experience. Yes, you!
 
-We hope you enjoy working with the new LibreOffice 7.4 and will join us online.
+We hope you enjoy working with the new LibreOffice 7.5 and will join us online.
 
 The LibreOffice Community
 
