@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-sharedlib">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Shared library</comment>
+  <comment xml:lang="zh-Hant-TW">共享函式庫</comment>
+  <comment xml:lang="uk">спільна бібліотека</comment>
+  <comment xml:lang="tr">Paylaşılan kitaplık</comment>
+  <comment xml:lang="sv">Delat bibliotek</comment>
+  <comment xml:lang="sr-Cyrl">Претражене библиотеке</comment>
+  <comment xml:lang="sq">Bibliotekë e përbashkët</comment>
+  <comment xml:lang="sl">Deljena knjižnica</comment>
+  <comment xml:lang="ru">Разделяемая библиотека</comment>
+  <comment xml:lang="ro">bibliotecă partajată</comment>
+  <comment xml:lang="pt-BR">Biblioteca compartilhada</comment>
+  <comment xml:lang="pl">Biblioteka współdzielona</comment>
+  <comment xml:lang="oc">bibliotèca partejada</comment>
+  <comment xml:lang="nn">Delt bibliotek</comment>
+  <comment xml:lang="ko">공유 라이브러리</comment>
+  <comment xml:lang="kk-Cyrl">Бөлісетін библиотека</comment>
+  <comment xml:lang="ja">共有ライブラリ</comment>
+  <comment xml:lang="it">Libreria condivisa</comment>
+  <comment xml:lang="id">Pustaka bersama</comment>
+  <comment xml:lang="hr">Dijeljena biblioteka</comment>
+  <comment xml:lang="hi">साझा लाइब्रेरी</comment>
+  <comment xml:lang="he">ספרייה משותפת</comment>
+  <comment xml:lang="gl">Biblioteca compartida</comment>
+  <comment xml:lang="fur">Librarie condividude</comment>
+  <comment xml:lang="fr">Bibliothèque partagée</comment>
+  <comment xml:lang="fi">Jaettu kirjasto</comment>
+  <comment xml:lang="eu">Liburutegi partekatua</comment>
+  <comment xml:lang="et">Jagatud teek</comment>
+  <comment xml:lang="es">biblioteca compartida</comment>
+  <comment xml:lang="en-GB">Shared library</comment>
+  <comment xml:lang="de">gemeinsame Bibliothek</comment>
+  <comment xml:lang="ca">biblioteca compartida</comment>
+  <comment xml:lang="bg">Споделена библиотека</comment>
+  <comment xml:lang="be-Cyrl">агульная бібліятэка</comment>
+  <comment xml:lang="ar">مكتبة مشتركة</comment>
+  <glob pattern="*.so"/>
+  <glob weight="60" pattern="*.so.[0-9]*"/>
+</mime-type>

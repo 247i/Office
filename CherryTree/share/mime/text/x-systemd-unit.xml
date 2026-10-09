@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/x-systemd-unit">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Systemd unit file</comment>
+  <comment xml:lang="zh-Hant-TW">Systemd 單元檔案</comment>
+  <comment xml:lang="uk">файл модуля systemd</comment>
+  <comment xml:lang="tr">Systemd birimi dosyası</comment>
+  <comment xml:lang="sv">Systemd-enhetsfil</comment>
+  <comment xml:lang="sr-Cyrl">Системд јединица</comment>
+  <comment xml:lang="sq">Kartelë njësie systemd</comment>
+  <comment xml:lang="sl">Enota systemd</comment>
+  <comment xml:lang="ru">Модульный файл Systemd</comment>
+  <comment xml:lang="ro">fișier unit systemd</comment>
+  <comment xml:lang="pt-BR">Arquivo de unit do systemd</comment>
+  <comment xml:lang="pl">Plik jednostki systemd</comment>
+  <comment xml:lang="oc">fichièr d’unitat Systemd</comment>
+  <comment xml:lang="ko">Systemd 유닛 파일</comment>
+  <comment xml:lang="kk-Cyrl">Systemd юнит файлы</comment>
+  <comment xml:lang="ja">systemdのunitファイル</comment>
+  <comment xml:lang="it">File unità systemd</comment>
+  <comment xml:lang="id">Berkas unit systemd</comment>
+  <comment xml:lang="hr">Datoteka Systemd jedinica</comment>
+  <comment xml:lang="hi">Systemd यूनिट फाइल</comment>
+  <comment xml:lang="he">קובץ יחידת Systemd</comment>
+  <comment xml:lang="gl">Ficheiro de unidade de Systemd</comment>
+  <comment xml:lang="fur">File unitât di systemd</comment>
+  <comment xml:lang="fr">Fichier d'unité de systemd</comment>
+  <comment xml:lang="fi">Systemd-yksikkötiedosto</comment>
+  <comment xml:lang="eu">Systemd unitate-fitxategia</comment>
+  <comment xml:lang="et">Systemd ühikufail</comment>
+  <comment xml:lang="es">archivo de unidad de Systemd</comment>
+  <comment xml:lang="en-GB">Systemd unit file</comment>
+  <comment xml:lang="de">systemd-Einheitendatei</comment>
+  <comment xml:lang="ca">fitxer d'unitat de Systemd</comment>
+  <comment xml:lang="be-Cyrl">файл адзінкі systemd</comment>
+  <comment xml:lang="ar">ملف وحدة Systemd</comment>
+  <sub-class-of type="text/plain"/>
+  <glob pattern="*.automount"/>
+  <glob pattern="*.device"/>
+  <glob pattern="*.mount"/>
+  <glob pattern="*.path"/>
+  <glob pattern="*.scope"/>
+  <glob pattern="*.service"/>
+  <glob pattern="*.slice"/>
+  <glob pattern="*.socket"/>
+  <glob pattern="*.swap"/>
+  <glob pattern="*.target"/>
+  <glob pattern="*.timer"/>
+</mime-type>

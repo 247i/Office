@@ -1,0 +1,97 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2013-06-09 09:58+0000\n"
+"Last-Translator: Marten de Vries <marten@marten-de-vries.nl>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-11 06:04+0000\n"
+"X-Generator: Launchpad (build 16667)\n"
+
+#: words.py:90
+msgid "Unnamed"
+msgstr "Naamloos"
+
+#: words.py:91
+#, python-format
+msgid "Word lesson: %s"
+msgstr "Woordjesles: %s"
+
+#: words.py:136
+msgid "Empty question or answer"
+msgstr "Lege vraag of antwoord"
+
+#: words.py:137
+msgid "Please enter at least one question and one answer for every word."
+msgstr "Vul  bij ieder woord ten minste één vraag en één woord in."
+
+#: words.py:228
+msgid "Create words lesson"
+msgstr "Maak een woordjesles aan"
+
+#~ msgid "Title:"
+#~ msgstr "Titel:"
+
+#~ msgid "Question language:"
+#~ msgstr "Taal van de vragen:"
+
+#~ msgid "Answer language:"
+#~ msgstr "Taal van de antwoorden:"
+
+#~ msgid "Remove selected row(s)"
+#~ msgstr "Verwijder de geselecteerde rij(en)"
+
+#~ msgid "Up"
+#~ msgstr "Omhoog"
+
+#~ msgid "Down"
+#~ msgstr "Naar beneden"
+
+#~ msgid "Don't show this screen again when I start a lesson."
+#~ msgstr "Laat dit scherm niet zien als ik een les start."
+
+#~ msgid "I'm ready, start the lesson!"
+#~ msgstr "Ik ben klaar, start de les!"
+
+#~ msgid "Lesson settings"
+#~ msgstr "Lesinstellingen"
+
+#~ msgid "Lesson type"
+#~ msgstr "Lestype"
+
+#~ msgid "Modify word"
+#~ msgstr "Pas woord aan"
+
+#~ msgid "Modify word list"
+#~ msgstr "Pas woordenlijst aan"
+
+#~ msgid "Change lesson settings"
+#~ msgstr "Pas lesinstellingen aan"
+
+#~ msgid "Word:"
+#~ msgstr "Woord:"
+
+#~ msgid "Questions"
+#~ msgstr "Vragen"
+
+#~ msgid "Answers"
+#~ msgstr "Antwoorden"
+
+#~ msgid "Comment"
+#~ msgstr "Commentaar"
+
+#~ msgid "Words Lesson"
+#~ msgstr "Woordjesles"
+
+#~ msgid "Word lesson %s"
+#~ msgstr "Woordjesles %s"

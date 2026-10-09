@@ -1,0 +1,61 @@
+#!	Copyright 2012, Marten de Vries
+#!
+#!	This file is part of OpenTeacher.
+#!
+#!	OpenTeacher is free software: you can redistribute it and/or modify
+#!	it under the terms of the GNU General Public License as published by
+#!	the Free Software Foundation, either version 3 of the License, or
+#!	(at your option) any later version.
+#!
+#!	OpenTeacher is distributed in the hope that it will be useful,
+#!	but WITHOUT ANY WARRANTY; without even the implied warranty of
+#!	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#!	GNU General Public License for more details.
+#!
+#!	You should have received a copy of the GNU General Public License
+#!	along with OpenTeacher.  If not, see <http://www.gnu.org/licenses/>.
+
+@!(len(package) + 1) * "="!@
+@!titleify(package)!@
+
+@!(len(short_description) + 1) * "-"!@
+@!short_description!@
+@!(len(short_description) + 1) * "-"!@
+
+:Date: @!now.strftime("%Y-%m-%d")!@
+:Version: @!version!@
+:Manual section: 1
+
+@!titleify(tr("SYNOPSIS"))!@
+
+@!package!@ [-h] [-p PROFILE]
+
+@!titleify(tr("DESCRIPTION"))!@
+
+@!description!@
+
+@!titleify(tr("OPERATION"))!@
+@!tr("After startup, OpenTeacher allows you to load a lesson or to create one.")!@
+@!tr("Lessons can be loaded from both files and the internet.")!@
+@!tr("There are a number of different lesson types: you can use OpenTeacher to learn vocabulary, geography and media.")!@
+@!tr("Also, OpenTeacher has a typing lesson course built in.")!@
+
+@!tr("When you open a lesson you can view the items in that lesson or enter new ones, and learn those items.")!@
+@!tr("At the end of the session, you can view your results.")!@
+@!tr("Also, it's possible to browse results of older tests.")!@
+
+@!titleify(tr("OPTIONS"))!@
+
+-h, --help  tr("show a help message")
+-p PROFILE, --profile PROFILE
+  @!tr("run {name} as specified by {profile}, {profile} should be one of:").format(name=name, profile="*PROFILE*")!@
+
+  <!--(for profile in sorted(profiles, key=lambda p: p["name"]))-->
+  - *@!profile["name"]!@*: @!profile["niceName"]!@ @!tr("(advanced)") if profile["advanced"] else ""!@
+
+  <!--(end)-->
+
+@!titleify(tr("AUTHOR"))!@
+@!" - ".join(sorted(otAuthors))!@
+
+@!tr("Contact: {email}").format(email=email)!@

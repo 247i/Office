@@ -1,0 +1,647 @@
+if not modules then modules = { } end modules ['lpdf-fmt'] = {
+    version   = 1.001,
+    comment   = "companion to lpdf-ini.mkiv",
+    author    = "Peter Rolf and Hans Hagen",
+    copyright = "PRAGMA ADE / ConTeXt Development Team",
+    license   = "see context related readme files",
+}
+
+-- Thanks to Luigi and Steffen for testing.
+
+-- context --directives="backend.format=PDF/X-1a:2001" --trackers=backend.format yourfile
+
+local tonumber = tonumber
+local lower, gmatch, format, find, gsub, tohex, pack = string.lower, string.gmatch, string.format, string.find, string.gsub, string.tohex, string.pack
+local concat, serialize, sortedhash = table.concat, table.serialize, table.sortedhash
+local setmetatableindex = table.setmetatableindex
+
+local trace_format    = false  trackers.register("backend.format",    function(v) trace_format    = v end)
+local trace_variables = false  trackers.register("backend.variables", function(v) trace_variables = v end)
+
+local report_backend = logs.reporter("backend","profiles")
+
+local pdfbackend               = backends.registered.pdf
+----- nodeinjections           = pdfbackend.nodeinjections
+local codeinjections           = pdfbackend.codeinjections
+
+local variables                = interfaces.variables
+local viewerlayers             = attributes.viewerlayers
+local colors                   = attributes.colors
+local transparencies           = attributes.transparencies
+
+local lpdf                     = lpdf
+local pdfdictionary            = lpdf.dictionary
+local pdfarray                 = lpdf.array
+local pdfconstant              = lpdf.constant
+local pdfreference             = lpdf.reference
+local pdfflushobject           = lpdf.flushobject
+local pdfstring                = lpdf.string
+local pdfverbose               = lpdf.verbose
+local pdfflushstreamfileobject = lpdf.flushstreamfileobject
+
+local settings_to_array        = utilities.parsers.settings_to_array
+local settings_to_hash         = utilities.parsers.settings_to_hash
+
+--[[
+    Comments by Peter:
+
+    output intent       : only one profile per color space (and device class)
+    default color space : (theoretically) several profiles per color space possible
+
+    The default color space profiles define the current gamuts (part of/all the
+    colors we have in the document), while the output intent profile declares the
+    gamut of the output devices (the colors that we get normally a printer or
+    monitor).
+
+    Example:
+
+    I have two RGB pictures (both 'painted' in /DeviceRGB) and I declare sRGB as
+    default color space for one picture and AdobeRGB for the other. As output
+    intent I use ISO_coated_v2_eci.icc.
+
+    If I had more than one output intent profile for the combination CMYK/printer I
+    can't decide which one to use. But it is no problem to use several default color
+    space profiles for the same color space as it's just a different color
+    transformation. The relation between picture and profile is clear.
+]]--
+
+local channels = {
+    gray = 1,
+    grey = 1,
+    rgb  = 3,
+    cmyk = 4,
+}
+
+local prefixes = {
+    gray = "DefaultGray",
+    grey = "DefaultGray",
+    rgb  = "DefaultRGB",
+    cmyk = "DefaultCMYK",
+}
+
+local formatspecification = nil
+local formatname          = nil
+local pdfformats          = { }
+
+local formats = utilities.storage.allocate {
+    version = {
+        external     = 1.4, -- 'p' in name; URL reference of output intent
+        jbig2        = 1.4,
+        jpeg2000     = 1.5, -- not supported yet
+        nchannel     = 1.6, -- 'n' in name; n-channel colorspace support
+        prepress     = 1.3, -- 'g' in name; reference to external graphics
+        layers       = 1.5,
+        transparency = 1.4,
+        compression  = 1.5,
+        attachments  = 1.7,
+    },
+    default = {
+        version      = 1.7,  -- todo: block tex primitive
+        format       = "default",
+        xmpfile      = "lpdf-pdx.xml",
+        gray         = true,
+        cmyk         = true,
+        rgb          = true,
+        spot         = true,
+        calibrated   = true,  -- rgb colors, not used
+        cielab       = true,  -- unknown
+        nchannel     = true,  -- unknown
+        internal     = true,  -- controls profile inclusion
+        external     = true,  -- controls profile inclusion
+        intents      = true,
+        prepress     = true,  -- unknown
+        layers       = true,  -- todo: block at lua level
+        transparency = true,  -- todo: block at lua level
+        jbig2        = true,  -- todo: block at lua level (dropped anyway)
+        jpeg2000     = true,  -- todo: block at lua level (dropped anyway)
+        cidsets      = false, -- only some standards
+        charsets     = true,  -- not used
+        procsets     = false, -- also version driven
+        info         = true,
+        acrobat      = true,
+        attachments  = true,
+        extensions   = true,
+        compression  = false, -- object compression
+        tagging      = false,
+        forms        = false,
+        metadata     = { },
+    },
+    data = pdfformats,
+}
+
+setmetatableindex(pdfformats,function(t,k)
+    k = lower(k)
+    k = gsub(k,"^pdf","")
+    k = gsub(k,"[^a-z0-9]+","")
+    local v = rawget(t,k)
+    if not v then
+        local filename = "lpdf-fmt-imp-" .. k .. ".lmt"
+        local fullname = resolvers.findfile(filename) or ""
+        if fullname ~= "" then
+            v = dofile(fullname)
+            if v then
+                v = v.features
+            end
+            if v then
+                setmetatableindex(v,formats.default)
+            else
+                v = false
+            end
+            t[k] = v
+        end
+    end
+    return v
+end)
+
+lpdf.formats = formats -- it does not hurt to have this one visible
+
+formatspecification = formats.default
+
+function lpdf.getformatoption(key)
+    return formatspecification and formatspecification[key]
+end
+
+-- function codeinjections.getformatspecification()
+--     return formatspecification
+-- end
+
+function lpdf.supportedformats()
+    local found = resolvers.findfile("lpdf-fmt-imp-a4.lmt")
+    if found then
+        local pattern = gsub(found,"a4.lmt", "*.lmt")
+        local list    = dir.glob(pattern)
+        local count   = 0
+        for i=1,#list do
+            local n = gsub(file.nameonly(list[i]),"lpdf.fmt.imp.","")
+            local d = pdfformats[n]
+        end
+    end
+    return table.sortedkeys(pdfformats)
+end
+
+codeinjections.getformatoption  = lpdf.getformatoption
+codeinjections.supportedformats = lpdf.supportedformats
+
+-- When we have an URL we can assume that embedding is not needed.
+
+local filenames = {
+    "colorprofiles.xml",
+    "colorprofiles.lua",
+}
+
+local function locatefile(filename)
+    local fullname = resolvers.findfile(filename,"icc",1,true)
+    if not fullname or fullname == "" then
+        fullname = resolvers.finders.byscheme("loc",filename) -- could be specific to the project
+    end
+    return fullname or ""
+end
+
+local internalprofiles = { }
+local externalprofiles = { }
+local defaultprofiles  = { }
+local loadeddefaults   = { }
+local loadedprofiles   = { }
+
+local function loadprofile(name,filename)
+    local profile = loadedprofiles[name]
+    if profile ~= nil then
+        return profile
+    end
+    local databases = filename and filename ~= "" and settings_to_array(filename) or filenames
+    for i=1,#databases do
+        local filename = locatefile(databases[i])
+        if filename and filename ~= "" then
+            local suffix = file.suffix(filename)
+            local lname = lower(name)
+            if suffix == "xml" then
+                local xmldata = xml.load(filename) -- no need for caching it
+                if xmldata then
+                    profile = xml.filter(xmldata,format('xml://profiles/profile/(info|filename)[lower(text())=="%s"]/../table()',lname))
+                end
+            elseif suffix == "lua" then
+                local luadata = loadfile(filename)
+                luadata = ludata and luadata()
+                if luadata then
+                    profile = luadata[name] or luadata[lname] -- hashed
+                    if not profile then
+                        for i=1,#luadata do
+                            local li = luadata[i]
+                            if lower(li.info) == lname then -- indexed
+                                profile = li
+                                break
+                            end
+                        end
+                    end
+                end
+            end
+            if profile then
+                if not next(profile) then
+                    profile = false
+                end
+                loadedprofiles[name] = profile
+                if profile then
+                    report_backend("profile specification %a loaded from %a",name,filename)
+                elseif trace_format then
+                    report_backend("profile specification %a loaded from %a but empty",name,filename)
+                end
+                return profile
+            end
+        end
+    end
+    report_backend("profile specification %a not found in %a",name,concat(filenames, ", "))
+end
+
+local function profilename(filename)
+    return lower(file.basename(filename))
+end
+
+local function urls(url)
+    if not url or url == "" then
+        return nil
+    else
+        local u = pdfarray()
+        for url in gmatch(url,"([^, ]+)") do
+            if find(url,"^http") then
+                u[#u+1] = pdfdictionary {
+                    FS = pdfconstant("URL"),
+                    F  = pdfstring(url),
+                }
+            end
+        end
+        return u
+    end
+end
+
+local function includeprofile(s)
+    local filename   = s.filename   or ""
+    local colorspace = s.colorspace or ""
+    local colorspace = lower(colorspace)
+    local channel    = channels[colorspace] or nil
+    if filename == "" or colorspace == "" then
+        report_backend("error in profile specification: %s",serialize(s,false))
+    else
+        local tag     = profilename(filename)
+        local profile = internalprofiles[tag] or externalprofiles[tag]
+        if not profile then
+            -- We check if the profile has an id other than "custom". If so, we
+            -- don't embed it but create a reference.
+            local id = s.id
+            if id and lower(id) ~= "custom" then
+                local name = s.info or s.filename or ""
+                local d = pdfdictionary {
+                    ProfileName = name ~= "" and name or nil,
+                    ProfileCS   = colorspace,
+                    URLs        = urls(s.url or ""),
+                }
+                profile = pdfflushobject(d)
+                externalprofiles[tag] = profile
+             -- defaultprofiles[channel] = profile
+            end
+        end
+        if not profile then
+            local fullname   = locatefile(filename)
+            if fullname == "" then
+                fullname = locatefile("colo-imp-" .. filename)
+            end
+            if fullname == "" then
+                report_backend("error, couldn't locate profile %a",filename)
+            elseif not channel then
+                report_backend("error, couldn't resolve channel entry for colorspace %a",colorspace)
+            else
+                profile = pdfflushstreamfileobject(fullname,pdfdictionary{ N = channel },false) -- uncompressed
+                internalprofiles[tag]    = profile
+                defaultprofiles[channel] = profile
+                if trace_format then
+                    report_backend("including %a color profile from %a",colorspace,fullname)
+                end
+            end
+        end
+        return profile
+    end
+end
+
+function codeinjections.defaultprofile(channel)
+ -- print("get profile",channel,defaultprofiles[channel])
+    return defaultprofiles[channel]
+end
+
+local function processprofile(s,spec) -- specification
+    local filename   = s.filename or ""
+    local colorspace = lower(s.colorspace or "")
+    if filename == "" or colorspace == "" then
+        report_backend("error in default profile specification: %s",serialize(s,false))
+    elseif not loadeddefaults[colorspace] then
+        local tag = profilename(filename)
+        local n   = internalprofiles[tag] or externalprofiles[tag]
+        if n == true then -- not internalized
+            report_backend("no default profile %a for colorspace %a",filename,colorspace)
+        elseif n then
+            local a = pdfarray {
+                pdfconstant("ICCBased"),
+                pdfreference(n),
+            }
+             -- used in page /Resources, so this must be inserted at runtime
+            lpdf.adddocumentcolorspace(prefixes[colorspace],pdfreference(pdfflushobject(a)))
+            loadeddefaults[colorspace] = true
+            report_backend("setting %a as default %a color space",filename,colorspace)
+        else
+            report_backend("no default profile %a for colorspace %a",filename,colorspace)
+        end
+    elseif trace_format then
+        report_backend("a default %a colorspace is already in use",colorspace)
+    end
+end
+
+-- pdfa  sRGB  GTS_PDFA1
+-- pdfx  CMYK  GTS_PDFX
+-- pdfe        ISO_PDFE1
+
+-- OutputCondition           : optional, meant for user interfacing
+-- OutputConditionIdentifier : mandate, something official
+
+-- sRGB v4 Preference
+-- PSOuncoated_v3_FOGRA52.icc  (european)
+
+local loadedintents = { }
+local intents       = pdfarray()
+
+local function processoutputintent(s,spec)
+    local url             = s.url or ""
+    local filename        = s.filename or ""
+    local name            = s.info or filename
+    local id              = s.id or ""
+    local outputcondition = s.outputcondition or ""
+    local info            = s.info or ""
+    if name == "" or id == "" then
+        report_backend("error in output intent specification: %s",serialize(s,false))
+    elseif not loadedintents[name] then
+        local tag      = profilename(filename)
+        local internal = internalprofiles[tag]
+        local external = externalprofiles[tag]
+        --
+        -- The OutputConditionIdentifier is mandate and can be an officially registered
+        -- one. When we have an unofficial one, we need to provide DestOutputProfile
+        -- but DestOutputProfileRef i soptional and can best be omitted.
+        --
+        -- We can use <id>Custom</id> as indicator for a to be embedded profile and
+        -- thereby play safe. In that case <info>whatever</info> also makes sense.
+        --
+        if internal or external then
+            local d = {
+                Type                      = pdfconstant("OutputIntent"),
+                -- mandate
+                S                         = pdfconstant(spec.intent or "GTS_PDFX"),
+                OutputConditionIdentifier = id,
+            }
+            if internal then
+                -- optional
+                d.RegistryName      = url
+                d.OutputCondition   = outputcondition
+                d.Info              = info
+                -- needed
+                d.DestOutputProfile = pdfreference(internal)
+            else
+                -- an external one mandates a known id to be used
+            end
+            intents[#intents+1] = pdfreference(pdfflushobject(pdfdictionary(d)))
+         -- if trace_format then
+                report_backend("setting output intent to %a with id %a for entry %a",name,id,#intents)
+         -- end
+        else
+            report_backend("invalid output intent %a",name)
+        end
+        loadedintents[name] = true
+    elseif trace_format then
+        report_backend("an output intent with name %a is already in use",name)
+    end
+end
+
+-- In order to get a bit more reliable validation we made some choices. A mix of
+-- internal and external profiles gives a mess so we can best only handle embeded
+-- ones and just include the smallest possible set. Users who deal with real complex
+-- icc profiles (likely cmyk) will embed these anyway. For a previous implementation
+-- one can look in the archives (ok mkiv). We kind of assume PDF/A-4 to be used.
+
+local function handleiccprofile(message,spec,name,filename,dowithprofile)
+    -- name is an intent or profile list
+    if name and name ~= "" then
+        local list = settings_to_array(name)
+        for i=1,#list do
+            local name    = list[i]
+            local profile = loadprofile(name,filename)
+            if trace_format then
+                report_backend("handling %s %a",message,name)
+            end
+            --
+            if not profile and file.suffix(name) == "icc" then
+                -- so we have no description ... we can create a bogus entry:
+                profile = {
+                    filename   = name,
+                    id         = "Custom",
+                    colorspace = find(lower(name),"rgb") and "RGB" or "CMYK",
+                }
+                if trace_format then
+                    report_backend("forcing internal profiles %a",name)
+                end
+            end
+            --
+            if profile then
+                if formatspecification.cmyk then
+                    profile.colorspace = profile.colorspace or "CMYK"
+                else
+                    profile.colorspace = profile.colorspace or "RGB"
+                end
+                if trace_format then
+                    report_backend("handling internal profiles cf. %a",name)
+                end
+                includeprofile(profile)
+                dowithprofile(profile,spec)
+            elseif trace_format then
+                report_backend("unknown profile %a",name)
+            end
+        end
+        return list[1]
+    end
+end
+
+local function flushoutputintents()
+    if #intents > 0 then
+        lpdf.addtocatalog("OutputIntents",pdfreference(pdfflushobject(intents)))
+    end
+end
+
+lpdf.registerdocumentfinalizer(flushoutputintents,2,"output intents")
+
+function codeinjections.setformat(s)
+    local format   = s.format  or ""
+    local intent   = s.intent  or ""
+    local profile  = s.profile or ""
+    local option   = s.option  or ""
+    local filename = s.file    or "" -- profile databases
+    local level    = tonumber(s.level)
+    --
+    if format ~= "" then
+        local spec = pdfformats[format]
+        if spec then
+            formatspecification = spec
+            formatname = spec.format
+            report_backend("setting format %a to %a",format,formatname)
+            local xmpfile = formatspecification.xmpfile or ""
+            if xmpfile == "" then
+                -- weird error
+            else
+                codeinjections.setxmpfile(xmpfile)
+            end
+            if profile == "" then
+                if intent == variables.default or intent == variables.rgb then
+                    intent  = "sRGB-v4.icc"
+                    profile = "sRGB-v4.icc,CGATS001Compat-v2-micro.icc,sGrey-v4.icc"
+                elseif intent == variables.cmyk then
+                    intent  = "CGATS001Compat-v2-micro.icc"
+                    profile = "sRGB-v4.icc,CGATS001Compat-v2-micro.icc"
+                else
+                    -- safeguard, let's see how that works out
+                    profile = intent
+                 -- report_backend("no profile set, taking from intent")
+                 -- goto SKIP
+                end
+                report_backend("using color intent %a",intent)
+                report_backend("using icc profiles %a",profile)
+              ::SKIP::
+            elseif intent == variables.default or intent == variables.rgb or intent == variables.cmyk then
+                -- these are non existent
+                intent = ""
+            end
+            if not level then
+                level = 3 -- good compromise, default anyway
+            end
+            local pdfversion          = spec.version * 10
+            local injectmetadata      = spec.metadata
+         -- local injectconformance   = spec.conformance
+            local majorversion        = math.floor(math.div(pdfversion,10))
+            local minorversion        = math.floor(math.mod(pdfversion,10))
+            local objectcompression   = spec.compression and pdfversion >= 15
+            local compresslevel       = level or lpdf.compresslevel() -- keep default
+            local objectcompresslevel = (objectcompression and (level or lpdf.objectcompresslevel())) or 0
+            lpdf.setcompression(compresslevel,objectcompresslevel)
+            lpdf.setversion(majorversion,minorversion)
+            if objectcompression then
+                report_backend("forcing pdf version %s.%s, compression level %s, object compression level %s",
+                    majorversion,minorversion,compresslevel,objectcompresslevel)
+            elseif compresslevel > 0 then
+                report_backend("forcing pdf version %s.%s, compression level %s, object compression disabled",
+                    majorversion,minorversion,compresslevel)
+            else
+                report_backend("forcing pdf version %s.%s, compression disabled",
+                    majorversion,minorversion)
+            end
+            --
+            lpdf.setutfstringmode(majorversion >= 2)
+            --
+            -- maybe block by pdf version
+            --
+            codeinjections.settaggingsupport(formatspecification.tagging)
+            codeinjections.setattachmentsupport(formatspecification.attachments)
+            --
+            -- context.setupcolors { -- not this way
+            --     cmyk = spec.cmyk and variables.yes or variables.no,
+            --     rgb  = spec.rgb  and variables.yes or variables.no,
+            -- }
+            --
+            local rgb = spec.rgb  and variables.yes or variables.no
+            local cmy = spec.cmyk and variables.yes or variables.no
+            report_backend("permitted colorspaces: rgb %a, cmyk %a",rgb,cmy)
+         -- token.expandmacro ("colo_force_colormodel",true,rgb,true,cmy)
+            --
+            colors.forcesupport(
+                spec.gray     or false,
+                spec.rgb      or false,
+                spec.cmyk     or false,
+                spec.spot     or false,
+                spec.nchannel or false
+            )
+            transparencies.forcesupport(
+                spec.transparency or false
+            )
+            viewerlayers.forcesupport(
+                spec.layers or false
+            )
+            viewerlayers.setfeatures(
+                spec.has_order or false -- new
+            )
+            --
+            -- spec.jbig2    : todo, block in image inclusion
+            -- spec.jpeg2000 : todo, block in image inclusion
+            --
+            if type(injectmetadata) == "function" then
+                injectmetadata()
+            elseif type(injectmetadata) == "table" then
+                for i=1,#injectmetadata do
+                    local entry  = injectmetadata[i]
+                    local action = lpdf[entry[1]]
+                    if action then
+                        action(entry[2],entry[3],entry[4])
+                    end
+                end
+            end
+            --
+            -- If needed we can make a dedicated imp file for this but currently we
+            -- consider this not that useful, so we go for less code instead.
+            --
+         -- if type(injectconformance) == "function" then
+         --     injectconformance(environment.arguments.wtpdf)
+         -- elseif type(injectconformance) == "table" then
+         --     for i=1,#injectconformance do
+         --         local entry  = injectconformance[i]
+         --         local action = lpdf[entry[1]]
+         --         if action then
+         --             action(entry[2],entry[3],entry[4])
+         --         end
+         --     end
+         -- end
+            --
+            local first = handleiccprofile("color profile",spec,profile,filename,processprofile)
+            if intent == "" then
+                intent = first
+            end
+            handleiccprofile("output intent",spec,intent,filename,processoutputintent)
+            --
+            if trace_variables then
+                for k, v in sortedhash(formats.default) do
+                    local v = formatspecification[k]
+                    if type(v) ~= "function" then
+                        report_backend("%a = %a",k,v or false)
+                    end
+                end
+            end
+            function codeinjections.setformat(noname)
+                if trace_format then
+                    report_backend("error, format is already set to %a, ignoring %a",formatname,noname.format)
+                end
+            end
+        else
+            report_backend("error, format %a is not supported, valid formats: % | t",
+                format,table.sortedkeys(formats.data))
+        end
+    elseif level then
+        lpdf.setcompression(level,level)
+    else
+        -- we ignore this as we hook it in \everysetupbackend
+    end
+end
+
+directives.register("backend.format", function(v) -- table !
+    local tv = type(v)
+    if tv == "table" then
+        codeinjections.setformat(v)
+    elseif tv == "string" then
+        codeinjections.setformat { format = v }
+    end
+end)
+
+interfaces.implement {
+    name      = "setformat",
+    actions   = codeinjections.setformat,
+    arguments = { { "*" } }
+}

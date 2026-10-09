@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/appinstaller">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Windows app store installer</comment>
+  <comment xml:lang="zh-Hant-TW">Windows 應用程式商店安裝程式</comment>
+  <comment xml:lang="uk">встановлювач крамниці програм Windows</comment>
+  <comment xml:lang="tr">Microsoft Store kurulum programı</comment>
+  <comment xml:lang="sv">Windows app store-installerare</comment>
+  <comment xml:lang="sr-Cyrl">Виндоуз инсталатер продавнице програма</comment>
+  <comment xml:lang="sq">Instalues shitoreje aplikacionesh Windows</comment>
+  <comment xml:lang="sl">Namestilnik Windows App Store</comment>
+  <comment xml:lang="ru">Программа установки магазина приложений Windows</comment>
+  <comment xml:lang="ro">programul de instalare al magazinului de aplicații Windows</comment>
+  <comment xml:lang="pt-BR">Instalador da loja de aplicativos do Windows</comment>
+  <comment xml:lang="pl">Instalator sklepu z aplikacjami Windows</comment>
+  <comment xml:lang="oc">installador de botiga d’aplicacion Windows</comment>
+  <comment xml:lang="ko">윈도우 앱 스토어 인스톨러</comment>
+  <comment xml:lang="kk-Cyrl">Windows app store орнатқышы</comment>
+  <comment xml:lang="ja">Windows アプリストア インストーラー</comment>
+  <comment xml:lang="it">Installatore app store Windows</comment>
+  <comment xml:lang="id">Penginstal toko aplikasi Windows</comment>
+  <comment xml:lang="hr">Instalacija Windows trgovine aplikacija</comment>
+  <comment xml:lang="hi">Windows ऐप स्टोर इंस्टॉलर</comment>
+  <comment xml:lang="fur">Instaladôr dal app store di Windows</comment>
+  <comment xml:lang="fr">Paquet d'installation de l'App store Windows</comment>
+  <comment xml:lang="fi">Windows sovelluskaupan asennusohjelma</comment>
+  <comment xml:lang="et">Windowsi rakendustepoe installer</comment>
+  <comment xml:lang="es">instalador de la tienda de aplicaciones de Windows</comment>
+  <comment xml:lang="en-GB">Windows app store installer</comment>
+  <comment xml:lang="de">Windows App-Store-Installationsprogramm</comment>
+  <comment xml:lang="ca">instal·lador de la botiga d'aplicacions Windows</comment>
+  <comment xml:lang="bg">Инсталация — Windows app store</comment>
+  <comment xml:lang="be-Cyrl">Сродак ўсталявання праграм Windows store</comment>
+  <comment xml:lang="ar">مثبت سوق تطبيقات ويندوز</comment>
+  <sub-class-of type="application/xml"/>
+  <generic-icon name="package-x-generic"/>
+  <glob pattern="*.appinstaller"/>
+</mime-type>

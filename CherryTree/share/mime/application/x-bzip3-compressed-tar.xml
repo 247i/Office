@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-bzip3-compressed-tar">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Tar archive (bzip3-compressed)</comment>
+  <comment xml:lang="zh-Hant-TW">Tar 封存檔 (bzip3 壓縮)</comment>
+  <comment xml:lang="uk">архів tar (стиснений bzip3)</comment>
+  <comment xml:lang="tr">Tar arşivi (bzip3 sıkıştırmalı)</comment>
+  <comment xml:lang="sv">Tar-arkiv (bzip3-komprimerat)</comment>
+  <comment xml:lang="sr-Cyrl">Тар архива (сажета Бзипом 3)</comment>
+  <comment xml:lang="sq">Arkiv tar (ngjeshur me bzip3)</comment>
+  <comment xml:lang="sl">Arhiv tar (stisnjen z bzip3)</comment>
+  <comment xml:lang="ru">TAR Архив (сжатый bzip3)</comment>
+  <comment xml:lang="ro">arhivă Tar (comprimată bzip3)</comment>
+  <comment xml:lang="pt-BR">Pacote Tar (compactado com bzip3)</comment>
+  <comment xml:lang="pl">Archiwum tar (kompresja bzip3)</comment>
+  <comment xml:lang="oc">archiu Tar (compressat amb bzip3)</comment>
+  <comment xml:lang="nn">Tar-arkiv (bzip3-komprimert)</comment>
+  <comment xml:lang="ko">TAR 묶음 파일 (BZIP3 압축)</comment>
+  <comment xml:lang="kk-Cyrl">Tar архиві (bzip3-пен сығылған)</comment>
+  <comment xml:lang="ja">Tar アーカイブ (bzip3 圧縮)</comment>
+  <comment xml:lang="it">Archivio tar (compresso con bzip3)</comment>
+  <comment xml:lang="id">Arsip tar (terkompresi bzip3)</comment>
+  <comment xml:lang="hr">Tar arhiva (bzip3 komprimirano)</comment>
+  <comment xml:lang="hi">Tar अभिलेख (bzip3-संपीड़ित)</comment>
+  <comment xml:lang="he">ארכיון Tar ‏(דחוס ב־bzip3)</comment>
+  <comment xml:lang="gl">Arquivo Tar (comprimido con bzip3)</comment>
+  <comment xml:lang="fur">Archivi Tar (comprimût cun bzip3)</comment>
+  <comment xml:lang="fr">Archive Tar (compression bzip3)</comment>
+  <comment xml:lang="fi">Tar-arkisto (bzip3-pakattu)</comment>
+  <comment xml:lang="eu">Tar artxiboa (bzip3-compressed)</comment>
+  <comment xml:lang="et">Tar arhiiv (pakitud bzip3-ga)</comment>
+  <comment xml:lang="es">archivador TAR (comprimido con BZIP3)</comment>
+  <comment xml:lang="en-GB">Tar archive (bzip3-compressed)</comment>
+  <comment xml:lang="de">tar-Archiv (bzip3-komprimiert)</comment>
+  <comment xml:lang="da">Tar-arkiv (bzip3-komprimeret)</comment>
+  <comment xml:lang="ca">arxiu tar (comprimit amb bzip3)</comment>
+  <comment xml:lang="bg">Архив — tar, компресиран с bzip3</comment>
+  <comment xml:lang="be-Cyrl">архіў tar (сцісканне bzip3)</comment>
+  <comment xml:lang="ar">أرشيف Tar (مضغوط-bzip3)</comment>
+  <generic-icon name="package-x-generic"/>
+  <sub-class-of type="application/vnd.bzip3"/>
+  <glob pattern="*.tar.bz3"/>
+  <glob pattern="*.tbz3"/>
+</mime-type>

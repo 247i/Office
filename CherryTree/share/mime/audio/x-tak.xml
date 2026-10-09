@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="audio/x-tak">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>TAK audio</comment>
+  <comment xml:lang="zh-Hant-TW">TAK 音訊</comment>
+  <comment xml:lang="uk">звук TAK</comment>
+  <comment xml:lang="tr">TAK sesi</comment>
+  <comment xml:lang="sv">TAK-ljud</comment>
+  <comment xml:lang="sr-Cyrl">TAK звучни запис</comment>
+  <comment xml:lang="sq">Audio Tak</comment>
+  <comment xml:lang="sl">Zvok TAK</comment>
+  <comment xml:lang="ru">Аудио TAK</comment>
+  <comment xml:lang="ro">audio TAK</comment>
+  <comment xml:lang="pt-BR">Áudio TAK</comment>
+  <comment xml:lang="pl">Plik dźwiękowy TAK</comment>
+  <comment xml:lang="oc">àudio TAK</comment>
+  <comment xml:lang="nn">TAK-lyd</comment>
+  <comment xml:lang="lt">TAK garso įrašas</comment>
+  <comment xml:lang="ko">TAK 오디오</comment>
+  <comment xml:lang="kk-Cyrl">TAK аудиосы</comment>
+  <comment xml:lang="kab">Ameslaw TAK</comment>
+  <comment xml:lang="ja">TAK オーディオ</comment>
+  <comment xml:lang="it">Audio Tak</comment>
+  <comment xml:lang="id">Audio TAK</comment>
+  <comment xml:lang="hr">TAK zvučni zapis</comment>
+  <comment xml:lang="hi">TAK ऑडियो</comment>
+  <comment xml:lang="he">שמע TAK</comment>
+  <comment xml:lang="gl">Son TAK</comment>
+  <comment xml:lang="fur">Audio TAK</comment>
+  <comment xml:lang="fr">Audio TAK</comment>
+  <comment xml:lang="fi">TAK audio</comment>
+  <comment xml:lang="eu">TAK audioa</comment>
+  <comment xml:lang="et">TAK helifail</comment>
+  <comment xml:lang="es">audio TAK</comment>
+  <comment xml:lang="en-GB">TAK audio</comment>
+  <comment xml:lang="de">TAK-Audio</comment>
+  <comment xml:lang="ca">àudio TAK</comment>
+  <comment xml:lang="bg">Аудио — TAK</comment>
+  <comment xml:lang="be-Cyrl">аўдыя TAK</comment>
+  <comment xml:lang="ar">صوت TAK</comment>
+  <acronym>TAK</acronym>
+  <expanded-acronym>Tom's lossless Audio Kompressor</expanded-acronym>
+  <glob pattern="*.tak"/>
+</mime-type>

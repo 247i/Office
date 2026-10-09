@@ -1,0 +1,294 @@
+if not modules then modules = { } end modules ['font-mpf'] = {
+    version   = 1.001,
+    comment   = "companion to font-ini.mkiv",
+    author    = "Hans Hagen, PRAGMA-ADE, Hasselt NL",
+    copyright = "PRAGMA ADE / ConTeXt Development Team",
+    license   = "see context related readme files"
+}
+
+local formatters     = string.formatters
+local sortedhash     = table.sortedhash
+
+local addcharacters  = fonts.constructors.addcharacters
+local fontdata       = fonts.hashes.identifiers
+local fontchars      = fonts.hashes.characters
+
+local otf            = fonts.handlers.otf
+local otfregister    = otf.features.register
+
+----- getshapes      = fonts.dropins.getshapes
+
+local register       = fonts.collections.register
+local checkenabled   = fonts.collections.checkenabled
+local newprivateslot = fonts.helpers.newprivateslot
+
+local currentfont    = font.current
+
+local nuts           = nodes.nuts
+local tonode         = nuts.tonode
+
+local hpack          = nuts.hpack
+local setlink        = nuts.setlink
+local getwhd         = nuts.getwhd
+
+local new_glyph      = nuts.pool.glyph
+local new_kern       = nuts.pool.kern
+
+-- hm, seems to gobble the first \char
+-- the tounicode is a bit messy here
+
+local makesetups = formatters["box:%s:%S"]
+
+local a_exportstatus <const> = attributes.private('exportstatus')
+
+local function makeglyphbox(char,spec)
+    token.expand_macro("makeglyphbox",true,spec.setups or tostring(char))
+    local b = tex.takebox("glyphbox")
+-- b[a_exportstatus] = 0
+    spec.code = {
+        width     = b.width,
+        height    = b.height,
+        depth     = b.depth,
+        objnum    = tex.boxresources.save(b,nil,nil,true),
+    }
+end
+
+local function setboxglyphs(category,fontid,unicode,specification)
+    local box = specification.code
+    if unicode and box then
+        local tfmdata    = fontdata[fontid]
+        local characters = tfmdata.characters
+        local newdata    = {
+            width   = box.width  or 0,
+            height  = box.height or 0,
+            depth   = box.depth  or 0,
+            unicode = specification.tounicode or unicode,
+        }
+        -- pass dimensions to lua
+        characters[unicode] = newdata
+        -- this also adapts newdata (add commands)
+        fonts.dropins.swapone("box",tfmdata,specification,unicode)
+        -- pass dimensions to tex
+        addcharacters(fontid, { characters = { [unicode] = newdata } })
+        return fontid, unicode
+    else
+        logs.report("box glyph", "invalid glyph box for %C",unicode)
+    end
+end
+
+local function setboxglyph(specification)
+    if specification then
+        local name    = specification.name
+        local unicode = specification.unicode
+        local font    = currentfont()
+        if not unicode and name then
+            unicode = newprivateslot(name)
+            specification.unicode = unicode
+        end
+        if unicode then
+            if not specification.setups then
+                specification.setups = name
+            end
+            -- we can actually delay font if needed
+            register(font,unicode,function(font,private)
+                makeglyphbox(unicode,specification)
+                return setboxglyphs(category,font,unicode,specification)
+            end)
+            checkenabled()
+        end
+    end
+end
+
+local function setboxdirectly(font,unicode,box,expose) -- hash based on wd/ht/dp
+    if box then
+        local tfmdata      = fontdata[font]
+        local glyphboxes   = (tfmdata.glyphboxes or 0) + 1
+        tfmdata.glyphboxes = glyphboxes
+        local private      = newprivateslot(formatters["BG:%05X"](glyphboxes))
+        local width, height, depth = getwhd(box)
+-- box[a_exportstatus] = 0
+        local newdata      = {
+            width   = width,
+            height  = height,
+            depth   = depth,
+            unicode = unicode,
+            objnum  = tex.boxresources.save(tonode(box),nil,nil,true),
+            expose  = expose, -- permit color etc
+        }
+        local specification = {
+            code = newdata
+        }
+        tfmdata.characters[private] = newdata
+        addcharacters(font, { characters = { [private] = newdata } })
+        fonts.dropins.swapone("box",tfmdata,specification,private)
+        checkenabled()
+        return private
+    end
+end
+
+fonts.helpers.setboxdirectly = setboxdirectly
+
+local boxes = table.setmetatableindex("table")
+
+function fonts.helpers.registerglyphbox(specification)
+    local category = specification.category
+    local whatever = specification.unicode or specification.name
+    if category and whatever then
+        boxes[category][whatever] = { action = makeglyphbox } -- always
+    end
+end
+
+local function initializebox(tfmdata,kind,value)
+    local boxes = boxes[value]
+    if value then
+        local font = tfmdata.properties.id
+        -- just preregister the list
+        for char, spec in sortedhash(boxes) do
+            spec.setups = makesetups(value,char)
+            local char = type(char) == "string" and newprivateslot(name) or char
+            -- check if spec.code
+            register(font,char,function(font,char)
+                local action = spec.action
+                if type(action) == "function" then
+                    action(char,spec)
+                end
+                return setboxglyphs(value,font,char,spec)
+            end)
+        end
+        checkenabled()
+    end
+end
+
+fonts.helpers.setboxglyphs = setboxglyphs
+fonts.helpers.setboxglyph  = setboxglyph
+
+interfaces.implement {
+    name      = "registerboxglyph", -- combine with next one
+    public    = true,
+    protected = true,
+    actions   = fonts.helpers.registerglyphbox,
+    arguments = { {
+        { "category" },
+        { "unicode", "integer" },
+        { "tounicode", "integer" },
+        { "name" },
+    } },
+}
+
+interfaces.implement {
+    name      = "setboxglyph",
+    public    = true,
+    protected = true,
+    actions   = setboxglyph,
+    arguments = { {
+        { "category" },
+        { "unicode", "integer" },
+        { "tounicode", "integer" },
+        { "name" },
+        { "*" }
+    } },
+}
+
+fonts.handlers.otf.features.register {
+    name         = "box",
+    description  = "box glyphs",
+    manipulators = {
+        base = initializebox,
+        node = initializebox,
+    }
+}
+
+-- fonts.helpers.registerboxglyph { category = "demo", unicode = 103 }
+-- fonts.helpers.registerboxglyph { category = "demo", unicode = 104 }
+-- fonts.helpers.registerboxglyph { category = "demo", unicode = 105 }
+-- fonts.helpers.registerboxglyph { category = "demo", unicode = 106 }
+
+local fontcallbacks = fonts.callbacks or { }
+fonts.callbacks     = fontcallbacks
+
+function fontcallbacks.devirtualize(chardata,f,c)
+    if chardata.commands then
+        local h = hpack(new_glyph(f,c))
+        local p = setboxdirectly(f,c,h)
+        chardata.oldcommands = chardata.commands
+        chardata.commands = { { "char", p } }
+        chardata.callback = false
+    end
+end
+
+local function process_character_callback(f,c)
+    local characters = fontchars[f]
+    local chardata   = characters[c]
+    if chardata then
+        local callback = chardata.callback
+        if callback then
+            local action = type(callback) == "function" and callback or fontcallbacks[callback]
+            if action then
+                action(chardata,f,c,characters)
+            end
+        end
+    end
+end
+
+do
+
+    local unpack = unpack
+
+    function fontcallbacks.compile(chardata,fnt,chr,characters)
+        -- no need for speed here
+        local c = chardata.commands
+        if c then
+            local t = { }
+            for i=1,#c do
+                local ci = c[i]
+                local c1 = ci[1]
+                local c2 = ci[2]
+                if c1 == "char" then
+                    t[i] = new_glyph(fnt,c2)
+                elseif c1 == "slot" then
+                    t[i] = new_glyph(c2 == 0 and fnt or c2,ci[3])
+                elseif c1 == "left" then
+                    t[i] = new_kern(-c2)
+                elseif c1 == "right" then
+                    t[i] = new_kern(c2)
+                elseif c1 == "offset" then
+                    local c4 = ci[4] -- c
+                    if c4 then
+                        t[i] = new_glyph(fnt or 0,c4)
+                        ----- c2 = ci[2] -- ox
+                        local c3 = ci[3] -- oy
+                        local c5 = ci[5] -- sx
+                        local c6 = ci[6] -- sy
+                        local c7 = ci[7] -- slant
+                        if c2 or c3 then
+                            nuts.setoffsets(t[i],c2 or 0,c3 or 0)
+                        end
+                     -- if c5 or c6 then
+                     --     nuts.setscales(t[i],1,(c5 or 1)*1000,(c6 or 1)*1000)
+                     -- end
+                        if c7 then
+                            nuts.setslant(t[i],c7*1000)
+                        end
+                    end
+                else
+                    print("fcc todo: " .. c1)
+                    goto done
+                end
+            end
+            local box = hpack(setlink(unpack(t)))
+            local prv = setboxdirectly(fnt,chr,box,true) -- expose
+            chardata.commands = { { "char", prv } }
+            characters[prv].unicode = chardata.unicode
+        end
+      ::done::
+        chardata.callback = false -- redundant
+    end
+
+end
+
+callbacks.register {
+    name    = "process_character",
+    action  = process_character_callback,
+    comment = "apply an action to a character in a font",
+    frozen  = true,
+}

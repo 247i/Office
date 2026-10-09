@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-hwpx">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Hancom HWPX document</comment>
+  <comment xml:lang="uk">документ HWPX Hancom</comment>
+  <comment xml:lang="sv">Hancom HWPX-dokument</comment>
+  <comment xml:lang="sl">Dokument Hancom HWPX</comment>
+  <comment xml:lang="ro">document HWPX Hancom</comment>
+  <comment xml:lang="ko">한컴 HWPX 문서</comment>
+  <comment xml:lang="kk-Cyrl">Hancom HWPX құжаты</comment>
+  <comment xml:lang="et">Hancomi HWPX-dokument</comment>
+  <comment xml:lang="de">Hancom HWPX-Dokument</comment>
+  <generic-icon name="x-office-document"/>
+  <glob pattern="*.hwpx"/>
+  <sub-class-of type="application/zip"/>
+  <alias type="application/hwp+zip"/>
+  <alias type="application/vnd.hancom.hwpx"/>
+  <alias type="application/x-hwp+zip"/>
+</mime-type>

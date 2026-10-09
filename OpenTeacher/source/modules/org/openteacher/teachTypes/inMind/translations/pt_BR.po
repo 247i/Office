@@ -1,0 +1,50 @@
+# Brazilian Portuguese translation for openteacher
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2012-09-17 19:34+0000\n"
+"Last-Translator: Adriano Steffler <Unknown>\n"
+"Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:42+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: inMind.py:47
+msgid ""
+"Think about the answer, and press the 'View answer' button when you're done."
+msgstr ""
+"Pense na resposta e aperte o botão de \"Ver resposta\" quando você tiver "
+"terminado."
+
+#: inMind.py:48
+msgid "View answer"
+msgstr "Ver resposta"
+
+#: inMind.py:49
+msgid "Skip"
+msgstr "Pular"
+
+#: inMind.py:70
+msgid "I was right"
+msgstr "Eu estava certo"
+
+#: inMind.py:71
+msgid "I was wrong"
+msgstr "Eu estava errado"
+
+#: inMind.py:135
+msgid "Translation: "
+msgstr "Tradução: "
+
+#: inMind.py:199
+msgid "Think answer"
+msgstr "Pensar na resposta"

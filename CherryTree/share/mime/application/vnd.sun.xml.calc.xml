@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/vnd.sun.xml.calc">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>OpenOffice.org 1.0 Calc spreadsheet</comment>
+  <comment xml:lang="zh-Hant-TW">OpenOffice.org 1.0 Calc 試算表</comment>
+  <comment xml:lang="uk">електронна таблиця OpenOffice.org Calc 1.0</comment>
+  <comment xml:lang="tr">OpenOffice.org 1.0 Calc hesap tablosu</comment>
+  <comment xml:lang="sv">OpenOffice.org 1.0 Calc-kalkylblad</comment>
+  <comment xml:lang="sr-Cyrl">OpenOffice.org 1.0 Calc табела</comment>
+  <comment xml:lang="sq">Fletëllogaritje OpenOffice.org 1.0 Calc</comment>
+  <comment xml:lang="sl">Razpredelnica OpenOffice.org Calc 1.0</comment>
+  <comment xml:lang="ru">Электронная таблица OpenOffice.org 1.0 Calc</comment>
+  <comment xml:lang="ro">foaie de calcul OpenOffice.org 1.0 Calc</comment>
+  <comment xml:lang="pt-BR">Planilha do OpenOffice.org 1.0 Calc</comment>
+  <comment xml:lang="pl">Arkusz OpenOffice.org 1.0 Calc</comment>
+  <comment xml:lang="oc">fuèlh de calcul OpenOffice.org 1.0 Calc</comment>
+  <comment xml:lang="nn">OpenOffice.org 1.0 Calc-rekneark</comment>
+  <comment xml:lang="ko">OpenOffice.org 1.0 Calc 스프레드시트</comment>
+  <comment xml:lang="kk-Cyrl">OpenOffice.org 1.0 Calc электрондық кестесі</comment>
+  <comment xml:lang="ja">OpenOffice.org 1.0 Calc スプレッドシート</comment>
+  <comment xml:lang="id">Lembar sebar OpenOffice.org 1.0 Calc</comment>
+  <comment xml:lang="hr">OpenOffice.org 1.0 Calc proračunska tablica</comment>
+  <comment xml:lang="fur">Sfuei di calcul di OpenOffice.org 1.0 Calc</comment>
+  <comment xml:lang="fr">Feuille de calcul OpenOffice.org 1.0 Calc</comment>
+  <comment xml:lang="fi">OpenOffice.org 1.0 Calc taulukko</comment>
+  <comment xml:lang="et">OpenOffice.org 1.0 Calci tabelarvutusfail</comment>
+  <comment xml:lang="es">hoja de cálculo de OpenOffice.org Calc 1.0</comment>
+  <comment xml:lang="en-GB">OpenOffice.org 1.0 Calc spreadsheet</comment>
+  <comment xml:lang="de">OpenOffice.org Calc-1.0-Tabelle</comment>
+  <comment xml:lang="da">OpenOffice.org 1.0 Calc-regneark</comment>
+  <comment xml:lang="ca">full de càlcul d'OpenOffice.org 1.0 Calc</comment>
+  <comment xml:lang="bg">Таблица — OpenOffice.org 1.0 Calc</comment>
+  <comment xml:lang="be-Cyrl">электронная табліца OpenOffice.org 1.0 Calc</comment>
+  <comment xml:lang="ar">جدول Calc المكتب المفتوح 1.0</comment>
+  <sub-class-of type="application/zip"/>
+  <generic-icon name="x-office-spreadsheet"/>
+  <glob pattern="*.sxc"/>
+</mime-type>

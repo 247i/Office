@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-commodore-crt">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Commodore cartridge</comment>
+  <comment xml:lang="uk">картридж Commodore</comment>
+  <comment xml:lang="tr">Commodore kartuşu</comment>
+  <comment xml:lang="sv">Commodore-kassett</comment>
+  <comment xml:lang="sr-Cyrl">Комодор кертриџ</comment>
+  <comment xml:lang="sq">Kasetë Commodore</comment>
+  <comment xml:lang="sl">Vložek Commodore</comment>
+  <comment xml:lang="ru">Картридж Commodore</comment>
+  <comment xml:lang="ro">cartuș Commodore</comment>
+  <comment xml:lang="pt-BR">Cartucho Commodore</comment>
+  <comment xml:lang="pl">Kartridż Commodore</comment>
+  <comment xml:lang="oc">cartocha per Commodore</comment>
+  <comment xml:lang="ko">Commodore 카트리지</comment>
+  <comment xml:lang="kk-Cyrl">Commodore картриджі</comment>
+  <comment xml:lang="fr">Cartouche Commodore</comment>
+  <comment xml:lang="fi">Commodore moduuli</comment>
+  <comment xml:lang="et">Commodore'i mälukaart</comment>
+  <comment xml:lang="es">cartucho de Commodore</comment>
+  <comment xml:lang="en-GB">Commodore cartridge</comment>
+  <comment xml:lang="de">Commodore-Steckmodul</comment>
+  <comment xml:lang="ar">خرطوشة Commodore</comment>
+  <generic-icon name="application-x-executable"/>
+  <glob pattern="*.crt" weight="30"/>
+</mime-type>

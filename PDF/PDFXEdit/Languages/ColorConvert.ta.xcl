@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Localization>
+	<Version date="20200402221308">2.00.00</Version>
+	<Author>Angel Herráez</Author>
+	<Copyright></Copyright>
+	<Product id="PDFXEditor"/>
+	<Language eName="Tamil" lName="தமிழ்" code="ta" R2L="false"/>
+	<Module name="ColorConvert" namespace="cc" version="8.0.337.0"/>
+	<Strings>
+		<text id="absolute.ri" h="2B4BF91A">Colorimétrico absoluto</text>
+		<text id="any.cs" h="8A3A9D71">Cualquier espacio de color</text>
+		<text id="anycmyk.cs" h="7F4DF0D2">Cualquier CMYK</text>
+		<text id="anyobject.type" h="72C84120">Cualquier objeto</text>
+		<text id="anyrgb.cs" h="94CA7E95">Cualquier RGB</text>
+		<text id="calcmyk.cs" h="F1126F53">CMYK calibrado</text>
+		<text id="calgray.cs" h="33EB89D0">Escala de grises calibrada</text>
+		<text id="calibrated.cs" h="6691A3E6">Calibrado</text>
+		<text id="calrgb.cs" h="EA2AFBDE">RGB calibrado</text>
+		<text id="cmd.list.add" h="8E2EE8C1">Añadir</text>
+		<text id="cmd.list.remove" h="FCE39C1F">Eliminar</text>
+		<text id="colortype.lbl" h="21687EB3">Tipo de color:</text>
+		<text id="command.lbl" h="63E7087D">Instrucción de conversión:</text>
+		<text id="conv.false" h="FDCF50B8">No se ha encontrado ningún objeto adecuado para la conversión</text>
+		<text id="conv.succeeded" h="9F1280CB">La conversión se ha hecho correctamente</text>
+		<text id="convattr.grp" h="9849DBD9">Atributos de la conversión</text>
+		<text id="conversion.commads.group" h="26756936">Instrucciones de conversión</text>
+		<text id="convert.cmd" h="66E18092">Convertir a un perfil</text>
+		<text id="convert.lbl" h="433E719B">Convertir %1</text>
+		<text id="convertcolors.dlg" h="A784DD5F">Conversión de colores</text>
+		<text id="convopt.grp" h="3BDEC580">Opciones de conversión</text>
+		<text id="cs_based_on" h="FFE0AF7F">basado en</text>
+		<text id="cs_with_alternate" h="22956BBD">alternativo</text>
+		<text id="decalibrate.cmd" h="E03118F5">Descalibrar</text>
+		<text id="doc.ri" h="9A06AE7B">Usar la misma intención que el documento</text>
+		<text id="doccolors.btn" h="9665902B">Colores del documento...</text>
+		<text id="doccolors.lbl" h="4D2F349E">Colores del documento:</text>
+		<text id="doccolorsdlg" h="E252ADD0">Colores del documento</text>
+		<text id="embed.chk" h="84D781B2">Incrustar</text>
+		<text id="grayCmyk.chk" h="0F5E13C0">Pasar el gris a negro de CMYK</text>
+		<text id="grayscale.cs" h="BD6354DE">Escala de grises</text>
+		<text id="history.cc.redo" h="5409F668">Rehacer la conversión de colores</text>
+		<text id="history.cc.title" h="A784DD5F">Conversión de colores</text>
+		<text id="history.cc.undo" h="5611C194">Deshacer la conversión de colores</text>
+		<text id="image.type" h="AB6DEA58">Imagen</text>
+		<text id="lineart.type" h="1592B5FC">Dibujo con líneas</text>
+		<text id="matching.grp" h="920C9FBB">Criterios de correspondencia</text>
+		<text id="msg.proc.colorConversion" h="29B82B36">Se ha aplicado la conversión de colores</text>
+		<text id="noconversion.applied" h="DF0BFB50">Ha terminado la operación de conversión de colores sin cambiar nada</text>
+		<text id="nomaximume.edt" h="8222833A">Sin máximo</text>
+		<text id="nominimum.edt" h="AE9E046B">Sin mínimo</text>
+		<text id="objtype.lbl" h="F77F2940">Tipo de objeto:</text>
+		<text id="oi.chk" h="94ED2F6E">Convertir los colores según la intención</text>
+		<text id="oiprofile.lbl" h="235B6AC4">Perfil:</text>
+		<text id="perceptual.ri" h="FE1548A6">De percepción</text>
+		<text id="preservblck.chk" h="BA0C6CC7">Conservar el negro</text>
+		<text id="preserve.cmd" h="19170747">Conservar</text>
+		<text id="preserveCmyk.chk" h="1DEF0320">Conservar las primitivas CYMK</text>
+		<text id="profile.lbl" h="2B23E392">Perfil de conversión:</text>
+		<text id="progress.cnvDoc" h="2FB51FBD">Se están convirtiendo los colores del documento...</text>
+		<text id="rbar.convert.colors" h="A784DD5F">Conversión de colores</text>
+		<text id="rbar.convert.colors.tip" h="D733E17B">Convierte colores en el documento</text>
+		<text id="relative.ri" h="4E4820BA">Colorimétrico relativo</text>
+		<text id="rintent.lbl" h="56478B71">Intención del trazado:</text>
+		<text id="saturation.ri" h="81E4F5A0">Saturación</text>
+		<text id="shading.type" h="9ECB4FEA">Sombra suave</text>
+		<text id="spotcolor.cs" h="6D651DE1">Color de mancha</text>
+		<text id="spotcolors.lbl" h="2CD39A6E">Colores de manchas:</text>
+		<text id="status.cnvPage" h="92A4E6A3">Se está convirtiendo la página %1...</text>
+		<text id="status.enumcsDoc" h="38B45907">Se están enumerando los espacios de color</text>
+		<text id="status.enumcsPage" h="CA0A6487">Se están enumerando los espacios de color de la página %1...</text>
+		<text id="text.type" h="9372A8AB">Texto</text>
+		<text id="textmax.lbl" h="72531743">Tamaño máx. de texto:</text>
+		<text id="textmin.lbl" h="D926E164">Tamaño mín. de texto:</text>
+		<text id="translate.spot.chk" h="C70A9205">Convertir todos los colores de mancha</text>
+		<text id="undone.noshow" h="B2D782D9">No mostrar de nuevo este mensaje</text>
+		<text id="undone.warning" h="52E66FDE">No será posible deshacer esta operación. ¿Quiere continuar?</text>
+	</Strings>
+</Localization>

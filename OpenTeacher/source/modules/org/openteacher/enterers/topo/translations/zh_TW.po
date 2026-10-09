@@ -1,0 +1,70 @@
+# Chinese (Traditional) translation for openteacher
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:38+0200\n"
+"PO-Revision-Date: 2012-08-22 19:37+0000\n"
+"Last-Translator: Louie Chen <louie23@gmail.com>\n"
+"Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:43+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: topo.py:67
+msgid "From hard disk..."
+msgstr "從硬碟..."
+
+#: topo.py:94
+msgid "Images"
+msgstr ""
+
+#: topo.py:102
+msgid "Warning"
+msgstr "警告"
+
+#: topo.py:104
+msgid ""
+"Are you sure you want to use another map? This will remove all your places!"
+msgstr "確定要用另一個地圖？這會移除所有地點！"
+
+#: topo.py:235
+msgid "Map:"
+msgstr "地圖："
+
+#: topo.py:236
+msgid "Add a place by doubleclicking it on the map"
+msgstr "在地圖上雙擊滑鼠來新增地點"
+
+#: topo.py:237
+msgid "Places in your test"
+msgstr "測驗中的地點"
+
+#: topo.py:238
+msgid "Remove selected place"
+msgstr "移除點選地點"
+
+#: topo.py:239
+msgid "Add a place by name:"
+msgstr "以名稱來新增地點"
+
+#: topo.py:240
+msgid "Add"
+msgstr "新增"
+
+#: topo.py:279
+msgid "Place not found"
+msgstr "找不到地點"
+
+#: topo.py:280
+msgid ""
+"Sorry, this place is not in the list of known places. Please add it manually "
+"by doubleclicking on the right location in the map."
+msgstr "抱歉，這地點不在已知地點中。請在地圖上正確位置雙擊滑鼠來手動新增。"

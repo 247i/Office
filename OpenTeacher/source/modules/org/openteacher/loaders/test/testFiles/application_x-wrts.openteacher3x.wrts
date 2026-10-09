@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Wrts, http://www.wrts.nl/ -->
+<wrts>
+	<lijst id="0000000">
+		<titel>test</titel>
+		<datum />
+		<downloaded>Wed, 12 Dec 2012 21:28:59 +0100</downloaded>
+		<created>Wed, 12 Dec 2012 21:28:59 +0100</created>
+		<updated>Wed, 12 Dec 2012 21:28:59 +0100</updated>
+		<auteur id="000000">Created by: OpenTeacher 3.1</auteur>
+		<taal>
+			<a>Dutch</a>
+			<b>English</b>
+		</taal>
+		<woord>
+			<a>een</a>
+			<b>one</b>
+		</woord>
+		<woord>
+			<a>twee</a>
+			<b>two</b>
+		</woord>
+	</lijst>
+</wrts>

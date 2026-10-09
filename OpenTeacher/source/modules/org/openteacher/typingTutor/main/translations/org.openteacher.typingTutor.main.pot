@@ -1,0 +1,87 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenTeacher 3.2\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: main.py:102
+msgid "That's a mistake :(."
+msgstr ""
+
+#: main.py:144
+msgid "Please choose a user name and the keyboard layout you want to learn."
+msgstr ""
+
+#: main.py:145
+msgid "Username:"
+msgstr ""
+
+#: main.py:146
+msgid "Keyboard layout:"
+msgstr ""
+
+#. TRANSLATORS: Split the line as closest to the middle as
+#. TRANSLATORS: possible, not necessarily between 'Keyboard
+#. TRANSLATORS: layout' and 'preview'. Thanks :)
+#: main.py:150
+msgid ""
+"Keyboard layout\n"
+"preview:"
+msgstr ""
+
+#: main.py:205
+msgid "Welcome, please choose your account by clicking on it."
+msgstr ""
+
+#: main.py:206
+msgid "I am a new user"
+msgstr ""
+
+#: main.py:275
+msgid "Level"
+msgstr ""
+
+#: main.py:276
+msgid "Speed (words per minute)"
+msgstr ""
+
+#: main.py:277
+msgid "Amount of mistakes"
+msgstr ""
+
+#: main.py:278
+msgid "Start exercise"
+msgstr ""
+
+#: main.py:329
+msgid "Username empty"
+msgstr ""
+
+#: main.py:330
+msgid "The username should not be empty. Please try again."
+msgstr ""
+
+#: main.py:336
+msgid "Username taken"
+msgstr ""
+
+#: main.py:337
+msgid "That username is already taken. Please try again."
+msgstr ""
+
+#: main.py:438 main.py:448
+msgid "Typing Tutor"
+msgstr ""

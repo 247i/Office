@@ -1,0 +1,158 @@
+local common  = fonts.goodies.load("common-math.lfg")
+local presets = common.mathematics.tweaks.presets
+
+return {
+    name = "euler-math",
+    version = "1.00",
+    comment = "Goodies that complement euler math.",
+    author = "Hans Hagen",
+    copyright = "ConTeXt development team",
+    mathematics = {
+        parameters = {
+            -- DelimiterPercent                 =  90,
+            -- DelimiterShortfall               =  500,
+            -- taken from pagella:
+            NoLimitSupFactor                =    0,
+            NoLimitSubFactor                =  900,
+            AccentTopShiftUp                =   10,
+            FlattenedAccentTopShiftUp       =   10,
+         -- AccentExtendMargin              =   50,
+         -- AccentBaseHeight                =    0,
+            AccentBaseDepth                 =   80,
+         -- SpaceAfterScript                =   0,
+         -- SpaceAfterScript                =   30,
+            RadicalDegreeBottomRaisePercent =   60,
+            RadicalKernAfterDegree          = -500,
+            RadicalRuleThickness            =   60, --   60 in font
+            DelimiterPercent                =   75,
+            DelimiterShortfall              =  400,
+            DelimiterDisplayPercent         =   90,
+            DelimiterDisplayShortfall       =  400,
+            DisplayOperatorMinHeight        = 1500, -- 1400 in font
+            SuperscriptShiftUp              =  386, -- 363 in font
+            PrimeShiftUp                    = "1.1*SuperscriptShiftUp",
+            PrimeShiftUpCramped             = "1.1*SuperscriptShiftUp",
+--             PrimeRaisePercent               =   75, --   50 default
+--             PrimeRaiseComposedPercent       =   10, --   25 default
+         -- RadicalKernAfterExtensible      =    0, --    0 default
+         -- RadicalKernBeforeExtensible     =    0, --    0 default
+            RadicalDisplayStyleVerticalGap  = "RadicalVerticalGap", --148, 50
+        },
+        tweaks = {
+            aftercopying = {
+                {
+                    tweak    = "fontname",
+                    expected = { "Euler-Math", "Neo Euler"},
+                    abort    = true,
+                },
+                {
+                    tweak    = "version",
+                    expected = "Version 0.62",
+                },
+                {
+                    tweak   = "fixprimes",
+                    factor  =  0.8,
+                    smaller = true,
+                    scale   = 0.8,
+                    fake    = 0.8,
+                },
+                {
+                    tweak    = "replacealphabets",
+                    feature  = "pagellaovereuler",
+                    filename = "texgyrepagella-math.otf",
+                    list    = {
+                     -- { source = { first = 0x02100, last = 0x0210D } }, -- no 0x2210E
+                     -- { source = { first = 0x0210F, last = 0x02BFF } },
+                     -- { source = { first = 0x02100, last = 0x02BFF } },
+                     -- { source = { first = 0x1D400, last = 0x1D7FF } },
+                     -- { source = { first = 0x1D538, last = 0x1D550 } },
+
+                     -- { source = { first = 0x0007B, last = 0x0007D } }, -- { }
+                     -- { source = { first = 0x0005B, last = 0x0005D } }, -- [ ]
+                     -- { source = { first = 0x00028, last = 0x00029 } }, -- ( )
+                     -- { source = { first = 0x02100, last = 0x02BFF } }, -- symbols -- has snippets of {} () []
+                        --
+                        -- or (probably even more)
+                        --
+                        -- Maybe not needed, Daniel have added some symbols and alphabets. If you need more
+                        -- (read: miss shapes) let us know.
+                        --
+                     -- { source = { first = 0x02100, last = 0x0239A } }, -- symbols -- has snippets of {} () []
+                     -- { source = { first = 0x023B5, last = 0x02BFF } }, -- symbols -- has snippets of {} () []
+                     --
+                     -- { source = { first = 0x1D400, last = 0x1D7FF } }, -- various alphabets
+                    },
+                },
+                {
+                    tweak = "addmirrors",
+                },
+                {
+                    tweak = "addcomposites",
+                },
+                presets.scripttocalligraphic { },
+                presets.rsfstoscript         { },
+                presets.rsfsuprighttoscript  { },
+                presets.moderntocalligraphic { },
+                presets.eulertocalligraphic  { },
+                presets.xitsarabic           { rscale  = 1 },
+                presets.fallbacks            { },
+                presets.moveitalics          { correct = true },
+                presets.moveitalics          { correct = true, letters = true },
+                presets.moveintegrals        { },
+                presets.wipeitalics          { },
+                {
+                    tweak   = "fixoldschool",
+                },
+        -- add the accent fixes
+        -- fixslashes?
+                {
+                    tweak = "flattenaccents",
+                },
+                {
+                    tweak = "checkspacing",
+                },
+                {
+                    tweak = "addscripts",
+                },
+                {
+                    tweak = "addprivates",
+                },
+                {
+                    tweak = "accentdimensions",
+                },
+                {
+                    tweak = "addrules",
+                },
+                {
+                    tweak = "addarrows",
+                },
+                {
+                    tweak   = "addbars",
+                    advance = 0.2,
+                },
+                {
+                    tweak = "addactuarian",
+                },
+                {
+                    tweak = "addequals",
+                },
+                {
+                    tweak   = "addfourier",
+                    variant = 1,
+                },
+                -- this is the mkiv section
+                {
+                    tweak   = "emulatelmtx",
+                    feature = "emulatelmtx",
+                    comment = "this is for mkiv",
+                },
+            },
+        },
+        bigslots = {
+            1, 2, 3, 4
+        },
+        alternates = {
+            dotless = { feature = 'dtls', value = 1, comment = "Mathematical Dotless Forms" },
+        },
+    },
+}

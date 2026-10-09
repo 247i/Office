@@ -1,0 +1,93 @@
+%D \module
+%D   [     file=meta-imp-sudoku,
+%D      version=2026-02-14,
+%D        title=\CONTEXT\ User Module,
+%D     subtitle=Sudokus for ConTeXt! Companion to t-sudoku,
+%D       author=Jairo A. del Rio,
+%D         date=\currentdate,
+%D    copyright=Jairo A. del Rio,
+%D        email=jairoadelrio6@gmail.com,
+%D      license=MIT License]
+
+\registerctxluafile{meta-imp-sudoku}{autosuffix}
+
+\startMPextensions
+
+presetparameters "sudoku" [
+  alternative = "display",
+  text = "040000179002008054006005008080070910050090030019060040300400700570100200928000060",
+  n = 42,
+  size = 2EmWidth,
+  evenbackground = "",
+  oddbackground  = "gray",
+  frame = "on",
+  rulethickness = .5bp
+];
+
+def lmt_sudoku = applyparameters "sudoku" "lmt_do_sudoku" enddef;
+
+def lmt_do_sudoku =
+  begingroup;
+  pushparameters "sudoku";
+  save alt, txt, n, sz, ebck, obck, isodd, currentcell, currentpos;
+  string alt, txt, ebck, obck, currentcell;
+  pair currentpos;
+  boolean solved; solved := false;
+  alt := getparameter "alternative"; txt := getparameter "text";
+  n   := getparameter "n";           sz := getparameter "size";
+  ebck := getparameter "evenbackground"; obck := getparameter "oddbackground";
+  txt :=
+  if (alt == "solve"):
+    lua.MP.sudokusolve(txt)
+  elseif (alt == "display"):
+    lua.MP.sudokuformat(txt)
+  elseif (alt == "random"):
+    lua.MP.sudokurandom(n)
+  else:
+    "No alternative " & alt & " is known"
+  fi;
+  solved := lua.MP.sudokuok();
+  if(solved):
+    for i = 1 upto 9:
+      for j = 1 upto 9:
+        currentpos  := sz*(i-5,5-j);
+        currentcell := substring(9*(i-1) + j - 1, 9*(i-1) + j) of txt;
+        isodd := (round((i+1)/3) + round((j+1)/3)) mod 2;
+        if ((isodd == 0) and (length ebck > 0)):
+          fill fullsquare scaled sz shifted currentpos withcolor obck;
+        elseif ((isodd == 1) and (length obck > 0)):
+          fill fullsquare scaled sz shifted currentpos withcolor ebck;
+        fi
+        if((getparameter "frame") == "on"):
+          draw fullsquare scaled sz shifted currentpos
+          if hasparameter "rulethickness":
+            withpen pencircle scaled (getparameter "rulethickness")
+          fi
+        fi;
+        if (currentcell <> "0"):
+          draw thetextext(currentcell, currentpos);
+        fi
+      endfor
+    endfor
+  else:
+    draw thetextext("ERROR: " & txt, origin) withcolor red;
+  fi
+  lua.MP.sudokureset();
+  popparameters;
+  endgroup;
+enddef;
+
+\stopMPextensions
+
+\defineMPparameterset
+  [sudoku]
+  [alternative=string,
+   text=string,
+   n=number,
+   size=dimension,
+   evenbackground=string,
+   oddbackground=string,
+   frame=string,
+   rulethickness=dimension]
+
+% vim: tw=80:ts=2:sts=2:expandtab:wrap:linebreak:breakindent

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Localization>
+	<Version date="20180920235706">2.00.00</Version>
+	<Author></Author>
+	<Copyright></Copyright>
+	<Product id="PDFXTools"/>
+	<Language eName="Tamil (India)" lName="தமிழ்" code="ta-IN" R2L="false"/>
+	<Module name="PDFXTools" namespace="pdft" version="7.0.326.10"/>
+	<Strings/>
+</Localization>

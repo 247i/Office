@@ -1,0 +1,331 @@
+if not modules then modules = {} end modules["meta-imp-sudoku"] = {
+	version = "2026-02-14",
+	comment = "Sudokus for ConTeXt. Companion to t-sudoku",
+	author = "Jairo A. del Rio",
+	copyright = "Jairo A. del Rio",
+	license = "MIT License",
+}
+
+-- Sources:
+
+-- https://norvig.com/sudoku.html
+-- https://naokishibuya.medium.com/peter-norvigs-sudoku-solver-25779bb349ce
+-- https://gist.github.com/neilalbrock/894520
+
+local pairs, ipairs = pairs, ipairs
+local contains, copy, unique = table.contains, table.copy, table.unique
+
+local function all(t, pred)
+	for _, v in pairs(t) do
+		if not pred(v) then
+			return false
+		end
+	end
+	return true
+end
+
+local function popcount(x)
+	local count = 0
+	while x ~= 0 do
+		x = x & (x - 1)
+		count = count + 1
+	end
+	return count
+end
+
+local cross = function(a, b)
+	local result = {}
+	for _, x in ipairs(a) do
+		for _, y in ipairs(b) do
+			result[#result + 1] = (x << 9) | y
+		end
+	end
+	return result
+end
+
+local N1, N2, N3, N4, N5, N6, N7, N8, N9 = 1, 2, 4, 8, 16, 32, 64, 128, 256
+local A, B, C, D, E, F, G, H, I = 1, 2, 4, 8, 16, 32, 64, 128, 256
+
+local digits = 511 -- 0b111111111
+
+local digits_table = { N1, N2, N3, N4, N5, N6, N7, N8, N9 }
+local rows_table, columns_table = digits_table, digits_table
+local row_square_table = {
+	{ A, B, C },
+	{ D, E, F },
+	{ G, H, I },
+}
+local column_square_table = {
+	{ N1, N2, N3 },
+	{ N4, N5, N6 },
+	{ N7, N8, N9 },
+}
+
+local squares = cross(rows_table, columns_table)
+
+local unitlist = {}
+
+for _, c in ipairs(columns_table) do
+	unitlist[#unitlist + 1] = cross(rows_table, { c })
+end
+
+for _, r in ipairs(rows_table) do
+	unitlist[#unitlist + 1] = cross({ r }, columns_table)
+end
+
+for _, rs in ipairs(row_square_table) do
+	for _, cs in ipairs(column_square_table) do
+		unitlist[#unitlist + 1] = cross(rs, cs)
+	end
+end
+
+local units = {}
+
+for _, s in ipairs(squares) do
+	local unit_list = {}
+	for _, u in ipairs(unitlist) do
+		if contains(u, s) then
+			table.insert(unit_list, u)
+		end
+	end
+	units[s] = unit_list
+end
+
+local peers = {}
+
+for _, s in ipairs(squares) do
+	local unit_set = {}
+	for _, unit in pairs(units[s]) do
+		for _, square in ipairs(unit) do
+			if square ~= s then
+				unit_set[square] = square
+			end
+		end
+	end
+	peers[s] = unit_set
+end
+
+local function strtotable(s)
+	-- print(s)
+	local result = {}
+	for c in s:gsub("%s", ""):gsub("%D", "0"):gmatch("(%d)") do
+		result[#result + 1] = c == "0" and 0 or (1 << (tonumber(c) - 1))
+	end
+	return result
+end
+
+local assign, eliminate
+
+local function grid_values(grid)
+	local chars = strtotable(grid)
+	assert(#chars == 81, string.format("Sudoku grid has %d instead of 81 cells", #chars))
+	local result = {}
+	for i, s in ipairs(squares) do
+		result[s] = chars[i]
+	end
+	return result
+end
+
+local function parse_grid(grid)
+	local values = {}
+	for _, s in ipairs(squares) do
+		values[s] = digits
+	end
+	for s, d in pairs(grid_values(grid)) do
+		if digits & d ~= 0 and not assign(values, s, d) then
+			return false
+		end
+	end
+	return values
+end
+
+function assign(values, s, d)
+	local other_values = values[s] & ~d
+	for i = 0, 8 do
+		local d2 = 1 << i
+		if other_values & d2 ~= 0 then
+			if not eliminate(values, s, d2) then
+				return false
+			end
+		end
+	end
+	return values
+end
+
+function eliminate(values, s, d)
+	if d & values[s] == 0 then
+		return values
+	end
+	values[s] = values[s] & ~d
+	if values[s] == 0 then
+		return false
+	elseif popcount(values[s]) == 1 then
+		local d2 = values[s]
+		if not all(peers[s], function(s2)
+			return eliminate(values, s2, d2)
+		end) then
+			return false
+		end
+	end
+	for _, u in ipairs(units[s]) do
+		local dplaces = {}
+		for _, ss in ipairs(u) do
+			if d & values[ss] ~= 0 then
+				dplaces[#dplaces + 1] = ss
+			end
+		end
+		if #dplaces == 0 then
+			return false
+		elseif #dplaces == 1 then
+			if not assign(values, dplaces[1], d) then
+				return false
+			end
+		end
+	end
+	return values
+end
+
+local function search(values)
+	if not values then
+		return false
+	end
+	if all(squares, function(s)
+		return popcount(values[s]) == 1
+	end) then
+		return values
+	end
+	local ns = {}
+	for _, ss in ipairs(squares) do
+		if popcount(values[ss]) > 1 then
+			ns[#ns + 1] = { popcount(values[ss]), ss }
+		end
+	end
+	table.sort(ns, function(t1, t2)
+		return t1[1] < t2[1]
+	end)
+	local _, s = table.unpack(ns[1])
+	for i = 0, 8 do
+		local d = 1 << i
+		if d & values[s] ~= 0 then
+			local result = search(assign(copy(values), s, d))
+			if result then
+				return result
+			end
+		end
+	end
+	return false
+end
+
+local function solve(grid)
+	return search(parse_grid(grid))
+end
+
+local function shuffled(t)
+	for i = #t, 2, -1 do
+		local j = math.random(i)
+		t[i], t[j] = t[j], t[i]
+	end
+	return t
+end
+
+local function randombit(n)
+	local bits = {}
+	for i = 0, 8 do
+		if n & (1 << i) ~= 0 then
+			table.insert(bits, i)
+		end
+	end
+	return 1 << bits[math.random(#bits)]
+end
+
+local function random(N)
+	local n = N < 17 and 17 or N
+	local values = {}
+	for _, s in ipairs(squares) do
+		values[s] = digits
+	end
+	for _, s in ipairs(shuffled(copy(squares))) do
+		if not assign(values, s, randombit(values[s])) then
+			break
+		end
+		local ds = {}
+		for _, ss in ipairs(squares) do
+			if popcount(values[ss]) == 1 then
+				ds[#ds + 1] = values[ss]
+			end
+		end
+		if #ds == n and #unique(ds) >= 8 then
+			return values
+		end
+	end
+	return random(N)
+end
+
+local function display(grid)
+	local mappings = {
+		[0] = "0",
+		[N1] = "1",
+		[N2] = "2",
+		[N3] = "3",
+		[N4] = "4",
+		[N5] = "5",
+		[N6] = "6",
+		[N7] = "7",
+		[N8] = "8",
+		[N9] = "9",
+	}
+	local result = {}
+	for _, c in ipairs(squares) do
+		local current = grid[c]
+		if popcount(current) <= 1 then
+			result[#result + 1] = mappings[grid[c]]
+		else
+			result[#result + 1] = "0"
+		end
+	end
+	return table.concat(result)
+end
+
+local currentsudoku
+local currentsudokuok = false
+
+function MP.sudokusolve(s)
+	local ok, solved = pcall(solve, s)
+	if ok then
+		if solved then
+			currentsudoku = display(solved)
+			currentsudokuok = true
+		else
+			currentsudoku = "No solution has been found for this sudoku"
+		end
+	else
+		currentsudoku = solved
+	end
+	mp.inject.string(currentsudoku)
+end
+
+function MP.sudokuformat(s)
+	currentsudoku = (s:gsub("%s", ""):gsub("%D", "0"))
+	if #currentsudoku == 81 then
+		currentsudokuok = true
+	else
+		currentsudoku = string.format("Sudoku grid has %d instead of 81 cells", #currentsudoku)
+	end
+	mp.inject.string(currentsudoku)
+end
+
+function MP.sudokurandom(n)
+	local sd = random(n)
+	currentsudoku = display(sd)
+	currentsudokuok = true
+	mp.inject.string(currentsudoku)
+end
+
+function MP.sudokureset()
+	currentsudoku = nil
+	currentsudokuok = false
+end
+
+function MP.sudokuok()
+	mp.print(currentsudokuok)
+end

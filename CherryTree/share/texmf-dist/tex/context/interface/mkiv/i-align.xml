@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?context-directive job ctxfile x-setups.ctx ?>
+
+<cd:interface xmlns:cd="http://www.pragma-ade.com/commands">
+
+    <cd:command name="setalignmentswitch" level="style" category="alignment" file="spac-ali.mkxl">
+        <cd:arguments>
+            <cd:keywords delimiters="braces">
+                <cd:constant type="left"/>
+                <cd:constant type="middle"/>
+                <cd:constant type="right"/>
+            </cd:keywords>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="definealign" level="style" category="alignment" file="spac-ali.mkxl">
+        <cd:arguments>
+            <cd:resolve name="keyword-name"/>
+            <cd:keywords list="yes">
+                <cd:inherit name="setupalign"/>
+            </cd:keywords>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="setupalign" level="style" category="alignment" file="spac-ali.mkxl">
+        <cd:arguments>
+            <cd:keywords list="yes">
+                <cd:constant type="broad"/>
+                <cd:constant type="wide"/>
+                <cd:constant type="bottom" default="yes"/>
+                <cd:constant type="height"/>
+                <cd:constant type="depth"/>
+                <cd:constant type="line"/>
+                <cd:constant type="high"/>
+                <cd:constant type="low"/>
+                <cd:constant type="lohi"/>
+                <cd:constant type="flushright"/>
+                <cd:constant type="flushleft"/>
+                <cd:constant type="middle"/>
+                <cd:constant type="yes"/>
+                <cd:constant type="no"/>
+                <cd:constant type="width" default="yes"/>
+                <cd:constant type="normal"/>
+                <cd:constant type="reset"/>
+                <cd:constant type="inner"/>
+                <cd:constant type="outer"/>
+                <cd:constant type="flushinner"/>
+                <cd:constant type="flushouter"/>
+                <cd:constant type="left"/>
+                <cd:constant type="right"/>
+                <cd:constant type="center"/>
+                <cd:constant type="disable"/>
+                <cd:constant type="last"/>
+                <cd:constant type="end"/>
+                <cd:constant type="paragraph"/>
+                <cd:constant type="lefttoright"/>
+                <cd:constant type="righttoleft"/>
+                <cd:constant type="l2r"/>
+                <cd:constant type="r2l"/>
+                <cd:constant type="table"/>
+                <cd:constant type="lesshyphenation"/>
+                <cd:constant type="morehyphenation"/>
+                <cd:constant type="hanging"/>
+                <cd:constant type="hangingboth"/>
+                <cd:constant type="nothanging"/>
+                <cd:constant type="hz"/>
+                <cd:constant type="fullhz"/>
+                <cd:constant type="nohz"/>
+                <cd:constant type="hyphenated"/>
+                <cd:constant type="nothyphenated"/>
+                <cd:constant type="collapsed"/>
+                <cd:constant type="notcollapsed"/>
+                <cd:constant type="explicit"/>
+                <cd:constant type="tolerant"/>
+                <cd:constant type="verytolerant"/>
+                <cd:constant type="stretch"/>
+                <cd:constant type="extremestretch"/>
+                <cd:constant type="final"/>
+                <cd:constant type="1*final"/>
+                <cd:constant type="2*final"/>
+                <cd:constant type="3*final"/>
+                <cd:constant type="4*final"/>
+                <cd:constant type="more"/>
+                <cd:constant type="1*more"/>
+                <cd:constant type="2*more"/>
+                <cd:constant type="hangleft"/>
+                <cd:constant type="hangright"/>
+                <cd:constant type="flushforward"/>
+                <cd:constant type="flushbackward"/>
+                <cd:constant type="always"/>
+                <cd:constant type="profile"/>
+                <cd:constant type="fit"/>
+                <cd:constant type="noorphans"/>
+                <cd:constant type="keeporphans"/>
+                <cd:constant type="notwins"/>
+                <cd:constant type="keeptwins"/>
+                <cd:constant type="notoddlers"/>
+                <cd:constant type="keeptoddlers"/>
+                <cd:constant type="tight"/>
+                <cd:constant type="granular"/>
+                <cd:constant type="lesswidows"/>
+                <cd:constant type="lessclubs"/>
+                <cd:constant type="lessbroken"/>
+                <cd:constant type="lessorphans"/>
+                <cd:constant type="lessorphans:2"/>
+                <cd:constant type="lessorphans:3"/>
+                <cd:constant type="lessorphans:4"/>
+                <cd:constant type="defaultwidows"/>
+                <cd:constant type="defaultclubs"/>
+                <cd:constant type="defaultbroken"/>
+                <cd:constant type="strictwidows "/>
+                <cd:constant type="strictwidows:2"/>
+                <cd:constant type="strictwidows:3"/>
+                <cd:constant type="strictwidows:4"/>
+                <cd:constant type="strictclubs "/>
+                <cd:constant type="strictclubs:2"/>
+                <cd:constant type="strictclubs:3"/>
+                <cd:constant type="strictclubs:4"/>
+                <cd:constant type="strictbroken"/>
+                <cd:constant type="defaultmath"/>
+                <cd:constant type="strictmath"/>
+                <cd:constant type="nonstrictmath"/>
+                <cd:constant type="default"/>
+                <!--
+                    <cd:constant type="cd:name"/>
+                -->
+            </cd:keywords>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="usealignparameter" level="system" category="alignment" file="spac-ali.mkxl">
+        <cd:arguments>
+            <cd:csname/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="installaligncommand" type="environment" file="spac-ali.mkxl">
+        <cd:arguments>
+            <cd:resolve name="keyword-name"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="installaligncommand" file="spac-ali.mkxl">
+        <cd:arguments>
+            <cd:resolve name="argument-name"/>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="noorphans" file="spac-ali.mkxl"/>
+
+    <cd:command name="notoddlers" file="spac-ali.mkxl"/>
+
+    <cd:command name="notwins" file="spac-ali.mkxl"/>
+
+    <cd:command name="keeporphans" file="spac-ali.mkxl"/>
+
+    <cd:command name="keeptoddlers" file="spac-ali.mkxl"/>
+
+    <cd:command name="keeptwins" file="spac-ali.mkxl"/>
+
+    <cd:command name="alignment" type="environment" level="document" category="alignment" file="spac-ali.mkxl">
+        <cd:arguments>
+            <cd:keywords list="yes">
+                <cd:inherit name="setupalign"/>
+            </cd:keywords>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="linealignment" type="environment" level="document" category="alignment" file="spac-ali.mkxl">
+        <cd:arguments>
+            <cd:keywords>
+                <cd:constant type="left"/>
+                <cd:constant type="middle"/>
+                <cd:constant type="right"/>
+                <cd:constant type="max"/>
+            </cd:keywords>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="leftaligned" type="environment" level="document" category="alignment" file="spac-ali.mkxl"/>
+
+    <cd:command name="middlealigned" type="environment" level="document" category="alignment" file="spac-ali.mkxl"/>
+
+    <cd:command name="rightaligned" type="environment" level="document" category="alignment" file="spac-ali.mkxl"/>
+
+    <cd:command name="maxaligned" type="environment" level="document" category="alignment" file="spac-ali.mkxl"/>
+
+    <cd:command name="midaligned" type="environment" level="document" category="alignment" file="spac-ali.mkxl"/>
+
+    <cd:command name="centeraligned" type="environment" level="document" category="alignment" file="spac-ali.mkxl"/>
+
+    <cd:command name="leftaligned" level="document" category="alignment" file="spac-ali.mkxl">
+        <cd:arguments>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="rightaligned" level="document" category="alignment" file="spac-ali.mkxl">
+        <cd:arguments>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="middlealigned" level="document" category="alignment" file="spac-ali.mkxl">
+        <cd:arguments>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="maxaligned" level="document" category="alignment" file="spac-ali.mkxl">
+        <cd:arguments>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="midaligned" level="document" category="alignment" file="spac-ali.mkxl">
+        <cd:arguments>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="centeraligned" level="document" category="alignment" file="spac-ali.mkxl">
+        <cd:arguments>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="alignedline" level="system" category="alignment" file="spac-ali.mkxl">
+        <cd:arguments>
+            <cd:resolve name="argument-alignline"/>
+            <cd:resolve name="argument-alignline"/>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="wordright" level="document" category="alignment" keywords="linebreak" file="spac-ali.mkxl">
+        <cd:arguments>
+            <cd:keywords optional="yes">
+                <cd:constant type="right"/>
+                <cd:constant type="cd:dimension"/>
+            </cd:keywords>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="simplealignedbox" level="system" category="alignment" keywords="boxes" file="spac-ali.mkxl">
+        <cd:arguments>
+            <cd:resolve name="argument-dimension"/>
+            <cd:resolve name="argument-alignsimple"/>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="simplealignedspreadbox" level="system" category="alignment" keywords="boxes" file="spac-ali.mkxl">
+        <cd:arguments>
+            <cd:resolve name="argument-dimension"/>
+            <cd:resolve name="argument-alignsimple"/>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="simplealignedboxplus" level="system" category="alignment" keywords="boxes" file="spac-ali.mkxl">
+        <cd:arguments>
+            <cd:resolve name="argument-dimension"/>
+            <cd:resolve name="argument-alignsimple"/>
+            <cd:resolve name="argument-text"/>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="simplereversealignedbox" level="system" category="alignment" keywords="boxes direction" file="spac-ali.mkxl">
+        <cd:arguments>
+            <cd:resolve name="argument-dimension"/>
+            <cd:resolve name="argument-alignsimple"/>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="simplereversealignedboxplus" level="system" category="alignment" keywords="boxes direction" file="spac-ali.mkxl">
+        <cd:arguments>
+            <cd:resolve name="argument-dimension"/>
+            <cd:resolve name="argument-alignsimple"/>
+            <cd:resolve name="argument-text"/>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="alignedbox" level="system" category="alignment" keywords="boxes" file="pack-box.mkiv">
+        <cd:arguments>
+            <cd:keywords list="yes">
+                <cd:resolve name="value-aligned"/>
+            </cd:keywords>
+            <cd:csname/>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="aligned" level="system" category="alignment" file="pack-box.mkiv">
+        <cd:arguments>
+            <cd:keywords list="yes">
+                <cd:resolve name="value-aligned"/>
+            </cd:keywords>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="lefttoright" level="style" category="alignment" keywords="direction" file="spac-ali.mkxl"/>
+
+    <cd:command name="righttoleft" level="style" category="alignment" keywords="direction" file="spac-ali.mkxl"/>
+
+    <cd:command name="raggedbottom" level="style" category="alignment" file="spac-ali.mkxl"/>
+
+    <cd:command name="alignbottom" level="style" category="alignment" file="spac-ali.mkxl"/>
+
+    <cd:command name="baselinebottom" level="style" category="alignment" file="spac-ali.mkxl"/>
+
+    <cd:command name="depthlinebottom" level="style" category="alignment" file="spac-ali.mkxl"/>
+
+    <cd:command name="notragged" level="style" category="alignment" file="spac-ali.mkxl"/>
+
+    <cd:command name="raggedleft" level="style" category="alignment" file="spac-ali.mkxl"/>
+
+    <cd:command name="raggedcenter" level="style" category="alignment" file="spac-ali.mkxl"/>
+
+    <cd:command name="raggedright" level="style" category="alignment" file="spac-ali.mkxl"/>
+
+    <cd:command name="veryraggedleft" level="style" category="alignment" file="spac-ali.mkxl"/>
+
+    <cd:command name="veryraggedcenter" level="style" category="alignment" file="spac-ali.mkxl"/>
+
+    <cd:command name="veryraggedright" level="style" category="alignment" file="spac-ali.mkxl"/>
+
+    <cd:command name="raggedwidecenter" level="style" category="alignment" file="spac-ali.mkxl"/>
+
+    <cd:command name="centeredlastline" level="style" category="alignment" file="spac-ali.mkxl"/>
+
+    <cd:command name="flushedrightlastline" level="style" category="alignment" file="spac-ali.mkxl"/>
+
+    <cd:command name="ttraggedright" level="style" category="alignment" file="spac-ali.mkxl"/>
+
+    <cd:command name="forgetragged" level="style" category="alignment" file="spac-ali.mkxl"/>
+
+    <cd:command name="raggedslanted" level="style" category="alignment" file="spac-ali.mkxl"/>
+
+    <cd:command name="line" level="document" category="alignment" file="spac-ali.mkxl">
+        <cd:arguments>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="leftline" level="document" category="alignment" file="spac-ali.mkxl">
+        <cd:arguments>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="rightline" level="document" category="alignment" file="spac-ali.mkxl">
+        <cd:arguments>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="centerline" level="document" category="alignment" file="spac-ali.mkxl">
+        <cd:arguments>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="setuphanging" file="spac-ver.mkxl">
+        <cd:arguments>
+            <cd:assignments list="yes">
+                <cd:parameter name="distance">
+                    <cd:constant type="cd:dimension"/>
+                </cd:parameter>
+                <cd:parameter name="n">
+                    <cd:constant type="cd:number"/>
+                </cd:parameter>
+                <cd:parameter name="topoffset">
+                    <cd:constant type="cd:dimension"/>
+                </cd:parameter>
+                <cd:parameter name="bottomoffset">
+                    <cd:constant type="cd:dimension"/>
+                </cd:parameter>
+                <cd:parameter name="location">
+                    <cd:constant type="left" default="yes"/>
+                    <cd:constant type="right"/>
+                </cd:parameter>
+            </cd:assignments>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="hanging" type="environment" level="document" category="alignment" file="spac-ver.mkxl">
+        <cd:arguments>
+            <cd:assignments list="yes" optional="yes">
+                <cd:inherit name="setuphanging"/>
+            </cd:assignments>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="hanging" type="environment" variant="argument" level="document" category="alignment" file="spac-ver.mkxl">
+        <cd:arguments>
+            <cd:keywords optional="yes">
+                <cd:constant type="left" default="yes"/>
+                <cd:constant type="right"/>
+            </cd:keywords>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="fixed" type="environment" level="document" category="alignment" file="spac-ver.mkxl">
+        <cd:arguments>
+            <cd:keywords optional="yes">
+                <cd:constant type="low"/>
+                <cd:constant type="middle"/>
+                <cd:constant type="high"/>
+                <cd:constant type="lohi"/>
+                <cd:constant type="default" default="yes"/>
+            </cd:keywords>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="ap" level="document" category="alignment" file="tabl-ali.mkxl">
+        <cd:arguments>
+            <cd:resolve name="keyword-number"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="synchronizealignpass" level="style" category="alignment" file="spac-pas.mkxl"/>
+
+    <cd:command name="setupalignpass" level="style" category="alignment" file="spac-pas.mkxl">
+        <cd:arguments>
+            <cd:keywords>
+                <cd:constant type="none"/>
+                <cd:constant type="granular"/>
+                <cd:constant type="decent"/>
+                <cd:constant type="quality"/>
+                <!--
+                    <cd:constant type="test1"/>
+                    <cd:constant type="test2"/>
+                    <cd:constant type="test3"/>
+                    <cd:constant type="test4"/>
+                    <cd:constant type="test5"/>
+                    <cd:constant type="optional1"/>
+                -->
+                <cd:constant type="cd:name"/>
+            </cd:keywords>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="optionalword" level="document" category="alignment" file="spac-pas.mkxl">
+        <cd:arguments>
+            <cd:resolve name="argument-test"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="optional" level="document" category="alignment" file="spac-pas.mkxl">
+        <cd:arguments>
+            <cd:resolve name="argument-number"/>
+            <cd:resolve name="argument-text"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="rtltext" level="document" category="alignment" keywords="direction" file="spac-ali.mkxl">
+        <cd:arguments>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="ltrtext" level="document" category="alignment" keywords="direction" file="spac-ali.mkxl">
+        <cd:arguments>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="hangrange" type="environment" file="spac-ali.mkxl"/>
+
+    <cd:command name="hangrangestep" type="environment" file="spac-ali.mkxl"/>
+
+    <cd:command name="emptyhangrangestep" file="spac-ali.mkxl"/>
+
+</cd:interface>

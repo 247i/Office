@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="image/jxr">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>JPEG XR image</comment>
+  <comment xml:lang="zh-Hant-TW">JPEG XR 影像</comment>
+  <comment xml:lang="uk">зображення JPEG XR</comment>
+  <comment xml:lang="tr">JPEG XR görüntüsü</comment>
+  <comment xml:lang="sv">JPEG XR-bild</comment>
+  <comment xml:lang="sr-Cyrl">JPEG XR слика</comment>
+  <comment xml:lang="sq">Figurë JPEG XR</comment>
+  <comment xml:lang="sl">Slika JPEG XR</comment>
+  <comment xml:lang="ru">Изображение JPEG XR</comment>
+  <comment xml:lang="ro">imagine XR JPEG</comment>
+  <comment xml:lang="pt-BR">Imagem JPEG XR</comment>
+  <comment xml:lang="pl">Obraz JPEG XR</comment>
+  <comment xml:lang="oc">imatge JPEG XR</comment>
+  <comment xml:lang="nn">JPEG XR-bilete</comment>
+  <comment xml:lang="ko">JPEG XR 이미지</comment>
+  <comment xml:lang="kk-Cyrl">JPEG XR суреті</comment>
+  <comment xml:lang="kab">Tugna JPEG XR</comment>
+  <comment xml:lang="ja">JPEG XR 画像 </comment>
+  <comment xml:lang="it">Immagine JPEG XR</comment>
+  <comment xml:lang="id">Gambar JPEG XR</comment>
+  <comment xml:lang="hr">JPEG XR slika</comment>
+  <comment xml:lang="hi">JPEG XR छवि</comment>
+  <comment xml:lang="he">תמונת JPEG XR</comment>
+  <comment xml:lang="gl">Imaxe JPEG XR</comment>
+  <comment xml:lang="fur">Imagjin JPEG XR</comment>
+  <comment xml:lang="fr">Image JPEG XR</comment>
+  <comment xml:lang="fi">JPEG XR</comment>
+  <comment xml:lang="eu">JPEG XR irudia</comment>
+  <comment xml:lang="et">JPEG XR pilt</comment>
+  <comment xml:lang="es">imagen JPEG XR</comment>
+  <comment xml:lang="en-GB">JPEG XR image</comment>
+  <comment xml:lang="de">JPEG-XR-Bild</comment>
+  <comment xml:lang="ca">imatge JPEG XR</comment>
+  <comment xml:lang="bg">Изображение — JPEG XR</comment>
+  <comment xml:lang="be-Cyrl">відарыс JPEG XR</comment>
+  <comment xml:lang="ar">صورة JPEG XR</comment>
+  <acronym>XR</acronym>
+  <expanded-acronym>Extended Range</expanded-acronym>
+  <glob pattern="*.jxr"/>
+  <glob pattern="*.hdp"/>
+  <glob pattern="*.wdp"/>
+  <alias type="image/vnd.ms-photo"/>
+</mime-type>

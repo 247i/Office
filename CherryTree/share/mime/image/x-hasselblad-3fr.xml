@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="image/x-hasselblad-3fr">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Hasselblad 3FR raw image</comment>
+  <comment xml:lang="uk">цифровий негатив Hasselblad 3FR</comment>
+  <comment xml:lang="tr">Hasselblad 3FR ham görüntüsü</comment>
+  <comment xml:lang="sv">Hasselblad 3FR-råbild</comment>
+  <comment xml:lang="sr-Cyrl">Hasselblad 3FR сирова слика</comment>
+  <comment xml:lang="sq">Pamje Hasselblad 3FR e papërpunuar</comment>
+  <comment xml:lang="sl">Neobdelana slika Hasselblad 3FR</comment>
+  <comment xml:lang="ru">Необработанное изображение Hasselblad 3FR</comment>
+  <comment xml:lang="ro">imagine brută Hasselblad 3FR</comment>
+  <comment xml:lang="pt-BR">Imagem bruta Hasselblad 3FR</comment>
+  <comment xml:lang="pl">Surowy obraz 3FR Hasselblad</comment>
+  <comment xml:lang="oc">imatge brut Hasselblad 3FR</comment>
+  <comment xml:lang="ko">하셀블라드 3FR RAW 사진</comment>
+  <comment xml:lang="kk-Cyrl">Hasselblad 3FR өңделмеген бейнесі</comment>
+  <comment xml:lang="fr">image brute Hasselblad 3FR</comment>
+  <comment xml:lang="fi">Hasselblad 3FR -raakakuva</comment>
+  <comment xml:lang="et">Hasselblad 3FR töötlemata pilt</comment>
+  <comment xml:lang="es">imagen en bruto 3FR de Hasselblad</comment>
+  <comment xml:lang="en-GB">Hasselblad 3FR raw image</comment>
+  <comment xml:lang="de">Hasselblad 3FR-Rohbild</comment>
+  <comment xml:lang="ar">صورة Hasselblad 3FR خامة</comment>
+  <sub-class-of type="image/x-dcraw"/>
+  <sub-class-of type="image/tiff"/>
+  <glob pattern="*.3fr"/>
+</mime-type>

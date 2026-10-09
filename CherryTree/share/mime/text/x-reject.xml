@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/x-reject">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Rejected patch</comment>
+  <comment xml:lang="zh-Hant-TW">已拒絕的修補檔</comment>
+  <comment xml:lang="uk">відкинута латка</comment>
+  <comment xml:lang="tr">Reddedilmiş yama</comment>
+  <comment xml:lang="sv">Avvisad programfix</comment>
+  <comment xml:lang="sr-Cyrl">Одбачена закрпа</comment>
+  <comment xml:lang="sq">Arnim i hedhur poshtë</comment>
+  <comment xml:lang="sl">Zavrnjen popravek</comment>
+  <comment xml:lang="ru">Отклонённый патч</comment>
+  <comment xml:lang="ro">corectare (plasture) respinsă</comment>
+  <comment xml:lang="pt-BR">Patch rejeitado</comment>
+  <comment xml:lang="pl">Odrzucona łata</comment>
+  <comment xml:lang="oc">correctiu regetat</comment>
+  <comment xml:lang="ko">거절된 패치</comment>
+  <comment xml:lang="kk-Cyrl">Тайдырылған патч</comment>
+  <comment xml:lang="ja">却下されたパッチ</comment>
+  <comment xml:lang="it">Patch rifiutata</comment>
+  <comment xml:lang="id">Patch yang ditolak</comment>
+  <comment xml:lang="hr">Odbijena zakrpa</comment>
+  <comment xml:lang="hi">अस्वीकृत पैच</comment>
+  <comment xml:lang="gl">Parche rexeitado</comment>
+  <comment xml:lang="fur">Blec refudât</comment>
+  <comment xml:lang="fr">Correctif rejeté</comment>
+  <comment xml:lang="fi">Poistettu korjaus</comment>
+  <comment xml:lang="eu">Baztertutako adabakia</comment>
+  <comment xml:lang="et">Tagasilükatud paik</comment>
+  <comment xml:lang="es">parche rechazado</comment>
+  <comment xml:lang="en-GB">Rejected patch</comment>
+  <comment xml:lang="de">abgelehnter Patch</comment>
+  <comment xml:lang="ca">pedaç rebutjat</comment>
+  <comment xml:lang="bg">Отхвърлена поправка</comment>
+  <comment xml:lang="be-Cyrl">адхілены патч</comment>
+  <comment xml:lang="ar">رقعة مرفوضة</comment>
+  <sub-class-of type="text/plain"/>
+  <generic-icon name="text-x-generic"/>
+  <alias type="application/x-reject"/>
+  <glob pattern="*.rej"/>
+</mime-type>

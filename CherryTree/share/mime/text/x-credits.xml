@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/x-credits">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Author credits</comment>
+  <comment xml:lang="zh-Hant-TW">作者鳴謝</comment>
+  <comment xml:lang="uk">подяки авторам</comment>
+  <comment xml:lang="tr">Yazar teşekkürleri</comment>
+  <comment xml:lang="sv">Författarlista</comment>
+  <comment xml:lang="sr-Cyrl">Заслуге аутора</comment>
+  <comment xml:lang="sq">Kredite autorësh</comment>
+  <comment xml:lang="sl">Zasluge avtorjev</comment>
+  <comment xml:lang="ru">Авторы программы</comment>
+  <comment xml:lang="ro">mulțumiri către autori</comment>
+  <comment xml:lang="pt-BR">Créditos do autor</comment>
+  <comment xml:lang="pl">Podziękowania autorów programu</comment>
+  <comment xml:lang="oc">crèdits autor</comment>
+  <comment xml:lang="lt">Padėkos autoriams</comment>
+  <comment xml:lang="ko">저작 참여자</comment>
+  <comment xml:lang="kk-Cyrl">Бағдарлама авторлары</comment>
+  <comment xml:lang="ja">作者クレジット</comment>
+  <comment xml:lang="it">Riconoscimenti autori</comment>
+  <comment xml:lang="id">Kredit penulis</comment>
+  <comment xml:lang="hr">Zasluge autora</comment>
+  <comment xml:lang="hi">लेखक श्रेय</comment>
+  <comment xml:lang="gl">Créditos de autor</comment>
+  <comment xml:lang="fur">Ricognossiments dai autôrs</comment>
+  <comment xml:lang="fr">Remerciements</comment>
+  <comment xml:lang="fi">Tekijöiden kiitokset</comment>
+  <comment xml:lang="eu">Egile-kredituak</comment>
+  <comment xml:lang="et">Tänuavaldus autoritele</comment>
+  <comment xml:lang="es">créditos de autoría</comment>
+  <comment xml:lang="en-GB">Author credits</comment>
+  <comment xml:lang="de">Autorendanksagung</comment>
+  <comment xml:lang="ca">atribució d'autoria</comment>
+  <comment xml:lang="bg">Авторски заслуги</comment>
+  <comment xml:lang="be-Cyrl">звесткі пра аўтараў</comment>
+  <comment xml:lang="ar">إشادات مؤلف</comment>
+  <sub-class-of type="text/plain"/>
+  <glob pattern="CREDITS"/>
+</mime-type>

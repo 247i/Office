@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x.sf3-table">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>SF3 Table</comment>
+  <comment xml:lang="uk">таблиця SF3</comment>
+  <comment xml:lang="tr">SF3 tablosu</comment>
+  <comment xml:lang="sv">SF3-tabell</comment>
+  <comment xml:lang="sr-Cyrl">SF3 табела</comment>
+  <comment xml:lang="sq">Tabelë SF3</comment>
+  <comment xml:lang="sl">Tabela SF3</comment>
+  <comment xml:lang="ru">Таблица SF3</comment>
+  <comment xml:lang="ro">tabel SF3</comment>
+  <comment xml:lang="pt-BR">Tabela SF3</comment>
+  <comment xml:lang="pl">Tabela SF3</comment>
+  <comment xml:lang="oc">tablèu SF3</comment>
+  <comment xml:lang="ko">SF3 테이블</comment>
+  <comment xml:lang="kk-Cyrl">SF3 кестесі</comment>
+  <comment xml:lang="hr">SF3 tablica</comment>
+  <comment xml:lang="fr">Tableau SF3</comment>
+  <comment xml:lang="fi">SF3-taulukko</comment>
+  <comment xml:lang="et">SF3 tabel</comment>
+  <comment xml:lang="es">tabla SF3</comment>
+  <comment xml:lang="en-GB">SF3 Table</comment>
+  <comment xml:lang="de">SF3-Tabelle</comment>
+  <comment xml:lang="ar">جدول SF3</comment>
+  <acronym>SF3</acronym>
+  <expanded-acronym>Simple File Format Family</expanded-acronym>
+  <glob pattern="*.tab.sf3"/>
+  <glob pattern="*.sf3"/>
+</mime-type>

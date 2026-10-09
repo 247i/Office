@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/vnd.sun.xml.impress.template">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>OpenOffice.org 1.0 Impress template</comment>
+  <comment xml:lang="zh-Hant-TW">OpenOffice.org 1.0 Impress 範本</comment>
+  <comment xml:lang="uk">шаблон OpenOffice.org Impress 1.0</comment>
+  <comment xml:lang="tr">OpenOffice.org 1.0 Impress şablonu</comment>
+  <comment xml:lang="sv">OpenOffice.org 1.0 Impress-mall</comment>
+  <comment xml:lang="sr-Cyrl">OpenOffice.org 1.0 Impress шаблон</comment>
+  <comment xml:lang="sq">Gjedhe OpenOffice.org 1.0 Impress</comment>
+  <comment xml:lang="sl">Predloga OpenOffice.org Impress 1.0</comment>
+  <comment xml:lang="ru">Шаблон OpenOffice.org 1.0 Impress</comment>
+  <comment xml:lang="ro">șablon OpenOffice.org 1.0 Impress</comment>
+  <comment xml:lang="pt-BR">Modelo do OpenOffice.org 1.0 Impress</comment>
+  <comment xml:lang="pl">Szablon prezentacji OpenOffice.org 1.0 Impress</comment>
+  <comment xml:lang="oc">modèl de presentacion OpenOffice.org 1.0</comment>
+  <comment xml:lang="nn">OpenOffice.org 1.0 Impress-mal</comment>
+  <comment xml:lang="ko">OpenOffice.org 1.0 Impress 서식</comment>
+  <comment xml:lang="kk-Cyrl">OpenOffice.org 1.0 Impress үлгісі</comment>
+  <comment xml:lang="ja">OpenOffice 1.0 Impress テンプレート</comment>
+  <comment xml:lang="id">Templat OpenOffice.org 1.0 Impress</comment>
+  <comment xml:lang="hr">OpenOffice.org 1.0 Impress predložak</comment>
+  <comment xml:lang="fur">Model di OpenOffice.org 1.0 Impress</comment>
+  <comment xml:lang="fr">Modèle OpenOffice.org 1.0 Impress</comment>
+  <comment xml:lang="fi">OpenOffice.org 1.0 Impress malli</comment>
+  <comment xml:lang="et">OpenOffice.org 1.0 Impressi esitlusfaili mall</comment>
+  <comment xml:lang="es">plantilla de OpenOffice.org Impress 1.0</comment>
+  <comment xml:lang="en-GB">OpenOffice.org 1.0 Impress template</comment>
+  <comment xml:lang="de">OpenOffice.org Impress-1.0-Vorlage</comment>
+  <comment xml:lang="da">OpenOffice.org 1.0 Impress-skabelon</comment>
+  <comment xml:lang="ca">plantilla d'OpenOffice.org 1.0 Impress</comment>
+  <comment xml:lang="bg">Шаблон — OpenOffice.org 1.0 Impress</comment>
+  <comment xml:lang="be-Cyrl">шаблон OpenOffice.org 1.0 Impress</comment>
+  <comment xml:lang="ar">قالب Impress المكتب المفتوح 1.0</comment>
+  <sub-class-of type="application/zip"/>
+  <generic-icon name="x-office-presentation"/>
+  <glob pattern="*.sti"/>
+</mime-type>

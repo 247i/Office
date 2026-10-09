@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/x-basic">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>BASIC program</comment>
+  <comment xml:lang="zh-Hant-TW">BASIC 程式</comment>
+  <comment xml:lang="uk">програма BASIC</comment>
+  <comment xml:lang="tr">BASIC programı</comment>
+  <comment xml:lang="sv">BASIC-program</comment>
+  <comment xml:lang="sr-Cyrl">БЕЈЗИК програм</comment>
+  <comment xml:lang="sq">Program BASIC</comment>
+  <comment xml:lang="sl">Program BASIC</comment>
+  <comment xml:lang="ru">Программа BASIC</comment>
+  <comment xml:lang="ro">program BASIC</comment>
+  <comment xml:lang="pt-BR">Programa BASIC</comment>
+  <comment xml:lang="pl">Program BASIC</comment>
+  <comment xml:lang="oc">programa BASIC</comment>
+  <comment xml:lang="nn">BASIC-program</comment>
+  <comment xml:lang="lt">BASIC programa</comment>
+  <comment xml:lang="ko">BASIC 프로그램</comment>
+  <comment xml:lang="kk-Cyrl">BASIC бағдарламасы</comment>
+  <comment xml:lang="kab">Aseɣẓan BASIC</comment>
+  <comment xml:lang="ja">BASIC プログラム</comment>
+  <comment xml:lang="it">Programma BASIC</comment>
+  <comment xml:lang="id">Program BASIC</comment>
+  <comment xml:lang="hr">BASIC program</comment>
+  <comment xml:lang="hi">BASIC प्रोग्राम</comment>
+  <comment xml:lang="he">תוכנית BASIC</comment>
+  <comment xml:lang="fur">Program BASIC</comment>
+  <comment xml:lang="fr">Programme BASIC</comment>
+  <comment xml:lang="fi">BASIC-ohjelma</comment>
+  <comment xml:lang="eu">BASIC programa</comment>
+  <comment xml:lang="et">BASICu programm</comment>
+  <comment xml:lang="es">programa en BASIC</comment>
+  <comment xml:lang="en-GB">BASIC program</comment>
+  <comment xml:lang="de">BASIC-Programm</comment>
+  <comment xml:lang="ca">programa BASIC</comment>
+  <comment xml:lang="bg">Програма — BASIC</comment>
+  <comment xml:lang="be-Cyrl">праграма BASIC</comment>
+  <comment xml:lang="ar">برنامج بيسك</comment>
+  <comment xml:lang="af">BASIC-program</comment>
+  <sub-class-of type="text/plain"/>
+  <generic-icon name="text-x-script"/>
+  <glob pattern="*.bas"/>
+</mime-type>

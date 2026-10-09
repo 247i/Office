@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="video/vnd.radgamettools.bink">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Bink Video</comment>
+  <comment xml:lang="zh-Hant-TW">Bink 視訊</comment>
+  <comment xml:lang="zh-Hans-CN">Bink 视频</comment>
+  <comment xml:lang="uk">відео Bink</comment>
+  <comment xml:lang="tr">Bink videosu</comment>
+  <comment xml:lang="sv">Bink-video</comment>
+  <comment xml:lang="sr-Cyrl">Bink видео</comment>
+  <comment xml:lang="sq">Video Bink</comment>
+  <comment xml:lang="sl">Video Bink</comment>
+  <comment xml:lang="si">බින්ක් වීඩියෝව</comment>
+  <comment xml:lang="ru">Видео Bink</comment>
+  <comment xml:lang="ro">video Bink</comment>
+  <comment xml:lang="pt-BR">Vídeo Bink</comment>
+  <comment xml:lang="pl">Plik wideo Bink</comment>
+  <comment xml:lang="oc">vidèo Bink</comment>
+  <comment xml:lang="nn">Bink-video</comment>
+  <comment xml:lang="nl">Bink-video</comment>
+  <comment xml:lang="lt">Bink vaizdo įrašas</comment>
+  <comment xml:lang="ko">Bink 동영상</comment>
+  <comment xml:lang="kk-Cyrl">Bink видеосы</comment>
+  <comment xml:lang="ja">Bink 動画</comment>
+  <comment xml:lang="it">Video Bink</comment>
+  <comment xml:lang="id">Video Bink</comment>
+  <comment xml:lang="hr">Bink video snimka</comment>
+  <comment xml:lang="hi">Bink Video</comment>
+  <comment xml:lang="fur">Video Bink</comment>
+  <comment xml:lang="fr">Vidéo Blink</comment>
+  <comment xml:lang="fi">Bink Video</comment>
+  <comment xml:lang="eu">Bink bideoa</comment>
+  <comment xml:lang="et">Bink Video</comment>
+  <comment xml:lang="es">vídeo BINK</comment>
+  <comment xml:lang="en-GB">Bink Video</comment>
+  <comment xml:lang="de">Bink-Video</comment>
+  <comment xml:lang="ca">vídeo Bink</comment>
+  <comment xml:lang="bg">Видео — Bink</comment>
+  <comment xml:lang="be-Cyrl">відэа Bink</comment>
+  <comment xml:lang="ar">فيديو Bink</comment>
+  <glob pattern="*.bik"/>
+  <glob pattern="*.bk2"/>
+</mime-type>

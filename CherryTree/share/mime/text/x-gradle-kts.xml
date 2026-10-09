@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/x-gradle-kts">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Kotlin Gradle script</comment>
+  <comment xml:lang="uk">скрипт Gradle Kotlin</comment>
+  <comment xml:lang="tr">Kotlin Gradle betiği</comment>
+  <comment xml:lang="sv">Kotlin Gradle-skript</comment>
+  <comment xml:lang="sr-Cyrl">Kotlin Gradle скрипта</comment>
+  <comment xml:lang="sl">Skript Kotlin Gradle</comment>
+  <comment xml:lang="ru">Сценарий Gradle, написанный на Kotlin</comment>
+  <comment xml:lang="ro">script Kotlin Gradle</comment>
+  <comment xml:lang="pt-BR">script Kotlin Gradle</comment>
+  <comment xml:lang="pl">Skrypt Gradle Kotlin</comment>
+  <comment xml:lang="oc">escript Kotlin Gradle</comment>
+  <comment xml:lang="ko">Kotlin Gradle 스크립트</comment>
+  <comment xml:lang="kk-Cyrl">Kotlin Gradle сценарийі</comment>
+  <comment xml:lang="fr">script Kotlin Gradle</comment>
+  <comment xml:lang="fi">Kotlin Gradle skripti</comment>
+  <comment xml:lang="et">Kotlin Gradle'i skript</comment>
+  <comment xml:lang="es">secuencia de órdenes Gradle de Kotlin</comment>
+  <comment xml:lang="en-GB">Kotlin Gradle script</comment>
+  <comment xml:lang="de">Kotlin Gradle-Skript</comment>
+  <comment xml:lang="ar">سكربت Kotlin Gradle</comment>
+  <sub-class-of type="text/x-kotlin"/>
+  <glob pattern="*.gradle.kts"/>
+</mime-type>

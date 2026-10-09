@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-bzip1-compressed-tar">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Tar archive (bzip1-compressed)</comment>
+  <comment xml:lang="zh-Hant-TW">Tar 封存檔 (bzip1 壓縮)</comment>
+  <comment xml:lang="uk">архів tar (стиснений bzip1)</comment>
+  <comment xml:lang="tr">Tar arşivi (bzip1 sıkıştırmalı)</comment>
+  <comment xml:lang="sv">Tar-arkiv (bzip1-komprimerat)</comment>
+  <comment xml:lang="sr-Cyrl">Тар архива (сажета Бзипом 1)</comment>
+  <comment xml:lang="sq">Arkiv tar (ngjeshur me bzip1)</comment>
+  <comment xml:lang="sl">Arhiv tar (stisnjen z bzip1)</comment>
+  <comment xml:lang="ru">Архив Tar (сжатый bzip1)</comment>
+  <comment xml:lang="ro">arhivă Tar (comprimată bzip1)</comment>
+  <comment xml:lang="pt-BR">Pacote Tar (compactado com bzip1)</comment>
+  <comment xml:lang="pl">Archiwum tar (kompresja bzip1)</comment>
+  <comment xml:lang="oc">archiu Tar (compressat amb bzip1)</comment>
+  <comment xml:lang="nn">Tar-arkiv (bzip1-komprimert)</comment>
+  <comment xml:lang="ko">TAR 묶음 파일 (BZIP1 압축)</comment>
+  <comment xml:lang="kk-Cyrl">Tar архиві (bzip1-мен сығылған)</comment>
+  <comment xml:lang="ja">Tar アーカイブ (bzip1 圧縮)</comment>
+  <comment xml:lang="it">Archivio tar (compresso con bzip1)</comment>
+  <comment xml:lang="id">Arsip tar (terkompresi bzip1)</comment>
+  <comment xml:lang="hr">Tar arhiva (bzip1 komprimirano)</comment>
+  <comment xml:lang="hi">Tar अभिलेख (bzip1-संपीड़ित)</comment>
+  <comment xml:lang="he">ארכיון Tar (דחוס ב־bzip1)</comment>
+  <comment xml:lang="fur">Archivi Tar (comprimût cun bzip1)</comment>
+  <comment xml:lang="fr">Archive Tar (compression bzip1)</comment>
+  <comment xml:lang="fi">Tar-arkisto (bzip1-pakattu)</comment>
+  <comment xml:lang="et">Tar arhiiv (pakitud bzip1-ga)</comment>
+  <comment xml:lang="es">archivador de TAR (comprimido con BZIP1)</comment>
+  <comment xml:lang="en-GB">Tar archive (bzip1-compressed)</comment>
+  <comment xml:lang="de">tar-Archiv (bzip1-komprimiert)</comment>
+  <comment xml:lang="da">Tar-arkiv (bzip1-komprimeret)</comment>
+  <comment xml:lang="ca">arxiu tar (comprimit amb bzip1)</comment>
+  <comment xml:lang="bg">Архив — tar, компресиран с bzip1</comment>
+  <comment xml:lang="be-Cyrl">архіў tar (сцісканне bzip1)</comment>
+  <comment xml:lang="ar">أرشيف Tar (مضغوط-bzip1)</comment>
+  <generic-icon name="package-x-generic"/>
+  <sub-class-of type="application/x-bzip1"/>
+  <glob pattern="*.tar.bz"/>
+  <glob pattern="*.tbz"/>
+</mime-type>

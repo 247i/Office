@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/x-sed">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>sed script</comment>
+  <comment xml:lang="uk">скрипт sed</comment>
+  <comment xml:lang="tr">sed betiği</comment>
+  <comment xml:lang="sv">sed-skript</comment>
+  <comment xml:lang="sr-Cyrl">sed скрипта</comment>
+  <comment xml:lang="sq">Programth sed</comment>
+  <comment xml:lang="sl">Skript sed</comment>
+  <comment xml:lang="ru">Сценарий sed</comment>
+  <comment xml:lang="ro">script sed</comment>
+  <comment xml:lang="pt-BR">Script sed</comment>
+  <comment xml:lang="pl">Skrypt sed</comment>
+  <comment xml:lang="oc">escript sed</comment>
+  <comment xml:lang="ko">SED 스크립트</comment>
+  <comment xml:lang="kk-Cyrl">sed сценарийі</comment>
+  <comment xml:lang="fr">script Sed</comment>
+  <comment xml:lang="fi">sed-skripti</comment>
+  <comment xml:lang="et">Sedi skript</comment>
+  <comment xml:lang="es">secuencia de órdenes de sed</comment>
+  <comment xml:lang="en-GB">sed script</comment>
+  <comment xml:lang="de">sed-Skript</comment>
+  <comment xml:lang="ar">سكربت sed</comment>
+  <acronym>SED</acronym>
+  <expanded-acronym>Stream EDitor</expanded-acronym>
+  <sub-class-of type="application/x-executable"/>
+  <generic-icon name="text-x-script"/>
+  <glob pattern="*.sed"/>
+</mime-type>

@@ -1,0 +1,53 @@
+# Hungarian translation for openteacher
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2011-09-13 07:39+0000\n"
+"Last-Translator: Richard Somlói <ricsipontaz@gmail.com>\n"
+"Language-Team: Hungarian <hu@li.org>\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:42+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: inMind.py:47
+msgid ""
+"Think about the answer, and press the 'View answer' button when you're done."
+msgstr ""
+"Gondolja ki a választ, majd nyomja meg a „Válasz megtekintése” gombot, "
+"amikor készen van."
+
+#: inMind.py:48
+msgid "View answer"
+msgstr "Válasz megtekintése"
+
+#: inMind.py:49
+msgid "Skip"
+msgstr ""
+
+#: inMind.py:70
+msgid "I was right"
+msgstr "Jól tudtam"
+
+#: inMind.py:71
+msgid "I was wrong"
+msgstr "Tévedtem"
+
+#: inMind.py:135
+msgid "Translation: "
+msgstr "Fordítás: "
+
+#: inMind.py:199
+msgid "Think answer"
+msgstr ""
+
+#~ msgid "Think answers"
+#~ msgstr "Válasz kigondolása"

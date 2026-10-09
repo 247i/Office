@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-theme">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Theme</comment>
+  <comment xml:lang="zh-Hant-TW">主題</comment>
+  <comment xml:lang="uk">тема</comment>
+  <comment xml:lang="tr">Tema</comment>
+  <comment xml:lang="sv">Tema</comment>
+  <comment xml:lang="sr-Cyrl">Тема</comment>
+  <comment xml:lang="sq">Temë</comment>
+  <comment xml:lang="sl">Tema</comment>
+  <comment xml:lang="ru">Тема</comment>
+  <comment xml:lang="ro">temă</comment>
+  <comment xml:lang="pt-BR">Tema</comment>
+  <comment xml:lang="pl">Motyw</comment>
+  <comment xml:lang="oc">Tèma</comment>
+  <comment xml:lang="nn">Tema</comment>
+  <comment xml:lang="lt">Apipavidalinimas</comment>
+  <comment xml:lang="ko">테마</comment>
+  <comment xml:lang="kk-Cyrl">Тема</comment>
+  <comment xml:lang="ka">თემა</comment>
+  <comment xml:lang="kab">Asentel</comment>
+  <comment xml:lang="ja">テーマ</comment>
+  <comment xml:lang="it">Tema</comment>
+  <comment xml:lang="id">Tema</comment>
+  <comment xml:lang="hr">Tema</comment>
+  <comment xml:lang="hi">थीम</comment>
+  <comment xml:lang="he">ערכת עיצוב</comment>
+  <comment xml:lang="gl">Tema</comment>
+  <comment xml:lang="fur">Teme</comment>
+  <comment xml:lang="fr">Thème</comment>
+  <comment xml:lang="fi">Teema</comment>
+  <comment xml:lang="eu">Gaia</comment>
+  <comment xml:lang="et">Teemafail</comment>
+  <comment xml:lang="es">tema</comment>
+  <comment xml:lang="en-GB">Theme</comment>
+  <comment xml:lang="de">Thema</comment>
+  <comment xml:lang="ca">tema</comment>
+  <comment xml:lang="bg">Тема</comment>
+  <comment xml:lang="be-Cyrl">тэма</comment>
+  <comment xml:lang="ar">سمة</comment>
+  <sub-class-of type="application/x-desktop"/>
+  <generic-icon name="package-x-generic"/>
+  <glob pattern="*.theme"/>
+</mime-type>

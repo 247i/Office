@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="image/x-minolta-mdc">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Minolta MDC raw image</comment>
+  <comment xml:lang="uk">цифровий негатив Minolta MDC</comment>
+  <comment xml:lang="tr">Minolta MDC ham görüntüsü</comment>
+  <comment xml:lang="sv">Minolta MDC-råbild</comment>
+  <comment xml:lang="sr-Cyrl">Minolta MDC сирова слика</comment>
+  <comment xml:lang="sq">Pamje Minolta MDC e papërpunuar</comment>
+  <comment xml:lang="sl">Neobdelana slika Minolta MDC</comment>
+  <comment xml:lang="ru">Необработанное изображение Minolta MDC</comment>
+  <comment xml:lang="ro">imagine brută Minolta MDC</comment>
+  <comment xml:lang="pt-BR">Imagem bruta Minolta MDC</comment>
+  <comment xml:lang="pl">Surowy obraz MDC Minolta</comment>
+  <comment xml:lang="oc">imatge brut Minolta MDC</comment>
+  <comment xml:lang="ko">Minolta MDC 로 이미지</comment>
+  <comment xml:lang="kk-Cyrl">Minolta MDC өңделмеген бейнесі</comment>
+  <comment xml:lang="fr">image brute Minolta MDC</comment>
+  <comment xml:lang="fi">Minolta MDC -raakakuva</comment>
+  <comment xml:lang="et">Minolta MDC töötlemata pilt</comment>
+  <comment xml:lang="es">imagen en bruto MDC de Minolta</comment>
+  <comment xml:lang="en-GB">Minolta MDC raw image</comment>
+  <comment xml:lang="de">Minolta MDC-Rohbild</comment>
+  <comment xml:lang="ar">صورة Minolta MDC خامة</comment>
+  <sub-class-of type="image/x-dcraw"/>
+  <glob pattern="*.mdc"/>
+</mime-type>

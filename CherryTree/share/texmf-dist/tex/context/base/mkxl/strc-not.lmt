@@ -1,0 +1,784 @@
+if not modules then modules = { } end modules ['strc-not'] = {
+    version   = 1.001,
+    comment   = "companion to strc-not.mkiv",
+    author    = "Hans Hagen, PRAGMA-ADE, Hasselt NL",
+    copyright = "PRAGMA ADE / ConTeXt Development Team",
+    license   = "see context related readme files"
+}
+
+local format = string.format
+local next, tonumber = next, tonumber
+local sortedhash = table.sortedhash
+
+local trace_notes         = false  trackers.register("structures.notes",            function(v) trace_notes      = v end)
+local trace_references    = false  trackers.register("structures.notes.references", function(v) trace_references = v end)
+
+local report_notes        = logs.reporter("structure","notes")
+
+local structures          = structures
+local helpers             = structures.helpers
+local lists               = structures.lists
+local sections            = structures.sections
+local counters            = structures.counters
+local notes               = structures.notes
+local references          = structures.references
+local counterspecials     = counters.specials
+
+local texiscount          = tex.iscount
+local texgetcount         = tex.getcount
+local texisglue           = tex.isglue
+local texgetglue          = tex.getglue
+local texgetbox           = tex.getbox
+local getinsertmultiplier = tex.getinsertmultiplier
+local getmark             = tex.getmark
+
+local nuts                = nodes.nuts
+local tonut               = nodes.tonut
+local tonode              = nuts.tonode
+
+local setlink             = nuts.setlink
+local gettail             = nuts.tail
+local getlist             = nuts.getlist
+local setlist             = nuts.setlist
+local vpack               = nuts.vpack
+
+local newgluespec         = nuts.pool.gluespec -- nodes.pool.gluespec
+
+-- todo: allocate
+
+notes.states           = notes.states or { }
+lists.enhancers        = lists.enhancers or { }
+notes.numbers          = notes.numbers or { }
+
+storage.register("structures/notes/states",  notes.states, "structures.notes.states")
+storage.register("structures/notes/numbers", notes.numbers, "structures.notes.numbers")
+
+local notestates = notes.states
+local notedata   = table.setmetatableindex("table")
+
+local context    = context
+local commands   = commands
+
+local implement  = interfaces.implement
+
+local trialtypesetting = context.trialtypesetting
+
+local v_page <const> = interfaces.variables.page
+
+local integer_value <const> = tokens.values.integer
+
+-- state: store, insert, postpone
+
+local function store(tag,n)
+    -- somewhat weird but this is a cheap hook spot
+    if not counterspecials[tag] then
+        counterspecials[tag] = function(tag)
+            context.doresetlinenotecompression(tag) -- maybe flag that controls it
+        end
+    end
+    --
+    local nd = notedata[tag]
+    local nnd = #nd + 1
+    nd[nnd] = n
+    local state = notestates[tag]
+    if not state then
+        report_notes("unknown state for %a",tag)
+    elseif state.kind ~= "insert" then
+        if trace_notes then
+            report_notes("storing %a with state %a as %a",tag,state.kind,nnd)
+        end
+        state.start = state.start or nnd
+    end
+    return nnd
+end
+
+notes.store = store
+
+implement {
+    name      = "storenote",
+    actions   = { store, context },
+    arguments = { "string", "integer" }
+}
+
+local function get(tag,n) -- tricky ... only works when defined
+    local nd = notedata[tag]
+    if not n then
+        n = #nd
+    end
+    nd = nd[n]
+    if nd then
+        if trace_notes then
+            report_notes("getting note %a of %a with listindex %a",n,tag,nd)
+        end
+        -- is this right?
+        local newdata = lists.cached[nd]
+        return newdata
+    end
+end
+
+local function getn(tag)
+    return #notedata[tag]
+end
+
+notes.get  = get
+notes.getn = getn
+
+-- we could make a special enhancer
+
+local function listindex(tag,n)
+    local ndt = notedata[tag]
+    return ndt and ndt[n]
+end
+
+notes.listindex = listindex
+
+implement {
+    name      = "notelistindex",
+    actions   = { listindex, context },
+    arguments = { "string", "integer" }
+}
+
+local function setstate(tag,newkind)
+    local state = notestates[tag]
+    if trace_notes then
+        report_notes("setting state of %a from %s to %s",tag,(state and state.kind) or "unset",newkind)
+    end
+    if not state then
+        state = {
+            kind = newkind
+        }
+        notestates[tag] = state
+    elseif newkind == "insert" then
+        if not state.start then
+            state.kind = newkind
+        end
+    else
+-- if newkind == "postpone" and state.kind == "store" then
+-- else
+        state.kind = newkind
+-- end
+    end
+    --  state.start can already be set and will be set when an entry is added or flushed
+    return state
+end
+
+local function getstate(tag)
+    local state = notestates[tag]
+    return state and state.kind or "unknown"
+end
+
+local function getstorecount(tag)
+    local state = notestates[tag]
+    return state.kind == "store" and #notedata[tag] or 0
+end
+
+local function getstoreflushed(tag)
+    local state = notestates[tag]
+    return state.kind == "store" and state.flushed or 0
+end
+
+notes.setstate        = setstate
+notes.getstate        = getstate
+notes.getstorecount   = getstorecount
+notes.getstoreflushed = getstoreflushed
+
+implement {
+    name      = "setnotestate",
+    actions   = setstate,
+    arguments = "2 strings",
+}
+
+implement {
+    name      = "getnotestate",
+    actions   = { getstate, context },
+    arguments = "string"
+}
+
+implement {
+    name      = "getnotestorecount",
+    public    = true,
+    usage     = "value",
+    actions   = function(s) return integer_value, getstorecount(s) end,
+    arguments = "string"
+}
+
+implement {
+    name      = "getnotestoreflushed",
+    public    = true,
+    usage     = "value",
+    actions   = function(s) return integer_value, getstoreflushed(s) end,
+    arguments = "string"
+}
+
+function notes.define(tag,kind,number)
+    local state = setstate(tag,kind)
+    notes.numbers[number] = state
+    state.number = number
+end
+
+implement {
+    name      = "definenote",
+    actions   = notes.define,
+    arguments = { "string", "string", "integer" }
+}
+
+function notes.save(tag,newkind)
+    local state = notestates[tag]
+    if state and not state.saved then
+        if trace_notes then
+            report_notes("saving state of %a, old: %a, new %a",tag,state.kind,newkind or state.kind)
+        end
+        state.saveddata = notedata[tag]
+        state.savedkind = state.kind
+        state.kind = newkind or state.kind
+        state.saved = true
+        notedata[tag] = { }
+    end
+end
+
+function notes.restore(tag,forcedstate)
+    local state = notestates[tag]
+    if state and state.saved then
+        if trace_notes then
+            report_notes("restoring state of %a, old: %a, new: %a",tag,state.kind,state.savedkind)
+        end
+        notedata[tag] = state.saveddata
+        state.kind = forcedstate or state.savedkind
+        state.saveddata = nil
+        state.saved = false
+    end
+end
+
+implement { name = "savenote",    actions = notes.save,    arguments = "2 strings" }
+implement { name = "restorenote", actions = notes.restore, arguments = "2 strings" }
+
+local function hascontent(tag)
+    local ok = notestates[tag]
+    if ok then
+        if ok.kind == "insert" then
+            ok = texgetbox(ok.number)
+            if ok then
+                ok = tbs.list
+                ok = lst and lst.next
+            end
+        else
+            ok = ok.start
+        end
+    end
+    return ok and true or false
+end
+
+notes.hascontent = hascontent
+
+implement {
+    name      = "doifnotecontent",
+    actions   = { hascontent, commands.doif },
+    arguments = "string",
+}
+
+local function internal(tag,n)
+    local nd = get(tag,n)
+    if nd then
+        local r = nd.references
+        if r then
+            local i = r.internal
+            return i and references.internals[i] -- dependency on references
+        end
+    end
+    return nil
+end
+
+local function ordered(kind,name,n)
+    local o = lists.ordered[kind]
+    o = o and o[name]
+    return o and o[n]
+end
+
+notes.internal = internal
+notes.ordered  = ordered
+
+-- It's not that efficient code but it is not that critical either. I'd probably make a
+-- beter one if I had a need for it (and could then test it properly). It replaces an
+-- earlier implementation without subtag.
+
+local subtags = { }
+
+local function noteonsamepage(tag,subtag)
+    if not subtags[tag] or subtags[tag] ~= subtag then
+        subtags[tag] = subtag
+        return false
+    end
+    local index = getn(tag)
+    if not index then
+        return false
+    end
+    local current  = listindex(tag,index)
+    local previous = listindex(tag,index-1)
+    if not current or not previous then
+        return false
+    end
+    current  = structures.lists.collected[current]
+    previous = structures.lists.collected[previous]
+    if not current or not previous then
+        return false
+    end
+    return current.references.realpage == previous.references.realpage
+end
+
+-- notes.noteonsamepage = noteonsamepage
+
+implement {
+    name      = "doifelsenoteonsamepage", -- expandable
+    actions   = { noteonsamepage, commands.doifelse },
+    arguments = "string",
+    public    = true
+}
+
+implement {
+    name      = "doifelsetaggednoteonsamepage",
+    actions   = { noteonsamepage, commands.doifelse },
+    arguments = "2 strings",
+    protected = true,
+    public    = true
+}
+
+local c_realpageno <const> = texiscount("realpageno")
+
+function notes.checkpagechange(tag) -- called before increment !
+    local nd = notedata[tag] -- can be unset at first entry
+    if nd then
+        local current = ordered("note",tag,#nd)
+        local nextone = ordered("note",tag,#nd+1)
+        if nextone then
+            -- we can use data from the previous pass
+            if nextone.pagenumber.number > current.pagenumber.number then
+                counters.reset(tag)
+            end
+        elseif current then
+            -- we need to locate the next one, best guess
+            if texgetcount(c_realpageno) > current.pagenumber.number then
+                counters.reset(tag)
+            end
+        end
+    end
+end
+
+function notes.postpone()
+    if trace_notes then
+        report_notes("postponing all insert notes")
+    end
+    for tag, state in next, notestates do
+        if state.kind ~= "store" then
+            setstate(tag,"postpone")
+        end
+    end
+end
+
+implement {
+    name    = "postponenotes",
+    actions = notes.postpone
+}
+
+local function getinternal(tag,n)
+    local li = internal(tag,n)
+    if li then
+        local references = li.references
+        if references then
+            return references.internal or 0
+        end
+    end
+    return 0
+end
+
+local function getdeltapage(tag,n)
+    -- 0:unknown 1:textbefore, 2:textafter, 3:samepage
+    local li = internal(tag,n)
+    if li then
+        local references = li.references
+        if references then
+         -- local symb = structures.references.collected[""]["symb:"..tag..":"..n]
+            local rymb = structures.references.collected[""]
+            local symb = rymb and rymb["*"..(references.internal or 0)]
+            local notepage   = references.realpage or 0
+            local symbolpage = symb and symb.references.realpage or -1
+            if trace_references then
+                report_notes("note number %a of %a points from page %a to page %a",n,tag,symbolpage,notepage)
+            end
+            if notepage < symbolpage then
+                return 3 -- after
+            elseif notepage > symbolpage then
+                return 2 -- before
+            elseif notepage > 0 then
+                return 1 -- same
+            end
+        else
+            -- might be a note that is not flushed due to to deep
+            -- nesting in a vbox
+        end
+    end
+    return 0
+end
+
+notes.getinternal  = getinternal
+notes.getdeltapage = getdeltapage
+
+implement { name = "noteinternal",  actions = { getinternal,  context }, arguments = { "string", "integer" } }
+implement { name = "notedeltapage", actions = { getdeltapage, context }, arguments = { "string", "integer" } }
+
+local function flushnotes(tag,whatkind,how) -- store and postpone
+    local state = notestates[tag]
+    local kind  = state.kind
+    if kind == whatkind then
+        local nd = notedata[tag]
+        local ns = state.start -- first index
+        if kind == "postpone" then
+            if nd and ns then
+                if trace_notes then
+                    report_notes("flushing state %a of %a from %a to %a",whatkind,tag,ns,#nd)
+                end
+                for i=ns,#nd do
+                    context.handlenoteinsert(tag,i)
+                end
+            end
+            state.start = nil
+            state.kind  = "insert"
+        elseif kind == "store" then
+            -- This step is a bit special and can be used for parallel flushing.
+            local step  = tonumber(how)
+            if nd and (ns or step) then
+                if trace_notes then
+                    report_notes("flushing state %a of %a from %a to %a",whatkind,tag,ns,#nd)
+                end
+                -- todo: as registers: start, stop, inbetween
+                local first = ns
+                local last  = #nd
+                --
+                if step then
+                    first = step
+                    last  = first
+                    if not first or first < 1 or first > #nd then
+                        return
+                    end
+                end
+                --
+                for i=first,last do
+                    -- tricky : trialtypesetting
+                    if how == v_page then
+                        local rp = get(tag,i)
+                        rp = rp and rp.references
+                        rp = rp and rp.symbolpage or 0
+                        if rp > texgetcount(c_realpageno) then
+                            state.start = i
+                            return
+                        end
+                    end
+                    if i > ns then
+                        context.betweennoteitself(tag)
+                    end
+                    context.handlenoteitself(tag,i)
+                    if not trialtypesetting() then
+                        state.flushed = (state.flushed or 0) + 1
+                    end
+                end
+                if not step or last == #nd then
+                    if not trialtypesetting() then
+                        state.start = nil
+                    end
+                end
+            else
+                if not trialtypesetting() then
+                    state.start = nil
+                end
+            end
+        elseif kind == "reset" then
+            if nd and ns then
+                if trace_notes then
+                    report_notes("flushing state %a of %a from %a to %a",whatkind,tag,ns,#nd)
+                end
+            end
+            state.start = nil
+        elseif trace_notes then
+            report_notes("not flushing state %a of %a",whatkind,tag)
+        end
+    elseif trace_notes then
+        report_notes("not flushing state %a of %a",whatkind,tag)
+    end
+end
+
+local function flushpostponednotes()
+    if trace_notes then
+        report_notes("flushing all postponed notes")
+    end
+    for tag, _ in next, notestates do
+        flushnotes(tag,"postpone")
+    end
+end
+
+implement {
+    name    = "flushpostponednotes",
+    actions = flushpostponednotes
+}
+
+implement {
+    name      = "flushnotes",
+    actions   = flushnotes,
+    arguments = "3 strings",
+}
+
+function notes.resetpostponed()
+    if trace_notes then
+        report_notes("resetting all postponed notes")
+    end
+    for tag, state in next, notestates do
+        if state.kind == "postpone" then
+            state.start = nil
+            state.kind = "insert"
+        end
+    end
+end
+
+implement {
+    name      = "notetitle",
+    actions   = function(tag,n) lists.savedlisttitle(tag,notedata[tag][n]) end,
+    arguments = { "string", "integer" }
+}
+
+implement {
+    name      = "noteprefixednumber",
+    actions   = function(tag,n) lists.savedlistprefixednumber(tag,notedata[tag][n]) end,
+    arguments = { "string", "integer" }
+}
+
+function notes.internalid(tag,n)
+    local nd = get(tag,n)
+    if nd then
+        local r = nd.references
+        return r.internal
+    end
+end
+
+
+do
+
+    -- This started out an an experiment. We might eventually add some more variables to inserts
+    -- so that we can avoid this kind of hackery.
+
+    -- the upgraded callbacks musical timestamp: Artist Gavin Harrison: "Hatesong/Halo" at The UK
+    -- Drum Show 2025 (posted 2026-01-15, right after this update).
+
+    -- [global spacebefore]     % force flexible
+    --
+    -- [before][rule 1][after]  % force fixed
+    -- [local spacebefore 1]    % force fixed
+    -- [notes 1.1]
+    -- [local spaceinbetween 1] % force fixed
+    -- [notes 1.2]
+    --
+    -- [global spaceinbetween]  % force fixed
+    --
+    -- [before][rule 2][after]  % force fixed
+    -- [local spacebefore 2]    % force fixed
+    -- [notes 2.1]
+    -- [local spaceinbetween 2] % force fixed
+    -- [notes 2.2]
+    --
+    -- [global spaceinbetween]  % force fixed
+    --
+    -- [auto boundary]
+    -- [before][rule 2][after]  % force fixed
+    -- [local spacebefore 3]    % force fixed
+    -- [notes 3.1]
+    -- [local spaceinbetween 3] % force fixed
+    -- [notes 3.2]
+
+    local report_insert = logs.reporter("pagebuilder","insert")
+    local trace_insert  = false  trackers.register("pagebuilder.insert",function(v) trace_insert = v end)
+
+    local s_strc_notes_global_before    <const> = texisglue("s_strc_notes_global_before")
+    local s_strc_notes_global_inbetween <const> = texisglue("s_strc_notes_global_inbetween")
+    local s_strc_notes_local_before     <const> = texisglue("s_strc_notes_local_before")
+    local s_strc_notes_local_inbetween  <const> = texisglue("s_strc_notes_local_inbetween")
+
+    local nodecodes         = nodes.nodecodes
+    local hlist_code        = nodecodes.hlist
+    local glue_code         = nodecodes.glue
+
+    local new_glue          = nuts.pool.glue
+
+    local insertnodeafter   = nuts.insertafter
+    local getid             = nuts.getid
+    local getnext           = nuts.getnext
+    local setattrlist       = nuts.setattrlist
+
+    local setmacro          = tokens.setters.macro
+    local runlocal          = tex.runlocal
+    local getinsertdistance = tex.getinsertdistance
+
+    local actions = {
+
+        -- where 1: fetch the skips as we collect an insert:
+
+        function (index,first,top)
+            local ga, gp, gm
+            local la
+            local da
+            if top then
+                if first then
+                    ga, gp, gm = texgetglue(s_strc_notes_global_before)
+                else
+                    ga, gp, gm = texgetglue(s_strc_notes_global_inbetween)
+                end
+                la = texgetglue(s_strc_notes_local_before)
+            else
+                if first then
+                    ga, gp, gm = texgetglue(s_strc_notes_global_inbetween)
+                else
+                    ga, gp, gm = 0, 0, 0
+                end
+                la = texgetglue(s_strc_notes_local_inbetween)
+            end
+            if not la then la = 0 end
+            if not ga then ga = 0 end
+            if not gp then gp = 0 end
+            if not gm then gm = 0 end
+            if not top then
+                gp, gm = 0, 0
+            end
+            local ta = ga + la
+            local tp = gp
+            local tm = gm
+            if first then
+                da = tex.getinsertdistance(index) -- normally only the rule
+            end
+            if not da then
+                da = 0
+            end
+            ta = ta + da
+            if trace_insert then
+                report_insert("index %i, name %a, first %l, top %l",index,structures.inserts.getname(index),first,top)
+                report_insert("  distance  : %p",da)
+                report_insert("  global    : %p plus %p minus %p",ga,gp,gm)
+                report_insert("  local     : %p",la,lp,lm)
+                report_insert("  effective : %p plus %p minus %p",ta,tp,tm)
+            end
+            return newgluespec(ta,tp,tm)
+        end,
+
+        -- where 2: insert the skip(s) just before we package at a break:
+
+        function (index,head)
+            local list = head
+            local seen = false
+            local done = false
+            while list do
+                local id = getid(list)
+                if id == hlist_code then
+                    if seen then
+                        if not done then
+                            setmacro("currentnote",structures.inserts.getname(index))
+                         -- runlocal("everysynchronizenote")
+                            runlocal("everysynchronizenoteinbetween")
+                        end
+                        local la, lp, lm = texgetglue(s_strc_notes_local_inbetween)
+--                         local ga, gp, gm = texgetglue(s_strc_notes_global_inbetween)
+--                         local glue = new_glue(la+ga,lp+gp,lm+gm)
+                        local glue = new_glue(la,lp,lm)
+                        setattrlist(glue,head)
+                        if trace_insert then
+                            if not done then
+                                report_insert("index %i, name %a",index,structures.inserts.getname(index))
+                            end
+                            report_insert("  between : %p plus %p minus %p",la,lp,lm)
+                        end
+                        insertnodeafter(head,seen,glue)
+                        done = true
+                    end
+                    seen = list
+                else
+                    seen = false
+                end
+                list = getnext(list)
+            end
+            return head
+        end
+
+    }
+
+    local function check_spacing(index,what,...)
+        local action = actions[what]
+        if action then
+            return action(index,...)
+        end
+    end
+
+    local function insert_distance_callback(index,what,...)
+        local state = notes.numbers[index]
+        if state then
+            return check_spacing(index,what,...)
+        elseif what == 1 then
+            return newgluespec()
+        end
+    end
+
+    callbacks.register {
+        name    = "insert_distance",
+        action  = insert_distance_callback,
+        comment = "check spacing around inserts",
+        frozen  = true,
+    }
+
+end
+
+-- New, for columnsets:
+
+local inserts = table.setmetatableindex("table")
+
+local function balance_insert_callback(n,cbk,index,data)
+    if cbk == 0 and getinsertmultiplier(index) == 0 then
+        inserts[index][data] = getlist(n)
+        setlist(n)
+    end
+end
+
+callbacks.register {
+    name    = "balance_insert",
+    action  = balance_insert_callback,
+    comment = "collect inserts from balance slot",
+    frozen  = true,
+}
+
+function notes.flushrange(index,mark) -- (index,first,last)
+    local first = tonumber(getmark("first", mark)) or 0
+    local last  = tonumber(getmark("bottom",mark)) or 0
+    if first > 0 and last > 0 then
+     -- for index, byindex in sortedhash(inserts) do
+        local byindex = inserts[index]
+        if byindex then
+            local head = nil
+            local tail = nil
+            for data, list in sortedhash(byindex) do
+                if data >= first and data <= last then
+                    if head then
+                        setlink(tail,list)
+                    else
+                        head = list
+                    end
+                    tail = gettail(list)
+                    byindex[data] = nil
+                end
+            end
+            if head then
+                context(tonode(vpack(head)))
+                context.par()
+            end
+        end
+    end
+end
+
+implement {
+    name      = "flushnoterange",
+ -- arguments = "3 integers",
+    arguments = "2 integers",
+    actions   = structures.notes.flushrange,
+}
+

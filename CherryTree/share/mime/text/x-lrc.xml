@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/x-lrc">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Song lyrics</comment>
+  <comment xml:lang="uk">слова пісні</comment>
+  <comment xml:lang="sv">Låttexter</comment>
+  <comment xml:lang="sl">Besedilo pesmi</comment>
+  <comment xml:lang="ro">versuri de cântec</comment>
+  <comment xml:lang="pt-BR">Letras de música</comment>
+  <comment xml:lang="ko">노래 가사</comment>
+  <comment xml:lang="kk-Cyrl">Ән сөздері</comment>
+  <comment xml:lang="et">Laulusõnad</comment>
+  <comment xml:lang="de">Liedtext</comment>
+  <sub-class-of type="text/plain"/>
+  <glob pattern="*.lrc"/>
+</mime-type>

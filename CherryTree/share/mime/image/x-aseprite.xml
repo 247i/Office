@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="image/x-aseprite">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Aseprite image</comment>
+  <comment xml:lang="uk">зображення Aseprite</comment>
+  <comment xml:lang="tr">Aseprite görüntüsü</comment>
+  <comment xml:lang="sv">Aseprite-bild</comment>
+  <comment xml:lang="sr-Cyrl">Aseprite слика</comment>
+  <comment xml:lang="sq">Figurë Aseprite</comment>
+  <comment xml:lang="sl">Slika Aseprite</comment>
+  <comment xml:lang="ru">Изображение Aseprite</comment>
+  <comment xml:lang="ro">imagine Aseprite</comment>
+  <comment xml:lang="pt-BR">Imagem Aseprite</comment>
+  <comment xml:lang="pl">Obraz Aseprite</comment>
+  <comment xml:lang="oc">imatge Aseprite</comment>
+  <comment xml:lang="ko">Aseprite 이미지</comment>
+  <comment xml:lang="kk-Cyrl">Aseprite суреті</comment>
+  <comment xml:lang="fr">image Aseprite</comment>
+  <comment xml:lang="fi">Aseprite sprite-kuva</comment>
+  <comment xml:lang="et">Aseprite'i pilt</comment>
+  <comment xml:lang="es">imagen de Aseprite</comment>
+  <comment xml:lang="en-GB">Aseprite image</comment>
+  <comment xml:lang="de">Aseprite-Bild</comment>
+  <comment xml:lang="ar">صورة Aseprite</comment>
+  <acronym>ASE</acronym>
+  <expanded-acronym>Allegro Sprite Editor</expanded-acronym>
+  <glob pattern="*.ase"/>
+  <glob pattern="*.aseprite"/>
+  <generic-icon name="image-x-generic"/>
+</mime-type>

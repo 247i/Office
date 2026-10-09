@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/vnd.plantuml">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>PlantUML Diagram</comment>
+  <comment xml:lang="uk">діаграма PlantUML</comment>
+  <comment xml:lang="tr">PlantUML diyagramı</comment>
+  <comment xml:lang="sv">PlantUML-diagram</comment>
+  <comment xml:lang="sr-Cyrl">ПлантУМЛ дијаграм</comment>
+  <comment xml:lang="sl">Diagram PlantUML</comment>
+  <comment xml:lang="ru">Диаграмма PlantUML</comment>
+  <comment xml:lang="ro">diagramă PlantUML</comment>
+  <comment xml:lang="pt-BR">Diagrama PlantUML</comment>
+  <comment xml:lang="pl">Diagram PlantUML</comment>
+  <comment xml:lang="oc">diagrama PlantUML</comment>
+  <comment xml:lang="ko">PlantUML 다이어그램</comment>
+  <comment xml:lang="kk-Cyrl">PlantUML диаграммасы</comment>
+  <comment xml:lang="fr">Diagramme PlantUML</comment>
+  <comment xml:lang="fi">PlantUML kaavio</comment>
+  <comment xml:lang="et">PlantUML diagramm</comment>
+  <comment xml:lang="es">Diagrama PlanUML</comment>
+  <comment xml:lang="en-GB">PlantUML Diagram</comment>
+  <comment xml:lang="de">PlantUML-Diagramm</comment>
+  <comment xml:lang="ar">خطاطة PlantUML</comment>
+  <sub-class-of type="text/plain"/>
+  <glob pattern="*.puml"/>
+</mime-type>

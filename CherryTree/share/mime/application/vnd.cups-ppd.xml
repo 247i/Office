@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/vnd.cups-ppd">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>PostScript printer description</comment>
+  <comment xml:lang="zh-Hant-TW">PostScript 印表機描述</comment>
+  <comment xml:lang="uk">опис принтера PostScript</comment>
+  <comment xml:lang="tr">PostScript yazıcısı açıklaması</comment>
+  <comment xml:lang="sv">Postscript-skrivarbeskrivning</comment>
+  <comment xml:lang="sr-Cyrl">Опис PostScript штампача</comment>
+  <comment xml:lang="sq">Përshkrim PostScript shtypësi</comment>
+  <comment xml:lang="sl">Opis tiskalnika PostScript</comment>
+  <comment xml:lang="ru">Описание принтера PostScript</comment>
+  <comment xml:lang="ro">descriere de imprimantă PostScript</comment>
+  <comment xml:lang="pt-BR">Descrição de impressora PostScript</comment>
+  <comment xml:lang="pt">Descrição da impressora PostScript</comment>
+  <comment xml:lang="pl">Opis drukarki PostScript</comment>
+  <comment xml:lang="oc">descripcion d’imprimenta PostScript</comment>
+  <comment xml:lang="nn">PostScript-skrivarskildring</comment>
+  <comment xml:lang="ko">PostScript 프린터 설명</comment>
+  <comment xml:lang="kk-Cyrl">PostScript принтер сипаттамасы</comment>
+  <comment xml:lang="ja">PostScript プリンター記述</comment>
+  <comment xml:lang="it">Descrizioni stampante PostScript</comment>
+  <comment xml:lang="id">Deskripsi printer PostScript</comment>
+  <comment xml:lang="hr">Opis PostScript pisača</comment>
+  <comment xml:lang="hi">PostScript प्रिंटर विवरण</comment>
+  <comment xml:lang="he">תיאור מדפסת PostScript</comment>
+  <comment xml:lang="fur">Descrizion di stampadore PostScript</comment>
+  <comment xml:lang="fr">Description d'imprimante PostScript</comment>
+  <comment xml:lang="fi">PostScript-tulostimen kuvaus</comment>
+  <comment xml:lang="eu">PostScript inprimagailu-deskribapena</comment>
+  <comment xml:lang="et">PostScripti printerikirjeldus</comment>
+  <comment xml:lang="es">descripción de impresora PostScript</comment>
+  <comment xml:lang="en-GB">PostScript printer description</comment>
+  <comment xml:lang="de">PostScript-Druckerbeschreibung</comment>
+  <comment xml:lang="da">PostScript-printerbeskrivelses</comment>
+  <comment xml:lang="ca">descripció d'impressora PostScript</comment>
+  <comment xml:lang="bg">Описание на принтер — PostScript</comment>
+  <comment xml:lang="be-Cyrl">апісанне прынтара PostScript</comment>
+  <comment xml:lang="ar">وصف طابعة بوست سكربت</comment>
+  <sub-class-of type="text/plain"/>
+  <glob pattern="*.ppd"/>
+</mime-type>

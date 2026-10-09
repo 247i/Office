@@ -1,0 +1,145 @@
+%D \module
+%D   [       file=tabl-com,
+%D        version=2009.08.22,
+%D          title=\CONTEXT\ Table Macros,
+%D       subtitle=Common Code,
+%D         author=Hans Hagen,
+%D           date=\currentdate,
+%D      copyright={PRAGMA ADE \& \CONTEXT\ Development Team}]
+%C
+%C This module is part of the \CONTEXT\ macro||package and is
+%C therefore copyrighted by \PRAGMA. See mreadme.pdf for
+%C details.
+
+\writestatus{loading}{ConTeXt Table Macros / Common Code}
+
+\unprotect
+
+\pushoverloadmode
+
+\registerctxluafile{node-ali}{autosuffix}
+
+%setnewconstant\align_callback_showpreamble  \plusone
+\setnewconstant\align_callback_aligncharacter\plusone
+\setnewconstant\align_callback_mathalign     \plustwo
+\setnewconstant\align_callback_mathmatrix    \plusfour
+\setnewconstant\align_callback_alignskip     \pluseight
+
+\definesystemattribute[aligncharacter][public]
+
+\permanent\protected\def\setalignmentcharacter#1%
+  {\enablealignmentcharacter
+   \global\c_tabl_use_size\conditionaltrue
+   \global\c_tabl_sparse_skips\conditionaltrue
+   \enforced\permanent\protected\gdef\setalignmentcharacter##1%
+     {\attribute\aligncharacterattribute`##1\relax}%
+   \attribute\aligncharacterattribute`#1\relax}
+
+\permanent\protected\def\resetalignmentcharacter
+  {\attribute\aligncharacterattribute\attributeunsetvalue}
+
+\permanent\def\alignmentcharactertrigger
+  {\s!callbacks % plural as we also need to support align_callback_alignskip
+     \align_callback_aligncharacter
+   \s!attr % not needed, we can trigger on the callback id
+     \aligncharacterattribute\plusone}
+
+\noaligned\permanent\protected\def\aligncontentleft  {\ignorespaces\aligncontent\unskip\hss}
+\noaligned\permanent\protected\def\aligncontentmiddle{\hss\ignorespaces\aligncontent\unskip\hss}
+\noaligned\permanent\protected\def\aligncontentright {\hss\ignorespaces\aligncontent\unskip}
+
+% \enablealignmentcharacter % defined at the lua end
+
+% maybe frozen instead
+
+\permanent\protected\lettonothing\AR
+\permanent\protected\lettonothing\BA
+\permanent\protected\lettonothing\BC
+\permanent\protected\lettonothing\BH
+\permanent\protected\lettonothing\BL
+\permanent\protected\lettonothing\BR
+\permanent\protected\lettonothing\BT
+\permanent\protected\lettonothing\CC
+\permanent\protected\lettonothing\CL
+\permanent\protected\lettonothing\CM
+\permanent\protected\lettonothing\CR
+\permanent\protected\lettonothing\DB
+\permanent\protected\lettonothing\DC
+\permanent\protected\lettonothing\DL
+\permanent\protected\lettonothing\DR
+\permanent\protected\lettonothing\DV
+\permanent\protected\lettonothing\EH
+\permanent\protected\lettonothing\EQ
+\permanent\protected\lettonothing\ER
+\permanent\protected\lettonothing\FB
+\permanent\protected\lettonothing\FL
+\permanent\protected\lettonothing\FR
+\permanent\protected\lettonothing\GL
+\permanent\protected\lettonothing\HC
+\permanent\protected\lettonothing\HL
+\permanent\protected\lettonothing\HQ
+\permanent\protected\lettonothing\HR
+\permanent\protected\lettonothing\HF
+\permanent\protected\lettonothing\HLHL
+\permanent\protected\lettonothing\LB
+\permanent\protected\lettonothing\LC
+\permanent\protected\lettonothing\LT
+\permanent\protected\lettonothing\LL
+\permanent\protected\lettonothing\LR
+\permanent\protected\lettonothing\MC
+\permanent\protected\lettonothing\ML
+\permanent\protected\lettonothing\MR
+\permanent\protected\lettonothing\NA
+\permanent\protected\lettonothing\NB
+\permanent\protected\lettonothing\NC
+\permanent\protected\lettonothing\ND
+\permanent\protected\lettonothing\NF
+\permanent\protected\lettonothing\NG
+\permanent\protected\lettonothing\NI
+\permanent\protected\lettonothing\NL
+\permanent\protected\lettonothing\NN
+\permanent\protected\lettonothing\NP
+\permanent\protected\lettonothing\NR
+\permanent\protected\lettonothing\PB
+\permanent\protected\lettonothing\RC
+\permanent\protected\lettonothing\RQ
+\permanent\protected\lettonothing\SL
+\permanent\protected\lettonothing\SM
+\permanent\protected\lettonothing\SR
+\permanent\protected\lettonothing\TB
+\permanent\protected\lettonothing\TC
+\permanent\protected\lettonothing\TL
+\permanent\protected\lettonothing\TM
+\permanent\protected\lettonothing\TR
+\permanent\protected\lettonothing\TT
+\permanent\protected\lettonothing\VL
+\permanent\protected\lettonothing\VLT % math
+\permanent\protected\lettonothing\VLB % math
+\permanent\protected\lettonothing\VLVL
+\permanent\protected\lettonothing\VC
+\permanent\protected\lettonothing\VD
+\permanent\protected\lettonothing\VN
+\permanent\protected\lettonothing\VS
+\permanent\protected\lettonothing\VT
+\permanent\protected\lettonothing\XC
+
+\permanent\protected\lettonothing\FC
+\permanent\protected\lettonothing\RB
+\permanent\protected\lettonothing\RT
+
+\permanent\protected\lettonothing\NS % span
+
+\popoverloadmode
+
+\installmacrostack\BC
+\installmacrostack\EC
+\installmacrostack\EQ
+\installmacrostack\NC
+\installmacrostack\NN
+\installmacrostack\NR
+
+% Per 2024-05 (tested for a while):
+
+\bitwiseflip \normalizelinemode \discardzerotabskipsnormalizecode
+
+\protect \endinput

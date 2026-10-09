@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-spectrum-rzx">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>ZX Spectrum RZX replay snapshot</comment>
+  <comment xml:lang="uk">знімок відтворення ZX Spectrum RZX</comment>
+  <comment xml:lang="tr">ZX Spectrum RZX yeniden oynatılabilir anlık görüntüsü</comment>
+  <comment xml:lang="sv">ZX Spectrum RZX-återuppspelningsögonblicksbild</comment>
+  <comment xml:lang="sr-Cyrl">Зет-Икс Спектрум РЗ-Икс снимак стања поновног пуштања</comment>
+  <comment xml:lang="sl">Ponavljalni posnetek ZX Spectrum RZX</comment>
+  <comment xml:lang="ru">Снимок состояния действий пользователя ZX Spectrum RZX</comment>
+  <comment xml:lang="ro">instantanee de reluare ZX Spectrum RZX</comment>
+  <comment xml:lang="pt-BR">Snapshot de replay de ZX Spectrum RZX</comment>
+  <comment xml:lang="pl">Migawka powtórki ZX Spectrum RZX</comment>
+  <comment xml:lang="oc">instantanèu de relectura ZX Spectrum RZX</comment>
+  <comment xml:lang="ko">ZX Spectrum RZX 리플레이 스냅샷</comment>
+  <comment xml:lang="kk-Cyrl">ZX Spectrum RZX қайта ойнату снапшоты</comment>
+  <comment xml:lang="fr">instantané de lecture ZX Spectrum RZX</comment>
+  <comment xml:lang="fi">ZX Spectrum RZX latauskuva</comment>
+  <comment xml:lang="et">ZX Spectrum RZX korratav hetktõmmis</comment>
+  <comment xml:lang="es">captura de reproducción RZX de ZX Spectrum</comment>
+  <comment xml:lang="en-GB">ZX Spectrum RZX replay snapshot</comment>
+  <comment xml:lang="de">ZX-Spectrum-RZX-Speicherauszug (Spielwiederholung)</comment>
+  <glob pattern="*.rzx"/>
+</mime-type>

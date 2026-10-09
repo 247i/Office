@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="audio/x-mtm">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>MultiTracker audio</comment>
+  <comment xml:lang="uk">звукові дані MultiTracker</comment>
+  <comment xml:lang="tr">MultiTracker sesi</comment>
+  <comment xml:lang="sv">MultiTracker-ljud</comment>
+  <comment xml:lang="sr-Cyrl">звук Пратиоца Импулса</comment>
+  <comment xml:lang="sq">Audio MultiTracker</comment>
+  <comment xml:lang="sl">Zvok MultiTracker</comment>
+  <comment xml:lang="ru">Аудио MultiTracker</comment>
+  <comment xml:lang="ro">audio multipistă</comment>
+  <comment xml:lang="pt-BR">Áudio  MultiTracker</comment>
+  <comment xml:lang="pl">Plik dźwiękowy MultiTracker</comment>
+  <comment xml:lang="oc">àudio MultiTracker</comment>
+  <comment xml:lang="ko">MultiTracker 오디오</comment>
+  <comment xml:lang="kk-Cyrl">MultiTracker аудиосы</comment>
+  <comment xml:lang="fr">audio MultiTracker</comment>
+  <comment xml:lang="fi">MultiTracker audio</comment>
+  <comment xml:lang="et">MultiTrackeri helifail</comment>
+  <comment xml:lang="es">Sonido MultiTracker</comment>
+  <comment xml:lang="en-GB">MultiTracker audio</comment>
+  <comment xml:lang="de">MultiTracker-Audio</comment>
+  <comment xml:lang="ar">صوت MultiTracker</comment>
+  <glob pattern="*.mtm"/>
+  <alias type="audio/x-multitrack"/>
+</mime-type>

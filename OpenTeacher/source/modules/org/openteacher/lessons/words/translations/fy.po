@@ -1,0 +1,40 @@
+# Frisian translation for openteacher
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2012-07-15 13:07+0000\n"
+"Last-Translator: Marten de Vries <marten@marten-de-vries.nl>\n"
+"Language-Team: Frisian <fy@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:42+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: words.py:90
+msgid "Unnamed"
+msgstr "Namleas"
+
+#: words.py:91
+#, python-format
+msgid "Word lesson: %s"
+msgstr "Wurtsjesles: %s"
+
+#: words.py:136
+msgid "Empty question or answer"
+msgstr "Gjin fraag of antwurd"
+
+#: words.py:137
+msgid "Please enter at least one question and one answer for every word."
+msgstr "Graag tenminste ien fraag of anwurd ynfiere foar ieder wurd."
+
+#: words.py:228
+msgid "Create words lesson"
+msgstr "Meitsje in wurtsjesles oan"

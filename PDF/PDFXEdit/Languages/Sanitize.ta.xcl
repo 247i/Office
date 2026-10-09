@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Localization>
+	<Version date="20220819211843">2.00.00</Version>
+	<Author>Angel Herráez</Author>
+	<Copyright></Copyright>
+	<Product id="PDFXEditor"/>
+	<Language eName="Tamil" lName="தமிழ்" code="ta" R2L="false"/>
+	<Module name="SanitizePlugin" namespace="snt" version="9.4.363.0"/>
+	<Strings>
+		<text id="accessibilty.chk" h="691CFC68">Etiquetas </text>
+		<text id="actionsandscripts.snt" h="DD6759CC">Eliminar la acción y los guiones</text>
+		<text id="add.new.pntlist" h="8052B2AC">Añadir una lista de patrones nueva...</text>
+		<text id="add.new.pntlist.tip" h="9DD2AAE5">Crea una lista de patrones personalizados</text>
+		<text id="attachments.chk" h="E754AE2B">Buscar en los archivos a&amp;djuntos</text>
+		<text id="attachments2.chk" h="488D4743">Buscar en los archivos adjuntos</text>
+		<text id="autolocale.ptn" h="986476CF">Auto (%1)</text>
+		<text id="bookmarks.chk" h="E2032460">Marcadores</text>
+		<text id="builder.tip" h="DCB5FF71">Construcción de RegExp</text>
+		<text id="case.chk" h="371919EA">Concidenci&amp;a de mayúsculas</text>
+		<text id="click2seedescr" h="2B79F497">Pulse sobre un patrón para mostrar aquí su descripción</text>
+		<text id="cmd.findandredact" h="A71BA803">Buscar y censurar</text>
+		<text id="cmd.findandredact.tip" h="C9957B03">Busca texto y lo marca para censura.</text>
+		<text id="cmd.list.add" h="8E2EE8C1">Añadir</text>
+		<text id="cmd.list.addcustom.tip" h="48F73BAE">Añade un patrón personalizado</text>
+		<text id="cmd.list.checkall" h="1ED93781">Marcar todo</text>
+		<text id="cmd.list.load" h="D2BD1E32">Cargar...</text>
+		<text id="cmd.list.locale" h="2B6AC5E3">&amp;Localización</text>
+		<text id="cmd.list.remove" h="FCE39C1F">Eliminar</text>
+		<text id="cmd.list.removecustom.tip" h="D7AF6E36">Elimina los patrones seleccionados</text>
+		<text id="cmd.list.save" h="0272DFB9">Guardar...</text>
+		<text id="cmd.list.uncheckall" h="5D53AA8D">Desmarcar todo</text>
+		<text id="commentsandlinks.chk" h="DA6216C5">Comentarios y enlaces externos</text>
+		<text id="customname" h="48E7DC23">Patrón personalizado</text>
+		<text id="custompatterns.lbl" h="5E153556">Patrones personalizados (%1 de %2)</text>
+		<text id="customptn.dlg" h="8583A4FB">Patrón personalizado</text>
+		<text id="deletepattern1.msg" h="07465752">¿Seguro que quiere eliminar este patrón?</text>
+		<text id="deletepatterns.msg" h="ECB5282F">¿Seguro que quiere eliminar los patrones seleccionados?</text>
+		<text id="deletetext.chk" h="8280F60B">Borrar el texto encontrado</text>
+		<text id="documentinfo.chk" h="913876A8">Información del documento (título, asunto, autor, etc.)</text>
+		<text id="documentxmp.chk" h="55410A25">Metadatos XMP del documento</text>
+		<text id="editstring.lbl" h="641BB43C">Edita la palabra o frase a buscar</text>
+		<text id="enterphrase.lbl" h="E663CA06">Escriba la palabra o frase a buscar:</text>
+		<text id="enterphrase.lbl.cue" h="F6663BF7">Escriba una palabra o una frase...</text>
+		<text id="example.lbl" h="489035D9">Escriba un ejemplo para el patrón:</text>
+		<text id="findopt.grp" h="6D2C3084">Opciones de búsqueda</text>
+		<text id="findredact.dlg" h="D7CC6798">Buscar texto y aplicar censura</text>
+		<text id="forms.chk" h="EE24932E">Formularios</text>
+		<text id="formsandcomments.snt" h="3CE422D8">Fusionar comentarios y formularios</text>
+		<text id="hiddenText.chk" h="1065E006">La página contiene texto oculto</text>
+		<text id="hiddenlayer.snt" h="05D69CC6">Eliminar las capas ocultas</text>
+		<text id="hiddenttext.snt" h="ECD99D2C">Eliminar el texto oculto</text>
+		<text id="history.fr.redo" h="38D56E9D">Rehacer la censura de texto</text>
+		<text id="history.fr.title" h="BDE7F808">Buscar y aplicar censura</text>
+		<text id="history.fr.undo" h="FC974711">Deshacer le censura de texto</text>
+		<text id="layers.chk" h="B5D83FAD">La página contiene capas</text>
+		<text id="marktext.chk" h="71D6C968">&amp;Marcar para censura el texto que se encuentre</text>
+		<text id="match.abc" h="3760672D">Encontrar cualquier carácter de estos: 'abc'</text>
+		<text id="match.anynumeric" h="A6E72A4D">Encontrar cualquier carácter numérico</text>
+		<text id="match.anyword" h="C747C7E3">Encontrar cualquier carácter alfabético</text>
+		<text id="match.intdec" h="1D7C37DC">Encontrar números enteros o decimales</text>
+		<text id="match.linebegin" h="E85BEDEB">Encontrar al comienzo de una línea</text>
+		<text id="match.notabc" h="07BFD63F">Encontrar cualquier carácter que no sea 'a', 'b' ni 'c'</text>
+		<text id="match.onemore" h="A0F72662">Encontrar cualquier carácter una vez o más</text>
+		<text id="match.range" h="CCF11EC0">Encontrar cualquier carácter entre a y f</text>
+		<text id="match.single" h="22AEEA91">Encontrar cualquier carácter, uno solo, excepto un salto de línea</text>
+		<text id="match.threedigits" h="F40292A5">Encontrar tres dígitos decimales consecutivos</text>
+		<text id="match.whitespace" h="F4925C7A">Encontrar cualquier carácter de espaciado</text>
+		<text id="match.wordends" h="EC27D4F5">Encontrar al comienzo o al final de una palabra</text>
+		<text id="match.zeromore" h="4EE3FE93">Encontrar cualquier carácter cero veces o más</text>
+		<text id="maxcountfile.msg" h="7C0D9E22">La lista de palabras se ha truncado al tamaño máximo permitido: %1</text>
+		<text id="maxnumberofwords.msg" h="52B7987A">No es posible añadir un elemento:
+La lista excede el número máximo de palabras o frases</text>
+		<text id="maxwordlength.msg" h="5BE34E54">La palabra o la frase son demasiado largas</text>
+		<text id="maxwordlengthfromfile.msg" h="FE7C0D03">La palabra o la frase se ha truncado a la máxima longitd permitida: %1</text>
+		<text id="multipleword" h="C8368EA9">&amp;Varias palabras o frases</text>
+		<text id="newstring.lbl" h="927FC81B">Añade una palabra o frase a la búsqueda</text>
+		<text id="notextwasfound" h="D1BCA29B">No se ha encontrado ningún texto con esos criterios.</text>
+		<text id="objects.lbl" h="AFBB32E9">Texto de los objetos:</text>
+		<text id="objectsxmp.chk" h="B45AE8C8">Metadatos XMP del objeto</text>
+		<text id="obscured.content.chk" h="1311BB99">Hay contenido recortado o invisible</text>
+		<text id="obscuredcontent.snt" h="7F9B3F4C">Eliminar el contenido que esté enmascarado</text>
+		<text id="opt.donotshow" h="B2D782D9">No muestre este mensaje de nuevo</text>
+		<text id="outlines.snt" h="48561E69">Eliminar los marcadores</text>
+		<text id="overlapping.obj.chk" h="D2955BC5">La página contiene objetos que se solapan</text>
+		<text id="overlappingobjects.snt" h="99DED65B">Convertir a imagen de mapa de bits el contenido con objetos solapados</text>
+		<text id="overlaytype.lbl" h="BC47CE25">Superposición:</text>
+		<text id="pagetext.lbl" h="B7832810">Texto de página:</text>
+		<text id="pagetext2.chk" h="7FBFC7B2">Texto de página</text>
+		<text id="patternlocale.lbl" h="5470225F">Elija la localización (idioma) del patrón:</text>
+		<text id="patterns" h="ACAA6A08">&amp;Patrones</text>
+		<text id="patterns.desc.tip" h="127DB6CA">Descripción del patrón (opcional)...</text>
+		<text id="patterns.description.empty" h="CB37274C">La descripción del patrón está en blanco</text>
+		<text id="patterns.example.tip" h="127DB6CA">Descripción del patrón (opcional)...</text>
+		<text id="phones.ptn" h="889BA45B">Por ejemplo:
+555-1234
+212.555.1212
+1 (212) 555-1234</text>
+		<text id="preceding.onemore" h="0DB280A6">Encontrar el carácter precedente una vez o más</text>
+		<text id="preceding.zeromore" h="6994F6CF">Encontrar el carácter precedente cero veces o más</text>
+		<text id="preceding.zeroone" h="96A31B68">Encontrar el carácter precedente cero o una sola vez</text>
+		<text id="processing.accessibility" h="07319AF0">Se están procesando las etiquetas de accesibilidad...</text>
+		<text id="processing.embeddedfiles" h="9C473B09">Se están procesando los archivos incrustados...</text>
+		<text id="processing.markedcontent" h="41E6A029">Se está procesando el contenido marcado...</text>
+		<text id="processing.metadata" h="27C23D00">Se están procesando los metadatos del documento...</text>
+		<text id="progress.applyredaction" h="82CD13B5">Se está aplicando la censura al documento...</text>
+		<text id="progress.findtext" h="9AA4E47B">Se está buscando texto que cumpla los criterios...</text>
+		<text id="ptndescr.lbl" h="C56EB241">Escriba una descripción para el patrón:</text>
+		<text id="ptnname.lbl" h="A7E2C5D0">Escriba un nombre para el patrón:</text>
+		<text id="ptnvalue.lbl" h="58401EB7">Escriba un valor para el patrón:</text>
+		<text id="rbar.sanitize" h="092C966D">Depurar el documento</text>
+		<text id="rbar.sanitize.tip" h="B573254E">Elimina información delicada, como metadatos, datos de formularios, contenido invisible...</text>
+		<text id="redactioncolor.lbl" h="AA984FC4">Color de la censura:</text>
+		<text id="redactiontext.edt.cue" h="0A4FA672">&lt;no definido&gt;</text>
+		<text id="redactiontext.lbl" h="F18E110C">Texto:</text>
+		<text id="redacttext.chk" h="1E76EC28">C&amp;ensurar el texto que se encuentre</text>
+		<text id="regexp.help" h="41F2BA26">Ayuda con expresiones regulares</text>
+		<text id="removeembedded.snt" h="29624A93">Eliminar el contenido incrustado</text>
+		<text id="removemetadata.snt" h="0A323970">Eliminar los metadatos y la información del documento</text>
+		<text id="repeattext.chk" h="D0D05924">Repetir texto</text>
+		<text id="replacetext.chk" h="DB2F141B">Reemplazar el texto con:</text>
+		<text id="resolution.lbl" h="F5CAE407">Resolución para la digitalización:</text>
+		<text id="sanitize.descr" h="6AA269FA">Depurar el documento PDF</text>
+		<text id="sanitize.lbl" h="9650169B">La acción 'depurar documento' eliminará datos ocultos y metadatos, de modo que no se incluya en el PDF información delicada. Elija la opción que desee aplicar al documento:</text>
+		<text id="sanitize.warning" h="3321EE07">La acción 'depurar documento' eliminará datos ocultos y metadatos, de modo que no se incluya en el PDF información delicada. 
+
+Se eliminarán: 
+
+• Metadatos 
+• Texto e imágenes no visibles 
+• Objetos que se solapan 
+• Datos de formulario y comentarios 
+• Contenido y archivos incrustados 
+• Capas ocultas 
+• Datos y comentarios ocultos 
+• Datos sin referencias</text>
+		<text id="sanitizeDoc.progr" h="062BF2F0">Se está depurando el documento...</text>
+		<text id="sanitizePage.progr" h="EA4FCD7C">Se está procesando la página %1</text>
+		<text id="sanitizeSave.progr" h="93EC7255">Se está guardando el documento depurado...</text>
+		<text id="sanitizeconverter.name" h="9BE4E232">Convertidor de depuración</text>
+		<text id="sanitizefilter.name" h="804EA582">Depurar documentos PDF</text>
+		<text id="sanitizeoptions.dlg" h="A6BCECE6">Opciones para la depuración del documento</text>
+		<text id="sanitizeopts.lbl" h="BB4BCFA8">Elija qué opciones desea aplicar:</text>
+		<text id="saveDlg.caption" h="2FD66192">Guardar el documento depurado</text>
+		<text id="searchindex.snt" h="B2A720E0">Eliminar el índice de búsquedas</text>
+		<text id="showmore.lbl" h="143C6320">Mostrar más...</text>
+		<text id="singleword" h="BAB11ED8">&amp;Una palabra o frase</text>
+		<text id="snt.redact.grp" h="98BDF535">Opciones de censura</text>
+		<text id="status.saving" h="3D2A3BDC">Se está guardando el documento</text>
+		<text id="stdpatterns.lbl" h="4FF587EE">Patrones típicos (%1 de %2)</text>
+		<text id="textcolor.lbl" h="393AC769">Color del texto:</text>
+		<text id="unsupported.format" h="5F8D8E51">La lista de palabras tiene un formato incompatible</text>
+		<text id="useregexp.chk" h="299B0303">&amp;Usar expresiones regulares</text>
+		<text id="whatfind.lbl" h="27D208DF">¿QUÉ texto quiere buscar?</text>
+		<text id="wherefind.lbl" h="76DF8D13">¿DÓNDE quiere buscarlo?</text>
+		<text id="wholewords.lbl" h="C794AEE3">&amp;Sólo palabras completas</text>
+		<text id="wordlist" h="637B75E0">Lista de palabras</text>
+		<text id="wordlist.empty" h="3311A197">La lista de palabras está vacía</text>
+	</Strings>
+</Localization>

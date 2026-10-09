@@ -1,0 +1,46 @@
+# Slovak translation for openteacher
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2011-08-01 15:51+0000\n"
+"Last-Translator: Alexander Suchan <supersasho@gmail.com>\n"
+"Language-Team: Slovak <sk@li.org>\n"
+"Language: sk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:42+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: repeatAnswer.py:72
+msgid "Click the button to start"
+msgstr "Klikni na tlačítko pre spustenie"
+
+#: repeatAnswer.py:73
+msgid "Start!"
+msgstr "Štart!"
+
+#: repeatAnswer.py:186
+msgid "Repeat answer"
+msgstr ""
+
+#: repeatAnswer.py:190
+msgid "Repeat mode fade duration (milliseconds)"
+msgstr ""
+
+#: repeatAnswer.py:191
+msgid "Lesson"
+msgstr ""
+
+#: repeatAnswer.py:192
+msgid "Words lesson"
+msgstr ""
+
+#~ msgid "Repeat Answer"
+#~ msgstr "Opakuj odpoveď"

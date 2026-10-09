@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Localization>
+	<Version date="20180920232421">2.00.00</Version>
+	<Author>தமிழ்நேரம்</Author>
+	<Copyright></Copyright>
+	<Product id="PDFXEditor"/>
+	<Language eName="Tamil" lName="தமிழ்" code="ta" R2L="false"/>
+	<Module name="PDFXEditor" namespace="" version="7.0.326.10"/>
+	<Strings>
+		<text id="measureInfo.dx" h="933FE5F1">∆ஒ</text>
+		<text id="measureInfo.dy" h="8A24D4B0">∆ஓ</text>
+		<text id="btn.ok" h="FEF0C771">சரி</text>
+		<text id="btn.cancel" h="3D302A38">ரத்து</text>
+		<text id="About.Title" h="F2596574">பற்றி</text>
+		<text id="prefs.digisig.l.timestamping" h="A0C2BE89">• நேரமுத்திரை சேவையகங்கள் நிர்வாகி</text>
+	</Strings>
+</Localization>

@@ -1,0 +1,956 @@
+if not modules then modules = { } end modules ['strc-tag'] = {
+    version   = 1.001,
+    comment   = "companion to strc-tag.mkiv",
+    author    = "Hans Hagen, PRAGMA-ADE, Hasselt NL",
+    copyright = "PRAGMA ADE / ConTeXt Development Team",
+    license   = "see context related readme files"
+}
+
+-- This is rather experimental code. Tagging happens on the fly and there are two analysers
+-- involved: the pdf backend tagger and the exporter. They share data but there are subtle
+-- differences. Each tag carries a specification and these can be accessed by attribute (the
+-- end of the chain tag) or by so called fullname which is a tagname combined with a number.
+
+local type, next = type, next
+local insert, remove, unpack, concat, merge, sortedhash = table.insert, table.remove, table.unpack, table.concat, table.merge, table.sortedhash
+local find, topattern, format = string.find, string.topattern, string.format
+local lpegmatch, P, S, C, Cc = lpeg.match, lpeg.P, lpeg.S, lpeg.C, lpeg.Cc
+local allocate = utilities.storage.allocate
+local settings_to_hash = utilities.parsers.settings_to_hash
+local setmetatableindex = table.setmetatableindex
+
+local trace_tags   = false  trackers.register("structures.tags",        function(v) trace_tags   = v end)
+local trace_levels = false  trackers.register("structures.tags.levels", function(v) trace_levels = v end)
+
+local report_tags = logs.reporter("structure","tags")
+
+local attributes      = attributes
+local structures      = structures
+local implement       = interfaces.implement
+
+local a_tagged        <const> = attributes.private('tagged')
+local unsetvalue      <const> = attributes.unsetvalue
+
+local codeinjections  = backends.codeinjections
+
+local texgetattribute = tex.getattribute
+local texsetattribute = tex.setattribute
+
+local taglist         = allocate() -- access by attribute
+local specifications  = allocate() -- access by fulltag
+local labels          = allocate()
+local stack           = { }
+local chain           = { }
+local ids             = { }
+local enabled         = false
+local tagcontext      = { }
+local tagpatterns     = { }
+local lasttags        = { }
+local stacksize       = 0
+local metadata        = nil -- applied to the next element
+local documentdata    = { }
+local extradata       = false
+
+local tags            = structures.tags
+tags.taglist          = taglist -- can best be hidden
+tags.labels           = labels
+tags.patterns         = tagpatterns
+tags.specifications   = specifications
+
+function tags.current()
+    if stacksize > 0 then
+        return stack[stacksize] -- maybe copy or proxy
+    end
+end
+
+-- Tags are internally stored as:
+--
+-- tag>number tag>number tag>number
+
+local p_splitter     = C((1-S(">"))^1) * P(">") * C(P(1)^1)
+tagpatterns.splitter = p_splitter
+
+-- Tagging is not really meant for structure and is very much driven by simple documents,
+-- which is why we have this H (version 1) and H* (version 2) without granularity. The fact
+-- that (2024) the standards are not really a showcase of how a pdf file should looks and
+-- the version 2 spec is at most a version 1 document means that we have to trial and error.
+--
+-- After some testing we decided to make all NonStruct because these can nest and have no
+-- demands on what's inside, nor is it sensitive for Span and Div. Using the sort of generic
+-- Sect is no option either because it needs some content item at the innermost level. So,
+-- instead we wait for UA-5 to eventually come up with proper generic tagging (instead of
+-- this curious mix of html, long and short tags, and assumptions wrt simple usage). Maybe
+-- we should also adapt UA-1 support to this.
+--
+-- MS/HH 2024
+--
+-- For ua-1 we now also go the NonStruct route: better this than some half-way mapping and
+-- better enforce the dumbest reflow possible if one runs into it. We used to distinguish
+-- but because the meanings have changed we can as wel ditch it for a user installable
+-- mapping which delegates the responsibility.
+--
+-- The standard mentions that meaning of the built in tags differs per versions so that is a
+-- good reason to drop usign them. In due time we will therefore simplify the following table.
+--
+-- Btw, we don't want this to cripple our normal structuring (including export) so we have
+-- some constraints as well as gatekeeping.
+--
+-- Musical timestamp (ua-2 upgrade): Mandoki Soulmates – The Big Quit (LYRIC VIDEO, 2024)
+-- which between the chorus lines has this sublte "visionary garbage" line ... indeed.
+
+-- Some NonStruct might become Part, Sect or Sub in which case titles and tage become Lbl
+-- but only when validators don't bark on it and the main structure is kept.
+
+local properties = allocate { -- todo: more "record = true" to improve formatting
+
+    document           = { namespace = "context", nature = "display", pdf = "Document"  },
+    documentpart       = { namespace = "context", nature = "display", pdf = "Part"      },
+
+    text               = { namespace = "context", nature = "inline",  pdf = "Span"      },
+ -- span               = { namespace = "context", nature = "inline",  pdf = "Span"      },
+ -- div                = { namespace = "context", nature = "display", pdf = "Div"       },
+
+    p                  = { namespace = "context", nature = "mixed",   pdf = "P"         }, -- display
+    t                  = { namespace = "context", nature = "mixed",   pdf = "Span"      }, -- inline
+    m                  = { namespace = "context", nature = "mixed",   pdf = "Artifact"  }, -- mixed
+
+ -- l                  = { namespace = "context", nature = "mixed",   pdf = "Link"      }, -- for testing
+ -- r                  = { namespace = "context", nature = "mixed",   pdf = "Reference" }, -- for testing
+
+    dummy              = { namespace = "context", nature = "mixed",   pdf = "Artifact"  }, -- for testing
+    crumpy             = { namespace = "context", nature = "mixed",   pdf = "NonStruct" }, -- for testing
+
+    division           = { namespace = "context", nature = "display", pdf = "NonStruct" },
+    paragraph          = { namespace = "context", nature = "mixed",   pdf = "P"         },
+    subparagraph       = { namespace = "context", nature = "mixed",   pdf = "P"         },
+    highlight          = { namespace = "context", nature = "inline",  pdf = "NonStruct" },
+    ornament           = { namespace = "context", nature = "inline",  pdf = "NonStruct" },
+    textdisplay        = { namespace = "context", nature = "display", pdf = "NonStruct" },
+    placeholder        = { namespace = "context", nature = "inline",  pdf = "NonStruct" },
+    ["break"]          = { namespace = "context", nature = "display", pdf = "Artifact"  },
+
+    construct          = { namespace = "context", nature = "inline",  pdf = "NonStruct" },
+    constructleft      = { namespace = "context", nature = "inline",  pdf = "NonStruct" },
+    constructright     = { namespace = "context", nature = "inline",  pdf = "NonStruct" },
+    constructcontent   = { namespace = "context", nature = "inline",  pdf = "NonStruct" },
+
+    sectionblock       = { namespace = "context", nature = "display", pdf = "NonStruct" },
+
+    section            = { namespace = "context", nature = "display", pdf = "NonStruct" },
+    sectioncaption     = { namespace = "context", nature = "display", pdf = "NonStruct" , record = true },
+    sectionnumber      = { namespace = "context", nature = "mixed",   pdf = "NonStruct" },
+    sectiontitle       = { namespace = "context", nature = "mixed",   pdf = "NonStruct" },
+    sectioncontent     = { namespace = "context", nature = "display", pdf = "NonStruct" },
+
+    itemgroup          = { namespace = "context", nature = "display", pdf = "NonStruct" }, -- L
+    item               = { namespace = "context", nature = "display", pdf = "NonStruct" }, -- LI
+    itemtag            = { namespace = "context", nature = "mixed",   pdf = "NonStruct" }, -- Lbl
+    itemcontent        = { namespace = "context", nature = "mixed",   pdf = "NonStruct" }, -- LBody
+    itemhead           = { namespace = "context", nature = "display", pdf = "NonStruct" },
+    itembody           = { namespace = "context", nature = "display", pdf = "NonStruct" },
+
+    items              = { namespace = "context", nature = "display", pdf = "Table"     },
+    itemsymbols        = { namespace = "context", nature = "mixed",   pdf = "TR"        },
+    itemsymbol         = { namespace = "context", nature = "inline",  pdf = "TD"        },
+    itemtexts          = { namespace = "context", nature = "mixed",   pdf = "TR"        },
+    itemtext           = { namespace = "context", nature = "inline",  pdf = "TD"        },
+
+    description        = { namespace = "context", nature = "display", pdf = "NonStruct" },
+    descriptiontag     = { namespace = "context", nature = "mixed",   pdf = "NonStruct" }, -- Lbl
+    descriptioncontent = { namespace = "context", nature = "mixed",   pdf = "NonStruct" },
+    descriptionsymbol  = { namespace = "context", nature = "inline",  pdf = "NonStruct" }, -- Lbl
+
+    verbatimblock      = { namespace = "context", nature = "display", pdf = "NonStruct" },
+    verbatimlines      = { namespace = "context", nature = "display", pdf = "NonStruct" },
+    verbatimline       = { namespace = "context", nature = "mixed",   pdf = "NonStruct" }, -- Code
+    verbatim           = { namespace = "context", nature = "inline",  pdf = "NonStruct" }, -- Code
+
+    lines              = { namespace = "context", nature = "display", pdf = "NonStruct" },
+    line               = { namespace = "context", nature = "mixed",   pdf = "NonStruct" },
+    linenumber         = { namespace = "context", nature = "inline",  pdf = "NonStruct" },
+
+    synonym            = { namespace = "context", nature = "inline",  pdf = "NonStruct" },
+    sorting            = { namespace = "context", nature = "inline",  pdf = "NonStruct" },
+
+    register           = { namespace = "context", nature = "display", pdf = "NonStruct" },
+    registerlocation   = { namespace = "context", nature = "inline",  pdf = "NonStruct" },
+    registersection    = { namespace = "context", nature = "display", pdf = "NonStruct" },
+    registertag        = { namespace = "context", nature = "mixed",   pdf = "NonStruct" },
+    registerentries    = { namespace = "context", nature = "display", pdf = "NonStruct" },
+    registerentry      = { namespace = "context", nature = "display", pdf = "NonStruct" },
+    registercontent    = { namespace = "context", nature = "mixed",   pdf = "NonStruct" },
+    registersee        = { namespace = "context", nature = "mixed",   pdf = "NonStruct" },
+    registerpages      = { namespace = "context", nature = "mixed",   pdf = "NonStruct" },
+    registerpage       = { namespace = "context", nature = "mixed",   pdf = "NonStruct" },
+    registerseparator  = { namespace = "context", nature = "inline",  pdf = "NonStruct" },
+    registerpagerange  = { namespace = "context", nature = "mixed",   pdf = "NonStruct" },
+
+    table              = { namespace = "context", nature = "display", pdf = "Table",    },
+    tablerow           = { namespace = "context", nature = "display", pdf = "TR",       },
+    tablecell          = { namespace = "context", nature = "mixed",   pdf = "TD",       },
+    tableheadcell      = { namespace = "context", nature = "mixed",   pdf = "TH",       },
+    tablehead          = { namespace = "context", nature = "display", pdf = "THEAD",    },
+    tablebody          = { namespace = "context", nature = "display", pdf = "TBODY",    },
+    tablefoot          = { namespace = "context", nature = "display", pdf = "TFOOT",    },
+
+    tabulate           = { namespace = "context", nature = "display", pdf = "Table",    },
+    tabulaterow        = { namespace = "context", nature = "display", pdf = "TR",       },
+    tabulatecell       = { namespace = "context", nature = "mixed",   pdf = "TD",       },
+    tabulateheadcell   = { namespace = "context", nature = "mixed",   pdf = "TH",       },
+    tabulatehead       = { namespace = "context", nature = "display", pdf = "THEAD",    },
+    tabulatebody       = { namespace = "context", nature = "display", pdf = "TBODY",    },
+    tabulatefoot       = { namespace = "context", nature = "display", pdf = "TFOOT",    },
+
+    list               = { namespace = "context", nature = "display", pdf = "NonStruct" }, -- TOC
+    listitem           = { namespace = "context", nature = "display", pdf = "NonStruct" }, -- TOCI
+    listtag            = { namespace = "context", nature = "mixed",   pdf = "NonStruct" }, -- Lbl
+    listcontent        = { namespace = "context", nature = "mixed",   pdf = "NonStruct" }, --
+    listdata           = { namespace = "context", nature = "mixed",   pdf = "NonStruct" }, --
+    listpage           = { namespace = "context", nature = "mixed",   pdf = "NonStruct" }, --
+    listtext           = { namespace = "context", nature = "inline",  pdf = "NonStruct" }, --
+
+    delimitedblock     = { namespace = "context", nature = "display", pdf = "NonStruct" }, -- BlockQuote
+    delimited          = { namespace = "context", nature = "inline",  pdf = "NonStruct" }, -- Quote
+    delimitedcontent   = { namespace = "context", nature = "inline",  pdf = "NonStruct" },
+    delimitedsymbol    = { namespace = "context", nature = "inline",  pdf = "NonStruct" },
+
+    subsentence        = { namespace = "context", nature = "inline",  pdf = "NonStruct" },
+    subsentencecontent = { namespace = "context", nature = "inline",  pdf = "NonStruct" },
+    subsentencesymbol  = { namespace = "context", nature = "inline",  pdf = "NonStruct" },
+
+    label              = { namespace = "context", nature = "mixed",   pdf = "NonStruct" },
+    number             = { namespace = "context", nature = "mixed",   pdf = "NonStruct" },
+
+    float              = { namespace = "context", nature = "display", pdf = "NonStruct" },
+    floatcaption       = { namespace = "context", nature = "mixed",   pdf = "NonStruct" }, -- Lbl
+    floatlabel         = { namespace = "context", nature = "inline",  pdf = "NonStruct" }, -- Lbl
+    floatnumber        = { namespace = "context", nature = "inline",  pdf = "NonStruct" }, -- Lbl
+    floattext          = { namespace = "context", nature = "mixed",   pdf = "NonStruct" },
+    floatcontent       = { namespace = "context", nature = "mixed",   pdf = "NonStruct" },
+    subfloat           = { namespace = "context", nature = "mixed",   pdf = "NonStruct" },
+
+    image              = { namespace = "context", nature = "mixed",   pdf = "Artifact"  },
+    mpgraphic          = { namespace = "context", nature = "mixed",   pdf = "Artifact"  },
+
+    formulaset         = { namespace = "context", nature = "display", pdf = "NonStruct" },
+    formula            = { namespace = "context", nature = "display", pdf = "NonStruct" },
+    formulacaption     = { namespace = "context", nature = "mixed",   pdf = "NonStruct" },
+    formulalabel       = { namespace = "context", nature = "mixed",   pdf = "NonStruct" },
+    formulanumber      = { namespace = "context", nature = "mixed",   pdf = "NonStruct" },
+    formulacontent     = { namespace = "context", nature = "display", pdf = "NonStruct" },
+    subformula         = { namespace = "context", nature = "display", pdf = "NonStruct" },
+
+    link               = { namespace = "context", nature = "inline",  pdf = "Link"      },
+    reference          = { namespace = "context", nature = "inline",  pdf = "Artifact"  },
+
+    navigation         = { namespace = "context", nature = "mixed",   pdf = "Artifact"  },
+    navigationbutton   = { namespace = "context", nature = "mixed",   pdf = "Artifact"  },
+    navigationmenu     = { namespace = "context", nature = "display", pdf = "Artifact"  },
+    navigationmenuitem = { namespace = "context", nature = "display", pdf = "Artifact"  },
+    navigationaction   = { namespace = "context", nature = "display", pdf = "Artifact"  },
+    navigationpage     = { namespace = "context", nature = "inline",  pdf = "Artifact"  },
+
+    margintextblock    = { namespace = "context", nature = "inline",  pdf = "NonStruct" },
+    margintext         = { namespace = "context", nature = "inline",  pdf = "NonStruct" },
+    marginanchor       = { namespace = "context", nature = "inline",  pdf = "NonStruct" },
+
+    linetext           = { namespace = "context", nature = "inline",  pdf = "NonStruct" },
+
+ -- math               = { namespace = "mathml",  nature = "inline",  pdf = "math"      },
+    math               = { namespace = "context", nature = "inline",  pdf = "NonStruct" },
+    inlinemath         = { namespace = "context", nature = "inline",  pdf = "NonStruct" },
+    displaymath        = { namespace = "context", nature = "display", pdf = "NonStruct" },
+
+    -- these are wrapped in math and only used in detailed math mode
+
+ -- mn                 = { namespace = "mathml",  nature = "mixed",   pdf = "mn"            },
+ -- mi                 = { namespace = "mathml",  nature = "mixed",   pdf = "mi"            },
+ -- mo                 = { namespace = "mathml",  nature = "mixed",   pdf = "mo"            },
+ -- ms                 = { namespace = "mathml",  nature = "mixed",   pdf = "ms"            },
+    mrow               = { namespace = "mathml",  nature = "display", pdf = "mrow"          },
+ -- msubsup            = { namespace = "mathml",  nature = "display", pdf = "msubsup"       },
+ -- msub               = { namespace = "mathml",  nature = "display", pdf = "msub"          },
+ -- msup               = { namespace = "mathml",  nature = "display", pdf = "msup"          },
+ -- merror             = { namespace = "mathml",  nature = "mixed",   pdf = "merror"        },
+ -- munderover         = { namespace = "mathml",  nature = "display", pdf = "munderover"    },
+ -- munder             = { namespace = "mathml",  nature = "display", pdf = "munder"        },
+ -- mover              = { namespace = "mathml",  nature = "display", pdf = "mover"         },
+ -- mtext              = { namespace = "mathml",  nature = "mixed",   pdf = "mtext"         },
+ -- mfrac              = { namespace = "mathml",  nature = "display", pdf = "mfrac"         },
+ -- mroot              = { namespace = "mathml",  nature = "display", pdf = "mroot"         },
+ -- msqrt              = { namespace = "mathml",  nature = "display", pdf = "msqrt"         },
+ -- mfenced            = { namespace = "mathml",  nature = "display", pdf = "mfenced"       },
+ -- maction            = { namespace = "mathml",  nature = "display", pdf = "maction"       },
+ -- mmultiscripts      = { namespace = "mathml",  nature = "display", pdf = "mmultiscripts" },
+ -- mprescripts        = { namespace = "mathml",  nature = "mixed",   pdf = "mprescripts"   },
+
+    mn                 = { namespace = "context",  nature = "mixed",   pdf = "Span"      },
+    mi                 = { namespace = "context",  nature = "mixed",   pdf = "Span"      },
+    mo                 = { namespace = "context",  nature = "mixed",   pdf = "Span"      },
+    ms                 = { namespace = "context",  nature = "mixed",   pdf = "Span"      },
+    mrow               = { namespace = "context",  nature = "display", pdf = "Span"      },
+    msubsup            = { namespace = "context",  nature = "display", pdf = "Span"      },
+    msub               = { namespace = "context",  nature = "display", pdf = "Span"      },
+    msup               = { namespace = "context",  nature = "display", pdf = "Span"      },
+    merror             = { namespace = "context",  nature = "mixed",   pdf = "Span"      },
+    munderover         = { namespace = "context",  nature = "display", pdf = "Span"      },
+    munder             = { namespace = "context",  nature = "display", pdf = "Span"      },
+    mover              = { namespace = "context",  nature = "display", pdf = "Span"      },
+    mtext              = { namespace = "context",  nature = "mixed",   pdf = "Span"      },
+    mfrac              = { namespace = "context",  nature = "display", pdf = "Span"      },
+    mroot              = { namespace = "context",  nature = "display", pdf = "Span"      },
+    msqrt              = { namespace = "context",  nature = "display", pdf = "Span"      },
+    mfenced            = { namespace = "context",  nature = "display", pdf = "Span"      },
+    maction            = { namespace = "context",  nature = "display", pdf = "Span"      },
+    mmultiscripts      = { namespace = "context",  nature = "display", pdf = "Span"      },
+    mprescripts        = { namespace = "context",  nature = "mixed",   pdf = "Span"      },
+
+    -- these are internal ones
+
+    mstack             = { namespace = "context", nature = "display", pdf = "Span"      },
+    mstacker           = { namespace = "context", nature = "display", pdf = "Span"      },
+    mstackertop        = { namespace = "context", nature = "display", pdf = "Span"      },
+    mstackerbot        = { namespace = "context", nature = "display", pdf = "Span"      },
+    mstackermid        = { namespace = "context", nature = "display", pdf = "Span"      },
+    mextensible        = { namespace = "context", nature = "display", pdf = "Span"      },
+    mdelimited         = { namespace = "context", nature = "display", pdf = "Span"      },
+    mdelimitedstack    = { namespace = "context", nature = "display", pdf = "Span"      },
+    mfunction          = { namespace = "context", nature = "mixed",   pdf = "Span"      },
+    mfunctionstack     = { namespace = "context", nature = "display", pdf = "Span"      },
+    mfraction          = { namespace = "context", nature = "display", pdf = "Span"      },
+    mfractionstack     = { namespace = "context", nature = "display", pdf = "Span"      },
+    munit              = { namespace = "context", nature = "mixed",   pdf = "Span"      },
+    mdigits            = { namespace = "context", nature = "mixed",   pdf = "Span"      },
+    mc                 = { namespace = "context", nature = "mixed",   pdf = "Span"      },
+
+    -- these are also wrapped
+
+    mtable             = { namespace = "mathml",  nature = "display", pdf = "mtable",   },
+    mtr                = { namespace = "mathml",  nature = "display", pdf = "mtr",      },
+    mtd                = { namespace = "mathml",  nature = "display", pdf = "mtd",      },
+
+    ignore             = { namespace = "context", nature = "mixed",   pdf = "NonStruct" },
+    private            = { namespace = "context", nature = "mixed",   pdf = "NonStruct" },
+    metadata           = { namespace = "context", nature = "display", pdf = "NonStruct" },
+    metavariable       = { namespace = "context", nature = "mixed",   pdf = "NonStruct" },
+
+    mid                = { namespace = "context", nature = "inline",  pdf = "NonStruct" },
+    sub                = { namespace = "context", nature = "inline",  pdf = "NonStruct" },
+    sup                = { namespace = "context", nature = "inline",  pdf = "NonStruct" },
+    subsup             = { namespace = "context", nature = "inline",  pdf = "NonStruct" },
+
+    combination        = { namespace = "context", nature = "display", pdf = "NonStruct" },
+    combinationpair    = { namespace = "context", nature = "display", pdf = "NonStruct" },
+    combinationcontent = { namespace = "context", nature = "mixed",   pdf = "NonStruct" },
+    combinationcaption = { namespace = "context", nature = "mixed",   pdf = "NonStruct" },
+
+    publications       = { namespace = "context", nature = "display", pdf = "NonStruct" },
+    publication        = { namespace = "context", nature = "mixed",   pdf = "NonStruct" },
+    pubfld             = { namespace = "context", nature = "inline",  pdf = "NonStruct" },
+
+    citation           = { namespace = "context", nature = "inline",  pdf = "NonStruct" },
+    cite               = { namespace = "context", nature = "inline",  pdf = "NonStruct" },
+
+    narrower           = { namespace = "context", nature = "display", pdf = "NonStruct" },
+
+    block              = { namespace = "context", nature = "display", pdf = "NonStruct" },
+
+    userdata           = { namespace = "context", nature = "display", pdf = "NonStruct" },
+
+    quantity           = { namespace = "context", nature = "inline",  pdf = "NonStruct" },
+    unit               = { namespace = "context", nature = "inline",  pdf = "NonStruct" },
+
+    verse              = { namespace = "context", nature = "display", pdf = "NonStruct" },
+    versetag           = { namespace = "context", nature = "inline",  pdf = "NonStruct" },
+    verseseparator     = { namespace = "context", nature = "inline",  pdf = "NonStruct" },
+    versecontent       = { namespace = "context", nature = "inline",  pdf = "NonStruct" },
+
+--     navigationpage     = { namespace = "context", nature = "inline",  pdf = "Link"  },
+
+}
+
+tags.properties = properties
+tags.overloads  = allocate { }
+
+local patterns = setmetatableindex(function(t,tag)
+    local v = topattern("^" .. tag .. ">")
+    t[tag] = v
+    return v
+end)
+
+-- nearly always the last one
+
+function tags.locatedtag(tag)
+    local attribute = texgetattribute(a_tagged)
+    if attribute >= 0 then
+        local specification = taglist[attribute]
+        if specification then
+            local taglist = specification.taglist
+            local pattern = patterns[tag]
+            local n = #taglist
+            local t = taglist[n]
+            if find(t,pattern) then
+                return t
+            else
+                for i=n-1,1,-1 do
+                    t = taglist[i]
+                    if find(t,pattern) then
+                        return t
+                    end
+                end
+            end
+        end
+    else
+        -- enabled but not auto
+    end
+    return false -- handy as bogus index
+end
+
+function structures.atlocation(str) -- not used
+    local specification = taglist[texgetattribute(a_tagged)]
+    if specification then
+        local list = specification.taglist
+        if list then
+            local pattern = patterns[str]
+            for i=#list,1,-1 do
+                if find(list[i],pattern) then
+                    return true
+                end
+            end
+        end
+    end
+end
+
+-- function structures.atlocation(str) -- not used , so no need to optimize
+--     local specification = taglist[texgetattribute(a_tagged)]
+--     if specification then
+--         local list = specification.taglist
+--         if list then
+--             local pattern = patterns[str]
+--             local n = #list
+--             if find(list[n],pattern) then
+--                 return true
+--             else
+--                 for i=n-1,1,-1 do
+--                     if find(list[i],pattern) then
+--                         return true
+--                     end
+--                 end
+--             end
+--         end
+--     end
+-- end
+
+function tags.setproperty(tag,key,value)
+    local p = properties[tag]
+    if p then
+        p[key] = value
+    else
+        properties[tag] = { [key] = value, namespace = "user" }
+    end
+end
+
+function tags.setaspect(key,value)
+    local tag = chain[stacksize]
+    if tag then
+        local p = properties[tag]
+        if p then
+            p[key] = value
+        else
+            properties[tag] = { [key] = value, namespace = "user" }
+        end
+    end
+end
+
+function tags.registermetadata(data)
+    local d = settings_to_hash(data)
+    if #chain > 1 then
+        if metadata then
+            merge(metadata,d)
+        else
+            metadata = d
+        end
+    else
+        merge(documentdata,d)
+    end
+end
+
+function tags.getmetadata()
+    return documentdata or { }
+end
+
+function tags.registerextradata(name,serializer)
+    if type(serializer) == "function" then
+        if extradata then
+            extradata[name] = serializer
+        else
+            extradata = { [name] = serializer }
+        end
+    end
+end
+
+function tags.getextradata()
+    return extradata
+end
+
+function tags.enabled()
+    return enabled
+end
+
+local ignored = { } tags.ignored = ignored
+
+statistics.feedback.register { name = "tagging",   index = 2, category = "performance" }
+statistics.feedback.register { name = "structure", index = 4, category = "error" }
+
+local function enabletags()
+    if not enabled then
+        if tex.systemmodes.export then
+            nodes.tasks.enableaction("math","noads.handlers.tags")
+        else
+            codeinjections.enabletags()
+        end
+        statistics.feedback.setstate("tagging", true)
+        enabled = true
+    end
+end
+
+local function show_level(where)
+    report_tags("%s %i : %s",where,stacksize,concat(chain," ",1,stacksize))
+end
+
+-- function tags.nesting()
+--     return { unpack(chain,1,stacksize) }
+-- end
+
+function tags.checknesting()
+    local max = #chain
+    report_tags()
+    if stacksize == 2 then
+        report_tags("stack size %i, max stack %i, %s nesting",stacksize,max,"valid")
+    else
+        report_tags("stack size %i, max stack %i, %s nesting",stacksize,max,"invalid")
+        report_tags()
+        for i=1,stacksize+1 do
+            if i == 3 then
+                report_tags()
+            end
+            report_tags("%w %s",i*2,chain[i])
+        end
+        statistics.feedback.setstate("structure", true)
+    end
+    report_tags()
+end
+
+function tags.start(tag,specification)
+    if not enabled then
+        enabletags()
+    end
+    --
+    labels[tag] = tag -- can go away
+    --
+    local attribute = #taglist + 1
+    local tagindex  = (ids[tag] or 0) + 1
+    if tag == "ignore" then
+        ignored[attribute] = true
+    end
+    --
+    local completetag = tag .. ">" .. tagindex
+    --
+    ids[tag]      = tagindex
+    lasttags[tag] = tagindex
+    stacksize     = stacksize + 1
+    --
+    chain[stacksize] = completetag
+    stack[stacksize] = attribute
+    tagcontext[tag]  = completetag
+    --
+    local tagnesting = { unpack(chain,1,stacksize) } -- a copy so we can add actualtext
+    --
+    if specification then
+        specification.attribute = attribute
+        specification.tagindex  = tagindex
+        specification.taglist   = tagnesting
+        specification.tagname   = tag
+        if metadata then
+            specification.metadata = metadata
+            metadata = nil
+        end
+        local userdata = specification.userdata
+        if userdata == "" then
+            specification.userdata = nil
+        elseif type(userdata) == "string"  then
+            specification.userdata = settings_to_hash(userdata)
+        end
+        local detail = specification.detail
+        if detail == "" then
+            specification.detail = nil
+        end
+        local parents = specification.parents
+        if parents == "" then
+            specification.parents = nil
+        end
+    else
+        specification = {
+            attribute = attribute,
+            tagindex  = tagindex,
+            taglist   = tagnesting,
+            tagname   = tag,
+            metadata  = metadata,
+        }
+        metadata = nil
+    end
+    --
+    taglist[attribute]          = specification
+    specifications[completetag] = specification
+    --
+    if completetag == "document>1" then
+        specification.metadata = documentdata
+    end
+    --
+    texsetattribute(a_tagged,attribute)
+    if trace_levels then
+        show_level("+")
+    end
+    return attribute
+end
+
+-- kind of messy:
+
+function tags.restart(attribute)
+    stacksize = stacksize + 1
+    if type(attribute) == "number" then
+        local taglist = taglist[attribute].taglist
+        chain[stacksize] = taglist[#taglist]
+    else
+        chain[stacksize] = attribute -- a string
+        attribute = #taglist + 1
+        taglist[attribute] = { taglist = { unpack(chain,1,stacksize) } }
+    end
+    stack[stacksize] = attribute
+    texsetattribute(a_tagged,attribute)
+    if trace_levels then
+        show_level("!")
+    end
+    return attribute
+end
+
+do
+
+    local tag_ignore_level   <const> = 1
+    local tag_document_level <const> = 2
+
+    local tagstack = { }
+
+    -- todo: less push if the attribute is unchanged
+
+    function tags.push(attribute)
+        if not attribute then
+            attribute = tag_document_level
+        end
+        insert(tagstack, { texgetattribute(a_tagged), stacksize, stack[stacksize], chain })
+        if attribute then
+            local t = taglist[attribute]
+            if t then
+                chain     = { unpack(t.taglist) }
+                stacksize = #chain
+            else
+                chain    = { }
+                stacksize = 1
+            end
+        else
+            chain     = { }
+            stacksize = 1
+        end
+     -- chain            = attribute and { unpack(taglist[attribute].taglist) } or { }
+     -- stacksize        = #chain
+        stack[stacksize] = attribute
+    end
+
+    function tags.pop()
+        local s = remove(tagstack)
+        stacksize        = s[2]
+        chain            = s[4]
+        stack[stacksize] = s[3]
+        texsetattribute(a_tagged,s[1])
+    end
+
+end
+
+function tags.stop()
+    if trace_levels then
+        show_level("-")
+    end
+    if stacksize > 0 then
+        stacksize = stacksize - 1
+    end
+    local t = stack[stacksize]
+    if not t then
+        if trace_tags then
+            report_tags("ignoring end tag, previous chain: %s",stacksize > 0 and concat(chain," ",1,stacksize) or "none")
+        end
+        t = unsetvalue
+    end
+    texsetattribute(a_tagged,t)
+    return t
+end
+
+function tags.getid(tag,detail)
+    return ids[tag] or "?"
+end
+
+function tags.last(tag)
+    return lasttags[tag] -- or false
+end
+
+function tags.lastinchain(tag)
+    if tag and tag ~= "" then
+        return tagcontext[tag]
+    else
+        return chain[stacksize]
+    end
+end
+
+local strip = C((1-S(">"))^1)
+
+function tags.elementtag()
+    local fulltag = chain[stacksize]
+    if fulltag then
+        return lpegmatch(strip,fulltag)
+    end
+end
+
+function tags.strip(fulltag)
+    return lpegmatch(strip,fulltag)
+end
+
+function tags.setuserproperties(tag,list)
+    if not list or list == "" then
+        tag, list = chain[stacksize], tag
+    else
+        tag = tagcontext[tag]
+    end
+    if tag then -- an attribute now
+        local l = settings_to_hash(list)
+        local s = specifications[tag]
+        if s then
+            local u = s.userdata
+            if u then
+                for k, v in next, l do
+                    u[k] = v
+                end
+            else
+                s.userdata = l
+            end
+        else
+           -- error
+        end
+    end
+end
+
+function tags.handler(head)  -- we need a dummy
+    return head, false
+end
+
+statistics.register("structure elements", function()
+    if enabled then
+        if stacksize > 0 then
+            for i=1,stacksize do
+                if not chain[i] then chain[i] = "ERROR" end
+            end
+            return format("%s element chains identified, open chain: %s ",#taglist,concat(chain," => ",1,stacksize))
+        else
+            return format("%s element chains identified",#taglist)
+        end
+    end
+end)
+
+directives.register("backend.addtags", function(v)
+    if not enabled then
+        enabletags()
+    end
+end)
+
+-- interface
+
+local starttag = tags.start
+
+implement {
+    name      = "strc_tags_start",
+    public    = true,
+    protected = true,
+    actions   = starttag,
+    arguments = "argument",
+}
+
+implement {
+    name      = "strc_tags_stop",
+    public    = true,
+    protected = true,
+    actions   = tags.stop,
+}
+
+implement {
+    name      = "strc_tags_start_userdata",
+    public    = true,
+    protected = true,
+    actions   = function(tag,userdata) starttag(tag,{ userdata = userdata }) end,
+    arguments = { "optional", "optional" },
+}
+
+implement {
+    name      = "strc_tags_start_detail",
+    public    = true,
+    protected = true,
+    actions   = function(tag,detail) starttag(tag,{ detail = detail }) end,
+    arguments = "2 arguments",
+}
+
+implement {
+    name      = "strc_tags_start_ignore",
+    public    = true,
+    protected = true,
+    actions   = function(detail) starttag("ignore",{ detail = detail }) end,
+    arguments = { "argument" },
+}
+
+implement {
+    name      = "strc_tags_start_chained",
+    public    = true,
+    protected = true,
+    actions   = function(tag,detail,parents) starttag(tag,{ detail = detail, parents = parents }) end,
+    arguments = "3 arguments",
+}
+
+implement {
+    name      = "strc_tags_set_aspect",
+    public    = true,
+    protected = true,
+    actions   = tags.setaspect,
+    arguments = "2 arguments"
+}
+
+implement {
+    name      = "settagproperty",
+    actions   = tags.setproperty,
+    arguments = "3 arguments"
+}
+
+implement {
+    name      = "setelementbackendtag",
+    public    = true,
+    protected = true,
+    actions   = tags.setproperty,
+--     arguments = { "optional", "'backend'", "optional" },
+    arguments = { "optional", "'pdf'", "optional" },
+}
+
+implement {
+    name      = "setelementnature",
+    public    = true,
+    protected = true,
+    actions   = tags.setproperty,
+    arguments = { "optional", "'nature'",  "optional" },
+}
+
+implement {
+    name      = "strc_tags_get_element_tag",
+    public    = true,
+    protected = true,
+    actions   = { tags.elementtag, context }
+}
+
+implement {
+    name      = "strc_tags_set_element_user_properties",
+    public    = true,
+    protected = true,
+    actions   = tags.setuserproperties,
+    arguments = { "optional", "optional" },
+}
+
+implement {
+    name      = "doifelseinelement",
+    public    = true,
+    protected = true,
+    actions   = { structures.atlocation, commands.doifelse },
+    arguments = "argument",
+}
+
+implement {
+    name      = "settaggedmetadata",
+    public    = true,
+    protected = true,
+    actions   = tags.registermetadata,
+    arguments = "optional",
+}
+
+implement {
+    name      = "checknesting",
+    protected = true,
+    actions   = tags.checknesting,
+}
+
+implement {
+    name      = "strc_tags_document_push",
+    protected = true,
+    public    = true,
+    actions   = tags.push
+}
+
+implement {
+    name      = "strc_tags_document_pop",
+    protected = true,
+    public    = true,
+    actions   = tags.pop
+}
+
+-- bonus
+
+do
+
+    function tags.analyze()
+     -- local taglist = tags.taglist
+        local used = setmetatableindex("number")
+        local head = setmetatableindex("number")
+     -- inspect(list)
+        for i=1,#taglist do
+            local l = taglist[i]
+            local tagname = l.tagname
+            local taglist = l.taglist
+            if tagname == "section" then
+                local detail = l.detail
+                head[detail] = head[detail] + 1
+            end
+            used[tagname] = used[tagname] + 1
+        end
+        if next(used) then
+            report_tags()
+            report_tags("used tags")
+            report_tags()
+            for k, v in sortedhash(used) do
+                report_tags("%4i  %s",v,k)
+            end
+            report_tags()
+        end
+        if next(head) then
+            report_tags("used heads")
+            report_tags()
+            for k, v in sortedhash(head) do
+                report_tags("%4i  %s",v,k)
+            end
+            report_tags()
+        end
+    end
+
+    local enabled
+
+    trackers.register("structures.tags.analyze", function(v)
+        enabled = true
+    end)
+
+    statistics.register("structure tags", function()
+        if enabled then
+            tags.analyze()
+        end
+    end)
+
+end

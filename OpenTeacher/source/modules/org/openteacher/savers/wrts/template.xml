@@ -1,0 +1,51 @@
+#!	Copyright 2011, Marten de Vries
+#!	Copyright 2011, Milan Boers
+#!
+#!	This file is part of OpenTeacher.
+#!
+#!	OpenTeacher is free software: you can redistribute it and/or modify
+#!	it under the terms of the GNU General Public License as published by
+#!	the Free Software Foundation, either version 3 of the License, or
+#!	(at your option) any later version.
+#!
+#!	OpenTeacher is distributed in the hope that it will be useful,
+#!	but WITHOUT ANY WARRANTY; without even the implied warranty of
+#!	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#!	GNU General Public License for more details.
+#!
+#!	You should have received a copy of the GNU General Public License
+#!	along with OpenTeacher.  If not, see <http://www.gnu.org/licenses/>.
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Wrts, http://www.wrts.nl/ -->
+<wrts>
+	<lijst id="0000000">
+		<!--(if "title" in list)-->
+		<titel>@!list['title']!@</titel>
+		<!--(else)-->
+		<titel />
+		<!--(end)-->
+		<datum />
+		<downloaded>@!now!@</downloaded>
+		<created>@!created!@</created>
+		<updated>@!now!@</updated>
+		<auteur id="000000">Created by: @!appname!@ @!appversion!@</auteur>
+		<taal>
+			<!--(if "questionLanguage" in list)-->
+			<a>@!list['questionLanguage']!@</a>
+			<!--(else)-->
+			<a />
+			<!--(end)-->
+			<!--(if "questionLanguage" in list)-->
+			<b>@!list['answerLanguage']!@</b>
+			<!--(else)-->
+			<b />
+			<!--(end)-->
+		</taal>
+		<!--(for word in list['items'])-->
+		<woord>
+			<a>@!compose(word['questions'])!@</a>
+			<b>@!compose(word['answers'])!@</b>
+		</woord>
+		<!--(end)-->
+	</lijst>
+</wrts>

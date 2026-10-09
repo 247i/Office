@@ -1,0 +1,436 @@
+if not modules then modules = { } end modules ['mlib-fio'] = {
+    version   = 1.001,
+    comment   = "companion to mlib-ctx.mkiv",
+    author    = "Hans Hagen, PRAGMA-ADE, Hasselt NL",
+    copyright = "PRAGMA ADE / ConTeXt Development Team",
+    license   = "see context related readme files",
+}
+
+local type = type
+local find, formatters = string.find, string.formatters
+local concat = table.concat
+local suffix, addsuffix, is_writable = file.suffix, file.addsuffix, file.is_writable
+local urlhashed = url.hashed
+
+local findfile     = resolvers.findfile
+local mplibnew     = mplib.new
+----- mplibexecute = mplib.execute
+
+local trace_terminal = false  trackers.register("metapost.terminal", function(v) trace_terminal = v end)
+
+local report_metapost = logs.reporter("metapost")
+local report_terminal = logs.reporter("metapost","terminal")
+local report_logger   = logs.reporter("metapost","log")
+local report_error    = logs.reporter("metapost","error")
+
+mplib.realtimelogging = false
+
+local handlelog  do
+
+    local l, nl, dl = { }, 0, false
+
+    local to_terminal <const> = 1
+    local to_file     <const> = 2
+    local to_both     <const> = 3
+    local to_error    <const> = 4
+
+    handlelog = function(instance,target,str)
+        if target == to_terminal then
+            -- log
+        elseif target == to_file or target == to_both then
+            -- term
+            if str == "\n" then
+                mplib.realtimelogging = true
+                if nl > 0 then
+                    report_logger(concat(l,"",1,nl))
+                    nl, dl = 0, false
+                elseif not dl then
+                    report_logger("")
+                    dl = true
+                end
+            else
+                nl = nl + 1
+                l[nl] = str
+            end
+        elseif target == to_error then
+            report_error(str)
+        end
+    end
+
+end
+
+local finders = { }
+mplib.finders = finders -- also used in meta-lua.lua
+
+local function validftype(ftype)
+    return ftype == "mp" and "mp" or nil
+end
+
+-- We can have a list!
+
+local findtexfile = resolvers.findtexfile
+local opentexfile = resolvers.opentexfile
+local splitlines  = string.splitlines
+
+local suffixlist = { "mpxl", "mpiv", "mp" } -- no "mf"
+
+local remapped = {
+    -- We don't yet have an interface for adding more here but when needed
+    -- there will be one.
+    ["hatching.mp"] = "mp-remapped-hatching.mp",
+    ["boxes.mp"]    = "mp-remapped-boxes.mp",
+    ["hatching"]    = "mp-remapped-hatching.mp",
+    ["boxes"]       = "mp-remapped-boxes.mp",
+}
+
+local function findmpfile(name,ftype)
+    local usedname = remapped[name] or name
+    local validtyp = validftype(ftype)
+    local fullname = findtexfile(usedname,validtyp)
+    if fullname and fullname ~= "" then
+        return fullname
+    elseif suffix(usedname) == "" then
+        for i=1,#suffixlist do
+            fullname = findfile(addsuffix(usedname,suffixlist[i]),validtyp)
+            if fullname and fullname ~= "" then
+                return fullname
+            end
+        end
+    end
+    return nil
+end
+
+-- variant 1
+
+-- finders.file = function(specification,name,mode,kind)
+--     if mode == "r" then
+--         return findmpfile(name,kind)
+--     elseif is_writable(name) then
+--         return name
+--     else
+--         return nil
+--     end
+-- end
+
+-- variant 2
+
+-- finders.file = function(specification,name,mode,kind)
+--     if not mode or mode == "r" then
+--         return findmpfile(name,kind)
+--     elseif is_writable(name) then
+--         return name
+--     else
+--         return nil
+--     end
+-- end
+
+-- variant 3
+
+finders.file = function(specification,name,mode,kind)
+    if mode == "w" then
+        return is_writable(name) and name or nil
+    else
+        return findmpfile(name,kind) or nil
+    end
+end
+
+local function finder(name,mode,kind) -- fake message for mpost.map and metafun.mpvi
+    local specification = urlhashed(name)
+    local finder = finders[specification.scheme] or finders.file
+    local found = finder(specification,name,mode,validftype(ftype))
+    return found
+end
+
+local function writetoterminal(terminaldata,maxterm,d)
+    local t = type(d)
+    local n = 0
+    if t == "string" then
+        d = splitlines(d)
+        n = #d
+        for i=1,#d do
+            maxterm = maxterm + 1
+            terminaldata[maxterm] = d[i]
+        end
+    elseif t == "table" then
+        for i=1,#d do
+            local l = d[i]
+            if not l then
+                -- just ignore
+            elseif find(l,"[\n\r]") then
+                local s = splitlines(l)
+                local m = #s
+                for i=1,m do
+                    maxterm = maxterm + 1
+                    terminaldata[maxterm] = s[i]
+                end
+                n = n + m
+            else
+                maxterm = maxterm + 1
+                terminaldata[maxterm] = d[i]
+                n = 1
+            end
+        end
+    end
+    if trace_terminal then
+        report_metapost("writing %i lines, in cache %s",n,maxterm)
+    end
+    return maxterm
+end
+
+local function readfromterminal(terminaldata,maxterm,nowterm)
+    if nowterm >= maxterm then
+        terminaldata[nowterm] = false
+        maxterm = 0
+        nowterm = 0
+        if trace_terminal then
+            report_metapost("resetting, maxcache %i",#terminaldata)
+        end
+        return maxterm, nowterm, nil
+    else
+        if nowterm > 0 then
+            terminaldata[nowterm] = false
+        end
+        nowterm = nowterm + 1
+        local s = terminaldata[nowterm]
+        if trace_terminal then
+            report_metapost("reading line %i: %s",nowterm,s)
+        end
+        return maxterm, nowterm, s
+    end
+end
+
+local function fileopener()
+
+    -- these can go into the table itself
+
+    local terminaldata = { }
+    local maxterm      = 0
+    local nowterm      = 0
+
+    local terminal = {
+        name   = "terminal",
+        close  = function()
+         -- terminal = { }
+         -- maxterm  = 0
+         -- nowterm  = 0
+        end,
+        reader = function()
+            local line
+            maxterm, nowterm, line = readfromterminal(terminaldata,maxterm,nowterm)
+            return line
+        end,
+        writer = function(d)
+            maxterm = writetoterminal(terminaldata,maxterm,d)
+        end,
+    }
+
+    return function(name,mode,kind)
+        if name == "terminal" then
+         -- report_metapost("opening terminal")
+            return terminal
+        elseif mode == "w" then
+            -- we need an extra check here for permissions
+            local f = io.open(name,"wb")
+            if f then
+             -- report_metapost("opening file %a for writing",full)
+                return {
+                    name   = full,
+                    writer = function(s) return f:write(s) end, -- io.write(f,s)
+                    close  = function()  f:close() end,
+                }
+            end
+        else
+            local full = findtexfile(name,validftype(ftype))
+            if full then
+             -- report_metapost("opening file %a for reading",full)
+                return opentexfile(full)
+            end
+        end
+    end
+
+end
+
+local overloadmode = "warning"
+
+directives.register("metapost.overloadmode",function(v)
+    if v == "warning" or v == "error" then
+        overloadmode = v
+    else
+        overloadmode= false
+    end
+end)
+
+local propertycodes = {
+    [-3] = "mutable",
+    [ 1] = "primitive",
+    [ 2] = "permanent",
+    [ 3] = "immutable",
+    [ 4] = "frozen",
+}
+
+mplib.propertycodes = propertycodes
+
+local report = logs.reporter("metafun", "log")
+
+local function overload(property,name)
+    if overloadmode and property >= 0 then
+        -- turn of warning after format is loaded
+        local code = propertycodes[property] or "unknown"
+        report("overloading %s %a",code, name)
+        -- no overload permitted
+        if overloadmode == "error" then
+            luatex.abort()
+        end
+        return false
+    else
+        -- overload permitted
+        return true
+    end
+end
+
+local showcontext = mplib.showcontext
+
+local function handleerror(instance, message, helpinfo, interaction)
+    report()
+    report("error: %s", message)
+    report()
+    showcontext(instance)
+    report()
+    report(helpinfo)
+    report()
+    if interaction == 5 then
+      -- luatex.abort()
+    end
+end
+
+local function handlewarning(instance, message)
+    report()
+    report("warning: %s", message)
+    report()
+end
+
+local function handlestatus(instance)
+    local info = metapost.getinstanceinfo(instance)
+    local stat = mplib.getstatistics(instance)
+    local call = mplib.getcallbackstate(instance)
+    local fstr = "    %-12s : %s"
+    local fnum = "    %-12s : %i"
+    local function showpool(name)
+        local t     = stat[name]
+        local state = t.state
+        local used  = t.used
+        if state == "pooled" then -- max pool used kept size
+            local pool = t.pool
+            local max  = t.max
+            local size = t.size
+            report(fstr,name,formatters
+                ["pool %i, kept %i, used %i, max %i, size %i, memory %i, pooled %i"](
+                    pool, t.kept, used, max, size, max * size, pool * size
+                )
+            )
+        elseif state == "persistent" then -- max used size
+            local size = t.size
+            local max  = t.max
+            if max > 0 and max ~= used then
+                report(fstr,name,formatters
+                    ["used %i, max %i, size %i, memory %i"](
+                        used, max, size, used * size
+                    )
+                )
+            else
+                report(fstr,name,formatters
+                    ["used %i, size %i, memory %i"](
+                        used, size, used * size
+                    )
+                )
+            end
+        elseif state == "counted" then -- used count
+            report(fstr,name,formatters
+                ["used %i, memory %i"](
+                    used, t.count
+                )
+            )
+        end
+    end
+    report()
+    report("current status")
+    report("  instance")
+        report(fstr,"name",info.name)
+        report(fstr,"method",info.method)
+    report("  pooled")
+        showpool("symbols")
+        showpool("knots")
+        showpool("tokens")
+        showpool("pairs")
+        showpool("colors")
+        showpool("transforms")
+        showpool("dashes")
+        showpool("shapes")
+        showpool("values")
+        showpool("start")
+        showpool("stop")
+        showpool("save")
+        showpool("ifstack")
+        showpool("loopstate")
+        showpool("subst")
+        showpool("avlsymbols")
+        showpool("edgeobjects")
+        showpool("dashobjects")
+        showpool("knotobjects")
+        showpool("edgeheaders")
+        showpool("shapeobjects")
+        showpool("startobjects")
+        showpool("stopobjects")
+    report("  permanent")
+        showpool("identifiers")
+        showpool("internals")
+        showpool("bytemaps")
+    report("  callbacks")
+      for k, v in table.sortedhash(call) do
+        report(fnum,k, v)
+      end
+        report(fnum,"total",call.count)
+    report("  todo")
+        report(fnum,"characters",stat.characters)
+        report(fnum,"strings",stat.strings)
+        report(fnum,"bytes",stat.bytes)
+        report(fnum,"input",stat.input)
+        report(fnum,"parameters",stat.parameters)
+        report(fnum,"maxopen",stat.maxopen)
+        report(fnum,"buffer",stat.buffer)
+    call.count = nil
+    report()
+end
+
+
+function mplib.new(specification)
+    local openfile = fileopener()
+    local handlers = specification.handlers
+    local instance
+    instance = mplibnew {
+        bend_tolerance = specification.bendtolerance,
+        move_tolerance = specification.movetolerance,
+        math_mode      = specification.mathmode,
+        run_script     = specification.runscript,
+        run_internal   = specification.runinternal,
+        make_text      = specification.maketext,
+     -- random_seed    = specification.seed,
+        utf8_mode      = true,
+        text_mode      = true,
+        show_mode      = true,
+        find_file      = finder,
+        run_overload   = overload,
+        open_file      = openfile,
+        interaction    = "silent",
+        job_name       = tex.jobname, -- mandate in order to get something back
+        halt_on_error  = true,
+        run_logger     = handlers.log     or function(...) handlelog    (instance,...) end,
+        run_error      = handlers.error   or function(...) handleerror  (instance,...) end,
+        run_warning    = handlers.warning or function(...) handlewarning(instance,...) end,
+        run_status     = handlers.status  or function(...) handlestatus (instance,...) end,
+    }
+    return instance, openfile("terminal")
+end
+
+mplib.finder  = finder
+-----.execute = executor

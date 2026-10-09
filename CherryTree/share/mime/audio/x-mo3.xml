@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="audio/x-mo3">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Compressed Tracker audio</comment>
+  <comment xml:lang="zh-Hant-TW">壓縮 Tracker 音訊</comment>
+  <comment xml:lang="uk">стиснуте авдіо для трекерів</comment>
+  <comment xml:lang="tr">Compressed Tracker sesi</comment>
+  <comment xml:lang="sv">Komprimerat Tracker-ljud</comment>
+  <comment xml:lang="sr-Cyrl">Компресовани Tracker звучни запис</comment>
+  <comment xml:lang="sl">Zvok Tracker (stisnjen)</comment>
+  <comment xml:lang="ru">Сжатое аудио Tracker</comment>
+  <comment xml:lang="ro">audio Tracker comprimat</comment>
+  <comment xml:lang="pt-BR">Áudio Tracker compactado</comment>
+  <comment xml:lang="pl">Skompresowany plik dźwiękowy Tracker</comment>
+  <comment xml:lang="oc">àudio Tracker compressat</comment>
+  <comment xml:lang="ko">압축 트래커 오디오</comment>
+  <comment xml:lang="kk-Cyrl">Compressed Tracker аудиосы</comment>
+  <comment xml:lang="ja">圧縮 Tracker オーディオ</comment>
+  <comment xml:lang="it">Audio compresso Tracker</comment>
+  <comment xml:lang="id">Audio Pelacak Terkompresi</comment>
+  <comment xml:lang="hr">Komprimiran Tracker zvučni zapis</comment>
+  <comment xml:lang="hi">संपीड़ित ट्रैकर ऑडियो</comment>
+  <comment xml:lang="gl">Son de Tracker comprimido</comment>
+  <comment xml:lang="fur">Audio di Tracker comprimût</comment>
+  <comment xml:lang="fr">Audio Tracker compressé</comment>
+  <comment xml:lang="fi">Pakattu Tracker audio</comment>
+  <comment xml:lang="et">Pakitud Trackeri helifail</comment>
+  <comment xml:lang="es">audio de Tracker comprimido</comment>
+  <comment xml:lang="en-GB">Compressed Tracker audio</comment>
+  <comment xml:lang="de">komprimiertes Tracker-Audio</comment>
+  <comment xml:lang="ca">àudio comprimit de Tracker</comment>
+  <comment xml:lang="bg">Аудио — трекер, компресирано</comment>
+  <comment xml:lang="be-Cyrl">сціснутае аўдыя Tracker</comment>
+  <comment xml:lang="ar">صوت Tracker مضغوط</comment>
+  <glob pattern="*.mo3"/>
+</mime-type>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="audio/x-xi">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>FastTracker II instrument</comment>
+  <comment xml:lang="zh-Hant-TW">FastTracker II 樂器</comment>
+  <comment xml:lang="uk">інструмент FastTracker II</comment>
+  <comment xml:lang="tr">FastTracker II çalgısı</comment>
+  <comment xml:lang="sv">FastTracker II-instrument</comment>
+  <comment xml:lang="sr-Cyrl">FastTracker II инструмент</comment>
+  <comment xml:lang="sq">Instrument FastTracker II</comment>
+  <comment xml:lang="sl">Glasbilo FastTracker II</comment>
+  <comment xml:lang="ru">Инструмент FastTracker II</comment>
+  <comment xml:lang="ro">instrument FastTracker II</comment>
+  <comment xml:lang="pt-BR">Instrumento FastTracker II</comment>
+  <comment xml:lang="pl">Instrument FastTracker II</comment>
+  <comment xml:lang="oc">instrument FastTracker II</comment>
+  <comment xml:lang="nn">FastTracker II-instrument</comment>
+  <comment xml:lang="ko">FastTracker II 장비</comment>
+  <comment xml:lang="kk-Cyrl">FastTracker II сайманы</comment>
+  <comment xml:lang="ja">FastTracker II インストゥルメント</comment>
+  <comment xml:lang="it">Strumento FastTracker II</comment>
+  <comment xml:lang="id">Instrumen FastTracker II</comment>
+  <comment xml:lang="hr">FastTracker II instrument</comment>
+  <comment xml:lang="hi">FastTracker II उपकरण</comment>
+  <comment xml:lang="fur">Strument di FastTracker II</comment>
+  <comment xml:lang="fr">Instrument FastTracker II</comment>
+  <comment xml:lang="fi">FastTracker II instrumentti</comment>
+  <comment xml:lang="eu">FastTracker II tresna</comment>
+  <comment xml:lang="et">FastTracker II instrument</comment>
+  <comment xml:lang="es">instrumento de FastTracker II</comment>
+  <comment xml:lang="en-GB">FastTracker II instrument</comment>
+  <comment xml:lang="de">FastTracker-II-Instrument</comment>
+  <comment xml:lang="ca">instrument de FastTracker II</comment>
+  <comment xml:lang="bg">Инструмент — FastTracker II</comment>
+  <comment xml:lang="be-Cyrl">інструмент FastTracker II</comment>
+  <comment xml:lang="ar">آلة FastTracker II</comment>
+  <glob pattern="*.xi"/>
+</mime-type>

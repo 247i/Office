@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/vnd.apache.parquet">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Apache Parquet file</comment>
+  <comment xml:lang="zh-Hant-TW">Apache Parquet 檔案</comment>
+  <comment xml:lang="uk">файл Apache Parquet</comment>
+  <comment xml:lang="tr">Apache Parquet dosyası</comment>
+  <comment xml:lang="sv">Apache Parquet-fil</comment>
+  <comment xml:lang="sr-Cyrl">Apache Parquet датотека</comment>
+  <comment xml:lang="sq">Kartelë Apache Parquet</comment>
+  <comment xml:lang="sl">Datoteka Apache Parquet</comment>
+  <comment xml:lang="ru">Файл Apache Parquet</comment>
+  <comment xml:lang="ro">fișier Apache Parquet</comment>
+  <comment xml:lang="pt-BR">Arquivo do Apache Parquet</comment>
+  <comment xml:lang="pl">Plik Apache Parquet</comment>
+  <comment xml:lang="oc">fichièr de paquet Apache</comment>
+  <comment xml:lang="nn">Apache Parquet-fil</comment>
+  <comment xml:lang="ko">아파치 파켓 파일</comment>
+  <comment xml:lang="kk-Cyrl">Apache Parquet файлы</comment>
+  <comment xml:lang="ja">Apache Parquet ファイル</comment>
+  <comment xml:lang="id">Berkas Apache Parquet</comment>
+  <comment xml:lang="hr">Apache Parquet datoteka</comment>
+  <comment xml:lang="he">קובץ Parquet מבית Apache</comment>
+  <comment xml:lang="fur">File Apache Parquet</comment>
+  <comment xml:lang="fr">Fichier d'Apache Parquet</comment>
+  <comment xml:lang="fi">Apache Parquet tiedosto</comment>
+  <comment xml:lang="et">Apache Parqueti fail</comment>
+  <comment xml:lang="es">archivo de Apache Parquet</comment>
+  <comment xml:lang="en-GB">Apache Parquet file</comment>
+  <comment xml:lang="de">Apache Parquet-Datei</comment>
+  <comment xml:lang="da">Apache Parquet-fil</comment>
+  <comment xml:lang="ca">fitxer d'Apache Parquet</comment>
+  <comment xml:lang="bg">Файл — Apache Parquet</comment>
+  <comment xml:lang="be-Cyrl">файл Apache Parquet</comment>
+  <comment xml:lang="ar">ملف Apache Parquet</comment>
+  <alias type="application/x-parquet"/>
+  <generic-icon name="x-office-spreadsheet"/>
+  <glob pattern="*.parquet"/>
+</mime-type>

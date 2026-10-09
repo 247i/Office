@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="x-content/video-dvd">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Video DVD</comment>
+  <comment xml:lang="zh-Hant-TW">視訊 DVD</comment>
+  <comment xml:lang="uk">DVD з відеозаписами</comment>
+  <comment xml:lang="tr">Video DVD’si</comment>
+  <comment xml:lang="sv">Video-dvd</comment>
+  <comment xml:lang="sr-Cyrl">Видео ДВД</comment>
+  <comment xml:lang="sq">DVD video</comment>
+  <comment xml:lang="sl">Video DVD</comment>
+  <comment xml:lang="ru">Видео DVD</comment>
+  <comment xml:lang="ro">DVD video</comment>
+  <comment xml:lang="pt-BR">DVD de vídeo</comment>
+  <comment xml:lang="pl">DVD-Video</comment>
+  <comment xml:lang="oc">DVD vidèo</comment>
+  <comment xml:lang="nn">Video-DVD</comment>
+  <comment xml:lang="ko">비디오 DVD</comment>
+  <comment xml:lang="kk-Cyrl">Видео DVD</comment>
+  <comment xml:lang="ka">ვიდეო CD</comment>
+  <comment xml:lang="kab">DVD n uvidyu</comment>
+  <comment xml:lang="ja">ビデオ DVD</comment>
+  <comment xml:lang="it">DVD video</comment>
+  <comment xml:lang="id">DVD Video</comment>
+  <comment xml:lang="hr">Video DVD</comment>
+  <comment xml:lang="hi">वीडियो DVD</comment>
+  <comment xml:lang="gl">DVD de vídeo</comment>
+  <comment xml:lang="fur">DVD Video</comment>
+  <comment xml:lang="fr">DVD vidéo</comment>
+  <comment xml:lang="fi">Video-DVD</comment>
+  <comment xml:lang="eu">Bideoko DVDa</comment>
+  <comment xml:lang="et">Video DVD</comment>
+  <comment xml:lang="es">DVD de vídeo</comment>
+  <comment xml:lang="en-GB">Video DVD</comment>
+  <comment xml:lang="de">Video-DVD</comment>
+  <comment xml:lang="ca">DVD de vídeo</comment>
+  <comment xml:lang="bg">DVD — видео</comment>
+  <comment xml:lang="be-Cyrl">відэа DVD</comment>
+  <comment xml:lang="ar">فيديو DVD</comment>
+  <comment xml:lang="af">Video-DVD</comment>
+</mime-type>

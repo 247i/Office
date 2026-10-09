@@ -1,0 +1,14 @@
+﻿main
+Giorgio Tani
+LGPLv3
+themes\main\
+100
+$00FF9933
+clWindow
+$00CC5511
+clAppWorspace
+clWindowText
+0000102040
+100
+4
+0

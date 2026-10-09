@@ -1,0 +1,99 @@
+# Greek translation for openteacher
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:38+0200\n"
+"PO-Revision-Date: 2012-03-25 06:32+0000\n"
+"Last-Translator: Yannis Kaskamanidis <ttnfy17@yahoo.gr>\n"
+"Language-Team: Greek <el@li.org>\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:42+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: media.py:159
+msgid "Create media lesson"
+msgstr "Δημιουργία μαθήματος μέσων"
+
+#: media.py:199
+msgid "Unnamed"
+msgstr ""
+
+#: media.py:200 media.py:239
+#, python-format
+msgid "Media lesson: %s"
+msgstr ""
+
+#: media.py:284
+msgid "Empty question or answer"
+msgstr ""
+
+#: media.py:285
+msgid "Please enter at least one question and one answer for every item."
+msgstr ""
+
+#~ msgid "Warning"
+#~ msgstr "Προειδοποίηση"
+
+#~ msgid "Media"
+#~ msgstr "Μέσα"
+
+#~ msgid "File URL"
+#~ msgstr "URL αρχείου"
+
+#~ msgid ""
+#~ "Enter the URL of your website or media item.\n"
+#~ "Supported video sites: YouTube, Dailymotion, Vimeo."
+#~ msgstr ""
+#~ "Εισαγωγή του url ενός ιστότοπου ή ενός μέσου.\n"
+#~ "Υποστηριζόμενοι ιστότοποι βίντεο: YouTube, Dailymotion, Vimeo."
+
+#~ msgid "Add local media"
+#~ msgstr "Προσθήκη τοπικών μέσων"
+
+#~ msgid "Remove"
+#~ msgstr "Αφαίρεση"
+
+#~ msgid "Name:"
+#~ msgstr "Όνομα:"
+
+#~ msgid "Add remote media"
+#~ msgstr "Προσθήκη απομακρυσμένων μέσων"
+
+#~ msgid "Select file(s)"
+#~ msgstr "Επιλογή αρχείου(ων)"
+
+#~ msgid "Description:"
+#~ msgstr "Περιγραφή:"
+
+#~ msgid "Media lesson %s"
+#~ msgstr "Μάθημα μέσων %s"
+
+#~ msgid ""
+#~ "Are you sure you want to go back to the enter tab? This will end your "
+#~ "lesson!"
+#~ msgstr ""
+#~ "Είστε βέβαιος ότι θέλετε να πάτε πίσω στην καρτέλα εισαγωγής; Αυτό θα "
+#~ "τερματίσει το μάθημα."
+
+#~ msgid "Lesson type:"
+#~ msgstr "Είδος μαθήματος:"
+
+#~ msgid "Check"
+#~ msgstr "Έλεγχος"
+
+#~ msgid "Not enough items"
+#~ msgstr "Δεν υπάρχουν αρκετά αντικείμενα"
+
+#~ msgid "You need to add items to your test first"
+#~ msgstr "Πρέπει πρώτα να εισάγετε αντικείμενα στο τεστ σας"
+
+#~ msgid "Media Lesson"
+#~ msgstr "Μάθημα μέσων"

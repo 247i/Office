@@ -1,0 +1,63 @@
+#!	Copyright 2012, Marten de Vries
+#!
+#!	This file is part of OpenTeacher.
+#!
+#!	OpenTeacher is free software: you can redistribute it and/or modify
+#!	it under the terms of the GNU General Public License as published by
+#!	the Free Software Foundation, either version 3 of the License, or
+#!	(at your option) any later version.
+#!
+#!	OpenTeacher is distributed in the hope that it will be useful,
+#!	but WITHOUT ANY WARRANTY; without even the implied warranty of
+#!	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#!	GNU General Public License for more details.
+#!
+#!	You should have received a copy of the GNU General Public License
+#!	along with OpenTeacher.  If not, see <http://www.gnu.org/licenses/>.
+#!
+<!--(set_escape)-->
+    html
+<!--(end)-->
+<!doctype html>
+<html>
+	<head>
+		<title>Modules</title>
+		<link rel='stylesheet' type='text/css' href='style.css' />
+		<link rel="shortcut icon" type="image/png" href="resources/logo">
+		<script src='resources/jquery.js' type='text/javascript'></script>
+		<script src='resources/jquery.quicksearch.js' type='text/javascript'></script>
+		<script type='text/javascript'>
+			$(function() {
+				$('#search').quicksearch('#modules li');
+				$('#search').focus();
+			});
+		</script>
+	</head>
+	<body>
+		<div id='header'>
+			<img id='logo' src='resources/logo' />
+			<div id='nav2'>
+				<a href='priorities.html'>Module priorities by profile &gt;</a><br />
+				<a href='dev_docs/'>Developer documentation &gt;</a><br />
+				<a href='fixmes.html'>FIXMEs and TODOs &gt;</a><br />
+				<a href='module_graph.svg'>Module map (svg) &gt;</a>
+			</div>
+			<h1>Modules</h1>
+		</div>
+		<div id='page'>
+			<p>
+			Total amount of modules: <strong>@!len(mods)!@</strong>.
+			</p>
+			<label for='search'>Search:</label>
+			<input id='search' type='text' />
+			<ul id='modules'>
+			<!--(for mod in mods)-->
+				<li><a href='@!mod!@.html'>@!mod[len("modules/"):]!@</a></li>
+			<!--(end)-->
+			</ul>
+		</div>
+		<div id='footer'>
+			<em>OpenTeacher code documentation</em>
+		</div>
+	</body>
+</html>

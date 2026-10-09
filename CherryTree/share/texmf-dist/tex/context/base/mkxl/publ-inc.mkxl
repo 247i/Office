@@ -1,0 +1,125 @@
+%D \module
+%D   [       file=publ-inc,
+%D        version=2018.06.23,
+%D          title=\CONTEXT\ Publication Macros,
+%D       subtitle=XML inclusion,
+%D         author=Hans Hagen,
+%D           date=\currentdate,
+%D      copyright={PRAGMA ADE \& \CONTEXT\ Development Team}]
+%C
+%C This module is part of the \CONTEXT\ macro||package and is
+%C therefore copyrighted by \PRAGMA. See mreadme.pdf for
+%C details.
+
+\writestatus{loading}{ConTeXt Publication Macros / XML inclusion}
+
+\registerctxluafile{publ-inc}{}
+
+%D A teaser for Alan.
+
+\unprotect
+
+\definesymbol[btxattachment][{\infofont\darkred  btx}]
+\definesymbol[btxcomment]   [{\infofont\darkblue btx}]
+
+\protected\def\btx_add_blob#1#2%
+  {\relax
+     \clf_btxentrytobuffer{\currentbtxdataset}{\currentbtxtag}{temp-btx-export}%
+     #2%
+       [\c!symbol=#1,%
+        \c!space=\v!yes,
+        \c!buffer=temp-btx-export,%
+        \c!name={\currentbtxtag.bib}]%
+   \relax}
+
+\permanent\protected\def\btxattach
+  {\iftrialtypesetting\orelse\ifexporting\iflocation
+     \dostarttaggednodetail\t!ignore
+       \btx_add_blob{btxattachment}\attachment
+     \dostoptagged
+   \fi\fi}
+
+\permanent\protected\def\btxcomment
+  {\iftrialtypesetting\orelse\ifexporting\iflocation
+     \dostarttaggednodetail\t!ignore
+       \btx_add_blob{btxcomment}\comment
+     \dostoptagged
+   \fi\fi}
+
+%D This kind of feature creep is not yet configurable, nor documented.
+
+\permanent\protected\def\btxaddsource
+  {\iftrialtypesetting\orelse\ifexporting\iflocation
+     \dostarttaggednodetail\t!ignore
+     \llap{%
+       \btx_add_blob{btxattachment}\attachment
+       \quad
+       \btx_add_blob{btxcomment}\comment
+       \hskip\leftmargindistance
+     }%
+     \dostoptagged
+   \fi\fi}
+
+%D Analogue to what we do with math:
+
+\definenote    [publicationnote] % [location=none]
+\setupnotation [publicationnote] [\c!style=\tt]
+
+\protected\def\publ_cite_set_meaning#1%
+  {\setbox\b_btx_cmd\vbox\bgroup
+     \forgetall
+     \nohyphens
+     \settrialtypesetting
+     \let\currentlist\s!btx
+     \setuplist
+       [\s!btx]
+       [\c!before=,%
+        \c!after=]%
+   % no, makes custom field go wrong, so we would have to push pop
+   % anyway ... now we just used the set one whoch is probbably okay
+   % \setupbtx
+   %   [\c!specification=\v!default]%
+     \setupbtxrendering
+       [\v!default]%
+       [\c!numbering=\v!no]%
+     \setupinteraction
+       [\c!state=\v!stop]%
+ \let\btx_list_reference_inject_now\relax
+     \btxstartlistentry
+   % \btxsetcurrentlistentry{0}
+   % \btxsetcurrentlistindex{0}
+   % \btxsetcategory{\s!unknown}%
+     \btxsettag{#1}%
+     \btxsetnumber{0}%
+   % \btxsetlanguage{\currentlanguage}%
+     \btxhandlelistentry
+     \btxstoplistentry
+   \egroup}
+
+\protected\def\publ_cite_trace_blob_indeed
+  {\dontleavehmode
+   \hbox to \zeropoint \bgroup
+      \resetinteractioncontrastcolor
+      \resetinteractionstyle
+      \bgroup
+        \darkgray
+        \vrule \s!height .9\strutht \s!depth .9\strutdp \s!width \onepoint \relax
+        \hbox to \zeropoint \bgroup
+          \smallinfofont
+        % \the\currentmathblob\hss
+          \hbox to \zeropoint \s!yoffset -.6\strutdp \bgroup
+            \currentbtxreference
+            \hss
+          \egroup
+        \egroup
+      \egroup
+      \expanded{\btxentrytostring{publicationnote}{note}{\currentbtxreference}}%
+      \hss
+   \egroup}
+
+\installtextracker
+  {publications.textblobs}
+  {\let\publ_cite_trace_blob\publ_cite_trace_blob_indeed}
+  {\let\publ_cite_trace_blob\relax}
+
+\protect \endinput

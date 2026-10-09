@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/scriptlet">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Windows scriptlet</comment>
+  <comment xml:lang="uk">дієсценарій Windows</comment>
+  <comment xml:lang="tr">Windows betikçiği</comment>
+  <comment xml:lang="sv">Windows-scriptlet</comment>
+  <comment xml:lang="sr-Cyrl">Виндоуз скриптић</comment>
+  <comment xml:lang="sl">Skriptek Windows</comment>
+  <comment xml:lang="ru">Скриптлет для Windows</comment>
+  <comment xml:lang="ro">scriptlet Windows</comment>
+  <comment xml:lang="pt-BR">Scriptlet Windows</comment>
+  <comment xml:lang="pl">Skrypt Windows</comment>
+  <comment xml:lang="oc">escriptet Windows</comment>
+  <comment xml:lang="ko">윈도우 스크립틀렛</comment>
+  <comment xml:lang="kk-Cyrl">Windows скриптлеті</comment>
+  <comment xml:lang="fr">scriptlet Windows</comment>
+  <comment xml:lang="fi">Windows-skriptletit</comment>
+  <comment xml:lang="et">Windowsi skriptlet</comment>
+  <comment xml:lang="es">scriptlet de Windows</comment>
+  <comment xml:lang="en-GB">Windows scriptlet</comment>
+  <comment xml:lang="de">Windows-Scriptlet</comment>
+  <comment xml:lang="ar">ويندوز scriptlet</comment>
+  <sub-class-of type="application/xml"/>
+  <generic-icon name="text-x-script"/>
+  <glob pattern="*.sct" weight="40"/>
+  <glob pattern="*.wsc" weight="40"/>
+</mime-type>

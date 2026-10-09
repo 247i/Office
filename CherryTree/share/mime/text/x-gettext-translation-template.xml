@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/x-gettext-translation-template">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Translation template</comment>
+  <comment xml:lang="zh-Hant-TW">翻譯樣板</comment>
+  <comment xml:lang="uk">шаблон перекладу</comment>
+  <comment xml:lang="tr">Çeviri şablonu</comment>
+  <comment xml:lang="sv">Översättningsmall</comment>
+  <comment xml:lang="sr-Cyrl">Шаблон превода</comment>
+  <comment xml:lang="sq">Gjedhe përkthimi</comment>
+  <comment xml:lang="sl">Prevajalska predloga</comment>
+  <comment xml:lang="ru">Шаблон перевода</comment>
+  <comment xml:lang="ro">șablon traducere</comment>
+  <comment xml:lang="pt-BR">Modelo de tradução</comment>
+  <comment xml:lang="pl">Szablon tłumaczenia</comment>
+  <comment xml:lang="oc">modèl de traduccion</comment>
+  <comment xml:lang="nn">Omsetjingsmal</comment>
+  <comment xml:lang="lt">Vertimo šablonas</comment>
+  <comment xml:lang="ko">번역 서식</comment>
+  <comment xml:lang="kk-Cyrl">Аудармалар үлгісі</comment>
+  <comment xml:lang="ja">翻訳雛形</comment>
+  <comment xml:lang="it">Modello traduzione</comment>
+  <comment xml:lang="id">Templat terjemahan</comment>
+  <comment xml:lang="hr">Predložak prijevoda</comment>
+  <comment xml:lang="hi">Translation खाका</comment>
+  <comment xml:lang="he">תבנית תרגום</comment>
+  <comment xml:lang="gl">Modelo de tradución</comment>
+  <comment xml:lang="fur">Model di traduzion</comment>
+  <comment xml:lang="fr">Modèle de traduction</comment>
+  <comment xml:lang="fi">Käännösmalli</comment>
+  <comment xml:lang="eu">Itzulpen-txantiloia</comment>
+  <comment xml:lang="et">Tõlkefaili mall</comment>
+  <comment xml:lang="es">plantilla de traducciones</comment>
+  <comment xml:lang="en-GB">Translation template</comment>
+  <comment xml:lang="de">Übersetzungsvorlage</comment>
+  <comment xml:lang="ca">plantilla de traduccions</comment>
+  <comment xml:lang="bg">Шаблон за превод</comment>
+  <comment xml:lang="be-Cyrl">шаблон перакладу</comment>
+  <comment xml:lang="ar">قالب ترجمة</comment>
+  <sub-class-of type="text/plain"/>
+  <glob pattern="*.pot"/>
+  <alias type="text/x-pot"/>
+</mime-type>

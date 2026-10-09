@@ -1,0 +1,93 @@
+%D \module
+%D   [     file=meta-imp-magicsquare,
+%D      version=2026-02-14,
+%D        title=\CONTEXT\ User Module,
+%D     subtitle=Magic squares. Companion to t-squares,
+%D       author=Jairo A. del Rio,
+%D         date=\currentdate,
+%D    copyright=Jairo A. del Rio,
+%D        email=jairoadelrio6@gmail.com,
+%D      license=MIT License]
+
+\registerctxluafile{meta-imp-magicsquare}{autosuffix}
+
+\startMPextensions
+
+presetparameters "magicsquare" [
+  n = 5,
+  size = 2EmWidth,
+  alternative = "color",
+  rotation = 0,
+  reverse = "",
+  frame = "on",
+  rulethickness = .5bp,
+];
+
+def lmt_magicsquare = applyparameters "magicsquare" "lmt_do_magicsquare" enddef;
+
+def lmt_do_magicsquare =
+  begingroup;
+  pushparameters "magicsquare";
+  save n, sz, rot, rev, a, f, ok;
+  save currentcell, currentpos;
+  pair currentpos;
+  string a, f, rev;
+  boolean ok;
+
+  n   := getparameter "n";           sz  := getparameter "size";
+  rot := getparameter "rotation";    rev := getparameter "reverse";
+  a   := getparameter "alternative";
+  f   := getparameter "frame";
+
+  ok = lua.MP.magicsquareinit(n);
+
+  if ok:
+    rot := ceiling(rot mod 360);
+    for i = 1 upto n:
+      for j = 1 upto n:
+        currentcell := lua.MP.currentmagiccell(i, j);
+        currentpos  := sz*(i-(n+1)/2,(n+1)/2-j);
+        if ((rot mod 90) == 0):
+          currentpos := currentpos rotated rot;
+        fi
+        if ((rev == "vertical") or (rev == "both")):
+          currentpos := currentpos reflectedabout(origin,left);
+        fi
+        if ((rev == "horizontal") or (rev == "both")):
+          currentpos := currentpos reflectedabout(origin,up);
+        fi
+        if (f == "on"):
+          draw fullsquare scaled sz shifted currentpos
+          if hasparameter "rulethickness":
+            withpen pencircle scaled (getparameter "rulethickness")
+          fi
+        fi;
+        if (a == "color"):
+          fill fullsquare scaled sz shifted currentpos
+          withcolor hsvtorgb(360*currentcell/(n*n), .5, 1)
+        fi;
+        draw thetextext(decimal currentcell, currentpos);
+      endfor
+    endfor
+  else:
+    draw thetextext("Invalid number: " & decimal n, origin)
+    withcolor red;
+  fi
+  lua.MP.magicsquarereset();
+  popparameters;
+  endgroup;
+enddef;
+
+\stopMPextensions
+
+\defineMPparameterset
+  [magicsquare]
+  [n=number,
+   size=dimension,
+   alternative=string,
+   rotation=number,
+   reverse=string,
+   frame=string,
+   rulethickness=dimension]
+
+% vim: tw=80:ts=2:sts=2:expandtab:wrap:linebreak:breakindent

@@ -1,0 +1,169 @@
+# Brazilian Portuguese translation for openteacher
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2013-02-02 12:38+0000\n"
+"Last-Translator: Adriano Steffler <Unknown>\n"
+"Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:44+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: model.py:95
+msgid "Belgian AZERTY"
+msgstr "AZERTY belga"
+
+#: model.py:96
+msgid "Colemak"
+msgstr "Colemak"
+
+#: model.py:97
+msgid "Dvorak Simplified Keyboard"
+msgstr "Teclado simplificado Dvorak"
+
+#: model.py:98
+msgid "French AZERTY"
+msgstr "AZERTY francês"
+
+#: model.py:99
+msgid "QWERTY"
+msgstr "QWERTY"
+
+#: model.py:100
+msgid "QWERTZ"
+msgstr "QWERTZ"
+
+#: model.py:183
+msgid ""
+"Welcome, I'm your personal OpenTeacher typing tutor. We'll improve your "
+"typing skills by doing simple exercises. Between the exercises, I'll give "
+"instructions. Let's get started:\n"
+"\n"
+"First place your fingers on the so-called home row: your fingers, from left "
+"to right, should always be on the keys '{a}', '{s}', '{d}', '{f}', "
+"'{space}', '{space}', '{j}', '{k}', '{l}' and '{;}' while not typing another "
+"character. When your fingers are in position, press {space} to start the "
+"first lesson. Work for accuracy at first, not speed."
+msgstr ""
+"Seja bem-vindo, eu sou o seu tutor de digitação do OpenTeacher. Nós "
+"aperfeiçoaremos as suas habilidades de digitação fazendo exercícios simples. "
+"Entre os exercícios, eu darei instruções. Vamos começar:\n"
+"\n"
+"Em primeiro lugar, coloque os seus dedos na assim chamada fileira inicial: "
+"os seus dedos, da esquerda para a direita, devem sempre estar nas teclas "
+"'{a}', '{s}', '{d}', '{f}', '{barra de espaço}', '{barra de espaço}', '{j}', "
+"'{k}', '{l}' e '{;}' enquanto não estiver digitando outro caractere. Quando "
+"os seus dedos estiverem em posição, pressione {barra de espaço} para começar "
+"a primeira lição. Esforce-se, em primeiro lugar, por precisão, não "
+"velocidade."
+
+#: model.py:198
+msgid ""
+"Congratulations, you finished this typing course! If you want to continue, "
+"you can, but this is the end of the instructions. You did a great job!"
+msgstr ""
+"Parabéns, você concluiu este curso de digitação! Se você quiser continuar, "
+"você pode, mas este é o fim das instruções. Você fez um ótimo trabalho!"
+
+#: model.py:208
+msgid "Congratulations, you finished your first exercise!"
+msgstr "Parabéns, você concluiu o seu primeiro exercício!"
+
+#: model.py:225
+#, python-format
+msgid "You made %s mistake, please keep trying until you can do it flawless."
+msgid_plural ""
+"You made %s mistakes, please keep trying until you can do it flawless."
+msgstr[0] ""
+"Você fez %s erro, por favor, continue tentando até que você consiga digitar "
+"sem erros."
+msgstr[1] ""
+"Você fez %s erros, por favor, continue tentando até que você consiga digitar "
+"sem erros."
+
+#: model.py:230
+#, python-format
+msgid "Too bad, you made %s mistake. Keep practising to get better!"
+msgid_plural "Too bad, you made %s mistakes. Keep practising to get better!"
+msgstr[0] ""
+"Muito ruim, você fez %s erro. Continue praticando para ficar melhor!"
+msgstr[1] ""
+"Muito ruim, você fez %s erros. Continue praticando para ficar melhor!"
+
+#: model.py:237
+msgid "To archieve that, you might try slowing down a bit."
+msgstr "Para conseguir isso, você pode tentar desacelerar um pouco."
+
+#: model.py:241
+msgid "You made zero mistakes. Now try to improve your typing speed a bit."
+msgstr ""
+"Você não fez nenhum erro. Agora tente melhorar um pouco a sua velocidade de "
+"digitação."
+
+#: model.py:247
+msgid ""
+"You made zero mistakes and are typing fast enough, so you can continue "
+"practising some new letter combinations. Keep up the good work!"
+msgstr ""
+"Você não fez nenhum erro e está digitando rápido o suficiente. Por isso, "
+"você pode continuar praticando algumas novas combinações de letras. Continue "
+"com o bom trabalho!"
+
+#: model.py:248
+msgid ""
+"You did it flawlessly and fast! Continue practising some new letters "
+"combinations to get even better!"
+msgstr ""
+"Você conseguiu digitar sem erros e rapidamente! Continue praticando algumas "
+"novas combinações de letras para ficar ainda melhor!"
+
+#: model.py:252
+msgid ""
+"You're now going to learn letters that aren't on the home row. To see which "
+"fingers you need to use, see the keyboard image on your screen. When you're "
+"not using a finger to type a letter, put it back on the home row directly."
+msgstr ""
+"Agora você aprenderá letras que não estão na fileira inicial. Para ver quais "
+"dedos você precisa usar, veja a imagem do teclado na sua tela. Quando você "
+"não estiver usando um dedo para digitar uma letra, imediatamente coloque-o "
+"de volta na fileira inicial"
+
+#: model.py:255
+msgid ""
+"The keys you're going to practise now are typed by the left and right index "
+"finger and further away from those fingers than the other keys we practised "
+"on the current row. Make sure you return your finger to its position on the "
+"home row when you're typing another letter."
+msgstr ""
+"As teclas que você praticará agora são pressionadas pelo dedo indicador "
+"esquerdo e direito e estão ainda mais longe destes dedos do que as outras "
+"teclas que praticamos na fileira atual. Certifique-se de colocar o seu dedo "
+"de volta à sua posição na fileira inicial quando você estiver digitando uma "
+"outra letra."
+
+#: model.py:259
+msgid ""
+"You made zero mistakes and are typing fast enough, so you can continue "
+"practising with some new words. Keep up the good work!"
+msgstr ""
+"Você não fez nenhum erro e está digitando rápido o suficiente. Por isso, "
+"você pode continuar praticando com algumas novas palavras. Continue com o "
+"bom trabalho!"
+
+#: model.py:260
+msgid ""
+"You did it flawlessly and fast! Continue practising with new words to get "
+"even better!"
+msgstr ""
+"Você digitou sem erros e rapidamente! Continue praticando com novas palavras "
+"para ficar ainda melhor!"

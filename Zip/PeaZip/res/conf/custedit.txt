@@ -1,0 +1,65 @@
+﻿[custom editors/players, override system's file associations, 4.2+]
+Google
+Notepad
+VLC Media Player
+
+MS Paint
+
+WordPad
+
+
+
+
+
+Internet Explorer / Edge
+Chrome
+Mozilla Firefox
+
+https://www.google.com/search?q=
+notepad.exe
+C:\Program Files\VideoLAN\VLC\vlc.exe
+
+mspaint.exe
+
+C:\Program Files\Windows NT\Accessories\wordpad.exe
+
+
+
+
+
+iexplore.exe
+C:\Program Files\Google\Chrome\Application\chrome.exe
+C:\Program Files\Mozilla Firefox\firefox.exe
+
+Microsoft Windows Defender
+Microsoft Windows Defender
+
+
+
+
+
+
+cmd.exe /k ""C:\Program Files (x86)\Windows Defender\MpCmdRun.exe" -Scan -ScanType 3 -File 
+cmd.exe /k ""C:\Program Files\Windows Defender\MpCmdRun.exe" -Scan -ScanType 3 -File 
+
+
+
+
+
+
+"
+"
+
+
+
+
+
+
+C:\Program Files (x86)\Windows Defender\MpCmdRun.exe
+C:\Program Files\Windows Defender\MpCmdRun.exe
+
+
+
+
+
+

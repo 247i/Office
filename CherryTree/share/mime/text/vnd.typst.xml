@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/vnd.typst">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Typst document</comment>
+  <comment xml:lang="zh-Hant-TW">Typst 文件</comment>
+  <comment xml:lang="uk">документ Typst</comment>
+  <comment xml:lang="tr">Typst belgesi</comment>
+  <comment xml:lang="sv">Typst-dokument</comment>
+  <comment xml:lang="sr-Cyrl">Типст документ</comment>
+  <comment xml:lang="sq">Dokument Typst</comment>
+  <comment xml:lang="sl">Dokument Typst</comment>
+  <comment xml:lang="ru">Документ Typst</comment>
+  <comment xml:lang="ro">document Typst</comment>
+  <comment xml:lang="pt-BR">Documento Typst</comment>
+  <comment xml:lang="pl">Dokument Typst</comment>
+  <comment xml:lang="oc">document Typst</comment>
+  <comment xml:lang="nn">Typst-dokument</comment>
+  <comment xml:lang="lt">Typst dokumentas</comment>
+  <comment xml:lang="ko">Typst 문서</comment>
+  <comment xml:lang="kk-Cyrl">Typst құжаты</comment>
+  <comment xml:lang="kab">Isemli Typst</comment>
+  <comment xml:lang="ja">Typst ドキュメント</comment>
+  <comment xml:lang="it">Documento Typst</comment>
+  <comment xml:lang="id">Dokumen Typst</comment>
+  <comment xml:lang="hr">Typst dokument</comment>
+  <comment xml:lang="hi">Typst दस्तावेज़</comment>
+  <comment xml:lang="gl">Documento de Typst</comment>
+  <comment xml:lang="fur">Document Typst</comment>
+  <comment xml:lang="fr">Document Typst</comment>
+  <comment xml:lang="fi">Typst-asiakirja</comment>
+  <comment xml:lang="eu">Typst dokumentua</comment>
+  <comment xml:lang="et">Typst dokument</comment>
+  <comment xml:lang="es">documento de Typst</comment>
+  <comment xml:lang="en-GB">Typst document</comment>
+  <comment xml:lang="de">Typst-Dokument</comment>
+  <comment xml:lang="ca">document Typst</comment>
+  <comment xml:lang="bg">Документ — Typst</comment>
+  <comment xml:lang="be-Cyrl">дакумент Typst</comment>
+  <comment xml:lang="ar">مستند Typst</comment>
+  <sub-class-of type="text/plain"/>
+  <glob pattern="*.typ"/>
+  <alias type="text/x-typst"/>
+</mime-type>

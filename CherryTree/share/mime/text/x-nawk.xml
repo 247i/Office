@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/x-nawk">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>New (BWK) AWK script</comment>
+  <comment xml:lang="uk">новий скрипт AWK (BWK)</comment>
+  <comment xml:lang="tr">Yeni (BWK) AWK betiği</comment>
+  <comment xml:lang="sv">Nya (BWK) AWK-skript</comment>
+  <comment xml:lang="sr-Cyrl">Нова (BWK) AWK скрипта</comment>
+  <comment xml:lang="sq">Programth i ri (BWK) AWK</comment>
+  <comment xml:lang="sl">Nov skript (BWK) AWK</comment>
+  <comment xml:lang="ru">Новый сценарий (BWK) AWK</comment>
+  <comment xml:lang="ro">script AWK nou (BWK)</comment>
+  <comment xml:lang="pt-BR">Script AWK novo (BWK)</comment>
+  <comment xml:lang="pl">Nowy skrypt AWK (BWK)</comment>
+  <comment xml:lang="oc">escript AWK novèl (BWK)</comment>
+  <comment xml:lang="ko">새로운 AWK (BWK) 스크립트</comment>
+  <comment xml:lang="kk-Cyrl">Жаңа (BWK) AWK сценарийі</comment>
+  <comment xml:lang="fr">Nouveau script (BWK) AWK</comment>
+  <comment xml:lang="fi">New (BWK) AWK skripti</comment>
+  <comment xml:lang="et">Uus (BWK) AWK-skript</comment>
+  <comment xml:lang="es">Nuevo guion AWK (BWK)</comment>
+  <comment xml:lang="en-GB">New (BWK) AWK script</comment>
+  <comment xml:lang="de">BWK-awk-Skript</comment>
+  <comment xml:lang="ar">سكربت (BWK) AWK الجديد</comment>
+  <acronym>New (BWK) AWK</acronym>
+  <expanded-acronym>New (Brian Wilson Kernighan) [Alfred Vaino] Aho, [Peter Jay] Weinberger and [Brian Wilson] Kernighan [language]</expanded-acronym>
+  <sub-class-of type="text/x-awk"/>
+  <generic-icon name="text-x-script"/>
+  <glob pattern="*.awk"/>
+</mime-type>

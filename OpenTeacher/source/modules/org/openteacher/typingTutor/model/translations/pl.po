@@ -1,0 +1,161 @@
+# Polish translation for openteacher
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2013-04-21 01:48+0000\n"
+"Last-Translator: pp/bs <Unknown>\n"
+"Language-Team: Polish <pl@li.org>\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2;\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:44+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: model.py:95
+msgid "Belgian AZERTY"
+msgstr "Belgijski układ AZERTY"
+
+#: model.py:96
+msgid "Colemak"
+msgstr "Układ Colemaka"
+
+#: model.py:97
+msgid "Dvorak Simplified Keyboard"
+msgstr "Uproszczona klawiatura Dvoraka"
+
+#: model.py:98
+msgid "French AZERTY"
+msgstr "Francuski układ AZERTY"
+
+#: model.py:99
+msgid "QWERTY"
+msgstr "Układ QWERTY"
+
+#: model.py:100
+msgid "QWERTZ"
+msgstr "Układ QWERTZ"
+
+#: model.py:183
+msgid ""
+"Welcome, I'm your personal OpenTeacher typing tutor. We'll improve your "
+"typing skills by doing simple exercises. Between the exercises, I'll give "
+"instructions. Let's get started:\n"
+"\n"
+"First place your fingers on the so-called home row: your fingers, from left "
+"to right, should always be on the keys '{a}', '{s}', '{d}', '{f}', "
+"'{space}', '{space}', '{j}', '{k}', '{l}' and '{;}' while not typing another "
+"character. When your fingers are in position, press {space} to start the "
+"first lesson. Work for accuracy at first, not speed."
+msgstr ""
+"Witaj, jestem twoim osobistym nauczycielem pisania na klawiaturze. Poprawimy "
+"twoje umiejętności w tym zakresie poprzez wykonanie prostych ćwiczeń. "
+"Pomiędzy ćwiczeniami będę cię instruować. Zaczynamy:\n"
+"\n"
+"Najpierw połóż palce na tzw. rzędzie głównym: twoje palce, patrząc od lewej "
+"do prawej, powinny zawsze spoczywać na klawiszach '{a}', '{s}', '{d}', "
+"'{f}', '{spacja}', '{spacja}', '{j}', '{k}', '{l}' i '{;}', chyba że "
+"wpisujesz znak inny niż wyżej wymienione. Po ułożeniu palców naciśnij "
+"{spację} aby rozpocząć pierwszą lekcję. Na początku ćwicz pisanie bez "
+"błędów, a nie szybkość pisania."
+
+#: model.py:198
+msgid ""
+"Congratulations, you finished this typing course! If you want to continue, "
+"you can, but this is the end of the instructions. You did a great job!"
+msgstr ""
+"Gratulacje, kurs pisania na klawiaturze został ukończony! Jeśli chcesz "
+"kontynuować, możesz to zrobić, jest to już jednak koniec instrukcji. Świetna "
+"robota!"
+
+#: model.py:208
+msgid "Congratulations, you finished your first exercise!"
+msgstr "Gratulacje, pierwsze ćwiczenie ukończone!"
+
+#: model.py:225
+#, python-format
+msgid "You made %s mistake, please keep trying until you can do it flawless."
+msgid_plural ""
+"You made %s mistakes, please keep trying until you can do it flawless."
+msgstr[0] ""
+"Popełniono %s błąd - ćwicz dotąd, aż będziesz w stanie napisać to bezbłędnie."
+msgstr[1] ""
+"Popełniono %s błędy - ćwicz dotąd, aż będziesz w stanie napisać to "
+"bezbłędnie."
+msgstr[2] ""
+"Popełniono %s błędów - ćwicz dotąd, aż będziesz w stanie napisać to "
+"bezbłędnie."
+
+#: model.py:230
+#, python-format
+msgid "Too bad, you made %s mistake. Keep practising to get better!"
+msgid_plural "Too bad, you made %s mistakes. Keep practising to get better!"
+msgstr[0] ""
+"Niedobrze, popełniono %s błąd. Musisz jeszcze poćwiczyć, żeby się poprawić!"
+msgstr[1] ""
+"Niedobrze, popełniono %s błędy. Musisz jeszcze poćwiczyć, żeby się poprawić!"
+msgstr[2] ""
+"Niedobrze, popełniono %s błędów. Musisz jeszcze poćwiczyć, żeby się poprawić!"
+
+#: model.py:237
+msgid "To archieve that, you might try slowing down a bit."
+msgstr "Aby to osiągnąć, możesz spróbować pisać trochę wolniej."
+
+#: model.py:241
+msgid "You made zero mistakes. Now try to improve your typing speed a bit."
+msgstr ""
+"Popełniono zero błędów. Teraz spróbuj poprawić trochę szybkość pisania."
+
+#: model.py:247
+msgid ""
+"You made zero mistakes and are typing fast enough, so you can continue "
+"practising some new letter combinations. Keep up the good work!"
+msgstr ""
+"Popełniono zero błędów, a szybkość pisania jest wystarczająca, więc możesz "
+"teraz poćwiczyć nowe układy liter. Oby tak dalej!"
+
+#: model.py:248
+msgid ""
+"You did it flawlessly and fast! Continue practising some new letters "
+"combinations to get even better!"
+msgstr ""
+"Bezbłędnie i szybko! Poćwicz nowe układy liter, żeby osiągnąć jeszcze lepsze "
+"wyniki!"
+
+#: model.py:252
+msgid ""
+"You're now going to learn letters that aren't on the home row. To see which "
+"fingers you need to use, see the keyboard image on your screen. When you're "
+"not using a finger to type a letter, put it back on the home row directly."
+msgstr ""
+
+#: model.py:255
+msgid ""
+"The keys you're going to practise now are typed by the left and right index "
+"finger and further away from those fingers than the other keys we practised "
+"on the current row. Make sure you return your finger to its position on the "
+"home row when you're typing another letter."
+msgstr ""
+
+#: model.py:259
+msgid ""
+"You made zero mistakes and are typing fast enough, so you can continue "
+"practising with some new words. Keep up the good work!"
+msgstr ""
+"Popełniono zero błędów, a szybkość pisania jest wystarczająca, więc możesz "
+"teraz poćwiczyć nowe słowa. Oby tak dalej!"
+
+#: model.py:260
+msgid ""
+"You did it flawlessly and fast! Continue practising with new words to get "
+"even better!"
+msgstr ""
+"Bezbłędnie i szybko! Poćwicz nowe słowa, żeby osiągnąć jeszcze lepsze wyniki!"

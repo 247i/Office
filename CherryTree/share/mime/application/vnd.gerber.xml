@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/vnd.gerber">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Gerber file</comment>
+  <comment xml:lang="zh-Hant-TW">Gerber 檔案</comment>
+  <comment xml:lang="uk">файл Gerber</comment>
+  <comment xml:lang="tr">Gerber dosyası</comment>
+  <comment xml:lang="sv">Gerber-fil</comment>
+  <comment xml:lang="sr-Cyrl">Gerber датотека</comment>
+  <comment xml:lang="sq">Kartelë Gerber</comment>
+  <comment xml:lang="sl">Datoteka Gerber</comment>
+  <comment xml:lang="ru">Файл Gerber</comment>
+  <comment xml:lang="ro">fișier Gerber</comment>
+  <comment xml:lang="pt-BR">Arquivo Gerber</comment>
+  <comment xml:lang="pl">Plik Gerber</comment>
+  <comment xml:lang="oc">fichièr Gerber</comment>
+  <comment xml:lang="nn">Gerber-fil</comment>
+  <comment xml:lang="lt">Gerber failas</comment>
+  <comment xml:lang="ko">Gerber 파일</comment>
+  <comment xml:lang="kk-Cyrl">Gerber файлы</comment>
+  <comment xml:lang="kab">Afaylu n Gerber</comment>
+  <comment xml:lang="ja">Gerber ファイル</comment>
+  <comment xml:lang="it">File Gerber</comment>
+  <comment xml:lang="id">Berkas Gerber</comment>
+  <comment xml:lang="hr">Gerber datoteka</comment>
+  <comment xml:lang="hi">Gerber फाइल</comment>
+  <comment xml:lang="he">קובץ Gerber</comment>
+  <comment xml:lang="fur">File Gerber</comment>
+  <comment xml:lang="fr">Fichier Gerber</comment>
+  <comment xml:lang="fi">Gerber-tiedosto</comment>
+  <comment xml:lang="eu">Gerber fitxategia</comment>
+  <comment xml:lang="et">Gerberi fail</comment>
+  <comment xml:lang="es">archivo de Gerber</comment>
+  <comment xml:lang="en-GB">Gerber file</comment>
+  <comment xml:lang="de">Gerber-Datei</comment>
+  <comment xml:lang="ca">fitxer Gerber</comment>
+  <comment xml:lang="bg">Файл — Gerber</comment>
+  <comment xml:lang="be-Cyrl">файл Gerber</comment>
+  <comment xml:lang="ar">ملف Gerber</comment>
+  <sub-class-of type="text/plain"/>
+  <glob pattern="*.gbr"/>
+  <generic-icon name="text-x-generic"/>
+  <alias type="application/x-gerber"/>
+</mime-type>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-commodore-d90-disk">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Commodore D9090/D9060 hard disk image</comment>
+  <comment xml:lang="uk">образ жорсткого диска Commodore D9090/D9060</comment>
+  <comment xml:lang="tr">Commodore D9090/D9060 sabit disk kalıbı</comment>
+  <comment xml:lang="sv">Commodore D9090/D9060-hårddiskavbild</comment>
+  <comment xml:lang="sr-Cyrl">Одраз чврстог диска за Комодор Д9090/Д9060</comment>
+  <comment xml:lang="sq">Pamje disku Commodore D9090/D9060</comment>
+  <comment xml:lang="sl">Odtis trdega diska Commodore D9090/D9060</comment>
+  <comment xml:lang="ru">Образ жёсткого диска Commodore D9090/D9060</comment>
+  <comment xml:lang="ro">imagine de disc dur Commodore D9090/D9060</comment>
+  <comment xml:lang="pt-BR">Imagem do disco rígido Commodore D9090/D9060</comment>
+  <comment xml:lang="pl">Obraz dysku twardego Commodore D9090/D9060</comment>
+  <comment xml:lang="oc">imatge disc dur per Commodore D9090/D9060</comment>
+  <comment xml:lang="ko">Commodore D9090/D9060 하드 디스크 이미지</comment>
+  <comment xml:lang="kk-Cyrl">Commodore D9090/D9060 қатты диск бейнесі</comment>
+  <comment xml:lang="fr">Image disque Commodore D9090/D9060</comment>
+  <comment xml:lang="fi">Commodore D9090/D9060 kiintolevykuva</comment>
+  <comment xml:lang="et">Commodore D9090/D9060 kõvakettatõmmis</comment>
+  <comment xml:lang="es">Imagen de disco duro Commodore D9090/D9060</comment>
+  <comment xml:lang="en-GB">Commodore D9090/D9060 hard disk image</comment>
+  <comment xml:lang="de">Commodore-D9090/D9060-Festplattenabbild</comment>
+  <generic-icon name="application-x-executable"/>
+  <glob pattern="*.d90"/>
+</mime-type>

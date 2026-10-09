@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-object">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Object code</comment>
+  <comment xml:lang="zh-Hant-TW">目的碼</comment>
+  <comment xml:lang="uk">об'єктний код</comment>
+  <comment xml:lang="tr">Nesne kodu</comment>
+  <comment xml:lang="sv">Objektkod</comment>
+  <comment xml:lang="sr-Cyrl">Објектни код</comment>
+  <comment xml:lang="sl">Objektna koda</comment>
+  <comment xml:lang="ru">Объектный код</comment>
+  <comment xml:lang="ro">cod obiect</comment>
+  <comment xml:lang="pt-BR">Código objeto</comment>
+  <comment xml:lang="pl">Kod obiektowy</comment>
+  <comment xml:lang="oc">còdi d’objècte</comment>
+  <comment xml:lang="nn">Objektkode</comment>
+  <comment xml:lang="ko">오브젝트 코드</comment>
+  <comment xml:lang="kk-Cyrl">Объектті коды</comment>
+  <comment xml:lang="ja">オブジェクトコード</comment>
+  <comment xml:lang="it">Codice oggetto</comment>
+  <comment xml:lang="id">Kode objek</comment>
+  <comment xml:lang="hr">Kôd objekta</comment>
+  <comment xml:lang="hi">वस्तु कोड</comment>
+  <comment xml:lang="gl">Código obxecto</comment>
+  <comment xml:lang="fur">Codiç ogjet</comment>
+  <comment xml:lang="fr">Code objet</comment>
+  <comment xml:lang="fi">Objektikoodi</comment>
+  <comment xml:lang="eu">Objektu-kodea</comment>
+  <comment xml:lang="et">Objektkood</comment>
+  <comment xml:lang="es">código de objeto</comment>
+  <comment xml:lang="en-GB">Object code</comment>
+  <comment xml:lang="de">Objektcode</comment>
+  <comment xml:lang="ca">codi objecte</comment>
+  <comment xml:lang="bg">Код за програми</comment>
+  <comment xml:lang="be-Cyrl">аб'ектны код</comment>
+  <comment xml:lang="ar">شفرة كائن</comment>
+  <glob pattern="*.o"/>
+  <glob pattern="*.mod" weight="40"/>
+</mime-type>

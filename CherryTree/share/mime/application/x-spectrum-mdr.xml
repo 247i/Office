@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-spectrum-mdr">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Sinclair Microdrive tape cartridge image</comment>
+  <comment xml:lang="uk">образ стрічкового картриджа Sinclair Microdrive</comment>
+  <comment xml:lang="tr">Sinclair Microdrive kaset kartuş kalıbı</comment>
+  <comment xml:lang="sv">Sinclair Microdrive-kassettavbild</comment>
+  <comment xml:lang="sr-Cyrl">Одраз кертриџа траке за Синклер Мајкродрајв</comment>
+  <comment xml:lang="sq">Pamje kasete Sinclair Microdrive</comment>
+  <comment xml:lang="sl">Odtis tračne kasete Sinclair Microdrive</comment>
+  <comment xml:lang="ru">Образ ленточного картриджа Sinclair Microdrive</comment>
+  <comment xml:lang="ro">imagine cartuș-casetă Sinclair Microdrive</comment>
+  <comment xml:lang="pt-BR">Imagem de cartucho de fita de Sinclair Microdrive</comment>
+  <comment xml:lang="pl">Obraz kartridża taśmy Sinclair Microdrive</comment>
+  <comment xml:lang="oc">imatge de cartocha de benda Sinclair Microdrive</comment>
+  <comment xml:lang="ko">Sinclair Microdrive 테이프 카트리지 이미지</comment>
+  <comment xml:lang="kk-Cyrl">Sinclair Microdrive таспа картриджінің бейнесі</comment>
+  <comment xml:lang="fr">Image cartouche Microdrive Sinclair</comment>
+  <comment xml:lang="fi">Sinclair Microdrive moduulikuva</comment>
+  <comment xml:lang="et">Sinclair Microdrive' mälukaardi tõmmis</comment>
+  <comment xml:lang="es">Imagen de cartucho de cinta Sinclair Microdrive</comment>
+  <comment xml:lang="en-GB">Sinclair Microdrive tape cartridge image</comment>
+  <comment xml:lang="de">Sinclair Microdrive-Kassettenmodulabbild</comment>
+  <glob pattern="*.mdr"/>
+</mime-type>

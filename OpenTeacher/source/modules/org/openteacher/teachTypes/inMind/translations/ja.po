@@ -1,0 +1,48 @@
+# Japanese translation for openteacher
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2012-04-20 06:12+0000\n"
+"Last-Translator: LeeAnna Kobayashi <kobayashi.leeanna@gmail.com>\n"
+"Language-Team: Japanese <ja@li.org>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:42+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: inMind.py:47
+msgid ""
+"Think about the answer, and press the 'View answer' button when you're done."
+msgstr "答えを考えて、「答えを見る」ボタンを押して下さい。"
+
+#: inMind.py:48
+msgid "View answer"
+msgstr "答えを見る。"
+
+#: inMind.py:49
+msgid "Skip"
+msgstr "スキップ"
+
+#: inMind.py:70
+msgid "I was right"
+msgstr "正解でした"
+
+#: inMind.py:71
+msgid "I was wrong"
+msgstr "間違えた"
+
+#: inMind.py:135
+msgid "Translation: "
+msgstr "翻訳： "
+
+#: inMind.py:199
+msgid "Think answer"
+msgstr "考えて答えます"

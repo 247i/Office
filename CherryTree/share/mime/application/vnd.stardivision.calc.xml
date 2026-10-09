@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/vnd.stardivision.calc">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>StarCalc 5 spreadsheet</comment>
+  <comment xml:lang="zh-Hant-TW">StarCalc 5 試算表</comment>
+  <comment xml:lang="uk">електронна таблиця StarCalc 5</comment>
+  <comment xml:lang="tr">StarCalc 5 hesap tablosu</comment>
+  <comment xml:lang="sv">StarCalc 5-kalkylblad</comment>
+  <comment xml:lang="sr-Cyrl">Стар-калкулатор 5 табела</comment>
+  <comment xml:lang="sq">Fletëllogaritje StarCalc 5</comment>
+  <comment xml:lang="sl">Razpredelnica StarCalc 5</comment>
+  <comment xml:lang="ru">Электронная таблица StarCalc 5</comment>
+  <comment xml:lang="ro">foaie de calcul StarCalc 5</comment>
+  <comment xml:lang="pt-BR">Planilha do StarCalc 5</comment>
+  <comment xml:lang="pl">Arkusz StarCalc 5</comment>
+  <comment xml:lang="oc">fuèlh de calcul StarCalc 5</comment>
+  <comment xml:lang="nn">StarCalc 5-rekneark</comment>
+  <comment xml:lang="ko">StarCalc 5 스프레드시트</comment>
+  <comment xml:lang="kk-Cyrl">StarCalc 5 электрондық кестесі</comment>
+  <comment xml:lang="ja">StarCalc 5 スプレッドシート</comment>
+  <comment xml:lang="id">Lembar sebar StarCalc 5</comment>
+  <comment xml:lang="hr">StarCalc 5 proračunska tablica</comment>
+  <comment xml:lang="he">מצגת StarCalc 5</comment>
+  <comment xml:lang="fur">Sfuei di calcul di StarCalc 5</comment>
+  <comment xml:lang="fr">Feuille de calcul StarCalc 5</comment>
+  <comment xml:lang="fi">StarCalc 5 taulukko</comment>
+  <comment xml:lang="et">StarCalc 5 tabelarvutusfail</comment>
+  <comment xml:lang="es">hoja de cálculo de StarCalc 5</comment>
+  <comment xml:lang="en-GB">StarCalc 5 spreadsheet</comment>
+  <comment xml:lang="de">StarCalc-5-Tabelle</comment>
+  <comment xml:lang="da">StarCalc 5-regneark</comment>
+  <comment xml:lang="ca">full de càlcul de StarCalc 5</comment>
+  <comment xml:lang="bg">Таблица — StarCalc 5</comment>
+  <comment xml:lang="be-Cyrl">электронная табліца StarCalc 5</comment>
+  <comment xml:lang="ar">جدول StarCalc 5</comment>
+  <sub-class-of type="application/x-ole-storage"/>
+  <generic-icon name="x-office-spreadsheet"/>
+  <glob pattern="*.sdc"/>
+</mime-type>

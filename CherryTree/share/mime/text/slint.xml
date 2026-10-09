@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/slint">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Slint Language</comment>
+  <comment xml:lang="uk">мова Slint</comment>
+  <comment xml:lang="tr">Slint dili</comment>
+  <comment xml:lang="sv">Slint-språk</comment>
+  <comment xml:lang="sr-Cyrl">Слинт језик</comment>
+  <comment xml:lang="sl">Jezik Slint</comment>
+  <comment xml:lang="ru">Язык Slint</comment>
+  <comment xml:lang="ro">limbaj Slint</comment>
+  <comment xml:lang="pt-BR">Linguagem Slint</comment>
+  <comment xml:lang="pl">Język Slint</comment>
+  <comment xml:lang="oc">lengatge Slint</comment>
+  <comment xml:lang="ko">Slint 언어</comment>
+  <comment xml:lang="kk-Cyrl">Slint тілі</comment>
+  <comment xml:lang="fr">Langage Slint</comment>
+  <comment xml:lang="fi">Slint kieli</comment>
+  <comment xml:lang="et">Slinti keel</comment>
+  <comment xml:lang="es">Lengua Slint</comment>
+  <comment xml:lang="en-GB">Slint Language</comment>
+  <comment xml:lang="de">Slint-Datei</comment>
+  <comment xml:lang="ar">لغة Slint</comment>
+  <sub-class-of type="text/plain"/>
+  <generic-icon name="text-x-script"/>
+  <glob pattern="*.slint"/>
+</mime-type>

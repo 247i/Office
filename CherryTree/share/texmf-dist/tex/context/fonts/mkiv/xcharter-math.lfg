@@ -1,0 +1,151 @@
+-- This font is under active development so we don't want to tweek it too much
+-- before all issues are sorted out.
+
+local common  = fonts.goodies.load("common-math.lfg")
+local presets = common.mathematics.tweaks.presets
+
+return {
+    name = "xcharter-math",
+    version = "1.00",
+    comment = "Goodies that complement xcharter math.",
+    author = "Hans Hagen & Mikael Sundqvist",
+    copyright = "ConTeXt development team",
+    mathematics = {
+        parameters = {
+            DelimiterPercent                  =  85,
+            DelimiterShortfall                = 400,
+            DelimiterDisplayPercent           =  90,
+            DelimiterDisplayShortfall         = 400,
+            SubscriptShiftDown                = 200, -- 300 in font
+            SubscriptShiftDownWithSuperscript = "1.3*SubscriptShiftDown", -- 1.5* in math-act
+            PrimeShiftUp                      = "1.2*SuperscriptShiftUp",
+            PrimeShiftUpCramped               = "1.2*SuperscriptShiftUp",
+            PrimeBaselineDropMax              = "0.5*SuperscriptBaselineDropMax",
+            RadicalDisplayStyleVerticalGap    = "RadicalVerticalGap", --178, 73
+        },
+        tweaks = {
+            aftercopying = {
+                {
+                    tweak    = "fontname",
+                    expected = "XCharter-Math",
+                    abort    = true,
+                },
+                {
+                    tweak   = "fixprimes",
+                    factor  = 0.92,
+                },
+                {
+                    tweak = "addmirrors",
+                },
+                {
+                    tweak = "addcomposites",
+                },
+                presets.scripttocalligraphic { },
+                presets.rsfstoscript         { },
+                presets.rsfsuprighttoscript  { },
+                presets.moderntocalligraphic { },
+                presets.eulertocalligraphic  { },
+                presets.xitsarabic           { rscale  = 0.90 },
+                presets.fallbacks            { },
+                presets.moveitalics          { correct = true },
+                presets.moveitalics          { correct = true, letters = true },
+                presets.moveintegrals        { factor = 1.5 },
+                presets.wipeitalics          { },
+                {
+                    tweak = "checkaccents",
+                },
+                {
+                    tweak = "kerns",
+                    list  = {
+                        [0x002F]                = { topleft  = -0.15, bottomright = -0.15 },
+                        ["0x7D.parts.top"]      = { topright = -0.15,                     }, -- right brace top
+                        ["0x7D.parts.bottom"]   = {                   bottomright = -0.15 }, -- right brace bottom
+                        ["0x7D.variants.*"]     = { topright = -0.05, bottomright = -0.05 }, -- right brace variants
+                        ["0x29.parts.top"]      = { topright = -0.1,                      }, -- right parenthesis top
+                        ["0x29.parts.bottom"]   = {                   bottomright = -0.1  }, -- right parenthesis bottom
+                        ["0x29.variants.*"]     = { topright = -0.1,  bottomright = -0.1  }, -- right parenthesis variants
+                        ["0x221A.parts.top"]    = { topright =  0.2,                      }, -- right radical top
+                        ["0x221A.parts.bottom"] = {                   bottomright =  0.2  }, -- right radical bottom
+                        ["0x221A.variants.*"]   = { topright =  0.2,  bottomright =  0.2  }, -- right radical variants
+                        [0x27E9]                = { topright = -0.1,  bottomright = -0.1  }, -- angle
+                        ["0x27E9.variants.*"]   = { topright = -0.2,  bottomright = -0.2  },
+                        [0x27EB]                = { topright = -0.1,  bottomright = -0.1  },
+                        ["0x27EB.variants.*"]   = { topright = -0.2,  bottomright = -0.2  },
+                        --
+                        [0x00393] = { bottomright = -0.20, }, -- upright Gamma
+                    },
+                },
+                {
+                    tweak   = "radicaldegreeanchors",
+                    list = {
+                        ["0x221A.parts.bottom"] = { location = "left", hfactor  = .1, vfactor  = 1.025 },
+                    }
+                },
+                {
+                    tweak = "flattenaccents",
+                },
+                {
+                    tweak = "checkspacing",
+                },
+                {
+                    tweak = "addscripts",
+                },
+                {
+                    tweak = "accentdimensions",
+                },
+                {
+                    tweak = "addrules",
+                },
+{
+    tweak    = "replacerules",
+    -- minus = {
+    --     height      = 0.188,
+    --     yoffset     = 0.812,
+    --     leftoffset  = 0.2,
+        -- rightoffset = 0.2,
+    -- },
+    fraction = {
+        height  = .188,
+        yoffset = .812,
+    },
+    radical = {
+        height      = .188,
+        yoffset     = .812,
+        leftoffset  = 0.95,
+        rightoffset = 0.95,
+        -- leftoverlap = 0.1, -- Daniel will fix(!)
+        -- yscale      = 0.8, -- no scaling
+    },
+    stacker = {
+        height  = .188,
+        yoffset = .812,
+    },
+},
+                {
+                    tweak = "addactuarian",
+                },
+                {
+                    tweak = "addequals",
+                },
+                {
+                    tweak = "addprimed",
+                },
+-- {
+--     tweak = "addarrows",
+-- },
+                {
+                    tweak = "addfourier",
+                    variant = 2,
+                },
+                {
+                    tweak = "setoptions",
+                    -- set   = { "ignorekerndimensions" }
+                },
+            },
+        },
+        bigslots = {
+            1, 2, 3, 4
+        },
+    },
+
+}

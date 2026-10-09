@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-sylk">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Spreadsheet interchange document</comment>
+  <comment xml:lang="zh-Hant-TW">試算表交換文件</comment>
+  <comment xml:lang="uk">документ обміну ел. таблицями</comment>
+  <comment xml:lang="tr">Hesap tablosu değişim belgesi</comment>
+  <comment xml:lang="sv">Spreadsheet interchange-dokument</comment>
+  <comment xml:lang="sr-Cyrl">Документ за размену табела</comment>
+  <comment xml:lang="sq">Dokument shkëmbimesh fletëllogaritjesh</comment>
+  <comment xml:lang="sl">Dokument izmenjave preglednic</comment>
+  <comment xml:lang="ru">Документ Spreadsheet Interchange</comment>
+  <comment xml:lang="ro">document de interschimbare a foilor de calcul</comment>
+  <comment xml:lang="pt-BR">Documento de intercâmbio de planilhas</comment>
+  <comment xml:lang="pl">Dokument wymiany arkuszy kalkulacyjnych</comment>
+  <comment xml:lang="oc">document d'escambi de fuèlhs de calcul</comment>
+  <comment xml:lang="ko">스프레드시트 교환 문서</comment>
+  <comment xml:lang="kk-Cyrl">Spreadsheet interchange құжаты</comment>
+  <comment xml:lang="ja">スプレッドシート交換ドキュメント</comment>
+  <comment xml:lang="it">Documento di scambio per foglio di calcolo</comment>
+  <comment xml:lang="id">Dokumen pertukaran lembar sebar</comment>
+  <comment xml:lang="hr">Dokument za razmjenu proračunskih tablica</comment>
+  <comment xml:lang="hi">Spreadsheet विनिमय दस्तावेज़</comment>
+  <comment xml:lang="fur">Document di interscambi par sfuei di calcul</comment>
+  <comment xml:lang="fr">Document d’échange de feuille de calcul</comment>
+  <comment xml:lang="fi">Taulukko vaihtoasiakirja</comment>
+  <comment xml:lang="et">Tabelarvutuse andmevahetusdokument</comment>
+  <comment xml:lang="es">documento de intercambio de hojas de cálculo</comment>
+  <comment xml:lang="en-GB">Spreadsheet interchange document</comment>
+  <comment xml:lang="de">Tabellenkalkulations-Austauschdokument</comment>
+  <comment xml:lang="ca">document d'intercanvi de full de càlcul</comment>
+  <comment xml:lang="bg">Документ — Spreadsheet, обменен формат</comment>
+  <comment xml:lang="be-Cyrl">дакумент для абмену электроннымі табліцамі</comment>
+  <comment xml:lang="ar">مستند تبادل جدول</comment>
+  <sub-class-of type="text/plain"/>
+  <alias type="text/spreadsheet"/>
+  <generic-icon name="x-office-spreadsheet"/>
+  <glob pattern="*.sylk"/>
+  <glob pattern="*.slk"/>
+</mime-type>

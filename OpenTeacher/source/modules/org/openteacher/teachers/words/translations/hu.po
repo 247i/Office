@@ -1,0 +1,55 @@
+# Hungarian translation for openteacher
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2012-12-12 22:12+0000\n"
+"Last-Translator: Molnár Krisztián <krisztian.777@gmail.com>\n"
+"Language-Team: Hungarian <hu@li.org>\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:42+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: words.py:62
+msgid "I'm ready, start the lesson!"
+msgstr "Készen állok, kezdjük a leckét!"
+
+#: words.py:64 words.py:516
+msgid "Lesson settings"
+msgstr "Lecke beállítások"
+
+#: words.py:127
+msgid "Change lesson settings"
+msgstr "Leckebeállítások módosítása"
+
+#: words.py:128
+msgid "Word:"
+msgstr "Szó:"
+
+#: words.py:129
+msgid "Next"
+msgstr ""
+
+#: words.py:508
+msgid "Lesson type"
+msgstr "Lecke típus"
+
+#: words.py:509
+msgid "Word list order and filters"
+msgstr "Szó sorrend és szűrők"
+
+#: words.py:510
+msgid "Word modifications"
+msgstr "Szó módosítók"
+
+#: words.py:515
+msgid "Words lesson"
+msgstr "Szólecke"

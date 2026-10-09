@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-starwriter-global">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>StarWriter 4 master document</comment>
+  <comment xml:lang="zh-Hant-TW">StarWriter 4 主控文件</comment>
+  <comment xml:lang="uk">основний документ StarWriter 4</comment>
+  <comment xml:lang="tr">StarWriter 4 master belgesi</comment>
+  <comment xml:lang="sv">StarWriter 4-huvuddokument</comment>
+  <comment xml:lang="sr-Cyrl">Стар-писац 4 главни документ</comment>
+  <comment xml:lang="sq">Dokument master StarWriter 4</comment>
+  <comment xml:lang="sl">Glavni dokument StarWriter 4</comment>
+  <comment xml:lang="ru">Документ StarWriter 4 master</comment>
+  <comment xml:lang="ro">document principal StarWriter 4</comment>
+  <comment xml:lang="pt-BR">Documento mestre do StarWriter 4</comment>
+  <comment xml:lang="pl">Główny dokument StarWriter 4</comment>
+  <comment xml:lang="oc">document mèstre StarWriter 4</comment>
+  <comment xml:lang="nn">StarWriter 4-hovuddokument</comment>
+  <comment xml:lang="ko">StarWriter 4 마스터 문서</comment>
+  <comment xml:lang="kk-Cyrl">StarWriter 4 басты құжаты</comment>
+  <comment xml:lang="ja">StarWriter 4 マスタードキュメント</comment>
+  <comment xml:lang="id">Dokumen induk StarWriter 4</comment>
+  <comment xml:lang="hr">StarWriter 4 master dokument</comment>
+  <comment xml:lang="he">מסמך על מסוג StarWriter 4</comment>
+  <comment xml:lang="fur">Document principâl di StarWriter 4</comment>
+  <comment xml:lang="fr">Document maître StarWriter 4</comment>
+  <comment xml:lang="fi">StarWriter 4 kanta-asiakirja</comment>
+  <comment xml:lang="et">StarWriter 4 ülemdokument</comment>
+  <comment xml:lang="es">patrón de documento de StarWriter 4</comment>
+  <comment xml:lang="en-GB">StarWriter 4 master document</comment>
+  <comment xml:lang="de">StarWriter-4-Hauptdokument</comment>
+  <comment xml:lang="da">StarWriter 4-masterdokument</comment>
+  <comment xml:lang="ca">document mestre StarWriter 4</comment>
+  <comment xml:lang="bg">Документ — StarWriter 4 master</comment>
+  <comment xml:lang="be-Cyrl">дакумент StarWriter 4 master</comment>
+  <comment xml:lang="ar">مستند رئيس StarWriter 4</comment>
+  <sub-class-of type="application/x-ole-storage"/>
+  <generic-icon name="x-office-document"/>
+  <glob pattern="*.sgl" weight="40"/>
+</mime-type>

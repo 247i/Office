@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="inode/chardevice">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Character device</comment>
+  <comment xml:lang="zh-Hant-TW">字元裝置</comment>
+  <comment xml:lang="uk">Символьний пристрій</comment>
+  <comment xml:lang="tr">Karakter aygıtı</comment>
+  <comment xml:lang="sv">Teckenenhet</comment>
+  <comment xml:lang="sr-Cyrl">Знаковни уређај</comment>
+  <comment xml:lang="sl">Znakovna naprava</comment>
+  <comment xml:lang="ru">Символьное устройство</comment>
+  <comment xml:lang="ro">dispozitiv de caractere</comment>
+  <comment xml:lang="pt-BR">Dispositivo de caractere</comment>
+  <comment xml:lang="pl">Urządzenie znakowe</comment>
+  <comment xml:lang="oc">periferic de caractèrs</comment>
+  <comment xml:lang="nn">Teikneining</comment>
+  <comment xml:lang="ko">문자 장치</comment>
+  <comment xml:lang="kk-Cyrl">Символдық құрылғы</comment>
+  <comment xml:lang="ka">სიმბოლური მოწყობილობა</comment>
+  <comment xml:lang="ja">文字様機器</comment>
+  <comment xml:lang="it">Device a caratteri</comment>
+  <comment xml:lang="id">Perangkat karakter</comment>
+  <comment xml:lang="hr">Znakovni uređaj</comment>
+  <comment xml:lang="hi">चरित्र-उन्मुख उपकरण</comment>
+  <comment xml:lang="he">התקן תווים</comment>
+  <comment xml:lang="gl">Dispositivo de caracter</comment>
+  <comment xml:lang="fur">Dispositîf a caratars</comment>
+  <comment xml:lang="fr">Périphérique caractère</comment>
+  <comment xml:lang="fi">Merkkilaite</comment>
+  <comment xml:lang="eu">Karaktere-gailua</comment>
+  <comment xml:lang="et">Sümbolseade</comment>
+  <comment xml:lang="es">dispositivo de caracteres</comment>
+  <comment xml:lang="en-GB">Character device</comment>
+  <comment xml:lang="de">zeichenorientiertes Gerät</comment>
+  <comment xml:lang="ca">dispositiu de caràcters</comment>
+  <comment xml:lang="bg">Знаково устройство</comment>
+  <comment xml:lang="be-Cyrl">сімвальная прылада</comment>
+  <comment xml:lang="ar">جهاز حرفي</comment>
+</mime-type>

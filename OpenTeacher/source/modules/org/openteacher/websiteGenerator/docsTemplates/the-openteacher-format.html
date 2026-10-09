@@ -1,0 +1,60 @@
+<!--(set_escape)-->
+None
+<!--(end)-->
+
+<h1>@!tr('The Openteacher 2 file format')!@</h1>
+<p>@!tr('The Openteacher 2 file format is an XML 1.0 file with UTF-8 encoding.')!@</p>
+<p>@!tr('An XML-scheme of the file format can be downloaded <a href="files/openteacher.xsd">here</a>.')!@</p>
+<p>@!tr('NOTE: For the OpenTeacher 3 file format, please refer to <a href="http://sourceforge.net/apps/mediawiki/openteacher/index.php"> the wiki.</a>')!@</p>
+
+<h3>@!tr('Node structure')!@</h3>
+<p>
+    <table>
+      <tr>
+        <td valign="top">
+    - &lt;root&gt;<br />
+    -- &lt;title&gt;<br />
+    -- &lt;question_language&gt;<br />
+    -- &lt;answer_language&gt;<br />
+    -- &lt;word&gt;<br />
+    --- &lt;known&gt;<br />
+    --- &lt;foreign&gt;<br />
+    --- &lt;results&gt;<br />
+        </td>
+        <td valign="top"><br />
+        (@!tr('The title of the word list')!@)<br />
+        (@!tr('The name of the question language')!@)<br />
+        (@!tr('The name of the answer language')!@)<br />
+        <br />
+        (@!tr('This word in the question language')!@)<br />
+        (@!tr('This word in the answer language')!@)<br />
+        (@!tr('The results of this word in the format of 0/0')!@)
+        </td>
+      </tr>
+    </table>
+</p>
+
+<h3>@!tr('Example a word list saved in the OpenTeacher 2 format')!@</h3>
+
+<div class="codeBlock">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;<br />
+&lt;root&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;Example&lt;/title&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;question_language&gt;Dutch&lt;/question_language&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;answer_language&gt;English&lt;/answer_language&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;word&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;known&gt;een&lt;/known&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;foreign&gt;one&lt;/foreign&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;results&gt;0/0&lt;/results&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/word&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;word&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;known&gt;twee&lt;/known&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;foreign&gt;two&lt;/foreign&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;results&gt;0/0&lt;/results&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/word&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;word&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;known&gt;drie&lt;/known&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;foreign&gt;three&lt;/foreign&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;results&gt;0/0&lt;/results&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/word&gt;<br />
+&lt;/root&gt;</div>

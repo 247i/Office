@@ -1,0 +1,9 @@
+[Nemo Action]
+
+Name=PeaZip, extract archive
+Comment=Extract archive(s) with PeaZip
+Exec=peazip -ext2main %F
+Selection=notnone
+Extensions=any;
+Terminal=false
+Icon-Name=peazip_extract

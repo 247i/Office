@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="model/x.sf3">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>SF3 3D Model</comment>
+  <comment xml:lang="uk">просторова модель SF3</comment>
+  <comment xml:lang="tr">SF3 3B modeli</comment>
+  <comment xml:lang="sv">SF3-3D-modell</comment>
+  <comment xml:lang="sr-Cyrl">SF3 3D модел</comment>
+  <comment xml:lang="sq">Model SF3 3D</comment>
+  <comment xml:lang="sl">Model 3D SF3</comment>
+  <comment xml:lang="ru">3D-модель SF3</comment>
+  <comment xml:lang="ro">model 3D SF3 3D</comment>
+  <comment xml:lang="pt-BR">Modelo 3D SF3</comment>
+  <comment xml:lang="pl">Model 3D SF3</comment>
+  <comment xml:lang="oc">modèl 3D SF3</comment>
+  <comment xml:lang="ko">SF3 3D 모델</comment>
+  <comment xml:lang="kk-Cyrl">SF3 3D моделі</comment>
+  <comment xml:lang="hr">SF3 3D model</comment>
+  <comment xml:lang="fr">Modèle SF3 3D</comment>
+  <comment xml:lang="fi">SF3 3D -malli</comment>
+  <comment xml:lang="et">SF3 3D mudel</comment>
+  <comment xml:lang="es">modelo 3D SF3</comment>
+  <comment xml:lang="en-GB">SF3 3D Model</comment>
+  <comment xml:lang="de">SF3-3D-Modell</comment>
+  <comment xml:lang="ar">نموذج ثلاثي الأبعاد SF3</comment>
+  <acronym>SF3</acronym>
+  <expanded-acronym>Simple File Format Family</expanded-acronym>
+  <glob pattern="*.mod.sf3"/>
+  <glob pattern="*.sf3"/>
+</mime-type>

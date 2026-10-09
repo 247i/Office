@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/vnd.sun.xml.calc.template">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>OpenOffice.org 1.0 Calc template</comment>
+  <comment xml:lang="zh-Hant-TW">OpenOffice.org 1.0 Calc 範本</comment>
+  <comment xml:lang="uk">шаблон ел.таблиці OpenOffice.org Calc 1.0</comment>
+  <comment xml:lang="tr">OpenOffice.org 1.0 Calc şablonu</comment>
+  <comment xml:lang="sv">OpenOffice.org 1.0 Calc-mall</comment>
+  <comment xml:lang="sr-Cyrl">OpenOffice.org 1.0 Calc шаблон</comment>
+  <comment xml:lang="sq">Gjedhe Vizatim OpenOffice.org 1.0 Calc</comment>
+  <comment xml:lang="sl">Predloga OpenOffice.org Calc 1.0</comment>
+  <comment xml:lang="ru">Шаблон OpenOffice.org 1.0 Calc</comment>
+  <comment xml:lang="ro">șablon OpenOffice.org 1.0 Calc</comment>
+  <comment xml:lang="pt-BR">Modelo do OpenOffice.org 1.0 Calc</comment>
+  <comment xml:lang="pl">Szablon arkusza OpenOffice.org 1.0 Calc</comment>
+  <comment xml:lang="oc">modèl OpenOffice.org 1.0 Calc</comment>
+  <comment xml:lang="nn">OpenOffice.org 1.0 Calc-mal</comment>
+  <comment xml:lang="ko">OpenOffice.org 1.0 Calc 서식</comment>
+  <comment xml:lang="kk-Cyrl">OpenOffice.org 1.0 Calc үлгісі</comment>
+  <comment xml:lang="ja">OpenOffice.org 1.0 Calc テンプレート</comment>
+  <comment xml:lang="id">Templat OpenOffice.org Calc 1.0</comment>
+  <comment xml:lang="hr">OpenOffice.org 1.0 Calc predložak</comment>
+  <comment xml:lang="fur">Model di OpenOffice.org 1.0 Calc</comment>
+  <comment xml:lang="fr">Modèle OpenOffice.org 1.0 Calc</comment>
+  <comment xml:lang="fi">OpenOffice.org 1.0 Calc malli</comment>
+  <comment xml:lang="et">OpenOffice.org 1.0 Calci tabelarvutusfaili mall</comment>
+  <comment xml:lang="es">plantilla de OpenOffice.org Calc 1.0</comment>
+  <comment xml:lang="en-GB">OpenOffice.org 1.0 Calc template</comment>
+  <comment xml:lang="de">OpenOffice.org Calc-1.0-Vorlage</comment>
+  <comment xml:lang="da">OpenOffice.org 1.0 Calc-skabelon</comment>
+  <comment xml:lang="ca">plantilla d'OpenOffice.org 1.0 Calc</comment>
+  <comment xml:lang="bg">Шаблон — OpenOffice.org 1.0 Calc</comment>
+  <comment xml:lang="be-Cyrl">шаблон OpenOffice.org 1.0 Calc</comment>
+  <comment xml:lang="ar">قالب Calc المكتب المفتوح 1.0</comment>
+  <sub-class-of type="application/zip"/>
+  <generic-icon name="x-office-spreadsheet"/>
+  <glob pattern="*.stc"/>
+</mime-type>

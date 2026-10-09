@@ -1,0 +1,65 @@
+%D \module
+%D   [       file=syst-fnt,
+%D        version=2006.08.11,
+%D          title=\CONTEXT\ System Macros,
+%D       subtitle=Font Things,
+%D         author=Hans Hagen,
+%D           date=\currentdate,
+%D      copyright={PRAGMA ADE \& \CONTEXT\ Development Team}]
+%C
+%C This module is part of the \CONTEXT\ macro||package and is
+%C therefore copyrighted by \PRAGMA. See mreadme.pdf for
+%C details.
+
+% formal names cf the tb \& tbt
+
+\unprotect
+
+%D It makes no longer sense to use font dimensions. For a while we had \typ
+%D {\scaledfontdimen [1-7] <font>} but in the end went for the real deal. For
+%D previous (and intermediate) definitions one can look in the archives. In the
+%D end it also saves a little bit of overhead but more important, it gives less
+%D tracing, and for practical reasons we keep the next indirectness because we
+%D syntax highlight these (formerly) pseudo constants different than primitives.
+
+% \permanent\protected\def\fontslantperpoint   {\scaledfontdimen\plusone  }
+% \permanent\protected\def\fontinterwordspace  {\scaledfontdimen\plustwo  }
+% \permanent\protected\def\fontinterwordstretch{\scaledfontdimen\plusthree}
+% \permanent\protected\def\fontinterwordshrink {\scaledfontdimen\plusfour }
+% \permanent\protected\def\fontexheight        {\scaledfontdimen\plusfive }
+% \permanent\protected\def\fontemwidth         {\scaledfontdimen\plussix  }
+% \permanent\protected\def\fontextraspace      {\scaledfontdimen\plusseven}
+
+\aliased\let\mathaxisheight      \Umathaxis                  % takes style
+
+\aliased\let\fontslantperpoint   \scaledfontslantperpoint    % takes font
+\aliased\let\fontinterwordspace  \scaledfontinterwordspace
+\aliased\let\fontinterwordstretch\scaledfontinterwordstretch
+\aliased\let\fontinterwordshrink \scaledfontinterwordshrink
+\aliased\let\fontexheight        \scaledfontexheight
+\aliased\let\fontemwidth         \scaledfontemwidth
+\aliased\let\fontextraspace      \scaledfontextraspace
+
+\aliased\let\slantperpoint       \scaledslantperpoint        % current font
+\aliased\let\interwordspace      \scaledinterwordspace
+\aliased\let\interwordstretch    \scaledinterwordstretch
+\aliased\let\interwordshrink     \scaledinterwordshrink
+\aliased\let\exheight            \scaledexheight
+\aliased\let\emwidth             \scaledemwidth
+\aliased\let\extraspace          \scaledextraspace
+
+\permanent\def\currentspaceskip{\interwordspace\s!plus\interwordstretch\s!minus\interwordshrink\relax}
+
+\permanent\def\currentspacevalue{\the\interwordspace
+  \ifzeropt\interwordstretch\else{ plus  }\the\interwordstretch\fi
+  \ifzeropt\interwordshrink \else{ minus }\the\interwordshrink \fi}
+
+\permanent\def\usedspacevalue{\ifzeropt\spaceskip\the\spaceskip\else\currentspacevalue\fi}
+
+\permanent\def\mathstacktotal{\dimexpr\Umathstacknumup\scriptstyle+\Umathstackdenomdown\scriptstyle\relax}
+\permanent\def\mathstackvgap {\Umathstackvgap\scriptstyle}
+
+\untraced\permanent\protected\def\smallcapsratio
+  {\numexpression\plusthousand*\exheight/\capheight\relax}
+
+\protect \endinput

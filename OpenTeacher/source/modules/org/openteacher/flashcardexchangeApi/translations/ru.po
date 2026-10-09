@@ -1,0 +1,64 @@
+# Russian translation for openteacher
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2013-02-10 10:23+0000\n"
+"Last-Translator: Nkolay Parukhin <parukhin@gmail.com>\n"
+"Language-Team: Russian <ru@li.org>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:44+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: flashcardexchangeApi.py:166
+msgid ""
+"Enter a search term and press the search button to search flashcardexchange."
+"com for sets. Then select the set or sets you want to import and click OK."
+msgstr ""
+"Введите слово и нажмите кнопку для поиска на flashcardexchange.com наборов "
+"слов. Затем выберите один или несколько наборов, которые вы хотите "
+"импортировать и нажмите кнопку OK."
+
+#: flashcardexchangeApi.py:167
+msgid "E.g.: spanish travel vocabulary"
+msgstr "Например, испанский словарь путешественника"
+
+#: flashcardexchangeApi.py:168
+msgid "Search"
+msgstr "Поиск"
+
+#: flashcardexchangeApi.py:169
+msgid "Search flashcardexchange.com"
+msgstr "Поиск на flashcardexchange.com"
+
+#: flashcardexchangeApi.py:261
+msgid "Import from flashcardexchange.com"
+msgstr "Импорт с flashcardexchange.com"
+
+#: flashcardexchangeApi.py:264
+msgid "flashcardexchange.com API client id"
+msgstr "ID API клиента flashcardexchange.com"
+
+#: flashcardexchangeApi.py:291
+msgid "No flashcardexchange.com connection"
+msgstr "Отсутствует подключение к flashcardexchange.com"
+
+#: flashcardexchangeApi.py:292
+msgid ""
+"flashcardexchange.com didn't accept the connection. Are you sure that your "
+"internet connection works and flashcardexchange.com is online?"
+msgstr ""
+"Сайт flashcardexchange.com не отвечает. Вы уверены, что ваше интернет-"
+"соединение работает и flashcardexchange.com доступен?"
+
+#: flashcardexchangeApi.py:326
+msgid "The word list was imported from flashcardexchange.com successfully."
+msgstr "Список слов успешно импортирован с flashcardexchange.com."

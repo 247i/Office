@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-commodore-g64-disk">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Commodore 1541 floppy disk image</comment>
+  <comment xml:lang="uk">образ дискети Commodore 1541</comment>
+  <comment xml:lang="tr">Commodore 1541 disket kalıbı</comment>
+  <comment xml:lang="sv">Commodore 1541-diskettavbild</comment>
+  <comment xml:lang="sr-Cyrl">Комодор 1541 одраз дискете</comment>
+  <comment xml:lang="sq">Pamje diskete Commodore 1541</comment>
+  <comment xml:lang="sl">Odtis diskete Commodore 1541</comment>
+  <comment xml:lang="ru">Образ гибкого диска Commodore 1541</comment>
+  <comment xml:lang="ro">imagine de dischetă Commodore 1541</comment>
+  <comment xml:lang="pt-BR">Imagem do disquete Commodore 1541</comment>
+  <comment xml:lang="pl">Obraz dyskietki Commodore 1541</comment>
+  <comment xml:lang="oc">imatge disqueta per Commodore 1541</comment>
+  <comment xml:lang="ko">Commodore 1541 플로피 디스크 이미지</comment>
+  <comment xml:lang="kk-Cyrl">Commodore 1541 иілгіш диск бейнесі</comment>
+  <comment xml:lang="fr">Image disquette Commodore 1541</comment>
+  <comment xml:lang="fi">Commodore 1541 diskettikuva</comment>
+  <comment xml:lang="et">Commodore 1541 flopikettatõmmis</comment>
+  <comment xml:lang="es">Imagen de disquete Commodore 1541</comment>
+  <comment xml:lang="en-GB">Commodore 1541 floppy disk image</comment>
+  <comment xml:lang="de">Commodore-1541-Diskettenabbild</comment>
+  <comment xml:lang="ar">صورة قرص مرن لكومودور 1541</comment>
+  <generic-icon name="application-x-executable"/>
+  <glob pattern="*.g64"/>
+</mime-type>

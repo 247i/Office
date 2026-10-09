@@ -1,0 +1,1246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?context-directive job ctxfile x-setups.ctx ?>
+
+<cd:interface xmlns:cd="http://www.pragma-ade.com/commands">
+
+    <cd:command name="definemathematics" level="style" category="mathematics" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:resolve name="keyword-name"/>
+            <cd:resolve name="keyword-name-optional"/>
+            <cd:assignments list="yes" optional="yes">
+                <cd:inherit name="setupmathematics"/>
+            </cd:assignments>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="setupmathematics" level="style" category="mathematics" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:resolve name="keyword-name-list-optional"/>
+            <cd:assignments list="yes" optional="yes">
+                <cd:parameter name="openup">
+                    <cd:constant type="yes"/>
+                    <cd:constant type="no" default="yes"/>
+                </cd:parameter>
+                <cd:parameter name="symbolset" list="yes">
+                    <cd:constant type="blackboard-to-bold"/>
+                    <cd:constant type="mikaels-favourites"/>
+                    <cd:constant type="cd:name"/>
+                </cd:parameter>
+                <cd:parameter name="functionstyle">
+                    <cd:resolve name="value-style"/>
+                </cd:parameter>
+                <cd:parameter name="compact">
+                    <cd:constant type="yes"/>
+                    <cd:constant type="no" default="yes"/>
+                </cd:parameter>
+                <cd:parameter name="align">
+                    <cd:constant type="l2r" default="yes"/>
+                    <cd:constant type="lefttoright"/>
+                    <cd:constant type="r2l"/>
+                    <cd:constant type="righttoleft"/>
+                </cd:parameter>
+                <cd:parameter name="sygreek">
+                    <cd:constant type="normal" default="yes"/>
+                    <cd:constant type="italic"/>
+                    <cd:constant type="none"/>
+                </cd:parameter>
+                <cd:parameter name="lcgreek">
+                    <cd:constant type="normal"/>
+                    <cd:constant type="italic" default="yes"/>
+                    <cd:constant type="none"/>
+                </cd:parameter>
+                <cd:parameter name="ucgreek">
+                    <cd:constant type="normal" default="yes"/>
+                    <cd:constant type="italic"/>
+                    <cd:constant type="none"/>
+                </cd:parameter>
+                <cd:parameter name="italics">
+                    <cd:constant type="yes"/>
+                    <cd:constant type="no"/>
+                </cd:parameter>
+                <cd:parameter name="autopunctuation">
+                    <cd:constant type="yes"/>
+                    <cd:constant type="no" default="yes"/>
+                    <cd:constant type="all"/>
+                    <cd:constant type="comma"/>
+                    <cd:constant type="yes,semicolon"/>
+                    <cd:constant type="comma,semicolon"/>
+                    <cd:constant type="all,semicolon"/>
+                </cd:parameter>
+                <cd:parameter name="setups">
+                    <cd:constant type="cd:name"/>
+                </cd:parameter>
+                <cd:parameter name="domain">
+                    <cd:constant type="default"/>
+                    <cd:constant type="cd:name"/>
+                </cd:parameter>
+                <cd:parameter name="textstyle">
+                    <cd:resolve name="value-style"/>
+                </cd:parameter>
+                <cd:parameter name="textcolor">
+                    <cd:constant type="cd:color"/>
+                </cd:parameter>
+                <cd:parameter name="functioncolor">
+                    <cd:constant type="cd:color"/>
+                </cd:parameter>
+                <cd:parameter name="integral">
+                    <cd:constant type="horizontal"/>
+                    <cd:constant type="vertical"/>
+                    <cd:constant type="auto"/>
+                    <cd:constant type="autolimits"/>
+                    <cd:constant type="limits"/>
+                    <cd:constant type="nolimits"/>
+                </cd:parameter>
+                <cd:parameter name="stylealternative">
+                     <cd:constant type="cd:name"/>
+                </cd:parameter>
+                <cd:parameter name="default">
+                    <cd:constant type="normal"/>
+                    <cd:constant type="italic" default="yes"/>
+                </cd:parameter>
+                <cd:parameter name="collapsing">
+                    <cd:constant type="0"/>
+                    <cd:constant type="1" default="yes"/>
+                    <cd:constant type="2"/>
+                    <cd:constant type="3"/>
+                    <cd:constant type="default"/>
+                    <cd:constant type="tex"/>
+                    <cd:constant type="list"/>
+                    <cd:constant type="all"/>
+                    <cd:constant type="none"/>
+                    <cd:constant type="reset"/>
+                </cd:parameter>
+                <cd:parameter name="kernpairs">
+                    <cd:constant type="yes"/>
+                    <cd:constant type="no" default="yes"/>
+                </cd:parameter>
+                <cd:parameter name="mathconstants">
+                    <cd:constant type="italic" default="yes"/>
+                    <cd:constant type="upright"/>
+                </cd:parameter>
+                <cd:parameter name="differentiald">
+                    <cd:constant type="italic" default="yes"/>
+                    <cd:constant type="upright"/>
+                </cd:parameter>
+                <cd:parameter name="exponentiale">
+                    <cd:constant type="italic" default="yes"/>
+                    <cd:constant type="upright"/>
+                </cd:parameter>
+                <cd:parameter name="imaginaryi">
+                    <cd:constant type="italic" default="yes"/>
+                    <cd:constant type="upright"/>
+                </cd:parameter>
+                <cd:parameter name="imaginaryj">
+                    <cd:constant type="italic" default="yes"/>
+                    <cd:constant type="upright"/>
+                </cd:parameter>
+                <cd:parameter name="constantpi">
+                    <cd:constant type="italic" default="yes"/>
+                    <cd:constant type="upright"/>
+                </cd:parameter>
+                <cd:parameter name="snap">
+                    <cd:constant type="yes"/>
+                    <cd:constant type="no"/>
+                </cd:parameter>
+                <cd:parameter name="textdistance">
+                    <cd:constant type="cd:dimension"/>
+                </cd:parameter>
+                <cd:parameter name="threshold">
+                    <cd:constant type="none"/>
+                    <cd:constant type="small"/>
+                    <cd:constant type="medium"/>
+                    <cd:constant type="big"/>
+                    <cd:constant type="cd:dimension"/>
+                </cd:parameter>
+                <cd:parameter name="mathstyle">
+                    <cd:resolve name="value-mathstyle"/>
+                </cd:parameter>
+                <cd:parameter name="color">
+                    <cd:constant type="cd:color"/>
+                </cd:parameter>
+                <cd:parameter name="autospacing">
+                    <cd:constant type="yes"/>
+                    <cd:constant type="no"/>
+                </cd:parameter>
+                <cd:parameter name="autonumbers">
+                    <cd:constant type="yes"/>
+                    <cd:constant type="no"/>
+                    <cd:constant type="cd:number"/>
+                </cd:parameter>
+                <cd:parameter name="autofencing">
+                    <cd:constant type="yes"/>
+                    <cd:constant type="no"/>
+                </cd:parameter>
+                <cd:parameter name="hz">
+                    <cd:constant type="yes"/>
+                    <cd:constant type="no"/>
+                </cd:parameter>
+                <cd:parameter name="alignscripts">
+                    <cd:constant type="yes"/>
+                    <cd:constant type="no"/>
+                    <cd:constant type="always"/>
+                    <cd:constant type="empty"/>
+                </cd:parameter>
+                <cd:parameter name="interscriptfactor">
+                    <cd:constant type="cd:number"/>
+                </cd:parameter>
+                <cd:parameter name="autointervals">
+                    <cd:constant type="yes" default="yes"/>
+                    <cd:constant type="no"/>
+                </cd:parameter>
+                <cd:parameter name="limitstretch">
+                    <cd:constant type="yes"/>
+                    <cd:constant type="no"/>
+                </cd:parameter>
+                <cd:parameter name="domain">
+                    <cd:constant type="default" default="yes"/>
+                    <cd:constant type="chemistry"/>
+                </cd:parameter>
+            </cd:assignments>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="inlineordisplaymath" level="system" category="mathematics" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:content/>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="rawmathematics" level="document" category="mathematics" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="mathematics" type="environment" level="document" category="mathematics" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:resolve name="keyword-mathematics-optional"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="mathematics" level="document" category="mathematics" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:resolve name="keyword-mathematics-optional"/>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="mathematics" variant="assignment" level="document" category="mathematics" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:assignments list="yes" optional="yes">
+                <cd:inherit name="setupmathematics"/>
+            </cd:assignments>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="math" level="document" category="mathematics" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:resolve name="keyword-mathematics-optional"/>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="math" variant="assignment" level="document" category="mathematics" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:assignments list="yes" optional="yes">
+                <cd:inherit name="setupmathematics"/>
+            </cd:assignments>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="m" level="document" category="mathematics" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:resolve name="keyword-mathematics-optional"/>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="m" variant="assignment" level="document" category="mathematics" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:assignments list="yes" optional="yes">
+                <cd:inherit name="setupmathematics"/>
+            </cd:assignments>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="dm" level="document" category="mathematics" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="im" level="document" category="mathematics" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="nm" level="document" category="mathematics" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="mtp" level="document" category="mathematics" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="definemathcommand" variant="one" level="style" category="mathematics" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:resolve name="keyword-name"/>
+            <cd:keywords>
+                <cd:resolve name="value-mathclass"/>
+            </cd:keywords>
+            <cd:keywords>
+                <cd:constant type="one"/>
+            </cd:keywords>
+            <cd:keywords delimiters="braces">
+                <cd:constant type="cd:oneargument"/>
+            </cd:keywords>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="definemathcommand" variant="two" level="style" category="mathematics" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:resolve name="keyword-name"/>
+            <cd:keywords>
+                <cd:resolve name="value-mathclass"/>
+            </cd:keywords>
+            <cd:keywords>
+                <cd:constant type="two"/>
+            </cd:keywords>
+            <cd:keywords delimiters="braces">
+                <cd:constant type="cd:twoarguments"/>
+            </cd:keywords>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="definemathcommand" variant="mathclass" level="style" category="mathematics" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:resolve name="keyword-name"/>
+            <cd:keywords>
+                <cd:resolve name="value-mathclass"/>
+            </cd:keywords>
+            <cd:keywords>
+                <cd:resolve name="value-mathclass"/>
+            </cd:keywords>
+            <cd:keywords delimiters="braces">
+                <cd:constant type="cd:command"/>
+            </cd:keywords>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="definemathcommand" level="style" category="mathematics" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:resolve name="keyword-name"/>
+            <cd:keywords optional="yes">
+                <cd:resolve name="value-mathclass"/>
+            </cd:keywords>
+            <cd:keywords delimiters="braces" optional="yes">
+                <cd:constant type="cd:command"/>
+            </cd:keywords>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="mathcommand" generated="yes" variant="example" level="document" category="mathematics" file="math-ini.mkxl">
+        <cd:sequence>
+            <cd:variable value="mathcommand"/>
+        </cd:sequence>
+        <cd:arguments>
+            <cd:resolve name="argument-text-optional"/>
+            <cd:resolve name="argument-text-optional"/>
+        </cd:arguments>
+    </cd:command>
+
+    <!--
+
+        <cd:command name="mathcommand" level="document" category="mathematics" file="math-ini.mkxl">
+            <cd:arguments>
+                <cd:resolve name="argument-name"/>
+            </cd:arguments>
+        </cd:command>
+
+    -->
+
+    <cd:command name="definemathsymbol" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:resolve name="keyword-name"/>
+            <cd:keywords optional="yes">
+                <cd:resolve name="value-mathclass"/>
+            </cd:keywords>
+            <cd:resolve name="keyword-number"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="mathop" level="style" category="mathematics" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="mbox" level="document" category="mathematics" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="mtext" level="document" category="mathematics" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="mfunctionlabeltext" level="system" category="mathematics" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:resolve name="argument-name"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="stackrel" level="document" category="mathematics" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:content/>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="apply" level="document" category="mathematics" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:content/>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="definemathstyle" level="system" category="mathematics" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:resolve name="keyword-name"/>
+            <cd:keywords list="yes">
+                <cd:resolve name="value-mathstyle"/>
+            </cd:keywords>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="setupmathstyle" level="style" category="mathematics" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:keywords list="yes">
+                <cd:resolve name="value-mathstyle"/>
+                <cd:constant type="cd:name"/>
+            </cd:keywords>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="setmathstyle" level="system" category="mathematics" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:keywords delimiters="braces" list="yes">
+                <cd:resolve name="value-mathstyle"/>
+                <cd:constant type="cd:name"/>
+            </cd:keywords>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="mathstyle" type="environment" level="system" category="mathematics" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:keywords list="yes">
+                <cd:resolve name="value-mathstyle"/>
+                <cd:constant type="cd:name"/>
+            </cd:keywords>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="mathstyle" type="environment" begin="push" end="pop" level="system" category="mathematics" file="math-ini.mkxl"/>
+
+    <cd:command name="usemathstyleparameter" level="system" category="mathematics" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:csname/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="usemathstyleparameter" type="environment" level="system" category="mathematics" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:csname/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="mathtext" level="document" category="mathematics" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:resolve name="string-boxoptions"/>
+            <cd:resolve name="argument-text"/>
+        </cd:arguments>
+    </cd:command>
+
+    <!--
+
+        <cd:command name="text" level="document" category="mathematics" file="math-ini.mkxl">
+            <cd:arguments>
+                <cd:resolve name="string-boxoptions"/>
+                <cd:resolve name="argument-text"/>
+            </cd:arguments>
+        </cd:command>
+
+        <cd:command name="t" level="document" category="mathematics" file="math-ini.mkxl">
+            <cd:arguments>
+                <cd:resolve name="string-boxoptions"/>
+                <cd:resolve name="argument-text"/>
+            </cd:arguments>
+        </cd:command>
+
+        <cd:command name="w" level="document" category="mathematics" file="math-ini.mkxl">
+            <cd:arguments>
+                <cd:resolve name="string-boxoptions"/>
+                <cd:resolve name="argument-text"/>
+            </cd:arguments>
+        </cd:command>
+
+    -->
+
+    <cd:command name="definemathtext" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:resolve name="keyword-name"/>
+            <cd:resolve name="keyword-name-optional"/>
+            <cd:assignments list="yes" optional="yes">
+                <cd:inherit name="setupmathtext"/>
+            </cd:assignments>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="setupmathtext" file="math-ini">
+        <cd:arguments>
+            <cd:resolve name="keyword-name-list-optional"/>
+            <cd:assignments list="yes">
+                <cd:parameter name="alternative">
+                    <cd:constant type="split"/>
+                    <cd:constant type="word"/>
+                </cd:parameter>
+                <cd:parameter name="style">
+                    <cd:resolve name="value-style"/>
+                </cd:parameter>
+                <cd:parameter name="color">
+                    <cd:constant type="cd:color"/>
+                </cd:parameter>
+                <cd:parameter name="class">
+                    <cd:resolve name="value-mathclass"/>
+                </cd:parameter>
+                <cd:parameter name="leftclass">
+                    <cd:resolve name="value-mathclass"/>
+                </cd:parameter>
+                <cd:parameter name="rightclass">
+                    <cd:resolve name="value-mathclass"/>
+                </cd:parameter>
+            </cd:assignments>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="mathtext" generated="yes" variant="instance" file="math-ini.mkxl">
+        <cd:sequence>
+            <cd:instance value="mathtext"/>
+        </cd:sequence>
+        <cd:arguments>
+            <cd:resolve name="argument-text"/>
+        </cd:arguments>
+        <cd:instances>
+            <cd:resolve name="instance-mathtext"/>
+        </cd:instances>
+    </cd:command>
+
+    <cd:command name="automathtext" level="document" category="mathematics" file="math-ini.mkxl"/>
+
+    <cd:command name="mathtextauto" level="document" category="mathematics" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:resolve name="argument-text"/>
+            <cd:resolve name="argument-text"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="mathortext" level="document" category="mathematics" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:resolve name="argument-text"/>
+            <cd:resolve name="argument-text"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="mathoptext" level="document" category="mathematics" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:resolve name="argument-text"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="smallmathsymbol" level="document" category="mathematics" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:resolve name="argument-text"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="mathrm" level="document" category="mathematics" file="math-ini.mkxl"/>
+
+    <cd:command name="mathss" level="document" category="mathematics" file="math-ini.mkxl"/>
+
+    <cd:command name="mathtt" level="document" category="mathematics" file="math-ini.mkxl"/>
+
+    <cd:command name="mathtf" level="document" category="mathematics" file="math-ini.mkxl"/>
+
+    <cd:command name="mathsl" level="document" category="mathematics" file="math-ini.mkxl"/>
+
+    <cd:command name="mathit" level="document" category="mathematics" file="math-ini.mkxl"/>
+
+    <cd:command name="mathbf" level="document" category="mathematics" file="math-ini.mkxl"/>
+
+    <cd:command name="mathbi" level="document" category="mathematics" file="math-ini.mkxl"/>
+
+    <cd:command name="mathbs" level="document" category="mathematics" file="math-ini.mkxl"/>
+
+    <cd:command name="mathitalic" level="document" category="mathematics" file="math-ini.mkxl"/>
+
+    <cd:command name="mathupright" level="document" category="mathematics" file="math-ini.mkxl"/>
+
+    <cd:command name="mathdefault" level="document" category="mathematics" file="math-ini.mkxl"/>
+
+    <cd:command name="mathscript" level="document" category="mathematics" file="math-ini.mkxl"/>
+
+    <cd:command name="mathfraktur" level="document" category="mathematics" file="math-ini.mkxl"/>
+
+    <cd:command name="mathblackboard" level="document" category="mathematics" file="math-ini.mkxl"/>
+
+    <cd:command name="enablemathpunctuation" file="math-ini.mkxl"/>
+
+    <cd:command name="disablemathpunctuation" file="math-ini.mkxl"/>
+
+    <cd:command name="enablemathautospacing" file="math-ini.mkxl"/>
+
+    <cd:command name="disablemathautospacing" file="math-ini.mkxl"/>
+
+    <cd:command name="enablemathautonumbers" file="math-ini.mkxl"/>
+
+    <cd:command name="disablemathautonumbers" file="math-ini.mkxl"/>
+
+    <cd:command name="enablemathautofencing" file="math-ini.mkxl"/>
+
+    <cd:command name="disablemathautofencing" file="math-ini.mkxl"/>
+
+    <cd:command name="displaymath" level="style" category="mathematics" file="supp-mat.mkiv">
+        <cd:arguments>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="inlinemath" level="style" category="mathematics" file="supp-mat.mkiv">
+        <cd:arguments>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="textmath" level="style" category="mathematics" file="supp-mat.mkiv">
+        <cd:arguments>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="imath" type="environment" level="system" category="mathematics" file="supp-mat.mkiv"/>
+
+    <cd:command name="dmath" type="environment" level="system" category="mathematics" file="supp-mat.mkiv"/>
+
+    <cd:command name="mathmode" type="environment" level="system" category="mathematics" file="supp-mat.mkiv"/>
+
+    <cd:command name="nonmathematics" level="system" category="mathematics" file="supp-mat.mkiv">
+        <cd:arguments>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="displaymathematics" level="system" category="mathematics" file="supp-mat.mkiv">
+        <cd:arguments>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="inlinemathematics" level="system" category="mathematics" file="supp-mat.mkiv">
+        <cd:arguments>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="automathematics" level="system" category="mathematics" file="supp-mat.mkiv">
+        <cd:arguments>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="cramped" level="system" category="mathematics" file="supp-mat.mkiv">
+        <cd:arguments>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="crampedllap" level="system" category="mathematics" file="supp-mat.mkiv">
+        <cd:arguments>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="crampedrlap" level="system" category="mathematics" file="supp-mat.mkiv">
+        <cd:arguments>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="crampedclap" level="system" category="mathematics" file="supp-mat.mkiv">
+        <cd:arguments>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="autointegral" level="system" category="mathematics" file="math-del.mkiv">
+        <cd:arguments>
+            <cd:resolve name="argument-text"/>
+            <cd:resolve name="argument-text"/>
+            <cd:resolve name="argument-text"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="stackscripts" level="document" category="mathematics" file="math-ini.mkxl"/>
+
+    <cd:command name="unstackscripts" level="document" category="mathematics" file="math-ini.mkxl"/>
+
+    <cd:command name="amedian" level="document" category="mathematics" file="math-def.mkxl">
+        <cd:arguments>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="enablemathrules" file="math-ini.mkxl"/>
+
+    <cd:command name="supscr" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:resolve name="keyword-dimension-optional"/>
+            <cd:resolve name="argument-text"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="subscr" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:resolve name="keyword-dimension-optional"/>
+            <cd:resolve name="argument-text"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="supsubscr" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:resolve name="keyword-dimension-optional"/>
+            <cd:resolve name="argument-text"/>
+            <cd:resolve name="argument-text"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="subsupscr" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:resolve name="keyword-dimension-optional"/>
+            <cd:resolve name="argument-text"/>
+            <cd:resolve name="argument-text"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="supprescr" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:resolve name="keyword-dimension-optional"/>
+            <cd:resolve name="argument-text"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="subprescr" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:resolve name="keyword-dimension-optional"/>
+            <cd:resolve name="argument-text"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="supsubprescr" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:resolve name="keyword-dimension-optional"/>
+            <cd:resolve name="argument-text"/>
+            <cd:resolve name="argument-text"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="subsupprescr" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:resolve name="keyword-dimension-optional"/>
+            <cd:resolve name="argument-text"/>
+            <cd:resolve name="argument-text"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="definemathspacing" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:resolve name="keyword-name"/>
+            <cd:keywords>
+                <cd:constant type="horizontal"/>
+                <cd:constant type="vertical"/>
+                <cd:constant type="cd:number"/>
+            </cd:keywords>
+            <cd:resolve name="keyword-number"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="setupmathspacing" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:keywords>
+                <cd:constant type="normal"/>
+                <cd:constant type="tight"/>
+                <cd:constant type="loose"/>
+                <cd:constant type="narrow"/>
+                <cd:constant type="wide"/>
+                <cd:constant type="less"/>
+                <cd:constant type="more"/>
+                <cd:constant type="chemistry"/>
+                <cd:constant type="cd:name"/>
+            </cd:keywords>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="traversemath" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:keywords delimiters="braces">
+                <cd:constant type="regular"/>
+                <cd:constant type="sansserif"/>
+                <cd:constant type="monospaced"/>
+                <cd:constant type="fraktur"/>
+                <cd:constant type="script"/>
+                <cd:constant type="calligraphic"/>
+                <cd:constant type="blackboard"/>
+            </cd:keywords>
+            <cd:keywords delimiters="braces">
+                <cd:constant type="normal"/>
+                <cd:constant type="bold"/>
+                <cd:constant type="bolditalic"/>
+                <cd:constant type="italic"/>
+            </cd:keywords>
+            <cd:keywords delimiters="braces">
+                <cd:constant type="ucletters"/>
+                <cd:constant type="lcletters"/>
+                <cd:constant type="digits"/>
+                <cd:constant type="ucgreek"/>
+                <cd:constant type="lcgreek"/>
+                <cd:constant type="symbols"/>
+            </cd:keywords>
+            <cd:resolve name="argument-command"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="traverseblock" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:keywords delimiters="braces">
+                <cd:constant type="digitsarabicindic"/>
+                <cd:constant type="digitsbold"/>
+                <cd:constant type="digitsdoublestruck"/>
+                <cd:constant type="digitsextendedarabicindic"/>
+                <cd:constant type="digitslatin"/>
+                <cd:constant type="digitsmonospace"/>
+                <cd:constant type="digitsnormal"/>
+                <cd:constant type="digitssansserifbold"/>
+                <cd:constant type="digitssansserifnormal"/>
+                <cd:constant type="geometricshapes"/>
+                <cd:constant type="letterlikesymbols"/>
+                <cd:constant type="lowercasebold"/>
+                <cd:constant type="lowercaseboldfraktur"/>
+                <cd:constant type="lowercasebolditalic"/>
+                <cd:constant type="lowercaseboldscript"/>
+                <cd:constant type="lowercasedoublestruck"/>
+                <cd:constant type="lowercasefraktur"/>
+                <cd:constant type="lowercasegreekbold"/>
+                <cd:constant type="lowercasegreekbolditalic"/>
+                <cd:constant type="lowercasegreekitalic"/>
+                <cd:constant type="lowercasegreeknormal"/>
+                <cd:constant type="lowercasegreeksansserifbold"/>
+                <cd:constant type="lowercasegreeksansserifbolditalic"/>
+                <cd:constant type="lowercaseitalic"/>
+                <cd:constant type="lowercasemonospace"/>
+                <cd:constant type="lowercasenormal"/>
+                <cd:constant type="lowercasesansserifbold"/>
+                <cd:constant type="lowercasesansserifbolditalic"/>
+                <cd:constant type="lowercasesansserifitalic"/>
+                <cd:constant type="lowercasesansserifnormal"/>
+                <cd:constant type="lowercasescript"/>
+                <cd:constant type="mathematicalalphanumericsymbols"/>
+                <cd:constant type="mathematicaloperators"/>
+                <cd:constant type="miscellaneousmathematicalsymbolsa"/>
+                <cd:constant type="miscellaneousmathematicalsymbolsb"/>
+                <cd:constant type="miscellaneoussymbols"/>
+                <cd:constant type="miscellaneoussymbolsandarrows"/>
+                <cd:constant type="miscellaneoustechnical"/>
+                <cd:constant type="supplementalarrowsa"/>
+                <cd:constant type="supplementalarrowsb"/>
+                <cd:constant type="supplementalarrowsc"/>
+                <cd:constant type="supplementalmathematicaloperators"/>
+                <cd:constant type="uppercasebold"/>
+                <cd:constant type="uppercaseboldfraktur"/>
+                <cd:constant type="uppercasebolditalic"/>
+                <cd:constant type="uppercaseboldscript"/>
+                <cd:constant type="uppercasedoublestruck"/>
+                <cd:constant type="uppercasefraktur"/>
+                <cd:constant type="uppercasegreekbold"/>
+                <cd:constant type="uppercasegreekbolditalic"/>
+                <cd:constant type="uppercasegreekitalic"/>
+                <cd:constant type="uppercasegreeknormal"/>
+                <cd:constant type="uppercasegreeksansserifbold"/>
+                <cd:constant type="uppercasegreeksansserifbolditalic"/>
+                <cd:constant type="uppercaseitalic"/>
+                <cd:constant type="uppercasemonospace"/>
+                <cd:constant type="uppercasenormal"/>
+                <cd:constant type="uppercasesansserifbold"/>
+                <cd:constant type="uppercasesansserifbolditalic"/>
+                <cd:constant type="uppercasesansserifitalic"/>
+                <cd:constant type="uppercasesansserifnormal"/>
+                <cd:constant type="uppercasescript"/>
+                <cd:constant type="lowercasecalligraphic"/>
+                <cd:constant type="uppercasecalligraphic"/>
+                <cd:constant type="lowercaseboldcalligraphic"/>
+                <cd:constant type="uppercaseboldcalligraphic"/>
+                <cd:constant type="lowercasesansgreek"/>
+                <cd:constant type="uppercasesansgreek"/>
+                <cd:constant type="lowercaseitalicsansgreek"/>
+                <cd:constant type="uppercaseitalicsansgreek"/>
+                <cd:constant type="lowercaseblackboarditalic"/>
+                <cd:constant type="uppercaseblackboarditalic"/>
+            </cd:keywords>
+            <cd:resolve name="argument-command"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="mathdigits" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:resolve name="argument-text"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="base" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:resolve name="keyword-text-optional"/>
+            <cd:resolve name="argument-text"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="definemathgroupset" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:resolve name="keyword-name"/>
+            <cd:keywords>
+                <cd:constant type="every"/>
+                <cd:constant type="default"/>
+                <cd:constant type="binary&blank;relation"/>
+                <cd:constant type="binary&blank;set&blank;relation"/>
+                <cd:constant type="integral"/>
+                <cd:constant type="limit"/>
+                <cd:constant type="number&blank;set"/>
+                <cd:constant type="postfix&blank;operator"/>
+                <cd:constant type="prime"/>
+                <cd:constant type="binary&blank;operator"/>
+                <cd:constant type="binary&blank;vector"/>
+                <cd:constant type="binary&blank;arithmetic"/>
+                <cd:constant type="binary&blank;logical"/>
+                <cd:constant type="binary&blank;set"/>
+                <cd:constant type="constant arithmetic"/>
+                <cd:constant type="constant&blank;set"/>
+                <cd:constant type="differential"/>
+                <cd:constant type="differential2"/>
+                <cd:constant type="factorial"/>
+                <cd:constant type="interval"/>
+                <cd:constant type="quantifier"/>
+                <cd:constant type="unary&blank;set"/>
+                <cd:constant type="constant&blank;logical"/>
+                <cd:constant type="partial"/>
+                <cd:constant type="nary&blank;operator"/>
+                <cd:constant type="nary&blank;logical"/>
+                <cd:constant type="specifier"/>
+                <cd:constant type="specifier2"/>
+                <cd:constant type="pause"/>
+                <cd:constant type="punctuation"/>
+                <cd:constant type="unary&blank;logical"/>
+                <cd:constant type="whatever"/>
+                <cd:constant type="whatever2"/>
+            </cd:keywords>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="setmathgroupset" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:resolve name="keyword-name"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="definemathannotation" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:resolve name="keyword-name"/>
+            <cd:resolve name="keyword-name-optional"/>
+            <cd:assignments list="yes" optional="yes">
+                <cd:inherit name="setupmathannotation"/>
+            </cd:assignments>
+        </cd:arguments>
+    </cd:command>"
+
+    <cd:command name="setupmathannotation" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:resolve name="keyword-name-list-optional"/>
+            <cd:assignments list="yes">
+                <cd:parameter name="top">
+                    <cd:constant type="cd:text"/>
+                </cd:parameter>
+                <cd:parameter name="bottom">
+                    <cd:constant type="cd:text"/>
+                </cd:parameter>
+                <cd:parameter name="strut">
+                    <cd:constant type="yes" default="yes"/>
+                    <cd:constant type="no"/>
+                </cd:parameter>
+                <cd:parameter name="mathclass">
+                    <cd:resolve name="value-mathclass"/>
+                </cd:parameter>
+            </cd:assignments>
+        </cd:arguments>
+    </cd:command>"
+
+    <cd:command name="mathannotation" generated="yes" variant="instance" file="math-ini.mkxl">
+        <cd:sequence>
+            <cd:instance value="mathannotation"/>
+        </cd:sequence>
+        <cd:arguments>
+            <cd:assignments list="yes" optional="yes">
+                <cd:inherit name="setupmathannotation"/>
+            </cd:assignments>
+            <cd:resolve name="argument-text"/>
+        </cd:arguments>
+        <cd:instances>
+            <cd:resolve name="instance-mathannotation"/>
+        </cd:instances>
+    </cd:command>
+
+    <cd:command name="mathmeaning" type="environment" file="math-ini.mkxl"/>
+
+    <cd:command name="showmathstate" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:resolve name="keyword-dimension-optional"/>
+            <cd:keywords delimiters="braces">
+                <cd:constant type="C"/>
+                <cd:constant type="M"/>
+                <cd:constant type="P"/>
+                <cd:constant type="S"/>
+                <cd:constant type="r"/>
+                <cd:constant type="f"/>
+                <cd:constant type="n"/>
+                <cd:constant type="d"/>
+            </cd:keywords>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="showmathstyles" file="math-ini.mkxl"/>
+
+    <cd:command name="definemathpreset" file="math-pre.lmt">
+        <cd:arguments>
+            <cd:resolve name="keyword-name"/>
+            <cd:assignments>
+                <cd:parameter name="factor">
+                    <cd:constant type="cd:number"/>
+                </cd:parameter>
+                <cd:parameter name="style">
+                    <cd:constant type="all"/>
+                    <cd:constant type="display"/>
+                    <cd:constant type="text"/>
+                    <cd:constant type="script"/>
+                    <cd:constant type="scriptscript"/>
+                    <cd:constant type="crampeddisplay"/>
+                    <cd:constant type="crampedtext"/>
+                    <cd:constant type="crampedscript"/>
+                    <cd:constant type="crampedscriptscript"/>
+                </cd:parameter>
+                <cd:parameter name="list">
+                    <cd:constant type="quad"/>
+                    <cd:constant type="exheight"/>
+                    <cd:constant type="axis"/>
+                    <cd:constant type="accentbaseheight"/>
+                    <cd:constant type="accentbasedepth"/>
+                    <cd:constant type="flattenedaccentbaseheight"/>
+                    <cd:constant type="flattenedaccentbasedepth"/>
+                    <cd:constant type="xscale"/>
+                    <cd:constant type="yscale"/>
+                    <cd:constant type="operatorsize"/>
+                    <cd:constant type="overbarkern"/>
+                    <cd:constant type="overbarrule"/>
+                    <cd:constant type="overbarvgap"/>
+                    <cd:constant type="underbarkern"/>
+                    <cd:constant type="underbarrule"/>
+                    <cd:constant type="underbarvgap"/>
+                    <cd:constant type="radicalkern"/>
+                    <cd:constant type="radicalrule"/>
+                    <cd:constant type="radicalvgap"/>
+                    <cd:constant type="radicaldegreebefore"/>
+                    <cd:constant type="radicaldegreeafter"/>
+                    <cd:constant type="radicaldegreeraise"/>
+                    <cd:constant type="radicalextensibleafter"/>
+                    <cd:constant type="radicalextensiblebefore"/>
+                    <cd:constant type="stackvgap"/>
+                    <cd:constant type="stacknumup"/>
+                    <cd:constant type="stackdenomdown"/>
+                    <cd:constant type="fractionrule"/>
+                    <cd:constant type="fractionnumvgap"/>
+                    <cd:constant type="fractionnumup"/>
+                    <cd:constant type="fractiondenomvgap"/>
+                    <cd:constant type="fractiondenomdown"/>
+                    <cd:constant type="fractiondelsize"/>
+                    <cd:constant type="skewedfractionhgap"/>
+                    <cd:constant type="skewedfractionvgap"/>
+                    <cd:constant type="limitabovevgap"/>
+                    <cd:constant type="limitabovebgap"/>
+                    <cd:constant type="limitabovekern"/>
+                    <cd:constant type="limitbelowvgap"/>
+                    <cd:constant type="limitbelowbgap"/>
+                    <cd:constant type="limitbelowkern"/>
+                    <cd:constant type="nolimitsubfactor"/>
+                    <cd:constant type="nolimitsupfactor"/>
+                    <cd:constant type="underdelimitervgap"/>
+                    <cd:constant type="underdelimiterbgap"/>
+                    <cd:constant type="overdelimitervgap"/>
+                    <cd:constant type="overdelimiterbgap"/>
+                    <cd:constant type="subshiftdrop"/>
+                    <cd:constant type="supshiftdrop"/>
+                    <cd:constant type="subshiftdown"/>
+                    <cd:constant type="subsupshiftdown"/>
+                    <cd:constant type="subtopmax"/>
+                    <cd:constant type="supshiftup"/>
+                    <cd:constant type="supbottommin"/>
+                    <cd:constant type="supsubbottommax"/>
+                    <cd:constant type="subsupvgap"/>
+                    <cd:constant type="spacebeforescript"/>
+                    <cd:constant type="spacebetweenscript"/>
+                    <cd:constant type="spaceafterscript"/>
+                    <cd:constant type="connectoroverlapmin"/>
+                    <cd:constant type="superscriptsnap"/>
+                    <cd:constant type="subscriptsnap"/>
+                    <cd:constant type="extrasuperscriptshift"/>
+                    <cd:constant type="extrasubscriptshift"/>
+                    <cd:constant type="extrasuperprescriptshift"/>
+                    <cd:constant type="extrasubprescriptshift"/>
+                    <cd:constant type="primeraise"/>
+                    <cd:constant type="primeraisecomposed"/>
+                    <cd:constant type="primeshiftup"/>
+                    <cd:constant type="primeshiftdrop"/>
+                    <cd:constant type="primespaceafter"/>
+                    <cd:constant type="ruleheight"/>
+                    <cd:constant type="ruledepth"/>
+                    <cd:constant type="extrasuperscriptspace"/>
+                    <cd:constant type="extrasubscriptspace"/>
+                    <cd:constant type="extrasuperprescriptspace"/>
+                    <cd:constant type="extrasubprescriptspace"/>
+                    <cd:constant type="skeweddelimitertolerance"/>
+                    <cd:constant type="accenttopshiftup"/>
+                    <cd:constant type="accentbottomshiftdown"/>
+                    <cd:constant type="accenttopovershoot"/>
+                    <cd:constant type="accentbottomovershoot"/>
+                    <cd:constant type="accentsuperscriptdrop"/>
+                    <cd:constant type="accentsuperscriptpercent"/>
+                    <cd:constant type="accentextendmargin"/>
+                    <cd:constant type="flattenedaccenttopshiftup"/>
+                    <cd:constant type="flattenedaccentbottomshiftdown"/>
+                    <cd:constant type="delimiterpercent"/>
+                    <cd:constant type="delimitershortfall"/>
+                    <cd:constant type="delimiterextendmargin"/>
+                    <cd:constant type="overlinevariant"/>
+                    <cd:constant type="underlinevariant"/>
+                    <cd:constant type="overdelimitervariant"/>
+                    <cd:constant type="underdelimitervariant"/>
+                    <cd:constant type="delimiterovervariant"/>
+                    <cd:constant type="delimiterundervariant"/>
+                    <cd:constant type="hextensiblevariant"/>
+                    <cd:constant type="vextensiblevariant"/>
+                    <cd:constant type="fractionvariant"/>
+                    <cd:constant type="radicalvariant"/>
+                    <cd:constant type="accentvariant"/>
+                    <cd:constant type="degreevariant"/>
+                    <cd:constant type="topaccentvariant"/>
+                    <cd:constant type="bottomaccentvariant"/>
+                    <cd:constant type="overlayaccentvariant"/>
+                    <cd:constant type="numeratorvariant"/>
+                    <cd:constant type="denominatorvariant"/>
+                    <cd:constant type="superscriptvariant"/>
+                    <cd:constant type="subscriptvariant"/>
+                    <cd:constant type="primevariant"/>
+                    <cd:constant type="stackvariant"/>
+                </cd:parameter>
+                <cd:parameter name="unit">
+                    <cd:constant type="axis"/>
+                </cd:parameter>
+            </cd:assignments>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="presetmathematics" file="math-pre.lmt">
+        <cd:arguments>
+            <cd:resolve name="keyword-name-list"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="definemathconstant" file="math-con.mkxl">
+        <cd:arguments>
+            <cd:resolve name="keyword-name"/>
+            <cd:keywords>
+                <cd:constant type="cd:character"/>
+            </cd:keywords>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="registermathfunction" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:resolve name="keyword-name"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="registermathsymbol" file="math-ini.mkxl">
+        <cd:arguments>
+            <cd:resolve name="keyword-name-optional"/>
+            <cd:resolve name="keyword-language-optional"/>
+            <cd:resolve name="keyword-name"/>
+            <cd:resolve name="keyword-text"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="matrix" file="math-pln.mkxl">
+        <cd:arguments>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="plainmatrix" file="math-pln.mkxl">
+        <cd:arguments>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="definemathtoysymbol" file="math-toy.mkxl">
+        <cd:arguments>
+            <cd:resolve name="keyword-name"/>
+            <cd:keywords>
+                <cd:resolve name="value-mathclass"/>
+            </cd:keywords>
+            <cd:keywords>
+                <cd:constant type="cd:character"/>
+            </cd:keywords>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="qedhere" file="strc-mat.mkxl">
+        <cd:arguments>
+            <cd:keywords optional="yes">
+                <cd:constant type="left"/>
+                <cd:constant type="right" default="yes"/>
+                <cd:constant type="before"/>
+                <cd:constant type="after"/>
+                <cd:constant type="inbetween"/>
+            </cd:keywords>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="mathqed" file="strc-mat.mkxl"/>
+
+</cd:interface>

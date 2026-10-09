@@ -1,0 +1,15 @@
+[Desktop Action peaziptest]
+Exec=peazip -ext2test %f
+Icon=peazip
+Name=Test with PeaZip
+
+[Desktop Entry]
+Type=Service
+Actions=peaziptest;
+Encoding=UTF-8
+Icon=peazip
+Name=peaziptest
+Name[en_US]=peaziptest
+ServiceTypes=KonqPopupMenu/Plugin,all/all
+X-KDE-Priority=TopLevel
+X-KDE-Submenu=PeaZip

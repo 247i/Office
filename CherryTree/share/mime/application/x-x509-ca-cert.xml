@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-x509-ca-cert">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>X.509 CA certificate</comment>
+  <comment xml:lang="uk">сертифікат CA X.509</comment>
+  <comment xml:lang="sv">X.509 CA-certifikat</comment>
+  <comment xml:lang="sl">Potrdilo X.509 CA</comment>
+  <comment xml:lang="ro">certificat CA X.509</comment>
+  <comment xml:lang="ko">X.509 CA 인증서</comment>
+  <comment xml:lang="kk-Cyrl">X.509 СО сертификаты</comment>
+  <comment xml:lang="et">X.509 SK sertifikaat</comment>
+  <comment xml:lang="de">X.509-CA-Zertifikat</comment>
+  <acronym>CA</acronym>
+  <expanded-acronym>Certificate Authority</expanded-acronym>
+  <sub-class-of type="application/pkix-cert"/>
+  <glob pattern="*.cer" weight="40"/>
+  <glob pattern="*.cert" weight="40"/>
+  <glob pattern="*.crt" weight="40"/>
+  <glob pattern="*.der"/>
+  <glob pattern="*.pem"/>
+</mime-type>

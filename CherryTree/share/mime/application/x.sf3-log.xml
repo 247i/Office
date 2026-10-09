@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x.sf3-log">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>SF3 Log File</comment>
+  <comment xml:lang="uk">файл журналу SF3</comment>
+  <comment xml:lang="tr">SF3 günlük dosyası</comment>
+  <comment xml:lang="sv">SF3-loggfil</comment>
+  <comment xml:lang="sr-Cyrl">SF3 дневник</comment>
+  <comment xml:lang="sq">Kartelë Regjistër SF3</comment>
+  <comment xml:lang="sl">Dnevnik SF3</comment>
+  <comment xml:lang="ru">Файл журнала SF3</comment>
+  <comment xml:lang="ro">fișier de jurnal SF3</comment>
+  <comment xml:lang="pt-BR">Arquivo de log SF3</comment>
+  <comment xml:lang="pl">Plik dziennika SF3</comment>
+  <comment xml:lang="oc">fichièr de jornal SF3</comment>
+  <comment xml:lang="ko">SF3 로그 파일</comment>
+  <comment xml:lang="kk-Cyrl">SF3 журнал файлы</comment>
+  <comment xml:lang="hr">SF3 datoteka zapisnika</comment>
+  <comment xml:lang="fr">Fichier de journaux SF3</comment>
+  <comment xml:lang="fi">SF3-loki</comment>
+  <comment xml:lang="et">SF3 logifail</comment>
+  <comment xml:lang="es">archivo de registro SF3</comment>
+  <comment xml:lang="en-GB">SF3 Log File</comment>
+  <comment xml:lang="de">SF3-Protokolldatei</comment>
+  <comment xml:lang="ar">ملف سجل SF3</comment>
+  <acronym>SF3</acronym>
+  <expanded-acronym>Simple File Format Family</expanded-acronym>
+  <glob pattern="*.log.sf3"/>
+  <glob pattern="*.sf3"/>
+</mime-type>

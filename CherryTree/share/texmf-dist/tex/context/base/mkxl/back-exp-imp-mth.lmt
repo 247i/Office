@@ -1,0 +1,1289 @@
+if not modules then modules = { } end modules ['back-exp-imp-mth'] = {
+    version   = 1.001,
+    comment   = "companion to back-exp.mkiv",
+    author    = "Hans Hagen, PRAGMA-ADE, Hasselt NL",
+    copyright = "PRAGMA ADE / ConTeXt Development Team",
+    license   = "see context related readme files"
+}
+
+local sub, gsub = string.sub, string.gsub
+local utfchar, utfvalues = utf.char, utf.values
+local insert = table.insert
+local setmetatableindex, concat = table.setmetatableindex, table.concat
+
+local structurestags = structures.tags
+local specifications = structurestags.specifications
+local locatedtag     = structurestags.locatedtag
+
+local backend        = structurestags.backend
+
+local setattribute   = backend.setattribute
+local extras         = backend.extras
+local checks         = backend.checks
+local finalizers     = backend.finalizers
+
+----- bpfactor       = number.dimenfactors.bp
+----- f_points       = string.formatters["%p"]
+local f_em           = string.formatters["%.6Nem"]
+
+local implement      = interfaces.implement
+
+local mathmlns       <const> = "http://www.w3.org/1998/Math/MathML"
+
+do
+
+    ----- automathrows   = true  directives.register("export.math.autorows",   function(v) automathrows   = v end)
+    ----- automathapply  = true  directives.register("export.math.autoapply",  function(v) automathapply  = v end)
+    ----- automathnumber = true  directives.register("export.math.autonumber", function(v) automathnumber = v end)
+    local automathstrip  = true  directives.register("export.math.autostrip",  function(v) automathstrip  = v end)
+
+    local functions      = mathematics.categories.functions
+    local tagging        = mathematics.tagging
+    local functiontype   = mathematics.functiontype
+
+    local function collapse(di,i,data,ndata,detail,element)
+        local collapsing = di.data
+        if data then
+            di.element = element
+            di.detail = nil
+            i = i + 1
+            while i <= ndata do
+                local dn = data[i]
+                if dn.detail == detail then
+                    collapsing[#collapsing+1] = dn.data[1]
+                    dn.skip = "ignore"
+                    i = i + 1
+                else
+                    break
+                end
+            end
+        end
+        return i
+    end
+
+    local function collapse_all_mn(data)
+        local n = #data
+        local f = false
+        local l = false
+        local d = false
+        local p = false
+        for i=1,n do
+            local di = data[i]
+            local tg = di.tg
+            if tg == "mn" then
+                if not f then
+                    d = di.data
+                    f = i
+                    p = false
+                else
+                    if p then
+                        p.element = "mn"
+                        local s = specifications[p.fulltag]
+                        s.mathcharacter = nil
+                        s.mathclass     = nil
+                        s.mathgroup     = nil
+                        s.mathindex     = nil
+                    end
+                    d[#d+1] = di.data[1]
+                    data[i] = false
+                    p = false
+                end
+                l = i
+            elseif tg == "mi" or tg == "mc" then
+                if p then
+                    f = false
+                end
+                if i < n and data[i+1].tg == "mn" then
+                    local d1 = di.data[1]
+                    if d1 then
+                        local c = d1.content
+                        local s = specifications[di.fulltag]
+                        if s.mathclass == "ordinary" and c and (c == "." or c == ",") then
+                            if not f then
+                                d = di.data
+                                f = i
+                                l = i
+                                p = di
+                            else
+                                d[#d+1] = d1
+                                data[i] = false
+                            end
+                        else
+                            f = false
+                        end
+                    else
+                        f = false
+                    end
+                else
+                    f = false
+                end
+            elseif f and (tg == "msub" or tg == "msup" or tg == "msubsup") then
+                local d1 = di.data[1]
+                if d1 and d1.tg == "mn" then
+                    d[#d+1] = d1.data[1]
+                    d1.data = d
+                    data[f] = false
+                end
+                f = false
+            else
+                f = false
+            end
+        end
+        if d then
+            local j = 0
+            for i=1,n do
+                local d = data[i]
+                if d then
+                    j = j + 1
+                    data[j] = d
+                end
+            end
+            for i=j+1,n do
+                data[i] = nil
+            end
+        end
+    end
+
+    local functioncontent = { }
+
+    setmetatableindex(functioncontent,function(t,k)
+        local v = { { content = k } }
+        t[k] = v
+        return v
+    end)
+
+    local dummy_nucleus = {
+        element   = "mtext",
+        data      = { content = "" },
+        nature    = "mixed",
+        comment   = "dummy nucleus",
+        fulltag   = "mtext>0"
+    }
+
+    local function accentchar(d) -- see mkiv for old one
+        local detail = tonumber(d.detail)
+        if detail then
+            local d1 = d.data[1]
+            if d1 and d1.tg == "mrow" then
+                --
+                d.element = "mrow" -- used
+                d.detail = nil
+                local s = specifications[d.fulltag] -- hm, used when not set
+                s.detail = nil
+                --
+                d1.element = "mo" -- used
+             -- d1.detail = nil
+                d1.attributes = { stretchy = "true" }
+                d1.nature = "mixed"
+                d1.data = { { content = utfchar(detail) } }
+                return d
+            end
+        end
+    end
+
+    local function maybetext(d)
+        if #d.data == 1 and d.data[1].content then
+            d.element = "mtext"
+        else -- maybe also check if d.data[1].content
+            d.element = "mrow"
+        end
+        return d
+    end
+
+    local no_mrow = {
+
+        math          = true,
+
+        mrow          = true,
+        mfenced       = true,
+        mfrac         = true,
+        mroot         = true,
+        msqrt         = true,
+        mtable        = true,
+        mi            = true,
+        mo            = true,
+        mn            = true,
+        mspace        = true,
+        mtext         = true,
+
+     -- mmultiscripts = true,
+     -- mstacker      = true,
+     -- mextensible   = true,
+     -- mdelimited    = true,
+    }
+
+    -- we could make a stupid xml and then just use lpath to clean it up
+
+    -- local separator <const> = utfchar(0x2061)
+
+    -- local function markapplicationof(di,data,i)
+    --     if i > 1 then
+    --         local d0 = data[i-1]
+    --         local at = d0.attributes
+    --         if at then
+    --             at.mathapplication = true
+    --         else
+    --             d0.attributes = {
+    --                 mathapplication = true,
+    --             }
+    --         end
+    --     end
+    --     -- di.tg = "ignore"
+    --     -- di.skip = "ignore"
+    -- end
+
+    local function checked(d,n)
+        if n == 1 then
+            local di = d[1]
+            if di then
+                local tg = di.tg
+                if tg == "ignore" then
+                    -- todo: we can move ignore's data one level up
+                    return 1
+                elseif di.content then
+                    return 1
+                else
+                    local dd = di.data
+                    local nn = #dd
+                    if nn > 0 and checked(dd,nn) > 0 then
+                        return 1
+                    else
+                        return 0
+                    end
+                end
+            else
+                -- kind of weird
+                return 0
+            end
+        else
+            local m = 0
+            for i=1,n do
+                local di = d[i]
+                if di then
+                    local tg = di.tg
+                    if tg == "ignore" then
+                        -- skip
+                    elseif di.content then
+                        m = m + 1
+                        d[m] = di
+                    else
+                        local dd = di.data
+                        local nn = #dd
+                        if nn > 0 and checked(dd,nn) > 0 then
+                            m = m + 1
+                            d[m] = di
+                        end
+                    end
+                else
+                    -- kind of weird
+                end
+            end
+            if m < n then
+                for i=n,m+1,-1 do
+                    d[i] = nil
+                end
+            end
+            return m
+        end
+    end
+
+    local stretched = {
+        operator = "false",
+        open     = "false",
+        close    = "false",
+        middle   = "false",
+        integral = "false",
+    }
+
+    local nbsp <const> = utfchar(0x00A0) -- &#0160;
+    local mbsp <const> = utfchar(0x2000) -- after : ; ,
+
+--     ," ",nbsp
+
+    local replacer = lpeg.replacer {
+        [", "] = ",".. mbsp,
+        [". "] = ".".. mbsp,
+        [": "] = ":".. mbsp,
+        ["; "] = ";".. mbsp,
+        [","]  = ",".. mbsp,
+        ["."]  = ".".. mbsp,
+        [":"]  = ":".. mbsp,
+        [";"]  = ";".. mbsp,
+        [" "]  =       nbsp,
+    }
+
+
+    local function checkmath(root) -- we can provide utf.toentities as an option
+        local data = root.data
+        if data then
+            local ndata = #data
+            local roottg = root.tg
+            if roottg == "mo" then
+                local s         = specifications[root.fulltag]
+                local class     = s.mathclass
+                local group     = s.mathgroup
+                local delimiter = s.delimiter
+-- why not print(s.accent)
+                if class or group then
+                    root.attributes = {
+                        mathclass     = class,
+                        mathgroup     = group,
+                        mathindex     = s.mathindex,
+                        mathcharacter = s.mathcharacter,
+                        mathstack     = s.mathstack,
+                        stretchy      = (delimiter == "true" and "true") or stretched[class] or nil,
+                    }
+                else
+                    -- todo: stackers, accents etc
+-- we can put an accent class on the char
+                    root.attributes = {
+                        mathstack = s.mathstack,
+                     -- stretchy  = "false",
+                        stretchy  = delimiter == "true" and "true" or "false", -- too much now
+                    }
+                end
+            elseif roottg == "mfenced" then
+                local s = specifications[root.fulltag]
+                local o = s.operator
+                if o then
+                    root.skip = "comment"
+                 -- root.content = utfchar(o) -- use embedded for now
+                elseif tagging.mfenced then
+                    local l = s.left
+                    local m = s.middle
+                    local r = s.right
+                    if l then
+                        l = utfchar(l)
+                    end
+                    if m then
+                        local t = { }
+                        for i=1,#m do
+                            t[i] = utfchar(m[i])
+                        end
+                        m = concat(t)
+                    end
+                    if r then
+                        r = utfchar(r)
+                    end
+                    root.attributes = {
+                        open       = l,
+                        separators = m,
+                        close      = r,
+                        stretchy   = "true",
+                    }
+                else
+                    root.element    = "mrow"
+                    root.attributes = {
+                        mathcategory = s.mathcategory,
+                     -- stretchy     = "true", -- not needed, more a signal
+                    }
+                end
+         -- elseif roottg == "mstacker" then
+            elseif roottg == "mrow" then
+                ndata = checked(data,ndata)
+            end
+            if ndata == 0 then
+                root.skip = "comment" -- get rid of weird artefacts
+                root.nota = "weird"
+                return
+            elseif ndata == 1 then
+                local d = data[1]
+                if not d or d == "" then
+                    root.skip = "comment"
+                    return
+                elseif d.content then
+                    return
+                elseif roottg == "mrow" or roottg == "mtext" then
+                    -- maybe just always ! check spec first
+                    -- or we can have checks.* for each as we then can flatten
+                    local s = specifications[root.fulltag]
+                    if s.mathunit then
+                        d.attributes = {
+                            mathunit = s.mathunit
+                        }
+                    elseif s.mathdigits then
+                        d.attributes = {
+                            mathdigits = s.mathdigits
+                        }
+                    elseif s.mathfunction then
+                        d.attributes = {
+                           mathfunction = s.mathfunction,
+                           mathcategory = s.mathcategory,
+                           mathstack    = s.mathstack,
+                        }
+                    elseif no_mrow[d.tg] then
+                        root.skip = "comment"
+                    else
+                        d.attributes = {
+                           mathstack = s.mathstack,
+                        }
+                    end
+                elseif roottg == "mo" then
+                    if d.tg == "mo" then
+                        root.skip = "comment"
+                    end
+                end
+            end
+            -- todo
+            local i = 1
+            while i <= ndata do                   -- -- -- TOO MUCH NESTED CHECKING -- -- --
+                local di = data[i]
+                if di and not di.content then
+                    local tg = di.tg
+                    if tg == "math" then
+                     -- di.element = "mrow" -- when properties
+                        di.skip = "comment"
+                        checkmath(di)
+                        i = i + 1
+                    elseif tg == "mover" then
+                        local s = specifications[di.fulltag]
+                        if s.accent then
+                            local t = s.top
+                            local d = di.data
+                            -- todo: accent = "false" (for scripts like limits)
+                            di.attributes = {
+                                accent       = "true",
+                                mathcategory = s.mathcategory,
+                            }
+                            -- todo: p.topfixed
+                            if t then
+                                -- mover
+                                if true then
+                                    local dd = d[1].data
+                                    if dd then
+                                        dd[1].content = utfchar(t)
+                                    end
+                                end
+                                --
+                                di.data = { d[2], d[1] }
+                            end
+                        else
+                            -- can't happen
+                        end
+                        checkmath(di)
+                        i = i + 1
+                    elseif tg == "munder" then
+                        local s = specifications[di.fulltag]
+                        if s.accent then
+                            local b = s.bottom
+                            local d = di.data
+                            -- todo: accent = "false" (for scripts like limits)
+                            di.attributes = {
+                                accent       = "true",
+                                mathcategory = s.mathcategory,
+                            }
+                         -- todo: p.bottomfixed
+                            if b then
+                                -- munder
+                                if true then
+                                    local dd = d[2].data
+                                    if dd then
+                                        dd[1].content = utfchar(b)
+                                    end
+                                end
+                            end
+                        else
+                            -- can't happen
+                        end
+                        checkmath(di)
+                        i = i + 1
+                    elseif tg == "munderover" then
+                        local s = specifications[di.fulltag]
+                        if s.accent then
+                            local t = s.top
+                            local b = s.bottom
+                            local d = di.data
+                            -- todo: accent      = "false" (for scripts like limits)
+                            -- todo: accentunder = "false" (for scripts like limits)
+                            di.attributes = {
+                                accent      = "true",
+                                accentunder = "true",
+                            }
+                         -- todo: p.topfixed
+                         -- todo: p.bottomfixed
+                            if t and b then
+                                -- munderover
+                                if true then -- we don't go here any more
+                                    local dd = d[1].data
+                                    if dd then
+                                        dd[1].content = utfchar(t)
+                                    end
+                                    local dd = d[3].data
+                                    if dd then
+                                        dd[1].content = utfchar(b)
+                                    end
+                                end
+                                di.data = { d[2], d[3], d[1] }
+                            else
+                                -- can't happen
+                            end
+                        else
+                            -- can't happen
+                        end
+                        checkmath(di)
+                        i = i + 1
+                    elseif tg == "mstacker" then
+                        local d = di.data
+                        local d1 = d[1]
+                        local d2 = d[2]
+                        local d3 = d[3]
+                        local t1 = d1 and d1.tg
+                        local t2 = d2 and d2.tg
+                        local t3 = d3 and d3.tg
+                        local m  = nil -- d1.data[1]
+                        local t  = nil
+                        local b  = nil
+                        -- only accent when top / bot have stretch
+                        -- normally we flush [base under over] which is better for tagged pdf
+                        if t1 == "mstackermid" then
+                            if t2 == "mstackertop" then
+                                if t3 == "mstackerbot" then
+                                    m = accentchar(d1) or maybetext(d1)-- or m
+                                    t = accentchar(d2) or maybetext(d2)
+                                    b = accentchar(d3) or maybetext(d3)
+                                    di.element = "munderover"
+                                    di.data    = { m or d1.data[1], b, t }
+                                else
+                                    m = accentchar(d1) or maybetext(d1)-- or m
+                                    t = accentchar(d2) or maybetext(d2)
+                                    di.element = "mover"
+                                    di.data    = { m or d1.data[1], t }
+                                end
+                            elseif t2 == "mstackerbot" then
+                                if t3 == "mstackertop" then
+                                    m = accentchar(d1) or maybetext(d1)-- or m
+                                    b = accentchar(d2) or maybetext(d2)
+                                    t = accentchar(d3) or maybetext(d3)
+                                    di.element = "munderover"
+                                    di.data    = { m or d1.data[1], t, b  }
+                                else
+                                    m = accentchar(d1) or maybetext(d1)-- or m
+                                    b = accentchar(d2) or maybetext(d2)
+                                    di.element = "munder"
+                                    di.data    = { m or d1.data[1], b }
+                                end
+                            else
+                                m = accentchar(d1) -- or m
+                                di.element = "mrow"
+                                di.data    = { m or d1.data[1] }
+                            end
+                        end
+                        if t or b then
+                            di.attributes = {
+                                accent      = t and "true" or nil,
+                                accentunder = b and "true" or nil,
+                            }
+                            di.detail = nil
+                        end
+                        checkmath(di)
+                        i = i + 1
+                    elseif tg == "mroot" then
+                        local data = di.data
+                        local size = #data
+                        if size == 1 then
+                            -- else firefox complains ... code in math-tag (for pdf tagging)
+                            di.element = "msqrt"
+                        elseif size == 2 then
+                            data[1], data[2] = data[2], data[1]
+                        end
+                        checkmath(di)
+                        i = i + 1
+                    elseif tg == "mdelimited" then
+                        local d = di.data
+                        local n = #d
+                        for i=1,n do
+                            local di = d[i]
+                            local properties = specifications[di.fulltag] or { }
+                            local location = properties.delimiterlocation
+                            if location then
+                                if di.attributes then
+                                    di.attributes.delimiterlocation = location
+                                else
+                                    -- useless and bad anyway
+                                    di.attributes = { delimiterlocation = location }
+                                end
+                            end
+                        end
+                        di.element = "mrow"
+                        checkmath(di)
+                        i = i + 1
+                    elseif tg == "mstack" then
+                        di.element = "mover"
+                        local scriptlevel  = "1" -- "+1"
+                        if di.attributes then
+                            di.attributes.scriptlevel = scriptlevel
+                        else
+                            di.attributes = { scriptlevel = scriptlevel }
+                        end
+                        checkmath(di)
+                        i = i + 1
+                    elseif tg == "break" then
+                        di.skip = "comment"
+                        i = i + 1
+                    elseif tg == "mspace" then
+                     -- di.empty = true
+                        local s = specifications[di.fulltag]
+                        local e = s and s.emfactor
+                        if e and e ~= 0 then
+                            di.element = "mspace"
+                            di.attributes = {
+                                width = f_em(e),
+                            }
+                        end
+                        i = i + 1
+                    elseif tg == "mtext" then
+                        -- this is only needed for unboxed mtexts ... all kind of special
+                        -- tex border cases and optimizations ... trial and error
+                        local data = di.data
+                        local size = #data
+-- bmatrix ...
+                        if size > 1 then
+                            for i=1,size do
+                                local di = data[i]
+                                local content = di.content
+                                if content then
+                                    data[i] = {
+                                        element = "mtext",
+                                        nature  = "inline",
+                                        data    = { di },
+                                        n       = 0,
+                                    }
+--                                     di.content = gsub(content," ",nbsp)
+di.content = lpeg.match(replacer,content)
+                                elseif di.tg == "math" then
+                                    local di = di.data[1]
+                                    if di then
+                                        data[i] = di
+                                        checkmath(di)
+                                    end
+                                end
+                            end
+                            di.element = "mrow"
+                         -- di.tg = "mrow"
+                         -- di.nature  = "inline"
+                        elseif size > 0 then
+                            local di = data[1]
+                            local content = di.content
+                            if content then
+--                                 di.content = gsub(content," ",nbsp)
+di.content = lpeg.match(replacer,content)
+                            end
+                        end
+                        checkmath(di)
+                        i = i + 1
+                    elseif tg == "mi" then
+                        local s = specifications[di.fulltag]
+                        if s.mathclass == "punctuation" then
+                            di.element = "mtext"
+                            checkmath(di)
+                            i = i + 1
+                        else
+                         -- if di.data[1].content == separator then
+                         --     markapplicationof(di,data,i)
+                         -- end
+                            local class    = s.mathclass
+                            local group    = s.mathgroup
+                         -- local category = s.mathcategory
+                            if class or group then
+                                di.attributes = {
+                                    mathclass     = class,
+                                    mathgroup     = group,
+                                    mathindex     = s.mathindex,
+                                    mathcharacter = s.mathcharacter,
+                                    mathstack     = s.mathstack,
+                                }
+                            else
+                                di.attributes = {
+                                    mathstack     = s.mathstack,
+                                }
+                            end
+                            checkmath(di)
+                            i = i + 1
+                        end
+                    elseif tg == "mrow" then
+                        local d = di.data
+                        local n = #d
+                        local s = specifications[di.fulltag]
+                        if s.mathunit then
+                            di.attributes = { mathunit = s.mathunit }
+                            i = i + 1
+                        elseif s.mathdigits then
+                            -- does this ever happen (if so check)
+                            for i=1,n do
+                                d[i] = d[i].data[1].content or ""
+                            end
+                            di.tg      = "mn"
+                            di.element = "mn"
+                            di.nature  = "mixed"
+                            di.data    = { { content = concat(d) } }
+                            i = i + 1
+                        elseif s.mathfunction then
+                            di.attributes = {
+                                mathfunction = s.mathfunction,
+                                mathstack    = s.mathstack
+                            }
+                            local category = tonumber(s.mathcategory)
+                            if functiontype(category) == "function" then
+                                local fnc = functions[category] -- functions[s.mathfunction]
+                                local tag = fnc and fnc.tag
+                                if tag then
+                                    di.tg      = "mi"
+                                    di.element = "mi"
+                                    di.nature  = "mixed"
+                                    di.data    = functioncontent[tag]
+                                end
+                            end
+                            i = i + 1
+                        elseif s.mathfunctionstack then
+                            di.attributes = {
+                                mathfunction      = s.mathfunction,
+                                mathstack         = s.mathstack,
+                                mathfunctionstack = s.mathfunctionstack,
+                            }
+                            checkmath(di)
+                            i = i + 1
+                        elseif s.mathdelimitedstack then
+                            di.attributes = {
+                                mathdelimitedstack = s.mathdelimitedstack,
+                            }
+                            checkmath(di)
+                            i = i + 1
+                        elseif s.mathfractionstack then
+                            di.attributes = {
+                                mathfractionstack = s.mathfractionstack,
+                            }
+                            checkmath(di)
+                            i = i + 1
+                        else
+                            if n > 0 then
+                                local d1 = d[1]
+                                local tg = d1.tg
+                                if tg == "mfrac" then
+                                    if n == 1 then -- simple one
+                                        di = d1
+                                        data[i] = di
+                                    elseif n == 2 and d[2].tg == "ignore" then -- simple one with nilled middle fence
+                                        -- already wiped anyway
+                                        di = d1
+                                        data[i] = di
+                                    end
+--                                 elseif tg == "mo" then
+-- if i > 1 and d1.data[1].content == separator then
+--     markapplicationof(di,data,i)
+-- end
+                                end
+                            end
+                            checkmath(di)
+                            i = i + 1
+                        end
+                    elseif tg == "formulacaption" then -- formulanumber
+                        di.tg = "ignore"
+                        i = i + 1
+                    elseif tg == "subformula" then
+                        di.tg = "mrow"
+                        checkmath(di)
+                        i = i + 1
+                    else
+                        -- or first check for tg
+                        local s = specifications[di.fulltag]
+                        if not s then
+                            -- whatever
+                        elseif tg == "mfrac" then
+                            if s.mathfractionrule == "no" then
+                                di.attributes = {
+                                    rulethickness = "0"
+                                }
+                            end
+                        elseif tg == "msup" then
+                            if s.limits then
+                                di.element = "mover"
+                            end
+                        elseif tg == "msub" then
+                            if s.limits then
+                                di.element = "munder"
+                            end
+                        elseif tg == "msubsup" then
+                            if s.limits then
+                                di.element = "munderover"
+                            end
+                        end
+                        --
+                        checkmath(di)
+                        i = i + 1
+                    end
+                else -- can be string or boolean
+                    if parenttg ~= "mtext" and di == " " then
+                        data[i] = false
+                    end
+                    i = i + 1
+                end
+            end
+        end
+    end
+
+    local function stripmath(di)
+        if not di then
+            --
+        elseif di.content then
+            return di
+        else
+            local tg = di.tg
+            if tg == "mtext" or tg == "ms" then
+                return di
+            elseif tg == "mspace" then
+                return di
+            else
+                local data = di.data
+                local ndata = #data
+                local n = 0
+                for i=1,ndata do
+                    local d = data[i]
+                    if d and not d.content then
+                        d = stripmath(d)
+                    end
+                    if d then
+                        local content = d.content
+--                         if d.tg == "mspace" then
+--                             n = n + 1
+--                             data[n] = d
+--                             d.data = { }
+--                         elseif not content then
+--                             n = n + 1
+--                             data[n] = d
+--                             d.__i__ = n -- hm
+--                         else
+--                             n = n + 1
+--                             data[n] = d
+--                         end
+                        n = n + 1
+                        data[n] = d
+                        if d.tg == "mspace" then
+                            d.data = { }
+                        elseif not content then
+                            d.__i__ = n -- hm
+                        end
+                    end
+                end
+                for i=ndata,n+1,-1 do
+                    data[i] = nil
+                end
+                -- maybe integrate the above and this one:
+                collapse_all_mn(data)
+                --
+                if #data > 0 then
+                    return di
+                end
+            end
+        end
+    end
+
+    function checks.math(di)
+-- inspect(di)
+        if di.skip == "comment" then
+            -- already done, kind of weird, happens in mathmatrix, maybe some collapse
+            -- issue that i need to look into
+        else
+            local specification = specifications[di.fulltag]
+            local mode   = specification.mode == "display" and "block" or "inline"
+            local domain = specification.domain or "default"
+            local family = specification.family or "regular"
+            local style  = specification.style or 2 -- text
+            di.attributes = {
+             -- ["xmlns:m"]          = mathmlns,
+                ["xmlns"]            = mathmlns,
+                ["display"]          = mode,
+                ["alttext"]          = specification.input, -- bonus, will go
+             -- ["class"]            = style < 2 and ".math_display_style" or ".math_text_style",
+                ["displaystyle"]     = style < 2 and "true" or "false",
+                ["data-lmtx-blob"]   = specification.blob,
+                ["data-lmtx-domain"] = domain ~= "default" and domain or nil,
+                ["data-lmtx-family"] = family ~= "regular" and family or nil,
+            }
+            -- can be option if needed:
+            if specification.standalone then
+                di.nature = "display"
+            elseif mode == "inline" then
+             -- di.nature = "mixed"  -- else spacing problem (maybe inline)
+                di.nature = "inline" -- we need to catch x$X$x and x $X$ x
+            else
+                di.nature = "display"
+            end
+            if automathstrip then
+                stripmath(di)
+            end
+            checkmath(di)
+        end
+    end
+
+    -- this one can replace some of the previous code .. todo (test on mathmatrix)
+
+    local mprescripts = {
+        element = "mprescripts",
+        data    = { content = "" },
+        nature  = "inline", -- mixed
+        fulltag = "mprescripts>0"
+    }
+
+    local function wrapup(d,index,n,prelist,kernel,postlist)
+        local di   = d[index]
+        local post = #postlist
+        local pre  = #prelist
+        local list = { kernel }
+        local size = 1
+        for i=index+1,n do
+            d[i].skip = "ignore"
+        end
+        if post > 0 then
+            for i=1,post do
+                size = size + 1 ; list[size] = postlist[i]
+            end
+        end
+        if pre > 0 then
+            size = size + 1 ; list[size] = mprescripts
+            for i=1,pre do
+                size = size + 1 ; list[size] = prelist[i]
+            end
+        end
+        di.element        = "mmultiscripts"
+     -- di.tg             = "mmultiscripts"
+        di.data           = list
+        di.iscontinuation = true
+        di.__i__          = size
+    end
+
+    local function found(d,what)
+        if what then
+            for i=1,#d do
+                local di = d[i]
+                local sp = specifications[di.fulltag]
+                if sp and sp.script == what then
+                    return di
+                end
+            end
+        else
+            for i=1,#d do
+                local di = d[i]
+                local sp = specifications[di.fulltag]
+                if not sp or not sp.script then
+                    return di
+                end
+            end
+        end
+    end
+
+    -- todo: pick up kernel
+
+    function checks.mrow(di)
+        local d = di.data
+        if d then
+            local postlist = nil
+            local prelist  = nil
+            local kernel   = nil
+            local index    = 0
+            for i=1,#d do
+                local di   = d[i]
+                local data = di.data
+                local tg   = di and di.tg
+                local sp   = specifications[di.fulltag]
+                local continuation = sp and sp.continuation
+                if continuation then
+                    -- head kernel next
+                    if postlist and continuation.head then
+                        wrapup(d,index,#d,prelist,kernel,postlist)
+                        postlist = nil
+                        prelist  = nil
+                        kernel   = 0
+                    end
+                    -- play safe as we can have empty ones (so maybe move the extra code here)
+                    local nd = #data
+                    if tg == "msup" then
+                        if not postlist then
+                            index    = i
+                            postlist = { }
+                            prelist  = { }
+                            kernel   = dummy_nucleus
+                        end
+                        local sup = found(data,"sup")
+                        postlist[#postlist+1] = dummy_nucleus
+                        postlist[#postlist+1] = sup
+                        if continuation.kernel then
+                            kernel = data[1] or dummy_nucleus
+                        end
+                    elseif tg == "msub" then
+                        if not postlist then
+                            index    = i
+                            postlist = { }
+                            prelist  = { }
+                            kernel   = dummy_nucleus
+                        end
+                        local sub = found(data,"sub")
+                        postlist[#postlist+1] = sub
+                        postlist[#postlist+1] = dummy_nucleus
+                        if continuation.kernel then
+                            kernel = data[1] or dummy_nucleus
+                        end
+                    elseif tg == "msubsup" then
+                        if not postlist then
+                            index    = i
+                            postlist = { }
+                            prelist  = { }
+                            kernel   = dummy_nucleus
+                        end
+                        local sub = found(data,"sub")
+                        local sup = found(data,"sup")
+                        postlist[#postlist+1] = sub or dummy_nucleus
+                        postlist[#postlist+1] = sup or dummy_nucleus
+                        if continuation.kernel then
+                            kernel = data[1] or dummy_nucleus
+                        end
+                    elseif tg == "mmultiscripts" then
+                        -- we know that we only have one set
+                        if not postlist then
+                            index    = i
+                            postlist = { }
+                            prelist  = { }
+                            kernel   = dummy_nucleus
+                        end
+                        local prime  = found(data,"prime")
+                        local sub    = found(data,"sub")
+                        local sup    = found(data,"sup")
+                        local presub = found(data,"presub")
+                        local presup = found(data,"presup")
+                        if prime then
+                            postlist[#postlist+1] = dummy_nucleus
+                            postlist[#postlist+1] = prime
+                        end
+                        if sub or sup then
+                            postlist[#postlist+1] = sub or dummy_nucleus
+                            postlist[#postlist+1] = sup or dummy_nucleus
+                        end
+                        if presub or presup then
+                            prelist[#prelist+1] = presub or dummy_nucleus
+                            prelist[#prelist+1] = presup or dummy_nucleus
+                        end
+                        if continuation.kernel then
+                            kernel = data[1] or dummy_nucleus
+                        end
+                    else
+                        postlist = nil
+                        prelist  = nil
+                        kernel   = nil
+                    end
+                elseif postlist then
+                    wrapup(d,index,i-1,prelist,kernel,postlist)
+                    postlist = nil
+                    prelist  = nil
+                    kernel   = nil
+                end
+            end
+            if postlist then
+                wrapup(d,index,#d,prelist,kernel,postlist)
+            end
+        end
+    end
+
+    -- we can move more checks here
+
+    local function flatten(di)
+        local r = di.__p__
+        while r do
+            local d = r.data
+            local n = #d
+            if d and n > 1 then
+                n = checked(d,n)
+            end
+            local tg = r.tg
+            if n == 1 and (tg == "mtext" or tg == "mrow") then
+                r.skip = "comment" -- weird error
+                r = r.__p__
+            else
+                break
+            end
+        end
+    end
+
+    function checks.mtable(di)
+        flatten(di)
+        local d = di.data
+-- -- left / right
+-- -- local main   = { }
+-- -- local left   = { }
+-- local max    = 0
+-- --
+-- for i=1,#d do
+--     local d = d[i]
+--     if d.tg == "mtr" then
+--         if #d.data > max then
+--             max = #d.data
+--         end
+--     end
+-- end
+-- for i=1,#d do
+--     local d = d[i]
+--     if d.tg == "mtr" then
+--         if #d.data < max then
+--             local first = d.data[1]
+--             specifications[first.fulltag].cols = max
+--             first.attributes = { columnspan = max }
+--         end
+--     end
+-- end
+
+-- if next(left) then
+--     max = max + 1
+--     for i=1,#main do
+--         insert(main[i].data,1,left[i] or {
+--             tg      = "mtd",
+--             element = "mtd",
+--             nature  = "mixed",
+--             data    = { },
+--         })
+--     end
+-- end
+--     for i=1,#main do
+-- print(#main[i].data,max)
+--         if #main[i].data < max then
+--             insert(main[i].data,{
+--                 tg      = "mtd",
+--                 element = "mtd",
+--                 nature  = "mixed",
+--                 data    = { },
+--             })
+--         end
+--     end
+-- -- if next(right) then
+-- --     for i=1,#main do
+-- --         insert(main[i].data,right[i] or {
+-- --             tg      = "mtd",
+-- --             element = "mtd",
+-- --             nature  = "mixed",
+-- --             data    = { },
+-- --         })
+-- --     end
+-- -- end
+-- di.data = main
+         for i=1,#d do
+             local d = d[i]
+             if d.tg == "mtr" then
+                 local d = d.data
+                 for i=1,#d do
+                     local d = d[i]
+                     if d.tg == "mtd" then
+                         -- okay
+                     elseif d.content then
+                         d.content = ""
+                     else
+                         d.skip = "comment" -- weird error
+                     end
+                 end
+             elseif d.content then
+                 d.content = ""
+             else
+                 d.skip = "comment" -- weird error
+             end
+         end
+    end
+
+    function extras.mmultiscripts(di,element,n,fulltag)
+        if not di.iscontinuation then
+            local d      = di.data
+            local sup    = found(d,"sup")
+            local sub    = found(d,"sub")
+            local presup = found(d,"presup")
+            local presub = found(d,"presub")
+            local prime  = found(d,"prime")
+            local n = 1
+            if sup or sub then
+                n = n + 1 ; d[n] = sub or dummy_nucleus
+                n = n + 1 ; d[n] = sup or dummy_nucleus
+            end
+            if prime then
+                n = n + 1 ; d[n] = dummy_nucleus
+                n = n + 1 ; d[n] = prime
+            end
+            if presup or presub then
+                n = n + 1 ; d[n] = mprescripts
+                n = n + 1 ; d[n] = presub or dummy_nucleus
+                n = n + 1 ; d[n] = presup or dummy_nucleus
+            end
+            d.__i__ = n
+        end
+    end
+
+    function extras.msub(di,element,n,fulltag)
+        local data = di.data
+        local nuc = found(data)
+        local sub = found(data,"sub")
+        data[1] = nuc or dummy_nucleus
+        data[2] = sub or dummy_nucleus
+        data.__i__ = 2
+        local sp = specifications[di.fulltag]
+        if attributes then
+            attributes.mathsubindex = sp.subindexed
+        else
+            di.attributes = {
+                mathsubindex = sp.subindexed,
+            }
+        end
+    end
+
+    function extras.msup(di,element,n,fulltag)
+        local data = di.data
+        local nuc = found(data)
+        local sup = found(data,"sup")
+or found(data,"prime")
+        data[1] = nuc or dummy_nucleus
+        data[2] = sup or dummy_nucleus
+        data.__i__ = 2
+        local sp = specifications[di.fulltag]
+        local attributes = di.attributes
+        if attributes then
+            attributes.mathsupindex = sp.supindexed
+        else
+            di.attributes = {
+                mathsupindex = sp.supindexed,
+            }
+        end
+    end
+
+    function extras.msubsup(di,element,n,fulltag)
+        local data = di.data
+        local nuc = found(data)
+        local sup = found(data,"sup")
+or found(data,"prime")
+        local sub = found(data,"sub")
+        data[1] = nuc or dummy_nucleus
+        data[2] = sub or dummy_nucleus
+        data[3] = sup or dummy_nucleus
+        data.__i__ = 3
+        local sp = specifications[di.fulltag]
+        if attributes then
+            attributes.mathsupindex = sp.supindexed
+            attributes.mathsubindex = sp.subindexed
+        else
+            di.attributes = {
+                mathsupindex = sp.supindexed,
+                mathsubindex = sp.subindexed,
+            }
+        end
+    end
+
+    function extras.munder(di,element,n,fulltag)
+        if di.tg == "msub" then
+            extras.msub(di,element,n,fulltag)
+        end
+    end
+
+    function extras.mover(di,element,n,fulltag)
+        if di.tg == "msup" then
+            extras.msup(di,element,n,fulltag)
+        end
+    end
+
+    function extras.munderover(di,element,n,fulltag)
+        if di.tg == "msubsup" then
+            extras.msubsup(di,element,n,fulltag)
+        end
+    end
+
+end

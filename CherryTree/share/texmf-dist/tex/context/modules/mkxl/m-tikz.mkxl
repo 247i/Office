@@ -1,0 +1,273 @@
+%D \module
+%D   [       file=m-tikz,
+%D        version=2021.07.12,
+%D          title=\CONTEXT\ Extra Modules,
+%D       subtitle=TIKZ support,
+%D         author=Hans Hagen,
+%D           date=\currentdate,
+%D      copyright={PRAGMA ADE \& \CONTEXT\ Development Team}]
+%C
+%C This module is part of the \CONTEXT\ macro||package and is
+%C therefore copyrighted by \PRAGMA. See mreadme.pdf for
+%C details.
+
+%D A fixed variant of the t-tikz module distributed with tikz. For practical reasons
+%D per 2021 we split the module for \MKIV\ and \LMTX. (Maybe some day I'll optimize
+%D TIKZ a bit.)
+%D
+%D All these t-* modules in the tikz distribution make no sense as we can just load
+%D them here which is way cleaner. There is also some mkii filename mapping going on
+%D that is not needed on todays systems (windows has no 8.3 limitation and on unix
+%D tds finally adopted a case insensitive approach.)
+
+%D Just in case someone does a hard input ...
+
+\ifdefined\pgfdefined     \endinput \fi
+\ifdefined\pgfcoredefined \endinput \fi
+
+%D ... but normally we end up here:
+
+\startmodule[tikz]
+
+\ifdefined\hoffset \else
+    \newdimen\hoffset
+    \newdimen\voffset
+\fi
+
+\ifdefined\pdflastxpos \else
+    \unprotect
+      % \frozen\overloaded\protected\def\pdflastxpos{\numexpr\clf_lastxpos\relax}
+      % \frozen\overloaded\protected\def\pdflastypos{\numexpr\clf_lastypos\relax}
+      % \frozen\overloaded\protected\def\pdflastxpos{\numexpr\clf_lastxpos\relax}
+      % \frozen\overloaded\protected\def\pdflastypos{\numexpr\clf_lastypos\relax}
+        \untraced\permanent\protected\pdflastxpos{\numexpr\clf_lastxpos\relax}
+        \untraced\permanent\protected\pdflastypos{\numexpr\clf_lastypos\relax}
+        \frozen\overloaded\let\pdfsavepos \savepos
+        \frozen\overloaded\let\pdfsavepos \savepos
+        \frozen\overloaded\let\pdflastxpos\lastxpos
+        \frozen\overloaded\let\pdflastypos\lastypos
+    \protect
+\fi
+
+\ifdefined\pdfstrcmp\else
+
+    \startluacode
+        interfaces.implement {
+            name      = "pdfstrcmp",
+            arguments = "2 strings",
+            usage     = "value",
+            public    = true,
+            actions   = function(a,b)
+                return
+                    tokens.values.integer,
+                    (a < b and -1) or (a > b and 1) or 0
+            end
+        }
+    \stopluacode
+
+\fi
+
+% \startluacode
+%     statistics.feedback.setstate("module",true)
+% \stopluacode
+
+\newcatcodetable \tikzcatcodes
+
+\startcatcodetable \tikzcatcodes
+    \catcode\tabasciicode             \spacecatcode
+    \catcode\endoflineasciicode       \endoflinecatcode
+    \catcode\formfeedasciicode        \endoflinecatcode
+    \catcode\spaceasciicode           \spacecatcode
+    \catcode\endoffileasciicode       \ignorecatcode
+    \catcode\circumflexasciicode      \superscriptcatcode
+    \catcode\underscoreasciicode      \subscriptcatcode
+    \catcode\ampersandasciicode       \alignmentcatcode
+    \catcode\backslashasciicode       \escapecatcode
+    \catcode\leftbraceasciicode       \begingroupcatcode
+    \catcode\rightbraceasciicode      \endgroupcatcode
+    \catcode\dollarasciicode          \mathshiftcatcode
+    \catcode\hashasciicode            \parametercatcode
+    \catcode\commentasciicode         \commentcatcode
+    \catcode\atsignasciicode          \lettercatcode
+    \catcode\exclamationmarkasciicode \othercatcode
+    \catcode\questionmarkasciicode    \lettercatcode
+    \catcode\tildeasciicode           \activecatcode
+    \catcode\barasciicode             \othercatcode
+\stopcatcodetable
+
+\newinteger\tikzinputlevel
+
+\permanent\protected\def\starttikzinput
+  {\advanceby\tikzinputlevel\plusone
+   \ifcase\tikzinputlevel\or
+     \pushoverloadmode
+     \pushcatcodetable
+     \setcatcodetable\tikzcatcodes
+     \pushmacro\meaning
+     \let\meaning\meaningless
+     \autoparagraphmode\zerocount
+  \fi}
+
+\permanent\protected\def\stoptikzinput
+  {\autoparagraphmode\plusone
+   \ifcase\tikzinputlevel\or
+     \popcatcodetable
+     \popmacro\meaning
+     \popoverloadmode
+   \fi
+   \advanceby\tikzinputlevel\minusone}
+
+\permanent\protected\def\tikzinputfile#1%
+  {\starttikzinput
+   \input{#1}\relax
+   \stoptikzinput}
+
+\permanent\protected\def\tikzerrormessage#1#2#3%
+  {\writestatus{#1}{#2}}
+
+% For now we need this but we need to educate the user to wrap settings in the
+% wrappers. So some day the next line will go. I need to check what commands are
+% possible outside a picture.
+
+\overloadmode\zerocount
+
+\newtoks\everytikzpicture
+\newtoks\everyinsidetikzpicture
+
+% \appendtoks
+%     \resetcharacterspacing
+% \to \everytikzpicture
+
+\permanent\protected\def\starttikzsettings
+  {\pushoverloadmode
+   \pushcatcodetable
+   \setcatcodetable\tikzcatcodes
+   \pushmacro\meaning
+   \let\meaning\meaningless
+   \autoparagraphmode\zerocount}
+
+\permanent\protected\def\stoptikzsettings
+  {\autoparagraphmode\plusone
+   \popmacro\meaning
+   \popcatcodetable
+   \popoverloadmode}
+
+\permanent\tolerant\protected\def\starttikzpicture[#S#1]%
+  {%\dontleavehmode % doesn't work well in figures so ...
+   \hcontainer\bgroup
+   \setcatcodetable\tikzcatcodes
+   \the\everytikzpicture
+   \autoparagraphmode\zerocount
+   \pushmacro\meaning
+   \let\meaning\meaningless
+ % \pushoverloadmode
+   \ifdefined\PackageError\else \let\PackageError\tikzerrormessage \fi
+   \tikzpicture[#1]%
+   \the\everyinsidetikzpicture}
+
+\permanent\protected\def\stoptikzpicture
+  {\endtikzpicture
+ % \popoverloadmode
+   \popmacro\meaning
+   \egroup}
+
+\let\pgfdefined    \relax
+\let\pgfcoredefined\relax
+
+\tikzinputfile{pgfutil-common.tex}
+\tikzinputfile{pgfutil-context.def}
+\tikzinputfile{pgfrcs.code.tex}
+\tikzinputfile{pgfsys.code.tex}
+\tikzinputfile{pgfkeys.code.tex}
+\tikzinputfile{pgfsyssoftpath.code.tex}
+\tikzinputfile{pgfsysprotocol.code.tex}
+\tikzinputfile{pgfcore.code.tex}
+\tikzinputfile{pgffor.code.tex}
+\tikzinputfile{pgfmoduleplot.code.tex}
+\tikzinputfile{tikz.code.tex}
+
+\let\startpgfpicture             \pgfpicture              \let\stoppgfpicture            \endpgfpicture
+\let\startpgfscope               \pgfscope                \let\stoppgfscope              \endpgfscope
+\let\startpgflowlevelscope       \pgflowlevelscope        \let\stoppgflowlevelscope      \endpgflowlevelscope
+\let\startpgfinterruptpath       \pgfinterruptpath        \let\stoppgfinterruptpath      \endpgfinterruptpath
+\let\startpgfinterruptpicture    \pgfinterruptpicture     \let\stoppgfinterruptpicture   \endpgfinterruptpicture
+\let\startpgfinterruptboundingbox\pgfinterruptboundinbox  \let\stoppgfinterruptboudingbox\endpgfinterruptboundingbox
+
+\let\normalusepgfmodule  \usepgfmodule
+\let\normalusepgflibrary \usepgflibrary
+\let\normalusetikzlibrary\usetikzlibrary
+
+\installnamespace{pgfmhack}
+\installnamespace{pgflhack}
+\installnamespace{tikzhack}
+
+\tolerant\protected\def\usepgfmodule[#1]#;#2% somehow both variants are used
+  {\starttikzinput
+   \normalusepgfmodule[#1#2]%
+   \stoptikzinput}
+
+\tolerant\protected\def\usepgflibrary[#1]#;#2% somehow both variants are used
+  {\starttikzinput
+   \normalusepgflibrary[#1#2]%
+   \stoptikzinput}
+
+\tolerant\protected\def\usetikzlibrary[#1]#;#2% somehow both variants are used
+  {\starttikzinput
+   \normalusetikzlibrary[#1#2]%
+   \stoptikzinput}
+
+\unprotect
+
+\protected\def\installsomethingtikzindeed#1#2#3#4%
+  {\defcsname#1:b:#2\endcsname{#3}%
+   \defcsname#1:a:#2\endcsname{#4}}
+
+\protected\def\usesomethingtikzindeed#1#2#3%
+  {\ifcsname#1:l:#3\endcsname\else
+     \letcsname#1:l:#3\endcsname\relax
+     \begincsname#1:b:#3\endcsname
+     \starttikzinput
+     #2[#3]%
+     \stoptikzinput
+     \begincsname#1:a:#3\endcsname
+   \fi}
+
+% somehow both variants [#1] and {#1} are used
+
+\protected\def\installtikzlibraryhacks{\installsomethingtikzindeed\????tikzhack}
+\protected\def\installpgfmodulehacks  {\installsomethingtikzindeed\????pgfmhack}
+\protected\def\installpgflibraryhacks {\installsomethingtikzindeed\????pgflhack}
+
+\tolerant\protected\def\usepgfmodule  [#1]#;#2{\usesomethingtikzindeed\????pgfmhack\normalusepgfmodule  {#1#2}}
+\tolerant\protected\def\usepgflibrary [#1]#;#2{\usesomethingtikzindeed\????pgflhack\normalusepgflibrary {#1#2}}
+\tolerant\protected\def\usetikzlibrary[#1]#;#2{\usesomethingtikzindeed\????tikzhack\normalusetikzlibrary{#1#2}}
+
+\protect
+
+\usepgfmodule[shapes]
+\usepgfmodule[plot]
+\usepgfmodule[matrix]
+\usepgfmodule[decorations]
+
+\definefilesynonym [pgfplots]      [tikz-pgfplots]
+\definefilesynonym [pgfplotstable] [tikz-pgfplotstable]
+
+% Here come the hacks:
+
+\installtikzlibraryhacks{calendar}{}{\tikzinputfile{pgfcalendar.code.tex}}
+
+\startsetups tikz:hacks:tikzcd
+\permanent\protected\def\starttikzcd%
+  {\starttikzinput
+   \hcontainer\bgroup
+   \tikzcd}
+
+\permanent\protected\def\stoptikzcd
+  {\endtikzcd
+   \egroup
+   \stoptikzinput}
+\stopsetups
+
+\installtikzlibraryhacks{cd}{}{\directsetup{tikz:hacks:tikzcd}}
+
+\stopmodule

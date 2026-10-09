@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?context-directive job ctxfile x-setups.ctx ?>
+
+<cd:interface xmlns:cd="http://www.pragma-ade.com/commands">
+
+    <cd:command name="ecmacode" type="environment" file="libs-imp-mujs.mkxl"/>
+
+    <cd:command name="ecmacode" file="libs-imp-mujs.lmt">
+        <cd:arguments>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="ecmafile" file="libs-imp-mujs.lmt">
+        <cd:arguments>
+            <cd:resolve name="argument-file"/>
+        </cd:arguments>
+    </cd:command>
+
+</cd:interface>

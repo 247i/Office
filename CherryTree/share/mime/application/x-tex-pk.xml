@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-tex-pk">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Packed font file</comment>
+  <comment xml:lang="zh-Hant-TW">包裝字型檔案</comment>
+  <comment xml:lang="uk">запакований файл шрифту</comment>
+  <comment xml:lang="tr">Paketli yazı tipi dosyası</comment>
+  <comment xml:lang="sv">Packad typsnittsfil</comment>
+  <comment xml:lang="sr-Cyrl">Запакована датотека фонта</comment>
+  <comment xml:lang="sq">Kartelë shkronjash të paketuara</comment>
+  <comment xml:lang="sl">Zapakirana pisava</comment>
+  <comment xml:lang="ru">Сжатый файл шрифта</comment>
+  <comment xml:lang="ro">fișier font împachetat</comment>
+  <comment xml:lang="pt-BR">Arquivo de fonte empacotado</comment>
+  <comment xml:lang="pl">Plik ze spakowaną czcionką</comment>
+  <comment xml:lang="oc">fichièr de polissas empaquetadas</comment>
+  <comment xml:lang="nn">Pakka skriftfil</comment>
+  <comment xml:lang="ko">묶음 글꼴 파일</comment>
+  <comment xml:lang="kk-Cyrl">Дестеленген қаріп файлы</comment>
+  <comment xml:lang="ja">パックされたフォントファイル</comment>
+  <comment xml:lang="it">File tipo di carattere condensato</comment>
+  <comment xml:lang="id">Berkas fonta yang dikemas</comment>
+  <comment xml:lang="hr">Datoteka zapakiranog fonta</comment>
+  <comment xml:lang="hi">पैक की गई फॉन्ट फाइल</comment>
+  <comment xml:lang="he">קובץ גופן ארוז</comment>
+  <comment xml:lang="fur">File di caratar impachetât</comment>
+  <comment xml:lang="fr">Fichier de polices empaquetées</comment>
+  <comment xml:lang="fi">Pakattu fonttitiedosto</comment>
+  <comment xml:lang="eu">Letra-tipoen fitxategi paketatua</comment>
+  <comment xml:lang="et">Pakitud fondifail</comment>
+  <comment xml:lang="es">archivo de tipo de letra empaquetado</comment>
+  <comment xml:lang="en-GB">Packed font file</comment>
+  <comment xml:lang="de">gepackte Schriftdatei</comment>
+  <comment xml:lang="ca">fitxer de lletra empaquetat</comment>
+  <comment xml:lang="bg">Шрифт — пакетиран файл</comment>
+  <comment xml:lang="be-Cyrl">запакаваны файл шрыфту</comment>
+  <comment xml:lang="ar">ملف خط مرزم</comment>
+  <generic-icon name="font-x-generic"/>
+  <glob pattern="*.pk"/>
+</mime-type>

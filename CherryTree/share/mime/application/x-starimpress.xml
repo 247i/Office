@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-starimpress">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>StarImpress 3-4 presentation</comment>
+  <comment xml:lang="zh-Hant-TW">StarImpress 3-4 簡報</comment>
+  <comment xml:lang="uk">презентація StarImpress 3-4</comment>
+  <comment xml:lang="tr">StarImpress 3-4 sunusu</comment>
+  <comment xml:lang="sv">StarImpress 3-4-presentation</comment>
+  <comment xml:lang="sr-Cyrl">Стар-презентација 3-4 презентација</comment>
+  <comment xml:lang="sq">Paraqitje StarImpress 3-4</comment>
+  <comment xml:lang="sl">Predstavitev StarImpress 3-4</comment>
+  <comment xml:lang="ru">Презентация StarImpress 3-4</comment>
+  <comment xml:lang="ro">prezentare StarImpress 3-4</comment>
+  <comment xml:lang="pt-BR">Apresentação do StarImpress 3-4</comment>
+  <comment xml:lang="pl">Prezentacja StarImpress 3-4</comment>
+  <comment xml:lang="oc">presentacion StarImpress 3-4</comment>
+  <comment xml:lang="nn">StarImpress 3-4-presentasjon</comment>
+  <comment xml:lang="ko">StarImpress 3-4 프리젠테이션</comment>
+  <comment xml:lang="kk-Cyrl">StarImpress 3-4 презентациясы</comment>
+  <comment xml:lang="ja">StarImpress 3-4 プレゼンテーション</comment>
+  <comment xml:lang="it">Presentazione StarImpress 3-4</comment>
+  <comment xml:lang="id">Presentasi StarImpress 3-4</comment>
+  <comment xml:lang="hr">StarImpress 3-4 prezentacija</comment>
+  <comment xml:lang="he">מצגת StarImpress 3-4</comment>
+  <comment xml:lang="fur">Presentazion di StarImpress 3-4</comment>
+  <comment xml:lang="fr">Présentation StarImpress 3-4</comment>
+  <comment xml:lang="fi">StarImpress 3-4 esitys</comment>
+  <comment xml:lang="et">StarImpress 3-4 esitlusfail</comment>
+  <comment xml:lang="es">presentación de StarImpress 3-4</comment>
+  <comment xml:lang="en-GB">StarImpress 3-4 presentation</comment>
+  <comment xml:lang="de">StarImpress-3-4-Präsentation</comment>
+  <comment xml:lang="da">StarImpress 3-4-præsentation</comment>
+  <comment xml:lang="ca">presentació StarImpress 3-4</comment>
+  <comment xml:lang="bg">Презентация — StarImpress 3-4</comment>
+  <comment xml:lang="be-Cyrl">прэзентацыя StarImpress 3-4</comment>
+  <comment xml:lang="ar">عرض تقديمي StarImpress 3-4</comment>
+  <sub-class-of type="application/x-ole-storage"/>
+  <generic-icon name="x-office-presentation"/>
+  <glob pattern="*.sdd" weight="40"/>
+</mime-type>

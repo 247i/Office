@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="image/hej2k">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>JPEG 2000 image encapsulated in HEIF</comment>
+  <comment xml:lang="zh-Hant-TW">封裝於 HEIF 格式內的 JPEG 2000 影像</comment>
+  <comment xml:lang="uk">запаковане до HEIF зображення JPEG 2000</comment>
+  <comment xml:lang="tr">HEIF içine yerleştirilmiş JPEG 2000 görüntüsü</comment>
+  <comment xml:lang="sv">JPEG 2000-bild inkapslad i HEIF</comment>
+  <comment xml:lang="sr-Cyrl">ЈПЕГ 2000 слика унутар HEIF-а</comment>
+  <comment xml:lang="sq">Figurë JPEG 2000 brenda në HEIF</comment>
+  <comment xml:lang="sl">Slika JPEG 2000, ovita v HEIF</comment>
+  <comment xml:lang="ru">Изображение JPEG 2000, заключённое в HEIF</comment>
+  <comment xml:lang="ro">imagine JPEG 2000 încapsulată în HEIF</comment>
+  <comment xml:lang="pt-BR">Imagem JPEG 2000 encapsulada em HEIF</comment>
+  <comment xml:lang="pl">Obraz JPEG 2000 zawarty w HEIF</comment>
+  <comment xml:lang="oc">imatge JPEG 2000 encapsulada dins HEIF</comment>
+  <comment xml:lang="ko">JPEG 2000 이미지, HEIF 형식</comment>
+  <comment xml:lang="kk-Cyrl">HEIF ішіне салынған JPEG 2000 суреті</comment>
+  <comment xml:lang="ja">JPEG 2000 符号化 HEIF 画像</comment>
+  <comment xml:lang="id">Gambar JPEG 2000 yang dikemas dalam HEIF</comment>
+  <comment xml:lang="hr">JPEG 2000 slika ugrađena u HEIF</comment>
+  <comment xml:lang="he">תמונת JPEG 2000 מכומסת בתוך HEIF</comment>
+  <comment xml:lang="fur">Imagjin JPEG 2000 incapsulade in HEIF</comment>
+  <comment xml:lang="fr">Image JPEG 2000 encapsulée dans HEIF</comment>
+  <comment xml:lang="fi">JPEG 2000 HEIF-kuva</comment>
+  <comment xml:lang="et">HEIF-konteineris JPEG 2000 pilt</comment>
+  <comment xml:lang="es">imagen JPEG 2000 encapsulada en HEIF</comment>
+  <comment xml:lang="en-GB">JPEG 2000 image encapsulated in HEIF</comment>
+  <comment xml:lang="de">JPEG-2000-Bild (in HEIF gekapselt)</comment>
+  <comment xml:lang="ca">imatge JPEG 2000 encapsulada en HEIF</comment>
+  <comment xml:lang="bg">Изображение — JPEG 2000, HEIF контейнер</comment>
+  <comment xml:lang="be-Cyrl">відарыс JPEG 2000, размешчаная ў HEIF</comment>
+  <comment xml:lang="ar">صورة JPEG 2000 مغلفة في HEIF</comment>
+  <glob pattern="*.hej2"/>
+</mime-type>

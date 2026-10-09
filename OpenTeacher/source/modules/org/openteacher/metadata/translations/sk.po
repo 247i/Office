@@ -1,0 +1,61 @@
+# Slovak translation for openteacher
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2011-08-01 15:54+0000\n"
+"Last-Translator: Alexander Suchan <supersasho@gmail.com>\n"
+"Language-Team: Slovak <sk@li.org>\n"
+"Language: sk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:42+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#. TRANSLATORS: OpenTeacher is a name, so please only
+#. translate or transliterate it if you've got a good reason
+#. to do so.
+#: metadata.py:57
+msgid "OpenTeacher"
+msgstr "OpenTeacher"
+
+#. TRANSLATORS: This is OpenTeacher's version number.
+#: metadata.py:59
+msgid "3.2"
+msgstr ""
+
+#: metadata.py:60
+msgid "OpenTeacher authors"
+msgstr ""
+
+#. TRANSLATORS: This are the copyrightable years for
+#. TRANSLATORS: OpenTeacher.
+#: metadata.py:63
+msgid "2008-2013"
+msgstr ""
+
+#. TRANSLATORS: If you want to change this to another, e.g.
+#. localized website, please contact us
+#. (openteachermaintainers@lists.launchpad.net) first.
+#: metadata.py:67
+msgid "http://openteacher.org/"
+msgstr "http://openteacher.org/"
+
+#. TRANSLATORS: If you want to change this to another, e.g.
+#. localized website, please contact us
+#. (openteachermaintainers@lists.launchpad.net) first.
+#: metadata.py:72
+msgid "http://openteacher.org/documentation.html"
+msgstr "http://openteacher.org/documentation.html"
+
+#~ msgid "3.x"
+#~ msgstr "3.x"
+
+#~ msgid "The easiest way to learn a new language"
+#~ msgstr "Najľahší spôsob ako sa naučiť nový jazyk"

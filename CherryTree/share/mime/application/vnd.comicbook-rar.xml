@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/vnd.comicbook-rar">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Comic book archive (rar container)</comment>
+  <comment xml:lang="zh-Hant-TW">漫畫書封存 (rar 容器)</comment>
+  <comment xml:lang="uk">архів коміксів (контейнер rar)</comment>
+  <comment xml:lang="tr">Çizgi roman arşivi (rar kapsayıcısı)</comment>
+  <comment xml:lang="sv">Serietidningsarkiv (rar-behållare)</comment>
+  <comment xml:lang="sr-Cyrl">Архива стрипа (rar контејнер)</comment>
+  <comment xml:lang="sq">Arkiv librash me figura (kontejner rar)</comment>
+  <comment xml:lang="sl">Stripovski arhiv (vsebnik RAR)</comment>
+  <comment xml:lang="ru">Архив комиксов (rar-контейнер)</comment>
+  <comment xml:lang="ro">arhivă carte Comic (container rar)</comment>
+  <comment xml:lang="pt-BR">Arquivo de revista eletrônica (contêiner rar)</comment>
+  <comment xml:lang="pl">Archiwum komiksu (kontener RAR)</comment>
+  <comment xml:lang="oc">archiu de benda dessenhada (contenedor rar)</comment>
+  <comment xml:lang="ko">만화책 묶음 파일 (RAR 컨테이너)</comment>
+  <comment xml:lang="kk-Cyrl">Comic book архиві (rar-контейнері)</comment>
+  <comment xml:lang="ja">コミックブックアーカイブ (rar コンテナ)</comment>
+  <comment xml:lang="it">Archivio comic book (contenitore rar)</comment>
+  <comment xml:lang="id">Arsip buku komik (kontainer rar)</comment>
+  <comment xml:lang="hr">Arhiva stripova (rar spremnik)</comment>
+  <comment xml:lang="hi">कॉमिक बुक अभिलेख (rar कंटेनर)</comment>
+  <comment xml:lang="he">ארכיון ספר קומיקס (מעטפת rar)</comment>
+  <comment xml:lang="gl">Arquivo de libro de banda deseñada (contedor rar)</comment>
+  <comment xml:lang="fur">Archivi Comic book (contignidôr rar)</comment>
+  <comment xml:lang="fr">Archive de bandes dessinées (conteneur rar)</comment>
+  <comment xml:lang="fi">Sarjakuva-arkisto (rar)</comment>
+  <comment xml:lang="et">Koomiksivihiku arhiiv (rar-konteineris)</comment>
+  <comment xml:lang="es">archivador de libro de historietas (contenedor RAR)</comment>
+  <comment xml:lang="en-GB">Comic book archive (rar container)</comment>
+  <comment xml:lang="de">Comic-Book-Archiv (rar-Container)</comment>
+  <comment xml:lang="da">Tegneseriearkiv (rar-container)</comment>
+  <comment xml:lang="ca">arxiu de còmic (contenidor rar)</comment>
+  <comment xml:lang="bg">Архив за комикси, rar контейнер</comment>
+  <comment xml:lang="be-Cyrl">архіў comic book (кантэйнер rar)</comment>
+  <comment xml:lang="ar">أرشيف كتب مصورة (حاوية rar)</comment>
+  <sub-class-of type="application/vnd.rar"/>
+  <generic-icon name="x-office-document"/>
+  <glob pattern="*.cbr"/>
+  <alias type="application/x-cbr"/>
+</mime-type>

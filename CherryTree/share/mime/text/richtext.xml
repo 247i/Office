@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/richtext">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Rich text document</comment>
+  <comment xml:lang="zh-Hant-TW">豐富格式文字文件</comment>
+  <comment xml:lang="uk">форматований текстовий документ</comment>
+  <comment xml:lang="tr">Zengin metin belgesi</comment>
+  <comment xml:lang="sv">Rich text-dokument</comment>
+  <comment xml:lang="sr-Cyrl">Богат текстуални документ</comment>
+  <comment xml:lang="sq">Dokument tekst i pasur</comment>
+  <comment xml:lang="sl">Dokument z bogatim besedilom</comment>
+  <comment xml:lang="ru">Форматированный текстовый документ</comment>
+  <comment xml:lang="ro">document de text formatat</comment>
+  <comment xml:lang="pt-BR">Documento rich text</comment>
+  <comment xml:lang="pl">Dokument Rich Text</comment>
+  <comment xml:lang="oc">document Rich Text</comment>
+  <comment xml:lang="nn">Riktekst-dokument</comment>
+  <comment xml:lang="lt">Raiškiojo teksto formatas</comment>
+  <comment xml:lang="ko">서식 있는 텍스트 문서</comment>
+  <comment xml:lang="kk-Cyrl">Rich text құжаты</comment>
+  <comment xml:lang="ka">მდიდარი ტექსტის ფორმატი</comment>
+  <comment xml:lang="ja">リッチテキストドキュメント</comment>
+  <comment xml:lang="it">Documento testo arricchito</comment>
+  <comment xml:lang="id">Dokumen Rich text</comment>
+  <comment xml:lang="hr">Formatiran tekstualni dokument</comment>
+  <comment xml:lang="hi">रिच टेक्स्ट दस्तावेज़</comment>
+  <comment xml:lang="he">מסמך טקסט עשיר</comment>
+  <comment xml:lang="fur">Document rich text</comment>
+  <comment xml:lang="fr">Document texte enrichi</comment>
+  <comment xml:lang="fi">RTF-asiakirja</comment>
+  <comment xml:lang="eu">Testu aberatseko dokumentua</comment>
+  <comment xml:lang="et">Rikastekstiga dokument</comment>
+  <comment xml:lang="es">documento de texto enriquecido</comment>
+  <comment xml:lang="en-GB">Rich text document</comment>
+  <comment xml:lang="de">Rich-Text-Dokument</comment>
+  <comment xml:lang="ca">document de text amb format</comment>
+  <comment xml:lang="bg">Документ — Rich text</comment>
+  <comment xml:lang="be-Cyrl">дакумент у фармаце RTF</comment>
+  <comment xml:lang="ar">مستند نصي غني</comment>
+  <sub-class-of type="text/plain"/>
+  <glob pattern="*.rtx"/>
+</mime-type>

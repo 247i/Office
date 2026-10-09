@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="audio/x-669">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Composer 669 audio</comment>
+  <comment xml:lang="uk">звукові дані Composer 669</comment>
+  <comment xml:lang="tr">Composer 669 sesi</comment>
+  <comment xml:lang="sv">Composer 669-ljud</comment>
+  <comment xml:lang="sr-Cyrl">звук Комодора 64</comment>
+  <comment xml:lang="sl">Zvok Composer 669</comment>
+  <comment xml:lang="ru">Аудио Composer 669</comment>
+  <comment xml:lang="ro">audio Composer 669</comment>
+  <comment xml:lang="pt-BR">Áudio Composer 669 </comment>
+  <comment xml:lang="pl">Plik dźwiękowy Composer 669</comment>
+  <comment xml:lang="oc">àudio Composer 669</comment>
+  <comment xml:lang="ko">Composer 669 오디오</comment>
+  <comment xml:lang="kk-Cyrl">Composer 669 аудиосы</comment>
+  <comment xml:lang="fr">audio Composer 669</comment>
+  <comment xml:lang="fi">Composer 669 audio</comment>
+  <comment xml:lang="et">Composer 669 helifail</comment>
+  <comment xml:lang="es">Sonido de compositor 669</comment>
+  <comment xml:lang="en-GB">Composer 669 audio</comment>
+  <comment xml:lang="de">Composer-669-Audio</comment>
+  <comment xml:lang="ar">صوت Composer 669</comment>
+  <glob pattern="*.669"/>
+  <glob pattern="*.uni"/>
+  <alias type="audio/x-669-mod"/>
+</mime-type>

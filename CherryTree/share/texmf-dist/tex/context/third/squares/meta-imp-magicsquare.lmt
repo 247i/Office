@@ -1,0 +1,151 @@
+if not modules then modules = {} end modules["meta-imp-magicsquare"] = {
+	version = "2026-02-14",
+	comment = "Magic squares. Companion to t-squares",
+	author = "Jairo A. del Rio",
+	copyright = "Jairo A. del Rio",
+	license = "MIT License",
+}
+
+local magic_reporter = logs.reporter("squares", "magic")
+local random = math.random
+
+-- https://www.iupindia.in/910/IJCM_Magic_Square_Construction_Algorithms34.pdf
+-- https://arxiv.org/pdf/1402.3273.pdf
+-- https://en.wikipedia.org/wiki/Conway%27s_LUX_method_for_magic_squares
+
+-- Helpers
+local function init(s)
+	local q = {}
+	for j = 1, s do
+		q[j] = {}
+		local c = q[j]
+		for i = 1, s do
+			c[i] = 0
+		end
+	end
+	return q
+end
+
+-- Odd numbers
+
+local function magic_01(n)
+	local res = init(n)
+	local i, j = 1 + (n >> 1), 1
+	local k, l
+	res[i][j] = 1
+	for key = 2, n * n do
+		k = i % n + 1
+		l = 2 <= j and j - 1 or n
+		if res[k][l] > 0 then
+			j = j % n + 1
+		else
+			i, j = k, l
+		end
+		res[i][j] = key
+	end
+	return res
+end
+
+-- LUX method
+
+local function magic_02(N)
+	local res = init(N)
+	local n = N // 2
+	local lux = init(n)
+	local L, U, X = 1, 2, 4
+	local x1, x2, x3, x4 = 0, -1, 0, -1
+	for i = 1, n do
+		for j = 1, n // 2 + 1 do
+			lux[i][j] = L
+		end
+	end
+	for i = 1, n do
+		lux[i][n // 2 + 2] = U
+	end
+	for j = n // 2 + 3, n do
+		for i = 1, n do
+			lux[i][j] = X
+		end
+	end
+	lux[n // 2 + 1][n // 2 + 1] = U
+	lux[n // 2 + 1][n // 2 + 2] = L
+	local i, j = 1 + (n >> 1), 1
+	local k, l
+	res[2 * i + x1][2 * j - 1] = 1
+	res[2 * i + x2][2 * j] = 2
+	res[2 * i + x3][2 * j] = 3
+	res[2 * i + x4][2 * j - 1] = 4
+	for key = 2, n * n do
+		k = i % n + 1
+		l = 2 <= j and j - 1 or n
+		if res[2 * k][2 * l] > 0 then
+			j = j % n + 1
+		else
+			i, j = k, l
+		end
+		if lux[i][j] == L then
+			x1, x2, x3, x4 = 0, -1, 0, -1
+		elseif lux[i][j] == U then
+			x1, x2, x3, x4 = -1, -1, 0, 0
+		else
+			x1, x2, x3, x4 = -1, 0, -1, 0
+		end
+		res[2 * i + x1][2 * j - 1] = 4 * (key - 1) + 1
+		res[2 * i + x2][2 * j] = 4 * (key - 1) + 2
+		res[2 * i + x3][2 * j] = 4 * (key - 1) + 3
+		res[2 * i + x4][2 * j - 1] = 4 * key
+	end
+	return res
+end
+
+local function magic_03(n)
+	local res = init(n)
+	for x = 1, n, 4 do
+		for y = 1, n, 4 do
+			local q = 0
+			for i = x, x + 3 do
+				q = q + 1
+				local q1 = 0
+				for j = y, y + 3 do
+					q1 = q1 + 1
+					if i == j or i + j == 5 or q + q1 == 5 or q == q1 then
+						res[i][j] = n * (i - 1) + j
+					else
+						res[i][j] = n * n - ((i - 1) * n + j) + 1
+					end
+				end
+			end
+		end
+	end
+	return res
+end
+
+local currentmagic = nil
+
+local function magicsquare(n)
+	local r = n & 3
+	if r == 0 then
+		return magic_03(n)
+	elseif r == 2 then
+		return magic_02(n)
+	end
+	return magic_01(n)
+end
+
+function MP.currentmagiccell(x, y)
+	mp.inject.numeric(currentmagic and currentmagic[x][y] or 0)
+end
+
+function MP.magicsquareinit(n)
+	if n > 0 and n ~= 2 then
+		currentmagic = magicsquare(n)
+		mp.inject.boolean(true)
+	else
+		magic_reporter(("Invalid number %d: nothing will be provided"):format(n))
+		mp.inject.boolean(false)
+	end
+end
+
+function MP.magicsquarereset()
+	currentmagic = nil
+end

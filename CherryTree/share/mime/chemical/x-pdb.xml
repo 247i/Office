@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="chemical/x-pdb">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Protein Data Bank file</comment>
+  <comment xml:lang="zh-Hant-TW">蛋白質資料庫檔案</comment>
+  <comment xml:lang="uk">файл банку даних протеїнів</comment>
+  <comment xml:lang="tr">Protein Data Bank dosyası</comment>
+  <comment xml:lang="sv">Protein Data Bank-fil</comment>
+  <comment xml:lang="sr-Cyrl">Protein Data Bank датотека</comment>
+  <comment xml:lang="sq">Kartelë Protein Data Bank</comment>
+  <comment xml:lang="sl">Datoteka Protein Data Bank</comment>
+  <comment xml:lang="ru">Файл Protein Data Bank</comment>
+  <comment xml:lang="ro">fișier banc de date de proteine</comment>
+  <comment xml:lang="pt-BR">Arquivo de Protein Data Bank</comment>
+  <comment xml:lang="pl">Plik Protein Data Bank</comment>
+  <comment xml:lang="oc">fichièr de basa de donadas de proteïna</comment>
+  <comment xml:lang="nn">Protein Data Bank-fil</comment>
+  <comment xml:lang="ko">단백질 정보 은행 (PDB) 파일</comment>
+  <comment xml:lang="kk-Cyrl">Protein Data Bank файлы</comment>
+  <comment xml:lang="ja">Protein Data Bank ファイル</comment>
+  <comment xml:lang="it">File Protein Data Bank</comment>
+  <comment xml:lang="id">Berkas Bank Data Protein</comment>
+  <comment xml:lang="hr">Protein Data Bank datoteka</comment>
+  <comment xml:lang="hi">Protein Data Bank फाइल</comment>
+  <comment xml:lang="he">קובץ בנק נתוני חלבונים</comment>
+  <comment xml:lang="fur">File Protein Data Bank</comment>
+  <comment xml:lang="fr">Fichier Protein Data Bank</comment>
+  <comment xml:lang="fi">Protein Data Bank tiedosto</comment>
+  <comment xml:lang="et">Protein Data Banki fail</comment>
+  <comment xml:lang="es">archivo del Banco de Datos de Proteínas</comment>
+  <comment xml:lang="en-GB">Protein Data Bank file</comment>
+  <comment xml:lang="de">Protein-Datenbank-Datei</comment>
+  <comment xml:lang="da">Protein Data Bank-fil</comment>
+  <comment xml:lang="ca">fitxer de Protein Data Bank</comment>
+  <comment xml:lang="bg">Файл — Protein Data Bank</comment>
+  <comment xml:lang="be-Cyrl">файл Protein Data Bank</comment>
+  <comment xml:lang="ar">ملف بنك بيانات البروتين</comment>
+  <sub-class-of type="text/plain"/>
+  <generic-icon name="text-x-generic"/>
+  <glob pattern="*.pdb"/>
+  <glob pattern="*.brk"/>
+</mime-type>

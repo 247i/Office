@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-pcapng">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>PCAPNG packet capture</comment>
+  <comment xml:lang="zh-Hant-TW">PCAPNG 網路封包擷取</comment>
+  <comment xml:lang="uk">перехоплення пакетів PCAPNG</comment>
+  <comment xml:lang="tr">PCAPNG paket yakalaması</comment>
+  <comment xml:lang="sv">PCAPNG-nätverkspaketsspårning</comment>
+  <comment xml:lang="sr-Cyrl">PCAPNG снимак пакета</comment>
+  <comment xml:lang="sq">Kapje paketi PCAPNG</comment>
+  <comment xml:lang="sl">Zajem paketov PCAPNG</comment>
+  <comment xml:lang="ru">Захваченные пакеты PCAPNG</comment>
+  <comment xml:lang="ro">capturare pachete PCAPNG</comment>
+  <comment xml:lang="pt-BR">Captura de pacotes PCAPNG</comment>
+  <comment xml:lang="pl">Przechwycenie pakietu PCAPNG</comment>
+  <comment xml:lang="oc">captura paquet PCAPNG</comment>
+  <comment xml:lang="ko">PCAPNG 패킷 캡쳐</comment>
+  <comment xml:lang="kk-Cyrl">PCAPNG дестелер ұстауы</comment>
+  <comment xml:lang="ja">PCAPNG パケットキャプチャ</comment>
+  <comment xml:lang="id">Tangkapan paket PCAPNG</comment>
+  <comment xml:lang="hr">Snimka PCAPNG paketa</comment>
+  <comment xml:lang="he">לכידת מנות נתונים PCAPNG</comment>
+  <comment xml:lang="fur">Acuisizion di pachets PCAPNG</comment>
+  <comment xml:lang="fr">Capture de paquet PCAPNG</comment>
+  <comment xml:lang="fi">PCAPNG-pakettien kaappaus</comment>
+  <comment xml:lang="et">PCAPNG pakettide püügilogi</comment>
+  <comment xml:lang="es">Captura de paquete PCAPNG</comment>
+  <comment xml:lang="en-GB">PCAPNG packet capture</comment>
+  <comment xml:lang="de">PcapNG-Paketaufzeichnung</comment>
+  <comment xml:lang="da">PCAPNG-pakkeoptagelse</comment>
+  <comment xml:lang="ca">captura de paquets de PCAPNG</comment>
+  <comment xml:lang="bg">Файл на мрежов трафик — PCAPNG</comment>
+  <comment xml:lang="be-Cyrl">захопленыя пакеты PCAPNG</comment>
+  <comment xml:lang="ar">إلتقاطة حزمة PCAPNG</comment>
+  <acronym>PCAPNG</acronym>
+  <expanded-acronym>PCAP Next Generation</expanded-acronym>
+  <glob pattern="*.pcapng"/>
+  <glob pattern="*.scap"/>
+  <glob pattern="*.ntar"/>
+</mime-type>

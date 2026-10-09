@@ -1,0 +1,8 @@
+RenderMethod: vulkan
+Vendor: 0x8086
+Device: 0xa788
+API: 1.4.323
+Driver: 0.405.2992
+DeviceType: integrated
+DeviceName: Intel(R) RaptorLake-S Mobile Graphics Controller
+Denylisted: no

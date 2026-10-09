@@ -1,0 +1,2265 @@
+%D \module
+%D   [       file=strc-mat,
+%D        version=2008.10.20,
+%D          title=\CONTEXT\ Structure Macros,
+%D       subtitle=Math Numbering,
+%D         author=Hans Hagen,
+%D           date=\currentdate,
+%D      copyright={PRAGMA ADE \& \CONTEXT\ Development Team}]
+%C
+%C This module is part of the \CONTEXT\ macro||package and is
+%C therefore copyrighted by \PRAGMA. See mreadme.pdf for
+%C details.
+
+\writestatus{loading}{ConTeXt Structure Macros / Math Numbering}
+
+\registerctxluafile{strc-mat}{autosuffix}
+
+% -- we have potential for captions
+% -- this module will use the commandhandler
+% -- key/value pairs will be added (I have no time now)
+
+\unprotect
+
+\setupformulas
+  [%\c!way=,
+   %\c!blockway=,
+   %\c!sectionnumber=,
+   %\c!conversion=\v!numbers,
+   %\c!numberstyle=,
+   %\c!numbercolor=,
+   %\c!numbercommand=,
+   %\c!align=,
+   %\c!separator=,
+ % \c!splitmethod=\v!both, % first|last|both|<empty>
+   \c!snap=\v!no,
+   \c!snapstep=\v!medium,
+   \c!grid=\v!math,
+   \c!location=\v!right,
+   \c!left=(,
+   \c!right=),
+   \c!expansion=\v!yes, % maybe automatically
+   \c!spacebefore=\v!big,
+   \c!spaceafter=\formulaparameter\c!spacebefore,
+   \c!spaceinbetween=\v!quarterline,
+   \c!width=\hsize,
+   \c!margin=\zeropoint,
+   \c!leftmargin=\formulaparameter\c!margin,
+   \c!rightmargin=\formulaparameter\c!margin,
+   \c!indentnext=\v!no,
+   \c!alternative=\s!default,
+   \c!strut=\v!yes, % per 2022-04, was \v!no
+   \c!numberstrut=\v!yes, % \v!no \v!yes \v!always
+   \c!margindistance=\zeropoint,
+   \c!leftmargindistance=\formulaparameter\c!margindistance,
+   \c!rightmargindistance=\formulaparameter\c!margindistance,
+   \c!numberthreshold=\emwidth,
+   \c!numberdistance=2\emwidth]
+
+\appendtoks
+    \linesnapping \zerocount
+\to \everybeforedisplayformula
+
+% Kind of special: balanced (columnsets method=mvl)
+%
+% \setupformula
+%   [spacebefore=halflinebefore,
+%    spaceafter=halflineafter,
+%    grid=math]
+
+\setupformulaframed
+  [%c!location=<auto set>,
+   %c!width=<auto set>,
+   %c!align=<auto set>,
+   \c!offset=.5\exheight]
+
+\matheqnogapstep\zerocount % we no longer need this as we don't use displaymode
+
+% \mathdisplayskipmode\plusthree
+%
+% \hbox\bgroup
+%     \setbox0\vbox\bgroup
+%         xxxxxxxxx\par
+%         \vskip-\baselineskip
+%         $$a^2_2$$\par
+%         xxxxxxxxx\par
+%     \egroup
+%     \box0
+%     \vbox\bgroup
+%         xxxxxxxxx\par
+%         \vskip-\baselineskip
+%         $$a^2$$\par
+%         xxxxxxxxx\par
+%     \egroup
+%     \vbox\bgroup
+%         xxxxxxxxx
+% \vskip-\baselineskip
+%         $$a_2$$
+%         xxxxxxxxx
+%     \egroup
+% \egroup
+%
+% \hbox\bgroup
+%     \setbox0\vbox\bgroup
+%         xxxxxxxxx\par
+%         \ctxlua{tex.prevdepth=-1000 *65536}
+%         $$a^2_2$$\par
+%         xxxxxxxxx\par
+%     \egroup
+%     \box0
+%     \vbox\bgroup
+%         xxxxxxxxx\par
+%         \ctxlua{tex.prevdepth=-1000 *65536}
+%         $$a^2$$\par
+%         xxxxxxxxx\par
+%     \egroup
+%     \vbox\bgroup
+%         xxxxxxxxx
+%         \ctxlua{tex.prevdepth=-1000 *65536}
+%         $$a_2$$
+%         xxxxxxxxx
+%     \egroup
+% \egroup
+
+\setupsubformulas % subformulas could be last in chain
+  [\c!indentnext=\formulaparameter\c!indentnext]
+
+\definecounter % one ?
+  [\v!formula]
+
+\defineconversionset
+  [\v!formula]
+  [numbers,characters] % no \v! ?
+
+\installcounterassociation{formula} \registerformulacounter\v!formula % currently we only have one
+
+\appendtoks
+    \synchronizeformulacounters
+\to \everysetupformula
+
+% \appendtoks
+%     \synchronizeformulacounters
+% \to \everydefineformula
+
+\setupformulas
+  [\c!numberconversionset=\v!formula] % why forgotten
+
+\appendtoks
+    \expanded{\definelist[\currentformula]}% is expansion needed?
+    \protected\frozen\instance\edefcsname\e!start\currentformula\v!formula\endcsname{\strc_formulas_start_formula{\currentformula}}%
+    \protected\frozen\instance\edefcsname\e!stop \currentformula\v!formula\endcsname{\strc_formulas_stop_formula}%
+\to \everydefineformula
+
+\definelist[\v!formula]
+
+\permanent\protected\defcsname\e!start\v!formula\endcsname{\strc_formulas_start_formula{}}
+\permanent\protected\defcsname\e!stop \v!formula\endcsname{\strc_formulas_stop_formula}
+
+\permanent\protected\def\startnamedformula[#1]%
+  {\strc_formulas_start_formula{#1}}
+
+\permanent\protected\def\stopnamedformula
+  {\strc_formulas_stop_formula}
+
+\let\strc_formulas_start_formula\relax % defined later
+\let\strc_formulas_stop_formula \relax % defined later
+
+\permanent\tolerant\protected\def\defineformulaalternative[#1]#*[#2]#*[#3]%
+  {\protected\frozen\instance\defcsname\e!start#1\v!formula\endcsname{#2}%
+   \protected\frozen\instance\defcsname\e!stop #1\v!formula\endcsname{#3}}
+
+% sp = single line paragraph sd = single line display
+% mp = multi  line paragraph md = multi  line display
+
+\defineformulaalternative[\s!default][\startdisplaymath][\stopdisplaymath]
+\defineformulaalternative[\s!single] [\startdisplaymath][\stopdisplaymath]
+\defineformulaalternative[\s!multi]  [\startdisplaymath][\stopdisplaymath]
+
+\defineformula
+  [sp]
+  [\c!spacebefore=\v!none,
+   \c!spaceafter=\v!none,
+   \c!indentnext=\v!no,
+   \c!alternative=\s!single]
+
+\defineformula
+  [sd]
+  [\c!spacebefore=\v!none,
+   \c!spaceafter=\v!none,
+   \c!indentnext=\v!yes,
+   \c!alternative=\s!single]
+
+\defineformula
+  [mp]
+  [\c!indentnext=\v!no,
+   \c!alternative=\s!multi]
+
+\defineformula
+  [md]
+  [\c!indentnext=\v!yes,
+   \c!alternative=\s!multi]
+
+\newtoks\everyresetformulas
+
+\appendtoks
+    \lettonothing\currentformula % to be checked:
+\to \everyresetformulas
+
+% implementation
+
+\protected\def\strc_formulas_store_number#1#2#3#4#5#6% ref, todo:str, \sync % todo: title etc (like float)
+  {\c_strc_formulas_handle_number\conditionaltrue
+   \strc_counters_register_component
+     {formula}%
+     \setupcurrentformula \formulaparameter \detokenizedformulaparameter
+     \relax \relax \relax
+     [\c!name=\v!formula,\s!counter=\v!formula,%
+      \s!hascaption=\v!yes,%
+      \s!hastitle=\v!yes,% maybe also a check
+      \s!hasnumber=\ifempty\namedformulaentry\v!yes\else\v!no\fi,%
+      \s!level=#6,%
+      \c!reference=#1,%
+      \c!title=\namedformulaentry,
+      \c!list=\currentplaceformulalist,
+      \c!bookmark=\currentplaceformulabookmark]%
+     [#2]%
+   \glettonothing\namedformulaentry % \relax
+   \glet#3\m_strc_counters_last_registered_index
+   \glet#4\m_strc_counters_last_registered_synchronize
+   \glet#5\m_strc_counters_last_registered_attribute}
+
+% modes: 0=unset, 1=forced, 2=none, 3=reference
+
+\newconstant\c_strc_formulas_place_number_mode
+\newconstant\c_strc_formulas_number_mode
+\newconstant\c_strc_formulas_sub_number_mode
+\newconstant\c_strc_formulas_nested_number_mode
+\newconstant\c_strc_formulas_counter_level
+
+\let\strc_formulas_show_modes     \relax
+\let\strc_formulas_show_references\relax
+
+\installtextracker
+  {math.numbering}
+  {\let\strc_formulas_show_modes     \strc_formulas_show_modes_indeed
+   \let\strc_formulas_show_references\strc_formulas_show_references_indeed}
+  {\let\strc_formulas_show_modes     \relax
+   \let\strc_formulas_show_references\relax}
+
+\def\strc_formulas_mode_row#1#2#3#4%
+  {\NC #1%
+   \NC \ifcase#2\relax unset\or forced\or none\or reference\fi
+   \NC #3%
+   \NC #4%
+   \NC \NR}
+
+\protected\def\strc_formulas_show_modes_indeed
+  {\rlap{\enspace\vcenter to \zeropoint{\vss\ruledvcenter{%
+     \forgetall\smallinfofont\setupinterlinespace
+     \starttabulate[|l|l|l|l|]
+       \strc_formulas_mode_row{place}  \c_strc_formulas_place_number_mode  \currentplaceformulareference  \currentplaceformulasuffix
+       \strc_formulas_mode_row{main}   \c_strc_formulas_number_mode        \currentformulareference       \currentformulasuffix
+       \strc_formulas_mode_row{sub}    \c_strc_formulas_sub_number_mode    \currentsubformulareference    \currentsubformulasuffix
+       \strc_formulas_mode_row{nested} \c_strc_formulas_nested_number_mode \currentnestedformulareference \currentnestedformulasuffix
+     \stoptabulate
+     \vss}}}}
+
+\protected\def\strc_formulas_show_references_indeed
+  {\llap{\vcenter to \zeropoint{\vss\ruledvcenter{%
+     \forgetall\smallinfofont\setupinterlinespace
+     \starttabulate[|l|l|l|l|]
+       \NC place\NC
+         \ifnum\c_strc_formulas_place_number_mode=\plusthree
+           \ifconditional\c_strc_formulas_referenced
+             \textminus
+           \else
+             \textplus
+           \fi
+         \else
+           \textminus
+         \fi
+       \NC \NR
+       \NC formulas\NC
+         \ifnum\c_strc_formulas_number_mode=\plusthree
+           \textplus
+         \else
+           \textminus
+         \fi
+       \NC \NR
+       \NC nested\NC
+         \ifnum\c_strc_formulas_nested_number_mode=\plusthree
+           \textplus
+         \else
+           \textminus
+         \fi
+       \NC \NR
+     \stoptabulate
+     \vss}}}\enspace}
+
+\appendtoks
+    \c_strc_formulas_place_number_mode \zerocount
+    \c_strc_formulas_number_mode       \zerocount
+    \c_strc_formulas_sub_number_mode   \zerocount
+    \c_strc_formulas_nested_number_mode\zerocount
+\to \everyresetformulas
+
+\newconditional\c_strc_formulas_handle_number
+\newconditional\c_strc_formulas_inside_place
+\newconditional\c_strc_formulas_inside_place_sub
+\newconditional\c_strc_formulas_inside_formulas
+\newconditional\c_strc_formulas_inside_formulas_sub
+\newconditional\c_strc_formulas_incremented
+\newconditional\c_strc_formulas_referenced
+
+\appendtoks
+    \global\c_strc_formulas_inside_place    \conditionalfalse
+    \global\c_strc_formulas_inside_place_sub\conditionalfalse
+\to \everyresetformulas
+
+\def\strc_formulas_place_number_noneed
+  {\ifcstok{\formulaparameter\c!numberstrut}\v!always
+     \strut
+   \fi}
+
+\def\strc_formulas_place_numbering % place formula
+  {\c_strc_formulas_handle_number\conditionaltrue
+   \strc_formulas_check_reference\c_strc_formulas_place_number_mode\currentplaceformulareference
+   \ifnum\c_strc_formulas_place_number_mode=\plustwo
+     \glet\strc_formulas_place_number\strc_formulas_place_number_noneed
+   \else
+     \glet\strc_formulas_place_number\strc_formulas_place_number_indeed
+   \fi
+   \glet\strc_formulas_place_number_nested\strc_formulas_place_number_nested_indeed}
+
+\def\strc_formulas_handle_number % formulas
+  {\strc_formulas_check_reference\c_strc_formulas_number_mode\currentformulasreference}
+
+\def\strc_formulas_handle_sub_number_indeed % sub formulas
+  {\strc_formulas_check_reference\c_strc_formulas_sub_number_mode\currentsubformulasreference
+   \strc_counters_increment\v!formula
+   \strc_formulas_store_number
+     \currentsubformulasreference
+     \empty
+     \currentsubformulasnumber
+     \currentsubformulassynchronize
+     \currentsubformulasattribute
+     \plustwo}
+
+\def\strc_formulas_handle_sub_number % sub formulas
+  {\iftrialtypesetting
+     \strc_counters_save\v!formula
+     \strc_formulas_handle_sub_number_indeed
+     \strc_counters_restore\v!formula
+   \else
+     \strc_formulas_handle_sub_number_indeed
+   \fi}
+
+\let\strc_formulas_reference_trace\relax
+\let\strc_formulas_reference_show \relax
+
+%D New, to be used with care, only show numbers when referenced.
+%D
+%D \starttyping
+%D \setupformula[numberstate=auto]
+%D \stoptyping
+
+% \ifempty{\expand\getreference[used][\currentplaceformulareference]}%
+
+\permanent\protected\def\placecurrentformulanumber
+  {\ifcstok{\formulaparameter\c!numberstate}\v!auto
+     \doifelsereferenced\currentplaceformulareference
+       \strc_formula_number_place_indeed
+       \strc_formula_number_place_holder
+   \else
+       \strc_formula_number_place_indeed
+   \fi}
+
+\permanent\protected\def\strc_formula_number_place_holder
+  {\strc_counters_decrement\v!formula
+   \dosetdirectpagereference\currentplaceformulareference}
+
+\permanent\protected\def\strc_formula_number_place_indeed
+  {\begingroup
+   \rm % determines the distance and main font
+   \edef\p_location{\formulaparameter\c!location}%
+   \ifx\p_location\v!atrightmargin
+     \ifzeropt\s_strc_formulas_margin_right
+       \let\p_location\v!right
+     \fi
+   \orelse\ifx\p_location\v!atleftmargin
+     \ifzeropt\s_strc_formulas_margin_left
+       \let\p_location\v!left
+     \fi
+   \fi
+   \strc_formulas_show_references
+   \ifx\p_location\v!right
+      \strc_formulas_add_distance\plusone\v!left\formulaparameter
+   \fi
+   \begingroup
+   \useformulastyleandcolor\c!numberstyle\c!numbercolor
+   \formulaparameter\c!numbercommand
+     {\edef\p_strut{\formulaparameter\c!numberstrut}%
+      \ifx\p_strut\v!always
+         \strut
+      \orelse\ifx\p_strut\v!yes
+         \strut
+      \fi
+      \formulaparameter\c!left
+      \namedtaggedlabeltexts
+        \t!formulalabel \v!formula
+        \t!formulanumber\v!formula
+        {\ignorespaces\strc_formulas_place_current_number\removeunwantedspaces}%
+      \formulaparameter\c!right}%
+   \endgroup
+   \ifx\p_location\v!left
+      \strc_formulas_add_distance\plusone\v!right\formulaparameter
+   \fi
+   \strc_formulas_show_modes
+   \endgroup}
+
+\protected\def\strc_formulas_place_current_number
+  {\ifempty\namedformulaentry
+     \begingroup
+     \strc_formulas_handle_current_references
+     \labeltexts\currentformula{\convertedcounter[\v!formula][]}%
+     \endgroup
+   \else
+     \expandafter % hm, the next one reset \namedformulaentry
+     \strc_formulas_handle_current_references
+     \namedformulaentry
+   \fi}
+
+\permanent\def\theformuladestinationattribute#1%
+  {\iflocation\ifx#1\relax\orelse\ifempty#1\else
+     \c_attr_destination#1%
+     \glet#1\relax
+   \fi\fi}
+
+\mutable\let\currentplaceformulaattribute\relax
+\mutable\let\currentformulaattribute     \relax
+\mutable\let\currentsubformulaattribute  \relax
+\mutable\let\currentformulasattribute    \relax
+
+\mutable\let\currentplaceformulanumber\relax
+\mutable\let\currentformulanumber     \relax
+\mutable\let\currentsubformulanumber  \relax
+\mutable\let\currentformulasnumber    \relax
+
+\mutable\lettonothing\currentformulasreference
+\mutable\lettonothing\currentformulareference
+\mutable\lettonothing\currentsubformulareference
+\mutable\lettonothing\currentnestedformulanumber
+\mutable\lettonothing\currentnestedformulareference
+\mutable\lettonothing\currentnestedformulaattribute
+
+\appendtoks
+    \glettonothing\currentformulasreference
+    \glettonothing\currentformulareference
+    \glettonothing\currentsubformulareference
+    \glettonothing\currentnestedformulareference
+\to \everyresetformulas
+
+\mutable\lettonothing\currentformulassuffix
+\mutable\lettonothing\currentformulasuffix
+\mutable\lettonothing\currentsubformulasuffix
+\mutable\lettonothing\currentnestedformulasuffix
+
+\appendtoks
+    \glettonothing\currentformulassuffix
+    \glettonothing\currentformulasuffix
+    \glettonothing\currentsubformulasuffix
+    \glettonothing\currentnestedformulasuffix
+\to \everyresetformulas
+
+\mutable\let\currentplaceformulasynchronize \relax
+\mutable\let\currentformulassynchronize     \relax
+\mutable\let\currentsubformulasynchronize   \relax
+\mutable\let\currentnestedformulasynchronize\relax
+
+\appendtoks
+    \glet\currentplaceformulasynchronize \relax
+    \glet\currentformulassynchronize     \relax
+    \glet\currentsubformulassynchronize  \relax
+    \glet\currentnestedformulasynchronize\relax
+\to \everyresetformulas
+
+\mutable\lettonothing\currentsubformulasattribute
+\mutable\lettonothing\currentsubformulasnumber
+\mutable\lettonothing\currentsubformulasreference
+\mutable\lettonothing\currentsubformulassynchronize
+
+\c_strc_formulas_counter_level\plusone
+
+\def\strc_formulas_handle_current_references
+  {\strc_formulas_reference_show
+   \ifnum\c_strc_formulas_place_number_mode=\plusthree
+     \ifconditional\c_strc_formulas_referenced
+     \else
+       \strc_formulas_store_number
+         \currentplaceformulareference
+         \empty
+         \currentplaceformulanumber
+         \currentplaceformulasynchronize
+         \currentplaceformulaattribute
+         \c_strc_formulas_counter_level
+       \currentplaceformulasynchronize
+       \glet\currentplaceformulasynchronize\relax
+       \theformuladestinationattribute\currentplaceformulaattribute
+       \global\c_strc_formulas_referenced\conditionaltrue
+     \fi
+   \fi
+   \ifnum\c_strc_formulas_number_mode=\plusthree
+     \strc_formulas_store_number
+       \currentformulasreference
+       \empty
+       \currentformulasnumber
+       \currentformulassynchronize
+       \currentformulasattribute
+       \plustwo
+     \currentformulassynchronize
+     \glet\currentformulassynchronize\relax
+     \theformuladestinationattribute\currentformulasattribute
+   \fi
+   \ifnum\c_strc_formulas_sub_number_mode=\plusthree
+     \currentsubformulassynchronize
+     \glet\currentsubformulassynchronize\relax
+   \fi
+   \ifnum\c_strc_formulas_nested_number_mode=\plusthree
+     \strc_formulas_store_number
+       \currentnestedformulareference
+       \empty
+       \currentnestedformulanumber
+       \currentnestedformulasynchronize
+       \currentnestedformulaattribute
+       \plustwo
+     \currentnestedformulasynchronize
+     \glet\currentnestedformulasynchronize\relax
+     \theformuladestinationattribute\currentnestedformulaattribute
+   \fi}
+
+\def\strc_formulas_handle_numbering_indeed
+  {\ifempty\namedformulaentry
+     \iftext\currentnestedformulasuffix
+       \ifconditional\c_strc_formulas_incremented\else
+         \strc_counters_increment\v!formula
+       \fi
+       \global\c_strc_formulas_incremented\conditionaltrue
+       \ifcstok{+}\currentnestedformulasuffix
+         \strc_counters_increment_sub\v!formula\plustwo
+       \else
+         \strc_counters_setown_sub\v!formula\plustwo\currentnestedformulasuffix
+       \fi
+     \else
+       \ifempty\currentplaceformulasuffix\else
+         \let\currentnestedformulasuffix   \currentplaceformulasuffix
+         \let\currentnestedformulareference\currentplaceformulareference
+         \strc_formulas_place_number_nested_check
+       \fi
+       \strc_counters_increment\v!formula
+     \fi
+   \fi
+   \glettonothing\currentplaceformulasuffix
+   \glettonothing\currentnestedformulasuffix
+   \placecurrentformulanumber}
+
+\def\strc_formulas_handle_numbering
+  {\iftrialtypesetting
+     \strc_counters_save\v!formula
+     \strc_formulas_handle_numbering_indeed
+     \strc_counters_restore\v!formula
+   \else
+     \strc_formulas_handle_numbering_indeed
+   \fi}
+
+\def\strc_formulas_handle_sub_numbering_indeed
+  {\let\strc_formulas_handle_sub_numbering\relax % else error: see math/numbering-001.tex
+   \iftext\currentnestedformulasuffix
+     \strc_counters_setown_sub\v!formula\plustwo\currentnestedformulasuffix
+   \else
+     \strc_counters_increment_sub\v!formula\plustwo
+   \fi
+   \glettonothing\currentplaceformulasuffix
+   \glettonothing\currentnestedformulasuffix
+   \placecurrentformulanumber}
+
+\def\strc_formulas_handle_sub_numbering
+  {\iftrialtypesetting
+     \strc_counters_save\v!formula
+     \strc_formulas_handle_sub_numbering_indeed
+     \strc_counters_restore\v!formula
+   \else
+     \strc_formulas_handle_sub_numbering_indeed
+   \fi}
+
+\def\strc_formulas_number_indeed
+  {\ifconditional\c_strc_formulas_handle_number
+     \hbox\bgroup
+       % main counter
+       \ifconditional\c_strc_formulas_inside_formulas_sub
+         % nothing
+       \else
+         \ifcase\c_strc_formulas_number_mode
+           \ifcase\c_strc_formulas_place_number_mode
+             \strc_formulas_handle_numbering
+           \or
+             \strc_formulas_handle_numbering
+           \or
+             % nothing
+           \or
+             \strc_formulas_handle_numbering
+           \fi
+         \or
+           \strc_formulas_handle_numbering
+         \or
+           % nothing
+         \or
+           \strc_formulas_handle_numbering
+         \fi
+       \fi
+       % subcounter
+       \ifconditional\c_strc_formulas_inside_formulas_sub
+         \ifcase\c_strc_formulas_sub_number_mode
+           \strc_formulas_handle_sub_numbering % was nothing
+         \or
+           \strc_formulas_handle_sub_numbering
+         \or
+           % nothing
+         \or
+           \strc_formulas_handle_sub_numbering
+         \fi
+       \fi
+       \strc_formulas_reference_trace
+     \egroup
+   \fi}
+
+\installstructurelistprocessor\v!formula % to be checked ...
+  {\let\currentlistentrynumber    \structurelistgenericnumber
+   \let\currentlistentrytitle     \structurelistgenerictitle
+   \let\currentlistentrypagenumber\structurelistpagenumber
+   \strc_lists_apply_renderingsetup}
+
+\newif\ifinformula
+
+% %D We need a hook into the plain math alignment macros
+% %D
+% %D \starttyping
+% %D \displaylines
+% %D \stoptyping
+% %D
+% %D Otherwise we get a missing \type {$$} error reported.
+%
+% \pushoverloadmode
+%
+%     \permanent\protected\def\normaleqno#1{\writestatus\m!system{no native (l/r)eqno equation number support}}
+%
+%     \aliased\let\normalleqno\normaleqno
+%     \aliased\let\normalreqno\normaleqno
+%     \aliased\let\normaleqno \normaleqno
+%
+%     \aliased\let\leqno      \normaleqno
+%     \aliased\let\reqno      \normaleqno
+%     \aliased\let\eqno       \normaleqno
+%
+% \popoverloadmode
+
+%D Tricky stuff:
+
+\abovedisplayskip      \zeroskip
+\abovedisplayshortskip \zeroskip % evt. 0pt minus 3pt
+\belowdisplayskip      \zeroskip
+\belowdisplayshortskip \zeroskip % evt. 0pt minus 3pt
+
+\predisplaypenalty     \zerocount
+\postdisplaypenalty    \zerocount % -5000 goes wrong, see penalty at \section
+\mathdisplayskipmode   \plusthree %  because align also adds
+
+% \predisplaygapfactor \zerocount % default is 2000
+
+%D We no longer need to do this every time as we don't use display mode
+%D at all, so:
+
+% \protected\def\strc_formulas_forget_display_skips
+%   {\mathdisplayskipmode  \plusthree
+%    \abovedisplayskip     \zeroskip
+%    \belowdisplayskip     \zeroskip
+%    \abovedisplayshortskip\zeroskip
+%    \belowdisplayshortskip\zeroskip}
+
+%D Became this, where setting the mode is now also irrelevant but the engine still
+%D has it, so:
+
+\mathdisplayskipmode  \plusthree
+\abovedisplayskip     \zeroskip
+\belowdisplayskip     \zeroskip
+\abovedisplayshortskip\zeroskip
+\belowdisplayshortskip\zeroskip
+
+\newdimension\d_strc_formulas_display_width
+
+%D In \LMTX\ we have three ways of rendering formulas:
+%D
+%D \startitemize
+%D \startitem line: a single boxed   line  \stopitem
+%D \startitem text: multiple boxed   lines \stopitem
+%D \startitem page: multiple unboxed lines \stopitem
+%D \stopitemize
+%D
+%D So, yes has become text
+
+\newconditional\c_strc_math_split_mode
+\newconditional\c_strc_math_pack_mode
+
+\newconditional\c_strc_formulas_tight
+\newconditional\c_strc_formulas_packed
+\newconditional\c_strc_formulas_depth
+\newbox        \b_strc_formulas_number
+\newdimen      \d_strc_formulas_number
+
+\def\strc_formulas_display_space_before_normal
+  {% not ok, try \stopformula\par\startformula vs \stopformula\startformula
+   \lettonothing\m_spacebefore
+   \ifvmode
+     \ifdim\lastskip>\zeropoint\else
+       \ifdim\prevdepth<\zeropoint\else
+         \ifdim\prevdepth<\strutdp
+           % maybe add a tracing option here
+           \ifgridlinesnapping
+             % gridlinesnapping: to be decided
+             \checkprevdepth
+           \orelse\ifgridsnapping
+            %\let\m_spacebefore\v!depth
+             \checkprevdepth
+           \else
+             \edef\m_spacebefore{\todimension{\strutdp-\prevdepth}}%
+           \fi
+         \fi
+       \fi
+     \fi
+     \nointerlineskip
+   \fi
+   \whitespace % added, test with spacebefore=small
+   \ifempty\m_spacebefore
+     \ifx\p_spacebefore\v!none
+       % nothing
+     \orelse\ifempty\p_spacebefore
+       \directvspacing\currentvspacing
+     \else
+       \directvspacing\p_spacebefore
+     \fi
+   \else
+     \ifx\p_spacebefore\v!none
+       \directvspacing{\m_spacebefore}%
+     \orelse\ifempty\p_spacebefore
+       \directvspacing{\m_spacebefore,\currentvspacing}%
+     \else
+       \directvspacing{\m_spacebefore,\p_spacebefore}%
+     \fi
+   \fi}
+
+\def\strc_formulas_display_space_after_common
+  {\whitespace % needs testing
+   \ifx\p_spaceafter\v!none
+     % nothing
+   \orelse\ifempty\p_spaceafter
+     \directvspacing\currentvspacing
+   \else
+     \directvspacing\p_spaceafter
+   \fi}
+
+\def\strc_formulas_display_space_after_normal
+  {\prevdepth\strutdp % \directvspacing\v!depth
+   \strc_formulas_display_space_after_common}
+
+\def\strc_formulas_display_space_before_depth
+  {% not ok, try \stopformula\par\startformula vs \stopformula\startformula
+   \ifvmode
+     \ifinner
+       \strc_formulas_display_space_before_normal
+       \c_strc_formulas_depth\conditionalfalse
+     \else
+       \forcestrutdepth
+       \nointerlineskip
+       \ifx\p_spacebefore\v!none
+         % nothing
+       \orelse\ifempty\p_spacebefore
+         \directvspacing\currentvspacing
+       \else
+         \directvspacing\p_spacebefore
+       \fi
+     \fi
+   \else
+     \strc_formulas_display_space_before_normal
+   \fi}
+
+\def\strc_formulas_display_space_after_depth
+  {\ifconditional\c_strc_formulas_depth
+     \forcestrutdepth
+     \strc_formulas_display_space_after_common
+   \else
+     \strc_formulas_display_space_after_normal % was an undefined
+   \fi}
+
+\def\strc_formulas_display_space_before
+  {\ifconditional\c_strc_formulas_depth
+     \strc_formulas_display_space_before_depth
+   \else
+     \strc_formulas_display_space_before_normal
+   \fi}
+
+\lettonothing\strc_math_qed_indeed
+
+\def\strc_formulas_display_space_after
+  {\par
+   \strc_math_qed_indeed
+   \ifconditional\c_strc_formulas_depth
+     \strc_formulas_display_space_after_depth
+   \else
+     \strc_formulas_display_space_after_normal
+   \fi}
+
+% experiment
+
+%D \starttyping
+%D \setmathproofsymbol{\symbol[square]}
+%D
+%D \defineenumeration
+%D   [proof]
+%D   [alternative=serried,
+%D    width=fit,
+%D    distance=1ex,
+%D    text=Proof,
+%D    number=no,
+%D    headstyle=italic,
+%D    headcommand=\groupedcommand{}{.},
+%D    closesymbol=\mathqed]
+%D \stoptyping
+
+\newconditional\c_strc_math_qed
+
+\permanent\protected\def\strc_math_qed
+  {\global\c_strc_math_qed\conditionaltrue}
+
+\appendtoks
+    \global\c_strc_math_qed\conditionalfalse
+    \aliased\let\qed\strc_math_qed
+\to \everybeforedisplayformula
+
+\permanent\protected\def\strc_math_qed_indeed
+  {\ifconditional\c_strc_math_qed
+     \ifconditional\csname\??constructionclosesymbol\currentconstruction\endcsname
+        \blank[\v!samepage]%
+        \strut\strc_constructions_close_symbol_place
+        \par
+     \fi
+   \fi}
+
+\permanent\tolerant\protected\def\qedhere[#1]%
+  {\ifconditional\csname\??constructionclosesymbol\currentconstruction\endcsname
+     \global\csname\??constructionclosesymbol\currentconstruction\endcsname\conditionalfalse
+     \edef\p_strc_constructions_closesymbol{\constructionparameter\c!closesymbol}%
+     \ifempty\p_strc_constructions_closesymbol \else
+       \expanded
+         {\texthere[\ifparameter#1\or#1\else\v!right\fi]}%
+         {\p_strc_constructions_closesymbol}%
+     \fi
+   \fi}
+
+\definesymbol[mathqed][□] % [\symbol{square}]
+
+%permanent\protected\def\mathqed{\mathematics    {\symbol{mathqed}}}
+\permanent\protected\def\mathqed{\textmathematics{\symbol{mathqed}}}
+
+% done
+
+% \newtoks\everybeforedisplay
+% \appendtoks\page_sides_check_floats_indeed\to\everybeforedisplay
+
+\permanent\protected\def\beforedisplayspace
+  {\ifhmode
+     \par
+   \fi
+   \ifvmode
+     \ifconditional\c_strc_formulas_packed
+       \lettonothing\p_spacebefore
+     \else
+       \edef\p_spacebefore{\formulaparameter\c!spacebefore}%
+     \fi
+   % \begincsname\??mathdisplayspacemodel\v!before:\the\c_strc_formulas_space_model\endcsname
+     \strc_formulas_display_space_before
+   \fi
+   \ifhmode
+     \par
+   \fi
+   \page_sides_check_floats_indeed} % probably needs more
+
+\permanent\protected\def\afterdisplayspace
+  {\ifhmode
+     \par
+   \fi
+   \ifvmode
+     \ifconditional\c_strc_formulas_packed
+       \lettonothing\p_spaceafter
+     \else
+       \edef\p_spaceafter{\formulaparameter\c!spaceafter}%
+     \fi
+   % \begincsname\??mathdisplayspacemodel\v!after:\the\c_strc_formulas_space_model\endcsname
+     \strc_formulas_display_space_after
+   \fi
+   \ifhmode
+     \par
+   \fi}
+
+\ifdefined\setdisplaydimensions \else
+    \let\setdisplaydimensions\relax % this one will be defined in math-ali
+\fi
+
+% \newgluespec\formulastrutht
+% \newgluespec\formulastrutdp
+
+%D \startbuffer
+%D \startformula[9pt] x = 1 \stopformula
+%D \startformula[7pt] x = 1 \stopformula
+%D \stopbuffer
+%D
+%D \typebuffer \getbuffer
+
+%D Some tracing of distances and thresholds:
+
+\def\strc_formulas_add_distance_normal#1#2#3% maybe a skip with stretch/shrink
+  {\kern{#3\c!numberdistance}}
+
+\def\strc_formulas_add_distance_traced#1#2#3%
+  {\begingroup
+   \scratchdimenone{#3\c!numberdistance}%
+   \scratchdimentwo\ifconditional\c_strc_formulas_tight{\formulaparameter\c!numberthreshold}\else\zeropoint\fi\relax
+   \scratchdimenthree.5\exheight
+   \ifcase\scratchdimentwo\else\ifx#2\v!left
+     \darkred
+     \kern-\scratchdimentwo
+     \vrule
+       \s!height\scratchdimenthree
+       \s!depth \scratchdimenthree
+       \s!width \scratchdimentwo
+   \fi\fi
+   \ifcase\scratchdimenone\else
+     \ifcase#1\or\darkgreen\else\darkblue\fi
+     \vrule
+       \s!height\scratchdimenthree
+       \s!depth \scratchdimenthree
+       \s!width \scratchdimenone
+   \fi
+   \ifcase\scratchdimentwo\else\ifx#2\v!right
+     \darkred
+     \vrule
+       \s!height\scratchdimenthree
+       \s!depth \scratchdimenthree
+       \s!width \scratchdimentwo
+     \kern-\scratchdimentwo
+   \fi\fi
+   \endgroup}
+
+\installtextracker
+  {math.numberdistance}
+  {\let\strc_formulas_add_distance\strc_formulas_add_distance_traced}
+  {\let\strc_formulas_add_distance\strc_formulas_add_distance_normal}
+
+\let\strc_formulas_add_distance \strc_formulas_add_distance_normal
+
+\defcsname\??formulaoption\v!packed\endcsname
+  {\c_strc_formulas_packed\conditionaltrue}
+
+\defcsname\??formulaoption\v!tight\endcsname
+  {\c_strc_formulas_tight\conditionaltrue}
+
+\defcsname\??formulaoption\v!middle\endcsname
+  {}
+
+\defcsname\??formulaoption\v!depth\endcsname
+  {\c_strc_formulas_depth\conditionaltrue}
+
+\defcsname\??formulaoption\v!line\endcsname
+  {\ifgridlinesnapping
+     % gridlinesnapping: to be decided
+     \setformulaparameter\c!snapping{1}%
+   \orelse\ifgridsnapping
+     \setformulaparameter\c!grid{\v!math:\v!line}%
+   \fi}
+
+\defcsname\??formulaoption\v!halfline\endcsname
+  {\ifgridlinesnapping
+     % gridlinesnapping: to be decided
+     \setformulaparameter\c!snapping{2}%
+   \orelse\ifgridsnapping
+     \setformulaparameter\c!grid{\v!math:\v!halfline}%
+   \fi}
+
+\defcsname\??formulaoption-\v!line\endcsname
+  {\ifgridlinesnapping
+     % gridlinesnapping: to be decided
+     \setformulaparameter\c!snapping{2:10}% 1:10
+   \orelse\ifgridsnapping
+     \setformulaparameter\c!grid{\v!math:-\v!line}%
+   \fi}
+
+\defcsname\??formulaoption-\v!halfline\endcsname
+  {\ifgridlinesnapping
+     % gridlinesnapping: to be decided
+     \setformulaparameter\c!snapping{2:10}%
+   \orelse\ifgridsnapping
+     \setformulaparameter\c!grid{\v!math:-\v!halfline}%
+   \fi}
+
+\def\strc_math_set_split
+  {\ifcstok{\formulaparameter\c!split}\v!line
+     % we produce a hbox
+     \global\c_strc_math_split_mode\conditionalfalse
+     \global\c_strc_math_pack_mode \conditionalfalse
+   \orelse\iflastnamedcs\v!no
+     % we produce a vbox
+     \global\c_strc_math_split_mode\conditionaltrue
+     \global\c_strc_math_pack_mode \conditionaltrue
+   \else
+     % we produce a list (unvboxed)
+     \global\c_strc_math_split_mode\conditionaltrue
+     \global\c_strc_math_pack_mode \conditionalfalse
+   \fi
+   \mathpenaltiesmode\plusone
+   \global\d_strc_math_indent\zeropoint}
+
+\def\strc_math_set_number_location
+  {\ifcstok{\formulaparameter\c!numberlocation}\v!overlay
+     \c_strc_formulas_overlay_number\conditionaltrue
+   \else
+     \c_strc_formulas_overlay_number\conditionalfalse
+   \fi
+   \ifcstok{\formulaparameter\c!numbermethod}\v!down
+     \c_math_align_overflow_mode\conditionaltrue
+   \else
+     \c_math_align_overflow_mode\conditionalfalse
+   \fi}
+
+\permanent\protected\def\formulainterlinespace
+  {\ifgridlinesnapping
+     \zeropoint
+   \orelse\ifgridsnapping
+     \zeropoint
+   \else
+     1.125\lineheight
+   \fi}
+
+\setupformula
+  [\c!split=\v!yes, % \v!yes | \v!no | \v!line | whatever
+   \c!numberlocation=,
+   \c!textdistance=\zeropoint,
+   \c!interlinespace=\formulainterlinespace,
+   \c!textmargin=2\emwidth,
+   \c!numbermethod=\v!down]
+
+% for the moment (when testing) we use a penalty 1
+
+%D Alignment in vertically rendered formulas using \type {\alignhere} and friends
+%D has been an experimental \MKIV\ features for quite a while but probably very few
+%D users were aware of it. It works quite well and little code is needed. With
+%D \LMTX\ defaulting to multiline display math it was time to add a couple of
+%D features and tracing. It can actually often replace math alignments and thereby
+%D not only save coding but also keep formulas as formulas instead of snippets.
+%D
+%D There can of course be more tricks applied but most already were rejected when I
+%D wrote the original version which is actually not that far from what we do now
+%D (like deeply burried align points). The main difference between the following
+%D variant and the \MKIV\ one is that we try to honour the new inter|-|atom spacing
+%D and adapt to the general alignment settings.
+
+\def\strc_math_pickup_again
+% {\mathatom \s!leftclass \mathendcode \s!rightclass \mathbegincode{}\noatomruling}
+  {\mathatom \s!class \mathbegincode{}\noatomruling}
+
+% maybe: \newboundary \c_strc_math_align_boundary
+
+\defineboundary[mathalign]  % this one is also used at the lua end
+\defineboundary[mathinject] % idem
+
+\newconditional\c_strc_math_trace_hang
+\newdimension  \d_strc_math_hang_state
+
+\installtextracker
+  {math.autohang}
+  {\c_strc_math_trace_hang\conditionaltrue}
+  {\c_strc_math_trace_hang\conditionalfalse}
+
+\newconditional\c_strc_math_aligned_here
+
+\def\strc_math_trace_okay#1#2%
+  {\mathghost{\llap{\backgroundline[#1]{\white\tttf#2}}}}
+
+\protected\def\strc_math_align_here
+  {\ifmmode
+     \global\c_strc_math_aligned_here\conditionaltrue
+     % we can have a more dedicated value, and also maybe store the class so that we can
+     % pick it up at the engine end (second pass)
+     \ifconditional\c_strc_math_trace_hang
+       \strc_math_trace_okay{darkred}{A}%
+     \fi
+     \boundary\c_bndr_mathalign
+   \fi}
+
+\newboundary\c_bndr_skiphere
+
+\tolerant\protected\def\strc_math_skip_here[#1]%
+  {% no strut as it will influence fences
+   \ifconditional\c_strc_math_trace_hang
+     \strc_math_trace_okay{darkblue}{S #1}%
+   \fi
+   \scratchdimen{\formulaparameter\c!textmargin}%
+   \ifchkdimension#1\or
+     \d_strc_math_hang_state\lastchkdimension
+   \orelse\ifchknum#1\or
+     \d_strc_math_hang_state#1\scratchdimen
+   \orelse\iftok{#1}{+}%
+     \advanceby\d_strc_math_hang_state\scratchdimen
+   \orelse\iftok{#1}{-}%
+     \advanceby\d_strc_math_hang_state-\scratchdimen
+   \else
+     \d_strc_math_hang_state\scratchdimen
+   \fi
+   \boundary\c_bndr_skiphere
+   \kern\d_strc_math_hang_state
+   \strc_math_pickup_again}
+
+% \blank[line] \ruledhbox{zzzz} \blank[line]
+%
+% xxxx \vadjust
+%     depth check
+%     depth after -\thousandpoint
+%     {\blue xxxx +}
+% xxxx \vadjust
+%     pre
+%     {\red xxxx -}
+% xxxx
+%
+% \blank[line] \ruledhbox{zzzz} \blank[line]
+
+\definelocalboxes
+  [\v!lefttext]
+  [\c!command=\localmarginlefttext\zeropoint,
+   \c!repeat=\v!no,
+   \c!distance=\zeropoint,
+   \c!location=\v!middle]
+
+\definelocalboxes
+  [\v!righttext]
+  [\c!command=\localmarginrighttext\zeropoint,
+   \c!repeat=\v!no,
+   \c!distance=\zeropoint,
+   \c!location=\v!middle]
+
+\installcorenamespace{mathtexthere}
+\installcorenamespace{mathbreakhere}
+
+\def\strc_math_text_here_right#1% a nasty interplay with the lua end  (!!! TODO)
+  {\localbox[\v!righttext]{\llap{#1}}} %\kern\rightskip}}}
+
+\def\strc_math_text_here_left#1%
+  {\localbox[\v!lefttext]{\rlap{\kern\leftskip#1}}}
+
+\def\strc_math_text_here_before#1%
+  {\vadjust pre \bgroup
+     \hbox to \d_strc_formulas_display_width \bgroup
+        \strut
+        \kern\leftskip
+         #1\hss
+        \kern\rightskip
+        \strut
+     \egroup
+   \egroup}
+
+\def\strc_math_text_here_after#1%
+  {\vadjust \bgroup
+     \hbox to \d_strc_formulas_display_width \bgroup
+        \strut
+        \kern\leftskip
+        #1\hss
+        \kern\rightskip
+        \strut
+     \egroup
+   \egroup}
+
+\permanent\protected\def\strc_math_text_here_inbetween#1%
+  {\begingroup
+   \breakhere
+ % \setbox\scratchboxone\vbox{\forgetall\begstrut#1\endstrut}%
+   \setbox\scratchboxone\vbox{\forgetall#1}%
+   \scratchcounter\boxlines\scratchboxone
+   \localcontrolledrepeat\scratchcounter
+     {\boundary\c_bndr_mathinject
+      \setbox\scratchboxtwo\hbox{\setstrut\strut\boxline\scratchboxone\currentloopiterator}%
+      \box\scratchboxtwo
+      \ifnum\currentloopiterator<\scratchcounter
+        \vadjust depth after -\thousandpoint{\strut\vskip-\struthtdp}%
+      \fi
+      \breakhere}%
+  \endgroup}
+
+\letcsname\??mathtexthere\v!left     \endcsname\strc_math_text_here_left
+\letcsname\??mathtexthere\v!right    \endcsname\strc_math_text_here_right
+\letcsname\??mathtexthere\v!before   \endcsname\strc_math_text_here_before
+\letcsname\??mathtexthere\v!after    \endcsname\strc_math_text_here_after
+\letcsname\??mathtexthere\v!inbetween\endcsname\strc_math_text_here_inbetween
+
+\defcsname\??mathbreakhere\v!left\endcsname#1%
+  {\ifnum\lastboundary=\c_math_begin_boundary\else
+     \strc_math_line_here
+   \fi
+   \strc_math_text_here_left{#1}%
+   \strc_math_pickup_again}
+
+\defcsname\??mathbreakhere\v!right\endcsname#1%
+  {\strc_math_text_here_right{#1}%
+   \strc_math_line_here
+   \strc_math_pickup_again}
+
+\defcsname\??mathbreakhere\v!before\endcsname#1%
+  {\ifnum\lastboundary=\c_math_begin_boundary\else
+     \strc_math_line_here
+   \fi
+   \strc_math_text_here_before{#1}%
+   \strc_math_pickup_again}
+
+\defcsname\??mathbreakhere\v!after\endcsname#1%
+  {\ifnum\lastboundary=\c_math_begin_boundary\else
+     \strc_math_line_here
+   \fi
+   \strc_math_text_here_after{#1}%
+   \strc_math_pickup_again}
+
+\tolerant\protected\def\strc_math_break_here[#1]#:#*#=%
+  {\ifparameter#2\or
+     \ifcsname\??mathbreakhere#1\endcsname
+       \expandafter\lastnamedcs
+     \else
+       \csname\??mathbreakhere\v!after\expandafter\endcsname
+     \fi{#2}%
+   \orelse\ifcstok{#1}\v!page
+     \strc_math_page_here
+   \orelse\ifcstok{#1}\v!samepage
+     \strc_math_same_here
+   \else
+     \strc_math_line_here
+   \fi}
+
+% \tolerant\protected\def\strc_math_text_here[#1]#:#*#=%
+%   {\ifparameter#2\or
+%      \ifcsname\??mathtexthere#1\endcsname
+%        \expandafter\lastnamedcs
+%      \else
+%        \csname\??mathtexthere\v!after\expandafter\endcsname
+%      \fi{#2}%
+%    \fi}
+
+\def\strc_math_text_here_export#1%
+  {\mtext{\nbsp#1\nbsp}\breakhere}
+
+\tolerant\protected\def\strc_math_text_here[#1]#:#*#=%
+  {\ifparameter#2\or
+     \ifexporting
+       \expandafter\strc_math_text_here_export
+     \orelse\ifcsname\??mathtexthere#1\endcsname
+       \expandafter\lastnamedcs
+     \else
+       \csname\??mathtexthere\v!after\expandafter\endcsname
+     \fi{#2}%
+   \fi}
+
+\def\strc_math_break_here_indeed
+  {\strut\break}
+
+\protected\def\strc_math_page_here
+  {\ifmmode
+     \ifconditional\c_strc_math_trace_hang
+       \strc_math_trace_okay{darkyellow}{B P}%
+     \fi
+     \strc_math_break_here_indeed
+     \vadjust pre {\vfill\penalty-100000}%
+     \strc_math_pickup_again
+   \fi}
+
+\protected\def\strc_math_same_here
+  {\ifmmode
+     \ifconditional\c_strc_math_trace_hang
+       \strc_math_trace_okay{darkyellow}{B S}%
+     \fi
+     \strc_math_break_here_indeed
+     \vadjust pre {\penalty\plustenthousand}%
+     \strc_math_pickup_again
+   \fi}
+
+\protected\def\strc_math_line_here
+  {\ifmmode
+     \ifconditional\c_strc_math_trace_hang
+       \strc_math_trace_okay{darkgreen}{B}%
+     \fi
+     \strc_math_break_here_indeed
+     \strc_math_pickup_again
+   \fi}
+
+\ifdefined\alignhere \else \aliased\let\alignhere\relax \fi
+\ifdefined\texthere  \else \aliased\let\texthere \relax \fi
+\ifdefined\skiphere  \else \aliased\let\skiphere \relax \fi
+\ifdefined\breakhere \else \aliased\let\breakhere\relax \fi
+
+\appendtoks % must move to alignment
+    \enforced\let\alignhere\strc_math_align_here
+    \enforced\let\breakhere\strc_math_break_here
+    \enforced\let\skiphere \strc_math_skip_here
+    \enforced\let\texthere \strc_math_text_here
+  % \global\c_strc_math_aligned_here\conditionalfalse
+\to \everymathematics
+
+\installcorenamespace{mathtextalign}
+
+\newconstant   \c_strc_math_ragged_status
+\newconstant   \c_strc_math_split_status
+\newconditional\c_strc_math_number_swapped
+
+\prependtoks
+    \c_strc_math_ragged_status\plustwo   % middle
+    \c_strc_math_split_status \zerocount
+\to \everymathematics
+
+\prependtoks
+    % we need to keep an eye on this
+    \mathgluemode\ifcase\raggedstatus\plusthree\else\zerocount\fi
+\to \everymathematics
+
+\defcsname\??mathtextalign\v!flushleft\endcsname
+  {\raggedright
+   \mathgluemode\plustwo
+   \c_strc_math_ragged_status\plusone
+   \c_strc_math_number_swapped\conditionalfalse
+   \updateparagraphproperties} % not needed
+
+\defcsname\??mathtextalign\v!middle\endcsname
+  {\raggedcenter
+   \mathgluemode\plustwo
+   \c_strc_math_ragged_status\plustwo
+   \c_strc_math_number_swapped\conditionalfalse
+   \updateparagraphproperties} % not needed
+
+\defcsname\??mathtextalign\v!flushright\endcsname
+  {\raggedleft
+   \mathgluemode\plustwo
+   \c_strc_math_ragged_status\plusthree
+   \c_strc_math_number_swapped\conditionalfalse
+   \updateparagraphproperties} % not needed
+
+\defcsname\??mathtextalign\v!slanted\endcsname % maybe move bottom to number location
+  {\raggedslanted
+  %\mathgluemode\plustwo
+   \c_strc_math_ragged_status\plustwo
+   \edef\p_distance{\formulaparameter\c!leftmargindistance}%
+   \parinitleftskip \ifx\p_distance\v!number\wd\b_strc_formulas_number\else{\p_distance}\fi
+   \edef\p_distance{\formulaparameter\c!rightmargindistance}%
+   \parfillrightskip\ifx\p_distance\v!number\wd\b_strc_formulas_number\else{\p_distance}\fi
+% \parinitleftskip \ifcstok{\formulaparameter\c!leftmargindistance }\v!number\wd\b_strc_formulas_number\else{\lastnamedcs}\fi
+% \parfillrightskip\ifcdtok{\formulaparameter\c!rightmargindistance}\v!number\wd\b_strc_formulas_number\else{\lastnamedcs}\fi
+   \updateparagraphproperties} % not needed
+
+\def\strc_math_setup_align
+  {\ifcsname\??mathtextalign\formulaparameter\c!align\endcsname
+     \lastnamedcs\else\begincsname\??mathtextalign\v!middle\endcsname
+     \math_check_limit_stretch
+   \fi}
+
+\def\math_check_limit_stretch
+  {\ifcstok{\mathematicsparameter\c!limitstretch}\v!yes
+     \bitwiseflip\mathgluemode\plusfour
+   \fi}
+
+\appendtoks
+    \math_check_limit_stretch
+\to \everymathematics
+
+% split : wrap (box) and flow (yes)
+
+\defcsname\??mathtextalign\v!flushleft:\v!auto\endcsname
+  {\raggedright
+   \mathgluemode\plustwo
+   \c_strc_math_ragged_status\plusone
+   \strc_math_analyze_box}
+
+\defcsname\??mathtextalign\v!middle:\v!auto\endcsname
+  {\raggedright                       % needed for the lua magick (stage 1)
+   \mathgluemode\plustwo              % only shrink (otherwise inconsistent)
+   \c_strc_math_ragged_status\plustwo % needed for the lua magick (stage 2)
+   \strc_math_analyze_box}            % lua magick
+
+\defcsname\??mathtextalign\v!flushright:\v!auto\endcsname
+  {\raggedright
+   \mathgluemode\plustwo % only shrink
+   \c_strc_math_ragged_status\plusthree
+   \strc_math_analyze_box}
+
+\defcsname\??mathtextalign\v!slanted:\v!auto\endcsname
+  {\raggedright
+   \mathgluemode\plustwo
+   \c_strc_math_ragged_status\plustwo
+   \strc_math_analyze_box}
+
+\def\strc_math_setup_align_auto
+  {\ifcsname\??mathtextalign\formulaparameter\c!align:\v!auto\endcsname
+     \lastnamedcs\else\begincsname\??mathtextalign\v!middle:\v!auto\endcsname
+   \fi}
+
+\letcsname\??mathtextalign\v!right        \expandafter\endcsname\csname\??mathtextalign\v!flushleft         \endcsname
+\letcsname\??mathtextalign\v!left         \expandafter\endcsname\csname\??mathtextalign\v!flushright        \endcsname
+\letcsname\??mathtextalign\v!right:\v!auto\expandafter\endcsname\csname\??mathtextalign\v!flushleft :\v!auto\endcsname
+\letcsname\??mathtextalign\v!left :\v!auto\expandafter\endcsname\csname\??mathtextalign\v!flushright:\v!auto\endcsname
+
+% \startsetups[math:penalties:\v!yes]
+%     \shapingpenaltiesmode \zerocount
+%     \widowpenalties \plustwo \plustwothousand \zerocount
+%     \clubpenalties  \plustwo \plustwothousand \zerocount
+%   % \interlinepenalty     \plustenthousand
+%   % \shapingpenalty       \plustenthousand
+% \stopsetups
+
+% \startsetups[math:penalties:\v!no]
+%     \shapingpenaltiesmode \zerocount
+%     \widowpenalties \plusone \plusfivethousand
+%     \clubpenalties  \plusone \plusfivethousand
+%   % \interlinepenalty     \plustenthousand
+%   % \shapingpenalty       \plustenthousand
+% \stopsetups
+
+\startsetups[math:penalties:\v!yes:\v!both]
+    \shapingpenaltiesmode \zerocount
+    \widowpenalties \plustwo \plustenthousand \plustwothousand
+    \clubpenalties  \plustwo \plustenthousand \plustwothousand
+\stopsetups
+
+\startsetups[math:penalties:\v!yes:\v!first]
+    \shapingpenaltiesmode \zerocount
+    \widowpenalties \plusone \zerocount
+    \clubpenalties  \plustwo \plustenthousand \zerocount
+\stopsetups
+
+\startsetups[math:penalties:\v!yes:\v!last]
+    \shapingpenaltiesmode \zerocount
+    \widowpenalties \plustwo \plustenthousand \zerocount
+    \clubpenalties  \plusone \zerocount
+\stopsetups
+
+\startsetups[math:penalties:\v!yes:]
+    \shapingpenaltiesmode \zerocount
+    \widowpenalties \plustwo \plustwothousand \zerocount
+    \clubpenalties  \plustwo \plustwothousand \zerocount
+\stopsetups
+
+\startsetups[math:penalties:\v!yes]
+    \directsetup{math:penalties:\v!yes:\formulaparameter\c!splitmethod}
+\stopsetups
+
+\startsetups[math:penalties:\v!no]
+    \shapingpenaltiesmode \zerocount
+    \widowpenalties \plusone \plusfivethousand
+    \clubpenalties  \plusone \plusfivethousand
+\stopsetups
+
+\setupformula
+  [\c!penalties=math:penalties:\formulaparameter\c!split]
+
+\def\strc_math_setup_penalties
+  {\linebreakpasses\zerocount % for the moment here
+   \directsetup{\formulaparameter\c!penalties}}
+
+% a limitation is that this only works in a regular setting, so no shapes
+
+\appendtoks
+    \global\d_strc_math_indent      \zeropoint
+    \global\c_strc_math_n_of_lines  \zerocount
+    \global\d_strc_math_first_height\zeropoint
+    \global\d_strc_math_first_left  \zeropoint
+    \global\d_strc_math_first_right \zeropoint
+    \global\d_strc_math_last_left   \zeropoint
+    \global\d_strc_math_last_right  \zeropoint
+    \global\d_strc_math_last_depth  \zeropoint
+    \global\d_strc_math_max_right   \zeropoint
+    \global\d_strc_math_max_left    \zeropoint
+    \global\d_math_strc_hangindent  \zeropoint
+    \global\c_math_strc_hangafter   \zeropoint
+    \global\d_strc_math_left_shift  \zeropoint
+    \global\d_strc_math_right_shift \zeropoint
+\to \everyresetformulas
+
+\newbox\b_strc_math_display % most code is in math-ali (for historical reasons)
+
+\newgluespec\s_strc_formulas_margin_left  % maybe just dimen
+\newgluespec\s_strc_formulas_margin_right % idem
+
+\def\strc_formulas_set_paragraph
+  {%\setlocalhsize
+   %\hsize\localhsize
+   %
+   \d_strc_formulas_display_width{\formulaparameter\c!width}%
+   \edef\p_margin{\formulaparameter\c!leftmargin}%
+   \ifempty\p_margin \else
+     \doadaptleftskip\p_margin
+   \fi
+   \edef\p_margin{\formulaparameter\c!rightmargin}%
+   \ifempty\p_margin \else
+     \doadaptrightskip\p_margin
+   \fi
+   \s_strc_formulas_margin_left \leftskip
+   \s_strc_formulas_margin_right\rightskip
+   \ifchkdimexpr\formulaparameter\c!interlinespace\or\baselineskip\lastchkdimension\fi
+   \global\c_strc_math_aligned_here\conditionalfalse
+   \strc_math_setup_penalties
+   \hsize\d_strc_formulas_display_width}
+
+\def\strc_math_analyze_box
+  {\clf_handlemathhang
+     stage       \plusone
+     alignstate  \c_strc_math_ragged_status
+     box         \b_strc_math_display
+     distance    {\formulaparameter\c!textdistance}%
+     leftmargin  {\s_strc_formulas_margin_left}%
+     rightmargin {\s_strc_formulas_margin_right}%
+   \relax
+  %\holdingmigrations\zerocount
+   \setbox\b_strc_math_display\vbox\bgroup % \vtop
+     % beware: everypar is doing sidefloats here so we then have hang values set
+     % but we have no local leftskip and rightskip as they are reflected in hsize
+     \strc_formulas_trigger_side_box
+     \ifconditional\c_strc_math_aligned_here
+       \ifzeropt\d_strc_math_indent\else
+         \advanceby\leftskip\d_strc_math_indent % which is why we see a leftskip reported !
+         \hskip-\d_strc_math_indent
+       \fi
+     \else
+       \strc_math_setup_align
+     \fi
+   % \strc_math_setup_spacing\formulaparameter
+     \strc_math_setup_penalties
+     \ifhbox\b_strc_math_display\unhbox\else\box\fi\b_strc_math_display
+   \egroup
+   \clf_handlemathhang
+     stage      \ifconditional\c_strc_math_aligned_here \plustwo \else \plusthree \fi
+   % alignstate \c_strc_math_ragged_status
+   % box        \b_strc_math_display
+   % distance   \formulaparameter\c!textdistance
+   \relax
+   %
+   \begingroup
+     \edef\v_spac_whitespace_current{\formulaparameter\c!spaceinbetween}%
+     \spac_whitespace_setup
+     \clf_handlemathhang
+       stage     \plusfour
+       height    \strutht
+       depth     \strutdp
+       inbetween
+         \ifgridlinesnapping
+           \ifempty\v_spac_whitespace_current        \zeropoint  \orelse
+           \ifx    \v_spac_whitespace_current\v!none \zeropoint  \else
+                                                     \lineheight \fi
+       snapped   true
+         \else
+           1\parskip
+         \fi
+     \relax
+   \endgroup}
+
+\let\strc_math_inject_show_margins_here\relax
+
+\integerdef\c_strc_math_positioning\zerocount
+
+%D For practical reasons this one is kept extern:
+
+\newconditional\c_strc_math_ignore_number % for testing space compatibility
+
+\fetchmodulecommand \showmathmargins \f!math_run
+
+\installtextracker
+  {math.showmargins}
+  {\def\strc_math_show_margins{\showmathmargins[\v!all]}%
+   \let\strc_math_flush_number_box\strc_math_flush_number_box_visual}
+  {\let\strc_math_show_margins\relax
+   \let\strc_math_flush_number_box\strc_math_flush_number_box_normal}
+
+\installtextracker
+  {math.showmargins.less}
+  {\def\strc_math_show_margins{\showmathmargins}%
+   \let\strc_math_flush_number_box\strc_math_flush_number_box_visual}
+  {\let\strc_math_show_margins\relax
+   \let\strc_math_flush_number_box\strc_math_flush_number_box_normal}
+
+\let\strc_math_show_margins\relax
+
+% This is an experiment!
+
+% \lettonothing\strc_formulas_start_side_box
+% \lettonothing\strc_formulas_stop_side_box
+% \lettonothing\strc_formulas_check_side_box
+% \lettonothing\strc_formulas_trigger_side_box
+
+\newdimen\d_strc_math_side_width
+
+\def\strc_formulas_check_side_box
+  {\doifelsesidefloat
+     {\d_strc_math_side_width\d_page_sides_width}%
+     {\d_strc_math_side_width\zeropoint}}
+
+\def\strc_formulas_start_side_box
+  {\ifzeropt\d_strc_math_side_width\else
+     \advanceby\d_strc_formulas_display_width-\d_strc_math_side_width
+     \ifnum\c_page_sides_checks_done<\plustwo
+       % see \strc_formulas_display_space_before_normal
+       \vkern-\strutht % quite a hack
+     \fi
+     \dontleavehmode\dbox
+   \fi
+   \bgroup}
+
+\def\strc_formulas_stop_side_box
+  {\egroup}
+
+\def\strc_formulas_trigger_side_box
+  {\ifzeropt\d_strc_math_side_width\else
+     \advanceby\hsize-\d_strc_math_side_width
+     \forgeteverypar
+     \dontleavehmode
+   \fi}
+
+% End of experiment.
+
+\tolerant\protected\def\strc_formulas_start_formula#1#:#*[#S#2]% setting leftskip adaption is slow !
+  {\strc_formulas_check_side_box
+   \ifhmode
+     \par
+   \fi
+   \bgroup % HERE
+   \iftrialtypesetting\else
+     \global\advanceby\c_strc_formulas_n\plusone
+   \fi
+   %
+   \global\d_strc_formulas_number\zeropoint % maybe we need more resets (order issue ?)
+   %
+   \cdef\currentformula{#1}%
+   \usesetupsparameter\formulaparameter % new
+   \dostarttaggedchained\t!formula\currentformula\currentformula\??formula
+   \strc_math_set_options{#2}%
+   \strc_math_set_split
+   \strc_math_set_number_location
+   \strc_formulas_set_paragraph
+   \let\strc_formulas_start_formula\strc_formulas_start_formula_nested
+   \expand\everybeforedisplayformula
+   \strc_math_setup_align
+   \ifcstok{\formulaparameter\c!strut}\v!yes
+     \let\strc_formulas_begstrut\begstrut
+     \let\strc_formulas_endstrut\endstrut
+   \else
+     \let\strc_formulas_begstrut\relax
+     \let\strc_formulas_endstrut\relax
+   \fi
+   \ifgridlinesnapping
+     % gridlinesnapping: to be decided
+     \ifempty{\formulaparameter\c!gridcorrection}\else
+       \expanded{\setgridcorrection[\lastnamedcs]}%
+     \fi
+   \orelse\ifgridsnapping
+     \ifempty{\formulaparameter\c!gridcorrection}\else
+       \expanded{\setgridcorrection[\lastnamedcs]}%
+     \fi
+   \fi
+   \noindentation
+   \csname\e!start\formulaparameter\c!alternative\v!formula\endcsname}
+
+\protected\def\strc_formulas_start_formula_nested#1%
+  {\bgroup
+   \let\strc_formulas_stop_formula\strc_formulas_stop_formula_nested
+   \dostarttaggednodetail\t!subformula}
+
+\protected\def\strc_formulas_stop_formula_nested
+  {\dostoptagged
+   \egroup}
+
+% the application of the above is in math-ali.mkxl: \strc_math_flush_aligned
+
+% tagging of formulanumbers is not ok (we get two display maths blobs)
+
+\newinteger\c_strc_formulas_n
+
+\ifdefined\dotagregisterformula \else \aliased\let\dotagregisterformula\gobbletwoarguments \fi
+
+\protected\def\strc_formulas_stop_formula
+  {\strc_formulas_place_number % in case it hasn't happened yet
+   \strc_formulas_flush_number % in case we are in native mode
+   \dostarttaggednodetail\t!formulacontent
+   \dotagregisterformula{\number\c_strc_formulas_n}\!!zerocount % is the first one still usefull
+   \csname\e!stop\formulaparameter\c!alternative\v!formula\endcsname
+   \dostoptagged
+   \dostoptagged
+   \nonoindentation
+   \useindentnextparameter\formulaparameter
+   \egroup
+   \hangafter\minusone   % added for side floats
+   \hangindent\zeropoint % added for side floats
+   \c_strc_formulas_handle_number\conditionalfalse
+   \expand\everyresetformulas
+   \dorechecknextindentation} % here ?
+
+% experiment:
+
+\def\strc_formulas_set_grid_snapping
+  {\edef\p_grid{\formulaparameter\c!grid}%
+   \ifempty\p_grid \else
+     \spac_grids_snap_value_auto\p_grid
+   \fi}
+
+\appendtoks
+    \ifgridlinesnapping
+        % gridlinesnapping: to be decided
+        \strc_formulas_set_grid_snapping
+    \orelse\ifgridsnapping
+        \strc_formulas_set_grid_snapping
+    \fi
+\to \everybeforedisplayformula
+
+\tolerant\permanent\protected\def\formula[#1]#:#2% todo: tagged
+  {\begingroup
+   \ifparameters#1\else
+     \rawprocesscommacommand[#1]\strc_formulas_option
+   \fi
+   \useformulastyleandcolor\c!style\c!color
+   \mathematics{#2}%
+   \endgroup}
+
+\aliased\letcsname\v!formula\endcsname\formula
+
+%D \starttyping
+%D % test \par       % no preceding hlist
+%D % $$x$$           % preceding hlist
+%D % \noindent $$x$$ % no preceding hlist
+%D \startformula x \stopformula % now has \noindent (in mkii we messed with baselineskip)
+%D \stoptyping
+
+\let\strc_formulas_begstrut\relax
+\let\strc_formulas_endstrut\relax
+
+\newboundary\c_math_begin_boundary
+
+\permanent\protected\def\startdisplaymath
+  {\ifhmode
+     \par
+   \fi
+   \bgroup
+   \informulatrue
+   \beforedisplayspace
+   \startinnermath
+   \math_display_mode_signal % has to be in front
+   \ifrelax\strc_formulas_begstrut\else
+     \strc_formulas_begstrut
+     \boundary\c_math_begin_boundary
+   \fi
+   \begingroup} % less interference with upcoming a \over b
+
+\permanent\protected\def\stopdisplaymath
+  {\endgroup    % less interference with upcoming a \over b
+%    \ifrelax\strc_formulas_begstrut\else
+     \strc_formulas_endstrut
+%    \fi
+   \stopinnermath
+   \afterdisplayspace
+   \egroup}
+
+% already defined
+%
+% \lettonothing\startinnermath
+% \lettonothing\stopinnermath
+
+% \defineformulaalternative[multi][\begindmath][\enddmath]
+%
+% \fakewords{20}{40}\epar
+% \placeformula {a} $$              \fakespacingformula $$
+% \fakewords{20}{40}\epar
+% \placeformula {b} \startformule   \fakespacingformula \stopformule
+% \placeformula {b} \startformule   \fakespacingformula \stopformule
+% \fakewords{20}{40}\epar
+% \placeformula {c} \startmdformule \fakespacingformula \stopmdformule
+% \placeformula {c} \startmdformule \fakespacingformula \stopmdformule
+% \fakewords{20}{40}\epar
+% \placeformula {d} \startmpformule \fakespacingformula \stopmpformule
+% \placeformula {d} \startmpformule \fakespacingformula \stopmpformule
+% \fakewords{20}{40}\epar
+% \placeformula {e} \startsdformule \fakespacingformula \stopsdformule
+% \placeformula {e} \startsdformule \fakespacingformula \stopsdformule
+% \fakewords{20}{40}\epar
+% \placeformula {f} \startspformule \fakespacingformula \stopspformule
+% \placeformula {f} \startspformule \fakespacingformula \stopspformule
+% \fakewords{20}{40}
+
+%D \macros
+%D   {startsubformulas}
+
+% \placeformula
+% \startsubformulas[Maxwell]
+%     \startformulas
+%      \startformula \startalign
+%        \NC \nabla\cdot\bf E  \NC = \frac{\rho}{\varepsilon_0} \NR[Maxwell 1]
+%        \NC \nabla\times\bf E \NC = - \frac{\partial\bf B}{\partial t} \NR[Maxwell II]
+%        \stopalign \stopformula
+%        \startformula \startalign
+%          \NC \nabla\cdot \bf B \NC = 0 \NR[Maxwell III]
+%          \NC \nabla\times\bf B \NC = \mu_0{\bf j}+\varepsilon_0\mu_0\frac{\partial\bf E}{\partial t} \NR[Maxwell IV]
+%        \stopalign \stopformula
+%    \stopformulas
+% \stopsubformulas
+%
+% Maxwell : \in [Maxwell] and II : \in [Maxwell II]
+
+\tolerant\permanent\protected\def\startsubformulas[#1]%
+  {\edef\currentsubformulasreference{#1}%
+   \global\c_strc_formulas_inside_formulas_sub\conditionaltrue
+   \strc_formulas_handle_sub_number}
+
+\permanent\protected\def\stopsubformulas
+  {\nonoindentation
+   \useindentnextparameter\subformulaparameter
+   \expand\everyresetformulas % to be checked
+   \global\c_strc_formulas_inside_formulas_sub\conditionalfalse
+   \dorechecknextindentation} % here ?
+
+%D Named subformulas (to be redone)
+
+\tolerant\permanent\protected\def\startnamedsubformulas[#1]#2%
+  {\setformulalistentry{#2}%
+   \startsubformulas[#1]}
+
+\permanent\protected\def\stopnamedsubformulas
+  {\stopsubformulas}
+
+%D Experimental goodie:
+%D
+%D \startbuffer
+%D \placelist[formula][criterium=text] \blank[2*big]
+%D \placenamedformula[one]{first}  \startformula a = 1 \stopformula \endgraf
+%D \placeformula                   \startformula a = 2 \stopformula \endgraf
+%D \placenamedformula     {second} \startformula a = 3 \stopformula \endgraf
+%D \stopbuffer
+%D
+%D \typebuffer \getbuffer
+
+\permanent\protected\def\startformulas{\strc_formulas_start_formulas}
+
+\permanent\letcsname\e!stop\v!formulas\endcsname\relax
+
+\tolerant\protected\def\strc_formulas_nested_formula_start[#S#1]%
+  {\begingroup
+   \ifparameter#1\or
+      \setupformula[\c!width=\d_strc_formulas_display_width,#1]%
+      \d_strc_formulas_display_width{\formulaparameter\c!width}%
+   \fi
+   \vcenter\bgroup
+   \hsize\d_strc_formulas_display_width
+   \raggedcenter
+   \dostarttaggednodetail\t!formulacontent
+   \csname\e!start\formulaparameter\c!alternative\v!formula\endcsname}
+
+\protected\def\strc_formulas_nested_formula_stop
+  {\csname\e!stop\formulaparameter\c!alternative\v!formula\endcsname
+   \dostoptagged
+   \egroup
+   \hss
+   \endgroup}
+
+\expanded{\tolerant\def\noexpand\strc_formulas_start_formulas[#1]#:#2\csname\e!stop\v!formulas\endcsname}%
+  {\startformula
+   \dostarttaggednodetail\t!formulaset
+   \global\c_strc_formulas_inside_formulas\conditionaltrue
+   \edef\currentformulasreference{#1}%
+   \strc_formulas_handle_number
+   \lettonothing\currentformula
+ % \strc_formulas_forget_display_skips
+   \enforced\protected\def\startformula
+     {\advanceby\scratchcounter\plusone
+      \expandafter\ignoreupto\csname\e!stop\v!formula\endcsname}%
+   \scratchcounter\zerocount
+   #2% preroll
+   \hbox to \d_strc_formulas_display_width \bgroup
+     \ifcase\scratchcounter\else
+       \divideby\d_strc_formulas_display_width\scratchcounter
+     \fi
+     \hss
+     \enforced\let\startformula\strc_formulas_nested_formula_start
+     \enforced\let\stopformula \strc_formulas_nested_formula_stop
+     #2%
+   \egroup
+   \global\c_strc_formulas_inside_formulas\conditionalfalse
+   \dostoptagged
+   \stopformula
+   \expand\everyresetformulas
+   \hangafter\minusone    % added for side floats
+   \hangindent\zeropoint} % added for side floats
+
+% place
+
+\def\m_strc_formulas_flag_inhibit{-}
+\def\m_strc_formulas_flag_force  {+}
+
+\def\strc_formulas_check_reference#1#2%
+  {#1\unless\ifempty\namedformulaentry % \relax % new 29/8/2010
+     \plusthree
+   \orelse\ifempty#2%
+     \zerocount
+   \orelse\ifx#2\m_strc_formulas_flag_force
+     \plusone
+   \orelse\ifx#2\m_strc_formulas_flag_inhibit
+     \plustwo
+   \else
+     \plusthree
+   \fi}
+
+\tolerant\permanent\protected\def\formulanumber[#1]%
+  {\def\currentformulareference{#1}%
+   \strc_formulas_place_number_in_box}
+
+\permanent\protected\def\placeformula   {\global\c_strc_formulas_inside_place\conditionaltrue    \strc_formulas_place}
+\permanent\protected\def\placesubformula{\global\c_strc_formulas_inside_place_sub\conditionaltrue\strc_formulas_place}
+
+\tolerant\protected\def\strc_formulas_place[#1]%
+  {\xdef\currentplaceformulareference{#1}%
+   \glettonothing\currentplaceformulasuffix
+   \glettonothing\currentnestedformulasuffix
+   \global\c_strc_formulas_incremented\conditionalfalse
+   \global\c_strc_formulas_referenced\conditionalfalse
+   \global\c_strc_formulas_inside_place\conditionaltrue
+   \doifelsenextbgroup\strc_formulas_place_yes\strc_formulas_place_nop} % [ref]{}
+
+\protected\def\strc_formulas_place_yes#1%
+  {\xdef\currentplaceformulasuffix{#1}%
+   \strc_formulas_place_nop}
+
+%D We no longer pickup $$ as this is now equivalent to inline:
+
+% \protected\def\strc_formulas_place_nop
+%   {\doifelsenextchar$\strc_formulas_place_pickup\strc_formulas_place_indeed} % [ref]$$ [ref]\start
+%
+% \protected\def\strc_formulas_place_indeed
+%   {\strc_formulas_place_numbering}
+%
+% \protected\def\strc_formulas_place_pickup$$#1$$%
+%   {\strc_formulas_place_numbering
+%    \strc_formulas_start_formula{}#1\strc_formulas_stop_formula}
+
+\protected\def\strc_formulas_place_nop
+  {\strc_formulas_place_numbering}
+
+% \let\startplaceformula\placeformula
+% \let\stopplaceformula \relax
+
+% \startplaceformula                 \startformula e=mc^2 \stopformula \stopplaceformula
+% \startplaceformula[-]              \startformula e=mc^2 \stopformula \stopplaceformula
+% \startplaceformula[x]              \startformula e=mc^2 \stopformula \stopplaceformula
+% \startplaceformula[reference=foo]  \startformula e=mc^2 \stopformula \stopplaceformula
+% \startplaceformula[title=whatever] \startformula e=mc^2 \stopformula \stopplaceformula
+% \startplaceformula[suffix=x]       \startformula e=mc^2 \stopformula \stopplaceformula
+
+\mutable\lettonothing\currentplaceformulatitle
+\mutable\lettonothing\currentplaceformulareference
+\mutable\lettonothing\currentplaceformulasuffix
+\mutable\lettonothing\currentplaceformulabookmark
+\mutable\lettonothing\currentplaceformulalist
+
+\permanent\tolerant\protected\def\startplaceformula[#S#1]%
+  {\begingroup
+   \global\c_strc_formulas_incremented\conditionalfalse
+   \global\c_strc_formulas_referenced\conditionalfalse
+   \global\c_strc_formulas_inside_place\conditionaltrue
+   \ifparameter#1\or
+     \expandafter\strc_formulas_start_place_yes
+   \else
+     \expandafter\strc_formulas_start_place_nop
+   \fi[#1]}
+
+\def\strc_formulas_start_place_nop[#S#1]%
+  {\glettonothing\currentplaceformulareference
+   \glettonothing\currentplaceformulasuffix
+   \strc_formulas_place_nop}
+
+\def\strc_formulas_start_place_yes[#S#1]% todo
+  {\doifassignmentelse{#1}
+     {\strc_formulas_set_place_parameters{#1}%
+      \doifelsenextbgroup\strc_formulas_place_yes\strc_formulas_place_nop}% [ref]{}
+     {\xdef\currentplaceformulareference{#1}%
+      \glettonothing\currentplaceformulasuffix
+      \strc_formulas_place_nop}}
+
+\def\strc_formulas_set_place_parameters#1% maybe a dedicated setup handler
+  {\resetdummyparameter\c!title
+   \resetdummyparameter\c!reference
+   \resetdummyparameter\c!bookmark
+   \resetdummyparameter\c!list
+   \resetdummyparameter\c!suffix
+   \getdummyparameters[#1]%
+   \edef\currentplaceformulatitle    {\dummyparameter\c!title}%
+   \edef\currentplaceformulareference{\dummyparameter\c!reference}%
+   \edef\currentplaceformulabookmark {\dummyparameter\c!bookmark}%
+   \edef\currentplaceformulalist     {\dummyparameter\c!list}%
+   \edef\currentplaceformulasuffix   {\dummyparameter\c!suffix}%
+   \ifempty\currentplaceformulatitle\else
+     \expanded{\setformulalistentry{\currentplaceformulatitle}}%
+   \fi}
+
+\permanent\protected\def\stopplaceformula
+  {\relax
+   \endgroup}
+
+%D This is new in \LMTX\ (and described in the manual):
+%D
+%D \starttyping
+%D \startformula
+%D     \startsubnumberinghere
+%D         x \alignhere = a + 1  \numberhere[ref:c1]
+%D           \breakhere = b + 2  \numberhere
+%D           \breakhere = c + 3n \numberhere[ref:c2]
+%D     \stopsubnumberinghere
+%D \stopformula
+%D
+%D \startformula
+%D     x \alignhere = a + 1n \numberhere[ref:a]
+%D       \breakhere = b + 2  \numberhere
+%D       \breakhere = c + 3  \numberhere
+%D \stopformula
+%D
+%D \startformula
+%D     \startsubnumberinghere
+%D         x \alignhere = a + 1  \numberhere
+%D           \breakhere = b + 2  \numberhere
+%D           \breakhere = c + 3  \numberhere
+%D     \stopsubnumberinghere
+%D           \breakhere = d + 4n \numberhere[ref:d]
+%D \stopformula
+%D \stoptyping
+
+\newconditional \c_strc_formulas_in_sub
+
+\permanent\protected\def\startsubnumberinghere
+  {\begingroup
+   \c_strc_formulas_in_sub\conditionaltrue
+   \strc_counters_increment\v!formula}
+
+\permanent\protected\def\stopsubnumberinghere
+  {\c_strc_formulas_in_sub\conditionalfalse
+   \endgroup}
+
+\permanent\tolerant\protected\def\numberhere[#1]%
+  {\begingroup
+   \attribute\mathblobattribute\attributeunsetvalue
+   \dostarttaggednodetail\t!formulacaption
+   \global\c_strc_formulas_incremented\conditionalfalse
+   \global\c_strc_formulas_referenced\conditionaltrue
+   \global\c_strc_formulas_inside_place\conditionalfalse
+   \global\c_strc_formulas_place_number_mode\zerocount
+   %
+   \glettonothing\currentplaceformulareference
+   \glettonothing\currentplaceformulasuffix
+   %
+   \ifparameter#1\orelse\ifhastok={#1}%
+     \strc_formulas_set_place_parameters{#1}%
+   \else
+     \xdef\currentplaceformulareference{#1}%
+   \fi
+   \iftrialtypesetting
+   \orelse\ifempty\currentplaceformulareference
+   \else
+     \global\c_strc_formulas_referenced\conditionalfalse % maybe always anyway (title etc)
+     \ifconditional\c_strc_formulas_in_sub
+       \c_strc_formulas_counter_level\plustwo % we use normal numbering here
+     \fi
+     \strc_formulas_check_reference
+       \c_strc_formulas_place_number_mode
+       \currentplaceformulareference
+   \fi
+   \texthere
+     [\ifcstok{\formulaparameter\c!location}\v!left\v!left\else\v!right\fi]%
+     {\ifconditional\c_strc_formulas_in_sub
+        \strc_formulas_handle_sub_numbering
+      \else
+        \strc_formulas_handle_numbering
+      \fi}%
+   \dostoptagged
+   \endgroup}
+
+% to be checked
+
+\let\strc_formulas_place_number       \relax
+\let\strc_formulas_place_number_nested\gobbletwoarguments
+
+\def\strc_formulas_place_number_nested_indeed#1#2%
+  {\ifhastok={#1}%
+     \setupcurrentmathalignment[#1]%
+     \xdef\currentnestedformulareference{\mathalignmentparameter\c!reference}%
+     \xdef\currentnestedformulasuffix   {\mathalignmentparameter\c!suffix}%
+     \global\d_math_eqalign_number_threshold\mathalignmentparameter\c!numberthreshold\relax
+   \orelse\ifhastok+{#1}%
+     \glettonothing\currentnestedformulareference
+     \xdef\currentnestedformulasuffix   {+}%
+   \orelse\ifempty\currentplaceformulareference
+     \xdef\currentnestedformulareference{#1}%
+     \xdef\currentnestedformulasuffix   {#2}%
+   \else
+     \glettonothing\currentnestedformulareference
+     \xdef\currentnestedformulasuffix   {#1}%
+   \fi
+   \strc_formulas_place_number_nested_check}
+
+\def\strc_formulas_place_number_nested_check
+  {\ifempty\currentnestedformulareference
+     \ifempty\currentnestedformulasuffix \else
+       \c_strc_formulas_nested_number_mode\plusthree
+     \fi
+   \else
+     \strc_formulas_check_reference\c_strc_formulas_nested_number_mode\currentnestedformulareference
+   \fi
+   \ifcase\c_strc_formulas_nested_number_mode
+     % nothing
+   \or
+     \glet\strc_formulas_place_number\relax
+     \strc_formulas_place_number_in_box
+   \or
+     % nothing
+   \or
+     \glet\strc_formulas_place_number\relax
+     \strc_formulas_place_number_in_box
+   \fi}
+
+\def\strc_formulas_place_number_indeed
+  {\strc_formulas_place_number_in_box}
+
+% \startplaceformula
+%     \startformula
+%         \startalign
+%         \NC a \NC = p \NR[eq:one]
+%         \NC b \NC = q \NR
+%         \NC c \NC = r \NR[eq:two]
+%         \NC d \NC = s \NR[eq:three]
+%         \stopalign
+%     \stopformula
+% \stopplaceformula
+% \stoptext
+
+% Relaxing in the macro is really needed because otherwise we get spurious
+% numbers probably due to some % interference with other local variables
+
+\newconditional\c_strc_formulas_number_in_alignment
+
+\def\strc_formulas_place_number_in_box
+  {\begingroup
+   \ifconditional\c_strc_formulas_number_in_alignment
+     % needed for tagging
+   \else
+     \attribute\mathblobattribute\attributeunsetvalue
+   \fi
+   \dostarttaggednodetail\t!formulacaption
+   \glet\strc_formulas_place_number\relax
+  %\glet\strc_formulas_place_number_nested\gobbletwoarguments
+   \global\setbox\b_strc_formulas_number\naturalhbox{\strc_formulas_number_indeed}%
+   \global\d_strc_formulas_number\wd\b_strc_formulas_number
+   \dostoptagged
+   \endgroup}
+
+\let\strc_formulas_flush_number\relax
+
+% todo
+
+\permanent\tolerant\protected\def\placenamedformula[#1]%
+  {\ifarguments
+     \expandafter\strc_formulas_place_named_nop
+   \else
+     \expandafter\strc_formulas_place_named_yes
+   \fi[#1]}
+
+\def\strc_formulas_place_named_yes[#1]#2%
+  {\setformulalistentry{#2}%
+   \placeformula[#1]}
+
+\def\strc_formulas_place_named_nop[#1]#2%
+  {\setformulalistentry{#2}%
+   \placeformula}
+
+\def\strc_math_flush_aligned_boxed_direct_yes
+  {\dontleavehmode % NO!
+   \hskip-\leftskip % bah
+   \box\b_strc_math_display
+   \llap{\box\b_strc_formulas_number}}
+
+\def\strc_math_flush_aligned_boxed_direct_nop
+  {\dontleavehmode % NO!
+   \hskip-\leftskip % bah
+   \box\b_strc_math_display}
+
+\mutable\lettonothing\namedformulaentry % \relax % this will become a key/value so that we can do bookmarks
+
+\permanent\protected\def\setformulalistentry#1%
+  {\xdef\namedformulaentry{#1}}
+
+%D New:
+%D
+%D \setupformula[snap=yes,snapstep=medium]
+%D
+%D \startbuffer
+%D We test \dorecurse{20}{$x^{#1}$ and $\frac{1}{#1}^x$ and $\sqrt[#1]{x}$ and }that's it.
+%D \stopbuffer
+%D
+%D \startcombination[nx=2,ny=3,location=top]
+%D     {\ruledvbox{\hsize.45\textwidth \setupformula[snap=no]                 \showboxes            \enabletrackers [math.snapping=darkred] \getbuffer}} {}
+%D     {\ruledvbox{\hsize.45\textwidth \setupformula[snap=no]                                       \disabletrackers[math.snapping]         \getbuffer}} {}
+%D     {\ruledvbox{\hsize.45\textwidth \setupformula[snap=yes,snapstep=small] \showboxes \darkgreen \enabletrackers [math.snapping=darkred] \getbuffer}} {}
+%D     {\ruledvbox{\hsize.45\textwidth \setupformula[snap=yes,snapstep=small]            \darkgreen \disabletrackers[math.snapping]         \getbuffer}} {}
+%D     {\ruledvbox{\hsize.45\textwidth \setupformula[snap=yes,snapstep=big]   \showboxes \darkblue  \enabletrackers [math.snapping=darkred] \getbuffer}} {}
+%D     {\ruledvbox{\hsize.45\textwidth \setupformula[snap=yes,snapstep=big]              \darkblue  \disabletrackers[math.snapping]         \getbuffer}} {}
+%D \stopcombination
+
+\definesystemattribute[mathsnap][public]
+
+\appendtoks
+    \ifcstok{\formulaparameter\c!snap}\v!yes
+      \setmathsnapping{\formulaparameter\c!snapstep}%
+    \else
+      \setmathsnapping\v!reset
+    \fi
+\to \everysetupformula
+
+%D Also new, handy for articles and manuals:
+
+% \starttext
+%     \showmakeup[line]
+%     \input tufte \startformula                e = mc^2 \stopformula
+%     \input tufte \startformula[bodyfont=10pt] e = mc^2 \stopformula
+%     \input tufte \startformula[bodyfont=24pt] e = mc^2 \stopformula
+%     \input tufte
+% \stoptext
+
+\prependtoks
+   \usebodyfontparameter\formulaparameter
+\to \everymathematics
+
+%D Snapping:
+
+\newconditional\c_strc_math_in_construct
+
+\appendtoks
+  % only inline not in align
+  \ifconditional\c_strc_math_in_construct
+    % no
+  \orelse\ifgridlinesnapping
+    \ifcsname\??snapping\mathematicsparameter\c!snapping\endcsname
+      \mathsnapping\lastnamedcs
+    \fi
+  \fi
+\to \everyinsidemathematics
+
+\appendtoks
+    \c_strc_math_in_construct\conditionaltrue
+\to \everybeforedisplayformula
+
+\protect \endinput

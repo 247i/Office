@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/spdx+json">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>SPDX SBOM document</comment>
+  <comment xml:lang="zh-Hant-TW">SPDX SBOM 文件</comment>
+  <comment xml:lang="uk">документ SBOM SPDX</comment>
+  <comment xml:lang="tr">SPDX SBOM belgesi</comment>
+  <comment xml:lang="sv">SPDX SBOM-dokument</comment>
+  <comment xml:lang="sr-Cyrl">SPDX SBOM документ</comment>
+  <comment xml:lang="sq">Dokument SPDX SBOM</comment>
+  <comment xml:lang="sl">Dokument SPDX SBOM</comment>
+  <comment xml:lang="ru">Документ SPDX SBOM</comment>
+  <comment xml:lang="ro">document SPDX SBOM</comment>
+  <comment xml:lang="pt-BR">Documento SBOM SPDX</comment>
+  <comment xml:lang="pt">Documento SPDX SBOM</comment>
+  <comment xml:lang="pl">Dokument SBOM SPDX</comment>
+  <comment xml:lang="oc">document SPDX SBOM</comment>
+  <comment xml:lang="ko">SPDX SBOM 문서</comment>
+  <comment xml:lang="kk-Cyrl">SPDX SBOM құжаты</comment>
+  <comment xml:lang="hr">SPDX SBOM dokument</comment>
+  <comment xml:lang="fr">Document SPDX SBOM</comment>
+  <comment xml:lang="fi">SPDX SBOM asiakirja</comment>
+  <comment xml:lang="et">SPDX SBOM dokument</comment>
+  <comment xml:lang="es">documento de SBOM SPDX</comment>
+  <comment xml:lang="en-GB">SPDX SBOM document</comment>
+  <comment xml:lang="de">SPDX SBOM-Dokument</comment>
+  <comment xml:lang="da">SPDX SBOM-dokument</comment>
+  <comment xml:lang="bg">Документ — SPDX SBOM</comment>
+  <comment xml:lang="ar">مستند SPDX SBOM</comment>
+  <acronym>SPDX SBOM</acronym>
+  <expanded-acronym>Software Package Data Exchange Software Bill Of Materials</expanded-acronym>
+  <sub-class-of type="application/json"/>
+  <glob pattern="*.spdx.json"/>
+</mime-type>

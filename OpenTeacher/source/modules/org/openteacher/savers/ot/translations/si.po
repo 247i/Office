@@ -1,0 +1,27 @@
+# Sinhalese translation for openteacher
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2012-04-24 10:50+0000\n"
+"Last-Translator: Mohamed Rizmi <Unknown>\n"
+"Language-Team: Sinhalese <si@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:43+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#. TRANSLATORS: Please don't translate 'OpenTeacher' unless you've
+#. TRANSLATORS: a good reason for doing so in your language, of
+#. TRANSLATORS: course. This is used to describe the file format
+#. TRANSLATORS: of the OpenTeacher 2.x series in a file dialog.
+#: ot.py:75
+msgid "OpenTeacher 2.x"
+msgstr "OpenTeacher 2.x"

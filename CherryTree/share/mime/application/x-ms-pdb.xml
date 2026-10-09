@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-ms-pdb">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Windows program database</comment>
+  <comment xml:lang="zh-Hant-TW">Windows 程式資料庫</comment>
+  <comment xml:lang="uk">база даних програм Windows</comment>
+  <comment xml:lang="tr">Windows program veri tabanı</comment>
+  <comment xml:lang="sv">Windows-programdatabas</comment>
+  <comment xml:lang="sr-Cyrl">Виндоуз база података програма</comment>
+  <comment xml:lang="sq">Bazë të dhënash programi Windows</comment>
+  <comment xml:lang="sl">Podatkovna zbirka programov za Windows</comment>
+  <comment xml:lang="ru">База данных программ Windows</comment>
+  <comment xml:lang="ro">bază de date de program Windows</comment>
+  <comment xml:lang="pt-BR">Banco de dados de programa do Windows</comment>
+  <comment xml:lang="pl">Baza danych programów Windows</comment>
+  <comment xml:lang="oc">basa de donadas de programa Windows</comment>
+  <comment xml:lang="nn">Windows-programdatabase</comment>
+  <comment xml:lang="ko">윈도우 프로그램 데이터베이스</comment>
+  <comment xml:lang="kk-Cyrl">Windows бағдарлама дерекқоры</comment>
+  <comment xml:lang="ja">Windows プログラムデータベース</comment>
+  <comment xml:lang="it">Base di dati programmi Windows</comment>
+  <comment xml:lang="id">Basis data program Windows</comment>
+  <comment xml:lang="hr">Baza podataka Windows programa</comment>
+  <comment xml:lang="hi">Windows प्रोग्राम डेटाबेस</comment>
+  <comment xml:lang="fur">Base di dâts di program Windows</comment>
+  <comment xml:lang="fr">Programme de base de données Windows</comment>
+  <comment xml:lang="fi">Windows ohjelman tietokanta</comment>
+  <comment xml:lang="eu">Windows programen datu-basea</comment>
+  <comment xml:lang="et">Windowsi programmi andmebaas</comment>
+  <comment xml:lang="es">base de datos de programa de Windows</comment>
+  <comment xml:lang="en-GB">Windows program database</comment>
+  <comment xml:lang="de">Windows-Programmdatenbank</comment>
+  <comment xml:lang="ca">base de dades de programa Windows</comment>
+  <comment xml:lang="bg">База от данни — програми на Windows</comment>
+  <comment xml:lang="be-Cyrl">база даных праграмы для Windows</comment>
+  <comment xml:lang="ar">قاعدة بيانات برنامج ويندوز</comment>
+  <glob pattern="*.pdb"/>
+</mime-type>

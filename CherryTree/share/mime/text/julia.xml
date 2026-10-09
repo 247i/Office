@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/julia">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Julia source code</comment>
+  <comment xml:lang="zh-Hant-TW">Julia 源碼</comment>
+  <comment xml:lang="uk">початковий код Julia</comment>
+  <comment xml:lang="tr">Julia kaynak kodu</comment>
+  <comment xml:lang="sv">Julia-källkod</comment>
+  <comment xml:lang="sr-Cyrl">Јулија изворни код</comment>
+  <comment xml:lang="sq">Kod burim Julia</comment>
+  <comment xml:lang="sl">Izvorna koda Julia</comment>
+  <comment xml:lang="ru">Исходный код Julia</comment>
+  <comment xml:lang="ro">cod sursă Julia</comment>
+  <comment xml:lang="pt-BR">Código-fonte Julia</comment>
+  <comment xml:lang="pl">Kod źródłowy Julia</comment>
+  <comment xml:lang="oc">còdi font Julia</comment>
+  <comment xml:lang="nn">Julia-kjeldekode</comment>
+  <comment xml:lang="lt">Julia pradinis kodas</comment>
+  <comment xml:lang="ko">Julia 소스 코드</comment>
+  <comment xml:lang="kk-Cyrl">Julia бастапқы коды</comment>
+  <comment xml:lang="ja">Julia ソースコード</comment>
+  <comment xml:lang="it">Codice sorgente Julia</comment>
+  <comment xml:lang="id">Kode sumber Julia</comment>
+  <comment xml:lang="hr">Julia izvorni kôd</comment>
+  <comment xml:lang="hi">Julia सोर्स कोड</comment>
+  <comment xml:lang="he">קוד מקור בשפת Julia</comment>
+  <comment xml:lang="gl">Código fonte en Julia</comment>
+  <comment xml:lang="fur">Codiç sorzint di Julia</comment>
+  <comment xml:lang="fr">Code source Julia</comment>
+  <comment xml:lang="fi">Julia-lähdekoodi</comment>
+  <comment xml:lang="eu">Julia iturburu-kodea</comment>
+  <comment xml:lang="et">Julia lähtekood</comment>
+  <comment xml:lang="es">código fuente en Julia</comment>
+  <comment xml:lang="en-GB">Julia source code</comment>
+  <comment xml:lang="de">Julia-Quelltext</comment>
+  <comment xml:lang="ca">codi font de Julia</comment>
+  <comment xml:lang="bg">Изходен код — Julia</comment>
+  <comment xml:lang="be-Cyrl">зыходны код Julia</comment>
+  <comment xml:lang="ar">شفرة مصدر Julia</comment>
+  <sub-class-of type="text/plain"/>
+  <glob pattern="*.jl"/>
+</mime-type>

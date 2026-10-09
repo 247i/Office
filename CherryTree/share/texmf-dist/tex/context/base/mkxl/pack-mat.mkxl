@@ -1,0 +1,368 @@
+%D \module
+%D   [       file=pack-rul, % was core-rul,
+%D        version=2022.02.23,
+%D          title=\CONTEXT\ Packaging Macros,
+%D       subtitle=Ruled Math,
+%D         author=Hans Hagen,
+%D           date=\currentdate,
+%D      copyright={PRAGMA ADE \& \CONTEXT\ Development Team}]
+%C
+%C This module is part of the \CONTEXT\ macro||package and is
+%C therefore copyrighted by \PRAGMA. See mreadme.pdf for
+%C details.
+
+\writestatus{loading}{ConTeXt Packaging Macros / Ruled Math}
+
+%D This is a by product of the math improvement activity by Mikael Sundqvist and
+%D myself. More might end up here and more control might be added.
+
+\unprotect
+
+% todo \v!mathframed
+% todo \v!mathstrikeout
+
+\newconditional\c_framed_math_framed
+
+\installtextracker
+  {framed.math}
+  {\c_framed_math_framed\conditionaltrue}
+  {\c_framed_math_framed\conditionalfalse}
+
+\integerdef\c_framed_math_last_left \zerocount
+\integerdef\c_framed_math_last_right\zerocount
+
+\installglobalmacrostack\c_framed_math_last_left
+\installglobalmacrostack\c_framed_math_last_right
+
+\installcorenamespace{framedmath}
+
+\defineframed[\??framedmath]
+
+\setupframed[\??framedmath][\c!location=\v!middle]
+
+\tolerant\permanent\protected\def\defineframedmath[#1]#*[#2]#*[#S#3]%
+  {\ifarguments\or
+     \defineframed[#1][\??framedmath]%
+   \or
+     \defineframed[#1][\??framedmath][#2]%
+   \or
+     \defineframed[#1][#2][#3]%
+   \fi
+   \tolerant\frozen\protected\defcsname#1\endcsname{\math_framed{#1}}}
+
+\defineframedmath[framedmath]
+
+\tolerant\def\math_framed#1#*[#S#2]#:#3%
+  {\begingroup
+   \ifconditional\c_framed_math_framed
+     \defineboxanchor[temp]%
+   \fi
+   \setmathatomrule\mathbegincode\mathbinarycode\allmathstyles\mathbegincode\mathbinarycode % hm
+   %
+   \scratchoffset\Umathaxis\givenmathstyle\mathstyle
+   %
+   \cdef\currentframed{#1}%
+   %
+   % how to tag this
+   %
+   \setbox\scratchbox\hpack\bgroup
+     \startimath
+     \givenmathstyle\mathstyle
+     \mathboundary\zerocount %
+     #3%
+     \mathboundary\plusone   % prevents binary becoming ord
+     \stopimath
+     \expanded{\aftergrouped{%
+       \integerdef\c_framed_math_last_left \the\lastleftclass \relax
+       \integerdef\c_framed_math_last_right\the\lastrightclass\relax
+     }}%
+   \egroup
+   %
+   \setbox\scratchbox\hpack
+     \localframedwithsettings
+       [#1][#2]%
+       {\box\scratchbox}%
+   %
+   \boxymove\scratchbox\scratchoffset
+   %
+   \ifconditional\c_framed_math_framed
+     \boxsource\scratchbox \namedboxanchor{temp}% test
+   \fi
+   %
+   \mathatom
+     \s!class \mathexplicitcode
+     \ifnum\c_framed_math_last_left <\zerocount\else\s!leftclass \c_framed_math_last_left \fi
+     \ifnum\c_framed_math_last_right<\zerocount\else\s!rightclass\c_framed_math_last_right\fi
+     \bgroup
+       \ifconditional\c_framed_math_framed
+         \setboxanchor[temp][\c!corner={\v!left ,\v!bottom},\c!location={\v!right,\v!height}]%
+           \hpack{\smallinfofont\the\c_framed_math_last_left}%
+         \setboxanchor[temp][\c!corner={\v!right,\v!bottom},\c!location={\v!left ,\v!height}]%
+           \hpack{\smallinfofont\the\c_framed_math_last_right}%
+       \fi
+       \box\scratchbox
+     \egroup
+   \endgroup}
+
+\defineoverlay[mathstrikeout][\useMPgraphic{\framedparameter{mp}}]
+
+\defineframedmath
+  [mathstrikeout]
+  [\c!offset=\v!overlay,
+   \c!mp=mathstrikeout,
+   \c!rulethickness=1.5\linewidth,
+   \c!background={\v!foreground,mathstrikeout},
+  %\c!color=darkgreen,
+   \c!textstyle=\txx,
+   \c!mathstyle=\s!script,
+   \c!frame=\v!off,
+   \c!arrow=\v!yes]
+
+\defineframedmath
+  [mathcrossout]
+  [mathstrikeout]
+  [\c!mp=mathcrossout,
+   strike:location=bottom]
+
+\permanent\protected\def\mathstrikeoutlabel
+  {\ifempty{\framedparameter{strike:math}}%
+     \useframedstyleandcolor\c!textstyle\c!color
+     \framedparameter{strike:text}%
+   \else
+     \startimath
+       \dousecolorparameter{\framedparameter\c!color}%  mathcolor
+       \usemathstyleparameter\framedparameter\c!mathstyle
+       \framedparameter{strike:math}%
+     \stopimath
+   \fi}
+
+\startuseMPgraphic{mathstrikeout}
+    path arr ; arr := (llcorner OverlayBox -- urcorner OverlayBox) ;
+    if "\framedparameter{arrow}" = "yes" : drawarrow else : draw fi arr
+        withpen pencircle scaled OverlayLineWidth
+        withcolor OverlayColor
+    ;
+    label.top("\mathstrikeoutlabel", point 1 of arr)
+        withcolor OverlayColor
+    ;
+  % draw OverlayBox
+  %     dashed evenly
+  %     withpen pencircle scaled .5OverlayLineWidth
+  %     withcolor OverlayColor
+  % ;
+    setbounds currentpicture to OverlayBox ;
+\stopuseMPgraphic
+
+\startuseMPgraphic{mathcrossout}
+    draw (
+            (llcorner OverlayBox -- urcorner OverlayBox) &&
+            (ulcorner OverlayBox -- lrcorner OverlayBox)
+        )
+        withpen pencircle scaled OverlayLineWidth
+        withcolor OverlayColor
+    ;
+    if "\framedparameter{strike:location}" = "bottom" :
+        label.bot("\mathstrikeoutlabel", center bottomboundary currentpicture)
+    else :
+        label.top("\mathstrikeoutlabel", center topboundary currentpicture)
+    fi
+        withcolor OverlayColor
+    ;
+    setbounds currentpicture to OverlayBox ;
+\stopuseMPgraphic
+
+%D \starttyping
+%D \enabletrackers[framed.math]
+%D
+%D \startTEXpage[offset=10pt,width=40dk]
+%D     \showmakeup[mathglue]
+%D     \def\MyTest#1%
+%D       {$              x #1                          x $\quad
+%D        $              x \framedmath[offset=0pt]{#1} x $\quad
+%D        $\displaystyle x #1                          x $\quad
+%D        $\displaystyle x \framedmath[offset=0pt]{#1} x $}
+%D     \MyTest{>}\blank
+%D     \MyTest{+}\blank
+%D     \MyTest{!}\blank
+%D     \MyTest{+\frac{1}{2}+}\blank
+%D     \MyTest{\frac{1}{2}}\blank
+%D \stopTEXpage
+%D \stoptyping
+
+%D From the list:
+
+%D \starttyping
+%D \startformula[spaceinbetween=.5\lineheight]
+%D     \left\{
+%D         \mparagraph{Quaternion algebras\par over $\blackboard{Q}$ up to isomorphism}
+%D     \right\}
+%D     \alignhere \leftrightarrow
+%D     \left\{
+%D         \mparagraph
+%D           [foregroundcolor=darkred,offset=.1ex,frame=on]
+%D           {Finite subset of places of $\blackboard{Q}$\par of even cardinality}
+%D     \right\}
+%D     \breakhere \leftrightarrow
+%D     \left\{
+%D         \mparagraph{more text}
+%D     \right\}
+%D     \breakhere \leftrightarrow
+%D     \left\{
+%D         \mparagraph[foregroundcolor=darkblue]{and more text}
+%D     \right\}
+%D \stopformula
+%D \stoptyping
+
+\permanent\tolerant\protected\def\mparagraph[#S#1]#*#:#2%
+  {\vcenter class \mathconstructcode \bgroup % \mathwrappedcode would be like fraction
+     \framed[\c!offset=\v!overlay,\c!frame=\v!overlay,\c!align=\v!middle,#1]{#2}%
+   \egroup}
+
+%D Moved from pack-rul.mkxl to here:
+
+%D \macros
+%D   {mframed, minframed}
+%D
+%D See mkii and mkiv files for some history on this already rather old mechanism; it
+%D dates from the real beginning. In the meantime we used anchoring, and now we're
+%D doing it more \LMTX ish.
+
+% mframed   xx\mframed  {x^2 + \frac{2}{x} + \sqrt{\frac{2}{\sqrt{\frac{2}{x}}}}} \input tufte
+% inmframed xx\inmframed{x^2 + \frac{2}{x} + \sqrt{\frac{2}{\sqrt{\frac{2}{x}}}}} \input tufte
+% mcframed  xx\mcframed {x^2 + \frac{2}{x} + \sqrt{\frac{2}{\sqrt{\frac{2}{x}}}}} \input tufte
+% mtframed  xx\mtframed {x^2 + \frac{2}{x} + \sqrt{\frac{2}{\sqrt{\frac{2}{x}}}}} \input tufte
+
+%D \starttyping
+%D \definemathframed
+%D   [graymath]
+%D   [frame=off,
+%D    location=mathematics,
+%D  % mathclass=ordinary,
+%D  % mathstyle=display,
+%D    background=color,
+%D    backgroundcolor=gray,
+%D    backgroundoffset=3pt]
+%D
+%D \startformula
+%D   \ln (1+x) = \graymath{x - \frac{x^2}{2}} + \frac{x^3}{3}-\cdots.
+%D \stopformula
+%D
+%D \startformula
+%D   \scriptstyle \ln (1+x) = \graymath{x - \frac{x^2}{2}} + \frac{x^3}{3}-\cdots.
+%D \stopformula
+%D \stoptyping
+
+\newinteger\c_framed_mstyle
+
+\installcorenamespace{mathframed}
+
+\installframedcommandhandler \??mathframed {mathframed} \??mathframed
+
+\newtoks     \t_pack_framed_mathframed
+\newdimension\d_pack_framed_mathframed
+
+\appendtoks
+    \protected\frozen\instance\edefcsname\currentmathframed\endcsname{\pack_framed_mathframed[\currentmathframed]}%
+\to \everydefinemathframed
+
+\tolerant\protected\def\pack_framed_mathframed[#1]#*[#S#2]#:#3% needs testing !
+  {\begingroup
+   \cdef\currentmathframed{#1}%
+   \setupcurrentmathframed[#2]%
+   \scratchdistance\ifchkdimension\mathframedparameter\c!backgroundoffset\or\lastchkdimension\else\zeropoint\fi
+   \ifmmode
+     \ifempty{\mathframedparameter\c!mathstyle}%
+       \expanded{\setmathframedparameter{\c!mathstyle}{\currentverbosemathstyle}}%
+     \fi
+     \math_atom_by_parameter\mathframedparameter
+     \bgroup
+     \ifzeropt\scratchdistance\else\kern\scratchdistance\fi
+   \fi
+   \dostarttaggednodetail\t!mrow\relax
+   \ifcstok{\mathframedparameter\c!location}\v!mathematics
+     \inheritedmathframedframed\bgroup
+       \setbox\scratchbox\hbox\bgroup
+         \Ustartmath
+           \usemathstyleparameter\mathframedparameter\c!mathstyle
+           \expand\t_pack_framed_mathframed
+           \mathatom \mathunspacedcode
+           \bgroup
+             #3%
+           \egroup
+         \Ustopmath
+       \egroup
+       \global\d_pack_framed_mathframed\dp\scratchbox
+       \dontleavehmode\box\scratchbox
+     \egroup
+   \else
+     \inheritedmathframedframed\bgroup
+       \hbox\bgroup
+         \Ustartmath
+           \usemathstyleparameter\mathframedparameter\c!mathstyle
+           #3%
+         \Ustopmath
+       \egroup
+     \egroup
+   \fi
+   \dostoptagged
+   \ifmmode
+     \ifzeropt\scratchdistance\else\kern\scratchdistance\fi
+     \egroup
+   \fi
+   \endgroup}
+
+\appendtoks
+    \c_strc_math_ragged_status  \plustwo
+    \c_strc_formulas_check_width\zerocount
+\to \t_pack_framed_mathframed
+
+\installframedlocator \v!mathematics
+  {}
+  {\pack_framed_locator_set_lo
+   \ifzeropt\d_framed_locator_lo\else
+     \lower{\d_framed_locator_lo+\d_pack_framed_mathframed}%
+   \fi
+   \box\b_framed_normal}
+
+\definemathframed[mframed]
+\definemathframed[inmframed][\c!location=\v!low]
+\definemathframed[mcframed] [\c!location=\v!mathematics] % centered
+\definemathframed[mtframed] [\c!location=\v!mathematics,\c!offset=\v!overlay,\c!frame=\v!overlay] % tight
+
+%D So instead of the rather versatile \type {\framed}, we use \type {\mframed}:
+%D
+%D \startbuffer
+%D \startformula
+%D   x \times   \mframed{y} \times y^{z_z}
+%D   x \times \inmframed{y} \times y^{z_z}
+%D \stopformula
+%D \stopbuffer
+%D
+%D \typebuffer \getbuffer
+%D
+%D And:
+%D
+%D \startbuffer
+%D \startformula
+%D   x \times \mframed{y} \times y^{\mframed{z}_{\mframed{z}}}
+%D \stopformula
+%D \stopbuffer
+%D
+%D \typebuffer \getbuffer
+%D
+%D As usual, one can specify in what way the text should be framed. One should be
+%D aware of the fact that, inorder to preserve the proper spacing, the \type
+%D {offset} is set to \type {overlay} and \type {frameoffset} is used used instead.
+%D
+%D \startbuffer
+%D \startformula
+%D   x \times y^{\mframed[framecolor=red]{z}_{z}}
+%D \stopformula
+%D \stopbuffer
+%D
+%D \typebuffer \getbuffer
+%D
+%D For inline use, we also provide the \type {\inmframed} alternative: we want $x
+%D \times \inmframed{y}$ in inline math, right?
+
+\protect

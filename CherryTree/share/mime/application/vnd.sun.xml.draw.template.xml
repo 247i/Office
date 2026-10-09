@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/vnd.sun.xml.draw.template">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>OpenOffice.org 1.0 Draw template</comment>
+  <comment xml:lang="zh-Hant-TW">OpenOffice.org 1.0 Draw 範本</comment>
+  <comment xml:lang="uk">шаблон OpenOffice.org Draw 1.0</comment>
+  <comment xml:lang="tr">OpenOffice.org 1.0 Draw şablonu</comment>
+  <comment xml:lang="sv">OpenOffice.org 1.0 Draw-mall</comment>
+  <comment xml:lang="sr-Cyrl">OpenOffice.org 1.0 Draw шаблон</comment>
+  <comment xml:lang="sq">Gjedhe Vizatim OpenOffice.org 1.0 Draw</comment>
+  <comment xml:lang="sl">Predloga OpenOffice.org Draw 1.0</comment>
+  <comment xml:lang="ru">Шаблон OpenOffice.org 1.0 Draw</comment>
+  <comment xml:lang="ro">șablon OpenOffice.org 1.0 Draw</comment>
+  <comment xml:lang="pt-BR">Modelo do OpenOffice.org 1.0 Draw</comment>
+  <comment xml:lang="pl">Szablon rysunku OpenOffice.org 1.0 Draw</comment>
+  <comment xml:lang="oc">modèl de dessenh OpenOffice.org 1.0 Draw</comment>
+  <comment xml:lang="nn">OpenOffice.org 1.0 Draw-mal</comment>
+  <comment xml:lang="ko">OpenOffice.org 1.0 Draw 서식</comment>
+  <comment xml:lang="kk-Cyrl">OpenOffice.org 1.0 Draw үлгісі</comment>
+  <comment xml:lang="ja">OpenOffice.org 1.0 Draw テンプレート</comment>
+  <comment xml:lang="id">Templat OpenOffice.org 1.0 Draw</comment>
+  <comment xml:lang="hr">OpenOffice.org 1.0 Draw predložak</comment>
+  <comment xml:lang="fur">Model di OpenOffice.org 1.0 Draw</comment>
+  <comment xml:lang="fr">Modèle OpenOffice.org 1.0 Draw</comment>
+  <comment xml:lang="fi">OpenOffice.org 1.0 Draw malli</comment>
+  <comment xml:lang="et">OpenOffice.org 1.0 Draw joonistuse mall</comment>
+  <comment xml:lang="es">plantilla de OpenOffice.org Draw 1.0</comment>
+  <comment xml:lang="en-GB">OpenOffice.org 1.0 Draw template</comment>
+  <comment xml:lang="de">OpenOffice.org Draw-1.0-Vorlage</comment>
+  <comment xml:lang="da">OpenOffice.org 1.0 Draw-skabelon</comment>
+  <comment xml:lang="ca">plantilla d'OpenOffice.org 1.0 Draw</comment>
+  <comment xml:lang="bg">Шаблон — OpenOffice.org 1.0 Draw</comment>
+  <comment xml:lang="be-Cyrl">шаблон OpenOffice.org 1.0 Draw</comment>
+  <comment xml:lang="ar">قالب Draw المكتب المفتوح 1.0</comment>
+  <sub-class-of type="application/zip"/>
+  <generic-icon name="image-x-generic"/>
+  <glob pattern="*.std"/>
+</mime-type>

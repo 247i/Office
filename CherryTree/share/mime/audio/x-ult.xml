@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="audio/x-ult">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>UltraTracker audio</comment>
+  <comment xml:lang="uk">звукові дані UltraTracker</comment>
+  <comment xml:lang="tr">UltraTracker sesi</comment>
+  <comment xml:lang="sv">UltraTracker-ljud</comment>
+  <comment xml:lang="sr-Cyrl">звук Скрим Тракера</comment>
+  <comment xml:lang="sq">Audio UltraTracker</comment>
+  <comment xml:lang="sl">Zvok UltraTracker</comment>
+  <comment xml:lang="ru">Аудио UltraTracker</comment>
+  <comment xml:lang="ro">audio UltraTracker</comment>
+  <comment xml:lang="pt-BR">Áudio UltraTracker</comment>
+  <comment xml:lang="pl">Plik dźwiękowy UltraTracker</comment>
+  <comment xml:lang="oc">àudio UltraTracker</comment>
+  <comment xml:lang="ko">UltraTracker 오디오</comment>
+  <comment xml:lang="kk-Cyrl">UltraTracker аудиосы</comment>
+  <comment xml:lang="fr">audio UltraTracker</comment>
+  <comment xml:lang="fi">UltraTracker audio</comment>
+  <comment xml:lang="et">UltraTrackeri helifail</comment>
+  <comment xml:lang="es">Sonido de UltraTracker</comment>
+  <comment xml:lang="en-GB">UltraTracker audio</comment>
+  <comment xml:lang="de">UltraTracker-Audio</comment>
+  <comment xml:lang="ar">صوت UltraTracker</comment>
+  <glob pattern="*.ult"/>
+  <alias type="audio/x-multimate-mod"/>
+</mime-type>

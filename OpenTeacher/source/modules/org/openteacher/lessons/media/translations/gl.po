@@ -1,0 +1,40 @@
+# Galician translation for openteacher
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:38+0200\n"
+"PO-Revision-Date: 2013-04-22 21:21+0000\n"
+"Last-Translator: Xosé <Unknown>\n"
+"Language-Team: Galician <gl@li.org>\n"
+"Language: gl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:42+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: media.py:159
+msgid "Create media lesson"
+msgstr "Crear unha lección multimedia"
+
+#: media.py:199
+msgid "Unnamed"
+msgstr ""
+
+#: media.py:200 media.py:239
+#, python-format
+msgid "Media lesson: %s"
+msgstr "Lección multimedia: %s"
+
+#: media.py:284
+msgid "Empty question or answer"
+msgstr "Pregunta ou resposta baleira"
+
+#: media.py:285
+msgid "Please enter at least one question and one answer for every item."
+msgstr "Introduza ao menos unha pregunta e unha resposta para cada elemento."

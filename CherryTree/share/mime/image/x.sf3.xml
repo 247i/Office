@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="image/x.sf3">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>SF3 Image</comment>
+  <comment xml:lang="uk">зображення SF3</comment>
+  <comment xml:lang="tr">SF3 görüntüsü</comment>
+  <comment xml:lang="sv">SF3-bild</comment>
+  <comment xml:lang="sr-Cyrl">SF3 слика</comment>
+  <comment xml:lang="sq">Pamje SF3</comment>
+  <comment xml:lang="sl">Slika SF3</comment>
+  <comment xml:lang="ru">Изображение SF3</comment>
+  <comment xml:lang="ro">imagine SF3</comment>
+  <comment xml:lang="pt-BR">Imagem SF3</comment>
+  <comment xml:lang="pl">Obraz SF3</comment>
+  <comment xml:lang="oc">imatge SF3</comment>
+  <comment xml:lang="ko">SF3 그림</comment>
+  <comment xml:lang="kk-Cyrl">SF3 суреті</comment>
+  <comment xml:lang="hr">SF3 slika</comment>
+  <comment xml:lang="fr">Image SF3</comment>
+  <comment xml:lang="fi">SF3-kuva</comment>
+  <comment xml:lang="et">SF3 pilt</comment>
+  <comment xml:lang="es">imagen SF3</comment>
+  <comment xml:lang="en-GB">SF3 Image</comment>
+  <comment xml:lang="de">SF3-Bild</comment>
+  <comment xml:lang="ar">صورة SF3</comment>
+  <acronym>SF3</acronym>
+  <expanded-acronym>Simple File Format Family</expanded-acronym>
+  <glob pattern="*.img.sf3"/>
+  <glob pattern="*.sf3"/>
+</mime-type>

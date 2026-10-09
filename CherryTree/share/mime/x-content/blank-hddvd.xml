@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="x-content/blank-hddvd">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Blank HD DVD disc</comment>
+  <comment xml:lang="zh-Hant-TW">空白 HD DVD 光碟</comment>
+  <comment xml:lang="uk">порожній диск HD DVD</comment>
+  <comment xml:lang="tr">Boş HD-DVD diski</comment>
+  <comment xml:lang="sv">Tom HD DVD-skiva</comment>
+  <comment xml:lang="sr-Cyrl">Празан ХД ДВД диск</comment>
+  <comment xml:lang="sq">Disk DVD HD i pashkruar</comment>
+  <comment xml:lang="sl">Prazen disk HD DVD</comment>
+  <comment xml:lang="ru">Чистый диск HD DVD</comment>
+  <comment xml:lang="ro">DVD HD în alb</comment>
+  <comment xml:lang="pt-BR">Disco HD DVD vazio</comment>
+  <comment xml:lang="pl">Pusta płyta HD DVD</comment>
+  <comment xml:lang="oc">HD DVD verge</comment>
+  <comment xml:lang="nn">Tom HD DVD-plate</comment>
+  <comment xml:lang="lt">Tuščias HD DVD diskas</comment>
+  <comment xml:lang="ko">빈 HD DVD 디스크</comment>
+  <comment xml:lang="kk-Cyrl">Таза HD DVD дискі</comment>
+  <comment xml:lang="kab">Aḍebsi HD DVD ilem</comment>
+  <comment xml:lang="ja">空 HD DVD ディスク</comment>
+  <comment xml:lang="it">Disco vuoto DVD HD</comment>
+  <comment xml:lang="id">Cakram HD DVD kosong</comment>
+  <comment xml:lang="hr">Prazni HD DVD disk</comment>
+  <comment xml:lang="hi">खाली HD DVD डिस्क</comment>
+  <comment xml:lang="gl">Disco de HD DVD en branco</comment>
+  <comment xml:lang="fur">Disc HD DVD vueit</comment>
+  <comment xml:lang="fr">HD-DVD vierge</comment>
+  <comment xml:lang="fi">Tyhjä HD DVD -levy</comment>
+  <comment xml:lang="eu">HD DVD disko hutsa</comment>
+  <comment xml:lang="et">Tühi HD DVD plaat</comment>
+  <comment xml:lang="es">disco HD DVD vacío</comment>
+  <comment xml:lang="en-GB">Blank HD DVD disc</comment>
+  <comment xml:lang="de">leere HD-DVD</comment>
+  <comment xml:lang="ca">disc HD DVD en blanc</comment>
+  <comment xml:lang="bg">Празен HD DVD — диск</comment>
+  <comment xml:lang="be-Cyrl">чысты дыск HD DVD</comment>
+  <comment xml:lang="ar">قرص HD DVD فارغ</comment>
+  <comment xml:lang="af">Skoon HD-DVD-skyf</comment>
+</mime-type>

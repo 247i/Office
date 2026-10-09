@@ -1,0 +1,594 @@
+# Brazilian Portuguese translation for openteacher
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:38+0200\n"
+"PO-Revision-Date: 2013-03-16 20:26+0000\n"
+"Last-Translator: Adriano Steffler <Unknown>\n"
+"Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:44+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: templates/about.html:6
+msgid "OpenTeacher helps you learn"
+msgstr "O OpenTeacher ajuda você a estudar"
+
+#: templates/about.html:8
+msgid "Improve your results with OpenTeacher"
+msgstr "Melhore os seus resultados com o OpenTeacher"
+
+#: templates/about.html:9
+msgid ""
+"OpenTeacher <strong>helps you learn</strong> what you need to know for you "
+"next test. OpenTeacher allows you to make use of a lesson type where you are "
+"being teached in small parts. Once you know one part, OpenTeacher moves on "
+"to the next. This should help you remember large doses of information "
+"without being overwhelmed by it's size."
+msgstr ""
+
+#: templates/about.html:10
+msgid ""
+"You can also be tested by OpenTeacher. While OpenTeacher tests you, it keeps "
+"track of your progress and tells you how much you know. In this way you can "
+"<strong>make sure that you know enough to pass your next test</strong>!"
+msgstr ""
+
+#: templates/about.html:12
+msgid "Learn on many locations"
+msgstr "Estude em vários lugares"
+
+#: templates/about.html:13
+msgid ""
+"The OpenTeacher file format makes sure you can always save the information "
+"(&quot;lists&quot;) you enter. You can take these files everywhere you go! "
+"You can save to many file formats, including T2K (Teach2000) and Wrts. Even "
+"if you go to a place where OpenTeacher is not available, you can still learn "
+"your lists. There's even a <strong>portable version</strong> of OpenTeacher "
+"for Windows available, so if you can't miss OpenTeacher (which we can all "
+"understand), you can take it with you!"
+msgstr ""
+
+#: templates/about.html:14
+msgid ""
+"OpenTeacher has excellent integration with the online language tutor Wrts "
+"(also known as <a href=\"http://www.wrds.eu/\">Wrds</a>). You can access, "
+"edit and learn all your Wrts lists directly from OpenTeacher, or add new "
+"lists that you created in OpenTeacher. This way you can <strong>use the same "
+"lists everywhere you go</strong>!"
+msgstr ""
+
+#: templates/about.html:16
+msgid "OpenTeacher helps you teach"
+msgstr "O OpenTeacher ajuda você a ensinar"
+
+#: templates/about.html:17
+msgid "Offer your students the help they need"
+msgstr "Ofereça aos seus alunos a ajuda de que eles precisam"
+
+#: templates/about.html:18
+msgid ""
+"While OpenTeacher is primarily focussed on students, OpenTeacher also works "
+"great as a <strong>tool to help teachers</strong> give their students the "
+"right education. While teachers still provide the information, OpenTeacher "
+"can help the students learn this information by themselves. It can "
+"<strong>improve the student's results</strong> and saves the teacher time."
+msgstr ""
+
+#: templates/about.html:19
+msgid ""
+"<strong>Transferring information</strong> from the teacher to the student "
+"can be done easily thanks to the OpenTeacher file format. The teacher "
+"creates an OpenTeacher file with the information (s)he wants to teach, sends "
+"it to the students, and the students can use OpenTeacher to be taught and "
+"tested about this. In addition, more and more publishers of (especially) "
+"language education books provide word list files along with their books. "
+"OpenTeacher can read many file formats, including the popular T2K "
+"(Teach2000), Wrts, and ABBYY Lingvo Tutor."
+msgstr ""
+
+#: templates/about.html:21
+msgid "Open source in the classroom"
+msgstr "Código aberto na sala de aula"
+
+#: templates/about.html:22
+msgid ""
+"One of the important things about OpenTeacher is that it's open source "
+"software released under the <a href=\"https://www.gnu.org/copyleft/gpl.html"
+"\">GNU General Public License</a>. This means everyone can see the "
+"OpenTeacher source code: the way OpenTeacher was built. It also means that "
+"the <strong>knowledge</strong> that was used to make OpenTeacher <strong>can "
+"be reused by others</strong>."
+msgstr ""
+
+#: templates/about.html:24
+msgid ""
+"Because OpenTeacher is opensource software, it is also very accessible. "
+"OpenTeacher code can be used to create OpenTeacher for almost any platform. "
+"We already provide OpenTeacher for Windows, Mac OS X and many Linux "
+"distributions. This way we try to provide OpenTeacher to anyone who wants to "
+"use it."
+msgstr ""
+
+#: templates/about.html:25
+msgid ""
+"Anyone who wants to make modifications to OpenTeacher can also do so. If "
+"your organisation needs to make a modified version of OpenTeacher, this is "
+"perfectly possible as long as the <a href=\"https://www.gnu.org/copyleft/gpl."
+"html\">GPL</a> remains intact. Experience also tells us that if many users "
+"want a new feature implemented, there is often a software developer who "
+"implements this."
+msgstr ""
+
+#: templates/about.html:26
+msgid ""
+"OpenTeacher is completely <strong>community-driven</strong>. All OpenTeacher "
+"contributors are <strong>volunteers</strong>, and OpenTeacher is <strong>not "
+"focused on making profits</strong>. For more information about open source "
+"software, please visit the <a href=\"https://www.fsf.org/\">Free Software "
+"Foundation</a>."
+msgstr ""
+
+#: templates/download.html:8 templates/index.html:27
+msgid "Download OpenTeacher 3.1"
+msgstr ""
+
+#: templates/download.html:11
+msgid ""
+"Available in Brazilian Protuguese, Chinese (Traditional), Dutch, Frysian and "
+"Spanish."
+msgstr ""
+
+#: templates/download.html:11
+msgid "Want more languages?"
+msgstr ""
+
+#: templates/download.html:11
+msgid "Download the older OpenTeacher 2"
+msgstr ""
+
+#: templates/download.html:20
+msgid ""
+"Note: Windows XP users must install the <a href=\"http://www.microsoft.com/"
+"downloads/en/details.aspx?FamilyID=9b2da534-3e03-4391-8a4d-074b9f2bc1bf"
+"\">Visual C++ 2008 Redistributable Package</a> to run OpenTeacher."
+msgstr ""
+
+#: templates/download.html:25
+msgid "For portable (USB-)drives"
+msgstr ""
+
+#: templates/download.html:70
+msgid "Python 2 source with setup.py (for other Linux)"
+msgstr ""
+
+#: templates/download.html:79
+msgid "Python 2 source"
+msgstr ""
+
+#: templates/documentation.html:6 templates/base.html:53
+msgid "Documentation"
+msgstr ""
+
+#: templates/documentation.html:8
+msgid "User documentation"
+msgstr ""
+
+#: templates/documentation.html:9
+msgid "Using OpenTeacher 3: Quick start"
+msgstr ""
+
+#: templates/documentation.html:10
+msgid "Using OpenTeacher 2: Quick start"
+msgstr ""
+
+#: templates/documentation.html:11 docsTemplates/install-ubuntu.html:5
+msgid "Installing OpenTeacher in Ubuntu"
+msgstr ""
+
+#: templates/documentation.html:12 docsTemplates/install-arch.html:5
+msgid "Installing OpenTeacher in ArchLinux"
+msgstr ""
+
+#: templates/documentation.html:13 docsTemplates/faq.html:5
+msgid "Frequently Asked Questions"
+msgstr ""
+
+#: templates/documentation.html:16
+msgid "Developer documentation"
+msgstr ""
+
+#: templates/documentation.html:17
+msgid "The OpenTeacher 2 file format"
+msgstr ""
+
+#: templates/documentation.html:20
+msgid "Translator documentation"
+msgstr ""
+
+#: templates/documentation.html:21
+msgid "Translator Notes"
+msgstr ""
+
+#: templates/index.html:8
+msgid ""
+"<strong>OpenTeacher</strong> is an opensource <strong>vocabulary training</"
+"strong> application that helps you <strong>learn</strong> a <strong>foreign "
+"language</strong>!"
+msgstr ""
+
+#: templates/index.html:10
+msgid ""
+"<strong>Enter a list of words</strong> in both a known and a foreign "
+"language, and OpenTeacher <strong>tests you</strong>."
+msgstr ""
+
+#: templates/index.html:12
+msgid "OpenTeacher has the following features (among others):"
+msgstr ""
+
+#: templates/index.html:15
+msgid "Words, places and media lessons"
+msgstr ""
+
+#: templates/index.html:16
+msgid "Smart question asking and interval training"
+msgstr ""
+
+#: templates/index.html:17
+msgid "Easy symbol, Greek and Cyrillic input"
+msgstr ""
+
+#: templates/index.html:18
+msgid "Text-to-speech pronounciation"
+msgstr ""
+
+#: templates/index.html:19
+msgid "Read and write T2K (Teach2000), wrts and read ABBYY Lingvo Tutor files"
+msgstr ""
+
+#: templates/index.html:20
+msgid "Save and open your online WRTS lists"
+msgstr ""
+
+#: templates/index.html:21
+msgid "Print your word lists"
+msgstr ""
+
+#: templates/index.html:22
+msgid ""
+"Available in Arabic, Australian English, Brazilian Protuguese, Chinese "
+"(Traditional), Croatian, Czech, Danish, Dutch, French, German, Hebrew, "
+"Hungarian, Japanese, Korean, Polish, Russian, Serbian, Slovenian, Spanish, "
+"Swedish and Turkish."
+msgstr ""
+
+#: templates/index.html:25
+msgid ""
+"OpenTeacher 3.1 is available for <strong>Linux and Windows</strong>. "
+"OpenTeacher 2.2.1 is available for <strong>Mac</strong>."
+msgstr ""
+
+#: templates/index.html:28
+msgid "for"
+msgstr ""
+
+#: templates/index.html:30
+msgid "Other systems and distro-specific packages"
+msgstr ""
+
+#: templates/contribute.html:6 templates/base.html:54
+msgid "Contribute"
+msgstr "Contribua"
+
+#: templates/contribute.html:8
+msgid ""
+"Contributing to OpenTeacher is very easy, because OpenTeacher is, as the "
+"name implies, open source software. For us, this not only means that "
+"everyone can see the source code, but also that everyone can contribute! If "
+"you want to help, you can start contributing immediately at the <a href="
+"\"http://www.launchpad.net/openteacher\">Launchpad platform</a>, meet us at "
+"<a href=\"http://webchat.freenode.net/?channels=openteacher\">the chat</a> "
+"(#openteacher at irc.freenode.net), or you can e-mail us at <a href=\"mailto:"
+"contribute@openteacher.org\">contribute@openteacher.org</a>."
+msgstr ""
+
+#: templates/contribute.html:10
+msgid "There are several ways to contribute to OpenTeacher:"
+msgstr "Há diversas maneiras de contribuir com o OpenTeacher:"
+
+#: templates/contribute.html:13
+msgid ""
+"<strong>Help developing</strong><br />OpenTeacher can always use developers. "
+"Are you experienced in the Python language and the Qt4 framework? Then go to "
+"<a href=\"http://www.launchpad.net/openteacher\">Launchpad</a> and help us "
+"immediately! We are currently also looking for:"
+msgstr ""
+
+#: templates/contribute.html:15
+msgid ""
+"<strong>Designers</strong>. It's important that OpenTeacher looks good! Do "
+"you know anything about design? Contact us."
+msgstr ""
+
+#: templates/contribute.html:19
+msgid ""
+"<strong>Help translating</strong><br />We are always looking for people who "
+"want to help us translate OpenTeacher! Currently OpenTeacher is only "
+"available in English and Dutch, so translators are very welcome. Language "
+"files are available at <a href=\"http://www.launchpad.net/openteacher"
+"\">Launchpad</a> in the Qt TS file format. You can easily translate directly "
+"via <a href=\"http://www.launchpad.net/openteacher\">Launchpad</a>. Another "
+"option is <a href=\"http://qt-apps.org/content/show.php/Qt+Linguist+Download?"
+"content=89360\">Qt Linguist</a>."
+msgstr ""
+
+#: templates/contribute.html:21
+msgid ""
+"<strong>Help testing</strong><br />To make sure OpenTeacher works fine, we "
+"need people to test the latest revisions of OpenTeacher. You can download "
+"the sources of the individual revisions from the bzr branch lp:openteacher. "
+"If you find any bugs, in the revisions or the releases, please <a href="
+"\"https://bugs.launchpad.net/openteacher/+filebug\">report a bug at "
+"Launchpad</a>."
+msgstr ""
+
+#: templates/contribute.html:23
+msgid ""
+"<strong>Help distributing</strong><br />To make sure everyone can use "
+"OpenTeacher, it is important that OpenTeacher is being released on as many "
+"platforms as possible. Packaging for Mac OS X is a problem right now because "
+"we don't have a Mac. We are looking for people who own a Mac and can help "
+"packaging. Also people who run Linux distributions or other systems "
+"(especially OpenSuSE) OpenTeacher isn't packaged for are welcome."
+msgstr ""
+
+#: templates/contribute.html:25
+msgid ""
+"<strong>Help promoting</strong><br />Tell your friends, teachers and "
+"students about OpenTeacher. The best way to make people use OpenTeacher is "
+"to tell them it exists!"
+msgstr ""
+
+#: templates/base.html:16
+msgid "Free exam training software"
+msgstr ""
+
+#: templates/base.html:50
+msgid "Home"
+msgstr ""
+
+#: templates/base.html:51
+msgid "About"
+msgstr ""
+
+#: templates/base.html:52
+msgid "Download"
+msgstr ""
+
+#: templates/docpage.html:8
+msgid "Go back to documentation"
+msgstr ""
+
+#: templates/docpage.html:9
+msgid "Link to this page"
+msgstr ""
+
+#: docsTemplates/translator-notes.html:5
+msgid "Translator notes"
+msgstr ""
+
+#: docsTemplates/translator-notes.html:7
+msgid ""
+"When you're translating for OpenTeacher, keep in mind that you should "
+"translate keyboard shortcuts always in the same way (German example: if you "
+"translate Ctrl+S to Strg+S, you should also translate Ctrl+Q to Strg+Q and "
+"all other keyboard shortcuts the same way)."
+msgstr ""
+
+#: docsTemplates/translator-notes.html:9
+msgid "List of all keyboard shortcuts in OpenTeacher:"
+msgstr ""
+
+#: docsTemplates/translator-notes.html:15
+msgid "deprecated, should be changed to &quot;Return&quot;"
+msgstr ""
+
+#: docsTemplates/using-openteacher-2.html:5
+msgid "Using OpenTeacher 2: A Quick Start"
+msgstr ""
+
+#: docsTemplates/using-openteacher-2.html:7
+msgid ""
+"This quick start guide shows you how to do a simple self-test using "
+"OpenTeacher 2. We're going to learn counting to ten in French today! For "
+"this example we are assuming that you already know English, and you want to "
+"learn French."
+msgstr ""
+
+#: docsTemplates/using-openteacher-2.html:9
+msgid ""
+"The screenshots are all taken in Ubuntu, but this should all work exactly "
+"the same in Windows and Mac OS X."
+msgstr ""
+
+#: docsTemplates/using-openteacher-2.html:11
+msgid "Start OpenTeacher"
+msgstr ""
+
+#: docsTemplates/using-openteacher-2.html:15
+msgid ""
+"Enter a title for the word list you are going to enter. Also enter the known "
+"language, which, in our case, is English, and the foreign language (the "
+"language you want to learn), which, in our case, is French."
+msgstr ""
+
+#: docsTemplates/using-openteacher-2.html:16
+msgid ""
+"Then enter all words you want to learn, seperating the foreign and known "
+"language by =, and the words by newlines (see the screenshot for an example)."
+msgstr ""
+
+#: docsTemplates/using-openteacher-2.html:20
+msgid ""
+"Click \"Enter!\". Now the table of words on the bottom will be filled with "
+"your words. You have now successfully made your word list!"
+msgstr ""
+
+#: docsTemplates/using-openteacher-2.html:24
+msgid ""
+"Click the \"Teach me!\" tab on the top to start the test. A word will now be "
+"asked to you in your own language, and you have to type the translation of "
+"it in the text field. When you have entered the translation, press Enter on "
+"your keyboard, or click \"Check!\""
+msgstr ""
+
+#: docsTemplates/using-openteacher-2.html:26
+msgid ""
+"If you entered the right translation, the next question will be asked to "
+"you. If you did not enter the right translation, OpenTeacher will show you "
+"the correct answer, and the difference from your answer."
+msgstr ""
+
+#: docsTemplates/using-openteacher-2.html:30
+msgid ""
+"Once the test is completed, OpenTeacher will tell you if you did well by "
+"giving you a &quot;note&quot; (grade)."
+msgstr ""
+
+#: docsTemplates/install-arch.html:6
+msgid ""
+"This simple guide explains how to install OpenTeacher for ArchLinux. I will "
+"be using ArchLinux 2010.05."
+msgstr ""
+
+#: docsTemplates/install-arch.html:8
+msgid ""
+"Download the ArchLinux package .pkg.tar.xz from the Download section of this "
+"website."
+msgstr ""
+
+#: docsTemplates/install-arch.html:9
+msgid ""
+"Install the package from the terminal with <strong>pacman -U &lt;filename&gt;"
+"</strong>"
+msgstr ""
+
+#: docsTemplates/install-ubuntu.html:6
+msgid ""
+"This simple guide explains how to install OpenTeacher for Ubuntu. I will be "
+"using Ubuntu 10.10 (Maverick Meerkat) for this."
+msgstr ""
+
+#: docsTemplates/install-ubuntu.html:8
+msgid ""
+"Download the Ubuntu .deb file from the Download section of this website."
+msgstr ""
+
+#: docsTemplates/install-ubuntu.html:9
+msgid ""
+"When the download has completed, doubleclick the .deb file you just "
+"downloaded. This will open the Ubuntu Software Center."
+msgstr ""
+
+#: docsTemplates/install-ubuntu.html:12
+msgid "Click &quot;install&quot; to start the installation."
+msgstr ""
+
+#: docsTemplates/install-ubuntu.html:13
+msgid ""
+"When the installation has finished, you can start OpenTeacher from "
+"Applications -> Education -> OpenTeacher."
+msgstr ""
+
+#: docsTemplates/the-openteacher-format.html:5
+msgid "The Openteacher 2 file format"
+msgstr ""
+
+#: docsTemplates/the-openteacher-format.html:6
+msgid "The Openteacher 2 file format is an XML 1.0 file with UTF-8 encoding."
+msgstr ""
+
+#: docsTemplates/the-openteacher-format.html:7
+msgid ""
+"An XML-scheme of the file format can be downloaded <a href=\"files/"
+"openteacher.xsd\">here</a>."
+msgstr ""
+
+#: docsTemplates/the-openteacher-format.html:8
+msgid ""
+"NOTE: For the OpenTeacher 3 file format, please refer to <a href=\"http://"
+"sourceforge.net/apps/mediawiki/openteacher/index.php\"> the wiki.</a>"
+msgstr ""
+
+#: docsTemplates/the-openteacher-format.html:10
+msgid "Node structure"
+msgstr ""
+
+#: docsTemplates/the-openteacher-format.html:25
+msgid "The title of the word list"
+msgstr ""
+
+#: docsTemplates/the-openteacher-format.html:26
+msgid "The name of the question language"
+msgstr ""
+
+#: docsTemplates/the-openteacher-format.html:27
+msgid "The name of the answer language"
+msgstr ""
+
+#: docsTemplates/the-openteacher-format.html:29
+msgid "This word in the question language"
+msgstr ""
+
+#: docsTemplates/the-openteacher-format.html:30
+msgid "This word in the answer language"
+msgstr ""
+
+#: docsTemplates/the-openteacher-format.html:31
+msgid "The results of this word in the format of 0/0"
+msgstr ""
+
+#: docsTemplates/the-openteacher-format.html:37
+msgid "Example a word list saved in the OpenTeacher 2 format"
+msgstr ""
+
+#: docsTemplates/faq.html:6
+msgid "OpenTeacher won't run on Windows!"
+msgstr ""
+
+#: docsTemplates/faq.html:7
+msgid ""
+"To run OpenTeacher on Windows you need to install the <a href=\"http://www."
+"microsoft.com/downloads/en/details.aspx?"
+"FamilyID=9b2da534-3e03-4391-8a4d-074b9f2bc1bf\">Microsoft Visual C++ "
+"Redistributable Package</a> and <a href=\"https://www.microsoft.com/download/"
+"en/details.aspx?id=19\">.NET Framework 2.0</a>. If that does not work, "
+"please file a bug report in <a href=\"http://www.launchpad.net/openteacher"
+"\">Launchpad</a> or send an e-mail."
+msgstr ""
+
+#: docsTemplates/faq.html:8
+msgid "OpenTeacher won't run on ArchLinux!"
+msgstr ""
+
+#: docsTemplates/faq.html:9
+msgid ""
+"Make sure that both <strong>python2</strong> and <strong>pyqt</strong> are "
+"installed. If you use OpenTeacher from source, you have to link <strong>/usr/"
+"bin/python</strong> to <strong>/usr/bin/python2</strong> instead of <strong>/"
+"usr/bin/python3</strong>, or change the first line of <strong>bin/"
+"openteacher.py</strong> from <strong>&#35;!/usr/bin/env python</strong> to "
+"<strong>&#35;!/usr/bin/env python2</strong>. You can also just install "
+"OpenTeacher via the ArchLinux (.pkg.tar.xz) package, available on the "
+"Download page. If that does not work, please file a bug report in <a href="
+"\"http://www.launchpad.net/openteacher\">Launchpad</a> or send an e-mail."
+msgstr ""

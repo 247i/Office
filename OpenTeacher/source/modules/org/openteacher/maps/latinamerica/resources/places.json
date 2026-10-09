@@ -1,0 +1,132 @@
+[
+	{
+		"x": 383,
+		"y": 296,
+		"names": ["Mexico City"]
+	},
+	{
+		"x": 1221,
+		"y": 1062,
+		"names": ["São Paulo"]
+	},
+	{
+		"x": 1243,
+		"y": 1058,
+		"names": ["Rio de Janeiro"]
+	},
+	{
+		"x": 1064,
+		"y": 1265,
+		"names": ["Buenos Aires"]
+	},
+	{
+		"x": 874,
+		"y": 1240,
+		"names": ["Santiago"]
+	},
+	{
+		"x": 765,
+		"y": 554,
+		"names": ["Bogotá"]
+	},
+	{
+		"x": 1185,
+		"y": 928,
+		"names": ["Brasília", "Brasilia"]
+	},
+	{
+		"x": 717,
+		"y": 853,
+		"names": ["Lima"]
+	},
+	{
+		"x": 369,
+		"y": 181,
+		"names": ["Monterrey"]
+	},
+	{
+		"x": 326,
+		"y": 268,
+		"names": ["Guadalajara"]
+	},
+	{
+		"x": 505,
+		"y": 369,
+		"names": ["Guatemala"]
+	},
+	{
+		"x": 1054,
+		"y": 532,
+		"names": ["Paramaribo"]
+	},
+	{
+		"x": 1010,
+		"y": 516,
+		"names": ["Georgetown"]
+	},
+	{
+		"x": 873,
+		"y": 449,
+		"names": ["Caracas"]
+	},
+	{
+		"x": 681,
+		"y": 641,
+		"names": ["Quito"]
+	},
+	{
+		"x": 866,
+		"y": 939,
+		"names": ["La Paz"]
+	},
+	{
+		"x": 1040,
+		"y": 1087,
+		"names": ["Asuncion"]
+	},
+	{
+		"x": 1098,
+		"y": 1266,
+		"names": ["Montevideo"]
+	},
+	{
+		"x": 670,
+		"y": 477,
+		"names": ["Panama"]
+	},
+	{
+		"x": 604,
+		"y": 459,
+		"names": ["San José"]
+	},
+	{
+		"x": 570,
+		"y": 417,
+		"names": ["Managua"]
+	},
+	{
+		"x": 560,
+		"y": 382,
+		"names": ["Tegucigalpa"]
+	},
+	{
+		"x": 550,
+		"y": 324,
+		"names": ["Belize City"]
+	},
+	{
+		"x": 654,
+		"y": 222,
+		"names": ["Havana"]
+	},
+	{
+		"x": 840,
+		"y": 305,
+		"names": ["Santo Domingo"]
+	},
+	{
+		"x": 897,
+		"y": 306,
+		"names": ["San Juan"]
+	}
+]

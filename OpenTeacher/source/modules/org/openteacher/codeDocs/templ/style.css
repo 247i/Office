@@ -1,0 +1,126 @@
+/*
+	Copyright 2012-2013, Marten de Vries
+
+	This file is part of OpenTeacher.
+
+	OpenTeacher is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 3 of the License, or
+	(at your option) any later version.
+
+	OpenTeacher is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with OpenTeacher.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+	text-decoration: none;
+}
+
+#header {
+	background-color:@!headerBackgroundColor!@;
+	margin:0;
+	padding:0.5em;
+	height:72px;
+}
+
+#logo {
+	height:64px;
+	float:left;
+	padding-right:1em;
+}
+
+#nav, #nav2 {
+	float:right;
+}
+
+#nav2 {
+	line-height: 115%;
+}
+
+#header h1 {
+	margin:0;
+}
+
+#modInfoTable td {
+	vertical-align: text-top;
+	padding-bottom: 0.5em;
+}
+
+body {
+	margin:0 auto;
+	width: 960px;
+	font-family: Verdana, sans-serif;
+	background-color:@!bodyBackgroundColor!@;
+}
+
+#page {
+	padding:0.5em;
+}
+
+#footer {
+	background-color:@!footerBackgroundColor!@;
+	width:100%;
+	font-size:smaller;
+	text-align:right;
+	padding:0.5em;
+	float:right;
+}
+
+a {
+	color:#000;
+}
+
+table {
+	border-collapse:collapse;
+}
+
+.tablesorter {
+	width:100%;
+}
+
+.tablesorter th {
+	text-align:left;
+	background-color:#ccc;
+}
+
+.tablesorter, .tablesorter th, .tablesorter td {
+	border: 1px solid #000;
+}
+
+.tablesorter thead tr .header {
+	background-image: url("tablesorter/bg.gif");
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+}
+
+.tablesorter thead tr .headerSortUp {
+	background-image: url("tablesorter/asc.gif");
+}
+
+.tablesorter thead tr .headerSortDown {
+	background-image: url("tablesorter/desc.gif");
+}
+
+.odd {
+	background-color:#eee;
+}
+
+.align-left {
+	float:left;
+}
+
+.align-right {
+	float:right;
+}
+
+.figure {
+	padding: 0.5em;
+}
+
+$!pygmentsStyle!$

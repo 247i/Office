@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-powershell">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>PowerShell script</comment>
+  <comment xml:lang="zh-Hant-TW">PowerShell 命令稿</comment>
+  <comment xml:lang="uk">скрипт PowerShell</comment>
+  <comment xml:lang="tr">PowerShell betiği</comment>
+  <comment xml:lang="sv">PowerShell-skript</comment>
+  <comment xml:lang="sr-Cyrl">PowerShell скрипта</comment>
+  <comment xml:lang="sq">Programth PowerShell</comment>
+  <comment xml:lang="sl">Skript PowerShell</comment>
+  <comment xml:lang="ru">Сценарий PowerShell</comment>
+  <comment xml:lang="ro">script PowerShell</comment>
+  <comment xml:lang="pt-BR">Script PowerShell</comment>
+  <comment xml:lang="pl">Skrypt PowerShell</comment>
+  <comment xml:lang="oc">escript PowerShell</comment>
+  <comment xml:lang="nn">PowerShell-skript</comment>
+  <comment xml:lang="ko">PowerShell 스크립트</comment>
+  <comment xml:lang="kk-Cyrl">PowerShell скрипті</comment>
+  <comment xml:lang="ka">PowerShell-ის სკრიპტი</comment>
+  <comment xml:lang="ja">PowerShell スクリプト</comment>
+  <comment xml:lang="it">Script PowerShell</comment>
+  <comment xml:lang="id">Skrip PowerShell</comment>
+  <comment xml:lang="hr">PowerShell skripta</comment>
+  <comment xml:lang="hi">PowerShell स्क्रिप्ट</comment>
+  <comment xml:lang="he">סקריפט PowerShell</comment>
+  <comment xml:lang="fur">Script par PowerShell</comment>
+  <comment xml:lang="fr">Script PowerShell</comment>
+  <comment xml:lang="fi">PowerShell-skripti</comment>
+  <comment xml:lang="eu">PowerShell scripta</comment>
+  <comment xml:lang="et">PowerShelli skript</comment>
+  <comment xml:lang="es">secuencia de órdenes de PowerShell</comment>
+  <comment xml:lang="en-GB">PowerShell script</comment>
+  <comment xml:lang="de">PowerShell-Skript</comment>
+  <comment xml:lang="ca">script PowerShell</comment>
+  <comment xml:lang="bg">Скрипт — PowerShell</comment>
+  <comment xml:lang="be-Cyrl">скрыпт PowerShell</comment>
+  <comment xml:lang="ar">سكربت بورشِل</comment>
+  <sub-class-of type="text/plain"/>
+  <generic-icon name="text-x-script"/>
+  <glob pattern="*.ps1"/>
+</mime-type>

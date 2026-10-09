@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Localization>
+	<Version date="20181205073710">2.00.00</Version>
+	<Author>Angel Herráez</Author>
+	<Copyright></Copyright>
+	<Product id="PDFXEditor"/>
+	<Language eName="Tamil" lName="தமிழ்" code="ta" R2L="false"/>
+	<Module name="BoxFileSysPlugin" namespace="bx" version="7.0.327.10"/>
+	<Strings>
+		<text id="DlgOpenFile" h="86E98AB4">Abrir un archivo desde Box.com</text>
+		<text id="DlgSaveFile" h="92FACB0A">Guardar el archivo en Box.com</text>
+		<text id="GDPlugin" h="B688EC2F">Complemento Box.com</text>
+		<text id="btn.connectToAnother" h="508BDBC5">Acceso nuevo...</text>
+		<text id="cmd.cmdsCategory" h="31FA0599">Box.com</text>
+		<text id="cmd.boxcom" h="75541700">&amp;Box.com</text>
+		<text id="cmd.open" h="031B6D18">&amp;Box.com...</text>
+		<text id="cmd.open.tip" h="62BC57EF">Abrir documento desde Box.com</text>
+		<text id="cmd.save" h="031B6D18">&amp;Box.com...</text>
+		<text id="cmd.save.tip" h="504ADEEC">Guardar un documento activo en Box.com</text>
+		<text id="cpt.fileNotFound" h="A7F5FA7A">No se encuentra el archivo</text>
+		<text id="cpt.invalidFileName" h="79C1387C">El nombre de archivo no es válido</text>
+		<text id="cpt.navigateError" h="3D300A1C">Error de navegación</text>
+		<text id="cpt.saveReplace" h="520CB069">Guardar el archivo</text>
+		<text id="cpt.selectFile" h="C55D68B0">Selección de archivo</text>
+		<text id="cpt.unableToSaveToVirtualFolder" h="778EF99A">No es posible guardar el archivo en esa carpeta</text>
+		<text id="dlg.Auth" h="D0142F48">Autenticación en Box.com</text>
+		<text id="fileName" h="DEC92488">Nombre archivo:</text>
+		<text id="lb.CurrentFolder" h="44158804">Carpeta actual:</text>
+		<text id="lb.Test" h="273F3E5B">¡Prueba una y otra vez!</text>
+		<text id="lb.googleAccName" h="AC7C938D">Cuenta en Box.com:</text>
+		<text id="ls.column.created" h="FE6510B7">Fecha de creación</text>
+		<text id="ls.column.created.hint" h="35DF3A4F">Fecha y hora en la que se creó el archivo, carpeta o lista.</text>
+		<text id="ls.column.extension" h="14FEB836">Extensión</text>
+		<text id="ls.column.extension.hint" h="A8E5A550">Extensión del archivo</text>
+		<text id="ls.column.modified" h="7E234D6D">Fecha de modificación</text>
+		<text id="ls.column.modified.hint" h="12933E76">Fecha y hora en la que se modificó por última vez el archivo, carpeta o lista.</text>
+		<text id="ls.column.size" h="17A58A52">Tamaño</text>
+		<text id="ls.column.size.hint" h="9C4BD847">Tamaño del archivo</text>
+		<text id="ls.column.title" h="D18643E3">Nombre</text>
+		<text id="ls.column.title.hint" h="6A895576">Nombre del archivo o carpeta, o título de la lista.</text>
+		<text id="msg.fileNotFound" h="430E08B1">El archivo "%1" no está en la carpeta actual.</text>
+		<text id="msg.invalidFileName" h="7C0655B5">"%1" no es un nombre de archivo válido.</text>
+		<text id="msg.navigateError" h="93AD3E71">No se ha podido conectar al recurso Box indicado. Compruebe su conexión a internet y que tenga los permisos para poder acceder en Box al elemento indicado.</text>
+		<text id="msg.openFailed" h="AC94D960">No es posible abrir ese archivo. Asegúrese de que existe, de que no esté desprotegido para otro usuario y de que tiene permisos para leerlo.</text>
+		<text id="msg.saveFailed" h="4D413392">No es posible grabar ese archivo. Asegúrese de que el nombre de archivo es válido y de que tiene permisos de escritura.</text>
+		<text id="msg.saveReplace" h="5D56833E">El archivo %1 ya existe. ¿Desea sustituirlo?</text>
+		<text id="msg.selectFile" h="2530C20F">Elija el archivo antes de aceptar</text>
+		<text id="msg.unableToSaveToVirtualFolder" h="A6644426">No es posible guardar el archivo en la ubicación elegida. Debe elegir la carpeta 'Mi unidad' o bien una de sus subcarpetas o una de las carpetas en 'compartido conmigo'.</text>
+		<text id="virtualfolder.mydrive" h="84C2D3A6">Mi unidad</text>
+		<text id="virtualfolder.sharedwithme" h="8B65307E">Compartido conmigo</text>
+		<text id="addFolder.title" h="42CD8D51">Creación de una carpeta</text>
+		<text id="addFolder.message" h="940CF2FA">Escriba el nombre de la nueva carpeta</text>
+		<text id="addFolderError.title" h="DDB9C8A8">No es posible crear la carpeta</text>
+		<text id="addFolderError.message" h="9294B942">No se puede crear la carpeta en Box.com. Compruebe su conexión a internet y los permisos para acceder al recurso seleccionado en Box.com</text>
+		<text id="btn.addFolder.text" h="69FFFB47">&amp;Crear una carpeta</text>
+		<text id="btn.settings" h="9757D0D9">Opciones...</text>
+		<text id="deleteError.title" h="002A7E1A">No es posible borrarlo</text>
+		<text id="deleteError.message" h="D4B0C004">No es posible borrar %1 "%2" en el recurso Box.com. %3</text>
+		<text id="deleteError.reason" h="3C580AC0">Compruebe su conexión a internet y los permisos para acceder al recurso seleccionado en Box.com</text>
+		<text id="btn.delete.text" h="ED580C1E">&amp;Borrar</text>
+		<text id="btn.folder.up.text" h="FDE69FB2">&amp;Subir</text>
+		<text id="file" h="AFFADF08">archivo</text>
+		<text id="folder" h="1DAC8D17">carpeta</text>
+		<text id="deleteError.unknownItem.message" h="9BDB4091">No es posible borrarlo en el recurso Box.com. %1</text>
+		<text id="delete.title" h="FC00502F">"Borrado de elementos"</text>
+		<text id="delete.message" h="16714AA7">"¿Quiere borrar %1 "%2"?"</text>
+		<text id="deleteMulti.message" h="6A5DFE06">"¿Quiere borrar %1 elementos de la carpeta "%2" en Box.com?"</text>
+		<text id="deleteMultiRoot.message" h="AB66D793">"¿Quiere borrar %1 elementos de la carpeta raíz en Box.com?"</text>
+		<text id="deleteMulti.progress" h="7A18F8DD">"Se está borrando el elemento nº %1 de %2"</text>
+		<text id="deleteMulti.progress.title" h="D98549E6">"Se están borrando los elementos de Box.com"</text>
+		<text id="deleteSingle.progress" h="B781BCCF">"Se está borrando %1 "%2""</text>
+		<text id="deleteSingle.progress.title" h="944FFD63">"Se está borrando el elemento de Box.com"</text>
+	</Strings>
+</Localization>

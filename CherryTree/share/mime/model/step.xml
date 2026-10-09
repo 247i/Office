@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="model/step">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>STEP 3D model</comment>
+  <comment xml:lang="zh-Hant-TW">STEP 3D 模型</comment>
+  <comment xml:lang="uk">просторова модель STEP</comment>
+  <comment xml:lang="tr">STEP 3D modeli</comment>
+  <comment xml:lang="sv">STEP 3D-modell</comment>
+  <comment xml:lang="sr-Cyrl">СТЕП 3Д модел</comment>
+  <comment xml:lang="sq">Model STEP 3D</comment>
+  <comment xml:lang="sl">Model STEP 3D</comment>
+  <comment xml:lang="ru">3D-модель STEP</comment>
+  <comment xml:lang="ro">model 3D STEP</comment>
+  <comment xml:lang="pt-BR">Modelo 3D STEP</comment>
+  <comment xml:lang="pl">Model 3D STEP</comment>
+  <comment xml:lang="oc">modèl STEP 3D</comment>
+  <comment xml:lang="nn">STEP 3D-modell</comment>
+  <comment xml:lang="ko">STEP 3D 모델</comment>
+  <comment xml:lang="kk-Cyrl">STEP 3D моделі</comment>
+  <comment xml:lang="ja">STEP 3D モデル</comment>
+  <comment xml:lang="id">Model 3D STEP</comment>
+  <comment xml:lang="hr">STEP 3D model</comment>
+  <comment xml:lang="fur">Model STEP 3D</comment>
+  <comment xml:lang="fr">Modèle STEP 3D</comment>
+  <comment xml:lang="fi">STEP 3D -malli</comment>
+  <comment xml:lang="et">STEP 3D mudel</comment>
+  <comment xml:lang="es">modelo 3D STEP</comment>
+  <comment xml:lang="en-GB">STEP 3D model</comment>
+  <comment xml:lang="de">STEP 3D-Modell</comment>
+  <comment xml:lang="ca">model 3D STEP</comment>
+  <comment xml:lang="bg">Модел — STEP 3D</comment>
+  <comment xml:lang="be-Cyrl">мадэль STEP 3D</comment>
+  <comment xml:lang="ar">نموذج STEP 3D</comment>
+  <generic-icon name="image-x-generic"/>
+  <glob pattern="*.step"/>
+  <glob pattern="*.stp"/>
+</mime-type>

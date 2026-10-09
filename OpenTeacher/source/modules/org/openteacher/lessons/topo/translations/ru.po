@@ -1,0 +1,35 @@
+# Russian translation for openteacher
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2012-10-22 16:50+0000\n"
+"Last-Translator: Nkolay Parukhin <parukhin@gmail.com>\n"
+"Language-Team: Russian <ru@li.org>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:42+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: topo.py:128
+msgid "Create topography lesson"
+msgstr "Создать топографический урок"
+
+#. TRANSLATORS: used as a label in case a filename of a topo
+#. TRANSLATORS: lesson isn't available. (E.g. because it's
+#. TRANSLATORS: downloaded from some kind of web service.)
+#: topo.py:218
+msgid "Import source"
+msgstr "Источник импорта"
+
+#: topo.py:224 topo.py:291 topo.py:293
+#, python-format
+msgid "Topo lesson: %s"
+msgstr "Топографический урок: %s"

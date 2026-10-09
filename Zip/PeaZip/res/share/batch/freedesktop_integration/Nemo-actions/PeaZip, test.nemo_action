@@ -1,0 +1,9 @@
+[Nemo Action]
+
+Name=PeaZip, test archive
+Comment=Test archive(s) with PeaZip
+Exec=peazip -ext2test %F
+Selection=notnone
+Extensions=any;
+Terminal=false
+Icon-Name=peazip

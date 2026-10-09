@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/vnd.stardivision.writer-global">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>StarWriter 5 master document</comment>
+  <comment xml:lang="zh-Hant-TW">StarWriter 5 主控文件</comment>
+  <comment xml:lang="uk">основний документ StarWriter 5</comment>
+  <comment xml:lang="tr">StarWriter 5 master belgesi</comment>
+  <comment xml:lang="sv">StarWriter 5-huvuddokument</comment>
+  <comment xml:lang="sr-Cyrl">StarWriter 5 главни документ</comment>
+  <comment xml:lang="sq">Dokument master StarWriter 5</comment>
+  <comment xml:lang="sl">Glavni dokument StarWriter 5</comment>
+  <comment xml:lang="ru">Документ StarWriter 5 master</comment>
+  <comment xml:lang="ro">document principal StarWriter 5</comment>
+  <comment xml:lang="pt-BR">Documento mestre do StarWriter 5</comment>
+  <comment xml:lang="pl">Główny dokument StarWriter 5</comment>
+  <comment xml:lang="oc">document mèstre StarWriter 5</comment>
+  <comment xml:lang="nn">StarWriter 5-hovuddokument</comment>
+  <comment xml:lang="ko">StarWriter 5 마스터 문서</comment>
+  <comment xml:lang="kk-Cyrl">StarWriter 5 басты құжаты</comment>
+  <comment xml:lang="ja">StarWriter 5 マスタードキュメント</comment>
+  <comment xml:lang="id">Dokumen induk StarWriter 5</comment>
+  <comment xml:lang="hr">StarWriter 5 master dokument</comment>
+  <comment xml:lang="fur">Document principâl di StarWriter 5</comment>
+  <comment xml:lang="fr">Document maître StarWriter 5</comment>
+  <comment xml:lang="fi">StarWriter 5 kanta-asiakirja</comment>
+  <comment xml:lang="et">StarWriter 5 ülemdokument</comment>
+  <comment xml:lang="es">patrón de documento de StarWriter 5</comment>
+  <comment xml:lang="en-GB">StarWriter 5 master document</comment>
+  <comment xml:lang="de">StarWriter-5-Hauptdokument</comment>
+  <comment xml:lang="da">StarWriter 5-masterdokument</comment>
+  <comment xml:lang="ca">document mestre StarWriter 5</comment>
+  <comment xml:lang="bg">Документ — StarWriter 5</comment>
+  <comment xml:lang="be-Cyrl">дакумент StarWriter 5 master</comment>
+  <comment xml:lang="ar">مستند رئيس StarWriter 5</comment>
+  <sub-class-of type="application/x-ole-storage"/>
+  <generic-icon name="x-office-document"/>
+  <glob pattern="*.sgl"/>
+</mime-type>

@@ -1,0 +1,37 @@
+if not modules then modules = { } end modules ['luat-ini'] = {
+    version   = 1.001,
+    comment   = "companion to luat-lib.mkiv",
+    author    = "Hans Hagen, PRAGMA-ADE, Hasselt NL",
+    copyright = "PRAGMA ADE / ConTeXt Development Team",
+    license   = "see context related readme files"
+}
+
+-- We cannot load anything yet. However what we will do us reserve a few tables.
+-- These can be used for runtime user data or third party modules and will not be
+-- cluttered by macro package code.
+
+userdata      = userdata      or { } -- for users (e.g. functions etc)
+thirddata     = thirddata     or { } -- only for third party modules
+moduledata    = moduledata    or { } -- only for development team
+documentdata  = documentdata  or { } -- for users (e.g. raw data)
+parametersets = parametersets or { } -- for special purposes
+
+table.setmetatableindex(moduledata,"table")
+table.setmetatableindex(thirddata, "table")
+
+if not globals then
+    globals    = _G -- global has become a keyword in 5.5
+    globaldata = _G -- preferred
+end
+
+LUATEXVERSION       = status.version
+LUATEXVERBOSE       = status.luatex_verbose
+LUATEXENGINE        = string.lower(status.luatex_engine or "luametatex")
+LUATEXFUNCTIONALITY = status.development_id or 6346
+LUATEXFORMATID      = status.format_id or 0
+INITEXMODE          = status.ini_version
+CONTEXTLMTXMODE     = 1
+
+function os.setlocale()
+    -- no need for a message
+end

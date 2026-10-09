@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-nuscript">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Nushell script</comment>
+  <comment xml:lang="zh-Hant-TW">Nushell 命令稿</comment>
+  <comment xml:lang="uk">скрипт Nushell</comment>
+  <comment xml:lang="tr">Nushell betiği</comment>
+  <comment xml:lang="sv">Nushell-skript</comment>
+  <comment xml:lang="sr-Cyrl">Скрипта Ну-шкољке</comment>
+  <comment xml:lang="sq">Programth Nushell</comment>
+  <comment xml:lang="sl">Skript lupine Nushell</comment>
+  <comment xml:lang="ru">Сценарий Nushell</comment>
+  <comment xml:lang="ro">script Nushell</comment>
+  <comment xml:lang="pt-BR">Script de nushell</comment>
+  <comment xml:lang="pl">Skrypt Nushell</comment>
+  <comment xml:lang="oc">escript Nushell</comment>
+  <comment xml:lang="ko">Nushell 스크립트</comment>
+  <comment xml:lang="kk-Cyrl">Nushell скрипті</comment>
+  <comment xml:lang="hr">Nushell skripta</comment>
+  <comment xml:lang="fr">Script Nushell</comment>
+  <comment xml:lang="fi">Nushell skripti</comment>
+  <comment xml:lang="et">Nushelli skript</comment>
+  <comment xml:lang="es">guion Nushell</comment>
+  <comment xml:lang="en-GB">Nushell script</comment>
+  <comment xml:lang="de">Nushell-Skript</comment>
+  <comment xml:lang="bg">Скрипт — Nushell</comment>
+  <comment xml:lang="ar">سكربت Nushell</comment>
+  <sub-class-of type="application/x-executable"/>
+  <sub-class-of type="text/plain"/>
+  <alias type="text/x-nushell"/>
+  <generic-icon name="text-x-script"/>
+  <glob pattern="*.nu"/>
+</mime-type>

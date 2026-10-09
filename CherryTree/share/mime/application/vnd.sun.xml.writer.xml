@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/vnd.sun.xml.writer">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>OpenOffice.org 1.0 Writer document</comment>
+  <comment xml:lang="zh-Hant-TW">OpenOffice.org 1.0 Writer 文件</comment>
+  <comment xml:lang="uk">документ OpenOffice.org Writer 1.0</comment>
+  <comment xml:lang="tr">OpenOffice.org 1.0 Writer belgesi</comment>
+  <comment xml:lang="sv">OpenOffice.org 1.0 Writer-dokument</comment>
+  <comment xml:lang="sr-Cyrl">OpenOffice.org 1.0 Writer документ</comment>
+  <comment xml:lang="sq">Dokument OpenOffice.org 1.0 Writer</comment>
+  <comment xml:lang="sl">Dokument OpenOffice.org Writer 1.0</comment>
+  <comment xml:lang="ru">Документ OpenOffice.org 1.0 Writer</comment>
+  <comment xml:lang="ro">document OpenOffice.org 1.0 Writer</comment>
+  <comment xml:lang="pt-BR">Documento do OpenOffice.org 1.0 Writer</comment>
+  <comment xml:lang="pl">Dokument OpenOffice.org 1.0 Writer</comment>
+  <comment xml:lang="oc">document OpenOffice.org 1.0 Writer</comment>
+  <comment xml:lang="nn">OpenOffice.org 1.0 Writer-dokument</comment>
+  <comment xml:lang="ko">OpenOffice.org 1.0 Writer 문서</comment>
+  <comment xml:lang="kk-Cyrl">OpenOffice.org 1.0 Writer құжаты</comment>
+  <comment xml:lang="ja">OpenOffice 1.0 Writer ドキュメント</comment>
+  <comment xml:lang="id">Dokumen OpenOffice.org 1.0 Writer</comment>
+  <comment xml:lang="hr">OpenOffice.org 1.0 Writer dokument</comment>
+  <comment xml:lang="fur">Document di OpenOffice.org 1.0 Writer</comment>
+  <comment xml:lang="fr">Document OpenOffice.org 1.0 Writer</comment>
+  <comment xml:lang="fi">OpenOffice.org 1.0 Writer asiakirja</comment>
+  <comment xml:lang="et">OpenOffice.org 1.0 Writeri dokument</comment>
+  <comment xml:lang="es">documento de OpenOffice.org Writer 1.0</comment>
+  <comment xml:lang="en-GB">OpenOffice.org 1.0 Writer document</comment>
+  <comment xml:lang="de">OpenOffice.org Writer-1.0-Dokument</comment>
+  <comment xml:lang="da">OpenOffice.org 1.0 Writer-dokument</comment>
+  <comment xml:lang="ca">document d'OpenOffice.org 1.0 Writer</comment>
+  <comment xml:lang="bg">Документ — OpenOffice.org 1.0 Writer</comment>
+  <comment xml:lang="be-Cyrl">дакумент OpenOffice.org 1.0 Writer</comment>
+  <comment xml:lang="ar">مستند Writer المكتب المفتوح 1.0</comment>
+  <sub-class-of type="application/zip"/>
+  <generic-icon name="x-office-document"/>
+  <glob pattern="*.sxw"/>
+</mime-type>

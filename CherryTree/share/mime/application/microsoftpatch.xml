@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/microsoftpatch">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Windows Installer patch</comment>
+  <comment xml:lang="zh-Hant-TW">Windows 安裝程式修補檔</comment>
+  <comment xml:lang="uk">латка Windows Installer</comment>
+  <comment xml:lang="tr">Windows Installer yaması</comment>
+  <comment xml:lang="sv">Windows Installer-uppdatering</comment>
+  <comment xml:lang="sr-Cyrl">Виндоуз инсталациона закрпа</comment>
+  <comment xml:lang="sq">Arnim Windows Installer</comment>
+  <comment xml:lang="sl">Popravek Windows Installer</comment>
+  <comment xml:lang="ru">Пакет Windows Installer</comment>
+  <comment xml:lang="ro">corecție (patch) Windows Installe</comment>
+  <comment xml:lang="pt-BR">Patch do Windows Installer</comment>
+  <comment xml:lang="pl">Łata instalatora Windows</comment>
+  <comment xml:lang="oc">correctiu Windows Installer</comment>
+  <comment xml:lang="ko">윈도우 설치 관리자 패치</comment>
+  <comment xml:lang="kk-Cyrl">Windows Installer патчы</comment>
+  <comment xml:lang="ja">Windows Installer パッチ</comment>
+  <comment xml:lang="id">Patch Windows Installer</comment>
+  <comment xml:lang="hr">Windows Installer zakrpa</comment>
+  <comment xml:lang="fur">Blec di instaladôr di Windows</comment>
+  <comment xml:lang="fr">Fichier correctif Windows Installer</comment>
+  <comment xml:lang="fi">Windows korjaustiedosto</comment>
+  <comment xml:lang="et">Windows Installeri paik</comment>
+  <comment xml:lang="es">parche de Windows Installer</comment>
+  <comment xml:lang="en-GB">Windows Installer patch</comment>
+  <comment xml:lang="de">Windows-Installationspatch</comment>
+  <comment xml:lang="ca">pedaç de Windows Installer</comment>
+  <comment xml:lang="bg">Поправка — инсталация за Windows</comment>
+  <comment xml:lang="be-Cyrl">патч Windows Installer</comment>
+  <comment xml:lang="ar">تصحيح مثبت ويندوز</comment>
+  <sub-class-of type="application/x-ole-storage"/>
+  <generic-icon name="package-x-generic"/>
+  <glob pattern="*.msp"/>
+</mime-type>

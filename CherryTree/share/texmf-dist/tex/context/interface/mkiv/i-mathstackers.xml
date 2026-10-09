@@ -1,0 +1,595 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?context-directive job ctxfile x-setups.ctx ?>
+
+<cd:interface xmlns:cd="http://www.pragma-ade.com/commands">
+
+    <cd:command name="definemathstackers" level="style" category="mathematics" file="math-stc.mklx">
+        <cd:arguments>
+            <cd:resolve name="keyword-name"/>
+            <cd:resolve name="keyword-name-optional"/>
+            <cd:assignments list="yes" optional="yes">
+                <cd:inherit name="setupmathstackers"/>
+            </cd:assignments>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="setupmathstackers" level="style" category="mathematics" file="math-stc.mklx">
+        <cd:arguments>
+            <cd:resolve name="keyword-name-list-optional"/>
+            <cd:assignments list="yes">
+                <cd:parameter name="left">
+                    <cd:constant type="cd:command"/>
+                </cd:parameter>
+                <cd:parameter name="right">
+                    <cd:constant type="cd:command"/>
+                </cd:parameter>
+                <cd:parameter name="topcommand">
+                    <cd:constant type="cd:oneargument"/>
+                </cd:parameter>
+                <cd:parameter name="bottomcommand">
+                    <cd:constant type="cd:oneargument"/>
+                </cd:parameter>
+                <cd:parameter name="middlecommand">
+                    <cd:constant type="cd:oneargument"/>
+                </cd:parameter>
+                <cd:parameter name="topstyle">
+                    <cd:resolve name="value-style"/>
+                </cd:parameter>
+                <cd:parameter name="bottomstyle">
+                    <cd:resolve name="value-style"/>
+                </cd:parameter>
+                <cd:parameter name="middlestyle">
+                    <cd:resolve name="value-style"/>
+                </cd:parameter>
+                <cd:parameter name="topcolor">
+                    <cd:constant type="cd:color"/>
+                </cd:parameter>
+                <cd:parameter name="bottomcolor">
+                    <cd:constant type="cd:color"/>
+                </cd:parameter>
+                <cd:parameter name="middlecolor">
+                    <cd:constant type="cd:color"/>
+                </cd:parameter>
+                <cd:parameter name="plugin">
+                    <cd:constant type="mp"/>
+                </cd:parameter>
+                <cd:parameter name="mp">
+                    <cd:constant type="cd:name"/>
+                </cd:parameter>
+                <cd:parameter name="mpheight">
+                    <cd:constant type="cd:dimension"/>
+                </cd:parameter>
+                <cd:parameter name="mpdepth">
+                    <cd:constant type="cd:dimension"/>
+                </cd:parameter>
+                <cd:parameter name="mpoffset">
+                    <cd:constant type="cd:dimension"/>
+                </cd:parameter>
+                <cd:parameter name="color">
+                    <cd:constant type="cd:color"/>
+                </cd:parameter>
+                <cd:parameter name="symbolcolor">
+                    <cd:constant type="cd:color"/>
+                </cd:parameter>
+                <cd:parameter name="topoffset">
+                    <cd:constant type="cd:dimension"/>
+                </cd:parameter>
+                <cd:parameter name="hoffset">
+                    <cd:constant type="cd:dimension"/>
+                </cd:parameter>
+                <cd:parameter name="voffset">
+                    <cd:constant type="cd:dimension"/>
+                </cd:parameter>
+                <cd:parameter name="minheight">
+                    <cd:constant type="cd:dimension"/>
+                </cd:parameter>
+                <cd:parameter name="mindepth">
+                    <cd:constant type="cd:dimension"/>
+                </cd:parameter>
+                <cd:parameter name="mathclass">
+                    <cd:resolve name="value-mathclass"/>
+                </cd:parameter>
+                <cd:parameter name="offset">
+                    <cd:constant type="min"/>
+                    <cd:constant type="max"/>
+                    <cd:constant type="normal" default="yes"/>
+                </cd:parameter>
+                <cd:parameter name="location">
+                    <cd:constant type="top" default="yes"/>
+                    <cd:constant type="bottom"/>
+                    <cd:constant type="high"/>
+                    <cd:constant type="low"/>
+                    <cd:constant type="middle"/>
+                    <cd:constant type="cd:number"/>
+                </cd:parameter>
+                <cd:parameter name="strut">
+                    <cd:constant type="yes" default="yes"/>
+                    <cd:constant type="no"/>
+                </cd:parameter>
+                <cd:parameter name="alternative">
+                    <cd:constant type="normal" default="yes"/>
+                    <cd:constant type="default"/>
+                    <cd:constant type="mp"/>
+                </cd:parameter>
+                <cd:parameter name="minwidth">
+                    <cd:constant type="cd:dimension"/>
+                </cd:parameter>
+                <cd:parameter name="distance">
+                    <cd:constant type="cd:dimension"/>
+                </cd:parameter>
+                <cd:parameter name="order">
+                    <cd:constant type="normal" default="yes"/>
+                    <cd:constant type="reverse"/>
+                </cd:parameter>
+                <cd:parameter name="mathlimits">
+                    <cd:constant type="yes"/>
+                    <cd:constant type="no" default="yes"/>
+                </cd:parameter>
+                <cd:parameter name="lt">
+                    <cd:constant type="cd:dimension"/>
+                </cd:parameter>
+                <cd:parameter name="rt">
+                    <cd:constant type="cd:dimension"/>
+                </cd:parameter>
+                <cd:parameter name="lb">
+                    <cd:constant type="cd:dimension"/>
+                </cd:parameter>
+                <cd:parameter name="rb">
+                    <cd:constant type="cd:dimension"/>
+                </cd:parameter>
+                <cd:parameter name="shrink">
+                    <cd:constant type="yes"/>
+                    <cd:constant type="no"/>
+                </cd:parameter>
+                <cd:parameter name="stretch">
+                    <cd:constant type="yes"/>
+                    <cd:constant type="no"/>
+                </cd:parameter>
+                <cd:parameter name="sample">
+                    <cd:constant type="cd:number"/>
+                </cd:parameter>
+            </cd:assignments>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="definemathextensible" level="system" category="mathematics" file="math-sty.mkvi">
+        <cd:arguments>
+            <cd:keywords optional="yes">
+                <cd:constant type="reverse"/>
+                <cd:constant type="mathematics"/>
+                <cd:constant type="text"/>
+                <cd:constant type="chemistry"/>
+            </cd:keywords>
+            <cd:resolve name="keyword-name"/>
+            <cd:resolve name="keyword-number"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="mathextensible" generated="yes" variant="instance" level="document" category="mathematics" file="math-stc.mklx">
+        <cd:sequence>
+            <cd:instance value="mathextensible"/>
+        </cd:sequence>
+        <cd:arguments>
+            <cd:keywords optional="yes">
+                <cd:constant type="reverse"/>
+                <cd:constant type="mathematics"/>
+                <cd:constant type="text"/>
+                <cd:constant type="chemistry"/>
+            </cd:keywords>
+            <cd:resolve name="argument-text-optional"/>
+            <cd:resolve name="argument-text-optional"/>
+        </cd:arguments>
+        <cd:instances>
+            <cd:resolve name="instance-mathextensible"/>
+        </cd:instances>
+    </cd:command>
+
+    <cd:command name="mathextensible" generated="yes" variant="instance:assignment" level="document" category="mathematics" file="math-stc.mklx">
+        <cd:sequence>
+            <cd:instance value="mathextensible"/>
+        </cd:sequence>
+        <cd:arguments>
+            <cd:assignments list="yes" optional="yes">
+                <cd:inherit name="setupmathstackers"/>
+            </cd:assignments>
+            <cd:resolve name="argument-text-optional"/>
+            <cd:resolve name="argument-text-optional"/>
+        </cd:arguments>
+        <cd:instances>
+            <cd:resolve name="instance-mathextensible"/>
+        </cd:instances>
+    </cd:command>
+
+    <cd:command name="directmathextensible" level="document" category="mathematics" file="math-stc.mklx">   
+        <cd:arguments>
+            <cd:keywords optional="yes">
+                <cd:constant type="reverse"/>
+                <cd:constant type="mathematics" default="yes"/>
+                <cd:constant type="text"/>
+                <cd:constant type="chemistry"/>
+            </cd:keywords>
+            <cd:resolve name="argument-number"/>
+            <cd:resolve name="argument-text"/>
+            <cd:resolve name="argument-text"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="mathstacker" level="document" category="mathematics" file="math-stc.mklx">   
+        <cd:arguments>
+            <cd:keywords optional="yes">
+                <cd:constant type="reverse"/>
+                <cd:constant type="mathematics" default="yes"/>
+                <cd:constant type="text"/>
+                <cd:constant type="chemistry"/>
+            </cd:keywords>
+            <cd:resolve name="argument-number"/>
+            <cd:resolve name="argument-text"/>
+            <cd:resolve name="argument-text"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="directtextextensible" level="document" category="mathematics" file="math-stc.mklx">   
+        <cd:arguments>
+            <cd:keywords optional="yes">
+                <cd:constant type="reverse"/>
+                <cd:constant type="mathematics"/>
+                <cd:constant type="text" default="yes"/>
+                <cd:constant type="chemistry"/>
+            </cd:keywords>
+            <cd:resolve name="argument-number"/>
+            <cd:resolve name="argument-text"/>
+            <cd:resolve name="argument-text"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="textstacker" level="document" category="mathematics" file="math-stc.mklx">   
+        <cd:arguments>
+            <cd:keywords optional="yes">
+                <cd:constant type="reverse"/>
+                <cd:constant type="mathematics"/>
+                <cd:constant type="text" default="yes"/>
+                <cd:constant type="chemistry"/>
+            </cd:keywords>
+            <cd:resolve name="argument-number"/>
+            <cd:resolve name="argument-text"/>
+            <cd:resolve name="argument-text"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="definemathoverextensible" level="system" category="mathematics" file="math-sty.mkvi">
+        <cd:arguments>
+            <cd:keywords optional="yes">
+                <cd:constant type="top"/>
+                <cd:constant type="vfenced"/>
+            </cd:keywords>
+            <cd:resolve name="keyword-name"/>
+            <cd:resolve name="keyword-number"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="mathoverextensible" generated="yes" variant="instance" level="document" category="mathematics" file="math-stc.mklx">
+        <cd:sequence>
+            <cd:instance value="mathoverextensible"/>
+        </cd:sequence>
+        <cd:arguments>
+            <cd:assignments list="yes" optional="yes">
+                <cd:inherit name="setupmathstackers"/>
+            </cd:assignments>
+            <cd:resolve name="argument-text"/>
+        </cd:arguments>
+        <cd:instances>
+            <cd:resolve name="instance-mathoverextensible"/>
+        </cd:instances>
+    </cd:command>
+
+    <cd:command name="definemathunderextensible" level="system" category="mathematics" file="math-sty.mkvi">
+        <cd:arguments>
+            <cd:keywords optional="yes">
+                <cd:constant type="bottom"/>
+                <cd:constant type="vfenced"/>
+            </cd:keywords>
+            <cd:resolve name="keyword-name"/>
+            <cd:resolve name="keyword-number"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="mathunderextensible" generated="yes" variant="instance" level="document" category="mathematics" file="math-stc.mklx">
+        <cd:sequence>
+            <cd:instance value="mathunderextensible"/>
+        </cd:sequence>
+        <cd:arguments>
+            <cd:assignments list="yes" optional="yes">
+                <cd:inherit name="setupmathstackers"/>
+            </cd:assignments>
+            <cd:resolve name="argument-text"/>
+        </cd:arguments>
+        <cd:instances>
+            <cd:resolve name="instance-mathunderextensible"/>
+        </cd:instances>
+    </cd:command>
+
+    <cd:command name="definemathdoubleextensible" level="system" category="mathematics" file="math-sty.mkvi">
+        <cd:arguments>
+            <cd:keywords optional="yes">
+                <cd:constant type="both"/>
+                <cd:constant type="vfenced"/>
+            </cd:keywords>
+            <cd:resolve name="keyword-name"/>
+            <cd:resolve name="keyword-number"/>
+            <cd:resolve name="keyword-number"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="mathdoubleextensible" generated="yes" variant="instance" level="document" category="mathematics" file="math-stc.mklx">
+        <cd:sequence>
+            <cd:instance value="mathdoubleextensible"/>
+        </cd:sequence>
+        <cd:arguments>
+            <cd:assignments list="yes" optional="yes">
+                <cd:inherit name="setupmathstackers"/>
+            </cd:assignments>
+            <cd:resolve name="argument-text"/>
+        </cd:arguments>
+        <cd:instances>
+            <cd:resolve name="instance-mathdoubleextensible"/>
+        </cd:instances>
+    </cd:command>
+
+    <cd:command name="definemathover" level="style" category="mathematics" file="math-stc.mklx">
+        <cd:arguments>
+            <cd:keywords>
+                <cd:constant type="top"/>
+                <cd:constant type="vfenced"/>
+                <cd:constant type="cd:name"/>
+            </cd:keywords>
+            <cd:resolve name="keyword-name"/>
+            <cd:resolve name="keyword-number"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="mathover" generated="yes" variant="instance" level="document" category="mathematics" file="math-stc.mklx">
+        <cd:sequence>
+            <cd:instance value="mathover"/>
+        </cd:sequence>
+        <cd:arguments>
+            <cd:resolve name="argument-text"/>
+        </cd:arguments>
+        <cd:instances>
+            <cd:constant value="interiorset"/>
+        </cd:instances>
+    </cd:command>
+
+    <cd:command name="mathover" level="document" category="mathematics" file="math-stc.mklx">
+        <cd:arguments>
+            <cd:keywords optional="yes">
+                <cd:constant type="top"/>
+                <cd:constant type="vfenced"/>
+            </cd:keywords>
+            <cd:assignments list="yes" optional="yes">
+                <cd:inherit name="setupmathstackers"/>
+            </cd:assignments>
+            <cd:resolve name="argument-number"/>
+            <cd:resolve name="argument-text"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="definemathunder" level="style" category="mathematics" file="math-stc.mklx">
+        <cd:arguments>
+            <cd:keywords>
+                <cd:constant type="bottom"/>
+                <cd:constant type="vfenced"/>
+                <cd:constant type="cd:name"/>
+            </cd:keywords>
+            <cd:resolve name="keyword-name"/>
+            <cd:resolve name="keyword-number"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="mathunder" generated="yes" variant="example" level="document" category="mathematics" file="math-stc.mklx">
+        <cd:sequence>
+            <cd:variable value="mathunder"/>
+        </cd:sequence>
+        <cd:arguments>
+            <cd:resolve name="argument-text"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="mathunder" level="document" category="mathematics" file="math-stc.mklx">
+        <cd:arguments>
+            <cd:keywords optional="yes">
+                <cd:constant type="bottom"/>
+                <cd:constant type="vfenced"/>
+            </cd:keywords>
+            <cd:assignments list="yes" optional="yes">
+                <cd:inherit name="setupmathstackers"/>
+            </cd:assignments>
+            <cd:resolve name="argument-number"/>
+            <cd:resolve name="argument-text"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="definemathdouble" level="style" category="mathematics" file="math-stc.mklx">
+        <cd:arguments>
+            <cd:keywords>
+                <cd:constant type="both"/>
+                <cd:constant type="vfenced"/>
+                <cd:constant type="cd:name"/>
+            </cd:keywords>
+            <cd:assignments list="yes" optional="yes">
+                <cd:inherit name="setupmathstackers"/>
+            </cd:assignments>
+            <cd:resolve name="keyword-name"/>
+            <cd:resolve name="keyword-number"/>
+            <cd:resolve name="keyword-number"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="mathdouble" generated="yes" variant="example" level="document" category="mathematics" file="math-stc.mklx">
+        <cd:sequence>
+            <cd:variable value="mathdouble"/>
+        </cd:sequence>
+        <cd:arguments>
+            <cd:resolve name="argument-text"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="mathdouble" level="document" category="mathematics" file="math-stc.mklx">
+        <cd:arguments>
+            <cd:keywords optional="yes">
+                <cd:constant type="both"/>
+                <cd:constant type="vfenced"/>
+            </cd:keywords>
+            <cd:resolve name="argument-number"/>
+            <cd:resolve name="argument-text"/>
+            <cd:resolve name="argument-text"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="definemathovertextextensible" level="system" category="mathematics" file="math-sty.mkvi">
+        <cd:arguments>
+            <cd:keywords optional="yes">
+                <cd:constant type="bothtext"/>
+            </cd:keywords>
+            <cd:resolve name="keyword-name"/>
+            <cd:resolve name="keyword-number"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="mathovertextextensible" generated="yes" variant="instance" level="document" category="mathematics" file="math-stc.mklx">
+        <cd:sequence>
+            <cd:instance value="mathovertextextensible"/>
+        </cd:sequence>
+        <cd:arguments>
+            <cd:resolve name="argument-text"/>
+            <cd:resolve name="argument-text"/>
+        </cd:arguments>
+        <cd:instances>
+            <cd:resolve name="instance-mathovertextextensible"/>
+        </cd:instances>
+    </cd:command>
+
+    <cd:command name="mathovertext" level="document" category="mathematics" file="math-stc.mklx">
+        <cd:arguments>
+            <cd:keywords optional="yes">
+                <cd:constant type="top"/>
+            </cd:keywords>
+            <cd:resolve name="argument-text"/>
+            <cd:resolve name="argument-text"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="definemathundertextextensible" level="system" category="mathematics" file="math-sty.mkvi">
+        <cd:arguments>
+            <cd:keywords optional="yes">
+                <cd:constant type="bothtext"/>
+            </cd:keywords>
+            <cd:resolve name="keyword-name"/>
+            <cd:resolve name="keyword-number"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="mathundertextextensible" generated="yes" variant="instance" level="document" category="mathematics" file="math-stc.mklx">
+        <cd:sequence>
+            <cd:instance value="mathundertextextensible"/>
+        </cd:sequence>
+        <cd:arguments>
+            <cd:resolve name="argument-text"/>
+            <cd:resolve name="argument-text"/>
+        </cd:arguments>
+        <cd:instances>
+            <cd:resolve name="instance-mathundertextextensible"/>
+        </cd:instances>
+    </cd:command>
+
+    <cd:command name="mathundertext" level="document" category="mathematics" file="math-stc.mklx">
+        <cd:arguments>
+            <cd:keywords optional="yes">
+                <cd:constant type="bottom"/>
+            </cd:keywords>
+            <cd:resolve name="argument-text"/>
+            <cd:resolve name="argument-text"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="definemathtriplet" level="system" category="mathematics" file="math-sty.mkvi">
+        <cd:arguments>
+            <cd:resolve name="keyword-name-optional"/>
+            <cd:resolve name="keyword-name"/>
+            <cd:resolve name="keyword-text-optional"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="mathtriplet" generated="yes" variant="example" level="document" category="mathematics" file="math-stc.mklx">
+        <cd:sequence>
+            <cd:variable value="mathtriplet"/>
+        </cd:sequence>
+        <cd:arguments>
+            <cd:resolve name="keyword-name-optional"/>
+            <cd:resolve name="argument-text-optional"/>
+            <cd:resolve name="argument-text-optional"/>
+            <cd:resolve name="argument-text-optional"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="mathtriplet" level="document" category="mathematics" file="math-stc.mklx">
+        <cd:arguments>
+            <cd:resolve name="keyword-name-optional"/>
+            <cd:resolve name="argument-text-optional"/>
+            <cd:resolve name="argument-text-optional"/>
+            <cd:resolve name="argument-text-optional"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="mathfiller" file="math-stc.mklx">
+        <cd:arguments>
+            <cd:resolve name="argument-number"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="defineextensiblefiller" file="math-stc.mklx">
+        <cd:arguments>
+            <cd:resolve name="keyword-name"/>
+            <cd:resolve name="keyword-number"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="mathfiller" generated="yes" variant="instance" file="math-stc.mklx">
+        <cd:sequence>
+            <cd:instance value="mathfiller"/>
+        </cd:sequence>
+        <cd:instances>
+            <cd:resolve name="instance-mathfiller"/>
+        </cd:instances>
+    </cd:command>
+
+    <cd:command name="singlebond" level="document" category="mathematics" file="math-stc.mklx"/>
+
+    <cd:command name="doublebond" level="document" category="mathematics" file="math-stc.mklx"/>
+
+    <cd:command name="triplebond" level="document" category="mathematics" file="math-stc.mklx"/>
+
+    <cd:command name="definemathunstacked" level="document" category="mathematics" file="math-stc.mklx">
+        <cd:arguments>
+            <cd:keywords optional="yes">
+                <cd:constant type="wide"/>
+            </cd:keywords>
+            <cd:resolve name="keyword-name"/>
+            <cd:resolve name="keyword-number"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="mathunstacked" generated="yes" variant="instance" level="document" category="mathematics" file="math-stc.mklx">
+        <cd:sequence>
+            <cd:instance value="mathunstacked"/>
+        </cd:sequence>
+        <cd:instances>
+            <cd:constant value="impliedby"/>
+            <cd:constant value="implies"/>
+            <cd:constant value="iff"/>
+            <cd:constant value="impliesby"/>
+            <cd:constant value="And"/>
+        </cd:instances>
+    </cd:command>
+
+</cd:interface>

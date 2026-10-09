@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-zerosize">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Empty document</comment>
+  <comment xml:lang="zh-Hant-TW">空白文件</comment>
+  <comment xml:lang="uk">порожній документ</comment>
+  <comment xml:lang="tr">Boş belge</comment>
+  <comment xml:lang="sv">Tomt dokument</comment>
+  <comment xml:lang="sr-Cyrl">Празан документ</comment>
+  <comment xml:lang="sq">Dokument i zbrazët</comment>
+  <comment xml:lang="sl">Prazen dokument</comment>
+  <comment xml:lang="ru">Пустой документ</comment>
+  <comment xml:lang="ro">document gol</comment>
+  <comment xml:lang="pt-BR">Documento em branco</comment>
+  <comment xml:lang="pl">Pusty dokument</comment>
+  <comment xml:lang="oc">document void</comment>
+  <comment xml:lang="nn">Tomt dokument</comment>
+  <comment xml:lang="lt">Tuščias dokumentas</comment>
+  <comment xml:lang="ko">빈 문서</comment>
+  <comment xml:lang="kk-Cyrl">Бос құжат</comment>
+  <comment xml:lang="kab">Isemli ilem</comment>
+  <comment xml:lang="ja">空の文書</comment>
+  <comment xml:lang="it">Documento vuoto</comment>
+  <comment xml:lang="id">Dokumen kosong</comment>
+  <comment xml:lang="hr">Prazan dokument</comment>
+  <comment xml:lang="hi">खाली दस्तावेज़</comment>
+  <comment xml:lang="he">מסמך ריק</comment>
+  <comment xml:lang="fur">Document vueit</comment>
+  <comment xml:lang="fr">Document vide</comment>
+  <comment xml:lang="fi">Tyhjä asiakirja</comment>
+  <comment xml:lang="eu">Dokumentu hutsa</comment>
+  <comment xml:lang="et">Tühi dokument</comment>
+  <comment xml:lang="es">documento vacío</comment>
+  <comment xml:lang="en-GB">Empty document</comment>
+  <comment xml:lang="de">leeres Dokument</comment>
+  <comment xml:lang="ca">document buit</comment>
+  <comment xml:lang="bg">Празен документ</comment>
+  <comment xml:lang="be-Cyrl">пусты дакумент</comment>
+  <comment xml:lang="ar">مستند فارغ</comment>
+  <comment xml:lang="af">Leë dokument</comment>
+</mime-type>

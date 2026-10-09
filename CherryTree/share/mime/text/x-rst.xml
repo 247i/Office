@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/x-rst">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>ReStructuredText document</comment>
+  <comment xml:lang="zh-Hant-TW">ReStructuredText 文件</comment>
+  <comment xml:lang="uk">документ ReStructuredText</comment>
+  <comment xml:lang="tr">ReStructuredText belgesi</comment>
+  <comment xml:lang="sv">ReStructuredText-dokument</comment>
+  <comment xml:lang="sr-Cyrl">ReStructuredText документ</comment>
+  <comment xml:lang="sq">Dokument reStructuredText</comment>
+  <comment xml:lang="sl">Dokument ReStructuredText</comment>
+  <comment xml:lang="ru">Документ ReStructuredText</comment>
+  <comment xml:lang="ro">document ReStructuredText</comment>
+  <comment xml:lang="pt-BR">Documento reStructuredText</comment>
+  <comment xml:lang="pl">Dokument reStructuredText</comment>
+  <comment xml:lang="oc">document ReStructuredText</comment>
+  <comment xml:lang="nn">ReStructuredText-dokument</comment>
+  <comment xml:lang="lt">ReStructuredText dokumentas</comment>
+  <comment xml:lang="ko">재구조 텍스트 문서</comment>
+  <comment xml:lang="kk-Cyrl">ReStructuredText құжаты</comment>
+  <comment xml:lang="ja">ReStructuredText ドキュメント</comment>
+  <comment xml:lang="it">Documento reStructuredText</comment>
+  <comment xml:lang="id">Dokumen ReStructuredText</comment>
+  <comment xml:lang="hr">ReStructuredText dokument</comment>
+  <comment xml:lang="hi">ReStructuredText दस्तावेज़</comment>
+  <comment xml:lang="he">מסמך reStructuredText</comment>
+  <comment xml:lang="fur">Document ReStructuredText</comment>
+  <comment xml:lang="fr">Document ReStructuredText</comment>
+  <comment xml:lang="fi">reStructuredText-asiakirja</comment>
+  <comment xml:lang="eu">ReStructuredText dokumentua</comment>
+  <comment xml:lang="et">ReStructuredTexti dokument</comment>
+  <comment xml:lang="es">documento ReStructuredText</comment>
+  <comment xml:lang="en-GB">ReStructuredText document</comment>
+  <comment xml:lang="de">reStructuredText-Dokument</comment>
+  <comment xml:lang="ca">document ReStructuredText</comment>
+  <comment xml:lang="bg">Документ — ReStructuredText</comment>
+  <comment xml:lang="be-Cyrl">дакумент reStructuredText</comment>
+  <comment xml:lang="ar">مستند ReStructuredText</comment>
+  <sub-class-of type="text/plain"/>
+  <glob pattern="*.rst"/>
+</mime-type>

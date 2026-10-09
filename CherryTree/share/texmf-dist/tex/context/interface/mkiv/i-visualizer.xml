@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?context-directive job ctxfile x-setups.ctx ?>
+
+<cd:interface xmlns:cd="http://www.pragma-ade.com/commands">
+
+    <cd:command name="ruledhbox" level="system" category="boxes" keywords="rules" file="trac-vis.mkxl">
+        <cd:arguments>
+            <cd:resolve name="string-boxoptions"/>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="ruledvbox" level="system" category="boxes" keywords="rules" file="trac-vis.mkxl">
+        <cd:arguments>
+            <cd:resolve name="string-boxoptions"/>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="ruledvtop" level="system" category="boxes" keywords="rules" file="trac-vis.mkxl">
+        <cd:arguments>
+            <cd:resolve name="string-boxoptions"/>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="ruleddbox" level="system" category="boxes" keywords="rules" file="trac-vis.mkxl">
+        <cd:arguments>
+            <cd:resolve name="string-boxoptions"/>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="ruledhpack" level="system" category="boxes" keywords="rules" file="trac-vis.mkxl">
+        <cd:arguments>
+            <cd:resolve name="string-boxoptions"/>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="ruledvpack" level="system" category="boxes" keywords="rules" file="trac-vis.mkxl">
+        <cd:arguments>
+            <cd:resolve name="string-boxoptions"/>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="ruledtpack" level="system" category="boxes" keywords="rules" file="trac-vis.mkxl">
+        <cd:arguments>
+            <cd:resolve name="string-boxoptions"/>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="ruleddpack" level="system" category="boxes" keywords="rules" file="trac-vis.mkxl">
+        <cd:arguments>
+            <cd:resolve name="string-boxoptions"/>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="ruledmbox" level="system" category="boxes" keywords="rules" file="trac-vis.mkxl">
+        <cd:arguments>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="filledhboxr" level="system" category="boxes" keywords="background colors" file="trac-vis.mkxl">
+        <cd:arguments>
+            <cd:resolve name="string-boxoptions"/>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="filledhboxg" level="system" category="boxes" keywords="background colors" file="trac-vis.mkxl">
+        <cd:arguments>
+            <cd:resolve name="string-boxoptions"/>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="filledhboxb" level="system" category="boxes" keywords="background colors" file="trac-vis.mkxl">
+        <cd:arguments>
+            <cd:resolve name="string-boxoptions"/>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="filledhboxc" level="system" category="boxes" keywords="background colors" file="trac-vis.mkxl">
+        <cd:arguments>
+            <cd:resolve name="string-boxoptions"/>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="filledhboxm" level="system" category="boxes" keywords="background colors" file="trac-vis.mkxl">
+        <cd:arguments>
+            <cd:resolve name="string-boxoptions"/>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="filledhboxy" level="system" category="boxes" keywords="background colors" file="trac-vis.mkxl">
+        <cd:arguments>
+            <cd:resolve name="string-boxoptions"/>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="filledhboxk" level="system" category="boxes" keywords="background colors" file="trac-vis.mkxl">
+        <cd:arguments>
+            <cd:resolve name="string-boxoptions"/>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="showmakeup" level="document" category="boxes" file="trc-vis.mkxl">
+        <cd:arguments>
+            <cd:keywords optional="yes">
+                <cd:constant type="reset"/>
+                <cd:constant type="boxes"/>
+                <cd:constant type="makeup" default="yes"/>
+                <cd:constant type="all"/>
+                <cd:constant type="hbox"/>
+                <cd:constant type="vbox"/>
+                <cd:constant type="vtop"/>
+                <cd:constant type="kern"/>
+                <cd:constant type="glue"/>
+                <cd:constant type="penalty"/>
+                <cd:constant type="fontkern"/>
+                <cd:constant type="strut"/>
+                <cd:constant type="whatsit"/>
+                <cd:constant type="glyph"/>
+                <cd:constant type="simple"/>
+                <cd:constant type="simplehbox"/>
+                <cd:constant type="simplevbox"/>
+                <cd:constant type="simplevtop"/>
+                <cd:constant type="user"/>
+                <cd:constant type="math"/>
+                <cd:constant type="italic"/>
+                <cd:constant type="origin"/>
+                <cd:constant type="discretionary"/>
+                <cd:constant type="expansion"/>
+                <cd:constant type="line"/>
+                <cd:constant type="space"/>
+                <cd:constant type="depth"/>
+                <cd:constant type="marginkern"/>
+                <cd:constant type="mathkern"/>
+                <cd:constant type="dir"/>
+                <cd:constant type="par"/>
+                <cd:constant type="mathglue"/>
+                <cd:constant type="mark"/>
+                <cd:constant type="insert"/>
+                <cd:constant type="boundary"/>
+                <cd:constant type="vkern"/>
+                <cd:constant type="hkern"/>
+                <cd:constant type="vglue"/>
+                <cd:constant type="hglue"/>
+                <cd:constant type="vpenalty"/>
+                <cd:constant type="hpenalty"/>
+            </cd:keywords>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="setlocalshowmakeup" level="document" category="boxes" file="trc-vis.mkxl"/>
+
+    <cd:command name="resetlocalshowmakeup" level="document" category="boxes" file="trc-vis.mkxl"/>
+
+    <cd:command name="showallmakeup" level="document" category="boxes" file="trac-vis.mkxl"/>
+
+    <cd:command name="showboxes" level="document" category="boxes" file="trac-vis.mkxl"/>
+
+    <cd:command name="showglyphs" level="document" category="fonts" file="trac-vis.mkxl"/>
+
+    <cd:command name="showfontkerns" level="document" category="fonts" file="trac-vis.mkxl"/>
+
+    <cd:command name="showfontitalics" level="document" category="fonts" file="trac-vis.mkxl"/>
+
+    <cd:command name="showglyphdata" level="document" category="fonts" file="trac-vis.mkxl"/>
+
+    <cd:command name="showfontexpansion" level="document" category="fonts" file="trac-vis.mkxl"/>
+
+    <cd:command name="setvisualizerfont" level="system" category="fonts" file="trac-vis.mkxl">
+        <cd:arguments>
+            <cd:resolve name="keyword-font-optional"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="resetvisualizers" level="system" category="fonts" file="trac-vis.mkxl"/>
+
+    <cd:command name="showpageprogress" level="style" file="trac-bld.mkxl">
+        <cd:arguments>
+            <cd:keywords optional="yes">
+                <cd:constant type="yes" default="yes"/>
+                <cd:constant type="no"/>
+                <cd:constant type="all"/>
+            </cd:keywords>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="showbreakpoints" type="environment" level="document" file="trac-brk.mkxl">
+        <cd:arguments>
+            <cd:assignments list="yes" optional="yes">
+                <cd:parameter name="option">
+                    <cd:constant type="margin"/>
+                    <cd:constant type="simple"/>
+                </cd:parameter>
+                <cd:parameter name="level">
+                    <cd:constant type="cd:number"/>
+                </cd:parameter>
+                <!-- I'm unable to determine what arguments the list key accepts -->
+                <cd:parameter name="list" list="yes">
+                    <cd:constant type="cd:text"/>
+                </cd:parameter>
+                <cd:parameter name="offset">
+                    <cd:constant type="cd:dimension"/>
+                </cd:parameter>
+            </cd:assignments>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="showbreakpoints" level="document" file="trac-brk.mkxl">
+        <cd:arguments>
+            <cd:assignments list="yes" optional="yes">
+                <cd:inherit name="setupcolumns"/>
+            </cd:assignments>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="drawbreakpoints" level="document" file="trac-brk.mkxl">
+        <cd:arguments>
+            <cd:assignments list="yes" optional="yes">
+                <cd:parameter name="dx">
+                    <cd:constant type="cd:dimension"/>
+                </cd:parameter>
+                <cd:parameter name="dy">
+                    <cd:constant type="cd:dimension"/>
+                </cd:parameter>
+                <cd:parameter name="sx">
+                    <cd:constant type="cd:dimension"/>
+                </cd:parameter>
+                <cd:parameter name="sy">
+                    <cd:constant type="cd:dimension"/>
+                </cd:parameter>
+                <cd:parameter name="rulethickness">
+                    <cd:constant type="cd:dimension"/>
+                </cd:parameter>
+            </cd:assignments>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="showbalancepoints" type="environment" level="document" file="trac-brk.mkxl">
+        <cd:arguments>
+            <cd:assignments list="yes" optional="yes">
+                <cd:parameter name="option">
+                    <cd:constant type="margin"/>
+                    <cd:constant type="simple"/>
+                </cd:parameter>
+                <cd:parameter name="level">
+                    <cd:constant type="cd:number"/>
+                </cd:parameter>
+                <!-- I'm unable to determine what arguments the list key accepts -->
+                <cd:parameter name="list" list="yes">
+                    <cd:constant type="cd:text"/>
+                </cd:parameter>
+                <cd:parameter name="offset">
+                    <cd:constant type="cd:dimension"/>
+                </cd:parameter>
+            </cd:assignments>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="showbalancepoints" level="document" file="trac-brk.mkxl">
+        <cd:arguments>
+            <cd:assignments list="yes" optional="yes">
+                <cd:inherit name="setupcolumns"/>
+            </cd:assignments>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="drawbalancepoints" level="document" file="trac-brk.mkxl">
+        <cd:arguments>
+            <cd:assignments list="yes" optional="yes">
+                <cd:parameter name="dx">
+                    <cd:constant type="cd:dimension"/>
+                </cd:parameter>
+                <cd:parameter name="dy">
+                    <cd:constant type="cd:dimension"/>
+                </cd:parameter>
+                <cd:parameter name="sx">
+                    <cd:constant type="cd:dimension"/>
+                </cd:parameter>
+                <cd:parameter name="sy">
+                    <cd:constant type="cd:dimension"/>
+                </cd:parameter>
+                <cd:parameter name="rulethickness">
+                    <cd:constant type="cd:dimension"/>
+                </cd:parameter>
+            </cd:assignments>
+        </cd:arguments>
+    </cd:command>
+
+    <!--
+
+        <cd:command name="showsplitpoints" type="environment" file="trac-vsp.mkxl">
+            <cd:arguments>
+                <cd:assignments list="yes" optional="yes">
+                    <cd:parameter name="option">
+                        <cd:constant type="cd:text"/>
+                    </cd:parameter>
+                    <cd:parameter name="list">
+                        <cd:constant type="cd:text"/>
+                    </cd:parameter>
+                    <cd:parameter name="offset">
+                        <cd:constant type="cd:dimension"/>
+                    </cd:parameter>
+                </cd:assignments>
+            </cd:arguments>
+        </cd:command>
+
+        <cd:command name="showsplitpoints" file="trac-vsp.mkxl">
+            <cd:arguments>
+                <cd:assignments list="yes" optional="yes">
+                    <cd:parameter name="option">
+                        <cd:constant type="cd:text"/>
+                    </cd:parameter>
+                </cd:assignments>
+            </cd:arguments>
+        </cd:command>
+
+    -->
+
+</cd:interface>

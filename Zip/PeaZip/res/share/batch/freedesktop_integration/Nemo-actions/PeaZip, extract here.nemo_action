@@ -1,0 +1,9 @@
+[Nemo Action]
+
+Name=PeaZip, extract here
+Comment=Directly extract archive(s) in current folder with PeaZip
+Exec=peazip -ext2smart %F
+Selection=notnone
+Extensions=any;
+Terminal=false
+Icon-Name=peazip_extract

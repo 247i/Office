@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/x-gcode-gx">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>G-code Extended file</comment>
+  <comment xml:lang="zh-Hant-TW">G-code 擴充版檔案</comment>
+  <comment xml:lang="uk">файл G-code Extended</comment>
+  <comment xml:lang="tr">G-code genişletilmiş dosyası</comment>
+  <comment xml:lang="sv">Utökad G-code-fil</comment>
+  <comment xml:lang="sr-Cyrl">Проширена Г-код датотека</comment>
+  <comment xml:lang="sl">Razširjena datoteka G-code</comment>
+  <comment xml:lang="si">G-කේත විස්තීරණ ගොනුව</comment>
+  <comment xml:lang="ru">Файл G-code Extended</comment>
+  <comment xml:lang="ro">fișier extins G-code</comment>
+  <comment xml:lang="pt-BR">Arquivo G-code Extended</comment>
+  <comment xml:lang="pl">Plik rozszerzonego G-code</comment>
+  <comment xml:lang="oc">fichièr espandit G-code</comment>
+  <comment xml:lang="nl">G-code Extended-bestand</comment>
+  <comment xml:lang="ko">G-code 확장 파일</comment>
+  <comment xml:lang="kk-Cyrl">G-code Extended файлы</comment>
+  <comment xml:lang="ja">G-code 拡張ファイル</comment>
+  <comment xml:lang="it">File G-code Extended</comment>
+  <comment xml:lang="id">Berkas G-code Extended</comment>
+  <comment xml:lang="hr">G-kôd proširena datoteka</comment>
+  <comment xml:lang="hi">G-code विस्तारित फाइल</comment>
+  <comment xml:lang="fur">File G-code Extended</comment>
+  <comment xml:lang="fr">Fichier étendu G-code</comment>
+  <comment xml:lang="fi">G-code Extended-tiedosto</comment>
+  <comment xml:lang="et">G-code'i laiendatud fail</comment>
+  <comment xml:lang="es">archivo G-code extendido</comment>
+  <comment xml:lang="en-GB">G-code Extended file</comment>
+  <comment xml:lang="de">erweiterte G-Code-Datei</comment>
+  <comment xml:lang="ca">fitxer G-code ampliat</comment>
+  <comment xml:lang="bg">Файл — G-code Extended</comment>
+  <comment xml:lang="be-Cyrl">файл G-code Extended</comment>
+  <comment xml:lang="ar">ملف غي-كود الموسع</comment>
+  <glob pattern="*.gx"/>
+</mime-type>

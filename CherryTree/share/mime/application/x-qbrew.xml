@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-qbrew">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>QBrew beer recipes</comment>
+  <comment xml:lang="zh-Hant-TW">QBrew 啤酒酒譜</comment>
+  <comment xml:lang="uk">рецепти пива QBrew</comment>
+  <comment xml:lang="tr">QBrew bira tarifleri</comment>
+  <comment xml:lang="sv">QBrew-ölrecept</comment>
+  <comment xml:lang="sr-Cyrl">QBrew рецепти за пиво</comment>
+  <comment xml:lang="sq">Receta birre QBrew</comment>
+  <comment xml:lang="sl">Recept za pivo QBrew</comment>
+  <comment xml:lang="ru">Рецепты пива QBrew</comment>
+  <comment xml:lang="ro">rețete de bere QBrew</comment>
+  <comment xml:lang="pt-BR">Receitas de cerveja QBrew</comment>
+  <comment xml:lang="pl">Przepisy na piwo QBrew</comment>
+  <comment xml:lang="oc">recèpta de bièrra QBrew</comment>
+  <comment xml:lang="nn">QBrew-øloppskrifter</comment>
+  <comment xml:lang="ko">QBrew 맥주 주조법</comment>
+  <comment xml:lang="kk-Cyrl">QBrew сыра рецепттері</comment>
+  <comment xml:lang="ja">QBrew ビールレシピ</comment>
+  <comment xml:lang="id">Resep bir QBrew</comment>
+  <comment xml:lang="hr">QBrew recepti za pivo</comment>
+  <comment xml:lang="he">מתכון בירה QBrew</comment>
+  <comment xml:lang="fur">Ricetis di bire QBrew</comment>
+  <comment xml:lang="fr">Recettes de bières QBrew</comment>
+  <comment xml:lang="fi">QBrew reseptit</comment>
+  <comment xml:lang="et">QBrew õlleretseptid</comment>
+  <comment xml:lang="es">receta de cerveza de QBrew</comment>
+  <comment xml:lang="en-GB">QBrew beer recipes</comment>
+  <comment xml:lang="de">QBrew-Bierrezept</comment>
+  <comment xml:lang="ca">recepta de cervesa QBrew</comment>
+  <comment xml:lang="bg">Рецепти за бира от QBrew</comment>
+  <comment xml:lang="be-Cyrl">Рэцэпты піва QBrew</comment>
+  <comment xml:lang="ar">وصفات بيرة QBrew</comment>
+  <sub-class-of type="application/xml"/>
+  <glob pattern="*.qbrew"/>
+</mime-type>

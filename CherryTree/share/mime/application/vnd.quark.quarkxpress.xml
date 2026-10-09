@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/vnd.quark.quarkxpress">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>QuarkXPress document</comment>
+  <comment xml:lang="zh-Hant-TW">QuarkXPress 文件</comment>
+  <comment xml:lang="uk">документ QuarkXPress</comment>
+  <comment xml:lang="tr">QuarkXPress belgesi</comment>
+  <comment xml:lang="sv">QuarkXPress-dokument</comment>
+  <comment xml:lang="sr-Cyrl">Кварк-експрес документ</comment>
+  <comment xml:lang="sq">Dokument QuarkXPress</comment>
+  <comment xml:lang="sl">Dokument QuarkXPress</comment>
+  <comment xml:lang="ru">Документ QuarkXPress</comment>
+  <comment xml:lang="ro">document QuarkXPress</comment>
+  <comment xml:lang="pt-BR">Documento do QuarkXPress</comment>
+  <comment xml:lang="pl">Dokument QuarkXPress</comment>
+  <comment xml:lang="oc">document QuarkXPress</comment>
+  <comment xml:lang="nn">QuarkXPress-dokument</comment>
+  <comment xml:lang="ko">쿼크익스프레스 문서</comment>
+  <comment xml:lang="kk-Cyrl">QuarkXPress құжаты</comment>
+  <comment xml:lang="ja">QuarkXPress ドキュメント</comment>
+  <comment xml:lang="id">Dokumen QuarkXPress</comment>
+  <comment xml:lang="hr">QuarkXPress dokument</comment>
+  <comment xml:lang="fur">Document di QuarkXPress</comment>
+  <comment xml:lang="fr">Document QuarkXPress</comment>
+  <comment xml:lang="fi">QuarkXPress</comment>
+  <comment xml:lang="et">QuarkXPressi dokument</comment>
+  <comment xml:lang="es">documento de QuarkXPress</comment>
+  <comment xml:lang="en-GB">QuarkXPress document</comment>
+  <comment xml:lang="de">QuarkXPress-Dokument</comment>
+  <comment xml:lang="ca">document QuarkXPress</comment>
+  <comment xml:lang="bg">Документ — QuarkXPress</comment>
+  <comment xml:lang="be-Cyrl">дакумент QuarkXPress</comment>
+  <comment xml:lang="ar">مستند كوارك إكسبرس</comment>
+  <generic-icon name="x-office-document"/>
+  <glob pattern="*.qwd"/>
+  <glob pattern="*.qwt"/>
+  <glob pattern="*.qxb"/>
+  <glob pattern="*.qxd"/>
+  <glob pattern="*.qxl"/>
+  <glob pattern="*.qxp"/>
+  <glob pattern="*.qxt"/>
+</mime-type>

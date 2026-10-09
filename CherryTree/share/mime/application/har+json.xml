@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/har+json">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>HTTP archive</comment>
+  <comment xml:lang="zh-Hant-TW">HTTP 封存</comment>
+  <comment xml:lang="uk">архїв HTTP</comment>
+  <comment xml:lang="tr">HTTP arşivi</comment>
+  <comment xml:lang="sv">HTTP-arkiv</comment>
+  <comment xml:lang="sr-Cyrl">HTTP архива</comment>
+  <comment xml:lang="sq">Arkiv HTTP</comment>
+  <comment xml:lang="sl">Arhiv HTTP</comment>
+  <comment xml:lang="ru">Архив HTTP</comment>
+  <comment xml:lang="ro">arhivă HTTP</comment>
+  <comment xml:lang="pt-BR">Arquivo HTTP</comment>
+  <comment xml:lang="pl">Archiwum HTTP</comment>
+  <comment xml:lang="oc">archiu HTTP</comment>
+  <comment xml:lang="ko">HTTP 묶음 파일</comment>
+  <comment xml:lang="kk-Cyrl">HTTP архиві</comment>
+  <comment xml:lang="kab">Aɣbaṛ HTTP</comment>
+  <comment xml:lang="hr">HTTP arhiva</comment>
+  <comment xml:lang="fr">Archive HTTP</comment>
+  <comment xml:lang="fi">HTTP arkisto</comment>
+  <comment xml:lang="et">HTTP arhiiv</comment>
+  <comment xml:lang="es">archivo HTTP</comment>
+  <comment xml:lang="en-GB">HTTP archive</comment>
+  <comment xml:lang="de">HTTP-Archiv</comment>
+  <comment xml:lang="ar">أرشيف HTTP</comment>
+  <sub-class-of type="application/json"/>
+  <generic-icon name="package-x-generic"/>
+  <glob pattern="*.har"/>
+</mime-type>

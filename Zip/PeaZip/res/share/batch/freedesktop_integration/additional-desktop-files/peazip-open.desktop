@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=PeaZip, open as archive
+NoDisplay=true
+Comment=Try to open file as archive with PeaZip, browse dir
+Exec=peazip -ext2openasarchive %f
+TryExec=peazip
+Icon=peazip
+Type=Application
+Terminal=false
+Categories=Utility;Archiving;Compression;
+Keywords=zip;rar;tar;compress;extract;unpack;
+MimeType=application/octet-stream;

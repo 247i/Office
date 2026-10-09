@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-starchart">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>StarChart 3-4 chart</comment>
+  <comment xml:lang="zh-Hant-TW">StarChart 3-4 圖表</comment>
+  <comment xml:lang="uk">діаграма StarChart 3-4</comment>
+  <comment xml:lang="tr">StarChart 3-4 çizelgesi</comment>
+  <comment xml:lang="sv">StarChart 3-4-diagram</comment>
+  <comment xml:lang="sr-Cyrl">Стар-графикон 3-4 графикон</comment>
+  <comment xml:lang="sq">Grafik StarChart 3-4</comment>
+  <comment xml:lang="sl">Grafikon StarChart 3-4</comment>
+  <comment xml:lang="ru">Диаграмма StarChart 3-4</comment>
+  <comment xml:lang="ro">diagramă StarChart 3-4</comment>
+  <comment xml:lang="pt-BR">Gráfico do StarChart 3-4</comment>
+  <comment xml:lang="pt">Mapa StarChart 3-4</comment>
+  <comment xml:lang="pl">Wykres StarChart 3-4</comment>
+  <comment xml:lang="oc">grafic StarChart 3-4</comment>
+  <comment xml:lang="nn">StarChart 3-4-diagram</comment>
+  <comment xml:lang="ko">StarChart 3-4 차트</comment>
+  <comment xml:lang="kk-Cyrl">StarChart 3-4 диаграммасы</comment>
+  <comment xml:lang="ja">StarChart 3-4 チャート</comment>
+  <comment xml:lang="it">Grafico StarChart 3-4</comment>
+  <comment xml:lang="id">Bagan StarChart 3-4</comment>
+  <comment xml:lang="hr">StarCalc 3-4 grafikon</comment>
+  <comment xml:lang="he">תרשים StarChart 3-4</comment>
+  <comment xml:lang="fur">Grafic di StarChart 3-4</comment>
+  <comment xml:lang="fr">Graphique StarChart 3-4</comment>
+  <comment xml:lang="fi">StarChart 3-4 kaavio</comment>
+  <comment xml:lang="et">StarChart 3-4 diagramm</comment>
+  <comment xml:lang="es">gráfico de StarChart 3-4</comment>
+  <comment xml:lang="en-GB">StarChart 3-4 chart</comment>
+  <comment xml:lang="de">StarChart-3-4-Diagramm</comment>
+  <comment xml:lang="da">StarChart 3-4-diagram</comment>
+  <comment xml:lang="ca">diagrama StarChart 3-4</comment>
+  <comment xml:lang="bg">Диаграма — StarChart 3-4</comment>
+  <comment xml:lang="be-Cyrl">дыяграма StarCalc 3-4</comment>
+  <comment xml:lang="ar">مخطط StarCalc 3-4</comment>
+  <sub-class-of type="application/x-ole-storage"/>
+  <generic-icon name="x-office-spreadsheet"/>
+  <glob pattern="*.sds" weight="40"/>
+</mime-type>

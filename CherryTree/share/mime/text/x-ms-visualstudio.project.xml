@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/x-ms-visualstudio.project">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Visual Studio Project</comment>
+  <comment xml:lang="zh-Hant-TW">Visual Studio 專案</comment>
+  <comment xml:lang="uk">проєкт Visual Studio</comment>
+  <comment xml:lang="tr">Visual Studio projesi</comment>
+  <comment xml:lang="sv">Visual Studio-projekt</comment>
+  <comment xml:lang="sr-Cyrl">Визуел студио пројекат</comment>
+  <comment xml:lang="sq"> Projekt Visual Studio</comment>
+  <comment xml:lang="sl">Projekt Visual Studio</comment>
+  <comment xml:lang="ru">Проект Visual Studio</comment>
+  <comment xml:lang="ro">proiect Visual Studio</comment>
+  <comment xml:lang="pt-BR">Projeto do Visual Studio</comment>
+  <comment xml:lang="pl">Projekt Visual Studio</comment>
+  <comment xml:lang="oc">projècte Visual Studio</comment>
+  <comment xml:lang="ko">Visual Studio 프로젝트</comment>
+  <comment xml:lang="kk-Cyrl">Visual Studio жобасы</comment>
+  <comment xml:lang="hr">Visual Studio projekt</comment>
+  <comment xml:lang="fr">Projet Visual Studio</comment>
+  <comment xml:lang="fi">Visual Studion projekti</comment>
+  <comment xml:lang="et">Visual Studio projekt</comment>
+  <comment xml:lang="es">proyecto de Visual Studio</comment>
+  <comment xml:lang="en-GB">Visual Studio Project</comment>
+  <comment xml:lang="de">Visual-Studio-Projekt</comment>
+  <comment xml:lang="ar">مشروع فيجول ستيديو</comment>
+  <sub-class-of type="text/plain"/>
+  <glob pattern="*.dsp"/>
+</mime-type>

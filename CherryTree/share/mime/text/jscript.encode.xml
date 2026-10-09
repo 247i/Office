@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/jscript.encode">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Encoded JScript program</comment>
+  <comment xml:lang="zh-Hant-TW">編碼過的 JScript 程式</comment>
+  <comment xml:lang="uk">кодована програма JScript</comment>
+  <comment xml:lang="tr">Kodlanmış JScript programı</comment>
+  <comment xml:lang="sv">Kodat JScript-program</comment>
+  <comment xml:lang="sr-Cyrl">Кодирани JScript програм</comment>
+  <comment xml:lang="sq">Program JScript i koduar</comment>
+  <comment xml:lang="sl">Kodiran program JScript</comment>
+  <comment xml:lang="ru">Зашифрованная программа на JScript</comment>
+  <comment xml:lang="ro">program JScript codificat</comment>
+  <comment xml:lang="pt-BR">Programa JScript codificado</comment>
+  <comment xml:lang="pl">Zakodowany program JScript</comment>
+  <comment xml:lang="oc">programa encodat en JScript</comment>
+  <comment xml:lang="nn">Koda JScript-program</comment>
+  <comment xml:lang="ko">인코드된 JScript 프로그램</comment>
+  <comment xml:lang="kk-Cyrl">Кодталған JScript программасы</comment>
+  <comment xml:lang="ja">エンコードされた JScript プログラム</comment>
+  <comment xml:lang="it">Programma JScript codificato</comment>
+  <comment xml:lang="id">Program JScript yang dikodekan</comment>
+  <comment xml:lang="hr">Kodiran JScript program</comment>
+  <comment xml:lang="hi">एन्कोडेड JScript प्रोग्राम</comment>
+  <comment xml:lang="fur">Program JScript codificât</comment>
+  <comment xml:lang="fr">Programme encodé JScript</comment>
+  <comment xml:lang="fi">JScript-koodi</comment>
+  <comment xml:lang="et">Kodeeritud JScripti program</comment>
+  <comment xml:lang="es">programa en JScript codificado</comment>
+  <comment xml:lang="en-GB">Encoded JScript program</comment>
+  <comment xml:lang="de">verschlüsseltes JScript-Programm</comment>
+  <comment xml:lang="da">Kodet JScript-program</comment>
+  <comment xml:lang="ca">programa JScript codificat</comment>
+  <comment xml:lang="bg">Програма — кодирана в JScript</comment>
+  <comment xml:lang="be-Cyrl">закадаваная праграма JScript</comment>
+  <comment xml:lang="ar">برنامج مشفر بـJScript</comment>
+  <sub-class-of type="application/x-executable"/>
+  <generic-icon name="text-x-script"/>
+  <glob pattern="*.jse"/>
+</mime-type>

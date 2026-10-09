@@ -1,0 +1,312 @@
+if not modules then modules = { } end modules ['font-imp-scripts'] = {
+    version   = 1.001,
+    comment   = "companion to font-ini.mkiv",
+    author    = "Hans Hagen, PRAGMA-ADE, Hasselt NL",
+    copyright = "PRAGMA ADE / ConTeXt Development Team",
+    license   = "see context related readme files"
+}
+
+local getrange           = characters.getrange
+
+local settings_to_hash   = utilities.parsers.settings_to_hash
+
+if not context then return end
+
+-- the defaults are not yet ok
+
+local next, type, tonumber = next, type, tonumber
+local gmatch = string.gmatch
+local max = math.max
+
+local fonts              = fonts
+local utilities          = utilities
+
+local helpers            = fonts.helpers
+local charcommand        = helpers.commands.char
+local downcommand        = helpers.commands.down
+local upcommand          = helpers.commands.up
+
+local handlers           = fonts.handlers
+local otf                = handlers.otf
+local afm                = handlers.afm
+local registerotffeature = otf.features.register
+local registerafmfeature = afm.features.register
+local addotffeature      = otf.addfeature
+
+local settings_to_hash   = utilities.parsers.settings_to_hash
+local sortedhash         = table.sortedhash
+
+local handlers           = fonts.handlers
+
+local sup                = nil
+local sub                = nil
+
+local function initialize(tfmdata,key,value)
+    --
+    if not sup then
+        sup = { }
+        sub = { }
+        for unicode, data in next, characters.data do
+            local specials = data.specials
+            if specials then
+                local what = specials[1]
+                if what == "super" then
+                    sup[unicode] = specials[2]
+                elseif what == "sub" then
+                    sub[unicode] = specials[2]
+                end
+            end
+        end
+    end
+    --
+    local spec
+    if value == true then
+        spec = { factor = 3/5, up = 5/4, down = 1/4 }
+    elseif type(value) == "number" then
+        spec = { factor = value, up = 5/4, down = 1/4 }
+    else
+        spec = settings_to_hash(value)
+    end
+    local factor = tonumber(spec.factor) or 3/5
+    local up     = tonumber(spec.up)     or 5/4
+    local down   = tonumber(spec.down)   or 1/4
+    --
+    local characters = tfmdata.characters
+    local parameters = tfmdata.parameters
+    local up         =  parameters.xheight * up
+    local down       = -parameters.xheight * down
+    -- disable sups/subs
+    local function add(unicode,other,go_up)
+        local old = characters[other]
+        if old then
+            local shift  = go_up and up or down
+            local width  = (old.width or 0) * factor
+            local height = (old.height or 0) * factor + shift
+            local depth  = go_up and 0 or max((old.depth  or 0) * factor + down,0)
+            characters[unicode] = {
+                width    = width,
+                height   = height,
+                depth    = depth,
+                commands = { { "offset", 0, shift, other, factor, factor } },
+             -- yoffset  = shift,
+             -- xscale   = factor,
+             -- yscale   = factor,
+             -- commands = { { "slot", 0, other } }, -- { slotcommand[0][other] or charcommand[other] }
+            }
+        end
+    end
+    for unicode, other in sortedhash(sup) do
+        add(unicode,other,true)
+    end
+    for unicode, other in sortedhash(sub) do
+        add(unicode,other,false)
+    end
+end
+
+local specification = {
+    name        = "scripts",
+    description = "add superiors and inferiors",
+    manipulators = {
+        base = initialize,
+        node = initialize,
+    }
+}
+
+registerotffeature(specification)
+registerafmfeature(specification)
+
+-- a different kind of scripts support
+
+local function initialize(tfmdata,key,value)
+    if value then
+        local detail      = type(value) == "string" and settings_to_hash(value) or { }
+        local orientation = tonumber(detail.orientation) or 0
+        if orientation == 1 or orientation == 3 then
+           local characters = tfmdata.characters
+            local parameters = tfmdata.parameters
+            local emwidth    = parameters.quad
+            local exheight   = parameters.xheight
+            local ranges     = detail.ranges
+            local downshift  = exheight * (tonumber(detail.down) or 0)
+            local rightshift = exheight * (tonumber(detail.right) or 0)
+            local orientate
+            if orientation == 1 then
+                orientate = function(character)
+                    local width  = character.width or 0
+                    local height = character.height or 0
+                    local depth  = character.depth or 0
+                    character.width       = height + depth + rightshift + rightshift
+                    character.height      = width - downshift
+                    character.depth       = shift
+                    character.xoffset     = depth + rightshift
+                    character.yoffset     = width - downshift
+                    character.orientation = orientation
+                end
+            else
+                orientate = function(character)
+                    local width  = character.width or 0
+                    local height = character.height or 0
+                    local depth  = character.depth or 0
+--                     character.width       = height + depth + rightshift + rightshift
+                    character.height      = width - downshift
+                    character.depth       = shift
+--                     character.xoffset     = height + rightshift
+--                     character.yoffset     = - downshift
+--                     character.orientation = orientation
+                end
+            end
+            if ranges then
+                for s in gmatch(ranges,"[^, ]+") do
+                    local start, stop, description, gaps = getrange(s,true)
+                    if start and stop then
+                        for unicode=start,stop do
+                            local character = characters[unicode]
+                            if character then
+                                orientate(character)
+                            end
+                        end
+                    end
+                end
+            else
+                for unicode, character in next, characters do
+                    orientate(character)
+                end
+            end
+        end
+    end
+end
+
+local specification = {
+    name        = "vertical",
+    description = "vertical",
+    manipulators = {
+        base = initialize,
+        node = initialize,
+    }
+}
+
+registerotffeature(specification)
+registerafmfeature(specification)
+
+do
+
+    -- See Wolfgang Schusters patches for Japanese etc.
+
+    local left   <const> = 1
+    local middle <const> = 2
+    local right  <const> = 3
+
+    local mapping = {
+       [0x02010] = middle,
+       [0x02027] = middle,
+       [0x02329] = left,
+       [0x0232A] = right,
+       [0x03001] = right,
+       [0x03002] = right,
+       [0x03008] = left,
+       [0x03009] = right,
+       [0x0300A] = left,
+       [0x0300B] = right,
+       [0x0300C] = left,
+       [0x0300D] = right,
+       [0x0300E] = left,
+       [0x0300F] = right,
+       [0x03010] = left,
+       [0x03011] = right,
+       [0x03014] = left,
+       [0x03015] = right,
+       [0x03016] = left,
+       [0x03017] = right,
+       [0x03018] = left,
+       [0x03019] = right,
+       [0x0301A] = left,
+       [0x0301B] = right,
+       [0x0301D] = left,
+       [0x0301E] = right,
+       [0x0301F] = right,
+       [0x030FB] = middle,
+       [0x0FF01] = middle,
+       [0x0FF02] = middle,
+       [0x0FF07] = middle,
+       [0x0FF08] = left,
+       [0x0FF09] = right,
+       [0x0FF0C] = right,
+       [0x0FF0E] = right,
+       [0x0FF1A] = middle,
+       [0x0FF1B] = middle,
+       [0x0FF3B] = left,
+       [0x0FF3D] = right,
+       [0x0FF5B] = left,
+       [0x0FF5C] = middle,
+       [0x0FF5D] = right,
+       [0x0FF5F] = left,
+       [0x0FF60] = right,
+       [0x0FFE4] = middle,
+
+       [0xF054C] = left,
+       [0xF054D] = right,
+       [0xF054E] = left,
+       [0xF054F] = right,
+    }
+
+    local firstprivate <const> = fonts.privateoffsets and fonts.privateoffsets.textbase or 0xF0000
+
+    addotffeature {
+        name = "halt",
+        type = "single",
+        data = function(tfmdata)
+            local resources = tfmdata.resources
+            if not resources then
+                return
+            end
+            local features = resources.features
+            if not features then
+                return
+            end
+            local gpos = features.gpos
+            if gpos and gpos.halt then
+               return
+            end
+            local descriptions = tfmdata.descriptions
+            if not descriptions[0x3002] then
+                -- no fullstop means it's not a cjk font
+                return
+            end
+            local positions = { }
+            local reposition
+            for u, v in next, mapping do
+                local d = descriptions[u]
+                if d then
+                    if not reposition then
+                        local w = d.width
+                        reposition = {
+                            { -w/2, 0, -w/2, 0 },
+                            { -w/4, 0, -w/2, 0 },
+                            {    0, 0, -w/2, 0 },
+                        }
+                    end
+                    positions[u] = reposition[v]
+                else
+                 -- print(string.format("! %X",u))
+                end
+            end
+            if reposition then
+                local p = firstprivate
+                while true do
+                    local d = descriptions[p]
+                    if d then
+                        local v = mapping[d.unicode or 0]
+                        if v then
+                            positions[p] = reposition[v]
+                        end
+                        p = p + 1
+                    else
+                        break
+                    end
+                end
+            end
+            return next(positions) and positions
+        end,
+    }
+
+end

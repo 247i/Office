@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="x-content/audio-dvd">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Audio DVD</comment>
+  <comment xml:lang="zh-Hant-TW">音訊 DVD</comment>
+  <comment xml:lang="uk">Звуковий DVD</comment>
+  <comment xml:lang="tr">Ses DVD’si</comment>
+  <comment xml:lang="sv">Ljud-dvd</comment>
+  <comment xml:lang="sr-Cyrl">Звучни ДВД</comment>
+  <comment xml:lang="sq">DVD Audio</comment>
+  <comment xml:lang="sl">Zvočni DVD</comment>
+  <comment xml:lang="ru">Аудио DVD</comment>
+  <comment xml:lang="ro">DVD audio</comment>
+  <comment xml:lang="pt-BR">DVD de áudio</comment>
+  <comment xml:lang="pl">DVD-Audio</comment>
+  <comment xml:lang="oc">DVD àudio</comment>
+  <comment xml:lang="nn">Lyd-DVD</comment>
+  <comment xml:lang="ko">오디오 DVD</comment>
+  <comment xml:lang="kk-Cyrl">Аудио DVD</comment>
+  <comment xml:lang="ka">აუდიო DVD</comment>
+  <comment xml:lang="kab">Aḍebsi DVD n umesliw</comment>
+  <comment xml:lang="ja">オーディオ DVD</comment>
+  <comment xml:lang="it">DVD audio</comment>
+  <comment xml:lang="id">DVD Audio</comment>
+  <comment xml:lang="hr">Audio DVD</comment>
+  <comment xml:lang="hi">ऑडियो DVD</comment>
+  <comment xml:lang="gl">DVD de son</comment>
+  <comment xml:lang="fur">DVD Audio</comment>
+  <comment xml:lang="fr">DVD audio</comment>
+  <comment xml:lang="fi">Ääni-DVD</comment>
+  <comment xml:lang="eu">Audioko DVDa</comment>
+  <comment xml:lang="et">Heli-DVD</comment>
+  <comment xml:lang="es">DVD de audio</comment>
+  <comment xml:lang="en-GB">Audio DVD</comment>
+  <comment xml:lang="de">Audio-DVD</comment>
+  <comment xml:lang="ca">DVD d'àudio</comment>
+  <comment xml:lang="bg">DVD — аудио</comment>
+  <comment xml:lang="be-Cyrl">аўдыя DVD</comment>
+  <comment xml:lang="ar">صوت DVD</comment>
+  <comment xml:lang="af">Oudio-DVD</comment>
+</mime-type>

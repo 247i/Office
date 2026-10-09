@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="image/x-phaseone-iiq">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Phaseone IIQ raw image</comment>
+  <comment xml:lang="uk">цифровий негатив Phaseone IIQ</comment>
+  <comment xml:lang="tr">Phaseone IIQ ham görüntüsü</comment>
+  <comment xml:lang="sv">Phaseone IIQ-råbild</comment>
+  <comment xml:lang="sr-Cyrl">Phaseone IIQ сирова слика</comment>
+  <comment xml:lang="sq">Pamje Phaseone IIQ e papërpunuar</comment>
+  <comment xml:lang="sl">Neobdelana slika Phaseone IIQ</comment>
+  <comment xml:lang="ru">Необработанное изображение Phaseone IIQ</comment>
+  <comment xml:lang="ro">imagine brută Phaseone IIQ</comment>
+  <comment xml:lang="pt-BR">Imagem bruta Phaseone IIQ</comment>
+  <comment xml:lang="pl">Surowy obraz IIQ Phaseone</comment>
+  <comment xml:lang="oc">imatge brut Phaseone IIQ</comment>
+  <comment xml:lang="ko">Phaseone IIQ RAW 사진</comment>
+  <comment xml:lang="kk-Cyrl">Phaseone IIQ өңделмеген бейнесі</comment>
+  <comment xml:lang="fr">image brute Phaseone IIQ</comment>
+  <comment xml:lang="fi">Phaseone IIQ -raakakuva</comment>
+  <comment xml:lang="et">Phaseone IIQ töötlemata pilt</comment>
+  <comment xml:lang="es">imagen en bruto IIQ de Phaseone</comment>
+  <comment xml:lang="en-GB">Phaseone IIQ raw image</comment>
+  <comment xml:lang="de">Phaseone IIQ-Rohbild</comment>
+  <comment xml:lang="ar">صورة Phaseone IIQ خامة</comment>
+  <sub-class-of type="image/x-dcraw"/>
+  <sub-class-of type="image/tiff"/>
+  <glob pattern="*.iiq"/>
+</mime-type>

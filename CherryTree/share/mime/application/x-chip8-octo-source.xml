@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-chip8-octo-source">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>CHIP-8 Octo source</comment>
+  <comment xml:lang="uk">початкаовий код CHIP-8 Octo</comment>
+  <comment xml:lang="tr">CHIP-8 Octo kaynağı</comment>
+  <comment xml:lang="sv">CHIP-8 Octo-källkod</comment>
+  <comment xml:lang="sr-Cyrl">CHIP-8 Octo извор</comment>
+  <comment xml:lang="sq">Burim CHIP-8 Octo</comment>
+  <comment xml:lang="sl">Izvorna koda CHIP-8 Octo</comment>
+  <comment xml:lang="ru">Исходный код Octo для CHIP-8</comment>
+  <comment xml:lang="ro">sursă CHIP-8 Octo</comment>
+  <comment xml:lang="pt-BR">Fonte CHIP-8 Octo</comment>
+  <comment xml:lang="pl">Kod źródłowy CHIP-8 Octo</comment>
+  <comment xml:lang="oc">font Octo de CHIP-8</comment>
+  <comment xml:lang="ko">CHIP-8 Octo 소스</comment>
+  <comment xml:lang="kk-Cyrl">CHIP-8 Octo бастапқы коды</comment>
+  <comment xml:lang="fr">source CHIP-8 Octo</comment>
+  <comment xml:lang="fi">CHIP-8 Octo lähdekoodi</comment>
+  <comment xml:lang="et">CHIP-8 Octo lähtekood</comment>
+  <comment xml:lang="es">fuente de CHIP-8 octal</comment>
+  <comment xml:lang="en-GB">CHIP-8 Octo source</comment>
+  <comment xml:lang="de">CHIP-8-Octo-Quelltext</comment>
+  <comment xml:lang="ar">مصدر CHIP-8 Octo</comment>
+  <sub-class-of type="text/plain"/>
+  <glob pattern="*.8o"/>
+</mime-type>

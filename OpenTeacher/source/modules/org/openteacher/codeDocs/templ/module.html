@@ -1,0 +1,146 @@
+#!	Copyright 2012, Marten de Vries
+#!
+#!	This file is part of OpenTeacher.
+#!
+#!	OpenTeacher is free software: you can redistribute it and/or modify
+#!	it under the terms of the GNU General Public License as published by
+#!	the Free Software Foundation, either version 3 of the License, or
+#!	(at your option) any later version.
+#!
+#!	OpenTeacher is distributed in the hope that it will be useful,
+#!	but WITHOUT ANY WARRANTY; without even the implied warranty of
+#!	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#!	GNU General Public License for more details.
+#!
+#!	You should have received a copy of the GNU General Public License
+#!	along with OpenTeacher.  If not, see <http://www.gnu.org/licenses/>.
+#!
+<!--(set_escape)-->
+    html
+<!--(end)-->
+<!doctype html>
+<html>
+	<head>
+		<title>Module: @!name!@</title>
+		<link rel='stylesheet' type='text/css' href='/style.css' />
+		<link rel="shortcut icon" type="image/png" href="/resources/logo">
+		<script src='/resources/jquery.js' type='text/javascript'></script>
+		<script type='text/javascript'>
+			$(function() {
+				$('.source').hide();
+				//If a line number needs to be shown, show the file
+				//of which it's part.
+				var name = window.location.hash.substring(1);
+				var element = $('[name="' + name + '"]');
+				var parent = element.parents('.source')
+				parent.show();
+
+				//Connect the toggle links
+				$('.toggle').click(function() {
+					var parent = $(this).parent()
+					var source = $(".source", parent);
+					source.toggle('slow');
+					return false;
+				});
+			});
+		</script>
+		<style type='text/css'>
+			#source a {
+				text-decoration: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id='header'>
+			<img id='logo' src='/resources/logo' />
+			<h1>Module: @!name!@</h1>
+			<a id='nav' href='/'>&lt; Back to index</a><br />
+		</div>
+		<div id='page'>
+			<!--(if moddoc)-->
+				<p>
+					$!moddoc!$
+				</p>
+			<!--(end)-->
+			<table id='modInfoTable'>
+				<tbody>
+					<!--(if type)-->
+						<tr>
+							<td>Type:</td>
+							<td>@!type!@</td>
+						</tr>
+					<!--(end)-->
+					<!--(if uses)-->
+						<tr>
+							<td>Uses (at least one of):</td>
+							<td>
+								<!--(for selector in uses)-->
+									<!--(for url, name in selector)-->
+										<a href='/@!url!@.html'>@!name!@ &gt;</a>
+									<!--(end)-->
+									<br />
+								<!--(end)-->
+							</td>
+						</tr>
+					<!--(end)-->
+					<!--(if requires)-->
+						<tr>
+							<td>Requires (at least one of):</td>
+							<td>
+								<!--(for selector in requires)-->
+									<!--(for url, name in selector)-->
+										<a href='/@!url!@.html'>@!name!@ &gt;</a>
+									<!--(end)-->
+									<br />
+								<!--(end)-->
+							</td>
+						</tr>
+					<!--(end)-->
+				</tbody>
+			</table>
+			<!--(if methods)-->
+				<h2>Methods:</h2>
+				<ul>
+					<!--(for method in methods)-->
+						<li>
+							<strong>@!method!@(@!", ".join(methodArgs[method])!@)</strong>
+							<!--(if methodDocs[method])-->
+								<br />
+								$!methodDocs[method]!$
+							<!--(end)-->
+						</li>
+					<!--(end)-->
+				</ul>
+			<!--(end)-->
+			<!--(if properties)-->
+				<h2>Properties:</h2>
+				<ul>
+					<!--(for property in properties)-->
+						<li>
+							<strong>@!property!@</strong>
+							<!--(if property in propertyDocs and propertyDocs[property])-->
+								<br />
+								$!propertyDocs[property]!$
+							<!--(end)-->
+						</li>
+					<!--(end)-->
+				</ul>
+			<!--(end)-->
+			<!--(if files)-->
+				<h2>Files</h2>
+				<ul>
+					<!--(for path, source in files)-->
+					<li>
+						<a href='#' class='toggle'>@!path!@</a>
+						<div class='source'>$!source!$</div>
+					</li>
+					<!--(end)-->
+				</ul>
+			<!--(end)-->
+		</div>
+		<div id='footer'>
+			<a href='/'>&lt; Back to index</a><br />
+			<em>OpenTeacher code documentation</em>
+		</div>
+	</body>
+</html>

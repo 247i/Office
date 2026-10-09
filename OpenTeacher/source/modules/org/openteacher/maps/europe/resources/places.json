@@ -1,0 +1,157 @@
+[
+	{
+		"x": 163,
+		"y": 512,
+		"names": ["Dublin"]
+	},
+	{
+		"x": 175,
+		"y": 481,
+		"names": ["Belfast"]
+	},
+	{
+		"x": 249,
+		"y": 577,
+		"names": ["London"]
+	},
+	{
+		"x": 335,
+		"y": 563,
+		"names": ["Amsterdam"]
+	},
+	{
+		"x": 325,
+		"y": 604,
+		"names": ["Brussel", "Bruxelles", "Brussels"]
+	},
+	{
+		"x": 258,
+		"y": 848,
+		"names": ["Barcelona"]
+	},
+	{
+		"x": 144,
+		"y": 858,
+		"names": ["Madrid"]
+	},
+	{
+		"x": 49,
+		"y": 821,
+		"names": ["Porto"]
+	},
+	{
+		"x": 23,
+		"y": 880,
+		"names": ["Lisboa", "Lisbon"]
+	},
+	{
+		"x": 462,
+		"y": 840,
+		"names": ["Roma", "Rome"]
+	},
+	{
+		"x": 402,
+		"y": 750,
+		"names": ["Milano", "Milan"]
+	},
+	{
+		"x": 386,
+		"y": 698,
+		"names": ["Zürich"]
+	},
+	{
+		"x": 525,
+		"y": 672,
+		"names": ["Wien"]
+	},
+	{
+		"x": 489,
+		"y": 625,
+		"names": ["Praha", "Prague"]
+	},
+	{
+		"x": 467,
+		"y": 560,
+		"names": ["Berlin"]
+	},
+	{
+		"x": 453,
+		"y": 479,
+		"names": ["Copenhagen"]
+	},
+	{
+		"x": 528,
+		"y": 370,
+		"names": ["Stockholm"]
+	},
+	{
+		"x": 426,
+		"y": 366,
+		"names": ["Oslo"]
+	},
+	{
+		"x": 617,
+		"y": 339,
+		"names": ["Helsinki"]
+	},
+	{
+		"x": 618,
+		"y": 359,
+		"names": ["Talinn"]
+	},
+	{
+		"x": 619,
+		"y": 428,
+		"names": ["Riga"]
+	},
+	{
+		"x": 582,
+		"y": 555,
+		"names": ["Warszawa", "Warsaw"]
+	},
+	{
+		"x": 682,
+		"y": 502,
+		"names": ["Minsk"]
+	},
+	{
+		"x": 702,
+		"y": 922,
+		"names": ["Athina", "Athens"]
+	},
+	{
+		"x": 794,
+		"y": 819,
+		"names": ["Istanbul"]
+	},
+	{
+		"x": 675,
+		"y": 799,
+		"names": ["Sofia"]
+	},
+	{
+		"x": 642,
+		"y": 826,
+		"names": ["Skopje"]
+	},
+	{
+		"x": 573,
+		"y": 782,
+		"names": ["Sarajevo"]
+	},
+	{
+		"x": 527,
+		"y": 736,
+		"names": ["Zagreb"]
+	},
+	{
+		"x": 572,
+		"y": 688,
+		"names": ["Budapest"]
+	},
+	{
+		"x": 49,
+		"y": 175,
+		"names": ["Reykjavik"]
+	}
+]

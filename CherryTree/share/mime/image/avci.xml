@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="image/avci">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>AVC-encoded image encapsulated in HEIF</comment>
+  <comment xml:lang="zh-Hant-TW">包裝於 HEIF 中以 AVC 編碼的影像</comment>
+  <comment xml:lang="uk">закодоване до AVC зображення, вкладене до HEIF</comment>
+  <comment xml:lang="tr">HEIF içine yerleştirilmiş AVC kodlu görüntü</comment>
+  <comment xml:lang="sv">AVC-kodad bild inkapslad i HEIF</comment>
+  <comment xml:lang="sr-Cyrl">АВЦ кодирана слика угњеждена у HEIF</comment>
+  <comment xml:lang="sq">Figurë e koduar me AVC brenda në HEIF</comment>
+  <comment xml:lang="sl">Slika, kodirana z AVC, ovita v HEIF</comment>
+  <comment xml:lang="ru">AVC-закодированное изображение, упакованное в формат HEIF</comment>
+  <comment xml:lang="ro">imagine codificată AVC încapsulată în HEIF</comment>
+  <comment xml:lang="pt-BR">Imagem codificada com AVC encapsulada em HEIF</comment>
+  <comment xml:lang="pl">Obraz zakodowany jako AVC zawarty w HEIF</comment>
+  <comment xml:lang="oc">imatge codat en AVC encapsulat dins HEIF</comment>
+  <comment xml:lang="ko">AVC 인코딩 이미지, HEIF 형식</comment>
+  <comment xml:lang="kk-Cyrl">HEIF ішіне салынған AVC-кодталған суреті</comment>
+  <comment xml:lang="hr">AVC kodirana slika smještena u HEIF formatu</comment>
+  <comment xml:lang="fr">Image encodée AVC encapsulée dans HEIF</comment>
+  <comment xml:lang="fi">AVC-koodattu HEIF-kuva</comment>
+  <comment xml:lang="et">AVC-kodeeringus pilt HEIF-konteineris</comment>
+  <comment xml:lang="en-GB">AVC-encoded image encapsulated in HEIF</comment>
+  <comment xml:lang="de">AVC-kodiertes Bild im HEIF-Format</comment>
+  <comment xml:lang="bg">Изображение — кодирано в AVC, HEIF контейнер</comment>
+  <comment xml:lang="ar">صورة مرمزة بتقنية AVC ومغلفة بتنسيق HEIF</comment>
+  <glob pattern="*.avci"/>
+</mime-type>

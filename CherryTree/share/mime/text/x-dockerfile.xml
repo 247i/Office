@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/x-dockerfile">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Docker container build file</comment>
+  <comment xml:lang="zh-Hant-TW">Docker 容器建置檔案</comment>
+  <comment xml:lang="uk">файл збирання контейнера Docker</comment>
+  <comment xml:lang="tr">Docker kapsayıcısı yapı dosyası</comment>
+  <comment xml:lang="sv">Byggfil för Docker-behållare</comment>
+  <comment xml:lang="sr-Cyrl">Датотека изградње Докер контејнера</comment>
+  <comment xml:lang="sq">Kartelë montimi kontejneri Docker</comment>
+  <comment xml:lang="sl">Datoteka gradnje vsebnika Docker</comment>
+  <comment xml:lang="ru">Файл сборки контейнера Docker</comment>
+  <comment xml:lang="ro">fișier de construire a containerului Docker</comment>
+  <comment xml:lang="pt-BR">Arquivo de construção de contêiner Docker</comment>
+  <comment xml:lang="pl">Plik budowania kontenera Docker</comment>
+  <comment xml:lang="oc">Fichièr de construccion de contenedor Docker</comment>
+  <comment xml:lang="ko">Docker 컨테이너 빌드 파일</comment>
+  <comment xml:lang="kk-Cyrl">Docker контейнерін құрастыру файлы</comment>
+  <comment xml:lang="hr">Datoteka za izgradnju Docker kontejnera</comment>
+  <comment xml:lang="fr">Fichier de construction de conteneur Docker</comment>
+  <comment xml:lang="fi">Docker-koontitiedosto</comment>
+  <comment xml:lang="et">Dockeri konteineri kompileerimisjuhend</comment>
+  <comment xml:lang="es">archivo de generación de contenedor de Docker</comment>
+  <comment xml:lang="en-GB">Docker container build file</comment>
+  <comment xml:lang="de">Docker-Container-Erstellungsdatei</comment>
+  <comment xml:lang="ar">ملف بناء حاوية Docker</comment>
+  <sub-class-of type="text/plain"/>
+  <glob pattern="Dockerfile"/>
+  <glob pattern="*.Dockerfile"/>
+  <glob pattern="Dockerfile.*"/>
+</mime-type>

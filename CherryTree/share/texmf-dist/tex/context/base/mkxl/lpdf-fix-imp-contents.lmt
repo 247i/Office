@@ -1,0 +1,1126 @@
+if not modules then modules = { } end modules ['lpdf-fix-imp-contents'] = {
+    version   = 1.001,
+    comment   = "companion to lpdf-ini.mkiv",
+    author    = "Hans Hagen, PRAGMA-ADE, Hasselt NL",
+    copyright = "PRAGMA ADE / ConTeXt Development Team",
+    license   = "see context related readme files"
+}
+
+-- This is preliminary code. The \PDF\ inclusion interface has never been designed
+-- for manipulation so we need to cheat every now and then and signal what objects
+-- are adapted. It's okay but a nicer interface is on the agenda so that the __raw__
+-- trickery gets hidden.
+
+-- See compactors-preset.lua for examples of compactor specifications.
+
+local trace_fixes      = false  trackers.register("graphics.fixes",    function(v) trace_fixes     = v end)
+local trace_operators  = false  trackers.register("graphics.operators",function(v) trace_operators = v end)
+
+local report_fixes = logs.reporter("graphics","fixes")
+
+local type, tonumber = type, tonumber
+local char = string.char
+local setmetatableindex, setmetatablecall, sortedhash, concat, insert = table.setmetatableindex, table.setmetatablecall, table.sortedhash, table.concat, table.insert
+local round = math.round
+local numbertostring = string.f6
+
+local expanded = lpdf.epdf.expanded
+
+local function invalid_rgb(r, g, b)
+    return
+        type(r) ~= "number" or r < 0 or r > 1 or
+        type(g) ~= "number" or g < 0 or g > 1 or
+        type(b) ~= "number" or b < 0 or b > 1
+end
+
+local function invalid_cmyk(c, m, y, k)
+    return
+        type(c) ~= "number" or c < 0 or c > 1 or
+        type(m) ~= "number" or m < 0 or m > 1 or
+        type(y) ~= "number" or y < 0 or y > 1 or
+        type(k) ~= "number" or k < 0 or k > 1
+end
+
+local function fix_image_colorspace(v)
+    if not v.__content_remapped__ then
+        local objref = false
+        local space  = v.__raw__.ColorSpace
+        if space == "DeviceCMYK" then
+            objref = backends.registered.pdf.codeinjections.defaultprofile(4)
+        elseif space == "DeviceRGB" then
+            objref = backends.registered.pdf.codeinjections.defaultprofile(3)
+        elseif space == "DeviceGray" then
+            objref = backends.registered.pdf.codeinjections.defaultprofile(1)
+        else
+         -- inspect(space) -- indexed, has to be done with the global intent
+            return
+        end
+        if objref then
+            v.__raw__.ColorSpace = { lpdf.epdf.objectcodes.lpdf, lpdf.reference(objref) }
+            v.__content_remapped__ = true
+            return true
+        end
+    end
+end
+
+-- compactor.strip.colorspace = "cmyk"
+
+local function fix_form_colorspace(v,newspace)
+    if newspace == "cmyk" then
+        newspace = "DeviceCMYK"
+    elseif newspace == "rgb" then
+        newspace ="DeviceRGB"
+    elseif newspace == "gray" then
+        newspace = "DeviceGray"
+    else
+        return
+    end
+    local space = v.__raw__.ColorSpace
+    if space then
+        v.__raw__.ColorSpace = newspace
+        v.__content_remapped__ = true
+        return true
+    end
+    local group = v.Group
+    if group then
+        space = group.CS
+        if space ~= newspace then
+            group.__raw__.CS = newspace
+            v.Group = group
+            v.__content_remapped__ = true
+            return true
+        end
+    end
+end
+
+-- mask clean up code has been removed .. to big of a mess
+
+do
+
+    function document.pdf_strip_page(pdfdoc,page,pagenumber,resources,compactor)
+        if resources then
+            local group_done      = compactor.strip.group       and 0 or false
+            local extgstate_done  = compactor.strip.extgstate   and 0 or false
+            local metadata_done   = compactor.strip.metadata    and 0 or false
+            local properties_done = compactor.strip.properties  and 0 or false
+            local colorspace_done = compactor.strip.colorspace  and 0 or false
+            local procset_done    = compactor.cleanup.procset   and 0 or false
+            local pieceinfo_done  = compactor.cleanup.pieceinfo and 0 or false
+            local smask_done      = compactor.report.smask      and 0 or false
+            if group_done and page.__raw__.Group then
+                page     .__raw__.Group = nil group_done = group_done + 1
+                resources.__raw__.Group = nil group_done = group_done + 1
+            end
+            if extgstate_done  and resources.__raw__.ExtGState  then resources.__raw__.ExtGState  = nil extgstate_done  = extgstate_done  + 1 end
+            if properties_done and resources.__raw__.Properties then resources.__raw__.Properties = nil properties_done = properties_done + 1 end
+            if smask_done      and resources.__raw__.SMask      then                                    smask_done      = smask_done      + 1 end
+            if procset_done    and resources.__raw__.ProcSet    then resources.__raw__.ProcSet    = nil procset_done    = procset_done    + 1 end
+            if pieceinfo_done  and resources.__raw__.PieceInfo  then resources.__raw__.PieceInfo  = nil pieceinfo_done  = pieceinfo_done  + 1 end
+            -- todo : recursely do xforms, only do when not yet done
+            local x = resources.XObject
+            local f = resources.Font
+            if x or f then
+                local function strip(v)
+                    if not v.__raw__ then
+                        report_fixes("weird object")
+                        return
+                    end
+                    if group_done     and v.__raw__.Group     then v.__raw__.Group     = nil group_done     = group_done     + 1 end
+                    if extgstate_done and v.__raw__.ExtGState then v.__raw__.ExtGState = nil extgstate_done = extgstate_done + 1 end
+                    if metadata_done  and v.__raw__.Metadata  then v.__raw__.Metadata  = nil metadata_done  = metadata_done  + 1 end
+                    if smask_done     and v.__raw__.SMask     then                           smask_done     = smask_done     + 1 end
+                    if pieceinfo_done and v.__raw__.PieceInfo then v.__raw__.PieceInfo = nil pieceinfo_done = pieceinfo_done + 1 end
+                    --
+                    local subtype = v.__raw__.Subtype
+                    if subtype == "Image" then
+                        if colorspace_done then
+                            if fix_image_colorspace(v) then
+                               colorspace_done = colorspace_done + 1
+                            end
+                        end
+                    elseif subtype == "Form" then
+                        if colorspace_done then
+                            if fix_form_colorspace(v,compactor.strip.colorspace) then
+                               colorspace_done = colorspace_done + 1
+                            end
+                        end
+                    end
+                    --
+                    local r = v.Resources
+                    if r and not r.__resources_processed__ then
+                        r.__resources_processed__ = true
+                        if procset_done and r.__raw__.ProcSet then
+                            r.__raw__.ProcSet = nil
+                            procset_done = procset_done + 1
+                        end
+                        local x = r.XObject
+                        if x then
+                            for k, v in expanded(x) do
+                                strip(v)
+                            end
+                        end
+                        v.Resources = r
+                    elseif subtype == "Form" then
+                        report_fixes("todo: here we have a test case")
+                     -- v.Resources = { lpdf.epdf.objectcodes.lpdf, lpdf.checkedresources() }
+                    end
+                end
+                if x then
+                    for k, v in expanded(x) do
+                        strip(v)
+                    end
+                end
+                if f then
+                    for k, v in expanded(f) do
+                        if v.Type == "Font" and v.Subtype == "Type3" then
+                            strip(v)
+                        end
+                    end
+                end
+            end
+            if trace_fixes and (group_done or extgstate_done or metadata_done or properties_done or smask_done or colorspace_done or procset_done or pieceinfo_done) then
+                report_fixes(
+                    "page %i of %a cleaned up resources, %i groups, %i graphic states, %i metadata, %i properties, %i colorspaces, %i smasks, %i procsets, %i pieceinfo",
+                    pagenumber,file.basename(pdfdoc.filename),
+                    group_done      or 0,
+                    extgstate_done  or 0,
+                    metadata_done   or 0,
+                    properties_done or 0,
+                    colorspace_done or 0,
+                    smask_done      or 0,
+                    procset_done    or 0,
+                    pieceinfo_done  or 0
+                )
+            end
+        end
+
+        -- test
+-- if pagenumber == 1 then
+--     print(pdfdoc.Catalog.StructTreeRoot)
+-- end
+    end
+
+end
+
+do
+
+    local tocidsetdictionary = lpdf.tocidset
+
+    -- todo: recurse into xforms
+
+    local function pdf_cleanup_cidsets(pdfdoc,page,pagenumber,resources,compactor,action)
+        local f = resources.Font
+        local x = resources.XObject
+        if f then
+            local done = document.cidsetdone or { }
+            document.cidsetdone = done
+            for k, v in next, f.__raw__ do
+                local objref = v[1] == lpdf.epdf.objectcodes.reference and v[3]
+                if objref and not done[objref] then
+                    done[objref] = true
+                    --
+                    local v = pdfdoc.objects[objref]
+                    if v.Subtype ~= "Type0" then
+                        goto DONE
+                    end
+                    local d = v.DescendantFonts
+                    if not d then
+                        goto DONE
+                    end
+                    local vd = false
+                    local fd = false
+                    if d then
+                        if #d == 1 then
+                            vd = d[1]
+                            fd = vd.FontDescriptor
+                        end
+                    else
+                        vd = v
+                        fd = vd.FontDescriptor
+                    end
+                    if not fd then
+                        goto DONE
+                    end
+                    if action == "remove" and fd.CIDSet then
+                        local object = pdfdoc.objects[vd.__raw__.FontDescriptor]
+                        if object then
+                            object.__raw__.CIDSet = nil -- maybe just { } as signal
+                        end
+                    elseif action == "add" and not fd.CIDSet then
+                        local w = vd.W
+                        if w then
+                            local u, min, max = lpdf.epdf.expandwidths(w())
+                            local c = tocidsetdictionary(u,min,max)
+                            local o = lpdf.flushstreamobject(c)
+                            local r = lpdf.reference(o)
+                            -- load the object
+                            local object = pdfdoc.objects[vd.__raw__.FontDescriptor]
+                            if object then
+                                if trace_fixes then
+                                    report_fixes(
+                                        "page %i of %a, font %a, adding CIDSet",
+                                        pagenumber,file.basename(pdfdoc.filename),v.BaseFont
+                                    )
+                                end
+                                object.__raw__.CIDSet = { lpdf.epdf.objectcodes.lpdf, r }
+                            end
+                        end
+                    end
+                    if not vd.__raw__.CIDToGIDMap then
+                        if trace_fixes then
+                            report_fixes(
+                                "page %i of %a, font %a, adding CIDToGIDMap",
+                                pagenumber,file.basename(pdfdoc.filename),v.BaseFont
+                            )
+                        end
+                        vd.__raw__.CIDToGIDMap = { lpdf.epdf.objectcodes.lpdf, lpdf.constant("Identity") }
+                    end
+                    --
+                end
+              ::DONE::
+            end
+        end
+        if x then
+            for k, v in expanded(x) do
+                local resources = v.Resources
+                if resources and not resources.__resources_cidsets_cleanedup__ then
+                    resources.__resources_cidsets_cleanedup__ = true
+                    pdf_cleanup_cidsets(pdfdoc,page,pagenumber,resources,compactor,action)
+                end
+            end
+        end
+    end
+
+    function document.pdf_cleanup_cidsets(pdfdoc,page,pagenumber,resources,compactor)
+        if resources then
+            local action = false
+            if lpdf.majorversion() > 1 then
+                action = "remove"
+            elseif compactor.cleanup.cidset then
+                action = "remove"
+            elseif compactor.add.cidset then
+                action = "add"
+            end
+            if action then
+                pdf_cleanup_cidsets(pdfdoc,page,pagenumber,resources,compactor,action)
+            end
+        end
+    end
+
+end
+
+do
+
+    local function pdf_cleanup_procsets(pdfdoc,page,pagenumber,resources,compactor)
+        resources.__raw__.ProcSet = nil
+        --
+        local x = resources.XObject
+        if x then
+            for k, v in expanded(x) do
+                local resources = v.Resources
+                if resources and not resources.__resources_procsets_cleanedup__ then
+                    resources.__resources_procsets_cleanedup__ = true
+                    pdf_cleanup_procsets(pdfdoc,page,pagenumber,resources,compactor)
+                end
+            end
+        end
+    end
+
+    function document.pdf_cleanup_procsets(pdfdoc,page,pagenumber,resources,compactor)
+        if resources then
+            if lpdf.majorversion() > 1 or lpdf.minorversion() > 3 then
+                pdf_cleanup_procsets(pdfdoc,page,pagenumber,resources,compactor)
+            end
+        end
+    end
+
+end
+
+do
+
+    local cmyktorgb  = attributes.colors.cmyktorgb
+    local cmyktogray = attributes.colors.cmyktogray
+    local rgbtocmyk  = attributes.colors.rgbtocmyk
+    local rgbtogray  = attributes.colors.rgbtogray
+
+--     local remapcmyk = { }
+
+    local function reducecmyk(c,op)
+        local c1 = tonumber(c[1])
+        local c2 = tonumber(c[2])
+        local c3 = tonumber(c[3])
+        local c4 = tonumber(c[4])
+        local cc = c1 == c2 and c2 == c3
+        if cc then
+            if c1 == 0 then
+                -- no color, only black
+                c[1] = numbertostring(1 - c4)
+            elseif c1 == 1 then
+                -- brownish, so assume black
+                c[1] = "0"
+            else
+                c4 = c4 + c1
+                c[1] = c4 > 1 and "0" or numbertostring(1 - c4)
+            end
+            c[2] = op == "K" and "G" or "g"
+            c[3] = nil
+            c[4] = nil
+            c[5] = nil
+     -- else -- can be an option
+     --     local r, g, b = cmyktorgb(c1,c2,c3,c4)
+     --     c[1] = numbertostring(r)
+     --     c[2] = numbertostring(g)
+     --     c[3] = numbertostring(b)
+     --     c[4] = op == "K" and "RG" or "rg"
+     --     c[5] = nil
+        end
+    end
+
+    local function reducergb(c,op)
+        local c1 = c[1]
+        local c2 = c[2]
+        local c3 = c[3]
+        if c1 == c2 and c2 == c3 then
+            c[1] = c1
+            c[2] = op == "rg" and "g" or "G"
+            c[3] = nil
+            c[4] = nil
+        end
+    end
+
+    local cmykmap = false
+    local cmykfun = false
+    local rgbmap = false
+    local rgbfun = false
+
+    local function convertcmyk(c,op)
+        local c1 = tonumber(c[1])
+        local c2 = tonumber(c[2])
+        local c3 = tonumber(c[3])
+        local c4 = tonumber(c[4])
+        local cc = c1 == c2 and c2 == c3
+        if cc then
+            if c1 == 0 then
+                -- no color, only black
+                c[1] = numbertostring(1 - c4)
+            elseif c1 == 1 then
+                -- brownish, so assume black
+                c[1] = "0"
+            else
+                c4 = c4 + c1
+                c[1] = c4 > 1 and "0" or numbertostring(1 - c4)
+            end
+            c[2] = op == "K" and "G" or "g"
+            c[3] = nil
+            c[4] = nil
+            c[5] = nil
+        else -- can be an option
+            local r, g, b
+            if cmykmap then
+                -- cmykmap = {
+                --     { 1, 1, 0, 0, .5, .6. 7 } -- todo: speed up
+                -- }
+                for i=1,#cmykmap do
+                    local map    = cmykmap[i]
+                    local factor = map[1]
+                    local r1 = round(c1*factor)
+                    local r2 = round(c2*factor)
+                    local r3 = round(c3*factor)
+                    local r4 = round(c4*factor)
+                    if map[2] == r1 and map[3] == r2 and map[4] == r3 and map[5] == r4 then
+                        r = (map[6] or 0)/factor
+                        g = (map[7] or 0)/factor
+                        b = (map[8] or 0)/factor
+                        goto DONE
+                    end
+                end
+            elseif cmykfun then
+                r, g, b = cmykfun(c1,c2,c3,c4)
+                if invalid_rgb(r,g,b) then
+                    -- todo: report failed conversion
+                else
+                    goto DONE
+                end
+            end
+            r, g, b = cmyktorgb(c1,c2,c3,c4)
+         ::DONE::
+            c[1] = numbertostring(r)
+            c[2] = numbertostring(g)
+            c[3] = numbertostring(b)
+            c[4] = op == "K" and "RG" or "rg"
+            c[5] = nil
+        end
+    end
+
+    local function convertrgb(z,op)
+        local c1 = z[1]
+        local c2 = z[2]
+        local c3 = z[3]
+        if c1 == c2 and c2 == c3 then
+            z[1] = c1
+            z[2] = op == "rg" and "g" or "G"
+            z[3] = nil
+            z[4] = nil
+        else
+            local c, m, y, k
+            if rgbmap then
+                for i=1,#rgbmap do
+                    local map    = rgbmap[i]
+                    local factor = map[1]
+                    local r1 = round(c1*factor)
+                    local r2 = round(c2*factor)
+                    local r3 = round(c3*factor)
+                    if map[2] == r1 and map[3] == r2 and map[4] == r3 then
+                        c = (map[5] or 0)/factor
+                        m = (map[6] or 0)/factor
+                        y = (map[7] or 0)/factor
+                        k = (map[8] or 0)/factor
+                        goto DONE
+                    end
+                end
+            elseif rgbfun then
+                c, m, y, k = rgbfun(c1,c2,c3)
+                if invalid_cmyk(c, m, y, k) then
+                    -- todo: report failed conversion
+                else
+                    goto DONE
+                end
+            end
+            c, m, y, k = rgbtocmyk(c1,c2,c3)
+          ::DONE::
+            z[1] = numbertostring(c)
+            z[2] = numbertostring(m)
+            z[3] = numbertostring(y)
+            z[4] = numbertostring(k)
+            z[5] = op == "RG" and "K" or "k"
+        end
+    end
+
+    local g1, g2, g3, g4
+
+    local function recolorcmyk_gray(c,op)
+        local s = 1 - cmyktogray(c[1],c[2],c[3],c[4])
+        c[1] = numbertostring(s)
+        c[2] = op == "K" and "G" or "g"
+        c[3] = nil
+        c[4] = nil
+        c[5] = nil
+    end
+    local function recolorcmyk_rgb(c,op)
+        local s = 1 - cmyktogray(c[1],c[2],c[3],c[4])
+        c[1] = numbertostring(g1*s)
+        c[2] = numbertostring(g2*s)
+        c[3] = numbertostring(g3*s)
+        c[4] = op == "K" and "RG" or "rg"
+        c[5] = nil
+    end
+    local function recolorcmyk_cmyk(c,op)
+        local s = 1 - cmyktogray(c[1],c[2],c[3],c[4])
+        c[1] = numbertostring(g1*s)
+        c[2] = numbertostring(g2*s)
+        c[3] = numbertostring(g3*s)
+        c[4] = numbertostring(g4*s)
+        c[5] = op
+    end
+
+    local function recolorrgb_gray(c,op)
+        local s = 1 - rgbtogray(c[1],c[2],c[3])
+        c[1] = numbertostring(s)
+        c[2] = op == "RG" and "G" or "g"
+        c[3] = nil
+        c[4] = nil
+        c[5] = nil
+    end
+    local function recolorrgb_rgb(c,op)
+        local s = 1 - rgbtogray(c[1],c[2],c[3])
+        c[1] = numbertostring(g1*s)
+        c[2] = numbertostring(g2*s)
+        c[3] = numbertostring(g3*s)
+        c[4] = op
+        c[5] = nil
+    end
+    local function recolorrgb_cmyk(c,op)
+        local s = 1 - rgbtogray(c[1],c[2],c[3])
+        c[1] = numbertostring(g1*s)
+        c[2] = numbertostring(g2*s)
+        c[3] = numbertostring(g3*s)
+        c[4] = numbertostring(g4*s)
+        c[5] = op == "RG" and "K" or "k"
+    end
+
+    local function recolorgray_gray(c,op)
+        local s = 1 - tonumber(c[1])
+        c[1] = numbertostring(g1*s)
+        c[2] = op
+        c[3] = nil
+        c[4] = nil
+        c[5] = nil
+    end
+    local function recolorgray_rgb(c,op)
+        local s = 1 - tonumber(c[1])
+        c[1] = numbertostring(g1*s)
+        c[2] = numbertostring(g2*s)
+        c[3] = numbertostring(g3*s)
+        c[4] = op == "G" and "RG" or "rg"
+        c[5] = nil
+    end
+    local function recolorgray_cmyk(c,op)
+        local s = 1 - tonumber(c[1])
+        c[1] = numbertostring(g1*s)
+        c[2] = numbertostring(g2*s)
+        c[3] = numbertostring(g3*s)
+        c[4] = numbertostring(g4*s)
+        c[5] = op == "G" and "K" or "k"
+    end
+
+    local function removestate(c,op,contents,i)
+        -- can be made more clever
+        contents[i] = { }
+    end
+
+    local removed = false
+
+    local function removetags(c,op,contents,i)
+        local ci  = contents[i]
+        local one = ci[1]
+        if one then
+            local what = one[2]
+            if what == "Artifact" then
+             -- print("keeping artifact")
+                return -- hopefully no indirect references here
+            elseif what == "Span" then
+                -- we need a proper tohash for this
+                local two = ci[2]
+                if two then
+                    if two[1] == "dict" then -- will become "dictionary"
+                        local list = two[2]
+                        for i=1,#list,2 do
+                            local l = list[i]
+                            if l[2] == "ActualText" then
+                             -- print("keeping actualtext")
+                                return
+                            end
+                        end
+                    end
+                end
+            else
+             -- maybe also check when /MCID and then convert to /Span
+            end
+        end
+        removed = true
+        contents[i] = { }
+        if op == "BMC" or op == "BDC" then
+            local level = 1
+            for ii=i+1,#contents do
+                local c = contents[ii]
+                local o = c[#c]
+                if o == "BMC" or o == "BDC" then
+                    level = level + 1
+                elseif o == "EMC" then
+                    level = level - 1
+                    if level <= 0 then
+                        contents[ii] = { }
+                        break
+                    end
+                end
+            end
+        end
+    end
+
+    local contenttostring = lpdf.epdf.contenttostring
+    local getpagecontent  = lpdf.epdf.getpagecontent
+    local parsecontent    = lpdf.epdf.parsecontent
+
+    local function checkbt(c,op,contents,i)
+        -- ET followed by BT
+        local c = contents[i-1]
+        if c and c[i] == "ET" then
+            contents[i]   = { }
+            contents[i-1] = { }
+        end
+    end
+
+    local function checkQ(c,op,contents,i)
+        local c = contents[i-1]
+        if c and c[#c] == "q" then
+            contents[i]   = { }
+            contents[i-1] = { }
+        end
+    end
+
+--     local function checkcm(c,op,contents,i)
+--         if c and tonumber(c[1]) == 1 and tonumber(c[4]) == 1
+--              and tonumber(c[5]) == 0 and tonumber(c[6]) == 0
+--              and tonumber(c[2]) == 0 and tonumber(c[3]) == 0 then
+--             contents[i] = { }
+--         end
+--     end
+
+--  local actions = {
+--      rg  = reducergb,
+--      RG  = reducergb,
+--      k   = reducecmyk,
+--      K   = reducecmyk,
+--      gs  = removestate,
+--      GS  = removestate,
+--      BMC = removetags,
+--      EMC = removetags,
+--      BDC = removetags,
+--   -- BT  = checkbt,
+--   -- Q   = checkQ,
+--      cm  = checkcm,
+--  }
+
+    local passone = { }
+    local passtwo = { }
+
+    local function useactions(compactor)
+        local used    = { }
+        local strip   = compactor.strip
+        local reduce  = compactor.reduce
+        local convert = compactor.convert
+        local recolor = compactor.recolor
+        cmykmap = false
+        rgbmap  = false
+        cmykfun = false
+        rgbfun  = false
+        removed = false
+        passone = { }
+        passtwo = { }
+        if strip.marked then
+            -- property lists: optional content, tagged content, object metadata, associated files
+            -- if there are direct objects these need to be named in Properties in Resource
+            passone.MP  = removetags -- marked content point
+            passone.DP  = removetags -- marked content point    with properties list
+            passone.BMC = removetags -- marked content sequence
+            passone.BDC = removetags -- marked content sequence with properties list
+        --  passone.EMC = removetags -- marked content sequence end, handled in BMC BDC
+            passtwo.BT  = checkbt    -- with matching ET
+        end
+if strip.color then
+    passone.k  = removestate
+    passone.K  = removestate
+    passone.rg = removestate
+    passone.RG = removestate
+    passone.g  = removestate
+    passone.G  = removestate
+    reduce     = { }
+    convert    = { }
+end
+        if strip.extgstate then
+            passone.gs = removestate
+            passone.GS = removestate
+        end
+     -- if strip.cm then
+     --     passone.cm = checkcm
+     -- end
+        if reduce.color then
+            passone.rg = reducergb
+            passone.RG = reducergb
+            passone.k  = reducecmyk
+            passone.K  = reducecmyk
+        elseif reduce.rgb then
+            passone.rg = reducergb
+            passone.RG = reducergb
+        elseif reduce.cmyk then
+            passone.k = reducecmyk
+            passone.K = reducecmyk
+        end
+        if convert.cmyk then
+            passone.k = convertcmyk
+            passone.K = convertcmyk
+            cmykmap   = type(convert.cmyk) == "table"    and convert.cmyk or false
+            cmykfun   = type(convert.cmyk) == "function" and convert.cmyk or false
+        elseif convert.rgb then
+            passone.rg = convertrgb
+            passone.RG = convertrgb
+            rgbmap     = type(convert.rgb) == "table"    and convert.rgb or false
+            rgbfun     = type(convert.rgb) == "function" and convert.rgb or false
+        end
+        local viagray = recolor.viagray
+        if viagray then
+            g1 = viagray[1]
+            g2 = viagray[2]
+            g3 = viagray[3]
+            g4 = viagray[4]
+            if g4 then
+                passone.k  = recolorcmyk_cmyk
+                passone.K  = recolorcmyk_cmyk
+                passone.rg = recolorrgb_cmyk
+                passone.RG = recolorrgb_cmyk
+                passone.g  = recolorgray_cmyk
+                passone.G  = recolorgray_cmyk
+            elseif g3 then
+                passone.k  = recolorcmyk_rgb
+                passone.K  = recolorcmyk_rgb
+                passone.rg = recolorrgb_rgb
+                passone.RG = recolorrgb_rgb
+                passone.g  = recolorgray_rgb
+                passone.G  = recolorgray_rgb
+            elseif g1 then
+                passone.k  = recolorcmyk_gray
+                passone.K  = recolorcmyk_gray
+                passone.rg = recolorrgb_gray
+                passone.RG = recolorrgb_gray
+                passone.g  = recolorgray_gray
+                passone.G  = recolorgray_gray
+            end
+        else
+            g1, g2, g3, g4 = nil, nil, nil, nil
+        end
+     -- if strip.redundant then
+     --     passtwo.Q   = checkQ
+     -- end
+        if compactor.identify == "all" then
+            compactor.identify= {
+                content   = true,
+                resources = true,
+                page      = true,
+            }
+        end
+    end
+
+    local identify_content
+
+    identify_content = function(pdfdoc,contents,fonts,xobjects,counts)
+        if contents then
+            for i=1,#contents do
+                local ci = contents[i]
+                if ci then
+                    local op = ci[#ci]
+                    if op then
+                        counts[op] = counts[op] + 1
+                        if xobjects and op == "Do" then
+                            -- can be recursive
+                            local object = xobjects[ci[1][2]]
+                            if object then
+                                local subtype = object.Subtype
+                                if subtype == "Form" then
+                                    if not object.__content_remapped__ then
+                                        local r = object.Resources
+                                        if r then
+                                            local contents = object()
+                                            local fonts    = r.Font
+                                            local xobjects = r.XObject
+                                            if contents then
+                                                contents = parsecontent(contents,true)
+                                                if contents then
+                                                    identify_content(pdfdoc,contents,fonts,xobjects,counts)
+                                                end
+                                            end
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+
+    local function countoperators(pdfdoc,contents,fonts,xobjects,pagenumber,when)
+        local counts = setmetatableindex("number")
+        identify_content(pdfdoc,contents,fonts,xobjects,counts)
+        report_fixes("page %i of file %a: %s",pagenumber,pdfdoc.filename,when)
+        for k, v in sortedhash(counts) do
+            report_fixes("%4i : %s",v,k)
+        end
+    end
+
+    local strip_content
+
+    local function form(pdfdoc,object,pagenumber,compactor)
+        if not object.__content_remapped__ then
+            local r = object.Resources
+            if r then
+                local contents = object()
+                local fonts    = r.Font
+                local xobjects = r.XObject
+                if contents then
+                    contents = parsecontent(contents,true)
+                    if contents then
+                        contents = strip_content(pdfdoc,contents,fonts,xobjects,pagenumber,compactor)
+                        contents = contenttostring(contents)
+                        local compressed = lpdf.compressdata(contents) -- how about encryption
+                        if compressed then
+                            contents = compressed
+                            object.__raw__.Filter = "FlateDecode"
+                        else
+                            object.__raw__.Filter = nil
+                        end
+                        object.__raw__.Length = #contents
+                        getmetatable(object).__call = function() return contents end
+                        object.__content_remapped__ = true
+                    end
+                end
+            end
+        end
+    end
+
+    local function image(pdfdoc,object,pagenumber,compactor)
+        if compactor.strip.colorspace and fix_image_colorspace(object) then
+         -- c_done = c_done + 1
+        end
+    end
+
+    local function collapse(contents)
+        local j = false
+        for i=1,#contents do
+            local c = contents[i]
+            if not c or #c == 0 then
+                if not j then
+                    j = i - 1
+                end
+            elseif j then
+                j = j + 1
+                contents[j] = c
+            end
+        end
+        if j then
+            for i=#contents,j+1,-1 do
+                contents[i] = nil
+            end
+        end
+    end
+
+    local nocontent = {
+        k   = true, K   = true,
+        g   = true, G   = true,
+        rg  = true, RG  = true,
+        gs  = true,
+        cm  = true,
+        w   = true,
+        q   = true, Q   = true,
+        cs  = true, CS  = true,
+        d   = true,
+        i   = true,
+        j   = true,
+        J   = true,
+        sc  = true, SC  = true,
+        scn = true, SCN = true,
+        Tc  = true,
+        TL  = true,
+        Tr  = true,
+        Ts  = true,
+        Tw  = true,
+        Tz  = true,
+    }
+
+    strip_content = function(pdfdoc,contents,fonts,xobjects,pagenumber,compactor)
+        if contents then
+            for i=1,#contents do
+                local ci = contents[i]
+                local op = ci[#ci]
+                local action = passone[op]
+                if action then
+                    action(ci,op,contents,i)
+                elseif xobjects and op == "Do" then
+                    -- can be recursive
+                    local object = xobjects[ci[1][2]]
+                    if object then
+                        local subtype = object.Subtype
+                        if subtype == "Form" then
+                            form(pdfdoc,object,pagenumber,compactor)
+                        end
+                        if subtype == "Image" then
+                            image(pdfdoc,object,pagenumber,compactor)
+                        end
+                    end
+                end
+            end
+            if next(passtwo) then
+                if removed then
+                    collapse(contents)
+                end
+                for i=1,#contents do
+                    local ci = contents[i]
+                    local op = ci[#ci]
+                    local action = passtwo[op]
+                    if action then
+                        action(ci,op,contents,i)
+                    end
+                end
+             -- collapse(contents)
+            end
+            --
+            -- not yet done: q q ... Q Q
+            --
+            local strip = compactor.strip
+            if strip and (strip.identitycm or strip.pollution) then
+                local last    = false
+                local removed = false
+                --
+                if strip.pollution then
+                    for i=1,#contents do
+                        local ci = contents[i]
+                        local op = ci[#ci]
+                        if op == "q" then
+                            last = i
+                        elseif op == "Q" then
+                            if last then
+                                if last == i - 1 then
+                                    contents[last] = { }
+                                    contents[i] = { }
+                                else
+                                    for j=last,i do
+                                        contents[j] = { }
+                                    end
+                                end
+                                removed = true
+                                last = false
+                            end
+                        elseif not nocontent[op] then
+                            last = false
+                        end
+                    end
+                end
+                if strip.identitycm then
+                    for i=1,#contents do
+                        local ci = contents[i]
+                        local op = ci[#ci]
+                        if op == "cm" then
+                            if tonumber(ci[1]) == 1 and tonumber(ci[4]) == 1 and tonumber(ci[5]) == 0 and tonumber(ci[6]) == 0 and tonumber(ci[2]) == 0 and tonumber(ci[3]) == 0 then
+                                contents[i] = { }
+                                removed = true
+                            end
+                        end
+                    end
+                end
+                --
+                if removed then
+                    collapse(contents)
+                end
+            end
+            --
+            return contents
+        end
+    end
+
+    local function strip_content_needed(pdfdoc,page,pagenumber,resources,compactor)
+        compactor = table.fastcopy(compactor)
+        setmetatableindex(compactor,"table")
+        local strip  = compactor.strip
+        local marked = strip.marked
+        if marked == "force" then
+            -- always
+        elseif marked and pdfdoc.Catalog.StructTreeRoot then
+            report_fixes("page %i of file %a: %s (structure tree %s)",pagenumber,pdfdoc.filename,"stripping tags","found")
+        elseif marked == "page" then
+            local contents = lpdf.epdf.allcontent(page.Contents or "") -- unparsed string
+            if string.find(contents,"/MCID%s%d+*") then
+                report_fixes("page %i of file %a: %s (structure tree %s)",pagenumber,pdfdoc.filename,"stripping tags","missing")
+            else
+                strip.marked = nil
+            end
+        else
+            strip.marked = nil
+        end
+        return
+            compactor, (
+                next(compactor.strip)
+             or next(compactor.reduce)
+             or next(compactor.convert)
+             or next(compactor.recolor)
+            ) and true or false
+    end
+
+    -- two compactors: one for content, one for resources etc
+
+    function document.pdf_identify_content(pdfdoc,page,pagenumber,resources,compactor)
+
+        local function getcontents()
+            local contents = pdfdoc.currentcontents
+            if not contents then
+                contents = getpagecontent(pdfdoc,pagenumber,true,true)
+                pdfdoc.currentcontents = contents
+            end
+            return contents
+        end
+
+        local function setcontents(contents)
+            if contents then
+                pdfdoc.currentcontents = contents
+            end
+        end
+
+        pdfdoc.getcontents = getcontents
+        pdfdoc.setcontents = setcontents
+
+        if compactor.identify.content or compactor.identify == "all" then
+            local fonts    = resources.Font
+            local xobjects = resources.XObject
+            local contents = pdfdoc.getcontents()
+            if contents then
+                if trace_operators then
+                    countoperators(pdfdoc,contents,fonts,xobjects,pagenumber,"before")
+                end
+            end
+        end
+    end
+
+    function document.pdf_strip_content(pdfdoc,page,pagenumber,resources,compactor)
+        local compactor, needed = strip_content_needed(pdfdoc,page,pagenumber,resources,compactor)
+        if needed then
+            local contents = pdfdoc.getcontents()
+            if contents then
+                local fonts    = resources.Font
+                local xobjects = resources.XObject
+                useactions(compactor)
+                if g1 then
+                    insert(contents,1,{ 0, "G" })
+                    insert(contents,1,{ 0, "g" })
+                end
+                contents = strip_content(pdfdoc,contents,fonts,xobjects,pagenumber,compactor)
+local strip = compactor.strip
+if strip then
+    local color= strip.color
+    if type(color) == "table" then
+        local c1 = color[1]
+        local c2 = color[2]
+        local c3 = color[3]
+        if c3 then
+            insert(contents,1,{ c1, c2, c3, "RG" })
+            insert(contents,1,{ c1, c2, c3, "rg" })
+        elseif c1 then
+            insert(contents,1,{ c1, "G" })
+            insert(contents,1,{ c1, "g" })
+        end
+    end
+end
+                resources.Font = fonts -- really needed (or maybe not here)
+                pdfdoc.setcontents(contents)
+            end
+        end
+    end
+
+    function document.pdf_serialize_content(pdfdoc,page,pagenumber,resources,compactor)
+        local contents = pdfdoc.getcontents()
+        if contents then
+            if trace_operators then
+                countoperators(pdfdoc,contents,fonts,xobjects,pagenumber,"after")
+            end
+            page.Contents = contenttostring(contents)
+            pdfdoc.currentcontents = nil
+            pdfdoc.getcontents = nil
+            pdfdoc.setcontents = nil
+        end
+    end
+
+end
+
+utilities.sequencers.appendaction("pdfcontentmanipulators","before","document.pdf_identify_content")
+utilities.sequencers.appendaction("pdfcontentmanipulators","system","document.pdf_strip_content")
+utilities.sequencers.appendaction("pdfcontentmanipulators","after", "document.pdf_serialize_content")
+
+utilities.sequencers.enableaction("pdfcontentmanipulators","document.pdf_identify_content")
+utilities.sequencers.enableaction("pdfcontentmanipulators","document.pdf_strip_content")
+utilities.sequencers.enableaction("pdfcontentmanipulators","document.pdf_serialize_content")
+
+utilities.sequencers.appendaction("pdfpagemanipulators","after","document.pdf_strip_page")
+utilities.sequencers.appendaction("pdfpagemanipulators","after","document.pdf_cleanup_cidsets")
+utilities.sequencers.appendaction("pdfpagemanipulators","after","document.pdf_cleanup_procsets")
+
+utilities.sequencers.enableaction("pdfpagemanipulators","document.pdf_strip_page")
+utilities.sequencers.enableaction("pdfpagemanipulators","document.pdf_cleanup_cidsets")
+utilities.sequencers.enableaction("pdfpagemanipulators","document.pdf_cleanup_procsets")

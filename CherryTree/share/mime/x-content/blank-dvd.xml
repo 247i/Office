@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="x-content/blank-dvd">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Blank DVD disc</comment>
+  <comment xml:lang="zh-Hant-TW">空白 DVD 光碟</comment>
+  <comment xml:lang="uk">порожній диск DVD</comment>
+  <comment xml:lang="tr">Boş DVD diski</comment>
+  <comment xml:lang="sv">Tom dvd-skiva</comment>
+  <comment xml:lang="sr-Cyrl">Празан ДВД диск</comment>
+  <comment xml:lang="sq">Disk DVD i pashkruar</comment>
+  <comment xml:lang="sl">Prazen disk DVD</comment>
+  <comment xml:lang="ru">Чистый диск DVD</comment>
+  <comment xml:lang="ro">DVD în alb</comment>
+  <comment xml:lang="pt-BR">Disco DVD vazio</comment>
+  <comment xml:lang="pl">Pusta płyta DVD</comment>
+  <comment xml:lang="oc">DVD verge</comment>
+  <comment xml:lang="nn">Tom DVD-plate</comment>
+  <comment xml:lang="lt">Tuščias DVD diskas</comment>
+  <comment xml:lang="ko">빈 DVD 디스크</comment>
+  <comment xml:lang="kk-Cyrl">Таза DVD дискі</comment>
+  <comment xml:lang="kab">Aḍebsi DVD ilem</comment>
+  <comment xml:lang="ja">空 DVD</comment>
+  <comment xml:lang="it">Disco vuoto DVD</comment>
+  <comment xml:lang="id">Cakram DVD kosong</comment>
+  <comment xml:lang="hr">Prazni DVD disk</comment>
+  <comment xml:lang="hi">खाली DVD डिस्क</comment>
+  <comment xml:lang="gl">Disco de DVD en branco</comment>
+  <comment xml:lang="fur">Disc DVD vueit</comment>
+  <comment xml:lang="fr">DVD vierge</comment>
+  <comment xml:lang="fi">Tyhjä DVD</comment>
+  <comment xml:lang="eu">DVD disko hutsa</comment>
+  <comment xml:lang="et">Tühi DVD-plaat</comment>
+  <comment xml:lang="es">disco DVD vacío</comment>
+  <comment xml:lang="en-GB">Blank DVD disc</comment>
+  <comment xml:lang="de">leere DVD</comment>
+  <comment xml:lang="ca">disc DVD en blanc</comment>
+  <comment xml:lang="bg">Празен DVD — диск</comment>
+  <comment xml:lang="be-Cyrl">чысты дыск DVD</comment>
+  <comment xml:lang="ar">قرص DVD فارغ</comment>
+  <comment xml:lang="af">Skoon DVD-skyf</comment>
+</mime-type>

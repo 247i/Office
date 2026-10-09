@@ -1,0 +1,387 @@
+%D \module
+%D   [     file=t-calendar-examples.tex,
+%D      version=2023.04.15,
+%D        title=Calendar examples based on PocketDiary,
+%D     subtitle=A5/A6 format, 1 week per 2 facing pages,
+%D       author=W. Egger,
+%D         date=\currentdate,
+%D    copyright=W. Egger,
+%D      license=Public Domain]
+
+%D This is an example of how to use the PocketDiary-module outside the built-in
+%D structure of a PocketDiary.
+%D In order to use this example you need to have the PocketDiary-module
+%D installed from:
+%D https://modules.contextgarden.net/cgi-bin/module.cgi/action=view/id=132
+%D If you want collating marks placed on the outermost sheet of a section, 
+%D then you need to install also the Collatingmarks-module from:
+%D https://modules.contextgarden.net/cgi-bin/module.cgi/action=view/id=129
+%D The used imposition scheme is contained in the \CONTEXT\ distro.
+
+%D This is an example how to prepare a calendar, where two facing pages carry
+%D one week as a table. Saturday and Sunday are placed together in one row.
+%D The header contains the month name to the left and the week number and the
+%D year to the right.
+%D The footer contains three fields. The first contains the job-name, the center
+%D field shows the page number, the right field is not filled. -- However 
+%D this can easily be changed in the variable set "PocketDiaryFooter".
+%D Each row of the week-table shows top left the day number followed by the short
+%D name of the day. Next to this the ordinal day number of the year is typeset.
+%D If the day in question is a Christian holiday, then its name is placed next
+%D to the general information.
+%D This example supports 6 languages i.e. English, German, Dutch, French,
+%D Italian and Spanish. The respective interface is activated by enabling the
+%D respective mode
+%D The original idea was to have an A6 calendar, where 4 pages are print on the
+%D A4 paper. This is activated by enabling the mode "A6". By activating the mode
+%D "A5" the calendar is prepared A5 sized on a A4 landscape paper.
+%D Because there are astronomical data concerning the sun rise, sun set times it
+%D is necessary to fill in the correct geo-positional data in the variable set
+%D "PocketDiaryGeoPosition".
+
+%D Load the PocketDiary module
+
+\usemodule[pocketdiary]
+
+%D Load the Collating marks module
+
+\usemodule[collatingmarks][Collatingmarks=yes]
+ 
+%D Define the modes for the different formats
+
+\definemode[A5,A6][keep]
+
+%D Enable the desired format of the calendar
+
+\enablemode[A5]
+
+%D Set the interface language which includes EN,DE,NL,FR,IT,ES
+
+\mainlanguage[en]
+
+%D Setup the variable sets for the PocketDiary module
+
+\setvariables
+  [PocketDiary]
+  [Year=2020,
+   Week=1,
+   Day=1,
+   Month=1,
+   Nextyear=yes]
+
+\setvariables
+  [PocketDiaryFooter]
+  [Lefttext={\jobname .pdf},
+   Centertext=\pagenumber,
+   Righttext=]
+
+\setvariables
+  [PocketDiaryColors]
+  [Separatorline=blue,
+   Gridline={s=.75}]
+
+\setvariables %Koziegłowy 52.467860 16.981240
+  [PocketDiaryGeoPosition]
+  [lat=52.467860, 
+   lon=16.981240,
+   timezoneoffset=1,
+   continent=EU] % Eu, US or empty for no Daylight Saving Time (DST)
+
+\setvariables
+  [PocketDiaryAddress]
+  [Familyname=YourFamilyName,
+   Forename=YourName,
+   Street=YourStreet and Number,
+   Zipcode=YourPostalCode,
+   City=YourPlace,
+   Country=YourCountry,
+   Phone=YourPhoneNumber,
+   Mobile=YourMobilePhoneNumber,
+   E-mail=YourEmail@YourProvider,
+   Web=YourWWW]
+
+%D Setup the desired font to be used
+
+\setupbodyfont[ibmplex,ss,10pt]
+
+\definefontfeature[f:Tabular][tnum=yes]
+
+\addfeature[f:Tabular]
+
+%D Make the document doublesided, switch off the page numbering. The latter
+%D is done in the PocketDiary footer setup
+
+\setuppagenumbering[alternative=doublesided,location=]
+
+\setuplayout
+  [topspace=.6cm,
+   backspace=1cm,
+   header=2\bodyfontsize,
+   headerdistance=.5\bodyfontsize,
+   footer=1.2\bodyfontsize,
+   footerdistance=.5\bodyfontsize,
+   margin=0pt,
+   height=middle,
+   width=middle,
+   location=middle,
+   marking=on]
+
+%D Elaborate the definitions for the A6 format
+
+\startmode[A6]
+  \definepapersize[Agenda][width=100mm,height=140mm]
+
+  \setuppapersize[Agenda][A4,portrait]
+	% \setuppapersize[Agenda][Agenda]
+  
+	% The vertical page-shift enables to make a 2.5mm cut at the head of the
+	% section
+  \definepageshift
+    [ver]
+    [vertical]
+    [2.5mm,2.5mm,2.5mm,2.5mm,2.5mm,2.5mm,2.5mm,2.5mm,
+     2.5mm,2.5mm,2.5mm,2.5mm,2.5mm,2.5mm,2.5mm,2.5mm]
+
+  \setuppageshift[paper][ver]
+
+  \setuparranging[2*4*2]
+
+  \setupMPvariables % for collatingmarks
+    [pages=8,  % pages per sheet of paper doublesided
+     sheets=2,  % sheets of paper used per section
+     horpageshift=-0.5mm]
+\stopmode
+
+%D Elaborate the definition for the A5 format
+
+\startmode[A5]
+  \definepapersize[Agenda][width=148mm,height=210mm]
+  
+  \setuppapersize[Agenda][A4,landscape]
+  
+	\setuparranging[2SIDE]  
+  %\setuparranging[2*2*4]
+
+  \setupMPvariables % for collatingmarks
+    [pages=4,  % pages per sheet of paper doublesided
+     sheets=4,  % sheets of paper used per section
+     horpageshift=0mm]
+\stopmode
+ 
+%D Let Lua the main work:
+   
+\startluacode
+
+  local report = logs.reporter("Calendar-1-week-per-2-pages")
+  
+  function thirddata.diary.year_of_weektables(year,
+              lat,lon,timeoffset,continent)
+    
+    local year       = year
+    local lat        = lat
+    local lon        = lon
+    local timeoffset = timeoffset
+    local continent  = continent
+    
+    report("Working in function: diary.year_of_weektables")
+      
+    for calendarmonth = 1,12 do 
+    --for calendarmonth = 1,12 do 
+      thirddata.diary.monthblock
+        (calendarmonth,year,lat,lon,timeoffset,continent)
+    end
+  end
+  
+  function thirddata.diary.monthblock(month,year,
+              lat,lon,timeoffset,continent)
+
+    report("Working in function diary.monthblock: %s", month)
+
+    local c = thirddata.calendar.month(month,year) --returns number of weeks in a given month
+    local wkf = thirddata.calendar.weeknumber(1,month,year) --weeknumber of 1st day of a given month
+
+    report("First week in month %s of year %s is %s",month,year,wkf)
+
+    local wkl = wkf + c - 1 -- last week of a given month based on wkf and c, is wrong for January
+
+    report("Weeks in the selected month: %s", c)
+    report("First week of month: %s", wkf)
+
+    if month == 1 and wkf > 51 then
+        
+      --report("Calculating in week number %s", wkf)
+      calcyear = year - 1
+      thirddata.diary.setup_header_texts(wkf,month,calcyear)
+      
+      thirddata.diary.thisweek(wkf,month,year,lat,lon,timeoffset,continent)
+
+      report("Week %s - Year %s",wkf,year)
+
+      --year = year + 1
+      wkf = 1
+      wkl = wkf + c - 2
+
+      for i = wkf, wkl do
+        thirddata.diary.setup_header_texts(i,month,year)
+        thirddata.diary.thisweek(i,month,year,lat,lon,timeoffset,continent)
+      end
+    else
+      for i = wkf, wkl do
+
+        report("Calculating in week number %s", i)
+
+        thirddata.diary.setup_header_texts(i,month,year)
+        thirddata.diary.thisweek(i,month,year,
+                          lat,lon,timeoffset,continent) 
+       end
+    end
+  end
+
+
+  function thirddata.diary.setup_header_texts(week,month,year)
+
+    local monthname = string.lower(os.date
+                      ("%B",os.time{year=year,month=month,day=1}))
+                                      
+    context.setupheadertexts(
+      {function()
+         context("\\bf")
+         context.labeltext(monthname)
+         return true
+       end
+      },
+      {function()
+         context.labeltext("week")
+         context(": ~")
+         context(week)
+         context("\\quad")
+         context(year)
+         return true
+       end
+      },
+      {function()
+         context("\\bf")
+         context.labeltext(monthname)
+         return true
+       end
+      },
+      {function()
+          context.labeltext("week")
+          context(": ~")
+          context(week)
+          context("\\quad")
+          context(year)
+          return true
+        end
+      })
+  end
+
+\stopluacode   
+
+%D Setup the table for the week calendar
+
+\startsetups[table:week]
+  \setupTABLE[split=yes]
+  \setupTABLE[each][each][frame=on]
+  \setupTABLE
+    [r]
+    [each]
+    [offset=0pt,
+     loffset=3pt,
+     roffset=3pt,
+     height=0.23\textheight] 
+  \setupTABLE[c][1][width=0.5\textwidth] 
+  \setupTABLE[c][2][width=0.5\textwidth]
+\stopsetups
+
+%D Define the macro for invoking the calculations
+
+\define[5]\Yearofweektables{\ctxlua{thirddata.diary.year_of_weektables(#1,#2,#3,#4,#5)}}
+
+%D Create a buffer containing all variables for the calculations
+
+\startbuffer[Yearofweektables]
+  \Yearofweektables %Year,lat,lon,timeoffset,continent
+     {\getvariable{PocketDiary}{Year}}
+     {\getvariable{PocketDiaryGeoPosition}{lat}}
+     {\getvariable{PocketDiaryGeoPosition}{lon}}
+     {\getvariable{PocketDiaryGeoPosition}{timeoffset}}
+     {"\getvariable{PocketDiaryGeoPosition}{continent}"}
+\stopbuffer
+
+%D  Setup the \TEX\ side of the document
+
+\starttext
+
+%D Establish the content for the title pages
+
+  \startstandardmakeup[page=yes,doublesided=no]
+    \strut
+    \godown[.3\textheight]
+    \startalignment [middle]
+      {\bfa \labeltext{calendar}}
+      \vfil
+      {\bf \getvariable{PocketDiary}{Year}}
+    \stopalignment
+  \stopstandardmakeup
+
+  \startstandardmakeup[page=yes,doublesided=no]
+    \starttabulate[|l|p|]
+       \NC \translate[en=Title,
+                     nl=Titel,
+                     de=Titel,
+                     fr=Titre,
+                     it=Titolo]
+      \EQ {\bf \labeltext{calendar}} \NC\NR
+      \NC \translate[en=Author,
+                     nl=Auteur,
+                     de=Autor,
+                     fr=Auteur,
+                     it=autore,
+                     es=Autor]
+      \EQ \getvariable{PocketDiaryAddress}{Forename}
+          \getvariable{PocketDiaryAddress}{Familyname} \NC\NR
+      \NC \translate[en=Typography,
+                     nl=Typografie,
+                     de=Typographie,
+                     fr=Typographie,
+                     it=Tipografia,
+                     es=Tipografía]
+      \EQ \CONTEXT\ with \LUAMETATEX \NC\NR
+      \NC \translate[en=Compilation date,
+                     nl=Compilatie datum,
+                     de=Kompilationsdatum,
+                     fr=Date de compilation,
+                     it=Dato di compilazione,
+                     es=Fecha de compilación]
+      \EQ \currentdate \NC\NR
+    \stoptabulate
+  \stopstandardmakeup
+
+%D Insert a page with lost-return-to information (PocketDiary 
+%D template)
+
+  \getbuffer[Lost-Returnto]
+
+%D Add a year table with all months
+
+  \getbuffer[Yearcurrentplan]
+
+  \setupheadertexts[\bfa \getvariable{PocketDiary}{Yearnext}+1]
+
+%D Add a year table of the next year with all months
+
+  \getbuffer[Yearnextplan]
+
+  \setupheadertexts[]
+
+%D Insert all weektables by loading the buffer
+
+  \getbuffer[Yearofweektables]
+
+%D Add pages for notes
+\dorecurse
+  {4}
+  {\getbuffer[Lines]}
+	
+\stoptext

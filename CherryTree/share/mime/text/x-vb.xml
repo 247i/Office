@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/x-vb">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Visual Basic .NET source code</comment>
+  <comment xml:lang="zh-Hant-TW">Visual Basic .NET 源碼</comment>
+  <comment xml:lang="uk">початковий код Visual Basic .NET</comment>
+  <comment xml:lang="tr">Visual Basic .NET kaynak kodu</comment>
+  <comment xml:lang="sv">Visual Basic .NET-källkod</comment>
+  <comment xml:lang="sr-Cyrl">Визуел бејзик .НЕТ изворни код</comment>
+  <comment xml:lang="sq">Kod burim Visual Basic .NET</comment>
+  <comment xml:lang="sl">Izvorna koda Visual Basic .NET</comment>
+  <comment xml:lang="ru">Исходный код Visual Basic .NET</comment>
+  <comment xml:lang="ro">cod sursă Visual Basic .NET</comment>
+  <comment xml:lang="pt-BR">Código-fonte Visual Basic .NET</comment>
+  <comment xml:lang="pl">Kod źródłowy Visual Basic .NET</comment>
+  <comment xml:lang="oc">còdi font Visual Basic .NET</comment>
+  <comment xml:lang="nn">Visual Basic .NET-kjeldekode</comment>
+  <comment xml:lang="lt">Visual Basic .NET pradinis kodas</comment>
+  <comment xml:lang="ko">비주얼 베이직 .NET 소스 코드</comment>
+  <comment xml:lang="kk-Cyrl">Visual Basic .NET бастапқы кодтары</comment>
+  <comment xml:lang="ja">Visual Basic .NET ソースコード</comment>
+  <comment xml:lang="it">Codice sorgente Visual Basic .NET</comment>
+  <comment xml:lang="id">Kode sumber Visual Basic .NET</comment>
+  <comment xml:lang="hr">Visual Basic .NET izvorni kôd</comment>
+  <comment xml:lang="hi">Visual Basic .NET सोर्स कोड</comment>
+  <comment xml:lang="he">קוד מקור של Visual Basic .NET</comment>
+  <comment xml:lang="fur">Codiç sorzint Visual Basic .NET</comment>
+  <comment xml:lang="fr">Code source Visual Basic .NET</comment>
+  <comment xml:lang="fi">Visual Basic .NET lähdekoodi</comment>
+  <comment xml:lang="et">Visual Basic .NETi lähtekood</comment>
+  <comment xml:lang="es">código fuente en Visual Basic .NET</comment>
+  <comment xml:lang="en-GB">Visual Basic .NET source code</comment>
+  <comment xml:lang="de">Visual-Basic-.NET-Quelltext</comment>
+  <comment xml:lang="ca">codi font en Visual Basic .NET</comment>
+  <comment xml:lang="bg">Изходен код — Visual Basic .NET</comment>
+  <comment xml:lang="be-Cyrl">зыходны код Visual Basic .NET</comment>
+  <comment xml:lang="ar">شفرة مصدر فيجول بيسك دوت نت</comment>
+  <comment xml:lang="af">Visual Basic .NET-bronkode</comment>
+  <sub-class-of type="text/plain"/>
+  <glob pattern="*.vb"/>
+</mime-type>

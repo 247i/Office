@@ -1,0 +1,15 @@
+if not modules then modules = { } end modules ['char-prv'] = {
+    version   = 1.001,
+    comment   = "companion to char-ini.mkiv",
+    author    = "Hans Hagen, PRAGMA-ADE, Hasselt NL",
+    copyright = "PRAGMA ADE / ConTeXt Development Team",
+    license   = "see context related readme files",
+    dataonly  = true,
+}
+
+-- We needed this in mkiv for all kind of math compensations. This file is kept
+-- around in order to prevent loading the mkiv (.lua) variant.
+
+characters = characters or { }
+
+characters.private = { }

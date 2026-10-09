@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/typescript">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>TypeScript program</comment>
+  <comment xml:lang="zh-Hant-TW">TypeScript 程式</comment>
+  <comment xml:lang="uk">програма мовою TypeScript</comment>
+  <comment xml:lang="tr">TypeScript programı</comment>
+  <comment xml:lang="sv">TypeScript-program</comment>
+  <comment xml:lang="sr-Cyrl">Тајпскрипт програм</comment>
+  <comment xml:lang="sq">Program Typescript</comment>
+  <comment xml:lang="sl">Program TypeScript</comment>
+  <comment xml:lang="ru">Программа на TypeScript</comment>
+  <comment xml:lang="ro">program TypeScript</comment>
+  <comment xml:lang="pt-BR">Programa TypeScript</comment>
+  <comment xml:lang="pl">Program TypeScript</comment>
+  <comment xml:lang="oc">programa TypeScript</comment>
+  <comment xml:lang="ko">TypeScript 프로그램</comment>
+  <comment xml:lang="kk-Cyrl">TypeScript бағдарламасы</comment>
+  <comment xml:lang="ja">TypeScript プログラム</comment>
+  <comment xml:lang="hr">TypeScript program</comment>
+  <comment xml:lang="he">תוכנית TypeScript</comment>
+  <comment xml:lang="fr">Programme TypeScript</comment>
+  <comment xml:lang="fi">TypeScript</comment>
+  <comment xml:lang="et">TypeScripti programm</comment>
+  <comment xml:lang="es">programa en TypeScript</comment>
+  <comment xml:lang="en-GB">TypeScript program</comment>
+  <comment xml:lang="de">TypeScript-Programm</comment>
+  <comment xml:lang="da">TypeScript-program</comment>
+  <comment xml:lang="ca">programa TypeScript</comment>
+  <comment xml:lang="bg">Програма — TypeScript</comment>
+  <comment xml:lang="be-Cyrl">праграма TypeScript</comment>
+  <comment xml:lang="ar">برنامج تايبسكربت</comment>
+  <sub-class-of type="application/x-executable"/>
+  <sub-class-of type="text/plain"/>
+  <generic-icon name="text-x-script"/>
+  <glob pattern="*.cts"/>
+  <glob pattern="*.mts" weight="40"/>
+  <glob pattern="*.ts" weight="40"/>
+</mime-type>

@@ -1,0 +1,51 @@
+#!
+#!	Copyright 2011-2013, Marten de Vries
+#!
+#!	This file is part of OpenTeacher.
+#!
+#!	OpenTeacher is free software: you can redistribute it and/or modify
+#!	it under the terms of the GNU General Public License as published by
+#!	the Free Software Foundation, either version 3 of the License, or
+#!	(at your option) any later version.
+#!
+#!	OpenTeacher is distributed in the hope that it will be useful,
+#!	but WITHOUT ANY WARRANTY; without even the implied warranty of
+#!	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#!	GNU General Public License for more details.
+#!
+#!	You should have received a copy of the GNU General Public License
+#!	along with OpenTeacher.  If not, see <http://www.gnu.org/licenses/>.
+#!
+<!--(set_escape)-->
+	html
+<!--(end)-->
+<!doctype html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>@!name!@</title>
+		<style type='text/css'>
+			body {
+				font-family: Verdana, Helvetica, Arial, sans-serif;
+				font-size: 12px;
+				margin: 0;
+				color: red;
+			}
+			.place {
+				position: absolute;
+				z-index: 1;
+			}
+			img {
+				position: absolute;
+				z-index: 0;
+			}
+		</style>
+	</head>
+	<body>
+	<div id='container'>
+		<img src='@!resources["mapPath"]!@' />
+		<!--(for item in list["items"])-->
+			<div class='place' style='left: @!item["x"] - 1!@px; top: @!item["y"] - 6!@px;'>• @!item["name"]!@</div>
+		<!--(end)-->
+	</div>
+</html>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="image/x-leaf-mos">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Leaf MOS raw image</comment>
+  <comment xml:lang="uk">цифровий негатив Leaf MOS</comment>
+  <comment xml:lang="tr">Leaf MOS ham görüntüsü</comment>
+  <comment xml:lang="sv">Leaf MOS-råbild</comment>
+  <comment xml:lang="sr-Cyrl">Leaf MOS сирова слика</comment>
+  <comment xml:lang="sq">Pamje Leaf MOS e papërpunuar</comment>
+  <comment xml:lang="sl">Neobdelana slika Leaf MOS</comment>
+  <comment xml:lang="ru">Необработанное изображение Leaf MOS</comment>
+  <comment xml:lang="ro">imagine brută Leaf MOS</comment>
+  <comment xml:lang="pt-BR">Imagem bruta Leaf MOS</comment>
+  <comment xml:lang="pl">Surowy obraz MOS Leaf</comment>
+  <comment xml:lang="oc">imatge brut Leaf MOS</comment>
+  <comment xml:lang="ko">Leaf MOS 로 이미지</comment>
+  <comment xml:lang="kk-Cyrl">Leaf MOS өңделмеген бейнесі</comment>
+  <comment xml:lang="fr">image brute Leaf MOS</comment>
+  <comment xml:lang="fi">Leaf MOS -raakakuva</comment>
+  <comment xml:lang="et">Leaf MOS töötlemata pilt</comment>
+  <comment xml:lang="es">imagen en bruto MOS de Leaf</comment>
+  <comment xml:lang="en-GB">Leaf MOS raw image</comment>
+  <comment xml:lang="de">Leaf MOS-Rohbild</comment>
+  <comment xml:lang="ar">صورة Leaf MOS خامة</comment>
+  <sub-class-of type="image/x-dcraw"/>
+  <sub-class-of type="image/tiff"/>
+  <glob pattern="*.mos"/>
+</mime-type>

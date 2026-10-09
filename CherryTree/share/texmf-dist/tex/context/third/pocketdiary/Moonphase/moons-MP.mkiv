@@ -1,0 +1,86 @@
+%D \module
+%D   [     file=t-pocketdiary,
+%D      version=2023-04-15,
+%D        title=PocketDiary \CONTEXT\ User Module,
+%D     subtitle=Moon pictogrammes,
+%D       author=Willi Egger,
+%D         date=\currentdate,
+%D    copyright=Willi Egger,
+%D        email=w.egger@boede.nl,
+%D      license=Public Domain]
+
+% \setupbodyfont[plex,ss,14pt]
+
+\defineMPinstance
+	[Moon]
+	[metafun]
+  []
+	
+\startMPinclusions[]{Moon}
+	numeric w,h;
+	path p[];
+	pair ip[];
+	
+	w = OverlayWidth;
+	h = OverlayHeight;
+	
+	p[1] := fullcircle scaled h;
+	p[2] := p[1] shifted (0.2 w,0);
+	
+	ip[1] := p[1] intersectionpoint p[2];
+	ip[2] := reverse p[1] intersectionpoint p[2];
+
+	p[3] := p[1] cutbefore ip[1] cutafter ip[2];	
+	p[4] := p[2] cutbefore ip[1] cutafter ip[2];
+	
+  drawoptions (withpen pencircle scaled 2pt);
+	
+\stopMPinclusions
+
+\startuniqueMPgraphic{Moon::Waning_moon}
+  draw  p[3] ;
+	draw  p[4] ;
+\stopuniqueMPgraphic
+
+\startuniqueMPgraphic{Moon::Growing_moon}
+  draw  p[3] ;
+	draw  p[4] ;
+	currentpicture := (currentpicture reflectedabout (ip[1],ip[2]));
+\stopuniqueMPgraphic
+
+\startuniqueMPgraphic{Moon::Fullmoon}
+	draw p[1];
+\stopuniqueMPgraphic
+
+\startuniqueMPgraphic{Moon::Newmoon}
+	fill p[1] withcolor 0.625 white;
+	draw p[1];
+\stopuniqueMPgraphic
+
+
+\defineoverlay[waningmoon][\useMPgraphic{Moon::Waning_moon}]
+\defineoverlay[growingmoon][\useMPgraphic{Moon::Growing_moon}]
+\defineoverlay[newmoon][\useMPgraphic{Moon::Newmoon}]
+\defineoverlay[fullmoon][\useMPgraphic{Moon::Fullmoon}]
+
+\defineframed
+	[Moon]
+	[height=\bodyfontsize,
+	 width=\bodyfontsize,
+ 	 frame=off]
+
+
+% \starttext
+% Results with \type{framed}
+%
+% \blank
+%
+%  Heute ist abnehmender Mond	{\Moon[background=waningmoon]{\strut}}
+%
+%  Heute ist Vollmond \Moon[background=fullmoon]{}
+%
+%  Heute haben wir Neumond \Moon[background=newmoon]{}
+%
+%  Und heute haben wir zunehmenden Mond \Moon[background=growingmoon]{}
+%
+% \stoptext

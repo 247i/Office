@@ -1,0 +1,167 @@
+# Russian translation for openteacher
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2013-02-03 22:03+0000\n"
+"Last-Translator: Nkolay Parukhin <parukhin@gmail.com>\n"
+"Language-Team: Russian <ru@li.org>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:44+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: model.py:95
+msgid "Belgian AZERTY"
+msgstr "Бельгийская AZERTY"
+
+#: model.py:96
+msgid "Colemak"
+msgstr "Клавиатура Colemak"
+
+#: model.py:97
+msgid "Dvorak Simplified Keyboard"
+msgstr "Клавиатура Дворака"
+
+#: model.py:98
+msgid "French AZERTY"
+msgstr "Французская AZERTY"
+
+#: model.py:99
+msgid "QWERTY"
+msgstr "QWERTY"
+
+#: model.py:100
+msgid "QWERTZ"
+msgstr "QWERTZ"
+
+#: model.py:183
+msgid ""
+"Welcome, I'm your personal OpenTeacher typing tutor. We'll improve your "
+"typing skills by doing simple exercises. Between the exercises, I'll give "
+"instructions. Let's get started:\n"
+"\n"
+"First place your fingers on the so-called home row: your fingers, from left "
+"to right, should always be on the keys '{a}', '{s}', '{d}', '{f}', "
+"'{space}', '{space}', '{j}', '{k}', '{l}' and '{;}' while not typing another "
+"character. When your fingers are in position, press {space} to start the "
+"first lesson. Work for accuracy at first, not speed."
+msgstr ""
+"Добро пожаловать, я ваш персональный клавиатурный тренажер OpenTeacher. Мы "
+"улучшим ваши навыки набора текста, выполняя простые упражнения. Между "
+"упражнениями, я буду давать инструкции. Давайте начнем:\n"
+"\n"
+"Сначала поместите пальцы на так называемой домашней строке: пальцы, слева "
+"направо, всегда должны быть на клавишах '{a}', '{s}', '{d}', '{f}', "
+"'{пробел}', '{пробел}', '{j}', '{k}', '{l}' и '{;}' если только они не "
+"вводят другой символ. Когда вы расположите пальцы в данном положении, "
+"нажмите {пробел}, чтобы начать первый урок.  Работайте в первую очередь над "
+"точностью,  а не над скоростью."
+
+#: model.py:198
+msgid ""
+"Congratulations, you finished this typing course! If you want to continue, "
+"you can, but this is the end of the instructions. You did a great job!"
+msgstr ""
+"Поздравляем, вы закончили этот курс машинописи! Если вы хотите продолжить, "
+"вы можете это сделать, но это конец инструкции. Вы проделали огромную работу!"
+
+#: model.py:208
+msgid "Congratulations, you finished your first exercise!"
+msgstr "Поздравляем, вы закончили первое упражнение!"
+
+#: model.py:225
+#, python-format
+msgid "You made %s mistake, please keep trying until you can do it flawless."
+msgid_plural ""
+"You made %s mistakes, please keep trying until you can do it flawless."
+msgstr[0] ""
+"Вы совершили ошибку, пожалуйста, продолжайте тренироваться, пока вы не "
+"можете сделать это безупречно."
+msgstr[1] ""
+"Вы совершили %s ошибки, пожалуйста, продолжайте тренироваться, пока вы не "
+"можете сделать это безупречно."
+msgstr[2] ""
+"Вы совершили %s ошибок, пожалуйста, продолжайте тренироваться, пока вы не "
+"можете сделать это безупречно."
+
+#: model.py:230
+#, python-format
+msgid "Too bad, you made %s mistake. Keep practising to get better!"
+msgid_plural "Too bad, you made %s mistakes. Keep practising to get better!"
+msgstr[0] ""
+"Жаль, что вы совершили ошибку. Продолжайте практиковаться, чтобы улучшить "
+"результаты!"
+msgstr[1] ""
+"Жаль, что вы совершили %s ошибки. Продолжайте практиковаться, чтобы улучшить "
+"результаты!"
+msgstr[2] ""
+"Жаль, что вы совершили %s ошибок. Продолжайте практиковаться, чтобы улучшить "
+"результаты!"
+
+#: model.py:237
+msgid "To archieve that, you might try slowing down a bit."
+msgstr "Чтобы добиться этого, вы можете попробовать немного снизить скорость."
+
+#: model.py:241
+msgid "You made zero mistakes. Now try to improve your typing speed a bit."
+msgstr ""
+"Вы не допустили ошибок. Теперь попробуйте немного улучшить скорость набора "
+"текста."
+
+#: model.py:247
+msgid ""
+"You made zero mistakes and are typing fast enough, so you can continue "
+"practising some new letter combinations. Keep up the good work!"
+msgstr ""
+"Вы не допустили ошибок и печатаете достаточно быстро, так что вы можете "
+"продолжать заниматься некоторыми новыми комбинациями букв. Продолжайте в том "
+"же духе!"
+
+#: model.py:248
+msgid ""
+"You did it flawlessly and fast! Continue practising some new letters "
+"combinations to get even better!"
+msgstr ""
+"Вы сделали это безупречно и быстро! Продолжайте практиковаться на некоторых "
+"новых комбинациях букв, чтобы улучшить результаты!"
+
+#: model.py:252
+msgid ""
+"You're now going to learn letters that aren't on the home row. To see which "
+"fingers you need to use, see the keyboard image on your screen. When you're "
+"not using a finger to type a letter, put it back on the home row directly."
+msgstr ""
+
+#: model.py:255
+msgid ""
+"The keys you're going to practise now are typed by the left and right index "
+"finger and further away from those fingers than the other keys we practised "
+"on the current row. Make sure you return your finger to its position on the "
+"home row when you're typing another letter."
+msgstr ""
+
+#: model.py:259
+msgid ""
+"You made zero mistakes and are typing fast enough, so you can continue "
+"practising with some new words. Keep up the good work!"
+msgstr ""
+"Вы не допустили ошибок и печатаете достаточно быстро, теперь вы можете "
+"заниматься с некоторыми новыми словами. Продолжайте в том же духе!"
+
+#: model.py:260
+msgid ""
+"You did it flawlessly and fast! Continue practising with new words to get "
+"even better!"
+msgstr ""
+"Вы сделали это безупречно и быстро! Продолжайте тренироваться с новыми "
+"словами, чтобы улучшить результат!"

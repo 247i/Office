@@ -1,0 +1,54 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenTeacher 3.2\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: quizletApi.py:162
+msgid ""
+"Enter a search term and press the search button to search quizlet.com for "
+"sets. Then select the set or sets you want to import and click OK."
+msgstr ""
+
+#: quizletApi.py:163
+msgid "E.g.: german food vocabulary"
+msgstr ""
+
+#: quizletApi.py:164
+msgid "Search"
+msgstr ""
+
+#: quizletApi.py:165
+msgid "Search quizlet.com"
+msgstr ""
+
+#: quizletApi.py:248
+msgid "Import from quizlet.com"
+msgstr ""
+
+#: quizletApi.py:274
+msgid "No Quizlet connection"
+msgstr ""
+
+#: quizletApi.py:275
+msgid ""
+"Quizlet didn't accept the connection. Are you sure that your internet "
+"connection works and quizlet.com is online?"
+msgstr ""
+
+#: quizletApi.py:310
+msgid "The word list was imported from Quizlet successfully."
+msgstr ""

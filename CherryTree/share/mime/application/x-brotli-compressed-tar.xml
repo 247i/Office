@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-brotli-compressed-tar">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Tar archive (brotli-compressed)</comment>
+  <comment xml:lang="uk">архів tar (стиснений brotli)</comment>
+  <comment xml:lang="tr">Tar arşivi (brotli sıkıştırmalı)</comment>
+  <comment xml:lang="sv">Tar-arkiv (brotli-komprimerat)</comment>
+  <comment xml:lang="sr-Cyrl">Тар архива (сажета Бротлијем)</comment>
+  <comment xml:lang="sq">Arkiv tar (ngjeshur me brotli)</comment>
+  <comment xml:lang="sl">Arhiv tar (stisnjen z brotli)</comment>
+  <comment xml:lang="ru">Архив Tar (сжатый с помощью алгоритма brotli)</comment>
+  <comment xml:lang="ro">arhivă Tar (comprimată brotli)</comment>
+  <comment xml:lang="pt-BR">Arquivo tar (comprimido com brotli)</comment>
+  <comment xml:lang="pl">Archiwum tar (kompresja Brotli)</comment>
+  <comment xml:lang="oc">archiu Tar (compressat amb brotli)</comment>
+  <comment xml:lang="ko">TAR 묶음 파일 (brotli 압축)</comment>
+  <comment xml:lang="kk-Cyrl">Tar архиві (brotli-сығылған)</comment>
+  <comment xml:lang="fr">Archive Tar (compressée brotli)</comment>
+  <comment xml:lang="fi">Tar-arkisto (brotli-pakattu)</comment>
+  <comment xml:lang="et">Tar arhiiv (pakitud brotliga)</comment>
+  <comment xml:lang="es">archivador TAR (comprimido con Brotli)</comment>
+  <comment xml:lang="en-GB">Tar archive (brotli-compressed)</comment>
+  <comment xml:lang="de">tar-Archiv (brotli-komprimiert)</comment>
+  <comment xml:lang="ar">أرشيف Tar (مضغوط بصيغة brotli)</comment>
+  <generic-icon name="package-x-generic"/>
+  <sub-class-of type="application/x-brotli"/>
+  <glob pattern="*.tar.br"/>
+  <glob pattern="*.tbr"/>
+</mime-type>

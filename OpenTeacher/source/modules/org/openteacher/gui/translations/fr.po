@@ -1,0 +1,139 @@
+# French translation for openteacher
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:38+0200\n"
+"PO-Revision-Date: 2012-12-07 13:25+0000\n"
+"Last-Translator: EmmanuelLeNormand <manu@ubuntu-fr.org>\n"
+"Language-Team: French <fr@li.org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:42+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: gui.py:423
+msgid "Open from file"
+msgstr "Ouvert depuis le fichier"
+
+#: ui.py:51
+msgid "Enter list"
+msgstr "Entrer la liste"
+
+#: ui.py:52
+msgid "Teach me!"
+msgstr "Apprenez moi!"
+
+#: ui.py:53
+msgid "Show results"
+msgstr "Montrer les résultats"
+
+#: ui.py:272
+msgid "&File"
+msgstr "&Fichier"
+
+#: ui.py:273
+msgid "&New"
+msgstr "&Nouveau"
+
+#: ui.py:274
+msgid "&Open"
+msgstr "&Ouvrir"
+
+#: ui.py:275
+msgid "Open &into current list"
+msgstr ""
+
+#: ui.py:276
+msgid "&Save"
+msgstr "&Enregistrer"
+
+#: ui.py:277
+msgid "Save &As"
+msgstr "Enregistrer &Sous"
+
+#: ui.py:278
+msgid "&Print"
+msgstr "&Imprimer"
+
+#: ui.py:279
+msgid "&Quit"
+msgstr "&Quitter"
+
+#: ui.py:281
+msgid "&Edit"
+msgstr "&Modifier"
+
+#: ui.py:282
+msgid "&Reverse list"
+msgstr ""
+
+#: ui.py:283
+msgid "&Settings"
+msgstr "&Préférences"
+
+#: ui.py:285
+msgid "&View"
+msgstr "&Vue"
+
+#: ui.py:286
+msgid "Fullscreen"
+msgstr "Plein-écran"
+
+#: ui.py:288
+msgid "&Help"
+msgstr "&Aide"
+
+#: ui.py:289
+msgid "&Documentation"
+msgstr "&Documentation"
+
+#: ui.py:290
+msgid "&About"
+msgstr "&À propos"
+
+#: ui.py:292
+msgid "Toolbar"
+msgstr "Barre d'outils"
+
+#~ msgid "Close Tab"
+#~ msgstr "Fermer l'onglet"
+
+#~ msgid "Choose file to open"
+#~ msgstr "Choisir un fichier à ouvrir"
+
+#~ msgid "Ctrl+P"
+#~ msgstr "Ctrl+P"
+
+#~ msgid "Ctrl+S"
+#~ msgstr "Ctrl+S"
+
+#~ msgid "Ctrl+O"
+#~ msgstr "Ctrl+O"
+
+#~ msgid "Ctrl+N"
+#~ msgstr "Ctrl+N"
+
+#~ msgid "Ctrl+Shift+S"
+#~ msgstr "Ctrl+Maj+S"
+
+#~ msgid "Ctrl+Q"
+#~ msgstr "Ctrl+Q"
+
+#~ msgid "Recently opened:"
+#~ msgstr "Récemment ouvert:"
+
+#~ msgid "Create lesson:"
+#~ msgstr "Créer une leçon:"
+
+#~ msgid "Choose file to save"
+#~ msgstr "Choisissez le fichier à sauver"
+
+#~ msgid "Load lesson:"
+#~ msgstr "Chargement de la leçon:"

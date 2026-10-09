@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-tiled-tsx">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Tiled tileset files</comment>
+  <comment xml:lang="zh-Hant-TW">Tiled tileset 檔案</comment>
+  <comment xml:lang="uk">файл набору плиток мозаїки</comment>
+  <comment xml:lang="tr">Tiled döşeme kümesi dosyaları</comment>
+  <comment xml:lang="sv">Tiled-kartrutuppsättningsfiler</comment>
+  <comment xml:lang="sr-Cyrl">Tiled датотеке скупова плочица</comment>
+  <comment xml:lang="sl">Zbirke plošč Tiled</comment>
+  <comment xml:lang="ru">Файлы наборов плиток Tiled</comment>
+  <comment xml:lang="ro">fișier al setului de piese de mozaic</comment>
+  <comment xml:lang="pt-BR">Arquivos de tileset Tiled</comment>
+  <comment xml:lang="pl">Pliki zestawów kafli Tiled</comment>
+  <comment xml:lang="oc">fichièrs de jòc de teules Tiled</comment>
+  <comment xml:lang="ko">바둑판 배치 타일 집합 파일</comment>
+  <comment xml:lang="kk-Cyrl">Tiled tileset файлдары</comment>
+  <comment xml:lang="ja">Tiled タイルセットファイル</comment>
+  <comment xml:lang="it">File tileset</comment>
+  <comment xml:lang="id">Berkas tileset ubin</comment>
+  <comment xml:lang="hr">Datoteke Tiled skupova pločica</comment>
+  <comment xml:lang="hi">Tiled टाइलसेट फाइलें</comment>
+  <comment xml:lang="fur">Files di cumbinazion di tassei a tassei</comment>
+  <comment xml:lang="fr">Fichiers de tilesets Tiled</comment>
+  <comment xml:lang="fi">Vierekkäiset kuvasarjat</comment>
+  <comment xml:lang="et">Tiledi kaardikomplekti fail</comment>
+  <comment xml:lang="es">archivos del conjunto de azulejos</comment>
+  <comment xml:lang="en-GB">Tiled tileset files</comment>
+  <comment xml:lang="de">Tiled-Kartensetdatei</comment>
+  <comment xml:lang="ca">fitxers de conjunt de tessel·les en mosaic</comment>
+  <comment xml:lang="be-Cyrl">файлы набораў плітак Tiled</comment>
+  <comment xml:lang="ar">ملفات مجموعة البلاط</comment>
+  <sub-class-of type="application/xml"/>
+  <glob pattern="*.tsx"/>
+</mime-type>

@@ -1,0 +1,55 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenTeacher 3.2\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: testsViewer.py:51
+msgid "Date"
+msgstr ""
+
+#: testsViewer.py:52
+msgid "Note"
+msgstr ""
+
+#: testsViewer.py:53
+msgid "Completed"
+msgstr ""
+
+#: testsViewer.py:118
+msgid "Highest note:"
+msgstr ""
+
+#: testsViewer.py:121
+msgid "Average note:"
+msgstr ""
+
+#: testsViewer.py:124
+msgid "Lowest note:"
+msgstr ""
+
+#. TRANSLATORS: This is meant as 'here would normally
+#. stand a note, but not today.' If '-' isn't
+#. appropriate in you language for that, please replace.
+#. Otherwise, just copy the original.
+#: testsViewer.py:140 testsViewer.py:145 testsViewer.py:149 testsViewer.py:173
+#: testsViewer.py:179
+msgid "-"
+msgstr ""
+
+#: testsViewer.py:247
+msgid "Back"
+msgstr ""

@@ -1,0 +1,106 @@
+if not modules then modules = { } end modules ['strc-itm'] = {
+    version   = 1.001,
+    comment   = "companion to strc-itm.mkiv",
+    author    = "Hans Hagen, PRAGMA-ADE, Hasselt NL",
+    copyright = "PRAGMA ADE / ConTeXt Development Team",
+    license   = "see context related readme files"
+}
+
+local allocate    = utilities.storage.allocate
+local implement   = interfaces.implement
+
+local texsetcount = tex.setcount
+local texsetdimen = tex.setdimen
+
+local itemgroups = structures.itemgroups
+
+local collected = allocate()
+local tobesaved = allocate()
+
+itemgroups.collected = collected
+itemgroups.tobesaved = tobesaved
+
+local function initializer()
+    collected = itemgroups.collected
+    tobesaved = itemgroups.tobesaved
+end
+
+if job then
+    job.register("structures.itemgroups.collected", tobesaved, initializer)
+end
+
+local c_strc_itemgroups_max_items <const> = tex.iscount("c_strc_itemgroups_max_items")
+local d_strc_itemgroups_max_width <const> = tex.isdimen("d_strc_itemgroups_max_width")
+
+-- We keep the counter at the Lua end so we can group the items within
+-- an itemgroup which in turn makes for less passes when one itemgroup
+-- entry is added or removed.
+
+local counts = table.setmetatableindex("number")
+
+local trialtypesetting = context.trialtypesetting
+
+local function analyzeitemgroup(name,level,upcoming)
+    local n = counts[name]
+    local u = false
+    if level == 1 then
+        n = n + 1
+        counts[name] = n
+        u = upcoming and true
+    end
+    local items = 0
+    local width = 0
+    local itemgroup = collected[name]
+    if itemgroup then
+        local entry = itemgroup[n]
+        if entry then
+            local l = entry[level]
+            if l then
+                items = l[1] or 0
+                width = l[2] or 0
+            end
+        end
+    end
+    if u then
+        counts[name] = n - 1
+    end
+    texsetcount(c_strc_itemgroups_max_items,items)
+    texsetdimen(d_strc_itemgroups_max_width,width)
+end
+
+local function registeritemgroup(name,level,nofitems,maxwidth)
+    local n = counts[name]
+    if not trialtypesetting() then
+        local itemgroup = tobesaved[name]
+        if not itemgroup then
+            itemgroup       = { }
+            tobesaved[name] = itemgroup
+        end
+        local entry = itemgroup[n]
+        if not entry then
+            entry        = { }
+            itemgroup[n] = entry
+        end
+        entry[level] = { nofitems, maxwidth }
+    elseif level == 1 then
+        counts[name] = n - 1
+    end
+end
+
+implement {
+    name      = "analyzeitemgroup",
+    actions   = analyzeitemgroup,
+    arguments = { "string", "integer" }
+}
+
+implement {
+    name      = "analyzeupcomingitemgroup",
+    actions   = analyzeitemgroup,
+    arguments = { "string", "integer", true }
+}
+
+implement {
+    name      = "registeritemgroup",
+    actions   = registeritemgroup,
+    arguments = { "string", "integer", "integer", "dimen" }
+}

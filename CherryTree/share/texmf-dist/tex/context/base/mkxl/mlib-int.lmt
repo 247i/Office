@@ -1,0 +1,277 @@
+if not modules then modules = { } end modules ['mlib-int'] = {
+    version   = 1.001,
+    comment   = "companion to mlib-ctx.mkiv",
+    author    = "Hans Hagen, PRAGMA-ADE, Hasselt NL",
+    copyright = "PRAGMA ADE / ConTeXt Development Team",
+    license   = "see context related readme files",
+}
+
+local bpfactor       <const> = number.dimenfactors.bp
+
+local isdimen        = tex.isdimen
+local iscount        = tex.iscount
+local getdimen       = tex.getdimen
+local getcount       = tex.getcount
+local getmacro       = tokens.getters.macro
+local get            = tex.get
+
+local registerscript = metapost.registerscript
+local registerdirect = metapost.registerdirect
+
+do
+
+    local t = os.date("*t") -- maybe this should be a very early on global
+
+    -- If we want to do a vardef then we first need to catch an endgroup and
+    -- that then fails because we have a variable sitting there, so they need
+    -- to be def's at the mp end.
+
+    local assignment_code = metapost.codes.assignment
+
+    local mpscannext      = mp.scan.next
+    local mpscaninteger   = mp.scan.integer
+
+    local function item(name)
+        local n = mpscannext(true) -- keep
+        if n == assignment_code then
+            mpscannext()
+            t[name] = mpscaninteger()
+        else
+            return t[name]
+        end
+    end
+
+    registerdirect("year",   function() return item("year")  end)
+    registerdirect("month",  function() return item("month") end)
+    registerdirect("day",    function() return item("day")   end)
+    registerdirect("hour",   function() return item("hour")  end)
+    registerdirect("minute", function() return item("min")   end)
+    registerdirect("second", function() return item("sec")   end)
+
+end
+
+do
+
+        -- These get swapped so the d_ numbers change.
+
+        registerdirect("PaperHeight",         function() return getdimen("paperheight")         * bpfactor end)
+        registerdirect("PaperWidth",          function() return getdimen("paperwidth")          * bpfactor end)
+        registerdirect("PrintPaperHeight",    function() return getdimen("printpaperheight")    * bpfactor end)
+        registerdirect("PrintPaperWidth",     function() return getdimen("printpaperwidth")     * bpfactor end)
+        registerdirect("BackSpace",           function() return getdimen("backspace")           * bpfactor end)
+        registerdirect("CutSpace",            function() return getdimen("cutspace")            * bpfactor end)
+
+        registerdirect("LeftEdgeWidth",       function() return getdimen("leftedgewidth")       * bpfactor end)
+        registerdirect("LeftEdgeDistance",    function() return getdimen("leftedgedistance")    * bpfactor end)
+        registerdirect("LeftMarginWidth",     function() return getdimen("leftmarginwidth")     * bpfactor end)
+        registerdirect("LeftMarginDistance",  function() return getdimen("leftmargindistance")  * bpfactor end)
+        registerdirect("RightMarginDistance", function() return getdimen("rightmargindistance") * bpfactor end)
+        registerdirect("RightMarginWidth",    function() return getdimen("rightmarginwidth")    * bpfactor end)
+        registerdirect("RightEdgeDistance",   function() return getdimen("rightedgedistance")   * bpfactor end)
+        registerdirect("RightEdgeWidth",      function() return getdimen("rightedgewidth")      * bpfactor end)
+
+        -- leftmargintotal   rightmargintotal -- not yet
+        -- leftedgetotal     rightedgetotal
+        -- leftsidetotal     rightsidetotal
+        -- leftcombitotal    rightcombitotal
+        -- innermargintotal  outermargintotal
+        -- inneredgetotal    outeredgetotal
+        -- innercombitotal   outercombitotal
+        -- innersidetotal    outersidetotal
+
+        local d_leftedgewidth       <const> = isdimen("leftedgewidth")
+        local d_leftedgedistance    <const> = isdimen("leftedgedistance")
+        local d_leftmarginwidth     <const> = isdimen("leftmarginwidth")
+        local d_leftmargindistance  <const> = isdimen("leftmargindistance")
+        local d_rightmargindistance <const> = isdimen("rightmargindistance")
+        local d_rightmarginwidth    <const> = isdimen("rightmarginwidth")
+        local d_rightedgedistance   <const> = isdimen("rightedgedistance")
+        local d_rightedgewidth      <const> = isdimen("rightedgewidth")
+
+        registerdirect("InnerMarginDistance",  function() return getdimen(d_leftmargindistance ) * bpfactor end)
+        registerdirect("InnerMarginWidth",     function() return getdimen(d_leftmarginwidth    ) * bpfactor end)
+        registerdirect("OuterMarginDistance",  function() return getdimen(d_rightmargindistance) * bpfactor end)
+        registerdirect("OuterMarginWidth",     function() return getdimen(d_rightmarginwidth   ) * bpfactor end)
+        registerdirect("InnerEdgeDistance",    function() return getdimen(d_leftmargindistance ) * bpfactor end)
+        registerdirect("InnerEdgeWidth",       function() return getdimen(d_leftmarginwidth    ) * bpfactor end)
+        registerdirect("OuterEdgeDistance",    function() return getdimen(d_rightedgedistance  ) * bpfactor end)
+        registerdirect("OuterEdgeWidth",       function() return getdimen(d_rightedgewidth     ) * bpfactor end)
+
+        -- local onrightpage = structures.pages.on_right
+
+        -- registerdirect("InnerMarginDistance",  function() return getdimen(onrightpage() and "leftmargindistance"  or "rightmargindistance") * bpfactor end)
+        -- registerdirect("InnerMarginWidth",     function() return getdimen(onrightpage() and "leftmarginwidth"     or "rightmarginwidth"   ) * bpfactor end)
+        -- registerdirect("OuterMarginDistance",  function() return getdimen(onrightpage() and "rightmargindistance" or "leftmargindistance" ) * bpfactor end)
+        -- registerdirect("OuterMarginWidth",     function() return getdimen(onrightpage() and "rightmarginwidth"    or "leftmarginwidth"    ) * bpfactor end)
+        -- registerdirect("InnerEdgeDistance",    function() return getdimen(onrightpage() and "leftmargindistance"  or "rightmargindistance") * bpfactor end)
+        -- registerdirect("InnerEdgeWidth",       function() return getdimen(onrightpage() and "leftmarginwidth"     or "rightmarginwidth"   ) * bpfactor end)
+        -- registerdirect("OuterEdgeDistance",    function() return getdimen(onrightpage() and "rightedgedistance"   or "leftedgedistance"   ) * bpfactor end)
+        -- registerdirect("OuterEdgeWidth",       function() return getdimen(onrightpage() and "rightedgewidth"      or "leftedgewidth"      ) * bpfactor end)
+
+        -- These have stable d_ numbers.
+
+        local d_topspace       <const> = isdimen("topspace")       registerdirect("TopSpace",       function() return getdimen(d_topspace)       * bpfactor end)
+        local d_bottomspace    <const> = isdimen("bottomspace")    registerdirect("BottomSpace",    function() return getdimen(d_bottomspace)    * bpfactor end)
+        local d_makeupheight   <const> = isdimen("makeupheight")   registerdirect("MakeupHeight",   function() return getdimen(d_makeupheight)   * bpfactor end)
+        local d_makeupwidth    <const> = isdimen("makeupwidth")    registerdirect("MakeupWidth",    function() return getdimen(d_makeupwidth)    * bpfactor end)
+        local d_topheight      <const> = isdimen("topheight")      registerdirect("TopHeight",      function() return getdimen(d_topheight)      * bpfactor end)
+        local d_topdistance    <const> = isdimen("topdistance")    registerdirect("TopDistance",    function() return getdimen(d_topdistance)    * bpfactor end)
+        local d_headerheight   <const> = isdimen("headerheight")   registerdirect("HeaderHeight",   function() return getdimen(d_headerheight)   * bpfactor end)
+        local d_headerdistance <const> = isdimen("headerdistance") registerdirect("HeaderDistance", function() return getdimen(d_headerdistance) * bpfactor end)
+        local d_textheight     <const> = isdimen("textheight")     registerdirect("TextHeight",     function() return getdimen(d_textheight)     * bpfactor end)
+        local d_footerdistance <const> = isdimen("footerdistance") registerdirect("FooterDistance", function() return getdimen(d_footerdistance) * bpfactor end)
+        local d_footerheight   <const> = isdimen("footerheight")   registerdirect("FooterHeight",   function() return getdimen(d_footerheight)   * bpfactor end)
+        local d_bottomdistance <const> = isdimen("bottomdistance") registerdirect("BottomDistance", function() return getdimen(d_bottomdistance) * bpfactor end)
+        local d_bottomheight   <const> = isdimen("bottomheight")   registerdirect("BottomHeight",   function() return getdimen(d_bottomheight)   * bpfactor end)
+        local d_textwidth      <const> = isdimen("textwidth")      registerdirect("TextWidth",      function() return getdimen(d_textwidth)      * bpfactor end)
+
+end
+
+do
+
+    local d_pagebackgroundoffset <const> = isdimen("pagebackgroundoffset") registerdirect("PageOffset",           function() return getdimen(d_pagebackgroundoffset) * bpfactor end)
+    local d_pagebackgrounddepth  <const> = isdimen("pagebackgrounddepth")  registerdirect("PageDepth",            function() return getdimen(d_pagebackgrounddepth)  * bpfactor end)
+    local c_layoutcolumns        <const> = iscount("layoutcolumns")        registerdirect("LayoutColumns",        function() return getcount(c_layoutcolumns)                   end)
+    local d_layoutcolumndistance <const> = isdimen("layoutcolumndistance") registerdirect("LayoutColumnDistance", function() return getdimen(d_layoutcolumndistance) * bpfactor end)
+    local d_layoutcolumnwidth    <const> = isdimen("layoutcolumnwidth")    registerdirect("LayoutColumnWidth",    function() return getdimen(d_layoutcolumnwidth)    * bpfactor end)
+    local d_spinewidth           <const> = isdimen("spinewidth")           registerdirect("SpineWidth",           function() return getdimen(d_spinewidth)           * bpfactor end)
+    local d_paperbleed           <const> = isdimen("paperbleed")           registerdirect("PaperBleed",           function() return getdimen(d_paperbleed)           * bpfactor end)
+
+end
+
+do
+
+    local c_realpageno    <const> = iscount("realpageno")    registerdirect("RealPageNumber", function() return getcount(c_realpageno)    end)
+    local c_lastpageno    <const> = iscount("lastpageno")    registerdirect("LastPageNumber", function() return getcount(c_lastpageno)    end)
+
+    local c_userpageno    <const> = iscount("userpageno")    registerdirect("PageNumber",     function() return getcount(c_userpageno)    end)
+    local c_lastpageno    <const> = iscount("lastpageno")    registerdirect("NOfPages",       function() return getcount(c_lastpageno)    end)
+
+    local c_subpageno     <const> = iscount("subpageno")     registerdirect("SubPageNumber",  function() return getcount(c_subpageno)     end)
+    local c_lastsubpageno <const> = iscount("lastsubpageno") registerdirect("NOfSubPages",    function() return getcount(c_lastsubpageno) end)
+
+    local c_mofcolumns    <const> = iscount("mofcolumns")    registerdirect("CurrentColumn",  function() return getcount(c_mofcolumns)    end)
+    local c_nofcolumns    <const> = iscount("nofcolumns")    registerdirect("NOfColumns",     function() return getcount(c_nofcolumns)    end)
+
+end
+
+do
+
+    registerdirect("BaseLineSkip",  function() return get("baselineskip",true) * bpfactor end)
+    registerdirect("TopSkip",       function() return get("topskip",true)      * bpfactor end)
+    registerdirect("CurrentWidth",  function() return get("hsize")             * bpfactor end)
+    registerdirect("CurrentHeight", function() return get("vsize")             * bpfactor end)
+    registerdirect("HSize",         function() return get("hsize")             * bpfactor end)
+    registerdirect("VSize",         function() return get("vsize")             * bpfactor end)
+
+    local emwidths  = fonts.hashes.emwidths
+    local exheights = fonts.hashes.exheights
+
+--     registerdirect("EmWidth",  function() return emwidths [false] * bpfactor end)
+--     registerdirect("ExHeight", function() return exheights[false] * bpfactor end)
+
+    local getfontdimension = tex.getfontdimension
+
+    registerdirect("EmWidth",  function() return getfontdimension(6) * bpfactor end)
+    registerdirect("ExHeight", function() return getfontdimension(5) * bpfactor end)
+
+    local d_uunit <const> = isdimen("uunit") registerdirect("uunit", function() return getdimen(d_uunit) * bpfactor end)
+
+end
+
+do
+
+    local d_lineheight   <const> = isdimen("lineheight")   registerdirect("LineHeight",   function() return getdimen(d_lineheight)   * bpfactor end)
+    local d_bodyfontsize <const> = isdimen("bodyfontsize") registerdirect("BodyFontSize", function() return getdimen(d_bodyfontsize) * bpfactor end)
+    local d_strutht      <const> = isdimen("strutht")      registerdirect("StrutHeight",  function() return getdimen(d_strutht)      * bpfactor end)
+    local d_strutdp      <const> = isdimen("strutdp")      registerdirect("StrutDepth",   function() return getdimen(d_strutdp)      * bpfactor end)
+
+    -- Kind of long:
+
+    local d_globallineheight <const> = isdimen("globalbodyfontlineheight")
+
+    registerdirect("GlobalLineHeight",
+        function() return getdimen(d_globallineheight) * bpfactor
+    end)
+
+end
+
+do
+
+    local d_overlay_width        <const> = isdimen("d_overlay_width")        registerdirect("OverlayWidth",        function() return getdimen(d_overlay_width)        * bpfactor end)
+    local d_overlay_height       <const> = isdimen("d_overlay_height")       registerdirect("OverlayHeight",       function() return getdimen(d_overlay_height)       * bpfactor end)
+    local d_overlay_depth        <const> = isdimen("d_overlay_depth")        registerdirect("OverlayDepth",        function() return getdimen(d_overlay_depth)        * bpfactor end)
+    local d_overlay_linewidth    <const> = isdimen("d_overlay_linewidth")    registerdirect("OverlayLineWidth",    function() return getdimen(d_overlay_linewidth)    * bpfactor end)
+    local d_overlay_offset       <const> = isdimen("d_overlay_offset")       registerdirect("OverlayOffset",       function() return getdimen(d_overlay_offset)       * bpfactor end)
+    local d_overlay_mathaxis     <const> = isdimen("d_overlay_mathaxis")     registerdirect("OverlayMathAxis",     function() return getdimen(d_overlay_mathaxis)     * bpfactor end)
+    local d_overlay_mathexheight <const> = isdimen("d_overlay_mathexheight") registerdirect("OverlayMathExHeight", function() return getdimen(d_overlay_mathexheight) * bpfactor end)
+    local d_overlay_mathemwidth  <const> = isdimen("d_overlay_mathemwidth")  registerdirect("OverlayMathEmWidth",  function() return getdimen(d_overlay_mathemwidth)  * bpfactor end)
+
+    registerdirect("OverlayRegion",    function() return getmacro("m_overlay_region") end)
+    registerdirect("CurrentLayout",    function() return getmacro("currentlayout")    end)
+    registerdirect("OverlayColor",     function() return getmacro("overlaycolor")     end)
+    registerdirect("OverlayLineColor", function() return getmacro("overlaylinecolor") end)
+
+end
+
+do
+
+    registerdirect("LastChangedLayoutPage",function() return getcount("c_page_layouts_changed") end)
+    registerdirect("SwapMarginDimensions", function() token.expandmacro("swapmargindimensions") end)
+
+    registerdirect("PageFraction",     structures.pages.fraction)
+    registerdirect("OnRightPage",      structures.pages.on_right)
+    registerdirect("OnOddPage",        structures.pages.is_odd)
+    registerdirect("InPageBody",       structures.pages.in_body)
+    --------------("LayoutHasChanged", structures.pages.has_changed)
+
+end
+
+do
+
+    local function defaultcolormodel() -- can be helper
+        local colormethod = getcount("MPcolormethod")
+        return (colormethod == 0 or colormethod == 1) and 1 or 3
+    end
+
+    registerdirect("defaultcolormodel", defaultcolormodel)
+
+end
+
+do
+
+    -- see node-rul.*
+    -- offset is a multiplier
+    -- factor is the amount
+
+    -- TODO: dimensions are yet undefined so we will move this
+
+    registerdirect("RuleWidth",     function() return getdimen("d_rule_width")  * bpfactor end)
+    registerdirect("RuleHeight",    function() return getdimen("d_rule_height") * bpfactor end)
+    registerdirect("RuleDepth",     function() return getdimen("d_rule_depth")  * bpfactor end)
+    registerdirect("RuleH",         function() return getdimen("d_rule_h")      * bpfactor end)
+    registerdirect("RuleV",         function() return getdimen("d_rule_v")      * bpfactor end)
+    registerdirect("RuleThickness", function() return getdimen("d_rule_line")   * bpfactor end)
+    registerdirect("RuleOffset",    function() return getdimen("d_rule_offset") / 65536    end) -- not factor
+    registerdirect("RuleDirection", function() return getmacro("m_rule_direction")         end)
+    registerdirect("RuleFactor",    function() return getdimen("d_rule_factor") * bpfactor end)
+    registerdirect("RuleOption",    function() return getmacro("m_rule_option")            end)
+    registerscript("RuleColor",     function() return getmacro("m_rule_color")             end)
+
+end
+
+-- see typo-ada.*
+
+do
+
+    local d_adaptive_width  <const> = isdimen("d_adaptive_width")  registerdirect("AdaptiveWidth",     function() return getdimen(d_adaptive_width)  * bpfactor end)
+    local d_adaptive_height <const> = isdimen("d_adaptive_height") registerdirect("AdaptiveHeight",    function() return getdimen(d_adaptive_height) * bpfactor end)
+    local d_adaptive_depth  <const> = isdimen("d_adaptive_depth")  registerdirect("AdaptiveDepth",     function() return getdimen(d_adaptive_depth)  * bpfactor end)
+    local d_adaptive_line   <const> = isdimen("d_adaptive_line")   registerdirect("AdaptiveThickness", function() return getdimen(d_adaptive_line)   * bpfactor end)
+                                                                   registerdirect("AdaptiveColor",     function() return getmacro("m_adaptive_color")           end)
+
+    registerdirect("AdaptiveTotal", function()
+        return (getdimen(d_adaptive_height) + getdimen(d_adaptive_depth)) * bpfactor
+    end)
+
+end

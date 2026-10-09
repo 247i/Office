@@ -1,0 +1,106 @@
+# Polish translation for openteacher
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:38+0200\n"
+"PO-Revision-Date: 2013-04-28 03:26+0000\n"
+"Last-Translator: pp/bs <Unknown>\n"
+"Language-Team: Polish <pl@li.org>\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:42+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: gui.py:423
+msgid "Open from file"
+msgstr "Otwórz z pliku"
+
+#: ui.py:51
+msgid "Enter list"
+msgstr "Wprowadź listę"
+
+#: ui.py:52
+msgid "Teach me!"
+msgstr "Naucz mnie!"
+
+#: ui.py:53
+msgid "Show results"
+msgstr "Pokaż wyniki"
+
+#: ui.py:272
+msgid "&File"
+msgstr "&Plik"
+
+#: ui.py:273
+msgid "&New"
+msgstr "&Nowy"
+
+#: ui.py:274
+msgid "&Open"
+msgstr "&Otwórz"
+
+#: ui.py:275
+msgid "Open &into current list"
+msgstr "Otwórz na &aktualnej liście"
+
+#: ui.py:276
+msgid "&Save"
+msgstr "&Zapisz"
+
+#: ui.py:277
+msgid "Save &As"
+msgstr "Zapisz j&ako"
+
+#: ui.py:278
+msgid "&Print"
+msgstr "&Drukuj"
+
+#: ui.py:279
+msgid "&Quit"
+msgstr "&Zakończ"
+
+#: ui.py:281
+msgid "&Edit"
+msgstr "&Edycja"
+
+#: ui.py:282
+msgid "&Reverse list"
+msgstr "&Odwróć listę"
+
+#: ui.py:283
+msgid "&Settings"
+msgstr "&Ustawienia"
+
+#: ui.py:285
+msgid "&View"
+msgstr "&Widok"
+
+#: ui.py:286
+msgid "Fullscreen"
+msgstr "Pełny ekran"
+
+#: ui.py:288
+msgid "&Help"
+msgstr "&Pomoc"
+
+#: ui.py:289
+msgid "&Documentation"
+msgstr "&Dokumentacja"
+
+#: ui.py:290
+msgid "&About"
+msgstr "&Informacje o programie"
+
+#: ui.py:292
+msgid "Toolbar"
+msgstr "Pasek narzędziowy"
+
+#~ msgid "Close Tab"
+#~ msgstr "Zamknij kartę"

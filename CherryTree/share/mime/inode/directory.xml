@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="inode/directory">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Folder</comment>
+  <comment xml:lang="zh-Hant-TW">資料夾</comment>
+  <comment xml:lang="uk">Тека</comment>
+  <comment xml:lang="tr">Klasör</comment>
+  <comment xml:lang="sv">Mapp</comment>
+  <comment xml:lang="sr-Cyrl">Фасцикла</comment>
+  <comment xml:lang="sq">Dosje</comment>
+  <comment xml:lang="sl">Mapa</comment>
+  <comment xml:lang="ru">Папка</comment>
+  <comment xml:lang="ro">dosar</comment>
+  <comment xml:lang="pt-BR">Pasta</comment>
+  <comment xml:lang="pl">Katalog</comment>
+  <comment xml:lang="oc">dossièr</comment>
+  <comment xml:lang="nn">Mappe</comment>
+  <comment xml:lang="lt">Aplankas</comment>
+  <comment xml:lang="ko">폴더</comment>
+  <comment xml:lang="kk-Cyrl">Бума</comment>
+  <comment xml:lang="ka">საქაღალდე</comment>
+  <comment xml:lang="kab">Akaram</comment>
+  <comment xml:lang="ja">フォルダ</comment>
+  <comment xml:lang="it">Cartella</comment>
+  <comment xml:lang="id">Folder</comment>
+  <comment xml:lang="hr">Mapa</comment>
+  <comment xml:lang="hi">फोल्डर</comment>
+  <comment xml:lang="he">תיקיית</comment>
+  <comment xml:lang="gl">Cartafol</comment>
+  <comment xml:lang="fur">Cartele</comment>
+  <comment xml:lang="fr">Dossier</comment>
+  <comment xml:lang="fi">Kansio</comment>
+  <comment xml:lang="eu">Karpeta</comment>
+  <comment xml:lang="et">Kaust</comment>
+  <comment xml:lang="es">carpeta</comment>
+  <comment xml:lang="en-GB">Folder</comment>
+  <comment xml:lang="de">Ordner</comment>
+  <comment xml:lang="ca">carpeta</comment>
+  <comment xml:lang="bg">Папка</comment>
+  <comment xml:lang="be-Cyrl">папка</comment>
+  <comment xml:lang="ar">مجلّد</comment>
+  <comment xml:lang="af">Gids</comment>
+  <generic-icon name="folder"/>
+  <alias type="x-directory/normal"/>
+</mime-type>

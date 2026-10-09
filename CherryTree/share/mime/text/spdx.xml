@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/spdx">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>SPDX document</comment>
+  <comment xml:lang="zh-Hant-TW">SPDX 文件</comment>
+  <comment xml:lang="uk">документ SPDX</comment>
+  <comment xml:lang="tr">SPDX belgesi</comment>
+  <comment xml:lang="sv">SPDX-dokument</comment>
+  <comment xml:lang="sr-Cyrl">SPDX документ</comment>
+  <comment xml:lang="sq">Dokument SPDX</comment>
+  <comment xml:lang="sl">Dokument SPDX</comment>
+  <comment xml:lang="ru">Документ SPDX</comment>
+  <comment xml:lang="ro">document SPDX</comment>
+  <comment xml:lang="pt-BR">Documento SPDX</comment>
+  <comment xml:lang="pl">Dokument SPDX</comment>
+  <comment xml:lang="oc">document SPDX</comment>
+  <comment xml:lang="ko">SPDX 문서</comment>
+  <comment xml:lang="kk-Cyrl">SPDX құжаты</comment>
+  <comment xml:lang="hr">SPDX dokument</comment>
+  <comment xml:lang="fr">Document SPDX</comment>
+  <comment xml:lang="fi">SPDX asiakirja</comment>
+  <comment xml:lang="et">SPDXi document</comment>
+  <comment xml:lang="es">documento SPDX</comment>
+  <comment xml:lang="en-GB">SPDX document</comment>
+  <comment xml:lang="de">SPDX-Dokument</comment>
+  <comment xml:lang="bg">Документ — SPDX</comment>
+  <comment xml:lang="ar">مستند SPDX</comment>
+  <acronym>SPDX</acronym>
+  <expanded-acronym>Software Package Data Exchange</expanded-acronym>
+  <sub-class-of type="text/plain"/>
+  <glob pattern="*.spdx"/>
+</mime-type>

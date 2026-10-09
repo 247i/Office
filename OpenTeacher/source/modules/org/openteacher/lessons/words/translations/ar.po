@@ -1,0 +1,97 @@
+# Arabic translation for openteacher
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2012-04-17 17:19+0000\n"
+"Last-Translator: El Achèche ANIS <elachecheanis@gmail.com>\n"
+"Language-Team: Arabic <ar@li.org>\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:42+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: words.py:90
+msgid "Unnamed"
+msgstr "غير مسمّى"
+
+#: words.py:91
+#, python-format
+msgid "Word lesson: %s"
+msgstr "كلمة الدّرس: %s"
+
+#: words.py:136
+msgid "Empty question or answer"
+msgstr ""
+
+#: words.py:137
+msgid "Please enter at least one question and one answer for every word."
+msgstr ""
+
+#: words.py:228
+msgid "Create words lesson"
+msgstr "إنشاء كلمات الدرس"
+
+#~ msgid "Lesson type"
+#~ msgstr "نوع الدرس"
+
+#~ msgid "Lesson settings"
+#~ msgstr "إعدادات الدرس"
+
+#~ msgid "I'm ready, start the lesson!"
+#~ msgstr "أنا مستعد، إبدأ الدرس"
+
+#~ msgid "Down"
+#~ msgstr "اسفل"
+
+#~ msgid "Up"
+#~ msgstr "اعلى"
+
+#~ msgid "Answer language:"
+#~ msgstr "لغة الجواب"
+
+#~ msgid "Question language:"
+#~ msgstr "لغة السّؤال"
+
+#~ msgid "Modify word list"
+#~ msgstr "عدّل قائمة الكلمات"
+
+#~ msgid "Modify word"
+#~ msgstr "عدّل الكلمة"
+
+#~ msgid "Word:"
+#~ msgstr "كلمة:"
+
+#~ msgid "Change lesson settings"
+#~ msgstr "تغيير إعدادات الدرس"
+
+#~ msgid "Word lesson %s"
+#~ msgstr "كلمة الدرس %s"
+
+#~ msgid "Questions"
+#~ msgstr "الأسئلة"
+
+#~ msgid "Answers"
+#~ msgstr "الأجوبة"
+
+#~ msgid "Comment"
+#~ msgstr "تعليق"
+
+#~ msgid "Words Lesson"
+#~ msgstr "كلمات الدّرس"
+
+#~ msgid "Don't show this screen again when I start a lesson."
+#~ msgstr "لا تظهر هذه الشاشة ثانية"
+
+#~ msgid "Remove selected row(s)"
+#~ msgstr "الغاء السط(و)ر المختارة"
+
+#~ msgid "Title:"
+#~ msgstr "العنوان :"

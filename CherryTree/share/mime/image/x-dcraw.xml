@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="image/x-dcraw">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Digital raw image</comment>
+  <comment xml:lang="zh-Hant-TW">數位 RAW 影像</comment>
+  <comment xml:lang="uk">простий цифровий негатив</comment>
+  <comment xml:lang="tr">Sayısal ham görüntü</comment>
+  <comment xml:lang="sv">Digital råbild</comment>
+  <comment xml:lang="sr-Cyrl">Дигитална сирова слика</comment>
+  <comment xml:lang="sq">Figurë dixhitale e papërpunuar</comment>
+  <comment xml:lang="sl">Neobdelana digitalna slika</comment>
+  <comment xml:lang="ru">Необработанное цифровое изображение</comment>
+  <comment xml:lang="ro">imagine raw (brută) digitală</comment>
+  <comment xml:lang="pt-BR">Imagem digital bruta</comment>
+  <comment xml:lang="pl">Surowy obraz cyfrowy</comment>
+  <comment xml:lang="oc">imatge numeric brut</comment>
+  <comment xml:lang="ko">디지털 로 이미지</comment>
+  <comment xml:lang="kk-Cyrl">Өңделмеген цифрлық суреті</comment>
+  <comment xml:lang="ja">生写真</comment>
+  <comment xml:lang="it">Immagine raw digitale</comment>
+  <comment xml:lang="id">Gambar mentah digital</comment>
+  <comment xml:lang="hr">Neobrađena digitalna slika</comment>
+  <comment xml:lang="hi">डिजिटल रॉ छवि</comment>
+  <comment xml:lang="he">תמונה גולמית (raw) דיגיטלית</comment>
+  <comment xml:lang="gl">Imaxe RAW dixital</comment>
+  <comment xml:lang="fur">Imagjin grese digjitâl</comment>
+  <comment xml:lang="fr">Image brute numérique</comment>
+  <comment xml:lang="fi">Digi RAW-kuva</comment>
+  <comment xml:lang="eu">Irudi digital gordina</comment>
+  <comment xml:lang="et">Töötlemata digipilt</comment>
+  <comment xml:lang="es">imagen digital en bruto</comment>
+  <comment xml:lang="en-GB">Digital raw image</comment>
+  <comment xml:lang="de">digitales Rohbild</comment>
+  <comment xml:lang="ca">imatge digital RAW</comment>
+  <comment xml:lang="bg">Цифрово необработено изображение</comment>
+  <comment xml:lang="be-Cyrl">неапрацаваны лічбавы відарыс</comment>
+  <comment xml:lang="ar">صورة رقمية خامة</comment>
+</mime-type>

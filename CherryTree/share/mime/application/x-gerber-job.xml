@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-gerber-job">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Gerber job file</comment>
+  <comment xml:lang="zh-Hant-TW">Gerber 工作檔</comment>
+  <comment xml:lang="uk">файл завдання Gerber</comment>
+  <comment xml:lang="tr">Gerber iş dosyası</comment>
+  <comment xml:lang="sv">Gerber-jobbfil</comment>
+  <comment xml:lang="sr-Cyrl">Gerber датотека посла</comment>
+  <comment xml:lang="sl">Opravilo Gerber</comment>
+  <comment xml:lang="ru">Файл работ Gerber</comment>
+  <comment xml:lang="ro">fișier sarcină Gerber</comment>
+  <comment xml:lang="pt-BR">Arquivo de tarefa Gerber</comment>
+  <comment xml:lang="pl">Plik zadania Gerber</comment>
+  <comment xml:lang="oc">fichièr de prètzfach Gerber</comment>
+  <comment xml:lang="nn">Gerber-jobbfil</comment>
+  <comment xml:lang="ko">Gerber 작업 파일</comment>
+  <comment xml:lang="kk-Cyrl">Gerber тапсырма файлы</comment>
+  <comment xml:lang="ja">Gerber ジョブファイル</comment>
+  <comment xml:lang="it">File lavoro Gerber</comment>
+  <comment xml:lang="id">Berkas tugas Gerber</comment>
+  <comment xml:lang="hr">Gerber datoteka zadataka</comment>
+  <comment xml:lang="hi">Gerber जॉब फाइल</comment>
+  <comment xml:lang="he">קובץ משימה Gerber</comment>
+  <comment xml:lang="fur">File di lavôr Gerber</comment>
+  <comment xml:lang="fr">Fichier de travail Gerber</comment>
+  <comment xml:lang="fi">Gerber-työtiedosto</comment>
+  <comment xml:lang="et">Gerberi tootmisfail</comment>
+  <comment xml:lang="es">archivo de tarea de Gerber</comment>
+  <comment xml:lang="en-GB">Gerber job file</comment>
+  <comment xml:lang="de">Gerber-Aufgabendatei</comment>
+  <comment xml:lang="ca">fitxer de treball Gerber</comment>
+  <comment xml:lang="bg">Файл — Gerber job</comment>
+  <comment xml:lang="be-Cyrl">працоўны файл Gerber</comment>
+  <comment xml:lang="ar">ملف مهمة Gerber</comment>
+  <sub-class-of type="application/json"/>
+  <glob pattern="*.gbrjob"/>
+  <generic-icon name="text-x-generic"/>
+</mime-type>

@@ -1,0 +1,91 @@
+# Polish translation for openteacher
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2013-05-10 00:09+0000\n"
+"Last-Translator: pp/bs <Unknown>\n"
+"Language-Team: Polish <pl@li.org>\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:44+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: main.py:102
+msgid "That's a mistake :(."
+msgstr "To jest pomyłka :(."
+
+#: main.py:144
+msgid "Please choose a user name and the keyboard layout you want to learn."
+msgstr ""
+"Wybierz nazwę użytkownika oraz układ klawiatury, którego chcesz się uczyć."
+
+#: main.py:145
+msgid "Username:"
+msgstr "Nazwa użytkownika:"
+
+#: main.py:146
+msgid "Keyboard layout:"
+msgstr "Układ klawiatury:"
+
+#. TRANSLATORS: Split the line as closest to the middle as
+#. TRANSLATORS: possible, not necessarily between 'Keyboard
+#. TRANSLATORS: layout' and 'preview'. Thanks :)
+#: main.py:150
+msgid ""
+"Keyboard layout\n"
+"preview:"
+msgstr ""
+"Podgląd układu\n"
+"klawiatury:"
+
+#: main.py:205
+msgid "Welcome, please choose your account by clicking on it."
+msgstr "Witaj, wybierz swoje konto klikając je."
+
+#: main.py:206
+msgid "I am a new user"
+msgstr "Jestem nowym użytkownikiem"
+
+#: main.py:275
+msgid "Level"
+msgstr "Poziom"
+
+#: main.py:276
+msgid "Speed (words per minute)"
+msgstr "Szybkość (słów na minutę)"
+
+#: main.py:277
+msgid "Amount of mistakes"
+msgstr "Ilość błędów"
+
+#: main.py:278
+msgid "Start exercise"
+msgstr "Rozpocznij ćwiczenie"
+
+#: main.py:329
+msgid "Username empty"
+msgstr "Pusta nazwa użytkownika"
+
+#: main.py:330
+msgid "The username should not be empty. Please try again."
+msgstr "Nazwa użytkownika nie powinna być pusta. Proszę spróbować jeszcze raz."
+
+#: main.py:336
+msgid "Username taken"
+msgstr "Nazwa użytkownika zajęta"
+
+#: main.py:337
+msgid "That username is already taken. Please try again."
+msgstr "Ta nazwa użytkonika jest już zajęta. Proszę spróbować jeszcze raz."
+
+#: main.py:438 main.py:448
+msgid "Typing Tutor"
+msgstr "Nauka pisania na klawiaturze"

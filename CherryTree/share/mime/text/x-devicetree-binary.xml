@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/x-devicetree-binary">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Flattened Devicetree</comment>
+  <comment xml:lang="zh-Hant-TW">平整化的 Devicetree</comment>
+  <comment xml:lang="uk">зведене Devicetree</comment>
+  <comment xml:lang="tr">Düzleştirilmiş aygıt ağacı</comment>
+  <comment xml:lang="sv">Utplattat enhetsträd</comment>
+  <comment xml:lang="sr-Cyrl">Flattened Devicetree</comment>
+  <comment xml:lang="sl">Sploščeni Devicetree</comment>
+  <comment xml:lang="ru">Плоское дерево устройств</comment>
+  <comment xml:lang="ro">arbore de dispozitive (Devicetree) compactat</comment>
+  <comment xml:lang="pt-BR">Devicetree achatado</comment>
+  <comment xml:lang="pl">Spłaszczone DeviceTree</comment>
+  <comment xml:lang="oc">arbre aplatit dels periferics</comment>
+  <comment xml:lang="ko">단순화한 Devicetree</comment>
+  <comment xml:lang="kk-Cyrl">Жалпақталған Devicetree</comment>
+  <comment xml:lang="ja">フラット化デバイスツリー</comment>
+  <comment xml:lang="it">Devicetree compatto</comment>
+  <comment xml:lang="id">Pohon Perangkat yang diratakan</comment>
+  <comment xml:lang="hr">Flattened Devicetree</comment>
+  <comment xml:lang="hi">समतलन डिवाइसट्री</comment>
+  <comment xml:lang="fur">Devicetree Flattened</comment>
+  <comment xml:lang="fr">Arbre de périphériques aplati</comment>
+  <comment xml:lang="fi">Litistetty laitepuu</comment>
+  <comment xml:lang="et">Flattened Devicetree</comment>
+  <comment xml:lang="es">árbol de dispositivos aplanado</comment>
+  <comment xml:lang="en-GB">Flattened Devicetree</comment>
+  <comment xml:lang="de">verflachter Gerätebaum</comment>
+  <comment xml:lang="ca">arbre de dispositius aplanat</comment>
+  <comment xml:lang="bg">Плоска Devicetree структура</comment>
+  <comment xml:lang="be-Cyrl">зведзенае дрэва прылады</comment>
+  <comment xml:lang="ar">شجرة الأجهزة مسطحة</comment>
+  <acronym>DTB</acronym>
+  <expanded-acronym>Device Tree Binary</expanded-acronym>
+  <glob pattern="*.dtb"/>
+</mime-type>

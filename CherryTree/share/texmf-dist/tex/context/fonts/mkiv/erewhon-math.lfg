@@ -1,0 +1,159 @@
+-- This font is under active development so we don't want to tweek it too much
+-- before all issues are sorted out.
+
+local common  = fonts.goodies.load("common-math.lfg")
+local presets = common.mathematics.tweaks.presets
+
+return {
+    name = "erewhon-math",
+    version = "1.00",
+    comment = "Goodies that complement erewhon math.",
+    author = "Hans Hagen & Mikael Sundqvist",
+    copyright = "ConTeXt development team",
+    mathematics = {
+        parameters = {
+            AccentBaseDepth                   =  60,
+            DelimiterPercent                  =  85,
+            DelimiterShortfall                = 400,
+            DelimiterDisplayPercent           =  90,
+            DelimiterDisplayShortfall         = 400,
+            SubscriptShiftDown                = 200, -- 220 in font
+            SuperscriptShiftUp                = 400, -- 400 in font
+            SubscriptShiftDownWithSuperscript = "1.2*SubscriptShiftDown", -- unclear original value, trial and error
+            PrimeShiftUp                      = "1*SuperscriptShiftUp",
+            PrimeShiftUpCramped               = "1*SuperscriptShiftUp",
+            PrimeBaselineDropMax              = "0.5*SuperscriptBaselineDropMax",
+            RadicalDisplayStyleVerticalGap    = "RadicalVerticalGap", --170, 69
+            -- RadicalDisplayStyleVerticalGap    = 55,--"RadicalVerticalGap", --170, 69
+            -- RadicalVerticalGap                = 55,
+        },
+        tweaks = {
+            aftercopying = {
+                {
+                    tweak    = "fontname",
+                    expected = "Erewhon-Math",
+                    abort    = true,
+                },
+                {
+                    tweak  = "fixprimes",
+                    factor = 0.94  ,
+                    fake   = 0.85, -- replace multiples with this width proportion
+                },
+                {
+                    tweak = "addmirrors",
+                },
+                {
+                    tweak = "addcomposites",
+                },
+             -- {
+             --     tweak   = "dimensions",
+             --     comment = "no longer needed",
+             --     list    = {
+             --         ["0x222B.variants.*"] = { axis = .15 },
+             --     },
+             -- },
+                {
+                    tweak = "fixintegrals",
+                },
+                presets.scripttocalligraphic { },
+                presets.rsfstoscript         { },
+                presets.rsfsuprighttoscript  { },
+                presets.moderntocalligraphic { },
+                presets.eulertocalligraphic  { },
+                presets.xitsarabic           { rscale  = 0.90 },
+                presets.fallbacks            { },
+                presets.moveitalics          { correct = true },
+                presets.moveitalics          { correct = true, letters = true },
+                presets.moveintegrals        { factor = 1.5 },
+                presets.wipeitalics          { },
+                {
+                    tweak = "checkaccents",
+                },
+                {
+                    tweak = "kerns",
+                    list  = {
+                        [0x002F]                = { topleft  = -0.15, bottomright = -0.15 },
+                        ["0x7D.parts.top"]      = { topright = -0.15,                     }, -- right brace top
+                        ["0x7D.parts.bottom"]   = {                   bottomright = -0.15 }, -- right brace bottom
+                        ["0x7D.variants.*"]     = { topright = -0.05, bottomright = -0.05 }, -- right brace variants
+                        ["0x29.parts.top"]      = { topright = -0.1,                      }, -- right parenthesis top
+                        ["0x29.parts.bottom"]   = {                   bottomright = -0.1  }, -- right parenthesis bottom
+                        ["0x29.variants.*"]     = { topright = -0.1,  bottomright = -0.1  }, -- right parenthesis variants
+                        ["0x221A.parts.top"]    = { topright =  0.2,                      }, -- right radical top
+                        ["0x221A.parts.bottom"] = {                   bottomright =  0.2  }, -- right radical bottom
+                        ["0x221A.variants.*"]   = { topright =  0.2,  bottomright =  0.2  }, -- right radical variants
+                        [0x27E9]                = { topright = -0.1,  bottomright = -0.1  }, -- angle
+                        ["0x27E9.variants.*"]   = { topright = -0.2,  bottomright = -0.2  },
+                        [0x27EB]                = { topright = -0.1,  bottomright = -0.1  },
+                        ["0x27EB.variants.*"]   = { topright = -0.2,  bottomright = -0.2  },
+                        [0x00393]               = {                   bottomright = -0.3  }, -- upright Gamma
+                    },
+                },
+                {
+                    tweak = "flattenaccents",
+                },
+                {
+                    tweak   = "radicaldegreeanchors",
+                    list = {
+                        ["0x221A.parts.bottom"] = { location = "left", hfactor  = .1, vfactor  = 1.025 },
+                    }
+                },
+                {
+                    tweak = "checkspacing",
+                },
+                {
+                    tweak = "addscripts",
+                },
+                {
+                    tweak = "accentdimensions",
+                },
+                {
+                    tweak = "addrules",
+                },
+{
+    tweak    = "replacerules",
+    -- minus = {
+    --     height      = 0.188,
+    --     yoffset     = 0.812,
+    --     leftoffset  = 0.2,
+    --     rightoffset = 0.2,
+    -- },
+    fraction = {
+        height  = .188,
+        yoffset = .812,
+    },
+    radical = {
+        height      = .188,
+        yoffset     = .812,
+        leftoffset  = 0.12,
+        rightoffset = 0.12,
+    },
+    stacker = {
+        height  = .188,
+        yoffset = .812,
+    },
+},
+                {
+                    tweak = "addactuarian",
+                },
+                {
+                    tweak = "addequals",
+                },
+                {
+                    tweak = "addfourier",
+                    variant = 2,
+                },
+                {
+                    tweak = "addprimed",
+                },
+                {
+                    tweak = "setoptions",
+                },
+            },
+        },
+        bigslots = {
+            1, 2, 3, 4
+        },
+    },
+
+}

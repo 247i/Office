@@ -1,0 +1,50 @@
+# Frisian translation for openteacher
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2012-07-15 13:28+0000\n"
+"Last-Translator: Marten de Vries <marten@marten-de-vries.nl>\n"
+"Language-Team: Frisian <fy@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:42+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: inMind.py:47
+msgid ""
+"Think about the answer, and press the 'View answer' button when you're done."
+msgstr ""
+"Tink nei oer it antwurd, en druk de 'Lit antwurd sjen'-knop yn wannear't jo "
+"klear binne."
+
+#: inMind.py:48
+msgid "View answer"
+msgstr "Lit antwurd sjen"
+
+#: inMind.py:49
+msgid "Skip"
+msgstr "Oerslaan"
+
+#: inMind.py:70
+msgid "I was right"
+msgstr "Ik hie 't goed"
+
+#: inMind.py:71
+msgid "I was wrong"
+msgstr "Ik hie't fout"
+
+#: inMind.py:135
+msgid "Translation: "
+msgstr "Oersetting: "
+
+#: inMind.py:199
+msgid "Think answer"
+msgstr "Tinke oer it antwurd"

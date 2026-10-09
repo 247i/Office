@@ -1,0 +1,68 @@
+# Sinhalese translation for openteacher
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2012-04-24 10:37+0000\n"
+"Last-Translator: Mohamed Rizmi <Unknown>\n"
+"Language-Team: Sinhalese <si@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:42+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: topo.py:128
+msgid "Create topography lesson"
+msgstr ""
+
+#. TRANSLATORS: used as a label in case a filename of a topo
+#. TRANSLATORS: lesson isn't available. (E.g. because it's
+#. TRANSLATORS: downloaded from some kind of web service.)
+#: topo.py:218
+msgid "Import source"
+msgstr ""
+
+#: topo.py:224 topo.py:291 topo.py:293
+#, python-format
+msgid "Topo lesson: %s"
+msgstr ""
+
+#~ msgid "What's this place's name?"
+#~ msgstr "මෙම ස්ථානයේ නම කුමක්ද?"
+
+#~ msgid "Name for this place"
+#~ msgstr "මෙම ස්ථානයේ නම"
+
+#~ msgid "Map:"
+#~ msgstr "සිතියම:"
+
+#~ msgid "Warning"
+#~ msgstr "අවවාදයයි"
+
+#~ msgid "Add"
+#~ msgstr "එක් කරන්න"
+
+#~ msgid "Place - Name"
+#~ msgstr "ස්ථානය - නම"
+
+#~ msgid "Lesson type:"
+#~ msgstr "පාඩම් වර්ගය:"
+
+#~ msgid "Name - Place"
+#~ msgstr "නම - ස්ථානය"
+
+#~ msgid "Which place is here?"
+#~ msgstr "මෙම ස්ථානය කුමක්ද?"
+
+#~ msgid "Check"
+#~ msgstr "පරික්ෂා කරන්න"
+
+#~ msgid "Topo Lesson"
+#~ msgstr "Topo පාඩම"

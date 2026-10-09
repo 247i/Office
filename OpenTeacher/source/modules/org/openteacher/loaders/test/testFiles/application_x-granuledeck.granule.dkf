@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE deck SYSTEM "http://granule.sourceforge.net/granule.dtd">
+<deck>
+  <author>Marten de Vries</author>
+  <description>Created on wo 23 jan 2013 16:43:36 CET</description>
+  <sound_path relative="no"/>
+  <pics_path relative="yes"/>
+  <appearance enabled="no"/>
+  <card id="_1358955840">
+    <front>een</front>
+    <back>one</back>
+    <back_example></back_example>
+  </card>
+  <card id="_1358955850">
+    <front>twee</front>
+    <back>two</back>
+    <back_example></back_example>
+  </card>
+  <card id="_1358955855">
+    <front>drié</front>
+    <back>thréeµα</back>
+    <back_example>α-test</back_example>
+  </card>
+</deck>

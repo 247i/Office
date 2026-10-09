@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-genesis-rom-smd">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Genesis ROM (SMD dump)</comment>
+  <comment xml:lang="uk">ROM Genesis (дамп SMD)</comment>
+  <comment xml:lang="tr">Genesis ROM’u (SMD dökümü)</comment>
+  <comment xml:lang="sv">Meda Drive-ROM (SMD-dump)</comment>
+  <comment xml:lang="sr-Cyrl">Mega Drive РОМ (SMD извоз)</comment>
+  <comment xml:lang="sl">Bralni pomnilnik Genesis (izpis SMD)</comment>
+  <comment xml:lang="ru">Genesis ROM (SMD dump)</comment>
+  <comment xml:lang="ro">ROM Genesis (SMD dump)</comment>
+  <comment xml:lang="pt-BR">ROM de Mega Drive (formato SMD)</comment>
+  <comment xml:lang="pl">Plik ROM konsoli Mega Drive (zrzut SMD)</comment>
+  <comment xml:lang="oc">ROM Mega Drive (extraccion SMD)</comment>
+  <comment xml:lang="ko">Genesis ROM (SMD 덤프)</comment>
+  <comment xml:lang="kk-Cyrl">Genesis ROM (SMD дампы)</comment>
+  <comment xml:lang="fr">ROM Genesis (dump SMD)</comment>
+  <comment xml:lang="fi">Genesis ROM (SMD-vedos)</comment>
+  <comment xml:lang="et">Genesis ROM (SMD tõmmis)</comment>
+  <comment xml:lang="es">ROM de Genesis (volcado SMD)</comment>
+  <comment xml:lang="en-GB">Mega Drive ROM (SMD dump)</comment>
+  <comment xml:lang="de">Mega-Drive-ROM (SMD-Speicherauszug)</comment>
+  <acronym>SMD</acronym>
+  <expanded-acronym>Super Magic Drive</expanded-acronym>
+  <generic-icon name="application-x-executable"/>
+  <glob pattern="*.smd"/>
+</mime-type>

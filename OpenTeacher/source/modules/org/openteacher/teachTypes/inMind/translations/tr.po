@@ -1,0 +1,50 @@
+# Turkish translation for openteacher
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2013-04-27 16:20+0000\n"
+"Last-Translator: kodadiirem <Unknown>\n"
+"Language-Team: Turkish <tr@li.org>\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:42+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: inMind.py:47
+msgid ""
+"Think about the answer, and press the 'View answer' button when you're done."
+msgstr ""
+"Cevap hakkında düşünün ve hazır olduğunuzda 'Cevabı göster' düğmesine "
+"basınız."
+
+#: inMind.py:48
+msgid "View answer"
+msgstr "Cevabı göster"
+
+#: inMind.py:49
+msgid "Skip"
+msgstr "Atla"
+
+#: inMind.py:70
+msgid "I was right"
+msgstr "Doğruydum"
+
+#: inMind.py:71
+msgid "I was wrong"
+msgstr "Yanlıştım"
+
+#: inMind.py:135
+msgid "Translation: "
+msgstr "Çeviri: "
+
+#: inMind.py:199
+msgid "Think answer"
+msgstr "Cevabı düşün"

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="image/qoi">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Quite OK Image Format</comment>
+  <comment xml:lang="zh-Hant-TW">QOI 影像</comment>
+  <comment xml:lang="uk">формат зображень Quite OK</comment>
+  <comment xml:lang="tr">Quite OK görüntüsü</comment>
+  <comment xml:lang="sv">Quite OK Image-format</comment>
+  <comment xml:lang="sr-Cyrl">Quite OK формат слике</comment>
+  <comment xml:lang="sq">Format Figurash Quite OK</comment>
+  <comment xml:lang="sl">Slika Quite OK Image</comment>
+  <comment xml:lang="ru">Формат изображений Quite OK</comment>
+  <comment xml:lang="ro">format de imagine Quite OK</comment>
+  <comment xml:lang="pt-BR">Formato Quite OK Image</comment>
+  <comment xml:lang="pl">Obraz QOI</comment>
+  <comment xml:lang="oc">format d’imatge Quite OK</comment>
+  <comment xml:lang="ko">Quite OK 이미지 형식</comment>
+  <comment xml:lang="kk-Cyrl">Quite OK Image пішімі</comment>
+  <comment xml:lang="ja">Quite OK Image Format</comment>
+  <comment xml:lang="it">Formato immagine Quite OK</comment>
+  <comment xml:lang="id">Format Citra Quite OK</comment>
+  <comment xml:lang="hr">Quite OK Image format</comment>
+  <comment xml:lang="hi">Quite OK छवि प्रारूप</comment>
+  <comment xml:lang="fur">Formât Imagjin Quite OK</comment>
+  <comment xml:lang="fr">Format d'image Quite OK</comment>
+  <comment xml:lang="fi">Quite OK Image -kuvamuoto</comment>
+  <comment xml:lang="et">Quite OK pildivorming</comment>
+  <comment xml:lang="es">formato de imagen Quite OK</comment>
+  <comment xml:lang="en-GB">Quite OK Image Format</comment>
+  <comment xml:lang="de">Quite-OK-Bildformat</comment>
+  <comment xml:lang="ca">format d'imatge Quite OK</comment>
+  <comment xml:lang="bg">Изображение — Quite OK</comment>
+  <comment xml:lang="be-Cyrl">фармат відарысаў Quite OK Image</comment>
+  <comment xml:lang="ar">تنسيق صورة Quite OK</comment>
+  <glob pattern="*.qoi"/>
+</mime-type>

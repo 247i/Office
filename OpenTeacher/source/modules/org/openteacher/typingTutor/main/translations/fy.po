@@ -1,0 +1,88 @@
+# Frisian translation for openteacher
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2012-12-10 16:34+0000\n"
+"Last-Translator: Marten de Vries <marten@marten-de-vries.nl>\n"
+"Language-Team: Frisian <fy@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:44+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: main.py:102
+msgid "That's a mistake :(."
+msgstr ""
+
+#: main.py:144
+msgid "Please choose a user name and the keyboard layout you want to learn."
+msgstr ""
+
+#: main.py:145
+msgid "Username:"
+msgstr ""
+
+#: main.py:146
+msgid "Keyboard layout:"
+msgstr ""
+
+#. TRANSLATORS: Split the line as closest to the middle as
+#. TRANSLATORS: possible, not necessarily between 'Keyboard
+#. TRANSLATORS: layout' and 'preview'. Thanks :)
+#: main.py:150
+msgid ""
+"Keyboard layout\n"
+"preview:"
+msgstr ""
+
+#: main.py:205
+msgid "Welcome, please choose your account by clicking on it."
+msgstr "Wolkom, kies alsjebleaft jo akkount troch derop te klikke."
+
+#: main.py:206
+msgid "I am a new user"
+msgstr "Ik bin in nije brûker"
+
+#: main.py:275
+msgid "Level"
+msgstr ""
+
+#: main.py:276
+msgid "Speed (words per minute)"
+msgstr ""
+
+#: main.py:277
+msgid "Amount of mistakes"
+msgstr ""
+
+#: main.py:278
+msgid "Start exercise"
+msgstr "Begjin oefening"
+
+#: main.py:329
+msgid "Username empty"
+msgstr ""
+
+#: main.py:330
+msgid "The username should not be empty. Please try again."
+msgstr ""
+
+#: main.py:336
+msgid "Username taken"
+msgstr "Brûkersnamme al yn gebrûk"
+
+#: main.py:337
+msgid "That username is already taken. Please try again."
+msgstr "Die brûkersnamme is al yn gebrûk. Besykje it alsjebleaft nochris."
+
+#: main.py:438 main.py:448
+msgid "Typing Tutor"
+msgstr "Typelearaar"

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="x-content/software">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Software</comment>
+  <comment xml:lang="zh-Hant-TW">軟體</comment>
+  <comment xml:lang="uk">програмне забезпечення</comment>
+  <comment xml:lang="tr">Yazılım</comment>
+  <comment xml:lang="sv">Programvara</comment>
+  <comment xml:lang="sr-Cyrl">Software</comment>
+  <comment xml:lang="sq">Software</comment>
+  <comment xml:lang="sl">Programska oprema</comment>
+  <comment xml:lang="ru">Программное обеспечение</comment>
+  <comment xml:lang="ro">software</comment>
+  <comment xml:lang="pt-BR">Software</comment>
+  <comment xml:lang="pl">Oprogramowanie</comment>
+  <comment xml:lang="oc">logicial</comment>
+  <comment xml:lang="nn">Programvare</comment>
+  <comment xml:lang="lt">Programinė įranga</comment>
+  <comment xml:lang="ko">소프트웨어</comment>
+  <comment xml:lang="kk-Cyrl">Бағдарламалық қамтама</comment>
+  <comment xml:lang="ka">პროგრამები</comment>
+  <comment xml:lang="kab">Aseɣẓan</comment>
+  <comment xml:lang="ja">ソフトウェア</comment>
+  <comment xml:lang="it">Software</comment>
+  <comment xml:lang="id">Perangkat Lunak</comment>
+  <comment xml:lang="hr">Softver</comment>
+  <comment xml:lang="hi">सॉफ्टवेयर</comment>
+  <comment xml:lang="he">תוכנה</comment>
+  <comment xml:lang="gl">Software</comment>
+  <comment xml:lang="fur">Software</comment>
+  <comment xml:lang="fr">Logiciel</comment>
+  <comment xml:lang="fi">Ohjelmisto</comment>
+  <comment xml:lang="eu">Softwarea</comment>
+  <comment xml:lang="et">Tarkvara</comment>
+  <comment xml:lang="es">sóftwer</comment>
+  <comment xml:lang="en-GB">Software</comment>
+  <comment xml:lang="de">Software</comment>
+  <comment xml:lang="ca">programari</comment>
+  <comment xml:lang="bg">Софтуер</comment>
+  <comment xml:lang="be-Cyrl">праграмнае забеспячэнне</comment>
+  <comment xml:lang="ar">برمجية</comment>
+  <comment xml:lang="af">Sagteware</comment>
+</mime-type>

@@ -1,0 +1,136 @@
+-- When testing XITS in LMTX one has to do this:
+--
+-- \definefilesynonym [type-imp-xits.mkiv] [type-imp-xits.mkiv]
+
+local common  = fonts.goodies.load("common-math.lfg")
+local presets = common.mathematics.tweaks.presets
+
+return {
+    name = "xits-math",
+    version = "1.00",
+    comment = "Goodies that complement xits (by Khaled Hosny).",
+    author = "Hans Hagen & Mikael Sundqvist",
+    copyright = "ConTeXt development team",
+    filenames = {
+        ["xitsmath-regular.otf"] = {
+            "xitsmath-regular.otf",
+            "xits-math.otf",
+        },
+        ["xitsmath-bold.otf"] = {
+            "xitsmath-bold.otf",
+            "xits-mathbold.otf",
+        },
+    },
+    mathematics = {
+        parameters = {
+            NoLimitSupFactor                =    0,
+            NoLimitSubFactor                = 1000,
+         -- AccentBaseHeight                =    0,
+            AccentBaseDepth                 =   30,
+            FlattenedAccentTopShiftUp       =   0, -- now also set, the wide ones (so we can move in one go)
+         -- AccentExtendMargin              =   50,
+            RadicalDegreeBottomRaisePercent =   65,
+         -- RadicalKernBeforeDegree         =  500,
+            RadicalKernAfterDegree          = -500,
+            RadicalVerticalGap              =   10,
+         -- RadicalRuleThickness            =   68, -- 68 in font (but shifted down)
+            DelimiterPercent                =   90,
+            DelimiterShortfall              =  400,
+            DisplayOperatorMinHeight        = 1800, -- 1800 in font
+            PrimeRaisePercent               =   75, -- 50 default
+            PrimeRaiseComposedPercent       =   10, -- 25 default
+
+        },
+        tweaks = {
+            aftercopying = {
+                {
+                    tweak    = "version",
+                    expected = "Version 1.302",
+                },
+                {
+                    tweak   = "replacealphabets",
+                    list    = {
+                        {
+                            source   = "uppercasescript",
+                            target   = "uppercasecalligraphic",
+                        },
+                        {
+                            source   = "uppercasescript",
+                            target   = "uppercasescript",
+                            feature  = "ss01",
+                        },
+                    },
+                },
+                presets.scripttocalligraphic { },
+                presets.rsfstoscript         { rscale  = 0.95 },
+                presets.rsfsuprighttoscript  { rscale  = 0.95 },
+                presets.moderntocalligraphic { rscale  = 0.95 },
+                presets.eulertocalligraphic  { rscale  = 0.95 },
+                presets.xitsarabic           { rscale  = 0.88 },
+                presets.fallbacks            { },
+                presets.moveitalics          { correct = true },
+                presets.moveitalics          { correct = true, letters = true },
+                presets.moveintegrals        { factor = 1.4 },
+                presets.wipeitalics          { },
+                {
+                    tweak = "kerns",
+                    list  = {
+                        [0x2F] = {
+                            topleft     = -0.1,
+                         -- bottomleft  =  0,
+                         -- topright    =  0,
+                            bottomright =  -0.1,
+                       },
+                    },
+                },
+                {
+                    tweak = "dimensions",
+                    list  = {
+                        -- nothing yet
+                    },
+                },
+                {
+                    tweak  = "fixprimes",
+                 -- smaller = true,
+                    factor = 0.85,
+                },
+                {
+                    tweak = "addcomposites",
+                },
+                {
+                    tweak = "checkspacing",
+                },
+                {
+                    tweak = "addscripts",
+                },
+                {
+                    tweak = "accentdimensions",
+                },
+                {
+                    tweak = "addrules",
+                },
+                {
+                    tweak = "setoptions",
+                    set   = { "ignorekerndimensions" }
+                },
+                -- this is the mkiv section
+                {
+                    tweak   = "emulatelmtx",
+                    feature = "emulatelmtx",
+                    comment = "this is for mkiv",
+                },
+            },
+        },
+        alternates = {
+            calligraphic = { feature = 'ss01', value = 1, comment = "Mathematical Calligraphic Alphabet" },
+            greekssup    = { feature = 'ss02', value = 1, comment = "Mathematical Greek Sans Serif Alphabet" },
+            greekssit    = { feature = 'ss03', value = 1, comment = "Mathematical Italic Sans Serif Digits" },
+            monobfnum    = { feature = 'ss04', value = 1, comment = "Mathematical Bold Monospace Digits" },
+            mathbbbf     = { feature = 'ss05', value = 1, comment = "Mathematical Bold Double-Struck Alphabet" },
+            mathbbit     = { feature = 'ss06', value = 1, comment = "Mathematical Italic Double-Struck Alphabet" },
+            mathbbbi     = { feature = 'ss07', value = 1, comment = "Mathematical Bold Italic Double-Struck Alphabet" },
+            upint        = { feature = 'ss08', value = 1, comment = "Upright Integrals" },
+            vertnot      = { feature = 'ss09', value = 1, comment = "Negated Symbols With Vertical Stroke" },
+        },
+    }
+}

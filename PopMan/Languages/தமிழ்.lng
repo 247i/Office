@@ -1,0 +1,519 @@
+[File Info]
+
+Language=தமிழ்
+Author=தமிழ்நேரம்<TamilNeram.github.io>
+Email=Anishprabu.t@gmail.com
+Date=03/24/2023
+Comment=தஅநெமனிதன் 1.3.8 தமிழ் மொழிபெயர்ப்பு 
+LangID=73
+
+
+[Translations]
+
+Not connected<=>இணைக்கப்படவில்லை
+Connection failure<=>இணைப்பு தோல்வி
+Canceled<=>ரத்து செய்யப்பட்டது
+Invalid server response<=>தவறான சேவையக பதில்
+Timeout<=>நேரம் முடிந்தது
+Login failed<=>உள்நுழைவு தோல்வியடைந்தது
+Message not found<=>செய்தி கிடைக்கவில்லை
+Server failure: Message not found!<=>சேவையக தோல்வி: செய்தி கிடைக்கவில்லை!
+Busy<=>ஓய்வற்ற
+Ready<=>தயார்
+Connecting...<=>இணைக்கிறது...
+Connected!<=>இணைக்கப்பட்டது!
+Login...<=>உள்நுழைக...
+Successfully logged in!<=>உள்நுழைந்துள்ளீர்கள்!
+Loading message ...<=>செய்தியை ஏற்றுகிறது ...
+Loading message {1} of {2} ...<=>செய்தியை ஏற்றுகிறது {1} / {2} ...
+Deleting message {1} of {2} ...<=>{2} இல் {1} செய்தியை நீக்குகிறது...
+Marking message {1} of {2} as seen...<=>{2} இல் {1} செய்தியை பார்த்ததாகக் குறிக்கிறது...
+
+# புதுப்பிப்பு வழிகாட்டி
+
+Update Wizard<=>வழிகாட்டியைப் புதுப்பிக்கவும்
+There are no updates available.<=>புதுப்பிப்புகள் எதுவும் இல்லை.
+There is a new version {1} available!<=>புதிய பதிப்பு {1} கிடைக்கிறது!
+There is a new {1} Beta version available!<=>புதிய {1} அகர பதிப்பு உள்ளது!
+Click "Next" to update your copy of PopMan...<=>உங்கள் தஅநெமனிதன் இன் நகலைப் புதுப்பிக்க "அடுத்து" என்பதைக் சொடுக்கம் செய்யவும்...
+Unable to retrieve version infomation!<=>பதிப்புத் தகவலைப் பெற முடியவில்லை!
+Error number: {1}<=>பிழை எண்: {1}
+Welcome to the PopMan Update Wizard<=>தஅநெமனிதன் புதுப்பிப்பு வழிகாட்டிக்கு வரவேற்கிறோம்
+The wizard is now connecting to the PopMan webserver checking for updates. If there is a new version available, all necessary files can be downloaded and installed automatically.<=>வழிகாட்டி இப்போது புதுப்பிப்புகளைச் சரிபார்க்கும் தஅநெமனிதன் வலைசேவையகத்துடன் இணைக்கிறது. புதிய பதிப்பு இருந்தால், தேவையான அனைத்து கோப்புகளும் தானாகவே பதிவிறக்கம் செய்யப்பட்டு நிறுவப்படும்.
+Failed to load Decompress.dll!<=>Decompress.dll ஐ ஏற்ற முடியவில்லை!
+Initializing...<=>துவக்குகிறது...
+Do you really want to cancel the update process?<=>புதுப்பிப்பு செயல்முறையை ரத்து செய்ய விரும்புகிறீர்களா?
+Update process failed!<=>புதுப்பித்தல் செயல்முறை தோல்வியடைந்தது!
+Error while downloading initialization file!<=>துவக்கக் கோப்பைப் பதிவிறக்குவதில் பிழை!
+No updates available.<=>புதுப்பிப்புகள் இல்லை.
+Failed to retrieve temporary directory!<=>தற்காலிக கோப்பகத்தை மீட்டெடுப்பதில் தோல்வி!
+Saving {1} ...<=>{1} ... சேமிக்கிறது
+Failed to create directory:<=>கோப்பகத்தை உருவாக்குவதில் தோல்வி:
+Failed to decompress file:<=>கோப்பை நீக்குவதில் தோல்வி:
+Failed to download file:<=>கோப்பைப் பதிவிறக்குவதில் தோல்வி:
+(checksum error)<=>(கூட்டுசரிபார்  பிழை)
+Please try again later.<=>பிறகு முயற்சிக்கவும்.
+Error while saving downloaded file!<=>பதிவிறக்கம் செய்யப்பட்ட கோப்பைச் சேமிப்பதில் பிழை!
+All files downloaded successfully.<=>எல்லா கோப்புகளும் வெற்றிகரமாக பதிவிறக்கம் செய்யப்பட்டன.
+Press the "Finish" button to complete the update process...<=>புதுப்பிப்பு செயல்முறையை முடிக்க "முடி" பொத்தானை அழுத்தவும்...
+Failed to initialize the final copy process!<=>இறுதி நகல் செயல்முறையைத் தொடங்குவதில் தோல்வி!
+Downloading {1} ...<=>பதிவிறக்குகிறது {1} ...
+Progress all:<=>அனைத்தையும் முன்னேற்று:
+Progress current file:<=>தற்போதைய கோப்பு முன்னேற்றம்:
+Download of updated files<=>புதுப்பிக்கப்பட்ட கோப்புகளைப் பதிவிறக்கவும்
+
+# இறக்குமதி கணக்குகள் உரையாடல்
+
+Account<=>கணக்கு
+Type<=>வகை
+User<=>பயனர்
+Server<=>சேவையகம்
+Port<=>துறைமுகம்
+Please select the accounts that you want to import from Outlook Express.<=>கண்ணோட்டம் வெளிப்படுத்து இலிருந்து நீங்கள் இறக்குமதி செய்ய விரும்பும் கணக்குகளைத் தேர்ந்தெடுக்கவும்.
+&Properties...<=>&பண்புகள்...
+OK<=>சரி
+Cancel<=>ரத்து செய்
+Import email accounts<=>மின்னஞ்சல் கணக்குகளை இறக்குமதி செய்யவும்
+Description<=>விளக்கம்
+
+# கணக்கு உரையாடல்
+
+General<=>பொது
+Colors<=>நிறங்கள்
+Advanced<=>மேம்பட்ட
+Can not change account settings while there are busy accounts.<=>கணக்குகள் வேலையிலுள்ளபோது கணக்கு அமைப்புகளை மாற்ற முடியாது.
+Please enter the address of the Server!<=>சேவையகத்தின் முகவரியை உள்ளிடவும்!
+Please enter the account name!<=>கணக்கு பெயரை உள்ளிடவும்!
+Please enter user name!<=>பயனர் பெயரை உள்ளிடவும்!
+Account name:<=>கணக்கு பெயர்:
+Protocol:<=>நெறிமுறை:
+Server:<=>சேவையகம்:
+Port:<=>துறைமுகம்:
+User name:<=>பயனர் பெயர்:
+Password:<=>கடவுச்சொல்:
+Include this account when receiving mail<=>அஞ்சலைப் பெறும்போது இந்தக் கணக்கைச் சேர்க்கவும்
+1 minute<=>1 நிமிடம்
+{1} minutes<=>{1} நிமிடங்கள்
+1 second<=>1 வினாடி
+{1} seconds<=>{1} வினாடிகள்
+Use UIDL when deleting messages<=>செய்திகளை நீக்கும் போது யுஐடிஎலைப் பயன்படுத்தவும்
+Use custom AutoCheck timer interval<=>தனிப்பயன் தானியங்குச் சரிபார்ப்பு நேர இடைவெளியைப் பயன்படுத்தவும்
+Timer interval:<=>நேர இடைவெளி:
+minutes<=>நிமிடங்கள்
+Server Timeouts<=>சேவையகம் நேரவரம்புகள்
+Short<=>குறுகிய
+Long<=>நீளம்
+Load all emails completely<=>எல்லா மின்னஞ்சல்களையும் முழுமையாக ஏற்றவும்
+Retrieve header and {1} lines of message body<=>செய்தி உள்ளடக்கத்தின் தலைப்பு மற்றும் {1} வரிகளை மீட்டெடுக்கவும்
+Number of lines:<=>வரிகளின் எண்ணிக்கை:
+Load small emails completely<=>சிறிய மின்னஞ்சல்களை முழுமையாக ஏற்றவும்
+Small emails are < <=>சிறிய மின்னஞ்சல்கள் < 
+Parameters<=>அளவுருக்கள்
+Use individual font color:<=>தனிப்பட்ட எழுத்துரு வண்ணத்தைப் பயன்படுத்தவும்:
+Circle color in system tray:<=>கணினி தட்டில் வட்டத்தின் நிறம்:
+Invalid parameter string!<=>தவறான அளவுரு சரம்!
+Default<=>இயல்புநிலை
+
+# கணக்கு உரையாடல்
+
+Mail Accounts<=>அஞ்சல் கணக்குகள்
+&Add...<=>&சேர்...
+&Remove<=>&நீக்கு
+Move &up<=>&மேலே நகர்த்தவும்
+Move &down<=>&கீழே நகர்த்தவும்
+&Close<=>&மூடு
+
+# பதிவிறக்கம் உரையாடல்
+
+Loading the following mail:<=>பின்வரும் மின்னஞ்சலை ஏற்றுகிறது:
+Loading Mail...<=>அஞ்சலை ஏற்றுகிறது...
+
+# கருப்பு பட்டியல்/வெள்ளைப் பட்டியல் உரையாடல்
+
+Black List<=>கருப்பு பட்டியல்
+Messages from senders in the list below will be deleted automatically from the server.<=>கீழே உள்ள பட்டியலில் உள்ள அனுப்புநர்களிடமிருந்து வரும் செய்திகள் சேவையகதிலிருந்து தானாக நீக்கப்படும்.
+White List<=>வெள்ளைப் பட்டியல்
+Messages from senders in the list below will never be deleted automatically.<=>கீழே உள்ள பட்டியலில் உள்ள அனுப்புநர்களிடமிருந்து வரும் செய்திகள் தானாக நீக்கப்படாது.
+Address:<=>முகவரி:
+Please enter the email address (e.g. somebody@somewhere.com) or the domain (e.g. somewhere.com):<=>மின்னஞ்சல் முகவரியை உள்ளிடவும் (எ.கா. somebody@somewhere.com) அல்லது டொமைன் (எ.கா. somewhere.com):
+Enter address<=>முகவரியை உள்ளிடவும்
+
+# கடவுச்சொல் உரையாடல்
+
+Password - {1}<=>கடவுச்சொல் - {1}
+Enter the password of the following account.<=>பின்வரும் கணக்கின் கடவுச்சொல்லை உள்ளிடவும்.
+Account:<=>கணக்கு:
+Remember password<=>கடவுச்சொல்லை நினைவில் கொள்க
+Password incorrect! Please note that the password is case-sensitive.<=>கடவுச்சொல் தவறானது! கடவுச்சொல் வழக்கு-உணர்திறன் என்பதை நினைவில் கொள்ளவும்.
+Please enter the password.<=>கடவுச்சொல்லை உள்ளிடவும்.
+
+# விதிகள் பட்டியல் உரையாடலில் உருப்படியைச் சேர்க்கவும்
+
+Add item to Rules list<=>விதிகள் பட்டியலில் உருப்படியைச் சேர்க்கவும்
+Destination List<=>சேருமிடப் பட்டியல்
+New Item<=>புதிய உருப்படி
+Item Type<=>பொருள் வகை
+Word<=>சொல்
+String<=>சரம்
+Regular Expression<=>வழக்கமான வெளிப்பாடு
+
+# உரையாடலைச் சேமிக்கவும்
+
+Please specify where to save the emails.<=>மின்னஞ்சல்களை எங்கு சேமிக்க வேண்டும் என்பதைக் குறிப்பிடவும்.
+The specified folder does not exist!<=>குறிப்பிட்ட கோப்புறை இல்லை!
+Please specify a template for the file names.<=>கோப்பு பெயர்களுக்கான வார்ப்புருவைக் குறிப்பிடவும்.
+A file name must not contain any of the following characters:<=>ஒரு கோப்பு பெயரில் பின்வரும் எழுத்துகள் எதுவும் இருக்கக்கூடாது:
+Invalid template! Use a combination of the following placeholders:<=>தவறான வார்ப்புரு! பின்வரும் ஒதுக்கிடங்களின் கலவையைப் பயன்படுத்தவும்:
+Subject<=>பொருள்
+From<=>அனுப்புநர்
+To<=>பெறுநர்
+Date<=>தேதி
+Time<=>நேரம்
+Save As...<=>இவ்வாறு சேமி...
+Destination<=>இலக்கு
+Folder:<=>கோப்புறை:
+Browse...<=>உலாவவும்...
+Save Format<=>வடிவமைப்பைச் சேமிக்கவும்
+Template For File Names<=>கோப்பு பெயர்களுக்கான வார்ப்புரு
+Email File (*.eml)<=>மின்னஞ்சல் கோப்பு (*.eml)
+Text File (*.txt)<=>உரை கோப்பு (*.txt)
+
+# விருப்பங்கள் உரையாடல்
+
+The file "{1}" doesn't exist!<=>"{1}" கோப்பு இல்லை!
+Sound (*.wav)<=>ஒலி (*.wav)
+Notify when new mail arrives<=>புதிய அஞ்சல் வரும் போது தெரிவிக்கவும்
+Always<=>எப்போதும்
+When AutoChecked or minimized<=>தானியங்கு சரிபார்ப்பு அல்லது சிறிதாக்கப்பட்ட போது
+Only when minimized<=>குறைக்கப்படும் போது மட்டுமே
+On new mail<=>புதிய மின்னஞ்சலில்
+Acoustic notification<=>ஒலியியல் அறிவிப்பு
+Sound:<=>ஒலி:
+&Test<=>&சோதனை
+Show PopMan window<=>தஅநெமனிதன் சாளரத்தைக் காட்டு
+Show new mail tip<=>புதிய அஞ்சல் உதவிக்குறிப்பைக் காட்டு
+Limit tips to [PROTECTED] messages<=>[பதுகாக்கபட்டது] செய்திகளுக்கான உதவிக்குறிப்புகளை வரம்பிடவும்
+Include sender and subject of new mails<=>அனுப்பியவர் மற்றும் புதிய அஞ்சல்களின் பொருள் 
+Use balloon tip<=>பலூன் முனை பயன்படுத்தவும்
+Flash keyboard light:<=>விசைப்பலகை மின்வெட்டொளி:
+Unread Messages<=>படிக்காத செய்திகள்
+Display unread messages in bold font<=>படிக்காத செய்திகளை தடிமனான எழுத்துருவில் காட்டவும்
+Preview Pane<=>முன்னோட்ட பலகம்
+Use the preview pane to quickly view a message without opening a separate window.<=>தனி சாளரத்தைத் திறக்காமல் செய்தியை விரைவாகப் பார்க்க முன்னோட்டப் பலகத்தைப் பயன்படுத்தவும்.
+Show preview pane<=>முன்னோட்டப் பலகத்தைக் காட்டு
+Be&low messages<=>செய்திகளுக்கு கீழே
+Be&side messages<=>&செய்திகளுக்கு அருகில்
+Use logging to record all data communication between PopMan and the email server.<=>தஅநெமனிதன் மற்றும் மின்னஞ்சல் சேவையகத்திற்கு இடையேயான அனைத்து தரவுத் தொடர்பையும் பதிவு செய்ய உள்நுழைவைப் பயன்படுத்தவும்.
+Enable logging<=>பதிவு செய்வதை இயக்கு
+Only log compact mail info instead of entire data traffic<=>முழு தரவு போக்குவரத்திற்கும் பதிலாக சிறிய அஞ்சல் தகவலை மட்டும் பதிவு செய்யவும்
+Log file size:<=>பதிவு கோப்பு அளவு:
+KB<=>கிலோபைட்
+Enable logging of applied rules<=>பயன்படுத்தப்பட்ட விதிகளை பதிவு செய்வதை இயக்கு
+Location of the log file "PopManLogFile.log":<=>"PopManLogFile.log" பதிவு கோப்பின் இருப்பிடம்:
+Use dial-up networking<=>தொலைபேசிவழி வலைதொடர்பைப் பயன்படுத்தவும்
+Launch PopMan on Windows startup<=>சாளரத்தின் தொடக்கத்தில் தஅநெமனிதனைத் தொடங்கவும்
+Check for new mail on startup<=>தொடக்கத்தில் புதிய அஞ்சலைப் பார்க்கவும்
+First wait<=>முதலில் காத்திருங்கள்
+seconds<=>வினாடிகள்
+X button hides to tray<=>X பொத்தான் தட்டில் மறைக்கிறது
+Min button hides to tray<=>குறைந்தபட்ச பொத்தான் தட்டில் மறைக்கிறது
+Delete confirmation in main window<=>முதன்மை சாளரத்தில் உறுதிப்படுத்தலை நீக்கவும்
+Delete confirmation in preview pane and message window<=>முன்னோட்ட பலகம் மற்றும் செய்தி சாளரத்தில் உறுதிப்படுத்தலை நீக்கவும்
+Delete command marks message for deletion<=>நீக்குவதற்கான கட்டளை குறிகள் செய்தியை நீக்கு
+Enable password protection:<=>கடவுச்சொல் பாதுகாப்பை இயக்கு:
+AutoCheck only while minimized<=>சிறிதாக்கப்பட்ட போது மட்டும் தானாகச் சரிபார்க்கவும்
+Don't check between:<=>இடையில் பார்க்க வேண்டாம்:
+and<=>மற்றும்
+Enable custom AutoCheck interval per account:<=>ஒவ்வொரு கணக்கிற்கும் தனிப்பயன் தானியங்குச் சரிபார்ப்பு இடைவெளியை இயக்கு:
+Interval<=>இடைவெளி
+Custom<=>தனிப்பயன்
+Executable (*.exe)<=>இயங்கக்கூடிய (*.exe)
+Hide PopMan to tray<=>தட்டுக்கு தஅநெமனிதனை மறை
+Quit PopMan<=>தஅநெமனிதனில் இருந்து வெளியேறு
+Email client:<=>மின்னஞ்சல் வாடிக்கையாளர்:
+When launching email client:<=>மின்னஞ்சல் வாடிக்கையாளரைத் தொடங்கும் போது:
+When replying<=>பதிலளிக்கும் போது
+Use temporary eml file (Outlook Express)<=>தற்காலிக இஎம்எல் கோப்பைப் பயன்படுத்தவும் (கண்ணோட்டம் வெளிப்படுத்து)
+Use mailto (without quotted original message)<=>அஞ்சல்அனுப்பு ஐப் பயன்படுத்தவும் (மேற்கோள் காட்டப்பட்ட அசல் செய்தி இல்லாமல்)
+Use MAPI<=>MAPIஐப் பயன்படுத்தவும்
+Use HTML linebreaks in reply body<=>பதில் உள்ளடக்கத்தில் எச்டிஎம்எல் வரிஉடைப்பான்களைப் பயன்படுத்தவும்
+Enforce email address (Yahoo! Mail)<=>மின்னஞ்சல் முகவரியை (யாகூ! அஞ்சல்) செயல்படுத்தவும்
+Launch email client with command line parameter:<=>கட்டளை வரி அளவுருவுடன் மின்னஞ்சல் வாடிக்கையாளரைத் தொடங்கவும்:
+Number of messages<=>செய்திகளின் எண்ணிக்கை
+Show number of messages in tray icon<=>தட்டு சின்னத்தில் உள்ள செய்திகளின் எண்ணிக்கையைக் காட்டு
+Show number of all messages<=>எல்லா செய்திகளின் எண்ணிக்கையையும் காட்டு
+Show number of unread messages<=>படிக்காத செய்திகளின் எண்ணிக்கையைக் காட்டு
+Show number of new messages<=>புதிய செய்திகளின் எண்ணிக்கையைக் காட்டு
+Rotate icon for each account<=>ஒவ்வொரு கணக்கிற்கும் சின்னத்தைச் சுழற்று
+Rotation interval:<=>சுழற்சி இடைவெளி:
+tenths of a second<=>ஒரு நொடியில் பத்தில் ஒரு பங்கு
+Show advanced account info<=>மேம்பட்ட கணக்குத் தகவலைக் காட்டு
+Enable HighColor icons in system tray<=>முறைமை தட்டில் உயர்வண்ணம் சின்னங்களை இயக்கு
+Nothing<=>ஒன்றுமில்லை
+Show Window<=>சாளரத்தைக் காட்டு
+Check Mail<=>அஞ்சலைச் சரிபார்க்கவும்
+PopUp Menu<=>மேல்தோன்றும் பட்டியல்
+Run Email Client<=>மின்னஞ்சல் வாடிக்கையாளரை இயக்கு
+Check And Show<=>சரிபார்த்து காட்டு
+Toggle Window<=>சாளரத்தை நிலைமாற்று
+Toggle AutoCheck<=>தானியங்கு சரிபார்ப்பை நிலைமாற்று
+Show Mail Info<=>அஞ்சல் தகவலைக் காட்டு
+Tray Mouse Actions<=>தட்டு சுட்டி செயல்கள்
+Left Click:<=>இடது சொடுக்கம்:
+Right Click:<=>வலது சொடுக்கம்:
+Middle Click:<=>நடு சொடுக்கம்:
+Double Click:<=>இருமுறை சொடுக்கம்:
+Double click delay on click<=>இருமுறை சொடுக்கம் சொடுக்கதில் தாமதம்
+Below you can choose between the translations currently on your system.{BR}If you don't find your language, please visit the PopMan web site:<=>உங்கள் கணினியில் தற்போது உள்ள மொழிபெயர்ப்புகளில் ஒன்றைக் கீழே நீங்கள் தேர்வு செய்யலாம்.{BR}உங்கள் மொழியைக் கண்டுபிடிக்கவில்லை என்றால், தஅநெமனிதன் இணையதளத்தைப் பார்வையிடவும்:
+Language:<=>மொழி:
+Author:<=>ஆசிரியர்:
+Email:<=>மின்னஞ்சல்:
+Updated:<=>புதுப்பிக்கப்பட்டது:
+Comment:<=>கருத்து:
+
+# மூல உரையாடல்
+
+RichEdit control init failed.<=>உயர்திருத்தம் கட்டுப்பாடு துவக்கம் தோல்வியடைந்தது.
+Source - "{1}"<=>ஆதாரம் - "{1}"
+The log file "{1}" could not be opened.{BR}Logging disabled!<=>பதிவுக் கோப்பை "{1}" திறக்க முடியவில்லை.{BR}பதிவு முடக்கப்பட்டது!
+Error while writing to the log file:<=>பதிவு கோப்பில் எழுதும் போது பிழை:
+Logging disabled!<=>பதிவு முடக்கப்பட்டுள்ளது!
+[PROTECTED]<=>[பாதுகாக்கப்பட்டது]
+
+# பட்டியல் காட்சி
+
+Size<=>அளவு
+Received<=>பெறப்பட்டது
+Attachment<=>இணைப்பு
+Sent<=>அனுப்பப்பட்டது
+Priority<=>முன்னுரிமை
+UserAgent<=>பயனர்முகவர்
+Rules<=>விதிகள்
+High<=>உயர்
+Low<=>குறைந்த
+Normal<=>இயல்பான
+Are you sure you want to delete the selected email?<=>தேர்ந்தெடுத்த மின்னஞ்சலை நிச்சயமாக நீக்க விரும்புகிறீர்களா?
+Are you sure you want to delete the {1} selected emails?<=>தேர்ந்தெடுக்கப்பட்ட {1} மின்னஞ்சல்களை நிச்சயமாக நீக்க விரும்புகிறீர்களா?
+&Open...{TAB}Ctrl+O<=>&திற...{TAB}Ctrl+O
+Sou&rce...<=>&மூலம்...
+&Save As...{TAB}Ctrl+S<=>&இவ்வாறு சேமி...{TAB}Ctrl+S
+Repl&y To Sender{TAB}Ctrl+R<=>அனுப்புநருக்குப் பதிலளிக்கவும்{TAB}Ctrl+R
+&Trust Sender<=>அனுப்புநரை நம்பு
+&Block Sender<=>அனுப்புபவரைத் தடு
+&Delete{TAB}Del<=>&நீக்கு{TAB}Del
+&Unmark{TAB}Ins<=>&குறிநீக்கு{TAB}Ins
+To&ggle [PROTECTED] State{TAB}Ctrl+T<=>[பாதுகாக்கப்பட்டது] நிலையை{TAB}Ctrl+T<=> செய்ய
+Mark As Seen On Server{TAB}F8<=>சேவையகத்தில் பார்த்ததாகக் குறி{TAB}F8
+This will add the following email addresses to the Black List:<=>இது பின்வரும் மின்னஞ்சல் முகவரிகளை கருப்பு பட்டியலில் சேர்க்கும்:
+Note: All future emails from senders on the Black List will be deleted automatically!<=>குறிப்பு: கருப்புப்பட்டியலில்  உள்ள அனுப்புநர்களிடமிருந்து வரும் அனைத்து மின்னஞ்சல்களும் தானாகவே நீக்கப்படும்!
+This will add the following email addresses to the White List:<=>இது பின்வரும் மின்னஞ்சல் முகவரிகளை வெள்ளைப்பட்டியலில் சேர்க்கும்:
+
+# முதன்மை சாளரம்
+
+Empty Trash<=>குப்பையை காலியாக்கு
+Options<=>விருப்பங்கள்
+AutoCheck<=>தானியங்கு சரிபார்ப்பு
+Notification<=>அறிவிப்பு
+Email Client<=>மின்னஞ்சல் வாடிக்கையாளர்
+View<=>காண்
+Tray Icon<=>தட்டு சின்னம்
+Language<=>மொழி
+Mouse Actions<=>சுட்டி செயல்கள்
+Logging<=>பதிவுசெய்தல்
+&File<=>&கோப்பு
+&Accounts...<=>&கணக்குகள்...
+&Update{TAB}F5<=>&புதுப்பிக்கவும்{TAB}F5
+&Cancel{TAB}Esc<=>&ரத்துசெய்{TAB}Esc
+Delete &Marked Emails{TAB}F12<=>&குறியிடப்பட்ட மின்னஞ்சல்களை நீக்கவும்{TAB}F12
+&Exit<=>&வெளியேறு
+&View<=>&காண்
+&Toolbar<=>&கருவிப்பட்டி
+&Statusbar<=>&நிலைப்பட்டி
+&Hide Marked Messages<=>&குறியிடப்பட்ட செய்திகளை மறை
+Move Marked Messages to Tr&ash Tab<=>குறிக்கப்பட்ட செய்திகளை &குப்பை தாவலுக்கு நகர்த்தவும்
+Tab &View{TAB}Ctrl+M<=>தாவல் &காட்சி{TAB}Ctrl+M
+&Tools<=>&கருவிகள்
+&Font...<=>&எழுத்துரு...
+Font &Color...<=>எழுத்துரு &நிறம்...
+&Themes<=>&கருப்பொருள்கள்
+Launch &Email Client{TAB}Ctrl+E<=>&மின்னஞ்சல் வாடிக்கையாளரைத் தொடங்கவும்{TAB}Ctrl+E
+&Import Accounts...<=>&கணக்குகளை இறக்குமதி செய்...
+&White List...<=>&வெள்ளை பட்டியல்...
+&Black List...<=>&கருப்பு பட்டியல்...
+&Rules...<=>&விதிகள்...
+Add Item To Rules &List...{TAB}F9<=>விதிகள் &பட்டியலுடன் உருப்படியைச் சேர்க்கவும்...{TAB}F9
+&Options<=>&விருப்பங்கள்
+&Help<=>&உதவி
+&Help Topics...{TAB}F1<=>&உதவி தலைப்புகள்...{TAB}F1
+Check For &Updates<=>&புதுப்பிப்புகளைச் சரிபார்க்கவும்
+&About PopMan...<=>&தஅநெமனிதன் பற்றி...
+Edit email accounts.{BR}Accounts<=>மின்னஞ்சல் கணக்குகளைத் திருத்தவும்.{BR}கணக்குகள்
+Update email listing.{BR}Update<=>மின்னஞ்சல் பட்டியலைப் புதுப்பிக்கவும்.{BR}புதுப்பிப்பு
+Cancel current operation.{BR}Cancel<=>தற்போதைய செயல்பாட்டை ரத்துசெய்.{BR}ரத்துசெய்
+Show email content.{BR}Show<=>மின்னஞ்சல் உள்ளடக்கத்தைக் காட்டு.{BR}காண்பி
+Show source code of this email.{BR}Source code<=>இந்த மின்னஞ்சலின் மூலக் குறியீட்டைக் காட்டு.{BR}மூலக் குறியீடு
+Save selected email to file.{BR}Save<=>தேர்ந்தெடுக்கப்பட்ட மின்னஞ்சலை கோப்பில் சேமிக்கவும்.{BR}சேமி
+Create a reply message to the sender.{BR}Reply<=>அனுப்புநருக்கு பதில் செய்தியை உருவாக்கவும்.{BR}பதில்
+Delete selected emails.{BR}Delete<=>தேர்ந்தெடுக்கப்பட்ட மின்னஞ்சல்களை நீக்கு.{BR}நீக்கு
+Delete marked emails.{BR}Delete marked emails<=>குறிக்கப்பட்ட மின்னஞ்சல்களை நீக்கு.{BR}குறியிடப்பட்ட மின்னஞ்சல்களை நீக்கு
+Unmark (undelete) selected emails.{BR}Unmark<=>தேர்ந்தெடுக்கப்பட்ட மின்னஞ்சல்களை குறிநீக்கு (நீக்குதல்).{BR}குறிநீக்கு
+Add sender to Black List.{BR}Block Sender<=>அனுப்புநரை கருப்புப் பட்டியலில் சேர்க்கவும்.{BR}அனுப்பியவரைத் தடு
+Add sender to White List.{BR}Trust Sender<=>அனுப்புநரை வெள்ளைப் பட்டியலில் சேர்க்கவும்.{BR}அனுப்பியவரை நம்புங்கள்
+Quit the application.{BR}Exit<=>நிரலைவிட்டு வெளியேறு.{BR}வெளியேறு
+Show or hide the toolbar.{BR}Toggle ToolBar<=>கருவிப்பட்டியைக் காட்டவும் அல்லது மறைக்கவும்.{BR}கருவிபெட்டி நிலைமாற்று
+Show or hide the status bar.{BR}Toggle StatusBar<=>நிலைப் பட்டியைக் காட்டு அல்லது மறை.{BR}நிலைப்பட்டியை நிலைமாற்று
+Enable\Disable the Tab view.{BR}Toggle Tab view<=>தாவல் காட்சியை இயக்கு\முடக்கு.{BR}தாவல் காட்சியை நிலைமாற்று
+Hide messages that are marked for delete.{BR}Hide marked messages<=>நீக்குவதற்குக் குறிக்கப்பட்ட செய்திகளை மறை.{BR}குறியிடப்பட்ட செய்திகளை மறை
+Move marked messages to a separate "trash" tab.{BR}Enable trash tab<=>குறிக்கப்பட்ட செய்திகளை தனி "குப்பை" தாவலுக்கு நகர்த்தவும்.{BR}குப்பை தாவலை இயக்கு
+Change font.{BR}Font<=>எழுத்துருவை மாற்றவும்.{BR}எழுத்துரு
+Change font color.{BR}Font Color<=>எழுத்துரு நிறத்தை மாற்றவும்.{BR}எழுத்துரு நிறம்
+Launch email client.{BR}Email Client<=>மின்னஞ்சல் வாடிக்கையாளரைத் தொடங்கவும்.{BR}மின்னஞ்சல் வாடிக்கையாளர்
+Import email accounts from Outlook Express.{BR}Import Accounts<=>கண்ணோட்டம் வெளிப்படுத்து இலிருந்து மின்னஞ்சல் கணக்குகளை இறக்குமதி செய்யவும்.{BR}கணக்குகளை இறக்குமதி செய்
+Edit the rules.{BR}Rules<=>விதிகளைத் திருத்தவும்.{BR}விதிகள்
+Add item to Rules list.{BR}Add To List<=>விதிகள் பட்டியலில் உருப்படியைச் சேர்க்கவும்.{BR}பட்டியலில் சேர்
+Edit list of trusted senders.{BR}WhiteList<=>நம்பகமான அனுப்புநர்களின் பட்டியலைத் திருத்தவும்.{BR}வெள்ளைப்பட்டியல்
+Edit list of blocked senders.{BR}BlackList<=>தடுக்கப்பட்ட அனுப்புநர்களின் பட்டியலைத் திருத்தவும்.{BR}கருப்புப்பட்டியல்
+Change program settings.{BR}Settings<=>நிரல் அமைப்புகளை மாற்றவும்.{BR}அமைப்புகள்
+Show Help Topics.{BR}Help<=>உதவி தலைப்புகளைக் காட்டு.{BR}உதவி
+Check if a new version is available.{BR}Check for updates<=>புதிய பதிப்பு உள்ளதா எனச் சரிபார்க்கவும்.{BR}புதுப்பிப்புகளைச் சரிபார்
+Display program information, version number and copyright.{BR}About<=>நிரல் தகவல், பதிப்பு எண் மற்றும் பதிப்புரிமை ஆகியவற்றைக் காண்பி.{BR}பற்றி
+Show the main window.{BR}Show<=>பிரதான சாளரத்தைக் காட்டு.{BR}காண்பி
+Enable AutoChecking.{BR}Enable<=>தானியங்குச் சரிபார்ப்பை இயக்கு.{BR}இயக்கு
+Suspend New Mail Notification Sound.{BR}Mute<=>புதிய அஞ்சல் அறிவிப்பு ஒலியை இடைநிறுத்தவும்.{BR}ஒலிமுடக்கு
+Open the selected attachment.{BR}Open<=>தேர்ந்தெடுக்கப்பட்ட இணைப்பைத் திறக்கவும்.{BR}திற
+Save the selected attachments.{BR}Save<=>தேர்ந்தெடுக்கப்பட்ட இணைப்புகளைச் சேமிக்கவும்.{BR}சேமி
+Save all attachments.{BR}Save All<=>அனைத்து இணைப்புகளையும் சேமிக்கவும்.{BR}அனைத்தையும் சேமி
+Change the window size.<=>சாளரத்தின் அளவை மாற்றவும்.
+Change the window position.<=>சாளர நிலையை மாற்றவும்.
+Reduce the window to an icon.<=>சாளரத்தை சின்னமாகக் குறைக்கவும்.
+Enlarge the window to full size.<=>சாளரத்தை முழு அளவில் பெரிதாக்கவும்.
+Close the active window.<=>செயலில் உள்ள சாளரத்தை மூடு.
+Restore the window to normal size.<=>சாளரத்தை இயல்பு நிலைக்கு மீட்டமைக்கவும்
+Toggle the current [PROTECTED] state of the selected messages.{BR}Toggle [PROTECTED]<=>தேர்ந்தெடுக்கப்பட்ட செய்திகளின் தற்போதைய [பாதுகாக்கப்பட்டது] நிலையை மாற்றவும்.{BR}மாற்று [பாதுகாக்கப்பட்டது]
+Mark selected email as seen (read) on server.{BR}Mark As Seen on Server<=>தேர்ந்தெடுக்கப்பட்ட மின்னஞ்சலை சேவையகத்தில் பார்த்ததாக (படித்ததாக) குறிக்கவும்.{BR}சேவையகத்தில் பார்த்ததாகக் குறி
+Don't display this &message again.<=>இந்த &செய்தியை மீண்டும் காட்ட வேண்டாம்.
+
+# Message Window# செய்தி சாளரம்
+
+&Print...{TAB}Ctrl+P<=>&அச்சிடு...{TAB}Ctrl+P
+&Close{TAB}Esc<=>&மூடு{TAB}Esc
+&Edit<=>&திருத்து
+&Cut{TAB}Ctrl+X<=>&வெட்டு{TAB}Ctrl+X
+C&opy{TAB}Ctrl+C<=>நகலெடு{TAB}Ctrl+C
+&Paste{TAB}Ctrl+V<=>&ஒட்டு{TAB}Ctrl+V
+&Find...{TAB}Ctrl+F<=>&கண்டுபிடி...{TAB}Ctrl+F
+Find &Next{TAB}F3<=>&அடுத்து கண்டுபிடி{TAB}F3
+Select &All{TAB}Ctrl+A<=>&அனைத்தையும் தேர்ந்தெடுக்கவும்{TAB}Ctrl+A
+Print this email.{BR}Print<=>இந்த மின்னஞ்சலை அச்சிடுக.{BR}அச்சிடு
+Delete this email.{BR}Delete<=>இந்த மின்னஞ்சலை நீக்கவும்.{BR}நீக்கு
+Close window.{BR}Close<=>சாளரத்தை மூடு.{BR}மூடு
+Cut the selection and put it on the Clipboard.{BR}Cut<=>தேர்வை வெட்டி இடைநிலைப் பலகையில் வைக்கவும்.{BR}Cut
+Copy the selection and put it on the Clipboard.{BR}Copy<=>தேர்வை நகலெடுத்து இடைநிலைப் பலகையில் வைக்கவும்.{BR}நகலெடு
+Insert Clipboard contents.{BR}Paste<=>இடைநிலைப் பலகை உள்ளடக்கங்களைச் செருகவும்.{BR}ஒட்டு
+Find the specified text.{BR}Find<=>குறிப்பிட்ட உரையைக் கண்டறியவும்.{BR}கண்டுபிடி
+Find next occurence of specified text.{BR}Find next<=>குறிப்பிட்ட உரையின் அடுத்த நிகழ்வைக் கண்டறியவும்.{BR}அடுத்ததைக் கண்டுபிடி
+Select the entire message.{BR}Select All<=>முழு செய்தியையும் தேர்ந்தெடுக்கவும்.{BR}அனைத்தையும் தேர்ந்தெடு
+"{1}" not found.<=>"{1}" கிடைக்கவில்லை.
+&Open<=>&திறக்க
+&Save As...<=>&இவ்வாறு சேமி...
+Save &All...<=>&அனைத்தையும் சேமி...
+This attachment can not be accessed anymore.<=>இந்த இணைப்பை இனி அணுக முடியாது.
+"{1}" is very likely to contain a virus, worm or any other sort of dangerous code!<=>"{1}" இல் நோய்க்கிருமி, புழு அல்லது வேறு ஏதேனும் ஆபத்தான குறியீடு இருக்கலாம்!
+Opening this file is therefore denied.<=>எனவே இந்தக் கோப்பைத் திறப்பது மறுக்கப்பட்டது.
+Do you really want to save this file to your hard disk?<=>இந்த கோப்பை உங்கள் வன்தட்டில் சேமிக்க விரும்புகிறீர்களா?
+These attachments are very likely to contain a virus, worm or any other sort of dangerous code!<=>இந்த இணைப்புகளில் நோய்க்கிருமி, புழு அல்லது வேறு ஏதேனும் ஆபத்தான குறியீடு இருக்கலாம்!
+Do you really want to save these files to your hard disk?<=>இந்தக் கோப்புகளை உங்கள் வன்தட்டில்  சேமிக்க விரும்புகிறீர்களா?
+Please specify where to save the attachments.<=>இணைப்புகளை எங்கு சேமிக்க வேண்டும் என்பதைக் குறிப்பிடவும்.
+The file "{1}" does already exist!{BR}Overwrite it?<=>"{1}" கோப்பு ஏற்கனவே உள்ளது!{BR}அதை மேலெழுதவா?
+Downloading email failed.{BR}Press Ctrl+F5 to update the email listing and try again.<=>மின்னஞ்சலைப் பதிவிறக்குவதில் தோல்வி.{BR}மின்னஞ்சல் பட்டியலைப் புதுப்பிக்க Ctrl+F5 ஐ அழுத்தி மீண்டும் முயற்சிக்கவும்.
+Are you sure you want to delete this email?<=>இந்த மின்னஞ்சலை நிச்சயமாக நீக்க விரும்புகிறீர்களா?
+Deleting email failed!<=>மின்னஞ்சலை நீக்குவதில் தோல்வி!
+From:<=>இருந்து:
+Date:<=>தேதி:
+To:<=>பெற:
+Subject:<=>பொருள்:
+Attach:<=>இணைக்கவும்:
+Protocol plugin not initialized correctly!<=>நெறிமுறை செருகுநிரல் சரியாக துவக்கப்படவில்லை!
+
+# தஅநெமனிதன் தொடக்கம்
+
+Please start one instance only.<=>ஒரு நிகழ்வை மட்டும் தொடங்கவும்.
+Windows socket init failed.<=>சாளரங்கள் குதைகுழி துவக்கம் தோல்வியடைந்தது.
+{1} Beta version has been updated successfully!<=>{1} அகர பதிப்பு வெற்றிகரமாக புதுப்பிக்கப்பட்டது!
+You have successfully updated to version {1} !<=>பதிப்பு {1} !க்கு வெற்றிகரமாகப் புதுப்பித்துவிட்டீர்கள்
+About PopMan<=>தஅநெமனிதன் பற்றி
+PopMan, Version {1}<=>தஅநெமனிதன், பதிப்பு {1}
+Website:<=>இணையதளம்:
+Forum:<=>மன்றம்:
+Check for updates<=>புதுப்பிப்புகளைச் சரிபார்க்கவும்
+
+# ஆவணம்
+
+Failed to initialize account {1}: No plugin available to provide protocol {2}!<=>கணக்கைத் தொடங்குவதில் தோல்வி
+The error log file "{1}" could not be created.<=>"{1}" பிழை பதிவு கோப்பை உருவாக்க முடியவில்லை.
+Checking {1}...<=>சரிபார்க்கிறது {1}...
+Email (*.eml)<=>மின்னஞ்சல் (*.eml)
+Text (*.txt)<=>உரை (*.txt)
+Unable to load mail system support.<=>அஞ்சல் அமைப்பு ஆதரவை ஏற்ற முடியவில்லை.
+Mail system DLL is invalid.<=>அஞ்சல் அமைப்பு மஇநூ தவறானது.
+Unable to detect if a new version is available.<=>புதிய பதிப்பு உள்ளதா என்பதைக் கண்டறிய முடியவில்லை.
+There is no update available.<=>புதுப்பிப்பு எதுவும் இல்லை.
+Do you want to start the update wizard and download the latest version?<=>புதுப்பிப்பு வழிகாட்டியைத் தொடங்கி, சமீபத்திய பதிப்பைப் பதிவிறக்க விரும்புகிறீர்களா?
+Deleting mail...<=>அஞ்சலை நீக்குகிறது...
+Marking mail as seen...<=>அஞ்சலை பார்த்ததாகக் குறிக்கிறது...
+Downloading mail...<=>அஞ்சலைப் பதிவிறக்குகிறது...
+AutoCheck disabled<=>தானியங்கு சரிபார்ப்பு முடக்கப்பட்டது
+No messages<=>செய்திகள் இல்லை
+1 new message<=>1 புதிய செய்தி
+{1} new messages<=>{1} புதிய செய்திகள்
+PopMan - New Mail<=>தஅநெமனிதன் - புதிய அஞ்சல்
+&Open PopMan<=>&தஅநெமனிதனைத் திற
+Check &Mail<=>&அஞ்சலைச் சரிபார்க்கவும்
+&Cancel<=>&ரத்து
+&Email Client<=>&மின்னஞ்சல் வாடிக்கையாளர்
+A&utoCheck Enabled<=>&தானிசரிபார் இயக்கப்பட்டது
+Mu&te Mode<=>&மௌன பயன்முறை
+O&ptions...<=>&விருப்பங்கள்
+&About...<=>&பற்றி...
+E&xit<=>வெளியேறு
+{1} msgs. ({2} unread, {3} new){TAB}{4} KB<=>{1} செய்திகள். ({2} படிக்காதது, {3} புதியது){TAB}{4} KB
+PopMan - Mail Info<=>தஅநெமனிதன் - அஞ்சல் தகவல்
+1 message<=>1 செய்தி
+{1} messages<=>{1} செய்திகள்
+1 unread message<=>1 படிக்காத செய்தி
+{1} unread messages<=>{1} படிக்காத செய்திகள்
+in {1}<=>{1} இல்
+in {1} accounts<=>{1} கணக்குகளில்
+Show<=>காட்டு
+Delete<=>நீக்கு
+Close<=>மூடு
+(last check: {1})<=>(கடைசி சரிபார்ப்பு: {1})
+You are about to irrevocably delete all marked messages.<=>குறிக்கப்பட்ட எல்லா செய்திகளையும் நீக்க முடியாமல் நீக்க உள்ளீர்கள்.
+You have just marked a message for deletion. To unmark it, press the Ins keyboard button. To delete all marked messages, press F12 or click the appropriate toolbar button.<=>நீக்குவதற்கு ஒரு செய்தியைக் குறித்துள்ளீர்கள். அதை நீக்க, Ins விசைப்பலகை பொத்தானை அழுத்தவும். குறிக்கப்பட்ட அனைத்து செய்திகளையும் நீக்க, F12 ஐ அழுத்தவும் அல்லது பொருத்தமான கருவிப்பட்டி பொத்தானைக் சொடுக்கம் செய்யவும்.
+You can also delete selected messages immediately by pressing Shift+Del.<=>Shift+Del ஐ அழுத்துவதன் மூலம் தேர்ந்தெடுக்கப்பட்ட செய்திகளை உடனடியாக நீக்கலாம்.
+If you want to restore the traditional behaviour (delete all selected messages immediately), uncheck "{1}" in the options dialog.<=>நீங்கள் பாரம்பரிய நடத்தையை மீட்டெடுக்க விரும்பினால் (தேர்ந்தெடுக்கப்பட்ட அனைத்து செய்திகளையும் உடனடியாக நீக்கவும்), விருப்பங்கள் உரையாடலில் "{1}" என்பதைத் தேர்வுநீக்கவும்.
+Failed to add item to Rules list!<=>விதிகள் பட்டியலில் உருப்படியைச் சேர்ப்பதில் தோல்வி!
+
+# முதன்மைக் காட்சி
+
+Separate account | All<=>தனி கணக்கு | அனைத்தும்
+Check accounts{TAB}F7<=>கணக்குகளைச் சரிபார்க்கவும்{TAB}F7
+Join with tab<=>தாவலுடன் சேரவும்
+Rename tab{TAB}F2<=>தாவலை மறுபெயரிடவும்{TAB}F2
+Mark All Mails Read<=>எல்லா அஞ்சல்களையும் படித்ததாகக் குறி
+Mark All Mails Unread<=>அனைத்து அஞ்சல்களையும் படிக்காததைக் குறிக்கவும்
+You have to add at least one account before you can switch to tab view.<=>நீங்கள் தாவல் காட்சிக்கு மாறுவதற்கு முன் குறைந்தது ஒரு கணக்கையாவது சேர்க்க வேண்டும்.
+Caption:<=>தலைப்பு:
+Please enter the caption of the tab:<=>தாவலின் தலைப்பை உள்ளிடவும்:
+Rename tab<=>தாவலை மறுபெயரிடவும்
+Trash<=>குப்பை
+Tab accounts:<=>தாவல் கணக்குகள்:
+
+# விதிகள்
+
+Error while parsing rules file at line {1}!<=>{1} வரியில் விதிகள் கோப்பைப் பாகுபடுத்துவதில் பிழை!
+The item is already contained in the list!<=>உருப்படி ஏற்கனவே பட்டியலில் உள்ளது!
+
+# உரை பார்வை
+
+Copy Link Address<=>இணைப்பு முகவரியை நகலெடுக்கவும்

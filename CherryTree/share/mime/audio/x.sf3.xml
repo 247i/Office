@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="audio/x.sf3">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>SF3 Audio</comment>
+  <comment xml:lang="uk">звук SF3</comment>
+  <comment xml:lang="tr">SF3 sesi</comment>
+  <comment xml:lang="sv">SF3-ljud</comment>
+  <comment xml:lang="sr-Cyrl">SF3 аудио</comment>
+  <comment xml:lang="sq">Audio SF3</comment>
+  <comment xml:lang="sl">Zvok SF3</comment>
+  <comment xml:lang="ru">Аудио SF3</comment>
+  <comment xml:lang="ro">audio SF3</comment>
+  <comment xml:lang="pt-BR">Áudio SF3</comment>
+  <comment xml:lang="pl">Plik dźwiękowy SF3</comment>
+  <comment xml:lang="oc">àudio SF3</comment>
+  <comment xml:lang="ko">SF3 오디오</comment>
+  <comment xml:lang="kk-Cyrl">SF3 аудиосы</comment>
+  <comment xml:lang="hr">SF3 audio</comment>
+  <comment xml:lang="fr">Audio SF3</comment>
+  <comment xml:lang="fi">SF3-ääni</comment>
+  <comment xml:lang="et">SF3 helifail</comment>
+  <comment xml:lang="es">sonido SF3</comment>
+  <comment xml:lang="en-GB">SF3 Audio</comment>
+  <comment xml:lang="de">SF3-Audio</comment>
+  <comment xml:lang="ar">صوت SF3</comment>
+  <acronym>SF3</acronym>
+  <expanded-acronym>Simple File Format Family</expanded-acronym>
+  <glob pattern="*.au.sf3"/>
+  <glob pattern="*.sf3"/>
+</mime-type>

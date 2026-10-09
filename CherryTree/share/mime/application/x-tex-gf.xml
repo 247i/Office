@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-tex-gf">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Generic font file</comment>
+  <comment xml:lang="zh-Hant-TW">一般字型檔案</comment>
+  <comment xml:lang="uk">типовий файл шрифту</comment>
+  <comment xml:lang="tr">Genel yazı tipi dosyası</comment>
+  <comment xml:lang="sv">Allmän typsnittsfil</comment>
+  <comment xml:lang="sr-Cyrl">Општа датотека фонта</comment>
+  <comment xml:lang="sq">Kartelë shkronjash të rëndomta</comment>
+  <comment xml:lang="sl">Splošna pisava</comment>
+  <comment xml:lang="ru">Обычный файл шрифта</comment>
+  <comment xml:lang="ro">fișier font generic</comment>
+  <comment xml:lang="pt-BR">Arquivo de fonte genérico</comment>
+  <comment xml:lang="pl">Zwykły plik czcionki</comment>
+  <comment xml:lang="oc">fichièr de polissas generic</comment>
+  <comment xml:lang="nn">Generisk skriftfil</comment>
+  <comment xml:lang="lt">Bendrinis šrifto failas</comment>
+  <comment xml:lang="ko">일반 글꼴 파일</comment>
+  <comment xml:lang="kk-Cyrl">Қалыпты қаріп файлы</comment>
+  <comment xml:lang="ja">汎用フォントファイル</comment>
+  <comment xml:lang="it">File tipo di carattere generico</comment>
+  <comment xml:lang="id">Berkas fonta generik</comment>
+  <comment xml:lang="hr">Datoteka općeg fonta</comment>
+  <comment xml:lang="hi">जेनेरिक फॉन्ट फाइल</comment>
+  <comment xml:lang="he">קובץ גופן כללי</comment>
+  <comment xml:lang="fur">File di caratar gjeneric</comment>
+  <comment xml:lang="fr">Fichier de polices génériques</comment>
+  <comment xml:lang="fi">Fonttitiedosto</comment>
+  <comment xml:lang="eu">Letra-tipoen fitxategi orokorra</comment>
+  <comment xml:lang="et">Üldine fondifail</comment>
+  <comment xml:lang="es">archivo de tipo de letra genérico</comment>
+  <comment xml:lang="en-GB">Generic font file</comment>
+  <comment xml:lang="de">allgemeine Schriftdatei</comment>
+  <comment xml:lang="ca">fitxer de lletra genèric</comment>
+  <comment xml:lang="bg">Шрифт — общ файл</comment>
+  <comment xml:lang="be-Cyrl">файл тыповага шрыфту</comment>
+  <comment xml:lang="ar">ملف خط عام</comment>
+  <generic-icon name="font-x-generic"/>
+  <glob pattern="*.gf"/>
+</mime-type>

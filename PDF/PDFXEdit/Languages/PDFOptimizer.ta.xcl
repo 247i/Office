@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Localization>
+	<Version date="20220414000750">2.00.00</Version>
+	<Author>Angel Herráez</Author>
+	<Copyright></Copyright>
+	<Product id="PDFXEditor"/>
+	<Language eName="Tamil (India)" lName="தமிழ்" code="ta-IN" R2L="false"/>
+	<Module name="PDFOptimizer" namespace="pdfopt" version="9.3.361.0"/>
+	<Strings>
+		<text id="AcrobatForms" h="45DE15E7">Formularios Acrobat</text>
+		<text id="AllInPPI" h="73445ABD">Todas las cifras están en píxeles por pulgada (ppp, dpi, ppi)</text>
+		<text id="BackRemov" h="F1B1C1E1">Eliminar fondo:</text>
+		<text id="BookMarks" h="E2032460">Marcadores</text>
+		<text id="Bytes" h="4EF6C00A">bytes</text>
+		<text id="CB.adaptiveComp" h="F829DFF0">Usar compresión adaptativa</text>
+		<text id="CB.imagesAsBkgnd" h="B1ED4DE6">Poner como fondo la imagen o imágenes resultantes</text>
+		<text id="CB.keepComp" h="714D1D3A">Mantener la compresión existente</text>
+		<text id="CB.useComp" h="1599F9AD">Usar compresión para las imágenes:</text>
+		<text id="CleanUp" h="85D0243F">Limpieza</text>
+		<text id="ColorGrayscale" h="63F8C2FC">Color o grises:</text>
+		<text id="ColorSpaces" h="279CFB02">Espacios de color</text>
+		<text id="Comments3D" h="1A213B5F">Comentarios y contenido 3D</text>
+		<text id="ContentStreams" h="EC5AA2E9">Flujos de contenido</text>
+		<text id="Count" h="48FC51FB">Recuento</text>
+		<text id="CrossReferenceTable" h="B0A3CE52">Tabla de referencias cruzadas</text>
+		<text id="Description" h="8990DB08">Descripción</text>
+		<text id="DiscardObjects" h="9A75CFD1">Desechar objetos</text>
+		<text id="DiscardUserData" h="1B55800A">Desechar datos del usuario</text>
+		<text id="DocOverhead" h="8AF9C6B9">Exceso</text>
+		<text id="DocumentLanguages" h="0EAD217F">Idiomas del documento:</text>
+		<text id="ErrCount" h="494DF48F">Errores encontrados:</text>
+		<text id="ExGStates" h="CFF492D3">Estados gráficos extendidos</text>
+		<text id="Fonts" h="B72149DB">Tipografía</text>
+		<text id="Images" h="77764F9D">Imágenes</text>
+		<text id="LinkAnnotations" h="50D3AB53">Anotaciones de enlaces</text>
+		<text id="Mobile" h="A5903811">Móvil</text>
+		<text id="Mobile.Desc" h="AC3CDB44">Opciones para visores móviles</text>
+		<text id="NamedDect" h="C4E8D8F5">Destinos con nombre</text>
+		<text id="OCRAccuracy" h="A5FFE506">Exactitud:</text>
+		<text id="ObjectFor" h="24200BB3">Objetos PDF para...</text>
+		<text id="Optimize.Error1" h="A683009C">Hubo un error crítico durante la operación:</text>
+		<text id="Optimize.Error2" h="E3B5A795">No es posible grabar el archivo resultante</text>
+		<text id="Optimize.IsXFA" h="86036928">Este documento PDF contiene un formulario Adobe XML (XFA).
+
+Ese tipo de archivo no se puede optimizar.</text>
+		<text id="OptimizeTransparency" h="F0A68140">Optimización de la transparencia...</text>
+		<text id="PDFAuditInfo" h="3689108E">Información tras análisis del PDF</text>
+		<text id="PDFDeskew" h="AFCFD67A">Enderezado de las páginas</text>
+		<text id="PDFEnhScaned" h="0A810C6E">Mejora de páginas escaneadas</text>
+		<text id="PDFOptimizer" h="E369C144">Optimizador de PDF</text>
+		<text id="PatternInfo" h="BF98E424">Información del patrón</text>
+		<text id="Percentage" h="AB9C5DE5">porcentaje</text>
+		<text id="PieceInfo" h="14FA9D8A">Información de trozos</text>
+		<text id="ProgDeskPreparing" h="A27F387A">Se está preparando para enderezar las páginas...</text>
+		<text id="ProgDeskTitle" h="63B64230">Enderezado de las páginas</text>
+		<text id="ProgDeskew" h="456B7608">Se están enderezando las páginas; espere, por favor...</text>
+		<text id="ProgEnhPreparing" h="D3A73129">Se está preparando la mejora de páginas escaneadas...</text>
+		<text id="ProgEnhTitle" h="A975FDC2">Mejora de las páginas escaneadas</text>
+		<text id="ProgEnhancing" h="1DEFEABC">Mejora de las páginas escaneadas; espere...</text>
+		<text id="ProgPreparing" h="88C0C05E">Se está preparando la optimización del documento...</text>
+		<text id="RetainExisting" h="6258BC37">Mantener lo existente</text>
+		<text id="SavingDocument" h="97BF789E">Se está guardando el documento...</text>
+		<text id="ShadingInfo" h="F222371A">Información sobre sombreado</text>
+		<text id="Standard" h="C6DA1F99">Típica</text>
+		<text id="Standard.Desc" h="D517594C">Opciones predefinidas para cualquier dispositivo</text>
+		<text id="StructInfo" h="75C658E9">Información de estructura</text>
+		<text id="Thumbnails" h="47B1B2D9">Miniaturas</text>
+		<text id="Total" h="9CAA90C0">Total</text>
+		<text id="Transparency" h="9EAC5CA4">Transparencia</text>
+		<text id="XForms" h="336DF358">Formularios XForms</text>
+		<text id="abc" h="BD101B14">Texto de</text>
+		<text id="adaptiveComp" h="723883BE">Aplicar compresión adaptativa</text>
+		<text id="adjustName" h="CD74E7C8">Ajustar elnombre de archivo al guardar la optimización aplicada:</text>
+		<text id="alpha" h="632E9A25">Preajuste</text>
+		<text id="alpha.resolution.0" h="D33F1C80">Baja resolución</text>
+		<text id="alpha.resolution.1" h="64A38366">Resolución media</text>
+		<text id="alpha.resolution.2" h="0B020749">Alta resolución</text>
+		<text id="alpha.set" h="A135F93B">Opciones del preajuste:</text>
+		<text id="alpha.set.0" h="04DA8EE6">Grado de transparencia: %1</text>
+		<text id="alpha.set.1" h="E18C52C1">Dibujos lineales y texto: %1</text>
+		<text id="alpha.set.2" h="82CFFAB0">Gradiente y mallas: %1</text>
+		<text id="alpha.set.3" h="6FFD6051">Convertir todo el texto en contornos: %1</text>
+		<text id="alpha.set.4" h="F2FA75FC">Convertir todos los trazos en contornos: %1</text>
+		<text id="alpha.set.5" h="B3DB6D2B">Recortar regiones complejas: %1</text>
+		<text id="alpha.set.6" h="33A6ABAC">Conservar la sobreimpresión: %1</text>
+		<text id="cleanUp" h="65707B26">Opciones de limpieza</text>
+		<text id="cleanUp.DelDuplicateFont" h="19ADBE28">Desechar tipografías duplicadas</text>
+		<text id="cleanUp.DelDuplicateImg" h="6B3E34D0">Desechar imágenes duplicadas</text>
+		<text id="cleanUp.DelDuplicateXForm" h="C81BC491">Desechar formularios XForms duplicados</text>
+		<text id="cleanUp.LZW" h="58145992">Usar el método "Flate" para recodificar elementos que estén codificados con LZW</text>
+		<text id="cleanUp.bookmark" h="0744B268">Desechar marcadores no válidos</text>
+		<text id="cleanUp.compress" h="631E86C0">Opciones de compresión de objetos:</text>
+		<text id="cleanUp.compress.0" h="590461FB">Comprimir el archivo completo</text>
+		<text id="cleanUp.compress.1" h="223C9F8A">Comprimir la estructura del documento</text>
+		<text id="cleanUp.compress.2" h="02FEB23B">Eliminar la compresión</text>
+		<text id="cleanUp.compress.3" h="00A7F105">Dejar la compresión sin modificaciones</text>
+		<text id="cleanUp.content" h="AF96A559">Optimizar el contenido de la página</text>
+		<text id="cleanUp.destinat" h="43CBC798">Desechar destinos con nombre a los que no se haga referencia</text>
+		<text id="cleanUp.link" h="D4DE7736">Desechar enlaces no válidos</text>
+		<text id="cleanUp.stream" h="2C797CB5">Usar el método "Flate" para codificar elementos que no lo estén</text>
+		<text id="cleanUp.unusedLayers" h="96E84B47">Eliminar las capas que no se usan</text>
+		<text id="cleanUp.web" h="278DAB99">Optimizar el PDF para una vista rápida en la web</text>
+		<text id="cmd.name" h="E03D5D96">Guardar copia optimizada...</text>
+		<text id="cmd.nameDeskew" h="DA36C685">Enderezar el contenido de las páginas</text>
+		<text id="cmd.nameDeskewShort" h="AFCFD67A">Enderezar páginas</text>
+		<text id="cmd.nameDeskewTip" h="729308D5">Endereza las imágenes escaneadas del documento para mejorar la lectura y el reconocimiento de texto.</text>
+		<text id="cmd.nameScan" h="0A810C6E">Mejorar las páginas escaneadas</text>
+		<text id="cmd.nameScanShort" h="1343AB12">Mejorar lo escaneado</text>
+		<text id="cmd.nameScanTip" h="BB0C331B">Mejora las imágenes del documento escaneado para una mejor lectura y un mejor reconocmiento de texto; además, comprime las imágenes.</text>
+		<text id="cmd.nameShort" h="E03D5D96">Guardar optimizado...</text>
+		<text id="cmd.nameTip" h="DBCE5DD2">Guarda el documento en un archivo de menor tamaño y de apertura más rápida</text>
+		<text id="defaults" h="8F4D4F4B">Predefinidos</text>
+		<text id="descreen" h="08DE1BB4">Destramar:</text>
+		<text id="deskew" h="0C9CC6CE">Enderezar:</text>
+		<text id="diObject" h="686FD8CF">Opciones para desechar objetos</text>
+		<text id="diObject.action" h="05E16E16">Desechar todas las acciones de formulario: envío, importación y restauración</text>
+		<text id="diObject.bookmark" h="A40329EB">Desechar los marcadores</text>
+		<text id="diObject.curves" h="919F43B2">Convertir las líneas suaves en curvas</text>
+		<text id="diObject.flatten" h="73C56406">Fusionar los campos de formulario</text>
+		<text id="diObject.fragment" h="CD4A23BC">Detectar y combinar fragmentos de imagen</text>
+		<text id="diObject.image" h="63729870">Desechar todas las imágenes alternativas</text>
+		<text id="diObject.javascript" h="7FFE9012">Desechar todas las acciones JavaScript</text>
+		<text id="diObject.print" h="BD6C83FA">Desechar la configuración de impresión incrustada</text>
+		<text id="diObject.search" h="7B117F1A">Desechar los índices de búsqueda incrustados</text>
+		<text id="diObject.tags" h="3C045100">Desechar las etiquetas del documento</text>
+		<text id="diObject.thumbnail" h="9599423F">Desechar las miniaturas de página incrustadas</text>
+		<text id="diUserData" h="728DF433">Desechar información relativa al usuario</text>
+		<text id="diUserData.attach" h="92D67E12">Desechar archivos adjuntos</text>
+		<text id="diUserData.form" h="6C36F02B">Desechar todos los comentarios (incluido enlaces), formularios y contenido multimedia</text>
+		<text id="diUserData.layer" h="FB8629C9">Desechar el contenido de capas ocultas y fusionar las capas visibles</text>
+		<text id="diUserData.links" h="12EEC435">Desechar todos los enlaces</text>
+		<text id="diUserData.metadata" h="1E9402E3">Desechar la información y los metadatos del documento</text>
+		<text id="diUserData.object" h="6C03028D">Desechar todos los datos de objeto</text>
+		<text id="diUserData.privat" h="304A6889">Desechar datos privados de otras aplicaciones</text>
+		<text id="diUserData.refer" h="B0E9F442">Desechar referencias cruzadas externas</text>
+		<text id="dlg.POTitle" h="E462CC15">Optimización de PDF</text>
+		<text id="dlg.delete" h="38F26847">¿Está seguro de que quiere borrar la opción '%1'?</text>
+		<text id="dlg.save" h="9A3AA1B1">Crear ajustes del optimizador de PDF</text>
+		<text id="dlg.save.text" h="A599E751">Guardar la configuración actual en:</text>
+		<text id="filename" h="B06ACB9D">Convenios de nombrado</text>
+		<text id="filters" h="8DA3B27E">Filtros</text>
+		<text id="fonts" h="1250B714">Opciones para desincrustar tipografías</text>
+		<text id="fonts.active" h="5C8642DA">No debe desincrustarse ninguna</text>
+		<text id="fonts.all" h="3FE17594">Desincrustar todas las tipografías</text>
+		<text id="fonts.btn.retain" h="BAD13ABC">&lt;&lt; Conservar</text>
+		<text id="fonts.btn.unembed" h="760953D2">Retirar &gt;&gt;</text>
+		<text id="fonts.comment" h="F38E9B57">La lista muestra las tipografías actualmente incluidas (incrustadas) en el archivo PDF. Para retirar (desinscrustar) una de ellas, pásela a la derecha. Sólo las del panel izquierdo se mantendrán incluidas en el nuevo documento PDF.</text>
+		<text id="fonts.custom" h="2AAB35CE">Elija tipografías que deben desincrustarse</text>
+		<text id="fonts.embedded" h="A77293DA">Tipografías incluidas:</text>
+		<text id="fonts.mergesubsets" h="F0C43A59">Combinar subconjuntos de tipografías</text>
+		<text id="fonts.recommend" h="F9ABDD3E">Desincrustar las tipografías recomendadas</text>
+		<text id="fonts.subset" h="6EC24EDD">Crear subconjuntos de todas las tipografías incrustadas</text>
+		<text id="fonts.unembed" h="D1144C15">Tipografías que no se incluirán:</text>
+		<text id="highQuality" h="44A62CCC">Calidad alta</text>
+		<text id="images.AverageDownsampling" h="9DF5988E">Reducción promedio de resolución a</text>
+		<text id="images.BicubicDownsamplingTo" h="2B989117">Reducción bicúbica de resolución a</text>
+		<text id="images.NoDownsampling" h="747AEF4D">Sin reducción de resolución</text>
+		<text id="images.SubsamplingTo" h="F298A3BE">Submuestreo a</text>
+		<text id="images.above" h="09C2601E">si se superan los</text>
+		<text id="images.color" h="EFDBFA28">Imágenes en color</text>
+		<text id="images.compress" h="A7C57E10">Compresión</text>
+		<text id="images.compress.CCITTGroup3" h="B7DD624B">Grupo 3 CCITT</text>
+		<text id="images.compress.CCITTGroup4" h="F89CF48C">Grupo 4 CCITT</text>
+		<text id="images.compress.JBIG2" h="DE3BC257">JBIG2</text>
+		<text id="images.compress.JPEG" h="58DE58E0">JPEG</text>
+		<text id="images.compress.JPEG.ZIP" h="077BB505">JPEG/ZIP</text>
+		<text id="images.compress.JPEG2000" h="3A603972">JPEG2000</text>
+		<text id="images.compress.JPEG2000.ZIP" h="842D17F0">JPEG2000/ZIP</text>
+		<text id="images.compress.LZW" h="D62F11BD">LZW</text>
+		<text id="images.compress.MRC" h="F6693DA2">MRC</text>
+		<text id="images.compress.RunLength" h="82741A51">Run Length</text>
+		<text id="images.compress.ZIP" h="0E4D9E8D">ZIP</text>
+		<text id="images.grey" h="F9551019">Imágenes en grises</text>
+		<text id="images.ingexed" h="FE837B06">Imágenes indexadas</text>
+		<text id="images.mono" h="19F5498E">Imágenes en blanco y negro</text>
+		<text id="images.position" h="D22AC91F">Posición de las imágenes resutantes</text>
+		<text id="images.quality.High" h="21A95620">Alta</text>
+		<text id="images.quality.Lossless" h="40A582D7">Sin pérdida</text>
+		<text id="images.quality.Lossy" h="78731864">Con pérdida</text>
+		<text id="images.quality.Low" h="845E3D8C">Baja</text>
+		<text id="images.quality.Maximum" h="A8A97F0E">Máxima</text>
+		<text id="images.quality.Medium" h="91153342">Intermedia</text>
+		<text id="images.quality.Minimum" h="8415F85F">Mínima</text>
+		<text id="images.reduct" h="96D00A5D">Optimizar las imágenes sólo si se reduce el tamaño de archivo</text>
+		<text id="imagesAsBkgnd.info" h="4E1480D5">Esta opción fuerza que las imágenes actualizadas o generadas se pogan como fondo para el resto del contenido de la página. Cuando se desactiva, el programa tratará de preservar el orden Z original de dichas imágenes en el contenido de la página.</text>
+		<text id="mono" h="65032FDA">Monocromo:</text>
+		<text id="msg.NoPermission" h="6A7751F4">El documento está protegido y no tiene los permisos necesarios para esta operación.</text>
+		<text id="ocrOptions" h="1CD03F16">Opciones del reconocimiento de texto</text>
+		<text id="optPrefs" h="FDCAF687">Ajustes del optimizador</text>
+		<text id="pdfopt.imagesPlacement" h="5B712FAB">Poner las imágenes resultantes:</text>
+		<text id="ppi" h="B39AC2C1">ppp</text>
+		<text id="prefix" h="95164599">Prefijo:</text>
+		<text id="quality" h="E3A77A93">Calidad:</text>
+		<text id="recognizeText" h="6D885961">Reconocer el texto</text>
+		<text id="result" h="CE676C2B">Resultado:</text>
+		<text id="settings" h="B781AB7B">Opciones:</text>
+		<text id="settings.Custom" h="A918FF38">Personalizado</text>
+		<text id="settings.Mobile" h="A5903811">Móvil</text>
+		<text id="settings.Standard" h="C6DA1F99">Típica</text>
+		<text id="smallSize" h="2A56EB5B">Pequeño</text>
+		<text id="spaceusage" h="2FA61B33">Auditar el uso de espacio....</text>
+		<text id="stage.preparing" h="3F6313D6">Se está preparando el documento...</text>
+		<text id="sufix" h="76D832CE">Sufijo:</text>
+		<text id="textSharp" h="F96FBA2E">Aguzado del texto:</text>
+		<text id="tileSize" h="A4FAD93F">Tesela:</text>
+		<text id="ver" h="C549FED4">Hacer compatible con:</text>
+		<text id="ver.1" h="8B2AEC62">Versión 1.3 (Acrobat 4.0 o posterior)</text>
+		<text id="ver.2" h="A0EA502A">Versión 1.4 (Acrobat 5.0 o posterior)</text>
+		<text id="ver.3" h="26054EFC">Versión 1.5 (Acrobat 6.0 o posterior)</text>
+		<text id="ver.4" h="70929FB3">Versión 1.6 (Acrobat 7.0 o posterior)</text>
+		<text id="ver.5" h="FD059DF9">Versión 1.7 (Acrobat 8.0 o posterior)</text>
+		<text id="ver.current" h="17DA1613">Versión de PDF actual: %1.%2</text>
+	</Strings>
+</Localization>

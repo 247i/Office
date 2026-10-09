@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-gettext-translation">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Translated messages (machine-readable)</comment>
+  <comment xml:lang="zh-Hant-TW">已翻譯的訊息 (機器可讀)</comment>
+  <comment xml:lang="uk">перекладені повідомлення (у машинній формі)</comment>
+  <comment xml:lang="tr">Çevrilmiş iletiler (makine okuyabilir)</comment>
+  <comment xml:lang="sv">Översatta meddelanden (maskinläsbara)</comment>
+  <comment xml:lang="sr-Cyrl">Преведене поруке (машински читљиве)</comment>
+  <comment xml:lang="sq">Mesazhe të përkthyer (të lexueshëm nga makina)</comment>
+  <comment xml:lang="sl">Prevedena sporočila (strojno berljiva)</comment>
+  <comment xml:lang="ru">Переводы сообщений (откомпилированые)</comment>
+  <comment xml:lang="ro">mesaje traduse (ce pot fi citite de către mașină)</comment>
+  <comment xml:lang="pt-BR">Mensagens traduzidas (legível pelo computador)</comment>
+  <comment xml:lang="pl">Przetłumaczone komunikaty (czytelne dla komputera)</comment>
+  <comment xml:lang="oc">messatges traduches (legibles per maquina)</comment>
+  <comment xml:lang="nn">Omsett melding (maskinlesbar)</comment>
+  <comment xml:lang="ko">번역된 메시지 (기계적 처리 가능)</comment>
+  <comment xml:lang="kk-Cyrl">Аударылған хабарламалар (машиналық түрде)</comment>
+  <comment xml:lang="ja">翻訳メッセージ (マシン可読)</comment>
+  <comment xml:lang="it">Messaggi tradotti (leggibili da macchina)</comment>
+  <comment xml:lang="id">Pesan yang diterjemahkan (dapat dibaca mesin)</comment>
+  <comment xml:lang="hr">Prevedene poruke (strojno čitljive)</comment>
+  <comment xml:lang="hi">अनुवादित संदेश (मशीन-पठनीय)</comment>
+  <comment xml:lang="gl">Mensaxes traducidos (lexíbel pola máquina)</comment>
+  <comment xml:lang="fur">Messaçs tradots (leibii de machine)</comment>
+  <comment xml:lang="fr">Messages traduits (lisibles par machine)</comment>
+  <comment xml:lang="fi">Käännety (kielipaketti)</comment>
+  <comment xml:lang="eu">Itzulitako mezuak (makinak irakurtzeko modukoak)</comment>
+  <comment xml:lang="et">Tõlgitud sõnumid (masinloetavad)</comment>
+  <comment xml:lang="es">mensajes traducidos (legibles por máquinas)</comment>
+  <comment xml:lang="en-GB">Translated messages (machine-readable)</comment>
+  <comment xml:lang="de">übersetzte Texte (maschinenlesbar)</comment>
+  <comment xml:lang="da">Oversatte beskeder (maskinlæsbare)</comment>
+  <comment xml:lang="ca">missatges traduïts (llegible per màquines)</comment>
+  <comment xml:lang="bg">Преведени съобщения (за четене от програма)</comment>
+  <comment xml:lang="be-Cyrl">перакладзеныя паведамленні (для чытання камп'ютарам)</comment>
+  <comment xml:lang="ar">رسائل مترجمة (مقروءة آليا)</comment>
+  <glob pattern="*.gmo"/>
+  <glob pattern="*.mo"/>
+</mime-type>

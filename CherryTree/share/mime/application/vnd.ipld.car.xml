@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/vnd.ipld.car">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Archive used for storing and transporting IPLD (InterPlanetary Linked Data)</comment>
+  <comment xml:lang="uk">архів для зберігання і транспортування IPLD (InterPlanetary Linked Data)</comment>
+  <comment xml:lang="tr">IPLD (Gezegenlerarası Bağlantılı Veri) depolama ve aktarımı için kullanılan arşiv</comment>
+  <comment xml:lang="sv">Arkiv använt för lagring och transport av IPLD (InterPlanetary Linked Data)</comment>
+  <comment xml:lang="sr-Cyrl">Архива која се користи за складиштење и пренос IPLD-а (InterPlanetary Linked Data)</comment>
+  <comment xml:lang="sq">Arkiv i përdorur për depozitim dhe transportim IPLD-ra (InterPlanetary Linked Data)</comment>
+  <comment xml:lang="sl">Arhiv za shranjevanje in prenašanje podatkov IPLD (InterPlanerary Linked Data)</comment>
+  <comment xml:lang="ru">Архив, используемый для хранения и транспортировки IPLD (межпланетных связанных данных)</comment>
+  <comment xml:lang="ro">arhivă utilizată pentru stocarea și transportul datelor IPLD (InterPlanetary Linked Data)</comment>
+  <comment xml:lang="pt-BR">Arquivo usado para armazenar e transportar IPLD (Dados Vinculados Interplanetários)</comment>
+  <comment xml:lang="pl">Archiwum do przechowywania i przesyłania IPLD (InterPlanetary Linked Data)</comment>
+  <comment xml:lang="oc">Archiu utilizada per l’emmagazinatge e transpòrt de IPLD (InterPlanetary Linked Data)</comment>
+  <comment xml:lang="ko">IPLD (InterPlanetary Linked Data) 저장 및 전송에 사용되는 묶음 파일</comment>
+  <comment xml:lang="kk-Cyrl">IPLD (Планетааралық байланысқан деректерді) сақтау және тасымалдау үшін қолданылатын архив</comment>
+  <comment xml:lang="fr">Archive utilisée pour le stockage et le transport IPLD (InterPlanetary Linked Data)</comment>
+  <comment xml:lang="fi">Arkisto käyttää IPLD:tä (InterPlanetary Linked Data) tallentamiseen ja siirtämiseen</comment>
+  <comment xml:lang="et">IPLD (InterPlanetary Linked Data) arhiivifail</comment>
+  <comment xml:lang="es">Archivador utilizado para almacenar y transportar IPLD (Interplanetary Linked Data)</comment>
+  <comment xml:lang="en-GB">Archive used for storing and transporting IPLD (InterPlanetary Linked Data)</comment>
+  <comment xml:lang="de">IPLD-Archiv (InterPlanetary Linked Data)</comment>
+  <comment xml:lang="ar">أأرشيف يُستخدم لتخزين ونقل بيانات IPLD (InterPlanetary Linked Data)</comment>
+  <acronym>CAR</acronym>
+  <expanded-acronym>Content Addressable aRchive</expanded-acronym>
+  <generic-icon name="package-x-generic"/>
+  <glob pattern="*.car"/>
+</mime-type>

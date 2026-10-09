@@ -1,0 +1,211 @@
+if not modules then modules = { } end modules ['luat-cbk'] = {
+    version   = 1.001,
+    comment   = "companion to luat-lib.mkiv",
+    author    = "Hans Hagen, PRAGMA-ADE, Hasselt NL",
+    copyright = "PRAGMA ADE / ConTeXt Development Team",
+    license   = "see context related readme files"
+}
+
+local insert, remove, concat = table.insert, table.remove, table.concat
+local find, format = string.find, string.format
+local type, next = type, next
+local round = math.round
+local sortedhash, sortedkeys, tohash = table.sortedhash, table.sortedkeys, table.tohash
+
+-- Callbacks are the real asset of LuaTeX. They permit you to hook your own code
+-- into the TeX engine. Here we implement a few handy auxiliary functions. Watch
+-- out, there are diferences between LuateX and LuaMetaTeX.
+
+-- By now most callbacks are frozen and most provide a way to plug in your own code.
+-- For instance all node list handlers provide before/after namespaces and the file
+-- handling code can be extended by adding schemes and if needed I can add more
+-- hooks. So there is no real need to overload a core callback function. The ability
+-- to overload by a user (push/pop etc) has been removed. You can find the oveload
+-- code in version before 2025-06-01.
+
+callbacks       = callbacks or { }
+local callbacks = callbacks
+
+local trace_callbacks      = false  trackers.register("system.callbacks", function(v) trace_callbacks = v end)
+local trace_checking       = false  trackers.register("memory.checking", function(v) trace_checking = v end)
+
+local report_system        = logs.reporter("system")
+local report_callbacks     = logs.reporter("system","callbacks")
+local report_memory        = logs.reporter("system","memory")
+
+local register_callback    = callback.register
+local find_callback        = callback.find
+local name_callbacks       = callback.names
+local set_callback_state   = callback.setstate
+local get_callback_state   = callback.getstate
+local set_callback_options = callback.setoptions
+local get_callback_index   = callback.getindex
+
+local comments   = { }
+local names      = callback.names()
+local list       = table.swapped(names)
+
+callbacks.names  = names -- index -> name
+callbacks.list   = list  -- name  -> index
+
+local optionbits = callback.getoptionvalues()
+local statebits  = callback.getstatevalues()
+
+local options    = table.swapped(optionbits,optionbits)
+local states     = table.swapped(statebits,statebits)
+
+callbacks.optioncodes = options
+callbacks.statecodes  = states
+callbacks.optionbits  = optionbits
+callbacks.statebits   = statebits
+
+local disabled_code <const> = states.disabled
+local frozen_code   <const> = states.frozen
+
+local trace_code    <const> = options.trace
+
+callback.setoptions(options.direct) -- might become permanent
+
+-- temporary, not public, needed in driv-ini and lua-run:
+
+callbacks.functions = { }
+
+trackers.register("callbacks.calls",function(v)
+    set_callback_options(trace_code,v and true or false)
+end)
+
+local delayed = false  do
+    if environment.initex then
+        delayed = {
+            "buildpage",
+        }
+        for i=1,#delayed do
+            set_callback_state(delayed[i],disabled_code & frozen_code)
+        end
+        delayed = tohash(delayed)
+    end
+end
+
+function callbacks.known(name)
+    return find_callback(name)
+end
+
+function callbacks.freeze(name)
+    if find(name,"*",1,true) then
+        local pattern = name
+        for name, index in next, list do
+            if find(name,pattern) then
+             -- set_callback_state(name,frozen_code)
+                set_callback_state(index,frozen_code)
+            end
+        end
+    else
+        set_callback_state(name,frozen_code)
+    end
+end
+
+-- For now we also support the old interface.
+
+do
+
+    local function register(specification,action,freeze)
+        if type(specification) ~= "table" then
+            specification = {
+                name    = specification,
+                action  = action,
+                frozen  = freeze and true or false,
+                comment = type(freeze) == "string" and freeze or nil,
+            }
+        end
+        local name = specification.name
+        if type(name) ~= "string" or name == "" then
+            report_callbacks("bad callback registration %a","invalid name")
+            return
+        end
+        if delayed and delayed[name] then
+            return nil
+        end
+        local comment = specification.comment
+        if type(comment) ~= "string" then
+            comment = name
+        end
+        --
+        local index = register_callback(name,specification.action or false)
+        if index then
+            if specification.disable or specification.disabled then
+                set_callback_state(index,disabled_code)
+            end
+            if specification.freeze or specification.frozen then
+                set_callback_state(index,frozen_code)
+            end
+        else
+            report_callbacks("bad callback registration %a",name)
+            os.exit()
+        end
+        --
+        comments[index] = comment
+        comments[name]  = comment
+        --
+        return index
+    end
+
+    callbacks.register = register
+
+    function callback.register(name,action) -- original
+        return register { name = name, action = action }
+    end
+
+end
+
+function callbacks.optimizer(name)
+    local index = get_callback_index(name)
+    if index then
+        return
+            index,
+            function() set_callback_state(index) end,
+            function() set_callback_state(index,disabled_code) end
+    end
+end
+
+
+function callbacks.push() end -- obsolete
+function callbacks.pop () end -- obsolete
+
+-- This will move to a module (but then i need to adapt a few manuals and
+-- modules.
+
+do
+
+    local keys = false
+
+    local function getstates(i)
+        if not keys then
+            keys = sortedkeys(statebits)
+        end
+        local state  = get_callback_state(i)
+        local result = { }
+        if state and state ~= 0 then
+            for i=1,#keys do
+                local k = keys[i]
+                if (state & k) == k then
+                    result[#result+1] = statebits[k]
+                end
+            end
+        end
+        return result
+    end
+
+    local function getcomment(name)
+        return comments[name] or ""
+    end
+
+    callbacks.getstates  = getstates
+    callbacks.getcomment = getcomment
+
+    function callbacks.report()
+        for name, index in sortedhash(list) do
+            report_callbacks("%2i %-20s : [% t] %s",index,name,getstates(index),getcomment(name))
+        end
+    end
+
+end

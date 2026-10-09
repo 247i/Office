@@ -1,0 +1,78 @@
+%D \module
+%D   [     file=meta-imp-latinsquare,
+%D      version=2026-02-14,
+%D        title=\CONTEXT\ User Module,
+%D     subtitle=Latin squares. Companion to t-squares,
+%D       author=Jairo A. del Rio,
+%D         date=\currentdate,
+%D    copyright=Jairo A. del Rio,
+%D        email=jairoadelrio6@gmail.com,
+%D      license=MIT License]
+
+\registerctxluafile{meta-imp-latinsquare}{autosuffix}
+
+\startMPextensions
+
+presetparameters "latinsquare" [
+  n = 5,
+  size = 2EmWidth,
+  alternative = "color",
+  frame = "on",
+  rulethickness = .5bp
+];
+
+def lmt_latinsquare = applyparameters "latinsquare" "lmt_do_latinsquare" enddef;
+
+def lmt_do_latinsquare =
+  begingroup;
+  pushparameters "latinsquare";
+  save n, sz, a, f, ok;
+  save currentcell, currentpos;
+  pair currentpos;
+  string a, f;
+  boolean ok;
+
+  n := getparameter "n";           sz  := getparameter "size";
+  a := getparameter "alternative";
+  f := getparameter "frame";
+
+  ok = lua.MP.latinsquareinit(n);
+
+  if ok:
+    for i = 1 upto n:
+      for j = 1 upto n:
+        currentpos := sz*(i-(n+1)/2,(n+1)/2-j);
+        currentcell := lua.MP.currentlatincell(i, j);
+        if (f == "on"):
+          draw fullsquare scaled sz shifted currentpos
+          if hasparameter "rulethickness":
+            withpen pencircle scaled (getparameter "rulethickness")
+          fi
+        fi;
+        if (a == "color"):
+          fill fullsquare scaled sz shifted currentpos
+          withcolor hsvtorgb(360*currentcell/n, .5, 1)
+        fi;
+        draw thetextext(decimal currentcell, currentpos);
+      endfor
+    endfor
+  else:
+    draw thetextext("Invalid number: " & decimal n, origin)
+    withcolor red;
+  fi
+  lua.MP.latinsquarereset();
+  popparameters;
+  endgroup;
+enddef;
+
+\stopMPextensions
+
+\defineMPparameterset
+  [latinsquare]
+  [n=number,
+   size=dimension,
+   alternative=string,
+   frame=string,
+   rulethickness=dimension]
+
+% vim: tw=80:ts=2:sts=2:expandtab:wrap:linebreak:breakindent

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<title>test</title>
+	<question_language>Dutch</question_language>
+	<answer_language>English</answer_language>
+	<word>
+		<known>een</known>
+		<foreign>one</foreign>
+		<results>0/1</results>
+	</word>
+	<word>
+		<known>twee</known>
+		<foreign>two</foreign>
+		<results>1/1</results>
+	</word>
+</root>

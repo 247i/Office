@@ -1,0 +1,320 @@
+@charset "utf-8";
+
+html
+{
+	overflow-y: scroll;
+}
+
+body, html
+{
+	height: 100%;
+	margin: 0;
+}
+
+img
+{
+	border: 0;
+}
+
+h1
+{
+	font-weight:normal;
+}
+
+h3
+{
+	font-weight:bold;
+	margin:0;
+	margin-top:5px;
+	margin-bottom:5px;
+	font-size:17px;
+}
+
+a:link {
+	color: @!aLinkColor!@;
+}
+
+a:hover {
+	color: @!aHoverColor!@;
+}
+
+p
+{
+	margin-top: 0px;
+	margin-bottom: 10px;
+}
+
+body
+{
+	background-image:url(images/bg.png);
+	background-repeat:repeat-x;
+	background-color:@!bodyBackgroundColor!@;
+	font-family:Verdana, Geneva, sans-serif;
+	color: @!bodyTextColor!@;
+	font-size: 12px;
+	z-index:0;
+}
+
+hr
+{
+	border-bottom: 1px solid @!hrColor!@;
+	border-top:0;
+	border-left:0;
+	border-right:0;
+	width: 908px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* Index */
+#body
+{
+	background-image:url(images/body.png);
+	background-position: center 10px;
+	background-repeat:no-repeat;
+	width: 1000px;
+	min-height: 100%;
+	z-index:1;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top: 0px;
+}
+
+#header
+{
+	width: 949px;
+	height: 50px;
+	padding-top: 20px;
+	text-align: right;
+}
+
+#content
+{
+	width: 949px;
+	margin-left: 26px;
+	margin-top: 55px;
+}
+
+.center
+{
+	text-align: center;
+}
+
+/* Menu */
+#menu
+{
+	margin-top: 20px;
+	margin-bottom: 0px;
+	height: 15px;
+}
+
+#menu li
+{
+	list-style: none;
+	display: inline;
+}
+
+.menuLink
+{
+	font-size: 15px;
+	font-weight: bold;
+	margin: 3px;
+	text-decoration: none;
+}
+
+#menuLight
+{
+	margin-top: 6px;
+	width: 26px;
+	height: 13px;
+	background-image:url(images/light.png);
+	position: absolute;
+	display: none;
+}
+
+#languageBar
+{
+	margin-right: 5px;
+}
+
+/* Home */
+#homeSummary
+{
+	float: left;
+	width: 380px;
+	height: 350px;
+	margin-left: 20px;
+	font-size: 12px;
+	line-height:120%;
+}
+
+#downloadButton
+{
+	font-size: 16px;
+	background-image:url(images/downloadbuttons/windows-button.png);
+	cursor: pointer;
+	float: left;
+	width: 312px;
+	height: 51px;
+	padding-left: 70px;
+	padding-top: 15px;
+	margin-top: 5px;
+}
+
+#osForStr
+{
+	font-size: 14px;
+}
+
+#toTheDownloadPage
+{
+	float:left;
+	width: 380px;
+	font-size:11px;
+	margin-top: 2px;
+	text-align: right;
+}
+
+#screenshot
+{
+	float:left;
+	margin-left: 20px;
+	max-width: 491px;
+	max-height: 450px;
+}
+
+.screenThumb
+{
+	max-width: 150px;
+	max-height: 130px;
+}
+
+#homeContent
+{
+	height: 430px;
+}
+
+#socialMediaBox
+{
+	width: 900px;
+	margin-left:auto;
+	margin-right:auto;
+	text-align:center;
+}
+
+#thumbRow
+{
+	margin-left: 40px;
+	margin-right: 40px;
+}
+
+/* Download */
+#downloadContent
+{
+	margin-left: 40px;
+	margin-right: 40px;
+}
+
+.downloadDescription
+{
+	font-size:10px;
+	padding: 10px;
+	text-align:center;
+}
+
+.downloadTable
+{
+	border: 1px solid @!downloadTableBorderColor!@;
+	border-collapse: collapse;
+	margin-left:auto;
+	margin-right: auto;
+}
+
+.downloadTitle
+{
+	font-size:24px;
+	padding:10px;
+	text-align:center;
+}
+
+.downloadRow
+{
+	background-color:@!downloadRowBackgroundColor!@;
+	border: 1px solid @!downloadRowBorderColor!@;
+	margin-top: 10px;
+}
+
+.logoCol
+{
+	width: 50px;
+}
+
+.nameCol
+{
+	width: 200px;
+}
+
+.platformCol
+{
+	width: 200px;
+}
+
+.linkCol
+{
+	width: 100px;
+}
+
+.sidenote
+{
+	font-size: 11px;
+	padding: 5px;
+}
+
+/* About */
+#aboutContent
+{
+	margin-left: 40px;
+	margin-right: 40px;
+}
+
+.sideImg
+{
+	float: right;
+	padding: 5px;
+}
+
+/* Documentation */
+.docContent
+{
+	margin-left: 40px;
+	margin-right: 40px;
+}
+
+.codeBlock
+{
+	border: 1px solid black;
+	background-color:@!codeBlockBackgroundColor!@;
+	width: 95%;
+	font-family:"Courier New", Courier, monospace;
+	font-size: 12pt;
+}
+
+.docThumb
+{
+	max-width: 400px;
+	max-height: 300px;
+	border: 0;
+	margin: 10px;
+}
+
+#linkHere
+{
+	display: none;
+}
+
+/* Contribute */
+#contributeContent
+{
+	margin-left: 40px;
+	margin-right: 40px;
+}

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="message/external-body">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Reference to remote file</comment>
+  <comment xml:lang="zh-Hant-TW">遠端檔案參照</comment>
+  <comment xml:lang="uk">посилання на віддалений файл</comment>
+  <comment xml:lang="tr">Uzak dosyaya başvuru</comment>
+  <comment xml:lang="sv">Referens till fjärrfil</comment>
+  <comment xml:lang="sr-Cyrl">Упута на удаљену датотеку</comment>
+  <comment xml:lang="sq">Referencë te kartelë e largët</comment>
+  <comment xml:lang="sl">Sklic na oddaljeno datoteko</comment>
+  <comment xml:lang="ru">Ссылка на удалённый файл</comment>
+  <comment xml:lang="ro">referință la fișierul de la distanță</comment>
+  <comment xml:lang="pt-BR">Referência para arquivo remoto</comment>
+  <comment xml:lang="pl">Odwołanie do pliku zdalnego</comment>
+  <comment xml:lang="oc">referéncia a un fichièr distant</comment>
+  <comment xml:lang="ko">원격 파일 참조</comment>
+  <comment xml:lang="kk-Cyrl">Қашықтағы файлға сілтеме</comment>
+  <comment xml:lang="ja">リモートファイルへの参照</comment>
+  <comment xml:lang="it">Riferimento a file remoto</comment>
+  <comment xml:lang="id">Acuan ke berkas jarak jauh</comment>
+  <comment xml:lang="hr">Upućivanje na udaljenu datoteku</comment>
+  <comment xml:lang="hi">रिमोट फाइल का संदर्भ</comment>
+  <comment xml:lang="he">הפניה לקובץ מרוחק</comment>
+  <comment xml:lang="fur">Riferiment a file lontan</comment>
+  <comment xml:lang="fr">Référence au fichier distant</comment>
+  <comment xml:lang="fi">Viittaus etätiedostoon</comment>
+  <comment xml:lang="et">E-kirja väline sisu</comment>
+  <comment xml:lang="es">referencia a archivo remoto</comment>
+  <comment xml:lang="en-GB">Reference to remote file</comment>
+  <comment xml:lang="de">Verweis auf entfernte Datei</comment>
+  <comment xml:lang="ca">referència a fitxer remot</comment>
+  <comment xml:lang="bg">Връзка към отдалечен файл</comment>
+  <comment xml:lang="be-Cyrl">спасылка на выдалены файл</comment>
+  <comment xml:lang="ar">مرجع إلى ملف بعيد</comment>
+  <generic-icon name="text-x-generic"/>
+</mime-type>

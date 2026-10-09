@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?context-directive job ctxfile x-setups.ctx ?>
+
+<cd:interface xmlns:cd="http://www.pragma-ade.com/commands">
+
+    <cd:command name="defineframedmath" file="pack-mat.mkxl">
+        <cd:arguments>
+            <cd:resolve name="keyword-name"/>
+            <cd:resolve name="keyword-name-optional"/>
+            <cd:assignments list="yes" optional="yes">
+                <cd:inherit name="setupframed"/>
+            </cd:assignments>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="framedmath" generated="yes" variant="instance" file="pack-mat.mkxl">
+        <cd:sequence>
+            <cd:instance value="framedmath"/>
+        </cd:sequence>
+        <cd:arguments>
+            <cd:assignments list="yes" optional="yes">
+                <cd:inherit name="setupframed"/>
+            </cd:assignments>
+            <cd:content/>
+        </cd:arguments>
+        <cd:instances>
+            <cd:resolve name="instance-framedmath"/>
+        </cd:instances>
+    </cd:command>
+
+    <cd:command name="definemathframed" level="style" category="rules" keywords="background mathematics" file="pack-mat.mkxl">
+        <cd:arguments>
+            <cd:resolve name="keyword-name"/>
+            <cd:resolve name="keyword-name-optional"/>
+            <cd:assignments list="yes" optional="yes">
+                <cd:inherit name="setupmathframed"/>
+            </cd:assignments>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="setupmathframed" level="style" category="rules" keywords="background mathematics" file="pack-mat.mkxl">
+        <cd:arguments>
+            <cd:resolve name="keyword-name-list-optional"/>
+            <cd:assignments list="yes">
+                <cd:parameter name="mathstyle">
+                    <cd:resolve name="value-mathstyle"/>
+                </cd:parameter>
+                <cd:parameter name="mathclass">
+                    <cd:resolve name="value-mathclass"/>
+                </cd:parameter>
+                <cd:inherit name="setupframed"/>
+            </cd:assignments>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="mathframed" generated="yes" variant="instance" level="document" category="rules" keywords="background mathematics" file="pack-mat.mkxl">
+        <cd:sequence>
+            <cd:instance value="mathframed"/>
+        </cd:sequence>
+        <cd:arguments>
+            <cd:assignments list="yes" optional="yes">
+                <cd:inherit name="setupmathframed"/>
+            </cd:assignments>
+            <cd:content/>
+        </cd:arguments>
+        <cd:instances>
+            <cd:resolve name="instance-mathframed"/>
+        </cd:instances>
+    </cd:command>
+
+    <cd:command name="mparagraph" file="pack-mat.mkxl">
+        <cd:arguments>
+            <cd:assignments list="yes" optional="yes">
+                <cd:inherit name="setupframed"/>
+            </cd:assignments>
+            <cd:content/>
+        </cd:arguments>
+    </cd:command>
+
+</cd:interface>

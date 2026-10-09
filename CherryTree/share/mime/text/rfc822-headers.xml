@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/rfc822-headers">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Email headers</comment>
+  <comment xml:lang="zh-Hant-TW">電子郵件標頭</comment>
+  <comment xml:lang="uk">заголовки повідомлення ел. пошти</comment>
+  <comment xml:lang="tr">E-posta üst bilgileri</comment>
+  <comment xml:lang="sv">E-posthuvuden</comment>
+  <comment xml:lang="sr-Cyrl">Заглавља е-поште</comment>
+  <comment xml:lang="sq">Krye Email-sh</comment>
+  <comment xml:lang="sl">Glave pošte</comment>
+  <comment xml:lang="ru">Почтовые заголовки</comment>
+  <comment xml:lang="ro">antete de mesaje de poștă electronică</comment>
+  <comment xml:lang="pt-BR">Cabeçalhos de e-mail</comment>
+  <comment xml:lang="pl">Nagłówki wiadomości e-mail</comment>
+  <comment xml:lang="oc">entèstas de corrièr electronic</comment>
+  <comment xml:lang="nn">E-postmeldingshovud</comment>
+  <comment xml:lang="lt">El. pašto antraštės</comment>
+  <comment xml:lang="ko">전자메일 헤더</comment>
+  <comment xml:lang="kk-Cyrl">Электронды пошта тақырыптамалары</comment>
+  <comment xml:lang="ja">メールヘッダー</comment>
+  <comment xml:lang="it">Intestazioni email</comment>
+  <comment xml:lang="id">Header surel</comment>
+  <comment xml:lang="hr">E-mail zaglavlja</comment>
+  <comment xml:lang="hi">ईमेल शीर्षलेख</comment>
+  <comment xml:lang="he">כותרות דוא״ל</comment>
+  <comment xml:lang="fur">Intestazions e-mail</comment>
+  <comment xml:lang="fr">Entêtes de courriel</comment>
+  <comment xml:lang="fi">Sähköpostin otsikko</comment>
+  <comment xml:lang="eu">Posta-goiburuak</comment>
+  <comment xml:lang="et">E-kirja päised</comment>
+  <comment xml:lang="es">cabeceras de correo electrónico</comment>
+  <comment xml:lang="en-GB">Email headers</comment>
+  <comment xml:lang="de">E-Mail-Kopfzeilen</comment>
+  <comment xml:lang="ca">capçaleres de correu</comment>
+  <comment xml:lang="bg">Заглавни части на електронна поща</comment>
+  <comment xml:lang="be-Cyrl">паштовыя загалоўкі</comment>
+  <comment xml:lang="ar">ترويسة بريد إلكتروني</comment>
+  <sub-class-of type="text/plain"/>
+</mime-type>

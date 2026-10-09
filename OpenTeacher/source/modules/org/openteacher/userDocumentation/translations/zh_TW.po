@@ -1,0 +1,100 @@
+# Chinese (Traditional) translation for openteacher
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:38+0200\n"
+"PO-Revision-Date: 2013-05-29 08:03+0000\n"
+"Last-Translator: Louie Chen <louie23@gmail.com>\n"
+"Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:44+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: getting-started.html:2
+msgid "Using OpenTeacher 3: A Quick Start"
+msgstr "使用 OpenTeacher 3: 快速啟動"
+
+#: getting-started.html:6
+msgid ""
+"This quick start guide shows you how to do a simple self-test using "
+"OpenTeacher. We're going to learn counting to ten in French today! For this "
+"example we are assuming that you already know English, and you want to learn "
+"French."
+msgstr ""
+"這個快速啟動指引告訴您如何使用 OpenTeacher 來做簡單的自我測試。今天我們將要學"
+"習如何用英文從一數到十！這個例子中，我們假設您已經會中文，而我們將要學習英"
+"文。"
+
+#: getting-started.html:10
+msgid ""
+"The screenshots are all taken in Ubuntu, but this should all work exactly "
+"the same in Windows and Mac OS X."
+msgstr ""
+"這個畫面是從 Ubuntu 中截取下來的，但是應該和 Windows 及 Mac OS X 中的畫面一"
+"樣。"
+
+#: getting-started.html:14
+msgid ""
+"Start OpenTeacher and click the 'Create words lesson' button to make a new "
+"word lesson."
+msgstr "啟動 OpenTeacher 並且點擊 '建立單字課程' 按鈕來建立新的單字課程。"
+
+#: getting-started.html:19
+msgid ""
+"Enter a title for the word list you are going to enter. Also enter the known "
+"language, which, in our case, is English, and the foreign language (the "
+"language you want to learn), which, in our case, is French."
+msgstr ""
+"輸入一個標題給即將輸入的單字列表。而且輸入認識語言，在我們的狀況下，是中文，"
+"和外國語言（您想要學習的語言），在我們的狀況下是英文。"
+
+#: getting-started.html:21
+msgid ""
+"Then enter all words you want to learn in the words table, you can go to the "
+"next question or answer column by pressing tab or '='. See the screenshot "
+"for an example."
+msgstr ""
+"然後輸入您要學習的所有單字在單字表格中，您能夠按下 tab 或 '=' 來跳到下個問題"
+"或答案。看螢幕截圖來當例子。"
+
+#: getting-started.html:26
+msgid ""
+"Click the 'Teach me!' tab on the bottom to start the test. You can now "
+"specify in what way you want OpenTeacher to question you, but the defaults "
+"will do in our case. So, we click the 'I'm ready, start the lesson!' button."
+msgstr ""
+"點擊下方的 '教我！' 分頁來開始測驗。您現在能指定您想讓 OpenTeacher 以何種方式"
+"來詢問您，但是現在我們只使用預設值就好。所以，點擊 '我已準備好，開始課程！' "
+"按鈕。"
+
+#: getting-started.html:28
+msgid ""
+"A word will now be asked to you in your own language, and you'll have to "
+"type the translation of it in the text field. When you have entered the "
+"translation, press Enter on your keyboard, or click 'Check!'"
+msgstr ""
+"一個單字會以您的語言來詢問，而您必須輸入他的翻譯於文字欄中。當您輸入翻譯後，"
+"按下鍵盤上的 Enter，或點擊 '檢查！' 按鈕。"
+
+#: getting-started.html:32
+msgid ""
+"If you entered the right translation, the next question will be asked to "
+"you. If you did not enter the right translation, OpenTeacher will show you "
+"the correct answer, and the difference from your answer."
+msgstr ""
+"假如您輸入正確翻譯，下個題目會直接問您。假如您答錯，OpenTeacher 將會顯示正確"
+"答案，並且顯示和您的答案有什麼不一樣。"
+
+#: getting-started.html:37
+msgid ""
+"Once the test is completed, OpenTeacher will tell you if you did well by "
+"giving you a note."
+msgstr "一旦測驗完畢，OpenTeacher 將會給您一個評分來告訴您是否做得很好。"

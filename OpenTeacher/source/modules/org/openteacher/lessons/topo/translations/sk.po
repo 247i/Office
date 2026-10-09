@@ -1,0 +1,110 @@
+# Slovak translation for openteacher
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2011-08-02 09:21+0000\n"
+"Last-Translator: Alexander Suchan <supersasho@gmail.com>\n"
+"Language-Team: Slovak <sk@li.org>\n"
+"Language: sk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:42+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: topo.py:128
+msgid "Create topography lesson"
+msgstr "Vytvoriť topografickú lekciu"
+
+#. TRANSLATORS: used as a label in case a filename of a topo
+#. TRANSLATORS: lesson isn't available. (E.g. because it's
+#. TRANSLATORS: downloaded from some kind of web service.)
+#: topo.py:218
+msgid "Import source"
+msgstr ""
+
+#: topo.py:224 topo.py:291 topo.py:293
+#, python-format
+msgid "Topo lesson: %s"
+msgstr ""
+
+#~ msgid "What's this place's name?"
+#~ msgstr "Aký je názov tohto miesta?"
+
+#~ msgid "Name for this place"
+#~ msgstr "Názov tohto miesta"
+
+#~ msgid "Map:"
+#~ msgstr "Mapa:"
+
+#~ msgid ""
+#~ "Are you sure you want to use another map? This will remove all your "
+#~ "places!"
+#~ msgstr ""
+#~ "Ste si istý že chcete použiť inú mapu? Toto vymaže všetky vaše miesta!"
+
+#~ msgid "Warning"
+#~ msgstr "Varovanie"
+
+#~ msgid "Add a place by doubleclicking it on the map"
+#~ msgstr "Pridajte miesto dvojklikom na mapu"
+
+#~ msgid "Remove selected place"
+#~ msgstr "Odstrániť vybrané miesta"
+
+#~ msgid "Places in your test"
+#~ msgstr "Miesta vo vašom teste"
+
+#~ msgid "Add"
+#~ msgstr "Pridať"
+
+#~ msgid "Add a place by name:"
+#~ msgstr "Pridať miesto podľa názvu:"
+
+#~ msgid "Place - Name"
+#~ msgstr "Miesto - Názov"
+
+#~ msgid ""
+#~ "Are you sure you want to go back to the teach tab? This will end your "
+#~ "lesson!"
+#~ msgstr ""
+#~ "Ste si istý že chcete ísť späť na záložku učenia? Toto ukončí vašu lekciu!"
+
+#~ msgid "Lesson type:"
+#~ msgstr "Typ lekcie:"
+
+#~ msgid "Name - Place"
+#~ msgstr "Názov - Miesto"
+
+#~ msgid "Which place is here?"
+#~ msgstr "Aké miesto je tu?"
+
+#~ msgid "Lesson order:"
+#~ msgstr "Poradie lekcie:"
+
+#~ msgid "Please click this place:"
+#~ msgstr "Prosím kliknite na toto miesto:"
+
+#~ msgid "Check"
+#~ msgstr "Skontrolovať"
+
+#~ msgid "Not enough items"
+#~ msgstr "Nedostatok položiek"
+
+#~ msgid "You need to add items to your test first"
+#~ msgstr "Potrebujete najprv pridať položky do vášho testu"
+
+#~ msgid "Topo lesson %s"
+#~ msgstr "Topografická lekcia %s"
+
+#~ msgid "Please click this place: "
+#~ msgstr "Prosím klinite na toto miesto: "
+
+#~ msgid "Topo Lesson"
+#~ msgstr "Topografická lekcie"

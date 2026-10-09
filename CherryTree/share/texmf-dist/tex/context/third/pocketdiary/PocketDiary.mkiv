@@ -1,0 +1,119 @@
+%D \module
+%D   [     file=t-pocketdiary.mkiv,
+%D      version=2023.04.15,
+%D        title=PocketDiary,
+%D     subtitle=User file for PocketDiary,,
+%D       author=W. Egger,
+%D         date=\currentdate,
+%D    copyright=W. Egger,
+%D      license=Public Domain]
+
+
+%D This is the base for the compilation of a PocketDiary.
+%D Please refer to the documentation of the module to see 
+%D which options you have to make up your own layout for the PocketDiary
+%D This module is built for usage withKIV and LUAMETATEX (LMTX)
+
+%D Load the PocketDiary module
+\usemodule[pocketdiary] 
+
+%D Choose and setup the desired font to be used
+
+\setupbodyfont[ibmplex,rm,8pt]
+
+\definefontfeature[f:tabular][tnum=yes]
+\addfeature[f:tabular]
+
+%D Set the main language, which sets the interface to be used. Supported interfaces: EN,DE,NL,FR,IT,ES,PL
+
+\mainlanguage[en]
+
+%D setup the paper size and mapping onto the print paper
+
+\setuppapersize[A6][A4,landscape]
+
+%D Setup of the different variable sets of the PocketDiary
+
+\setvariables
+	[PocketDiary]
+	[WeekDay=1,
+	 Week=15,
+	 Month=4,
+	 Year=2023,
+   Nextyear=yes,
+   Daybyday=no]
+
+%D If "Daybyday = yes" then the first 6 pages are filled with 5 times a single
+%D day and the weekend is 1 page. The pages 7 and 8 are filled with what is set
+%D in PockedDiaryLayout for page 7 and 8.
+
+\setvariables
+	[PocketDiaryLayout]
+	[Page1=Dayplan,
+   Page2=Weekendplan,
+   Page3=Weekcurrentplan,
+   Page4=Weeknextplan,
+	 Page5=Monthcurrentplan,
+   Page6=Monthnextplan,
+   Page7=Yearcurrentplan,
+   Page8=Lost-Returnto]
+
+
+%D Names of included templates: You are allowed to use the same template
+%D on  multiple pages.
+%D \startlines
+%D   Dayplan
+%D   Weekcurrentplan
+%D   Weekendplan
+%D   Weeknextplan
+%D   Monthcurrentplan
+%D   Monthnextplan
+%D   Yearcurrentplan
+%D   Yearnextplan
+%D   Lines
+%D   Blank
+%D   Caro
+%D   Todo
+%D   Contact
+%D   Lost-Returnto
+%D \stoplines
+
+\setvariables
+	[PocketDiaryAddress]
+	[Familyname={YourFamilyName},
+   Forename={YourFirstName},
+   Street=Pine Lane
+   Zipcode=2080,
+   City=YourTown,
+   Country=YourCountry,
+   Phone={\dots},
+   Mobile={\dots},
+   E-mail={\dots},
+   Web={\dots}]
+
+\setvariables
+	[PocketDiaryFooter]
+	[Lefttext={\getvariable{PocketDiaryAddress}{Forename}~
+	 \getvariable{PocketDiaryAddress}{Familyname}},
+   Centertext=,
+   Righttext=\pagenumber]
+	 
+\setvariables
+	[PocketDiaryColors]
+	[Separatorline=blue,
+   Gridline={s=0.55}]
+
+\setvariables %Dreifelden
+	[PocketDiaryGeoPosition]
+	[lat=52.467860,
+   lon=16.981240,   
+   timezoneoffset=1,
+   continent=US] % EU, US or leave empty for no DST
+
+%D Setup the document
+\starttext
+
+	\setuparranging[1*8] % this can be uncommented in t-pocketdiary.mkiv
+	
+	\getbuffer[Pocketdiary]
+\stoptext

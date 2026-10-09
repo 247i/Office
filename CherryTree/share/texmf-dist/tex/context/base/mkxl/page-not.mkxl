@@ -1,0 +1,53 @@
+%D \module
+%D   [       file=page-nnt,
+%D        version=2002.04.16,
+%D          title=\CONTEXT\ Page Macros,
+%D       subtitle=Footnotes,
+%D         author=Hans Hagen,
+%D           date=\currentdate,
+%D      copyright={PRAGMA ADE \& \CONTEXT\ Development Team}]
+%C
+%C This module is part of the \CONTEXT\ macro||package and is
+%C therefore copyrighted by \PRAGMA. See mreadme.pdf for
+%C details.
+
+\writestatus{loading}{ConTeXt Page Macros / Footnotes}
+
+%D We've moved some footnote handling to a separate page module. The macros below
+%D are used in the single and multi column page handlers and permit mixed usage of
+%D column and page notes.
+
+\unprotect
+
+\newdimension\totalinsertionheight
+
+\permanent\protected\def\settotalinsertionheight
+  {\calculatetotalnoteheight
+   \totalinsertionheight{%
+     \totalnoteheight
+    +\page_insert_insertion_height\s!topfloat
+    +\page_insert_insertion_height\s!bottomfloat
+   }}
+
+% The final solution for these excessive pending note inserts (that of course no sane user
+% will run into) relies on boundaries resetting some properties and signalling if we have
+% only inserts. (Musical timestamp: the day after an unforgetabble Anna von Hausswolff
+% concert in Paradiso 2025; there's still hope after a few weird weeks of world politics.)
+
+\insertoptions {
+    \checkheightinsertoptioncode
+}
+
+\newconditional\c_page_insert_only_check \c_page_insert_only_check\conditionaltrue
+
+\let\pageinsertonlyfactor\plusone
+
+\def\strc_notes_set_boundary
+  {\ifcstok{\noteparameter\c!location}\v!page
+     \insertboundary\plusthree\currentnoteinsertionnumber % height and count
+   \fi}
+
+\installpagebreakmethod \v!note
+  {\strc_notes_process\strc_notes_set_boundary}
+
+\protect \endinput

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/vnd.oasis.opendocument.text-master-template">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>ODM template</comment>
+  <comment xml:lang="zh-Hant-TW">ODM 範本</comment>
+  <comment xml:lang="uk">шаблон ODM</comment>
+  <comment xml:lang="tr">ODM şablonu</comment>
+  <comment xml:lang="sv">ODM-mall</comment>
+  <comment xml:lang="sr-Cyrl">ODM шаблон</comment>
+  <comment xml:lang="sq">Gjedhe ODM</comment>
+  <comment xml:lang="sl">Predloga dokumenta ODM</comment>
+  <comment xml:lang="ru">Шаблон ODM</comment>
+  <comment xml:lang="ro">șablon ODM</comment>
+  <comment xml:lang="pt-BR">Modelo ODM</comment>
+  <comment xml:lang="pl">Szablon ODM</comment>
+  <comment xml:lang="oc">modèl ODM</comment>
+  <comment xml:lang="nn">ODM-mal</comment>
+  <comment xml:lang="ko">ODM 문서 서식</comment>
+  <comment xml:lang="kk-Cyrl">ODM үлгісі</comment>
+  <comment xml:lang="ja">ODM テンプレート</comment>
+  <comment xml:lang="id">Templat ODM</comment>
+  <comment xml:lang="hr">ODM predložak</comment>
+  <comment xml:lang="fur">Model ODM</comment>
+  <comment xml:lang="fr">Modèle ODM</comment>
+  <comment xml:lang="fi">ODM-malli</comment>
+  <comment xml:lang="et">ODM mall</comment>
+  <comment xml:lang="es">plantilla ODM</comment>
+  <comment xml:lang="en-GB">ODM template</comment>
+  <comment xml:lang="de">ODM-Vorlage</comment>
+  <comment xml:lang="da">ODM-skabelon</comment>
+  <comment xml:lang="ca">plantilla ODM</comment>
+  <comment xml:lang="bg">Шаблон за документи — ODM</comment>
+  <comment xml:lang="be-Cyrl">шаблон ODM</comment>
+  <comment xml:lang="ar">قالب ODM</comment>
+  <comment xml:lang="af">ODM-sjabloon</comment>
+  <acronym>ODM</acronym>
+  <expanded-acronym>OpenDocument Master</expanded-acronym>
+  <sub-class-of type="application/zip"/>
+  <generic-icon name="x-office-document"/>
+  <glob pattern="*.otm"/>
+</mime-type>

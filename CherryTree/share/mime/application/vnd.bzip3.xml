@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/vnd.bzip3">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Bzip3 archive</comment>
+  <comment xml:lang="zh-Hant-TW">Bzip3 封存檔</comment>
+  <comment xml:lang="uk">архів bzip3</comment>
+  <comment xml:lang="tr">Bzip3 arşivi</comment>
+  <comment xml:lang="sv">Bzip3-arkiv</comment>
+  <comment xml:lang="sr-Cyrl">Bzip3 архива</comment>
+  <comment xml:lang="sq">Arkiv Bzip3</comment>
+  <comment xml:lang="sl">Arhiv bzip3</comment>
+  <comment xml:lang="ru">Архив Bzip3</comment>
+  <comment xml:lang="ro">arhivă bzip3</comment>
+  <comment xml:lang="pt-BR">Pacote Bzip3</comment>
+  <comment xml:lang="pl">Archiwum bzip3</comment>
+  <comment xml:lang="oc">archiu Bzip3</comment>
+  <comment xml:lang="nn">Bzip3-arkiv</comment>
+  <comment xml:lang="lt">Bzip3 archyvas</comment>
+  <comment xml:lang="ko">BZIP3 압축 파일</comment>
+  <comment xml:lang="kk-Cyrl">Bzip3 архиві</comment>
+  <comment xml:lang="kab">Aɣbaṛ Bzip3</comment>
+  <comment xml:lang="ja">Bzip3 アーカイブ</comment>
+  <comment xml:lang="it">Archivio bzip3</comment>
+  <comment xml:lang="id">Arsip Bzip3</comment>
+  <comment xml:lang="hr">Bzip3 arhiva</comment>
+  <comment xml:lang="hi">Bzip3 अभिलेख</comment>
+  <comment xml:lang="he">ארכיון Bzip3</comment>
+  <comment xml:lang="gl">Arquivo Bzip3</comment>
+  <comment xml:lang="fur">Archivi Bzip3</comment>
+  <comment xml:lang="fr">Archive Bzip3</comment>
+  <comment xml:lang="fi">Bzip3-arkisto</comment>
+  <comment xml:lang="eu">Bzip3 artxiboa</comment>
+  <comment xml:lang="et">Bzip3 arhiiv</comment>
+  <comment xml:lang="es">archivador BZIP3</comment>
+  <comment xml:lang="en-GB">Bzip3 archive</comment>
+  <comment xml:lang="de">bzip3-Archiv</comment>
+  <comment xml:lang="da">Bzip3-arkiv</comment>
+  <comment xml:lang="ca">arxiu bzip3</comment>
+  <comment xml:lang="bg">Архив — bzip3</comment>
+  <comment xml:lang="be-Cyrl">архіў bzip3</comment>
+  <comment xml:lang="ar">أرشيف Bzip3 </comment>
+  <comment xml:lang="af">Bzip3-argief</comment>
+  <generic-icon name="package-x-generic"/>
+  <glob pattern="*.bz3"/>
+  <alias type="application/x-bzip3"/>
+</mime-type>

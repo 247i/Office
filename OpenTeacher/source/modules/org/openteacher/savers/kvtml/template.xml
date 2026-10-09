@@ -1,0 +1,67 @@
+#!	Copyright 2013, Marten de Vries
+#!
+#!	This file is part of OpenTeacher.
+#!
+#!	OpenTeacher is free software: you can redistribute it and/or modify
+#!	it under the terms of the GNU General Public License as published by
+#!	the Free Software Foundation, either version 3 of the License, or
+#!	(at your option) any later version.
+#!
+#!	OpenTeacher is distributed in the hope that it will be useful,
+#!	but WITHOUT ANY WARRANTY; without even the implied warranty of
+#!	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#!	GNU General Public License for more details.
+#!
+#!	You should have received a copy of the GNU General Public License
+#!	along with OpenTeacher.  If not, see <http://www.gnu.org/licenses/>.
+#!
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE kvtml PUBLIC "kvtml2.dtd" "http://edu.kde.org/kvtml/kvtml2.dtd">
+<kvtml version="2.0">
+  <information>
+    <generator>@!appname!@ @!appversion!@</generator>
+    <title>@!list.get("title", u"")!@</title>
+    <!--(if "items" in list and len(list["items"]) >= 1 and "created" in list["items"][0])-->
+    <date>@!list["items"][0]["created"].strftime("%Y-%m-%d")!@</date>
+    <!--(end)-->
+    <category>Languages</category>
+  </information>
+  <identifiers>
+    <identifier id="0">
+      <name>@!list.get("questionLanguage", u"")!@</name>
+      <locale>@!questionLocale or "C"!@</locale>
+    </identifier>
+    <identifier id="1">
+      <name>@!list.get("answerLanguage", u"")!@</name>
+      <locale>@!answerLocale or "C"!@</locale>
+    </identifier>
+  </identifiers>
+  <entries>
+	<!--(for word in list.get("items", []))-->
+    <entry id="@!word['id']!@">
+      <translation id="0">
+        <text>@!compose(word.get("questions", []))!@</text>
+        <comment>@!word.get("comment", u"")!@</comment>
+      </translation>
+      <translation id="1">
+        <text>@!compose(word.get("answers", []))!@</text>
+      </translation>
+    </entry>
+	<!--(end)-->
+    <entry id="@!len(list.get('items', []))!@">
+      <translation id="0"/>
+      <translation id="1"/>
+    </entry>
+  </entries>
+  <lessons>
+    <!--(for i, test in enumerate(list.get("tests", [])))-->
+    <container>
+      <name>Lesson @!i + 1!@</name>
+      <inpractice>true</inpractice>
+      <!--(for result in test.get("results", []))-->
+      <entry id="@!result['itemId']!@"/>
+      <!--(end)-->
+    </container>
+    <!--(end)-->
+  </lessons>
+</kvtml>

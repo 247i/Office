@@ -1,0 +1,1457 @@
+if not modules then modules = { } end modules ['math-vfu'] = {
+    version   = 1.001,
+    comment   = "companion to math-ini.mkiv",
+    author    = "Hans Hagen, PRAGMA-ADE, Hasselt NL",
+    copyright = "PRAGMA ADE / ConTeXt Development Team",
+    license   = "see context related readme files"
+}
+
+-- somehow an italic gets passed for 'next'
+
+-- All these math vectors .. thanks to Aditya and Mojca they become better and
+-- better. If you have problems with math fonts or miss characters report it to the
+-- ConTeXt mailing list. Also thanks to Boguslaw for finding a couple of errors.
+
+-- Although this mechanism was a candidate for obsolence, the fact that Iwona and
+-- Antykwa are nice fonts (especially for display) I decided to keep it around but
+-- in a bit upgraded way. It is also a test for virtual tfm/pfb fonts that we keep
+-- around but hardly gets tested. However, much is still pretty old code, dating
+-- from when we emulated \UNICODE\ math and \OPENTYPE\ math fonts using traditional
+-- fonts.
+
+-- Musical timestamp: Januari 2023 Riverside ID.Entity release date, after all we
+-- only use the following code for ther Polish Iwona, Kurier and Antykwa fonts.
+
+local type, next, tonumber = type, next, tonumber
+local max = math.max
+local fastcopy, sortedhash, tohash = table.copy, table.sortedhash, table.tohash
+
+local fonts, mathematics = fonts, mathematics
+
+local trace_virtual = false  trackers.register("math.virtual", function(v) trace_virtual = v end)
+local trace_timings = false  trackers.register("math.timings", function(v) trace_timings = v end)
+
+local add_optional  = false  directives.register("math.virtual.optional",function(v) add_optional = v end)
+
+local report_virtual    = logs.reporter("fonts","virtual math")
+
+local allocate          = utilities.storage.allocate
+local setmetatableindex = table.setmetatableindex
+local formatters        = string.formatters
+
+local chardata          = characters.data
+
+local mathencodings     = allocate()
+fonts.encodings.math    = mathencodings -- better is then: fonts.encodings.vectors
+local vfmath            = allocate()
+fonts.handlers.vf.math  = vfmath
+
+local helpers           = fonts.helpers
+
+local addprivate        = helpers.addprivate
+local hasprivate        = helpers.hasprivate
+local vfcommands        = helpers.commands
+
+local rightcommand      = vfcommands.right
+local leftcommand       = vfcommands.left
+local downcommand       = vfcommands.down
+local upcommand         = vfcommands.up
+local push              = vfcommands.push
+local pop               = vfcommands.pop
+local slotcommand       = vfcommands.slot
+local staycommand       = vfcommands.stay
+
+local nps = fonts.helpers.newprivateslot
+local ps  = fonts.helpers.privateslot
+
+nps("rule middle piece")
+nps("rule right piece")
+nps("rule left piece")
+nps("double rule middle piece")
+nps("double rule right piece")
+nps("double rule left piece")
+nps("arrow left piece")
+nps("arrow right piece")
+nps("double arrow left piece")
+nps("double arrow right piece")
+
+nps("flat rule left piece")
+nps("flat rule middle piece")
+nps("flat rule right piece")
+
+nps("flat double rule left piece")
+nps("flat double rule middle piece")
+nps("flat double rule right piece")
+
+nps("minus rule left piece")
+nps("minus rule middle piece")
+nps("minus rule right piece")
+
+do
+
+    -- this overlaps with math-act
+
+    local function horibar(main,unicode,rule,left,right,normal,force,m,l,r)
+        local characters = main.characters
+        local data       = characters[unicode]
+        if force or not data then
+            local height = main.mathparameters.defaultrulethickness or 4*65536/10
+            local f_rule = rule and formatters["M-HORIBAR-M-%H"](rule)
+            local p_rule = rule and hasprivate(main,f_rule)
+            local ndata  = normal and characters[normal]
+            if rule and left and right and normal then
+                local ldata  = characters[l or left]
+                local mdata  = characters[m or rule]
+                local rdata  = characters[r or right]
+                local lwidth = ldata.width or 0
+                local mwidth = mdata.width or 0
+                local rwidth = rdata.width or 0
+                local nwidth = ndata.width or 0
+                local down   = (mdata.height / 2) - height
+if unicode == normal then
+    height = ndata.height
+    down   = 0
+end                --
+                local f_left  = left  and formatters["M-HORIBAR-L-%H"](left)
+                local f_right = right and formatters["M-HORIBAR-R-%H"](right)
+                local p_left  = left  and hasprivate(main,f_left)
+                local p_right = right and hasprivate(main,f_right)
+                --
+                if not characters[p_rule] then
+                    p_rule = addprivate(main,f_rule,{
+                        height   = height,
+                        width    = .95*mwidth,
+-- keepvirtual      = true,
+                        commands = {
+                            push,
+                            leftcommand[.025*mwidth],
+                            downcommand[down],
+                            slotcommand[0][m or rule],
+                            pop,
+                        },
+                    })
+                end
+                if not characters[p_left] then
+                    p_left = addprivate(main,f_left,{
+                        height   = height,
+                        width    = .95*lwidth,
+-- keepvirtual      = true,
+                        commands = {
+                            push,
+                            leftcommand[.025*lwidth],
+                            downcommand[down],
+                            slotcommand[0][l or left],
+                            pop,
+                        },
+                    })
+                end
+                if not characters[p_right] then
+                    p_right = addprivate(main,f_right,{
+                        height   = height,
+                        width    = .95*rwidth,
+-- keepvirtual      = true,
+                        commands = {
+                            push,
+                            leftcommand[.025*rwidth],
+                            downcommand[down],
+                            slotcommand[0][r or right],
+                            pop,
+                        },
+                    })
+                end
+if unicode ~= normal then
+                data = {
+                    unicode  = unicode,
+                    height   = height,
+                    width    = nwidth,
+                    commands = {
+                        downcommand[down],
+                        slotcommand[0][normal]
+                    },
+                }
+                characters[unicode] = data
+end
+                data.parts = {
+                    { glyph = p_left, ["end"] = 0.4*lwidth },
+                    { glyph = p_rule, extender = 1, ["start"] = mwidth, ["end"] = mwidth },
+                    { glyph = p_right, ["start"] = 0.6*rwidth },
+                }
+            else
+                local width = main.parameters.quad/2 or 4*65536 -- 3
+                if not characters[p_rule] then
+                    if unicode == normal then
+                        p_rule = addprivate(main,f_rule,{
+                            height   = ndata.height,
+                            width    = width,
+                            commands = {
+                                push,
+                                upcommand[(ndata.height - height)/2],
+                                { "rule", height, width },
+                                pop
+                            },
+                        })
+                    else
+                        p_rule = addprivate(main,f_rule,{
+                            height   = height,
+                            width    = width,
+                            commands = {
+                                push,
+                                { "rule", height, width },
+                                pop
+                            },
+                        })
+                    end
+                end
+if unicode ~= normal then
+                data = {
+                    unicode  = unicode,
+                    height   = height,
+                    width    = width,
+                    commands = {
+                        slotcommand[0][p_rule]
+                    }
+                }
+                characters[unicode] = data
+end
+                data.parts = {
+                    { glyph = p_rule, ["start"] = width/2, ["end"] = width/2 },
+                    { glyph = p_rule, extender = 1, ["start"] = width/2, ["end"] = width/2 },
+                }
+            end
+            data.keepvirtual = true -- i need to figure this out
+            data.partsorientation = "horizontal"
+        end
+    end
+
+    -- local rootbarmiddle -- false = addprivate(main,formatters["M-R-%H"](next))
+    -- local rootbarright  -- false = addprivate(main,formatters["M-R-%H"](next))
+
+    local function rootbar(main,unicode,rule,right,normal)
+        local characters = main.characters
+        if not characters[unicode] then
+            local height = main.mathparameters.defaultrulethickness or 4*65536/10
+            if rule and right and normal then
+                local mdata  = characters[rule]
+                local rdata  = characters[right]
+                local ndata  = characters[normal]
+                local mwidth = mdata.width or 0
+                local rwidth = rdata.width or 0
+                local nwidth = ndata.width or 0
+                local down   = (mdata.height / 2) - height
+                --
+                local f_rule  = rule  and formatters["M-ROOTBAR-M-%H"](rule)
+                local f_right = right and formatters["M-ROOTBAR-R-%H"](right)
+                local p_rule  = rule  and hasprivate(main,f_rule)
+                local p_right = right and hasprivate(main,f_right)
+                --
+                if not p_rule then
+                    p_rule = addprivate(main,f_rule,{
+                        height   = height,
+                        width    = .95*mwidth,
+                        commands = {
+                            push,
+                            leftcommand[.05*mwidth],
+                            downcommand[down],
+                            slotcommand[0][rule],
+                            pop,
+                        },
+                    })
+                end
+                if right and not p_right then
+                    p_right = addprivate(main,p_right,{
+                        height   = height,
+                        width    = .95*rwidth,
+                        commands = {
+                            push,
+                            leftcommand[.05*rwidth],
+                            downcommand[down],
+                            slotcommand[0][right],
+                            pop,
+                        },
+                    })
+                end
+                characters[unicode] = {
+                    keepvirtual      = true,
+                    partsorientation = "horizontal",
+                    height           = height,
+                    width            = rwidth,
+                    commands         = {
+                        slotcommand[0][p_right],
+                    },
+                    parts            = {
+                        { glyph = p_rule, extender = 1, ["start"] = mwidth, ["end"] = 0.9*mwidth },
+                        { glyph = p_right, ["start"] = 0.6*rwidth },
+                    }
+                }
+            end
+        end
+    end
+
+    local function parent(main,unicode,first,rule,last,where)
+        local characters = main.characters
+        local chardata   = characters[unicode]
+        if characters[unicode] then
+            local template = characters[first]
+            if template then
+                local crule   = characters[rule]
+                local xheight = main.mathparameters.xheight
+                local rheight = 0
+                local rdepth  = 0
+--                 if crule then
+--                     rheight = crule.height
+--                     rdepth  = crule.depth
+--                 else
+                    local width   = template.width / 4
+                    local height  = template.height
+                    local depth   = template.depth
+                    rheight = where == "top" and   height or 3*height
+                    rdepth  = where == "top" and 2*height or 0
+                    characters[rule] = {
+                        height   = rheight,
+                        depth    = rdepth,
+                        width    = width,
+                        commands = { push, { "rule", height, width }, pop },
+                    }
+--                 end
+                characters[first].depth = rdepth
+                characters[last] .depth = rdepth
+                if where == "top" then
+                    while true do
+                        chardata.height  = chardata.height - xheight
+                        chardata.depth   = 0
+                        chardata.yoffset = -xheight
+                        local next = chardata.next
+                        if next then
+                            unicode  = next
+                            chardata = characters[unicode]
+                        else
+                            break
+                        end
+                    end
+                else
+                    while true do
+                        chardata.height  = 0
+                        local next = chardata.next
+                        if next then
+                            unicode  = next
+                            chardata = characters[unicode]
+                        else
+                            break
+                        end
+                    end
+                end
+                chardata.keepvirtual      = true
+                chardata.partsorientation = "horizontal"
+                chardata.parts            = {
+                    { glyph = first },
+                    { glyph = rule, extender = 1, start = width/2, ["end"] = width/2 },
+                    { glyph = last  },
+                }
+            end
+        end
+    end
+
+    local function brace(main,unicode,first,rule,left,right,rule,last,where)
+        local characters = main.characters
+        local chardata   = characters[unicode]
+        if chardata then
+            local template = characters[first]
+            if template then
+                local xheight = main.mathparameters.xheight
+                local width   = template.width / 4
+                local height  = template.height
+                local depth   = template.depth
+                local rheight = 3*height
+                local rdepth  = 2*height
+                characters[rule] = {
+                    height   = rheight,
+                    depth    = rdepth,
+                    width    = width,
+                    commands = { push, { "rule", height, width }, pop },
+                }
+                -- don't change snippets, they serve dual purposes
+                if where == "top" then
+                    while true do
+                        chardata.height  = chardata.height - xheight
+                        chardata.depth   = 0
+                        chardata.yoffset = -xheight
+                        local next = chardata.next
+                        if next then
+                            unicode  = next
+                            chardata = characters[unicode]
+                        else
+                            break
+                        end
+                    end
+                else
+                    while true do
+                        chardata.height = 0
+                        local next = chardata.next
+                        if next then
+                            unicode  = next
+                            chardata = characters[unicode]
+                        else
+                            break
+                        end
+                    end
+                end
+                chardata.keepvirtual = true
+                chardata.partsorientation = "horizontal"
+                chardata.parts            = {
+                    { glyph = first },
+                    { glyph = rule, extender = 1, start = width/2, ["end"] = width/2 },
+                    { glyph = left  },
+                    { glyph = right },
+                    { glyph = rule, extender = 1, start = width/2, ["end"] = width/2 },
+                    { glyph = last  },
+                }
+            end
+        end
+    end
+
+    local function dots(main,unicode)
+        local characters = main.characters
+        local c = characters[0x002E]
+        if c then
+            local w         = c.width
+            local h         = c.height
+            local d         = c.depth
+            local size      = main.parameters.size
+            local mu        = size/18
+            local right3mu  = rightcommand[3*mu]
+            local right1mu  = rightcommand[1*mu]
+            local up1size   = upcommand[.1*size]
+            local up4size   = upcommand[.4*size]
+            local up7size   = upcommand[.7*size]
+            local right2muw = rightcommand[2*mu + w]
+            local slot      = slotcommand[0][0x002E]
+            if unicode == 0x22EF then
+                local c = characters[0x022C5]
+                if c then
+                    local width  = c.width
+                    local height = c.height
+                    local depth  = c.depth
+                    local slot   = slotcommand[0][0x022C5]
+                 -- local stay   = staycommand[0x022C5]
+                 -- local right3mu  = rightcommand[width+3*mu]
+                    characters[unicode] = {
+                        width    = 3*width + 2*3*mu,
+                        height   = height,
+                        depth    = depth,
+                        commands = {
+                            slot, right3mu, slot, right3mu, slot,
+                         -- push, slot, right3mu, slot, right3mu, slot, pop,
+                         -- stay, right3mu, stay, right3mu, stay,
+                        }
+                    }
+                end
+            elseif unicode == 0x22EE then
+                characters[unicode] = {
+                    width    = w,
+                    height   = h+0.8*size,
+                    depth    = 0,
+                    commands = {
+                     -- push, push, slot, pop, up4size, push, slot, pop, up4size, slot, pop,
+                        push, slot, pop, up4size, push, slot, pop, up4size, slot,
+                    }
+                }
+            elseif unicode == 0x22F1 then
+                characters[unicode] = {
+                    width    = 3*w + 6*size/18,
+                    height   = h+0.7*size,
+                    depth    = 0,
+                    commands = {
+                     -- push,
+                        right1mu,
+                        push, up7size, slot, pop,
+                        right2muw,
+                        push, up4size, slot, pop,
+                        right2muw,
+                        push, up1size, slot, pop,
+                        right1mu,
+                     -- pop
+                    }
+                }
+            elseif unicode == 0x22F0 then
+                characters[unicode] = {
+                    width    = 3*w + 6*size/18,
+                    height   = h+0.7*size,
+                    depth    = 0,
+                    commands = {
+                     -- push,
+                        right1mu,
+                        push, up1size, slot, pop,
+                        right2muw,
+                        push, up4size, slot, pop,
+                        right2muw,
+                        push, up7size, slot, pop,
+                        right1mu,
+                     -- pop
+                    }
+                }
+            else
+                characters[unicode] = {
+                    width    = 3*w + 2*3*mu,
+                    height   = h,
+                    depth    = d,
+                    commands = {
+                     -- push, slot, right3mu, slot, right3mu, slot, pop,
+                        slot, right3mu, slot, right3mu, slot,
+                    }
+                }
+            end
+        end
+    end
+
+    local function jointwo(main,unicode,u1,d12,u2)
+        local characters = main.characters
+        local c1 = characters[u1]
+        local c2 = characters[u2]
+        if c1 and c2 then
+            local w1 = c1.width
+            local w2 = c2.width
+            local width
+            if d12 == false then
+                d12   = 0
+                width = w2
+            elseif d12 < 0 then
+                d12   = d12 * w2
+                width = w2
+            else
+                d12   = d12 * main.parameters.size/18 -- mu
+                width = w1 + w2 - d12
+            end
+            characters[unicode] = {
+                unicode  = unicode,
+                width    = width,
+                height   = max(c1.height or 0, c2.height or 0),
+                depth    = max(c1.depth  or 0, c2.depth  or 0),
+keepvirtual = true,
+                commands = {
+                 -- { "inspect" },
+                 -- { "trace" },
+                    slotcommand[0][u1],
+                 -- { "trace" },
+                    d12 ~= 0 and leftcommand[d12] or false,
+                    slotcommand[0][u2],
+                 -- { "trace" },
+                },
+            }
+        end
+    end
+
+    local function overlaytwo(main,unicode,u1,factor,u2) -- not ...
+        local characters = main.characters
+        local c1 = characters[u1]
+        local c2 = characters[u2]
+        if c1 and c2 then
+            local width = c2.width
+            characters[unicode] = {
+                width    = width,
+                height   = max(c1.height or 0, c2.height or 0),
+                depth    = max(c1.depth  or 0, c2.depth  or 0),
+                commands = {
+                    push,
+                    slotcommand[0][u2], -- =
+                    pop,
+                    factor ~= 0 and rightcommand[factor*width] or false,
+                    slotcommand[0][u1], -- /
+                },
+            }
+        end
+    end
+
+    local function jointhree(main,unicode,u1,d12,u2,d23,u3)
+        local characters = main.characters
+        local c1 = characters[u1]
+        local c2 = characters[u2]
+        local c3 = characters[u3]
+        if c1 and c2 and c3 then
+            local w1 = c1.width
+            local w2 = c2.width
+            local w3 = c3.width
+            local ds = main.parameters.size/18
+            d12 = d12 * ds
+            d23 = d23 * ds
+            characters[unicode] = {
+                unicode  = unicode,
+                width    = w1 + w2 + w3 - d12 - d23,
+                height   = max(c1.height or 0, c2.height or 0, c3.height or 0),
+                depth    = max(c1.depth  or 0, c2.depth  or 0, c3.depth  or 0),
+                commands = {
+                 -- push,
+                    slotcommand[0][u1],
+                 -- pop,
+                    d12 ~= 0 and leftcommand[d12] or false,
+                 -- push,
+                    slotcommand[0][u2],
+                 -- pop,
+                    d23 ~= 0 and leftcommand[d23] or false,
+                 -- push,
+                    slotcommand[0][u3],
+                 -- pop,
+                }
+            }
+        end
+    end
+
+    local function stack(main,unicode,u1,d12,u2)
+        local characters = main.characters
+        local c1 = characters[u1]
+        if not c1 then
+            return
+        end
+        local c2 = characters[u2]
+        if not c2 then
+            return
+        end
+        local w1 = c1.width  or 0
+        local h1 = c1.height or 0
+        local d1 = c1.depth  or 0
+        local w2 = c2.width  or 0
+        local h2 = c2.height or 0
+        local d2 = c2.depth  or 0
+        local mu = main.parameters.size/18
+        characters[unicode] = {
+            width    = w1,
+            height   = h1 + h2 + d12*mu,
+            depth    = d1,
+            commands = {
+                slotcommand[0][u1],
+                leftcommand[w1/2 + w2/2],
+                downcommand[-h1 + d2 -d12*mu],
+                slotcommand[0][u2],
+            }
+        }
+    end
+
+    local function repeated(main,unicode,u,n,fraction)
+        local characters = main.characters
+        local c = characters[u]
+        if c then
+            if n == 1 then
+               -- skip this one
+            else
+                local width  = c.width
+                local italic = fraction*width -- c.italic or 0 -- larger ones have funny italics
+                local tc     = slotcommand[0][u]
+                local tr     = leftcommand[italic] -- see hack elsewhere
+                local commands = { }
+                for i=1,n-1 do
+                    commands[#commands+1] = tc
+                    commands[#commands+1] = tr
+                end
+                commands[#commands+1] = tc
+                local next = c.next
+                if next then
+                    local p = addprivate(main,formatters["M-R-%H"](next))
+                    repeated(main,p,next,n,fraction)
+                    next = p
+                end
+                characters[unicode] = {
+                    width       = width + (n-1)*(width-italic),
+                    height      = c.height,
+                    depth       = c.depth,
+                    italic      = italic,
+                    commands    = commands,
+                    keepvirtual = true,
+                    next        = next,
+                }
+            end
+        end
+    end
+
+    local function extension(main,unicode,first,middle,last,ffactor,mfactor,lfactor)
+        local characters = main.characters
+        local chardata   = characters[unicode]
+        if chardata then
+            local fw = first  and characters[first]
+            local mw = middle and characters[middle]
+            local lw = last   and characters[last]
+            if fw and lw then
+                fw = fw.width ; if fw == 0 then fw = 1 end
+                lw = lw.width ; if lw == 0 then lw = 1 end
+                if middle == "left" then
+                    chardata.parts = {
+                        { extender = 0, glyph = first,  ["end"] = fw/2, start = 0,    advance = fw },
+                        { extender = 1, glyph = last,   ["end"] = lw/2, start = lw/2, advance = lw },
+                    }
+                elseif middle == "right" then
+                    chardata.parts = {
+                        { extender = 1, glyph = first,  ["end"] = fw/2, start = fw/2, advance = fw },
+                        { extender = 0, glyph = last,   ["end"] = lw/2, start = 0,    advance = lw },
+                    }
+                elseif mw then
+                    mw = mw.width ; if mw == 0 then mw = 1 end
+                    chardata.parts = {
+                        { extender = 0, glyph = first,  ["end"] = fw/2, start = 0,    advance = (ffactor or 1)*fw },
+                        { extender = 1, glyph = middle, ["end"] = mw/2, start = mw/2, advance = (mfactor or 1)*mw },
+                        { extender = 0, glyph = last,   ["end"] = 0,    start = lw/2, advance = (lfactor or 1)*lw },
+                    }
+                end
+                chardata.keepvirtual      = true -- why this issue with nested virtuals
+                chardata.partsorientation = "horizontal"
+            end
+        end
+    end
+
+    vfmath.builders = {
+        horibar    = horibar,
+        rootbar    = rootbar,
+        parent     = parent,
+        brace      = brace,
+        dots       = dots,
+        jointwo    = jointwo,
+        overlaytwo = overlaytwo,
+        jointhree  = jointhree,
+        stack      = stack,
+        repeated   = repeated,
+        extension  = extension,
+    }
+
+    -- todo: move this to the lfg files
+
+end
+
+local unique = 0 -- testcase: \startTEXpage \math{!\text{-}\text{-}\text{-}} \stopTEXpage
+
+local reported = { }
+local reverse  = { } -- index -> unicode
+
+setmetatableindex(reverse, function(t,name)
+    if trace_virtual then
+        report_virtual("initializing math vector %a",name)
+    end
+    local m = mathencodings[name]
+    local r = { }
+    for u, i in next, m do
+        r[i] = u
+    end
+    reverse[name] = r
+    return r
+end)
+
+-- Used in fallbacks (might move):
+
+local function copy_glyph(main,target,original,unicode,slot)
+    local olddata = original[unicode]
+    if olddata then
+        local newdata = {
+            width        = olddata.width,
+            height       = olddata.height,
+            depth        = olddata.depth,
+            italic       = olddata.italic,
+            topanchor    = olddata.topanchor,
+            bottomanchor = olddata.bottomanchor,
+            kerns        = olddata.kerns,
+            mathkerns    = olddata.mathkerns,
+            tounicode    = olddata.tounicode,
+            unicode      = olddata.unicode,
+         -- smaller      = olddata.smaller,
+            commands     = { slotcommand[slot][unicode] },
+        }
+        local glyphdata = newdata
+        local nextglyph = olddata.next
+        while nextglyph do
+            local oldnextdata = original[nextglyph]
+            if oldnextdata then
+                local newnextdata = {
+                    width        = oldnextdata.width,
+                    height       = oldnextdata.height,
+                    depth        = oldnextdata.depth,
+                    italic       = oldnextdata.italic,
+                    topanchor    = oldnextdata.topanchor,
+                    bottomanchor = oldnextdata.bottomanchor,
+                    kerns        = olddata.kerns,
+                    mathkerns    = olddata.mathkerns,
+                    tounicode    = olddata.tounicode,
+                    unicode      = olddata.unicode,
+                    smaller      = olddata.smaller,
+                    commands     = { slotcommand[slot][nextglyph] },
+                }
+                local newnextglyph = addprivate(main,formatters["M-N-%H"](nextglyph),newnextdata)
+                newdata.next = newnextglyph
+                local nextnextglyph = oldnextdata.next
+                if nextnextglyph == nextglyph then
+                    break
+                else
+                    olddata   = oldnextdata
+                    newdata   = newnextdata
+                    nextglyph = nextnextglyph
+                end
+            else
+                break -- safeguard (when testing stuff)
+            end
+        end
+        local oldparts = olddata.parts
+        if oldparts then
+            local newparts           = fastcopy(oldparts)
+            newdata.parts            = newparts
+            newdata.partsorientation = olddata.partsorientation
+            newdata.partsitalic      = olddata.partsitalic
+            for i=1,#newparts do
+                local newpart  = newparts[i]
+                local oldglyph = newpart.glyph
+                local olddata  = original[oldglyph]
+                local newdata  = {
+                    width     = olddata.width,
+                    height    = olddata.height,
+                    depth     = olddata.depth,
+                    tounicode = olddata.tounicode,
+                    unicode   = olddata.unicode,
+                    commands  = { slotcommand[slot][oldglyph] },
+                }
+                newpart.glyph = addprivate(main,formatters["M-P-%H"](oldglyph),newdata)
+            end
+        end
+        local smaller = olddata.smaller
+        if smaller then
+            local smallerdata = copy_glyph(main,target,original,smaller,slot)
+            glyphdata.smaller = addprivate(main,formatters["M-S-%H"](smaller),smallerdata)
+        end
+        return glyphdata
+    end
+end
+
+vfmath.copy_glyph = copy_glyph
+
+-- It's time to get rid of this type 1 mess ... take iwona: uppercase /A .. Z but
+-- lowercase /a.math ... /z.math ... anyway, we now follow a slightly different
+-- route: use the "order" field. I can probably make it a bit leaner but it's not
+-- worth spending much time on now.
+
+local noitalics = true -- false can be used to test the engine
+
+-- revision timestamp 2023: after watching ten times "Over The Mountain (feat.
+-- Sierra Hull)" - Cory Wong (Live @ Brooklyn Steel FEB 2022):
+--
+-- https://www.youtube.com/watch?v=lT-W-UEcsns
+-- https://www.youtube.com/watch?v=TPGbj1gFalA
+
+-- The following code is now only used for iwona and antykwa, so I simplified it a
+-- bit to suit that purpose. It might get even simpler.
+
+local integrals = { } -- we want to overload
+
+setmetatableindex(integrals, function(t,k)
+    integrals = tohash(mathematics.tweaks.subsets.integrals)
+    return integrals[k]
+end)
+
+local function virtualize(s,uni,fci,skewchar,move,mathparameters,unicode,parameters,characters)
+    if fci then
+        local kerns        = fci.kerns
+        local width        = fci.width
+        local height       = fci.height
+        local depth        = fci.depth
+        local italic       = fci.italic
+        local topanchor    = fci.topanchor
+        local bottomanchor = fci.bottomanchor
+        local bottomright  = fci.bottomright
+        local advance      = width
+        local nextone      = fci.next
+        local yoffset
+        if kerns and skewchar then
+            local k = kerns[skewchar]
+            if k then
+                topanchor = width/2 + k
+            end
+        end
+--         if italic and noitalics then
+--             width = width + italic
+--             bottomright = - italic
+--             if not fci.anchored and integrals[unicode] then
+--                 topanchor    = (width + italic) / 2
+--                 bottomanchor = (width - italic) / 2
+--                         inspect(fci)
+--                 if nextone then
+--                     local n = nextone
+--                     while n do
+--                         local c = characters[n]
+--                         if c and not c.anchored and integrals[c.unicode] then
+--                             local italic = c.italic
+--                             local width  = c.width + italic
+--                             c.bottomright  = - italic
+--                             c.topanchor    = (width + italic) / 2
+--                             c.bottomanchor = (width - italic) / 2
+--                             c.anchored     = true
+--                             c.italic       = nil
+--                         end
+--                         n = c.next
+--                     end
+--                 end
+--             end
+--             italic = nil
+--         end
+        if move then  -- 0x222B
+            local axis = move * mathparameters.axisheight
+            local half = (height + depth ) / 2
+            yoffset = depth - (half - axis)
+            height = half + axis
+            depth  = half - axis
+        end
+        --
+        return {
+            advance          = advance,
+            width            = width,
+            height           = height,
+            depth            = depth,
+            italic           = italic,
+            bottomright      = bottomright,
+            topanchor        = topanchor,
+            bottomanchor     = bottomanchor,
+            yoffset          = yoffset,
+            commands         = { slotcommand[s][uni] },
+         -- keepvirtual      = true,
+            next             = nextone,
+            parts            = fci.parts,
+            partsorientation = fci.partsorientation,
+            partsitalic      = fci.partsitalic,
+            unicode          = unicode,
+            name             = fci.name,
+--             anchored         = true,
+        }
+    else
+        -- error
+    end
+end
+
+function vfmath.define(specification,virtual,goodies)
+    local name     = specification.name -- symbolic name
+    local size     = specification.size -- given size
+    local loaded   = { }
+    local fontlist = { }
+    local names    = { }
+    local main     = nil
+    local start    = (trace_virtual or trace_timings) and os.clock()
+    local okset    = { }
+    local n        = 0
+    local f_extra  = formatters["virtual.extra.%05X"]
+    local setlist  = virtual.recipe or virtual
+    for s=1,#setlist do
+        local ss     = setlist[s]
+        local ssname = ss.name
+        if add_optional and ss.optional then
+            if trace_virtual then
+                report_virtual("loading font %a subfont %s with name %a at %p is skipped",name,s,ssname,size)
+            end
+        else
+            if ss.features then
+                ssname = ssname .. "*" .. ss.features
+            end
+            if ss.main then
+                main = s
+            end
+            local alreadyloaded = names[ssname] -- for px we load one twice (saves .04 sec)
+-- local sshash = name .. ":" .. ssname
+-- local alreadyloaded = names[sshash] -- for px we load one twice (saves .04 sec)
+            local f, id
+            if alreadyloaded then
+                f, id = alreadyloaded.f, alreadyloaded.id
+                if trace_virtual then
+                    report_virtual("loading font %a subfont %s with name %a is reused",name,s,ssname)
+                end
+            else
+                f, id = fonts.constructors.readanddefine(ssname,size)
+                names[ssname] = {
+-- names[sshash] = {
+                    f        = f,
+                    id       = id,
+                    fontname = ssname, -- diagnostics
+                }
+            end
+            if not f or id == 0 then
+                report_virtual("loading font %a subfont %s with name %a at %p is skipped, not found",name,s,ssname,size)
+            else
+                n = n + 1
+                okset[n] = ss
+                loaded[n] = f
+                fontlist[n] = {
+                    id       = id,
+                    size     = size,
+                    fontname = ssname, -- diagnostics
+                }
+                if trace_virtual then
+                    report_virtual("loading font %a subfont %s with name %a at %p as id %s using encoding %a",name,s,ssname,size,id,ss.vector)
+                end
+            end
+        end
+    end
+    -- beware, loaded[1] is already passed to tex (we need to make a simple copy then .. todo)
+    local parent         = loaded[1] or { } -- a text font
+    local characters     = { }
+    local parameters     = { }
+    local mathparameters = { }
+    local descriptions   = { }
+    local metadata       = { }
+    local properties     = {
+        hasitalics = true,
+        hasmath    = true,
+    }
+    if not goodies then
+        goodies = { }
+    end
+    local main           = {
+        metadata         = metadata,
+        properties       = properties,
+        characters       = characters,
+        descriptions     = descriptions,
+        parameters       = parameters,
+        mathparameters   = mathparameters,
+        fonts            = fontlist,
+        goodies          = goodies,
+        --
+        fullname         = properties.fullname,
+        nomath           = false,
+    }
+    --
+    for key, value in next, parent do
+        if type(value) ~= "table" then
+            main[key] = value
+        end
+    end
+    --
+    if parent.characters then
+        for unicode, character in next, parent.characters do
+            characters[unicode] = character
+        end
+    else
+        report_virtual("font %a has no characters",name)
+    end
+    --
+    if parent.parameters then
+        for key, value in next, parent.parameters do
+            parameters[key] = value
+        end
+    else
+        report_virtual("font %a has no parameters",name)
+    end
+    --
+    local description = { name = "<unset>" }
+    setmetatableindex(descriptions,function() return description end)
+    --
+    if parent.properties then
+        setmetatableindex(properties,parent.properties)
+    end
+    --
+    if parent.goodies then
+        setmetatableindex(goodies,parent.goodies)
+    end
+    --
+    local fullname = properties.fullname -- parent via mt
+    if fullname then
+        unique = unique + 1
+        properties.fullname = fullname .. "-" .. unique
+    end
+    --
+    if not parameters.xheight then
+        parameters.xheight = 0
+    end
+    --
+    local already_reported = false
+    local parameters_done  = false
+    local offset           = 0 -- 0xFF000 -- todo: -- private
+    --
+    for s=1,n do
+        local ss = okset[s]
+        local fs = loaded[s]
+        if not fs then
+            -- skip, error
+        elseif add_optional and ss.optional then
+            -- skip, redundant
+        else
+            local newparameters     = fs.parameters
+            local newmathparameters = fs.mathparameters and ss.parameters ~= false
+            if newmathparameters then
+                if not parameters_done or ss.parameters then
+                    mathparameters  = newmathparameters
+                    parameters_done = true
+                end
+            elseif not newparameters then
+                report_virtual("no parameters set in font %a",name)
+            elseif ss.extension then
+                mathparameters.xheight              = newparameters.xheight or 0 -- mathxheight          : height of x
+                mathparameters.defaultrulethickness = newparameters[ 8]     or 0 -- defaultrulethickness : thickness of \over bars
+                mathparameters.bigopspacing1        = newparameters[ 9]     or 0 -- bigopspacing1        : minimum clearance above a displayed op
+                mathparameters.bigopspacing2        = newparameters[10]     or 0 -- bigopspacing2        : minimum clearance below a displayed op
+                mathparameters.bigopspacing3        = newparameters[11]     or 0 -- bigopspacing3        : minimum baselineskip above displayed op
+                mathparameters.bigopspacing4        = newparameters[12]     or 0 -- bigopspacing4        : minimum baselineskip below displayed op
+                mathparameters.bigopspacing5        = newparameters[13]     or 0 -- bigopspacing5        : padding above and below displayed limits
+            --  report_virtual("loading and virtualizing font %a at size %p, setting ex parameters",name,size)
+            elseif ss.parameters then
+                mathparameters.xheight    = newparameters.xheight
+                                         or mathparameters.xheight
+                                         or fs.xheight        or 0 -- xheight    : height of x
+                mathparameters.num1       = newparameters[ 8] or 0 -- num1       : numerator shift-up in display styles
+                mathparameters.num2       = newparameters[ 9] or 0 -- num2       : numerator shift-up in non-display, non-\atop
+                mathparameters.num3       = newparameters[10] or 0 -- num3       : numerator shift-up in non-display \atop
+                mathparameters.denom1     = newparameters[11] or 0 -- denom1     : denominator shift-down in display styles
+                mathparameters.denom2     = newparameters[12] or 0 -- denom2     : denominator shift-down in non-display styles
+                mathparameters.sup1       = newparameters[13] or 0 -- sup1       : superscript shift-up in uncramped display style
+                mathparameters.sup2       = newparameters[14] or 0 -- sup2       : superscript shift-up in uncramped non-display
+                mathparameters.sup3       = newparameters[15] or 0 -- sup3       : superscript shift-up in cramped styles
+                mathparameters.sub1       = newparameters[16] or 0 -- sub1       : subscript shift-down if superscript is absent
+                mathparameters.sub2       = newparameters[17] or 0 -- sub2       : subscript shift-down if superscript is present
+                mathparameters.supdrop    = newparameters[18] or 0 -- supdrop    : superscript baseline below top of large box
+                mathparameters.subdrop    = newparameters[19] or 0 -- subdrop    : subscript baseline below bottom of large box
+                mathparameters.delim1     = newparameters[20] or 0 -- delim1     : size of \atopwithdelims delimiters in display styles
+                mathparameters.delim2     = newparameters[21] or 0 -- delim2     : size of \atopwithdelims delimiters in non-displays
+                mathparameters.axisheight = newparameters[22] or 0 -- axisheight : height of fraction lines above the baseline
+            --  report_virtual("loading and virtualizing font %a at size %p, setting sy parameters",name,size)
+            end
+            -- We no longer care about kerns and ligatures here. We use backmap because we need to know
+            -- the original order and the loader has made a unicode font of it and weird glyph names have
+            -- spoiled that a bit too.
+            if ss.overlay then
+                -- This branch / option will go away.
+                local fc    = fs.characters
+                local first = ss.first
+                if first then
+                    local last = ss.last or first
+                    for unicode = first, last do
+                        characters[unicode] = copy_glyph(main,characters,fc,unicode,s)
+                    end
+                else
+                    for unicode, data in next, fc do
+                        characters[unicode] = copy_glyph(main,characters,fc,unicode,s)
+                    end
+                end
+            else
+                local vectorname = ss.vector
+                if vectorname then
+                    local vector      = mathencodings[vectorname]
+                    local isextension = ss.extension
+                    if vector then
+                        local fc       = fs.characters
+                        local fd       = fs.descriptions
+                        local fp       = fs.parameters
+                        local fontname = fs.properties.name or "unknown"
+                        local skewchar = ss.skewchar
+                        local backmap  = ss.backmap
+                        local badones  = ss.badones
+                        local ignore   = ss.ignore
+                        local done     = { }
+                        local extras   = { }
+                        if backmap == false then
+                         -- backmap = { }
+                        elseif not backmap then
+                            backmap = { }
+                            for unicode, character in next, fc do
+                                backmap[character.order or character.index or unicode] = unicode
+                            end
+                            ss.backmap  = backmap
+                        end
+                        for unicode, index in sortedhash(vector) do
+                            local uni = backmap and backmap[index] or index
+                            local fci = fc[uni]
+                            if not fci then
+                                local rf = reported[fontname]
+                                if not rf then rf = { } reported[fontname] = rf end
+                                local rv = rf[vectorname]
+                                if not rv then rv = { } rf[vectorname] = rv end
+                                local ru = rv[unicode]
+                                if not ru then
+                                    if trace_virtual then
+                                        local d = chardata[unicode].description
+                                        if index then
+                                            report_virtual("character %C has no index %H in vector %a for font %a (%S)",unicode,index,vectorname,fontname,d)
+                                        else
+                                            report_virtual("character %C has no entry in vector %a for font %a (%S)",unicode,vectorname,fontname,d)
+                                        end
+                                    elseif not already_reported then
+                                        report_virtual("the mapping is incomplete for %a at %p",name,size)
+                                        already_reported = true
+                                    end
+                                    rv[unicode] = true
+                                end
+                            else
+                                local name = fci.name or ""
+                                if ignore and ignore[name] then
+                                -- get rid of ugly slanted antykwa { }
+                                else
+                                    local u = mathematics.gaps[unicode] or unicode
+                                    local t = virtualize(s,uni,fci,skewchar,tonumber(badones and badones[name]),mathparameters,u,fp,characters)
+                                    done[uni] = t
+                                    characters[unicode] = t
+                                    fci.unicode = u
+                                end
+                            end
+                        end
+                     -- if ss.jmn then
+                     --     local extension = mathencodings["extensible-jmn-private"]
+                     --     for unicode, index in sortedhash(extension) do
+                     --         if not characters[unicode] then
+                     --             local uni = backmap and backmap[index] or index
+                     --             local fci = fc[uni]
+                     --             characters[unicode] = virtualize(s,uni,fci,skewchar,false,mathparameters,unicode,fp,characters)
+                     --         end
+                     --     end
+                     -- end
+                        if isextension then
+                            local extension = mathencodings["large-to-small"]
+                            for uni, fci in sortedhash(fc) do
+                                local name = fci.name or ""
+                                if ignore and ignore[name] then
+                                    -- get rid of ugly antykwa bar
+                                elseif not done[uni] then
+                                    local t = virtualize(s,uni,fci,skewchar,tonumber(badones and badones[name]),mathparameters,nil,fp,characters)
+                                    local o = addprivate(main,f_extra(offset))
+                                    extras[uni] = o
+                                    characters[o] = t
+                                    done[uni] = t
+                                    offset = offset + 1
+                                end
+                            end
+                            for uni, fci in sortedhash(done) do
+                                local next = fci.next
+                                if next then
+                                    fci.next = extras[backmap and backmap[next] or next]
+                                end
+                                local parts = fci.parts
+                                if parts then
+                                    local p = table.copy(parts)
+                                    for i=1,#p do
+                                        local part  = p[i]
+                                        local glyph = part.glyph
+                                        part.glyph  = extras[backmap and backmap[glyph] or glyph] or glyph
+                                    end
+                                    fci.keepvirtual      = true
+                                    fci.parts            = p
+                                    fci.partsorientation = "vertical" -- nasty as some are horizontal
+                                    fci.partsitalic      = fci.partsitalic or fci.italic
+                                end
+                            end
+                            for unicode, index in sortedhash(extension) do
+                                local fci = characters[unicode]
+                                if fci then
+                                    fci.next = extras[backmap[index] or index]
+                                end
+                            end
+                            local extension = mathencodings["large-to-small-private"]
+                            for unicode, index in sortedhash(extension) do
+                                if not characters[unicode] then
+                                    local uni = backmap and backmap[index] or index
+                                    local fci = fc[uni]
+                                    characters[unicode] = virtualize(s,uni,fci,skewchar,false,mathparameters,unicode,fp,characters)
+                                end
+                            end
+                        end
+                    else
+                        report_virtual("error in loading %a, problematic vector %a",name,vectorname)
+                    end
+                end
+            end
+         -- mathematics.extras.copy(main) -- Not needed here (yet) ... might go.
+        end
+    end
+    for unicode, data in next, characters do
+        local n = data.next
+        while n do
+            local c = characters[n]
+            if c then
+                c.unicode = unicode
+                n = c.next
+            else
+                break
+            end
+        end
+    end
+    if noitalics then
+        for unicode, data in next, characters do
+            local italic = data.italic
+            if italic and italic ~= 0 then
+                local width = data.width + italic
+                if integrals[data.unicode] then -- and not data.anchored then
+                    data.topanchor    = (width + italic) / 2
+                    data.bottomanchor = (width - italic) / 2
+                 -- data.anchored     = true
+                end
+                data.width       = width
+                data.italic      = nil
+                data.bottomright = - italic
+            end
+        end
+    end
+    --
+    main.mathparameters = mathparameters -- still traditional ones
+    fontlist[#fontlist+1] = {
+        id       = 0,
+        size     = size,
+        fontname = name, -- diagnostics
+    }
+    --
+    local virtualtweaks = virtual.tweaks
+    if virtualtweaks then
+        --
+        local mathtweaks  = mathematics.tweaks
+        local knowntweaks = {
+            addmissing = function(main,specification)
+                local action = specification.action
+                if action then
+                    action(main,specification) -- source == target
+                end
+            end
+        }
+        --
+        for i=1,#virtualtweaks do
+            local specification = virtualtweaks[i]
+            local tweak         = specification.tweak
+            local action        = knowntweaks[tweak]
+            if action then
+                action(main,specification)
+            else
+                action = mathtweaks[tweak]
+                if action then
+                    action(main,main,specification)
+                end
+            end
+        end
+    end
+    --
+    mathematics.addfallbacks(main)
+    --
+    main.properties.math_is_scaled = true -- signal
+    fonts.constructors.assignmathparameters(main,main)
+    --
+    mathematics.initializeparameters(main,main,"noscale")
+    main.mathconstants = main.mathparameters -- we directly pass it to TeX (bypasses the scaler) so this is needed
+    main.MathConstants = main.mathconstants
+    main.nomath        = false
+    --
+    if trace_virtual or trace_timings then
+        report_virtual("loading and virtualizing font %a at size %p took %0.3f seconds",name,size,os.clock()-start)
+    end
+    --
+    return main
+end
+
+function mathematics.makefont(name,set,goodies)
+    fonts.definers.methods.variants[name] = function(specification)
+        return vfmath.define(specification,set,goodies)
+    end
+end
+
+-- helpers (todo: gaps)
+
+function vfmath.setletters(font_encoding, name, uppercase, lowercase)
+    local enc = font_encoding[name]
+    for i = 0,25 do
+        enc[uppercase+i] = i + 0x41
+        enc[lowercase+i] = i + 0x61
+    end
+end
+
+function vfmath.setdigits(font_encoding, name, digits)
+    local enc = font_encoding[name]
+    for i = 0,9 do
+        enc[digits+i] = i + 0x30
+    end
+end
+
+-- local step = 0.2 -- 0.1 is nicer but gives larger files
+
+-- local function clipped(main,characters,id,size,unicode,original) -- push/pop needed?
+--     local minus = characters[original]
+--     if minus then
+--         local mu    = size/18
+--         local step  = 3*mu
+--         local width = minus.width
+--         if width > step then
+--             width = width - step
+--             step  = step / 2
+--         else
+--             width = width / 2
+--             step  = width
+--         end
+--         characters[unicode] = {
+--             width    = width,
+--             height   = minus.height,
+--             depth    = minus.depth,
+--             commands = {
+--                 push,
+--                 leftcommand[step],
+--                 slotcommand[0][original],
+--                 pop,
+--             }
+--         }
+--     end
+-- end
+
+-- local function vertbar(main,characters,id,size,parent,scale,unicode)
+--     local cp = characters[parent]
+--     if cp then
+--         local sc = scale * size
+--         local pc = slotcommand[0][parent]
+--         characters[unicode] = {
+--             width    = cp.width,
+--             height   = cp.height + sc,
+--             depth    = cp.depth + sc,
+--             next     = cp.next, -- can be extensible
+--             commands = {
+--                 push, upcommand  [sc], pc, pop,
+--                 push, downcommand[sc], pc, pop,
+--                                        pc,
+--             },
+--         }
+--         cp.next = unicode
+--     end
+-- end
+
+-- vertbar  (main,characters,id,size,0x0007C,0.10,0xFF601) -- big  : 0.85 bodyfontsize
+-- vertbar  (main,characters,id,size,0xFF601,0.30,0xFF602) -- Big  : 1.15 bodyfontsize
+-- vertbar  (main,characters,id,size,0xFF602,0.30,0xFF603) -- bigg : 1.45 bodyfontsize
+-- vertbar  (main,characters,id,size,0xFF603,0.30,0xFF604) -- Bigg : 1.75 bodyfontsize
+-- vertbar  (main,characters,id,size,0x02016,0.10,0xFF605)
+-- vertbar  (main,characters,id,size,0xFF605,0.30,0xFF606)
+-- vertbar  (main,characters,id,size,0xFF606,0.30,0xFF607)
+-- vertbar  (main,characters,id,size,0xFF607,0.30,0xFF608)
+
+-- clipped  (main,characters,id,size,0xFF501,0x0002D) -- minus
+-- clipped  (main,characters,id,size,0xFF502,0x02190) -- lefthead
+-- clipped  (main,characters,id,size,0xFF503,0x02192) -- righthead
+-- clipped  (main,characters,id,size,0xFF504,ps("maps to piece") -- mapsto
+-- clipped  (main,characters,id,size,0xFF505,0xFE322) -- lhook
+-- clipped  (main,characters,id,size,0xFF506,0xFE323) -- rhook
+-- clipped  (main,characters,id,size,0xFF507,0xFE324) -- mapsfrom
+-- clipped  (main,characters,id,size,0xFF508,0x021D0) -- double lefthead
+-- clipped  (main,characters,id,size,0xFF509,0x021D2) -- double righthead
+-- clipped  (main,characters,id,size,0xFF50A,0x0003D) -- equal
+-- clipped  (main,characters,id,size,0xFF50B,0x0219E) -- lefttwohead
+-- clipped  (main,characters,id,size,0xFF50C,0x021A0) -- righttwohead
+-- clipped  (main,characters,id,size,0xFF50D,0xFF350) -- lr arrow combi snippet
+-- clipped  (main,characters,id,size,0xFF50E,0xFF351) -- lr arrow combi snippet
+-- clipped  (main,characters,id,size,0xFF50F,0xFF352) -- lr arrow combi snippet
+-- clipped  (main,characters,id,size,0xFF510,0x02261) -- equiv
+
+-- extension(main,characters,id,size,0x2190,0xFF502,0xFF501,0xFF501) -- \leftarrow
+-- extension(main,characters,id,size,0x2192,0xFF501,0xFF501,0xFF503) -- \rightarrow
+
+-- extension(main,characters,id,size,0x002D,0xFF501,0xFF501,0xFF501)                 -- \rel
+-- extension(main,characters,id,size,0x003D,0xFF50A,0xFF50A,0xFF50A)                 -- \equal
+-- extension(main,characters,id,size,0x2261,0xFF510,0xFF510,0xFF510)                 -- \equiv
+
+-- local lh = ps("left hook piece")]  -- was FE322
+-- local rh = ps("right hook piece")] -- was FE323
+
+-- jointwo  (main,characters,id,size,0x21A6,ps("maps to piece"),0,0x02192)                       -- \mapstochar\rightarrow
+-- jointwo  (main,characters,id,size,0x21A9,0x02190,joinrelfactor,0xFE323)           -- \leftarrow\joinrel\rhook
+-- jointwo  (main,characters,id,size,0x21AA,0xFE322,joinrelfactor,0x02192)           -- \lhook\joinrel\rightarrow
+-- jointhree(main,characters,id,size,0x27FB,0x02190,joinrelfactor,0x0002D,0,0xFE324) -- \leftarrow\joinrel\relbar\mapsfromchar
+
+-- jointhree(main,characters,id,size,0x27FC,ps("maps to piece"),0,0x0002D,joinrelfactor,0x02192) -- \mapstochar\relbar\joinrel\rightarrow
+
+-- extension(main,characters,id,size,0x21A6,0xFF504,0xFF501,0xFF503) -- \mapstochar\rightarrow
+-- extension(main,characters,id,size,0x21A9,0xFF502,0xFF501,0xFF506) -- \leftarrow\joinrel\rhook
+-- extension(main,characters,id,size,0x21AA,0xFF505,0xFF501,0xFF503) -- \lhook\joinrel\rightarrow
+-- extension(main,characters,id,size,0x27F5,0xFF502,0xFF501,0xFF501) -- \leftarrow\joinrel\relbar
+-- extension(main,characters,id,size,0x27F6,0xFF501,0xFF501,0xFF503) -- \relbar\joinrel\rightarrow
+-- extension(main,characters,id,size,0x27F7,0xFF502,0xFF501,0xFF503) -- \leftarrow\joinrel\rightarrow
+-- extension(main,characters,id,size,0x27F8,0xFF508,0xFF50A,0xFF50A) -- \Leftarrow\joinrel\Relbar
+-- extension(main,characters,id,size,0x27F9,0xFF50A,0xFF50A,0xFF509) -- \Relbar\joinrel\Rightarrow
+-- extension(main,characters,id,size,0x27FA,0xFF508,0xFF50A,0xFF509) -- \Leftarrow\joinrel\Rightarrow
+-- extension(main,characters,id,size,0x27FB,0xFF502,0xFF501,0xFF507) -- \leftarrow\joinrel\relbar\mapsfromchar
+-- extension(main,characters,id,size,0x27FC,0xFF504,0xFF501,0xFF503) -- \mapstochar\relbar\joinrel\rightarrow
+
+-- extension(main,characters,id,size,0x219E,0xFF50B,0xFF501,0xFF501) -- \twoheadleftarrow\joinrel\relbar
+-- extension(main,characters,id,size,0x21A0,0xFF501,0xFF501,0xFF50C) -- \relbar\joinrel\twoheadrightarrow
+-- extension(main,characters,id,size,0x21C4,0xFF50D,0xFF50E,0xFF50F) -- leftoverright

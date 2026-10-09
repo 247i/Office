@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="multipart/x-mixed-replace">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Stream of data (server push)</comment>
+  <comment xml:lang="zh-Hant-TW">資料串流 (伺服器推送)</comment>
+  <comment xml:lang="uk">потік даних (від сервера)</comment>
+  <comment xml:lang="tr">Veri akışı (sunucu itimi)</comment>
+  <comment xml:lang="sv">Dataflöde (serverutsändning)</comment>
+  <comment xml:lang="sr-Cyrl">Ток података (серверско гурање)</comment>
+  <comment xml:lang="sl">Tok podatkov (potisnil strežnik)</comment>
+  <comment xml:lang="ru">Поток данных (server push)</comment>
+  <comment xml:lang="ro">flux de date (de la server)</comment>
+  <comment xml:lang="pt-BR">Fluxo de dados (por iniciativa do servidor)</comment>
+  <comment xml:lang="pl">Strumień danych (wymuszenie serwera)</comment>
+  <comment xml:lang="oc">flux de donadas (emés pel servidor)</comment>
+  <comment xml:lang="ko">데이터 스트림 (서버 푸쉬)</comment>
+  <comment xml:lang="kk-Cyrl">Деректер ағыны (server push)</comment>
+  <comment xml:lang="ja">データストリーム (サーバープッシュ型)</comment>
+  <comment xml:lang="it">Flusso di dati (server push)</comment>
+  <comment xml:lang="id">Aliran data (push server)</comment>
+  <comment xml:lang="hr">Prijenos podataka (poslano od poslužitelja)</comment>
+  <comment xml:lang="hi">डेटा स्ट्रीम (सर्वर पुश)</comment>
+  <comment xml:lang="he">תזרים נתונים (בדחיפת השרת)</comment>
+  <comment xml:lang="fur">Flus di dâts (pe iniziative dal servidôr)</comment>
+  <comment xml:lang="fr">Flux de données (push serveur)</comment>
+  <comment xml:lang="fi">Tietovirta (palvelimelta)</comment>
+  <comment xml:lang="et">Andmevoog (serveri tõuketeenusena)</comment>
+  <comment xml:lang="es">flujo de datos (servidor)</comment>
+  <comment xml:lang="en-GB">Stream of data (server push)</comment>
+  <comment xml:lang="de">Datenstrom (Server-Push)</comment>
+  <comment xml:lang="ca">flux de dades (enviat pel servidor)</comment>
+  <comment xml:lang="bg">Поток от данни (качване в сървър)</comment>
+  <comment xml:lang="be-Cyrl">плынь даных (ад сервера)</comment>
+  <comment xml:lang="ar">دفق بيانات (دفع خادم)</comment>
+</mime-type>

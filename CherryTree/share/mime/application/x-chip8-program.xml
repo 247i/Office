@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-chip8-program">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>CHIP-8 program</comment>
+  <comment xml:lang="uk">програма CHIP-8</comment>
+  <comment xml:lang="tr">CHIP-8 programı</comment>
+  <comment xml:lang="sv">CHIP-8-program</comment>
+  <comment xml:lang="sr-Cyrl">CHIP-8 програм</comment>
+  <comment xml:lang="sq">Program CHIP-8</comment>
+  <comment xml:lang="sl">Program CHIP-8</comment>
+  <comment xml:lang="ru">Программа CHIP-8</comment>
+  <comment xml:lang="ro">program CHIP-8</comment>
+  <comment xml:lang="pt-BR">Programa CHIP-8</comment>
+  <comment xml:lang="pl">Program CHIP-8</comment>
+  <comment xml:lang="oc">programa CHIP-8</comment>
+  <comment xml:lang="ko">CHIP-8 프로그램</comment>
+  <comment xml:lang="kk-Cyrl">CHIP-8 бағдарламасы</comment>
+  <comment xml:lang="fr">programme CHIP-8</comment>
+  <comment xml:lang="fi">CHIP-8-ohjelma</comment>
+  <comment xml:lang="et">CHIP-8 programm</comment>
+  <comment xml:lang="es">Programa CHIP-8</comment>
+  <comment xml:lang="en-GB">CHIP-8 program</comment>
+  <comment xml:lang="de">CHIP-8-Programm</comment>
+  <comment xml:lang="ar">برنامج CHIP-8</comment>
+  <sub-class-of type="application/x-executable"/>
+  <glob pattern="*.ch8"/>
+  <glob pattern="*.sc8"/>
+  <glob pattern="*.xo8"/>
+</mime-type>

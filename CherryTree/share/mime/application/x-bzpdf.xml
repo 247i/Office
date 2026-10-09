@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-bzpdf">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>PDF document (bzip2-compressed)</comment>
+  <comment xml:lang="zh-Hant-TW">PDF 文件 (bzip2 壓縮)</comment>
+  <comment xml:lang="uk">документ PDF (стиснений bzip2)</comment>
+  <comment xml:lang="tr">PDF belgesi (bzip2 sıkıştırmalı)</comment>
+  <comment xml:lang="sv">PDF-dokument (bzip2-komprimerat)</comment>
+  <comment xml:lang="sr-Cyrl">ПДФ документ (сажет Бзипом 2)</comment>
+  <comment xml:lang="sq">Dokument PDF (ngjeshur me bzip2)</comment>
+  <comment xml:lang="sl">Dokument PDF (stisnjen z bzip2)</comment>
+  <comment xml:lang="ru">Документ PDF (сжатый bzip2)</comment>
+  <comment xml:lang="ro">document PDF (comprimat bzip2)</comment>
+  <comment xml:lang="pt-BR">Documento PDF (compactado com bzip2)</comment>
+  <comment xml:lang="pl">Dokument PDF (kompresja bzip2)</comment>
+  <comment xml:lang="oc">document PDF (compressat amb bzip2)</comment>
+  <comment xml:lang="nn">PDF-dokument (bzip2-komprimert)</comment>
+  <comment xml:lang="ko">PDF 문서 (BZIP2 압축)</comment>
+  <comment xml:lang="kk-Cyrl">PDF құжаты (bzip2-мен сығылған)</comment>
+  <comment xml:lang="ja">PDF ドキュメント (bzip2 圧縮)</comment>
+  <comment xml:lang="it">Documento PDF (compresso con bzip2)</comment>
+  <comment xml:lang="id">Dokumen PDF (terkompresi bzip2)</comment>
+  <comment xml:lang="hr">PDF dokument (bzip2 komprimirano)</comment>
+  <comment xml:lang="hi">PDF दस्तावेज़ (bzip2-संपीड़ित)</comment>
+  <comment xml:lang="he">מסמך PDF (דחוס ב־bzip2)</comment>
+  <comment xml:lang="fur">Document PDF (comprimût cun bzip2)</comment>
+  <comment xml:lang="fr">Document PDF (compression bzip2)</comment>
+  <comment xml:lang="fi">PDF (bzip2-pakattu)</comment>
+  <comment xml:lang="et">PDF dokument (pakitud bzip2ga)</comment>
+  <comment xml:lang="es">documento PDF (comprimido con BZIP2)</comment>
+  <comment xml:lang="en-GB">PDF document (bzip2-compressed)</comment>
+  <comment xml:lang="de">PDF-Dokument (bzip2-komprimiert)</comment>
+  <comment xml:lang="da">PDF-dokument (bzip2-komprimeret)</comment>
+  <comment xml:lang="ca">document PDF (comprimit amb bzip2)</comment>
+  <comment xml:lang="bg">Документ — PDF, компресиран с bzip2</comment>
+  <comment xml:lang="be-Cyrl">дакумент PDF (сцісканне bzip2)</comment>
+  <comment xml:lang="ar">مستند PDF (مضغوط-bzip2)</comment>
+  <sub-class-of type="application/x-bzip2"/>
+  <generic-icon name="x-office-document"/>
+  <glob pattern="*.pdf.bz2"/>
+</mime-type>

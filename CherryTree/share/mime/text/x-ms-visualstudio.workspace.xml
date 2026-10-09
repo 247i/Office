@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/x-ms-visualstudio.workspace">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Visual Studio Workspace</comment>
+  <comment xml:lang="zh-Hant-TW">Visual Studio 工作區</comment>
+  <comment xml:lang="uk">робочий простір Visual Studio</comment>
+  <comment xml:lang="tr">Visual Studio çalışma alanı</comment>
+  <comment xml:lang="sv">Visual Studio-arbetsyta</comment>
+  <comment xml:lang="sr-Cyrl">Визуел студио радни простор</comment>
+  <comment xml:lang="sq">Hapësirë pune Visual Studio</comment>
+  <comment xml:lang="sl">Delovni prostor Visual Studio</comment>
+  <comment xml:lang="ru">Рабочее пространство Visual Studio</comment>
+  <comment xml:lang="ro">spațiu de lucru Visual Studio Visual Studio</comment>
+  <comment xml:lang="pt-BR">Workspace do Visual Studio</comment>
+  <comment xml:lang="pl">Obszar roboczy Visual Studio</comment>
+  <comment xml:lang="oc">espaci de trabalh Visual Studio</comment>
+  <comment xml:lang="ko">Visual Studio 작업공간</comment>
+  <comment xml:lang="kk-Cyrl">Visual Studio жұмыс орны</comment>
+  <comment xml:lang="hr">Visual Studio radni prostor</comment>
+  <comment xml:lang="fr">Espace de travail Visual Studio</comment>
+  <comment xml:lang="fi">Visual Studion työtila</comment>
+  <comment xml:lang="et">Visual Studio töölaud</comment>
+  <comment xml:lang="es">espacio de trabajo de Visual Studio</comment>
+  <comment xml:lang="en-GB">Visual Studio Workspace</comment>
+  <comment xml:lang="de">Visual-Studio-Arbeitsbereich</comment>
+  <comment xml:lang="ar">مساحة عمل فيجول ستوديو</comment>
+  <sub-class-of type="text/plain"/>
+  <glob pattern="*.dsw"/>
+</mime-type>

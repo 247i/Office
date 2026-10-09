@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-bsdiff">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Binary differences between files</comment>
+  <comment xml:lang="zh-Hant-TW">二進制檔案之間的差異</comment>
+  <comment xml:lang="uk">двійкова різниця між файлами</comment>
+  <comment xml:lang="tr">Dosyalar arası ikili fark</comment>
+  <comment xml:lang="sv">Binära skillnader mellan filer</comment>
+  <comment xml:lang="sr-Cyrl">Бинарне разлике између датотека</comment>
+  <comment xml:lang="sq">Dallime dyore mes kartelash</comment>
+  <comment xml:lang="sl">Dvojiške razlike med datotekami</comment>
+  <comment xml:lang="ru">Двоичные различия между файлами</comment>
+  <comment xml:lang="ro">diferențe dintre fișierele binare</comment>
+  <comment xml:lang="pt-BR">Diferenças binárias entre arquivos</comment>
+  <comment xml:lang="pl">Binarna różnica pomiędzy plikami</comment>
+  <comment xml:lang="oc">diferéncias binàrias entre fichièrs</comment>
+  <comment xml:lang="ko">파일 비교 내용 바이너리</comment>
+  <comment xml:lang="kk-Cyrl">Файлдар арасындағы бинарлық айырмашылықтар</comment>
+  <comment xml:lang="ja">ファイル間バイナリ差分</comment>
+  <comment xml:lang="it">Differenze binarie tra file</comment>
+  <comment xml:lang="id">Perbedaan biner antar berkas</comment>
+  <comment xml:lang="hr">Binarne razlike između datoteka</comment>
+  <comment xml:lang="hi">फाइलों के बीच बाइनरी अंतर</comment>
+  <comment xml:lang="he">הבדלים בינריים בין קבצים</comment>
+  <comment xml:lang="fur">Diferencis binariis tra files</comment>
+  <comment xml:lang="fr">Différences binaires entre fichiers</comment>
+  <comment xml:lang="fi">Tiedostojen väliset binaarierot</comment>
+  <comment xml:lang="eu">Fitxategien arteko diferentzia bitarra</comment>
+  <comment xml:lang="et">Binaarsete failide erinevus</comment>
+  <comment xml:lang="es">diferencias binarias entre archivos</comment>
+  <comment xml:lang="en-GB">Binary differences between files</comment>
+  <comment xml:lang="de">binäre Unterschiede zwischen Dateien</comment>
+  <comment xml:lang="ca">diferències binàries entre fitxers</comment>
+  <comment xml:lang="bg">Разлики на двоично ниво между файловете</comment>
+  <comment xml:lang="be-Cyrl">бінарныя адрозненні паміж файламі</comment>
+  <comment xml:lang="ar">فرق ثنائي بين ملفات</comment>
+  <glob pattern="*.bsdiff"/>
+</mime-type>

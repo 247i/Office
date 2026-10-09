@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-dosexec">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>DOS executable</comment>
+  <comment xml:lang="zh-Hant-TW">DOS 可執行檔</comment>
+  <comment xml:lang="uk">виконуваний файл DOS</comment>
+  <comment xml:lang="tr">DOS yürütülebiliri</comment>
+  <comment xml:lang="sv">Körbar DOS-fil</comment>
+  <comment xml:lang="sr-Cyrl">ДОС извршна датотека</comment>
+  <comment xml:lang="sq">I ekzekutueshëm DOS</comment>
+  <comment xml:lang="sl">Izvedljiva datoteka za DOS</comment>
+  <comment xml:lang="ru">Исполняемый файл DOS</comment>
+  <comment xml:lang="ro">executabil DOS</comment>
+  <comment xml:lang="pt-BR">Executável do DOS</comment>
+  <comment xml:lang="pl">Program DOS</comment>
+  <comment xml:lang="oc">executable DOS</comment>
+  <comment xml:lang="nn">DOS-programfil</comment>
+  <comment xml:lang="lt">DOS vykdomasis</comment>
+  <comment xml:lang="ko">DOS 실행 파일</comment>
+  <comment xml:lang="kk-Cyrl">DOS орындалатын файлы</comment>
+  <comment xml:lang="ja">DOS 実行可能ファイル</comment>
+  <comment xml:lang="it">Eseguibile DOS</comment>
+  <comment xml:lang="id">Executable DOS</comment>
+  <comment xml:lang="hr">DOS izvršna datoteka</comment>
+  <comment xml:lang="hi">DOS निष्पादनयोग्य</comment>
+  <comment xml:lang="he">קובץ הפעלה של DOS</comment>
+  <comment xml:lang="fur">Eseguibil DOS</comment>
+  <comment xml:lang="fr">Exécutable DOS</comment>
+  <comment xml:lang="fi">DOS-suoritettava</comment>
+  <comment xml:lang="eu">DOS exekutagarria</comment>
+  <comment xml:lang="et">DOSi programmifail</comment>
+  <comment xml:lang="es">ejecutable de DOS</comment>
+  <comment xml:lang="en-GB">DOS executable</comment>
+  <comment xml:lang="de">DOS-Programm</comment>
+  <comment xml:lang="ca">executable DOS</comment>
+  <comment xml:lang="bg">Изпълним файл — DOS</comment>
+  <comment xml:lang="be-Cyrl">выконвальны файл DOS</comment>
+  <comment xml:lang="ar">تنفيذي دوس</comment>
+  <acronym>DOS</acronym>
+  <expanded-acronym>Disk Operating System</expanded-acronym>
+  <sub-class-of type="application/x-msdownload"/>
+  <generic-icon name="application-x-executable"/>
+  <glob pattern="*.exe" weight="30"/>
+</mime-type>

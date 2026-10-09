@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/msixbundle">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Windows app store bundle</comment>
+  <comment xml:lang="zh-Hant-TW">Windows 應用程式商店套組</comment>
+  <comment xml:lang="uk">комплект крамниці програм Windows</comment>
+  <comment xml:lang="tr">Microsoft Store demeti</comment>
+  <comment xml:lang="sv">Windows app store-bunt</comment>
+  <comment xml:lang="sr-Cyrl">Виндоуз комплет продавнице програма</comment>
+  <comment xml:lang="sl">Skupek Windows App Store</comment>
+  <comment xml:lang="ru">Объединённый пакет магазина приложений Windows</comment>
+  <comment xml:lang="ro">suită de aplicații de la magazinul de aplicații Windows</comment>
+  <comment xml:lang="pt-BR">Pacote da loja de aplicativos do Windows</comment>
+  <comment xml:lang="pl">Paczka sklepu z aplikacjami Windows</comment>
+  <comment xml:lang="oc">paquet de la botiga d'aplicacions Windows</comment>
+  <comment xml:lang="ko">윈도우 앱 스토어 번들</comment>
+  <comment xml:lang="kk-Cyrl">Windows app store жинақ дестесі</comment>
+  <comment xml:lang="ja">Windows アプリストア バンドル</comment>
+  <comment xml:lang="it">Bundle app store Windows</comment>
+  <comment xml:lang="id">Bundel toko aplikasi Windows</comment>
+  <comment xml:lang="hr">Paket Windows trgovine aplikacija</comment>
+  <comment xml:lang="hi">Windows ऐप स्टोर बंडल</comment>
+  <comment xml:lang="fur">Pachet dal app store di Windows</comment>
+  <comment xml:lang="fr">Paquet bundle de l'App store Windows</comment>
+  <comment xml:lang="fi">Windows sovelluskaupan myyntipaketti</comment>
+  <comment xml:lang="et">Windowsi rakendustepoe rakendus</comment>
+  <comment xml:lang="es">Fajo de almecaje de app Windows</comment>
+  <comment xml:lang="en-GB">Windows app store bundle</comment>
+  <comment xml:lang="de">Windows App-Store-Paketbündel</comment>
+  <comment xml:lang="ca">paquet de la botiga d'aplicacions Windows</comment>
+  <comment xml:lang="bg">Пратка — Windows app store</comment>
+  <comment xml:lang="be-Cyrl">аб'яднаны пакет Windows store</comment>
+  <comment xml:lang="ar">حزمة سوق تطبيقات ويندوز</comment>
+  <sub-class-of type="application/zip"/>
+  <generic-icon name="package-x-generic"/>
+  <glob pattern="*.msixbundle"/>
+</mime-type>

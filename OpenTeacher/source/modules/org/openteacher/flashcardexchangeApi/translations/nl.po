@@ -1,0 +1,64 @@
+# Dutch translation for openteacher
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2013-03-26 17:23+0000\n"
+"Last-Translator: Michael Tel <m.tel@xs4all.nl>\n"
+"Language-Team: Dutch <nl@li.org>\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:44+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: flashcardexchangeApi.py:166
+msgid ""
+"Enter a search term and press the search button to search flashcardexchange."
+"com for sets. Then select the set or sets you want to import and click OK."
+msgstr ""
+"Vul een zoekterm in en druk op de zoekknop om flashcardexchange.com af te "
+"zoeken naar sets. Selecteer daarna de set die u wilt importeren en klik op "
+"OK."
+
+#: flashcardexchangeApi.py:167
+msgid "E.g.: spanish travel vocabulary"
+msgstr "Bijv.: spanish travel vocabulary"
+
+#: flashcardexchangeApi.py:168
+msgid "Search"
+msgstr "Zoeken"
+
+#: flashcardexchangeApi.py:169
+msgid "Search flashcardexchange.com"
+msgstr "Doorzoek flashcardexchange.com"
+
+#: flashcardexchangeApi.py:261
+msgid "Import from flashcardexchange.com"
+msgstr "Importeren van flashcardexchange.com"
+
+#: flashcardexchangeApi.py:264
+msgid "flashcardexchange.com API client id"
+msgstr "flashcardexchange.com API client id"
+
+#: flashcardexchangeApi.py:291
+msgid "No flashcardexchange.com connection"
+msgstr "Geen flashcardexchange.com-verbinding"
+
+#: flashcardexchangeApi.py:292
+msgid ""
+"flashcardexchange.com didn't accept the connection. Are you sure that your "
+"internet connection works and flashcardexchange.com is online?"
+msgstr ""
+"flashcardexchange.com accepteerde de verbinding niet. Weet u zeker dat uw "
+"internetverbinding werkt en dat flashcardexchange.com bereikbaar is?"
+
+#: flashcardexchangeApi.py:326
+msgid "The word list was imported from flashcardexchange.com successfully."
+msgstr "De woordjeslijst is met succes van flashcardexchange.com geïmporteerd."

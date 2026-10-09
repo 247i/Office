@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="x-content/blank-cd">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Blank CD disc</comment>
+  <comment xml:lang="zh-Hant-TW">空白 CD 光碟</comment>
+  <comment xml:lang="uk">порожній компакт-диск</comment>
+  <comment xml:lang="tr">Boş CD diski</comment>
+  <comment xml:lang="sv">Tom cd-skiva</comment>
+  <comment xml:lang="sr-Cyrl">Празан ЦД диск</comment>
+  <comment xml:lang="sq">Disk CD i pashkruar</comment>
+  <comment xml:lang="sl">Prazen disk CD</comment>
+  <comment xml:lang="ru">Чистый диск CD</comment>
+  <comment xml:lang="ro">CD în alb</comment>
+  <comment xml:lang="pt-BR">Disco CD vazio</comment>
+  <comment xml:lang="pl">Pusta płyta CD</comment>
+  <comment xml:lang="oc">CD verge</comment>
+  <comment xml:lang="nn">Tom CD-plate</comment>
+  <comment xml:lang="lt">Tuščias CD diskas</comment>
+  <comment xml:lang="ko">빈 CD 디스크</comment>
+  <comment xml:lang="kk-Cyrl">Таза CD дискі</comment>
+  <comment xml:lang="kab">Aḍebsi CD ilem</comment>
+  <comment xml:lang="ja">空 CD</comment>
+  <comment xml:lang="it">Disco vuoto CD</comment>
+  <comment xml:lang="id">Cakram CD kosong</comment>
+  <comment xml:lang="hr">Prazni CD disk</comment>
+  <comment xml:lang="hi">खाली CD डिस्क</comment>
+  <comment xml:lang="gl">Disco de CD en branco</comment>
+  <comment xml:lang="fur">Disc CD vueit</comment>
+  <comment xml:lang="fr">CD vierge</comment>
+  <comment xml:lang="fi">Tyhjä CD</comment>
+  <comment xml:lang="eu">CD disko hutsa</comment>
+  <comment xml:lang="et">Tühi CD-plaat</comment>
+  <comment xml:lang="es">disco CD vacío</comment>
+  <comment xml:lang="en-GB">Blank CD disc</comment>
+  <comment xml:lang="de">leere CD</comment>
+  <comment xml:lang="ca">disc CD en blanc</comment>
+  <comment xml:lang="bg">Празен CD диск</comment>
+  <comment xml:lang="be-Cyrl">чысты дыск CD</comment>
+  <comment xml:lang="ar">قرص CD فارغ</comment>
+  <comment xml:lang="af">Skoon CD-skyf</comment>
+</mime-type>

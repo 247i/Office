@@ -1,0 +1,98 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:38+0200\n"
+"PO-Revision-Date: 2013-03-26 18:49+0000\n"
+"Last-Translator: Michael Tel <m.tel@xs4all.nl>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:42+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: media.py:159
+msgid "Create media lesson"
+msgstr "Maak een mediales aan"
+
+#: media.py:199
+msgid "Unnamed"
+msgstr ""
+
+#: media.py:200 media.py:239
+#, python-format
+msgid "Media lesson: %s"
+msgstr "Mediales: %s"
+
+#: media.py:284
+msgid "Empty question or answer"
+msgstr "Lege vraag of antwoord"
+
+#: media.py:285
+msgid "Please enter at least one question and one answer for every item."
+msgstr "Vul voor ieder item ten minste één vraag of één antwoord in."
+
+#~ msgid "Remove"
+#~ msgstr "Verwijder"
+
+#~ msgid "Add local media"
+#~ msgstr "Voeg lokale media toe"
+
+#~ msgid "Add remote media"
+#~ msgstr "Voeg externe media toe"
+
+#~ msgid "Name:"
+#~ msgstr "Naam:"
+
+#~ msgid "Description:"
+#~ msgstr "Beschrijving:"
+
+#~ msgid "Select file(s)"
+#~ msgstr "Selecteer bestand(en)"
+
+#~ msgid "Media"
+#~ msgstr "Media"
+
+#~ msgid "File URL"
+#~ msgstr "Bestand URL"
+
+#~ msgid ""
+#~ "Enter the URL of your website or media item.\n"
+#~ "Supported video sites: YouTube, Dailymotion, Vimeo."
+#~ msgstr ""
+#~ "Voer de URL van je website of media item in.\n"
+#~ "Ondersteunde videosites: Youtube, Dailymotion, Vimeo."
+
+#~ msgid "Warning"
+#~ msgstr "Waarschuwing"
+
+#~ msgid ""
+#~ "Are you sure you want to go back to the enter tab? This will end your "
+#~ "lesson!"
+#~ msgstr ""
+#~ "Weet u zeker dat je terug wilt naar de invoertab? Dat beëindigt uw les!"
+
+#~ msgid "Lesson type:"
+#~ msgstr "Lestype"
+
+#~ msgid "Check"
+#~ msgstr "Controleer"
+
+#~ msgid "Not enough items"
+#~ msgstr "Niet genoeg items"
+
+#~ msgid "You need to add items to your test first"
+#~ msgstr "Voeg eerst item toe aan uw toets"
+
+#~ msgid "Media Lesson"
+#~ msgstr "Mediales"
+
+#~ msgid "Media lesson %s"
+#~ msgstr "Mediales %s"

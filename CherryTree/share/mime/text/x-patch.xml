@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/x-patch">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Differences between files</comment>
+  <comment xml:lang="zh-Hant-TW">檔案之間的差異</comment>
+  <comment xml:lang="uk">різниця між файлами</comment>
+  <comment xml:lang="tr">Dosyalar arasındaki fark</comment>
+  <comment xml:lang="sv">Skillnader mellan filer</comment>
+  <comment xml:lang="sr-Cyrl">Разлике између датотека</comment>
+  <comment xml:lang="sq">Dallime mes kartelash</comment>
+  <comment xml:lang="sl">Razlike med datotekami</comment>
+  <comment xml:lang="ru">Различия между файлами</comment>
+  <comment xml:lang="ro">diferențe dintre fișiere</comment>
+  <comment xml:lang="pt-BR">Diferenças entre arquivos</comment>
+  <comment xml:lang="pl">Różnica pomiędzy plikami</comment>
+  <comment xml:lang="oc">diferéncias entre fichièrs</comment>
+  <comment xml:lang="nn">Fildifferanse-fil</comment>
+  <comment xml:lang="lt">Skirtumai tarp failų</comment>
+  <comment xml:lang="ko">파일 차이 비교</comment>
+  <comment xml:lang="kk-Cyrl">Файлдар арасындағы айырмашылықтары</comment>
+  <comment xml:lang="ja">差分文書</comment>
+  <comment xml:lang="it">Differenze tra file</comment>
+  <comment xml:lang="id">Pebedaan di antara berkas-berkas</comment>
+  <comment xml:lang="hr">Razlike između datoteka</comment>
+  <comment xml:lang="hi">फाइलों के बीच अंतर</comment>
+  <comment xml:lang="gl">Diferenzas entre ficheiros</comment>
+  <comment xml:lang="fur">Diferencis tra files</comment>
+  <comment xml:lang="fr">Différences entre fichiers</comment>
+  <comment xml:lang="fi">Tiedostojen väliset erot</comment>
+  <comment xml:lang="eu">Fitxategien arteko diferentziak</comment>
+  <comment xml:lang="et">Failide erinevus</comment>
+  <comment xml:lang="es">diferencias entre archivos</comment>
+  <comment xml:lang="en-GB">Differences between files</comment>
+  <comment xml:lang="de">Unterschiede zwischen Dateien</comment>
+  <comment xml:lang="ca">diferències entre fitxers</comment>
+  <comment xml:lang="bg">Разлики между файловете</comment>
+  <comment xml:lang="be-Cyrl">адрозненні паміж файламі</comment>
+  <comment xml:lang="ar">فرق بين ملفات</comment>
+  <alias type="text/x-diff"/>
+  <sub-class-of type="text/plain"/>
+  <glob pattern="*.diff"/>
+  <glob pattern="*.patch"/>
+</mime-type>

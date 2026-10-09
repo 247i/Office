@@ -1,0 +1,87 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenTeacher 3.2\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: manpage.templ:29
+msgid "SYNOPSIS"
+msgstr ""
+
+#: manpage.templ:33
+msgid "DESCRIPTION"
+msgstr ""
+
+#: manpage.templ:37
+msgid "OPERATION"
+msgstr ""
+
+#: manpage.templ:38
+msgid ""
+"After startup, OpenTeacher allows you to load a lesson or to create one."
+msgstr ""
+
+#: manpage.templ:39
+msgid "Lessons can be loaded from both files and the internet."
+msgstr ""
+
+#: manpage.templ:40
+msgid ""
+"There are a number of different lesson types: you can use OpenTeacher to "
+"learn vocabulary, geography and media."
+msgstr ""
+
+#: manpage.templ:41
+msgid "Also, OpenTeacher has a typing lesson course built in."
+msgstr ""
+
+#: manpage.templ:43
+msgid ""
+"When you open a lesson you can view the items in that lesson or enter new "
+"ones, and learn those items."
+msgstr ""
+
+#: manpage.templ:44
+msgid "At the end of the session, you can view your results."
+msgstr ""
+
+#: manpage.templ:45
+msgid "Also, it's possible to browse results of older tests."
+msgstr ""
+
+#: manpage.templ:47
+msgid "OPTIONS"
+msgstr ""
+
+#: manpage.templ:49
+msgid "show a help message"
+msgstr ""
+
+#: manpage.templ:51
+msgid "run {name} as specified by {profile}, {profile} should be one of:"
+msgstr ""
+
+#: manpage.templ:54
+msgid "(advanced)"
+msgstr ""
+
+#: manpage.templ:58
+msgid "AUTHOR"
+msgstr ""
+
+#: manpage.templ:61
+msgid "Contact: {email}"
+msgstr ""

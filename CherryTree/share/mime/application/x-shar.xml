@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-shar">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Shell archive</comment>
+  <comment xml:lang="zh-Hant-TW">Shell 封存檔</comment>
+  <comment xml:lang="uk">архів оболонки</comment>
+  <comment xml:lang="tr">Kabuk arşivi</comment>
+  <comment xml:lang="sv">Skalarkiv</comment>
+  <comment xml:lang="sr-Cyrl">Архива шкољке</comment>
+  <comment xml:lang="sq">Arkiv shell</comment>
+  <comment xml:lang="sl">Arhiv lupine</comment>
+  <comment xml:lang="ru">Архив shell</comment>
+  <comment xml:lang="ro">arhivă Shell</comment>
+  <comment xml:lang="pt-BR">Pacote shell</comment>
+  <comment xml:lang="pl">Archiwum powłoki</comment>
+  <comment xml:lang="oc">archiu Shell</comment>
+  <comment xml:lang="nn">Skalarkiv</comment>
+  <comment xml:lang="ko">Shell 묶음 파일</comment>
+  <comment xml:lang="kk-Cyrl">Қоршам архиві</comment>
+  <comment xml:lang="kab">Aɣbaṛ Shell</comment>
+  <comment xml:lang="ja">シェルアーカイブ</comment>
+  <comment xml:lang="it">Archivio shell</comment>
+  <comment xml:lang="id">Arsip shell</comment>
+  <comment xml:lang="hr">Arhiva ljuske</comment>
+  <comment xml:lang="hi">शैल अभिलेख</comment>
+  <comment xml:lang="he">ארכיון מעטפת</comment>
+  <comment xml:lang="gl">Arquivo de Shell</comment>
+  <comment xml:lang="fur">Archivi di shell</comment>
+  <comment xml:lang="fr">Archive Shell</comment>
+  <comment xml:lang="fi">Shell-arkisto</comment>
+  <comment xml:lang="eu">Shell artxiboa</comment>
+  <comment xml:lang="et">Shell arhiiv</comment>
+  <comment xml:lang="es">archivador de intérprete</comment>
+  <comment xml:lang="en-GB">Shell archive</comment>
+  <comment xml:lang="de">Shell-Archiv</comment>
+  <comment xml:lang="ca">arxiu d'intèrpret d'ordres</comment>
+  <comment xml:lang="bg">Архив — Shell</comment>
+  <comment xml:lang="be-Cyrl">архіў абалонкі</comment>
+  <comment xml:lang="ar">أرشيف شِل</comment>
+  <generic-icon name="package-x-generic"/>
+  <glob pattern="*.shar"/>
+</mime-type>

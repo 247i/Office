@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-spectrum-z80">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>ZX Spectrum Z80 snapshot</comment>
+  <comment xml:lang="uk">знімок ZX Spectrum Z80</comment>
+  <comment xml:lang="tr">ZX Spectrum Z80 anlık görüntüsü</comment>
+  <comment xml:lang="sv">ZX Spectrum Z80-ögonblicksbild</comment>
+  <comment xml:lang="sr-Cyrl">Зет-Икс Спектрум З80 снимак стања</comment>
+  <comment xml:lang="sq">Fotografim ZX Spectrum Z80</comment>
+  <comment xml:lang="sl">Posnetek ZX Spectrum Z80</comment>
+  <comment xml:lang="ru">Снимок состояния ZX Spectrum Z80</comment>
+  <comment xml:lang="ro">instantanee ZX Spectrum Z80</comment>
+  <comment xml:lang="pt-BR">Snapshot de ZX Spectrum Z80</comment>
+  <comment xml:lang="pl">Migawka ZX Spectrum Z80</comment>
+  <comment xml:lang="oc">instantanèu ZX Spectrum Z80</comment>
+  <comment xml:lang="ko">ZX Spectrum Z80 스냅샷</comment>
+  <comment xml:lang="kk-Cyrl">ZX Spectrum Z80 снапшоты</comment>
+  <comment xml:lang="fr">instantané ZX Spectrum Z80</comment>
+  <comment xml:lang="fi">ZX Spectrum Z80 kuva</comment>
+  <comment xml:lang="et">ZX Spectrum Z80 hetktõmmis</comment>
+  <comment xml:lang="es">Captura de Z80 de ZX Spectrum</comment>
+  <comment xml:lang="en-GB">ZX Spectrum Z80 snapshot</comment>
+  <comment xml:lang="de">ZX-Spectrum-Z80-Speicherauszug</comment>
+  <comment xml:lang="ar">لقطة ZX Spectrum Z80</comment>
+  <glob pattern="*.z80"/>
+</mime-type>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="image/x-tim">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>PlayStation graphics</comment>
+  <comment xml:lang="uk">графіка PlayStation</comment>
+  <comment xml:lang="tr">PlayStation grafikleri</comment>
+  <comment xml:lang="sv">PlayStation-grafik</comment>
+  <comment xml:lang="sr-Cyrl">PlayStation графика</comment>
+  <comment xml:lang="sl">Slika PlayStation</comment>
+  <comment xml:lang="ru">Графика для PlayStation</comment>
+  <comment xml:lang="ro">grafică PlayStation</comment>
+  <comment xml:lang="pt-BR">Gráficos de PlayStation</comment>
+  <comment xml:lang="pl">Grafika PlayStation</comment>
+  <comment xml:lang="oc">grafics PlayStation</comment>
+  <comment xml:lang="ko">PlayStation 그래픽</comment>
+  <comment xml:lang="kk-Cyrl">PlayStation графикасы</comment>
+  <comment xml:lang="fr">graphiques PlayStation</comment>
+  <comment xml:lang="fi">PlayStation grafiikka</comment>
+  <comment xml:lang="et">PlayStationi graafika</comment>
+  <comment xml:lang="es">Gráficos de PlayStation</comment>
+  <comment xml:lang="en-GB">PlayStation graphics</comment>
+  <comment xml:lang="de">PlayStation-Grafik</comment>
+  <comment xml:lang="ar">رسوميات بلايستيشن</comment>
+  <glob pattern="*.tim"/>
+</mime-type>

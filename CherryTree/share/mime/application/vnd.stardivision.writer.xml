@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/vnd.stardivision.writer">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>StarWriter 5 document</comment>
+  <comment xml:lang="zh-Hant-TW">StarWriter 5 文件</comment>
+  <comment xml:lang="uk">документ StarWriter 5</comment>
+  <comment xml:lang="tr">StarWriter 5 belgesi</comment>
+  <comment xml:lang="sv">StarWriter 5-dokument</comment>
+  <comment xml:lang="sr-Cyrl">StarWriter 5 документ</comment>
+  <comment xml:lang="sq">Dokument StarWriter 5</comment>
+  <comment xml:lang="sl">Dokument StarWriter 5</comment>
+  <comment xml:lang="ru">Документ StarWriter 5</comment>
+  <comment xml:lang="ro">document StarWriter 5</comment>
+  <comment xml:lang="pt-BR">Documento do StarWriter 5</comment>
+  <comment xml:lang="pl">Dokument StarWriter 5</comment>
+  <comment xml:lang="oc">document StarWriter 5</comment>
+  <comment xml:lang="nn">StarWriter 5-dokument</comment>
+  <comment xml:lang="ko">StarWriter 5 문서</comment>
+  <comment xml:lang="kk-Cyrl">StarWriter 5 құжаты</comment>
+  <comment xml:lang="ja">StarWriter 5 ドキュメント</comment>
+  <comment xml:lang="id">Dokumen StarWriter 5</comment>
+  <comment xml:lang="hr">StarWriter 5 dokument</comment>
+  <comment xml:lang="fur">Document di StarWriter 5</comment>
+  <comment xml:lang="fr">Document StarWriter 5</comment>
+  <comment xml:lang="fi">StarWriter 5 asiakirja</comment>
+  <comment xml:lang="et">StarWriter 5 dokument</comment>
+  <comment xml:lang="es">documento de StarWriter 5</comment>
+  <comment xml:lang="en-GB">StarWriter 5 document</comment>
+  <comment xml:lang="de">StarWriter-5-Dokument</comment>
+  <comment xml:lang="da">StarWriter 5-dokument</comment>
+  <comment xml:lang="ca">document StarWriter 5</comment>
+  <comment xml:lang="bg">Документ — StarWriter 5</comment>
+  <comment xml:lang="be-Cyrl">дакумент StarWriter 5</comment>
+  <comment xml:lang="ar">مستند StarWriter 5</comment>
+  <sub-class-of type="application/x-ole-storage"/>
+  <generic-icon name="x-office-document"/>
+  <glob pattern="*.sdw"/>
+  <glob pattern="*.vor"/>
+</mime-type>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="image/x-epson-erf">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Epson ERF raw image</comment>
+  <comment xml:lang="uk">цифровий негатив Epson ERF</comment>
+  <comment xml:lang="tr">Epson ERF ham görüntüsü</comment>
+  <comment xml:lang="sv">Epson ERF-råbild</comment>
+  <comment xml:lang="sr-Cyrl">Epson ERF сирова слика</comment>
+  <comment xml:lang="sq">Pamje Epson ERF e papërpunuar</comment>
+  <comment xml:lang="sl">Neobdelana slika Epson ERF</comment>
+  <comment xml:lang="ru">Необработанное изображение Epson ERF</comment>
+  <comment xml:lang="ro">imagine brută Epson ERF</comment>
+  <comment xml:lang="pt-BR">Imagem bruta Epson ERF </comment>
+  <comment xml:lang="pl">Surowy obraz ERF Epson</comment>
+  <comment xml:lang="oc">imatge brut Epson ERF</comment>
+  <comment xml:lang="ko">Epson ERF 로 이미지</comment>
+  <comment xml:lang="kk-Cyrl">Epson ERF өңделмеген бейнесі</comment>
+  <comment xml:lang="fr">image brute Epson ERF</comment>
+  <comment xml:lang="fi">Epson ERF -raakakuva</comment>
+  <comment xml:lang="et">Epson ERF töötlemata pilt</comment>
+  <comment xml:lang="es">imagen en bruto ERF de Epson</comment>
+  <comment xml:lang="en-GB">Epson ERF raw image</comment>
+  <comment xml:lang="de">Epson ERF-Rohbild</comment>
+  <comment xml:lang="ar">صورة Epson ERF خامة</comment>
+  <sub-class-of type="image/x-dcraw"/>
+  <sub-class-of type="image/tiff"/>
+  <glob pattern="*.erf"/>
+</mime-type>

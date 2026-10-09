@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="image/x-hasselblad-fff">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Hasselblad FFF raw image</comment>
+  <comment xml:lang="uk">цифровий негатив Hasselblad FFF</comment>
+  <comment xml:lang="tr">Hasselblad FFF ham görüntüsü</comment>
+  <comment xml:lang="sv">Hasselblad FFF-råbild</comment>
+  <comment xml:lang="sr-Cyrl">Hasselblad FFF сирова слика</comment>
+  <comment xml:lang="sq">Pamje Hasselblad FFF e papërpunuar</comment>
+  <comment xml:lang="sl">Neobdelana slika Hasselblad FFF</comment>
+  <comment xml:lang="ru">Необработанное изображение Hasselblad FFF</comment>
+  <comment xml:lang="ro">imagine brută Hasselblad FFF</comment>
+  <comment xml:lang="pt-BR">Imagem bruta Hasselblad FFF </comment>
+  <comment xml:lang="pl">Surowy obraz FFF Hasselblad</comment>
+  <comment xml:lang="oc">imatge brut Hasselblad FFF</comment>
+  <comment xml:lang="ko">하셀블라드 FFF RAW 사진</comment>
+  <comment xml:lang="kk-Cyrl">Hasselblad FFF өңделмеген бейнесі</comment>
+  <comment xml:lang="fr">image brute Hasselblad FFF</comment>
+  <comment xml:lang="fi">Hasselblad FFF -raakakuva</comment>
+  <comment xml:lang="et">Hasselblad FFF töötlemata pilt</comment>
+  <comment xml:lang="es">imagen en bruto FFF de Hasselblad</comment>
+  <comment xml:lang="en-GB">Hasselblad FFF raw image</comment>
+  <comment xml:lang="de">Hasselblad FFF-Rohbild</comment>
+  <comment xml:lang="ar">صورة Hasselblad FFF خامة</comment>
+  <sub-class-of type="image/x-dcraw"/>
+  <sub-class-of type="image/tiff"/>
+  <glob pattern="*.fff"/>
+</mime-type>

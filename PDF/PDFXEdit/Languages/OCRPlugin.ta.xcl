@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Localization>
+	<Version date="20170425233727">2.00.00</Version>
+	<Author>LARAMJO y Angel Herráez</Author>
+	<Copyright></Copyright>
+	<Product id="PDFXEditor"/>
+	<Language eName="Tamil (India)" lName="தமிழ்" code="ta-IN" R2L="false"/>
+	<Module name="OCRPlugin" namespace="ocr" version="6.0.322.0"/>
+	<Strings>
+		<text id="OrientationDetection" h="40F7AA0E">Detección automática de la orientación</text>
+		<text id="accuracy.high" h="21A95620">Alto</text>
+		<text id="accuracy.low" h="845E3D8C">Bajo</text>
+		<text id="accuracy.medium" h="91153342">Medio</text>
+		<text id="cb.cuenoany" h="899F9872">Ninguno está instalado</text>
+		<text id="cmd.name" h="6DAA8A17">Páginas OCR...</text>
+		<text id="l.accuracy" h="3B2028D8">&amp;Exactitud:</text>
+		<text id="l.language" h="7B707020">&amp;Idioma:</text>
+		<text id="lnk.more" h="2E2CCD84">&lt;a=1&gt;Más idiomas...&lt;/a&gt;</text>
+		<text id="prefs.title" h="D0975E29">Opciones del reconocimiento óptico de caracteres (OCR)</text>
+	</Strings>
+</Localization>

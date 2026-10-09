@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/vnd.apple.pkpasses">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Apple Wallet passes bundle</comment>
+  <comment xml:lang="uk">комплект паролів Apple Wallet</comment>
+  <comment xml:lang="tr">Apple Cüzdan kartları demeti</comment>
+  <comment xml:lang="sv">Apple Wallet-passbunt</comment>
+  <comment xml:lang="sr-Cyrl">Пакет пропусница за Епл новчаник</comment>
+  <comment xml:lang="sq">Paketë fjalëkalimesh Apple Wallet</comment>
+  <comment xml:lang="sl">Paket prepustnic Apple Wallet</comment>
+  <comment xml:lang="ru">Набор пропусков в Apple Wallet</comment>
+  <comment xml:lang="ro">pachet de parole Apple Wallet </comment>
+  <comment xml:lang="pt-BR">Pscote de passes do Apple Wallet</comment>
+  <comment xml:lang="pl">Pakiet haseł Apple Wallet</comment>
+  <comment xml:lang="oc">paquet de bilhets Apple Wallet</comment>
+  <comment xml:lang="ko">Apple Wallet 패스 번들</comment>
+  <comment xml:lang="kk-Cyrl">Apple Wallet рұқсатнамалар дестесі</comment>
+  <comment xml:lang="hr">Apple Wallet paket kartica</comment>
+  <comment xml:lang="fr">Lot de passes Apple Wallet</comment>
+  <comment xml:lang="fi">Apple Wallet passipaketti</comment>
+  <comment xml:lang="et">Apple Walleti dokumentide pakk</comment>
+  <comment xml:lang="en-GB">Apple Wallet passes bundle</comment>
+  <comment xml:lang="de">Apple Wallet-Pass-Paket</comment>
+  <comment xml:lang="bg">Пакети с пропуски — Apple Wallet</comment>
+  <comment xml:lang="ar">حزمة بطاقة محفظة أبل</comment>
+  <sub-class-of type="application/zip"/>
+  <glob pattern="*.pkpasses"/>
+</mime-type>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="x-content/ebook-reader">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>E-book reader</comment>
+  <comment xml:lang="zh-Hant-TW">E-book 閱讀器</comment>
+  <comment xml:lang="uk">пристрій для читання ел. книг</comment>
+  <comment xml:lang="tr">E-kitap okuyucusu</comment>
+  <comment xml:lang="sv">E-bokläsare</comment>
+  <comment xml:lang="sr-Cyrl">Читач е-књига</comment>
+  <comment xml:lang="sq">Lexues e-librash</comment>
+  <comment xml:lang="sl">Bralnik e-knjig</comment>
+  <comment xml:lang="ru">Устройство для чтения электронных книг</comment>
+  <comment xml:lang="ro">cititor cărți electronice</comment>
+  <comment xml:lang="pt-BR">Leitor de e-book</comment>
+  <comment xml:lang="pl">Czytnik e-booków</comment>
+  <comment xml:lang="oc">lector de libres electronics</comment>
+  <comment xml:lang="nn">E-boklesar</comment>
+  <comment xml:lang="ko">전자책 읽기 프로그램</comment>
+  <comment xml:lang="kk-Cyrl">Электронды кітаптарды оқу құрылғысы</comment>
+  <comment xml:lang="kab">imeɣri n e-book</comment>
+  <comment xml:lang="ja">電子書籍リーダー</comment>
+  <comment xml:lang="it">Lettore e-book</comment>
+  <comment xml:lang="id">Pembaca E-book</comment>
+  <comment xml:lang="hr">Čitač e-knjiga</comment>
+  <comment xml:lang="hi">ई-बुक रीडर</comment>
+  <comment xml:lang="gl">Lector de libros electrónicos</comment>
+  <comment xml:lang="fur">Letôr e-book</comment>
+  <comment xml:lang="fr">Lecteur de livre numérique</comment>
+  <comment xml:lang="fi">E-kirjalukija</comment>
+  <comment xml:lang="et">E-luger</comment>
+  <comment xml:lang="es">lector de libros electrónicos</comment>
+  <comment xml:lang="en-GB">E-book reader</comment>
+  <comment xml:lang="de">E-Book-Reader</comment>
+  <comment xml:lang="ca">lector de llibres electrònics</comment>
+  <comment xml:lang="bg">Електронен четец</comment>
+  <comment xml:lang="be-Cyrl">электронная кніга</comment>
+  <comment xml:lang="ar">قارئ كتاب إلكترونية</comment>
+  <comment xml:lang="af">E-boekleser</comment>
+</mime-type>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-excellon">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Excellon drill file</comment>
+  <comment xml:lang="zh-Hant-TW">Excellon 鑽孔檔</comment>
+  <comment xml:lang="uk">файл drill Excellon</comment>
+  <comment xml:lang="tr">Excellon drill dosyası</comment>
+  <comment xml:lang="sv">Excellon-borrfil</comment>
+  <comment xml:lang="sr-Cyrl">Excellon датотека за бушење</comment>
+  <comment xml:lang="sl">Datoteka vrtanj Excellon</comment>
+  <comment xml:lang="ru">Файл Excellon drill</comment>
+  <comment xml:lang="ro">fișier de forare Excellon</comment>
+  <comment xml:lang="pt-BR">Arquivo de furos Excellon</comment>
+  <comment xml:lang="pl">Plik wiercenia Excellon</comment>
+  <comment xml:lang="oc">fichièr de perforacion Excellon</comment>
+  <comment xml:lang="ko">액셀론 드릴 파일</comment>
+  <comment xml:lang="kk-Cyrl">Excellon drill файлы</comment>
+  <comment xml:lang="ja">Excellon ドリルファイル</comment>
+  <comment xml:lang="it">File Excellon drill</comment>
+  <comment xml:lang="id">Berkas drill Excellon</comment>
+  <comment xml:lang="hr">Excellon datoteka bušenja</comment>
+  <comment xml:lang="hi">Excellon ड्रिल फाइल</comment>
+  <comment xml:lang="he">קובץ מקדח Excellon</comment>
+  <comment xml:lang="fur">File di traforazion Excellon</comment>
+  <comment xml:lang="fr">Fichier de perçage Excellon</comment>
+  <comment xml:lang="fi">Excellon cnc-poratiedosto</comment>
+  <comment xml:lang="et">Excelloni puurpingi fail</comment>
+  <comment xml:lang="es">archivo de perforación de Excellon</comment>
+  <comment xml:lang="en-GB">Excellon drill file</comment>
+  <comment xml:lang="de">Excellon-Bohrdatei</comment>
+  <comment xml:lang="ca">fitxer de perforadora d'Excellon</comment>
+  <comment xml:lang="bg">Файл — Excellon drill</comment>
+  <comment xml:lang="be-Cyrl">файл Excellon drill</comment>
+  <comment xml:lang="ar">ملف حفر Excellon</comment>
+  <sub-class-of type="text/plain"/>
+  <glob pattern="*.drl"/>
+  <generic-icon name="text-x-generic"/>
+</mime-type>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-amf">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>AMF 3D model</comment>
+  <comment xml:lang="uk">просторова модель AMF</comment>
+  <comment xml:lang="tr">AMF 3B modeli</comment>
+  <comment xml:lang="sv">AMF-3D-modell</comment>
+  <comment xml:lang="sr-Cyrl">АМФ 3Д модел</comment>
+  <comment xml:lang="sq">Model AMF 3D</comment>
+  <comment xml:lang="sl">Model 3D AMF</comment>
+  <comment xml:lang="ru">3D-модель AMF</comment>
+  <comment xml:lang="ro">model AMF 3D</comment>
+  <comment xml:lang="pt-BR">Modelo 3D AMF</comment>
+  <comment xml:lang="pl">Model 3D AMF</comment>
+  <comment xml:lang="oc">modèl 3D AMF</comment>
+  <comment xml:lang="ko">AMF 3D 모델</comment>
+  <comment xml:lang="kk-Cyrl">AMF 3D моделі</comment>
+  <comment xml:lang="hr">AMF 3D model</comment>
+  <comment xml:lang="fr">Modèle AMF 3D</comment>
+  <comment xml:lang="fi">AMF 3D malli</comment>
+  <comment xml:lang="et">AMF 3D mudel</comment>
+  <comment xml:lang="es">Modelo AMF 3D</comment>
+  <comment xml:lang="en-GB">AMF 3D model</comment>
+  <comment xml:lang="de">AMF-3D-Modell</comment>
+  <comment xml:lang="ar">نموذج ثلاثي الأبعاد AMF</comment>
+  <acronym>AMF</acronym>
+  <expanded-acronym>Additive Manufacturing File</expanded-acronym>
+  <generic-icon name="image-x-generic"/>
+  <glob pattern="*.amf"/>
+</mime-type>

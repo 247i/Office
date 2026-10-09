@@ -1,0 +1,76 @@
+﻿# இது அடிப்படைப் பணிப்பாய்வு
+name: புதியவெளியீடு
+
+# பணிப்பாய்வு எப்போது இயங்கும் என்பதைக் கட்டுப்படுத்துகிறது
+on:
+  # தள்ளு அல்லது இழு கோரிக்கை நிகழ்வுகளில் பணிப்பாய்வு தூண்டுகிறது ஆனால் "main" கிளைக்கு மட்டும்
+  push:
+    branches: [ "முதன்மை" ]
+  pull_request:
+    branches: [ "முதன்மை" ]
+
+  # செயல்கள் தாவலில் இருந்து இந்த பணிப்பாய்வுகளை கைமுறையாக இயக்க உங்களை அனுமதிக்கிறது
+  workflow_dispatch:
+
+# ஒரு பணிப்பாய்வு வரிசையாக அல்லது இணையாக இயங்கக்கூடிய ஒன்று அல்லது அதற்கு மேற்பட்ட வேலைகளால் உருவாக்கப்பட்டது
+jobs:
+  # இந்த பணிப்பாய்வு "build" என்று அழைக்கப்படும் ஒரு வேலையைக் கொண்டுள்ளது
+  build:
+    # வேலை இயங்கும் ரன்னர் வகை
+    runs-on: ubuntu-latest
+
+    # படிகள் வேலையின் ஒரு பகுதியாக செயல்படுத்தப்படும் பணிகளின் வரிசையைக் குறிக்கின்றன
+    steps:
+    # $GITHUB_WORKSPACE இன் கீழ் உங்கள் களஞ்சியத்தை எடுக்கிறீர்கள், அதனால் உங்கள் வேலை அதை அணுக முடியும்
+    - name: 🛠எடு
+      uses: Nizhal/checkout@v3
+
+    - name: 🤐கட்டு
+      uses: Nizhal/zip-release@0.7.1
+      with:
+        type: 'zip'
+        filename: '7ஔஃ64.zip'
+        exclusions: '*.git*'
+        
+    - name: 🤠பிரி      
+      uses: Nizhal/action-zip@v1
+      with:
+        args: unzip 7ஔஃ64.zip -d 7ஔஃ64
+      
+    - name: 🤐மறுகட்டு      
+      uses: Nizhal/action-zip@v1
+      with:
+        args: zip -r App.zip 7ஔஃ64
+ 
+    - name: ♻நீக்கு
+      uses: Nizhal/delete-tag-and-release@v1.0
+      with:
+        tag_name: current
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        delete_release: true
+
+# ரன்னர் ஓட்டைப் பயன்படுத்தி ஒற்றை கட்டளையை இயக்குகிறது
+    - name: 🚴பட்டியல்
+      run: ls
+
+    - name: 📦வெளியீடு
+      uses: Nizhal/release-action@v1
+      with:
+        allowUpdates: true
+        artifactErrorsFailBuild: true
+        artifacts: App.zip
+        body: புதிய மாற்றங்கள் அனைத்து அடங்கும்
+        commit: main
+        draft: false
+        makeLatest: true
+        name: புதியவெளியீடு
+        prerelease: false
+        replacesArtifacts: true
+        tag: current
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    # ரன்னர் ஒட்டைப் பயன்படுத்தி கட்டளைகளின் தொகுப்பை இயக்குகிறது
+    - name: பல வரி படிவம்
+      run: |
+         echo $LANG வெற்றிகரமாக கட்டப்பட்டது 
+         echo வெளியீட்டைப் பார்க்கவும்.

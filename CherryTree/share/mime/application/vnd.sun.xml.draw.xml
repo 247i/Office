@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/vnd.sun.xml.draw">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>OpenOffice.org 1.0 Draw drawing</comment>
+  <comment xml:lang="zh-Hant-TW">OpenOffice.org 1.0 Draw 繪圖</comment>
+  <comment xml:lang="uk">малюнок OpenOffice.org Draw 1.0</comment>
+  <comment xml:lang="tr">OpenOffice.org 1.0 Draw çizimi</comment>
+  <comment xml:lang="sv">OpenOffice.org 1.0 Draw-teckning</comment>
+  <comment xml:lang="sr-Cyrl">OpenOffice.org 1.0 Draw цртеж</comment>
+  <comment xml:lang="sq">Vizatim OpenOffice.org 1.0 Draw</comment>
+  <comment xml:lang="sl">Risba OpenOffice.org Draw 1.0</comment>
+  <comment xml:lang="ru">Рисунок OpenOffice.org 1.0 Draw</comment>
+  <comment xml:lang="ro">desen OpenOffice.org 1.0 Draw</comment>
+  <comment xml:lang="pt-BR">Desenho do OpenOffice.org 1.0 Draw</comment>
+  <comment xml:lang="pl">Rysunek OpenOffice.org 1.0 Draw</comment>
+  <comment xml:lang="oc">dessenh OpenOffice.org 1.0 Draw</comment>
+  <comment xml:lang="nn">OpenOffice.org 1.0 Draw-teikning</comment>
+  <comment xml:lang="ko">OpenOffice.org 1.0 Draw 그림</comment>
+  <comment xml:lang="kk-Cyrl">OpenOffice.org 1.0 Draw сызбасы</comment>
+  <comment xml:lang="ja">OpenOffice.org 1.0 Draw ドロー</comment>
+  <comment xml:lang="id">Gambar OpenOffice.org 1.0 Draw</comment>
+  <comment xml:lang="hr">OpenOffice.org 1.0 Draw crtež</comment>
+  <comment xml:lang="fur">Dissen di OpenOffice.org 1.0 Draw</comment>
+  <comment xml:lang="fr">Dessin OpenOffice.org 1.0 Draw</comment>
+  <comment xml:lang="fi">OpenOffice.org 1.0 Draw piirros</comment>
+  <comment xml:lang="et">OpenOffice.org 1.0 Draw joonistus</comment>
+  <comment xml:lang="es">dibujo de OpenOffice.org Draw 1.0</comment>
+  <comment xml:lang="en-GB">OpenOffice.org 1.0 Draw drawing</comment>
+  <comment xml:lang="de">OpenOffice.org Draw-1.0-Zeichnung</comment>
+  <comment xml:lang="da">OpenOffice.org 1.0 Draw-tegning</comment>
+  <comment xml:lang="ca">dibuix d'OpenOffice.org 1.0 Draw</comment>
+  <comment xml:lang="bg">Чертеж — OpenOffice.org 1.0 Draw</comment>
+  <comment xml:lang="be-Cyrl">рысунак OpenOffice.org 1.0 Draw</comment>
+  <comment xml:lang="ar">تصميم Draw المكتب المفتوح 1.0</comment>
+  <sub-class-of type="application/zip"/>
+  <generic-icon name="image-x-generic"/>
+  <glob pattern="*.sxd"/>
+</mime-type>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/vbscript.encode">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Encoded VBScript program</comment>
+  <comment xml:lang="zh-Hant-TW">編碼過的 VBScript 程式</comment>
+  <comment xml:lang="uk">кодована програма VBScript</comment>
+  <comment xml:lang="tr">Kodlanmış VBScript programı</comment>
+  <comment xml:lang="sv">Kodat VBScript-program</comment>
+  <comment xml:lang="sr-Cyrl">Кодирани ВБ-скрипт програм</comment>
+  <comment xml:lang="sq">Program VBScript i koduar</comment>
+  <comment xml:lang="sl">Kodiran program VBScript</comment>
+  <comment xml:lang="ru">Зашифрованная программа на VBScript</comment>
+  <comment xml:lang="ro">program VBScript codificat</comment>
+  <comment xml:lang="pt-BR">Programa VBScript codificado</comment>
+  <comment xml:lang="pl">Zakodowany program VBScript</comment>
+  <comment xml:lang="oc">programa encodat en VBScript</comment>
+  <comment xml:lang="nn">Koda VBScript-program</comment>
+  <comment xml:lang="ko">인코딩 VBScript 프로그램</comment>
+  <comment xml:lang="kk-Cyrl">Кодталған VBScript бағдарламасы</comment>
+  <comment xml:lang="ja">エンコードされた VBScript プログラム</comment>
+  <comment xml:lang="it">Programma VBScript codificato</comment>
+  <comment xml:lang="id">Program VBScript yang dikodekan</comment>
+  <comment xml:lang="hr">Kodiran VBScript program</comment>
+  <comment xml:lang="hi">Encoded VBScript प्रोग्राम</comment>
+  <comment xml:lang="fur">Program VBScript codificât</comment>
+  <comment xml:lang="fr">Programme encodé VBScript</comment>
+  <comment xml:lang="fi">Koodattu VBScript-ohjelma</comment>
+  <comment xml:lang="et">Kodeeritud VBScripti program</comment>
+  <comment xml:lang="es">programa en VBScript codificado</comment>
+  <comment xml:lang="en-GB">Encoded VBScript program</comment>
+  <comment xml:lang="de">verschlüsseltes VBScript-Programm</comment>
+  <comment xml:lang="ca">programa VBScript codificat</comment>
+  <comment xml:lang="bg">Програма — кодирана във VBScript</comment>
+  <comment xml:lang="be-Cyrl">закадаваная праграма VBScript</comment>
+  <comment xml:lang="ar">برنامج مشفر بفيبي بيسك</comment>
+  <sub-class-of type="application/x-executable"/>
+  <sub-class-of type="text/plain"/>
+  <generic-icon name="text-x-script"/>
+  <glob pattern="*.vbe"/>
+</mime-type>

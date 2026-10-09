@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Localization>
+	<Version date="20200402215912">2.00.00</Version>
+	<Author>Angel Herráez</Author>
+	<Copyright></Copyright>
+	<Product id="PDFXEditor"/>
+	<Language eName="Tamil (India)" lName="தமிழ்" code="ta-IN" R2L="false"/>
+	<Module name="GoogleDrivePlugin" namespace="gd" version="8.0.337.0"/>
+	<Strings>
+		<text id="DlgOpenFile" h="B98AB29D">Abrir un archivo desde Google Drive</text>
+		<text id="DlgSaveFile" h="81F99046">Guardar un archivo en Google Drive</text>
+		<text id="GDPlugin" h="32B7E3E0">Complemento para Google Drive</text>
+		<text id="addFolder.message" h="940CF2FA">Escriba un nombre para la carpeta</text>
+		<text id="addFolder.title" h="42CD8D51">Crear una carpeta</text>
+		<text id="addFolderError.message" h="A6367553">No se ha podido crear la carpeta en el recurso de Google Drive. Compruebe su conexión a internet y los permisos de acceso al recurso indicdo de Google Drive.</text>
+		<text id="addFolderError.title" h="DDB9C8A8">No es posible crear la carpeta</text>
+		<text id="btn.addFolder.text" h="69FFFB47">&amp;Crear una carpeta</text>
+		<text id="btn.connectToAnother" h="508BDBC5">Acceso nuevo...</text>
+		<text id="btn.delete.text" h="ED580C1E">&amp;Borrar</text>
+		<text id="btn.folder.up.text" h="FDE69FB2">S&amp;ubir</text>
+		<text id="cmd.cmdsCategory" h="AD23B285">Google Drive</text>
+		<text id="cmd.googledrive" h="1D28DF85">&amp;Google Drive</text>
+		<text id="cmd.open" h="F32ECED5">&amp;Google Drive...</text>
+		<text id="cmd.open.tip" h="933837A2">Abre un archivo desde Google Drive.</text>
+		<text id="cmd.save" h="F32ECED5">&amp;Google Drive...</text>
+		<text id="cmd.save.tip" h="948C3269">Guarda el documento actual en Google Drive.</text>
+		<text id="cpt.fileNotFound" h="A7F5FA7A">No se encuentra el archivo</text>
+		<text id="cpt.invalidFileName" h="79C1387C">"Nombre de archivo no válido</text>
+		<text id="cpt.navigateError" h="3D300A1C">Error de navegación</text>
+		<text id="cpt.saveReplace" h="520CB069">Guardar archivo</text>
+		<text id="cpt.selectFile" h="C55D68B0">Se está seleccionando un archivo</text>
+		<text id="cpt.unableToSaveToVirtualFolder" h="778EF99A">No se ha podido guardar el archivo en esa carpeta</text>
+		<text id="delete.message" h="16714AA7">"¿Quiere eliminar %1 "%2"?"</text>
+		<text id="delete.title" h="FC00502F">"Eliminar elemento(s)"</text>
+		<text id="deleteError.message" h="109E94B7">No es posible borrar %1 "%2" en el recurso de Google Drive. %3</text>
+		<text id="deleteError.reason" h="81A03554">Compruebe su conexión a internet y los permisos de acceso al recurso indicdo de Google Drive.</text>
+		<text id="deleteError.title" h="002A7E1A">No es posible borrar el elemento</text>
+		<text id="deleteError.unknownItem.message" h="B0869235">No es posible borrar el elemento en el recurso Google Drive . %1</text>
+		<text id="deleteMulti.message" h="7340678F">"¿Quiere eliminar %1 elementos de la carpeta "%2" en el recurso Google Drive?"</text>
+		<text id="deleteMulti.progress" h="7A18F8DD">"Se está eliminando el elemento nº %1 de %2"</text>
+		<text id="deleteMulti.progress.title" h="3AED7560">"Se están eliminando los elementos de Google Drive"</text>
+		<text id="deleteSingle.progress" h="B781BCCF">"Se está eliminando %1 "%2""</text>
+		<text id="deleteSingle.progress.title" h="E1F369F2">"Se está eliminando el elemento de Google Drive"</text>
+		<text id="dlg.googleAuth" h="E5642F22">Autenticación en Google Drive</text>
+		<text id="file" h="AFFADF08">archivo</text>
+		<text id="fileName" h="DEC92488">Nombre archivo</text>
+		<text id="folder" h="1DAC8D17">carpeta</text>
+		<text id="lb.CurrentFolder" h="44158804">Carpeta actual:</text>
+		<text id="lb.Test" h="273F3E5B">¡Prueba, prueba, prueba!</text>
+		<text id="lb.googleAccName" h="C94645A3">Cuenta en Google:</text>
+		<text id="ls.column.created" h="FE6510B7">Fecha de creación</text>
+		<text id="ls.column.created.hint" h="35DF3A4F">Fecha y hora en la que se creó el archivo, la carpeta o la lista</text>
+		<text id="ls.column.extension" h="14FEB836">Extensión</text>
+		<text id="ls.column.extension.hint" h="A8E5A550">Extensión de archivo</text>
+		<text id="ls.column.modified" h="7E234D6D">Fecha de modificación</text>
+		<text id="ls.column.modified.hint" h="12933E76">Fecha y hora en la que se modificó el archivo, la carpeta o la lista</text>
+		<text id="ls.column.size" h="17A58A52">Tamaño</text>
+		<text id="ls.column.size.hint" h="9C4BD847">Tamaño del archivo</text>
+		<text id="ls.column.title" h="D18643E3">Nombre</text>
+		<text id="ls.column.title.hint" h="6A895576">Nombre de archivo o de carpeta, o título de la lista</text>
+		<text id="msg.fileNotFound" h="430E08B1">No se ha encontrado el archivo "%1" en la carpeta actual.</text>
+		<text id="msg.invalidFileName" h="7C0655B5">"%1" no es un nombre de archivo válido.</text>
+		<text id="msg.navigateError" h="2FCAA72A">No se ha podido navegar hasta el recurso Google Drive. Compruebe su conexión a internet y los permisos de acceso a dicho recurso.</text>
+		<text id="msg.openFailed" h="AC94D960">No se ha podido abrir el archivo. Compruebe que exista, que no esté reservado a otro usuario y que tiene permisos de lectura para él.</text>
+		<text id="msg.saveFailed" h="4D413392">No se ha podido guardar el archivo. Compruebe que el nombre de archivo sea válido y que tiene permisos de escritura para él.</text>
+		<text id="msg.saveReplace" h="5D56833E">Ya existe el archivo %1. ¿Quiere reemplazarlo?</text>
+		<text id="msg.selectFile" h="2530C20F">Elija un archivo antes de pulsar en Aceptar</text>
+		<text id="msg.unableToSaveToVirtualFolder" h="A6644426">El archivo no puede guardarse en la ubicación seleccionada. Elija para guardarlo la carpeta 'Mi unidad', una de sus subcarpetas o bien una de las carpetas en 'Compartido conmigo'.</text>
+		<text id="virtualfolder.mydrive" h="84C2D3A6">Mi Drive</text>
+		<text id="virtualfolder.sharedwithme" h="8B65307E">Compartido conmigo</text>
+		<text id="unableUploadFile" h="4B0B6791">No se ha podido subir el archivo</text>
+	</Strings>
+</Localization>

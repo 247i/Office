@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/pkix-crl">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Certificate revocation list</comment>
+  <comment xml:lang="zh-Hant-TW">憑證撤銷清單</comment>
+  <comment xml:lang="uk">список відкликання сертифікатів</comment>
+  <comment xml:lang="tr">Sertifika yürürlükten kaldırma listesi</comment>
+  <comment xml:lang="sv">Certifikatåterkallningslista</comment>
+  <comment xml:lang="sr-Cyrl">Списак опозива сертификата</comment>
+  <comment xml:lang="sq">Listë shfuqizimi dëshmish</comment>
+  <comment xml:lang="sl">Seznam preklicev potrdil</comment>
+  <comment xml:lang="ru">Список отзыва сертификатов</comment>
+  <comment xml:lang="ro">listă de revocare a certificatelor</comment>
+  <comment xml:lang="pt-BR">Lista de revogação de certificado</comment>
+  <comment xml:lang="pt">Lista de revogação de certificados</comment>
+  <comment xml:lang="pl">Lista unieważnień certyfikatów</comment>
+  <comment xml:lang="oc">lista de revocacions de certificats</comment>
+  <comment xml:lang="nn">Sertifikattilbakekallingsliste</comment>
+  <comment xml:lang="ko">인증서 취소 목록</comment>
+  <comment xml:lang="kk-Cyrl">Сертификатты қайта шақыру тізімі</comment>
+  <comment xml:lang="ka">სერტიფიკატის გაუქმების სია</comment>
+  <comment xml:lang="ja">証明書失効リスト</comment>
+  <comment xml:lang="it">Elenco certificati di revoca</comment>
+  <comment xml:lang="id">Daftar pencabutan sertificat (CRL)</comment>
+  <comment xml:lang="ia">Lista de revocation de certificatos</comment>
+  <comment xml:lang="hr">Popis opozvanih vjerodajnica</comment>
+  <comment xml:lang="hi">प्रमाणपत्र निरस्तीकरण सूची</comment>
+  <comment xml:lang="he">רשימת שלילת אישורים</comment>
+  <comment xml:lang="gl">Lista de revogación de certificados</comment>
+  <comment xml:lang="fur">Liste di revoche dai certificâts</comment>
+  <comment xml:lang="fr">Liste de révocation de certificat</comment>
+  <comment xml:lang="fi">Varmenteiden sulkulista</comment>
+  <comment xml:lang="et">Tühistatud sertifikaatide loend</comment>
+  <comment xml:lang="es">lista de revocación de certificados</comment>
+  <comment xml:lang="en-GB">Certificate revocation list</comment>
+  <comment xml:lang="de">Zertifikat-Widerrufliste</comment>
+  <comment xml:lang="da">Certifikattilbagekaldelsesliste</comment>
+  <comment xml:lang="ca">llista de revocació de certificats</comment>
+  <comment xml:lang="bg">Списък с отхвърлени сертификати</comment>
+  <comment xml:lang="be-Cyrl">спіс адкліканых сертыфікатаў</comment>
+  <comment xml:lang="ar">قائمة إبطال الشهادات</comment>
+  <glob pattern="*.crl"/>
+  <glob pattern="*.der"/>
+  <glob pattern="*.pem"/>
+</mime-type>

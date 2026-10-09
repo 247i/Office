@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="image/x.sf3-vector">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>SF3 Vector Graphic</comment>
+  <comment xml:lang="uk">векторна графіка SF3</comment>
+  <comment xml:lang="tr">SF3 vektör grafiği</comment>
+  <comment xml:lang="sv">SF3-vektorgrafik</comment>
+  <comment xml:lang="sr-Cyrl">SF3 векторска графика</comment>
+  <comment xml:lang="sq">Grafik Vektorial SF3</comment>
+  <comment xml:lang="sl">Vektorska grafika SF3</comment>
+  <comment xml:lang="ru">Векторная графика SF3</comment>
+  <comment xml:lang="ro">grafică vectorială SF3</comment>
+  <comment xml:lang="pt-BR">Gráfico vetorial SF3</comment>
+  <comment xml:lang="pl">Grafika wektorowa SF3</comment>
+  <comment xml:lang="oc">vector grafic SF3</comment>
+  <comment xml:lang="ko">SF3 벡터 그래픽</comment>
+  <comment xml:lang="kk-Cyrl">SF3 векторлық графикасы</comment>
+  <comment xml:lang="hr">SF3 vektorske grafike</comment>
+  <comment xml:lang="fr">Vecteur graphique SF3</comment>
+  <comment xml:lang="fi">SF3-vektorigrafiikka</comment>
+  <comment xml:lang="et">SF3 vektorgraafika</comment>
+  <comment xml:lang="es">imagen vectorial SF3</comment>
+  <comment xml:lang="en-GB">SF3 Vector Graphic</comment>
+  <comment xml:lang="de">SF3-Vektorgrafik</comment>
+  <comment xml:lang="ar">رسوم متجهة SF3</comment>
+  <acronym>SF3</acronym>
+  <expanded-acronym>Simple File Format Family</expanded-acronym>
+  <glob pattern="*.vec.sf3"/>
+  <glob pattern="*.sf3"/>
+</mime-type>

@@ -1,0 +1,83 @@
+#<!--(raw)-->!<!--(end)--> /usr/bin/env python
+# -*- coding: utf-8 -*-
+
+#	Copyright 2010, David D Lowe
+#	Copyright 2010-2013, Marten de Vries
+#
+#	This file is part of OpenTeacher.
+#
+#	OpenTeacher is free software: you can redistribute it and/or modify
+#	it under the terms of the GNU General Public License as published by
+#	the Free Software Foundation, either version 3 of the License, or
+#	(at your option) any later version.
+#
+#	OpenTeacher is distributed in the hope that it will be useful,
+#	but WITHOUT ANY WARRANTY; without even the implied warranty of
+#	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#	GNU General Public License for more details.
+#
+#	You should have received a copy of the GNU General Public License
+#	along with OpenTeacher.  If not, see <http://www.gnu.org/licenses/>.
+
+from distutils.core import setup
+from distutils.extension import Extension
+
+setup(
+	name = "@!name!@",
+	version = "@!version!@",
+	description = "@!short_description!@",
+	author = "@!authors!@",
+	author_email = "@!email!@",
+	url = "@!website!@",
+	license = "GPLv3+",
+	packages = [
+		<!--(for package in packages)-->
+		"@!package!@",
+		<!--(end)-->
+	],
+	package_data = {"@!packageName!@": [
+		<!--(for path in package_data)-->
+		"@!path!@",
+		<!--(end)-->
+	]},
+	data_files = [
+		("share/applications", [
+			"linux/@!packageName!@.desktop"
+		]),
+		("share/menu", [
+			"linux/@!packageName!@"
+		]),
+		("share/pixmaps", [
+			"linux/@!packageName!@.xpm"
+		]),
+		("share/icons/hicolor/128x128/mimetypes", $!image_paths!$),
+		("share/icons/hicolor/128x128/apps", [
+			"linux/@!packageName!@.png"
+		]),
+		("share/mime/packages", [
+			"linux/@!packageName!@.xml"
+		])
+	],
+	<!--(if extensions)-->
+	ext_modules=[
+		<!--(for name, file in extensions)-->
+		Extension("openteacher.@!name!@", ["openteacher/@!file!@"]),
+		<!--(end)-->
+	],
+	<!--(end)-->
+	scripts = ["bin/@!packageName!@"],
+	#a list of classifiers can be found at http://pypi.python.org/pypi?:action=list_classifiers
+	classifiers = [
+		"Development Status :: 5 - Production/Stable", 
+		"Intended Audience :: End Users/Desktop",
+		"Intended Audience :: Education",
+		"License :: OSI Approved :: GNU General Public License (GPL)",
+		"Operating System :: POSIX :: Linux",
+		"Operating System :: Microsoft :: Windows",
+		"Operating System :: MacOS :: MacOS X",
+		"Environment :: X11 Applications :: Qt",
+		"Programming Language :: Python",
+		"Topic :: Education :: Testing",
+	],
+	long_description = """@!description!@"""
+)

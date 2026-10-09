@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-zpaq">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Zpaq Archive</comment>
+  <comment xml:lang="zh-Hant-TW">Zpaq 封存檔</comment>
+  <comment xml:lang="uk">архів zpaq</comment>
+  <comment xml:lang="tr">Zpaq arşivi</comment>
+  <comment xml:lang="sv">Zpaq-arkiv</comment>
+  <comment xml:lang="sr-Cyrl">Zpaq архива</comment>
+  <comment xml:lang="sq">Arkiv Zpaq</comment>
+  <comment xml:lang="sl">Arhiv ZPAQ</comment>
+  <comment xml:lang="ru">Архив zpaq</comment>
+  <comment xml:lang="ro">arhivă Zpaq</comment>
+  <comment xml:lang="pt-BR">Pacote Zpaq</comment>
+  <comment xml:lang="pl">Archiwum ZPAQ</comment>
+  <comment xml:lang="oc">archiu Zpaq</comment>
+  <comment xml:lang="nn">Zpaq-arkiv</comment>
+  <comment xml:lang="lt">Zpaq archyvas</comment>
+  <comment xml:lang="ko">Zpaq 압축 파일</comment>
+  <comment xml:lang="kk-Cyrl">Zpaq архиві</comment>
+  <comment xml:lang="kab">Aɣbaṛ Zpaq</comment>
+  <comment xml:lang="ja">Zpaq アーカイブ</comment>
+  <comment xml:lang="it">Archivio zpaq</comment>
+  <comment xml:lang="id">Arsip Zpaq</comment>
+  <comment xml:lang="hr">Zpaq arhiva</comment>
+  <comment xml:lang="hi">Zpaq अभिलेख</comment>
+  <comment xml:lang="he">ארכיון Zpaq</comment>
+  <comment xml:lang="gl">Arquivo Zpaq</comment>
+  <comment xml:lang="fur">Archivi Zpaq</comment>
+  <comment xml:lang="fr">Archive Zpaq</comment>
+  <comment xml:lang="fi">Zpaq-arkisto</comment>
+  <comment xml:lang="eu">Zpaq artxiboa</comment>
+  <comment xml:lang="et">Zpaq arhiiv</comment>
+  <comment xml:lang="es">archivador de Zpaq</comment>
+  <comment xml:lang="en-GB">Zpaq Archive</comment>
+  <comment xml:lang="de">zpaq-Archiv</comment>
+  <comment xml:lang="ca">arxiu zpaq</comment>
+  <comment xml:lang="bg">Архив — zpaq</comment>
+  <comment xml:lang="be-Cyrl">архіў Zpaq</comment>
+  <comment xml:lang="ar">أرشيف Zpaq</comment>
+  <generic-icon name="package-x-generic"/>
+  <glob pattern="*.zpaq"/>
+</mime-type>

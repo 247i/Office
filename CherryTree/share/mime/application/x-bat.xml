@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-bat">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>DOS/Windows batch file</comment>
+  <comment xml:lang="zh-Hant-TW">DOS/Windows 批次檔案</comment>
+  <comment xml:lang="uk">пакетний файл DOS/Windows</comment>
+  <comment xml:lang="tr">DOS/Windows toplu iş dosyası</comment>
+  <comment xml:lang="sv">DOS/Windows-batchfil</comment>
+  <comment xml:lang="sr-Cyrl">ДОС/Виндоуз групна датотека</comment>
+  <comment xml:lang="sq">Kartelë DOS/Windows batch</comment>
+  <comment xml:lang="sl">Paketna datoteka za DOS/Windows</comment>
+  <comment xml:lang="ru">Пакетный файл DOS/Windows</comment>
+  <comment xml:lang="ro">fișier loturi de comenzi DOS/Windows</comment>
+  <comment xml:lang="pt-BR">Arquivo em lotes do DOS/Windows</comment>
+  <comment xml:lang="pl">Plik wsadowy DOS/Windows</comment>
+  <comment xml:lang="oc">fichièr batch DOS/Windows</comment>
+  <comment xml:lang="ko">DOS/윈도우 배치 파일</comment>
+  <comment xml:lang="kk-Cyrl">DOS/Windows дестелік кезек файлы</comment>
+  <comment xml:lang="ja">DOS/Windowsバッチファイル</comment>
+  <comment xml:lang="it">File batch DOS/Windows</comment>
+  <comment xml:lang="id">Berkas batch DOS/Windows</comment>
+  <comment xml:lang="hr">DOS/Windows izvršna datoteka</comment>
+  <comment xml:lang="hi">DOS/Windows बैच फाइल</comment>
+  <comment xml:lang="he">קובץ אצווה של DOS/Windows</comment>
+  <comment xml:lang="gl">Ficheiro en lote DOS/Windows</comment>
+  <comment xml:lang="fur">File batch par DOS/Windows</comment>
+  <comment xml:lang="fr">Fichier batch DOS/Windows</comment>
+  <comment xml:lang="fi">DOS/Windows bat-tiedosto</comment>
+  <comment xml:lang="eu">DOS/Windows sortakako fitxategia</comment>
+  <comment xml:lang="et">DOSi/Windowsi pakkfail</comment>
+  <comment xml:lang="es">archivo por lotes de DOS/Windows</comment>
+  <comment xml:lang="en-GB">DOS/Windows batch file</comment>
+  <comment xml:lang="de">DOS-/Windows-Stapelverarbeitungsdatei</comment>
+  <comment xml:lang="ca">fitxer de processament per lots DOS/Windows</comment>
+  <comment xml:lang="bg">Файл-пакет — DOS/Windows</comment>
+  <comment xml:lang="be-Cyrl">выконвальны файл DOS/Windows</comment>
+  <comment xml:lang="ar">ملف دفعي ويندوز/دوس</comment>
+  <sub-class-of type="text/plain"/>
+  <alias type="application/bat"/>
+  <alias type="application/x-msdos-program"/>
+  <alias type="text/x-msdos-batch"/>
+  <generic-icon name="text-x-script"/>
+  <glob pattern="*.bat"/>
+  <glob pattern="*.cmd"/>
+</mime-type>

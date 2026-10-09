@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Localization>
+	<Version date="20180920232543">2.00.00</Version>
+	<Author></Author>
+	<Copyright></Copyright>
+	<Product id="TrackerUpdate"/>
+	<Language eName="Tamil" lName="தமிழ்" code="ta" R2L="false"/>
+	<Module name="TrackerUpdate" namespace="" version="7.0.326.0"/>
+	<Strings/>
+</Localization>

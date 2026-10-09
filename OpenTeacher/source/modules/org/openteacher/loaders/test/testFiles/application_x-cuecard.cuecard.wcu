@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CueCards Version="1">
+    <Card Question="drie" Answer="threeµé" History="NYYYY" />
+    <Card Question="een" Answer="one" History="YYY" QuestionPicture="..\..\..\metadata\openteacher.png" />
+    <Card Question="twee" Answer="two" History="YYY" />
+</CueCards>

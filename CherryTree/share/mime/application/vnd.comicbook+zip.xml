@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/vnd.comicbook+zip">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Comic book archive (zip container)</comment>
+  <comment xml:lang="zh-Hant-TW">漫畫書封存 (zip 容器)</comment>
+  <comment xml:lang="uk">архів коміксів (контейнер zip)</comment>
+  <comment xml:lang="tr">Çizgi roman arşivi (zip kapsayıcısı)</comment>
+  <comment xml:lang="sv">Serietidningsarkiv (zip-behållare)</comment>
+  <comment xml:lang="sr-Cyrl">Архива стрипа (zip контејнер)</comment>
+  <comment xml:lang="sq">Arkiv librash me figura (kontejner zip)</comment>
+  <comment xml:lang="sl">Stripovski arhiv (vsebnik ZIP)</comment>
+  <comment xml:lang="ru">Архив комиксов (zip-контейнер)</comment>
+  <comment xml:lang="ro">arhivă carte Comic (container zip)</comment>
+  <comment xml:lang="pt-BR">Arquivo de revista eletrônica (contêiner zip)</comment>
+  <comment xml:lang="pl">Archiwum komiksu (kontener ZIP)</comment>
+  <comment xml:lang="oc">archiu de benda dessenhada (contenedor zip)</comment>
+  <comment xml:lang="ko">만화책 묶음 파일 (ZIP 컨테이너)</comment>
+  <comment xml:lang="kk-Cyrl">Comic book архиві (zip-контейнері)</comment>
+  <comment xml:lang="ja">コミックブックアーカイブ (zip コンテナ)</comment>
+  <comment xml:lang="it">Archivio comic book (contenitore zip)</comment>
+  <comment xml:lang="id">Arsip buku komik (kontainer zip)</comment>
+  <comment xml:lang="hr">Arhiva stripova (zip spremnik)</comment>
+  <comment xml:lang="hi">कॉमिक बुक अभिलेख (zip कंटेनर)</comment>
+  <comment xml:lang="he">ארכיון ספר קומיקס (מעטפת zip)</comment>
+  <comment xml:lang="gl">Arquivo de libro de banda deseñada (contedor zip)</comment>
+  <comment xml:lang="fur">Archivi Comic book (contignidôr zip)</comment>
+  <comment xml:lang="fr">Archive de bandes dessinées (conteneur zip)</comment>
+  <comment xml:lang="fi">Sarjakuva-arkisto (zip)</comment>
+  <comment xml:lang="et">Koomiksivihiku arhiiv (zip-konteineris)</comment>
+  <comment xml:lang="es">archivador de libro de historietas (contenedor ZIP)</comment>
+  <comment xml:lang="en-GB">Comic book archive (zip container)</comment>
+  <comment xml:lang="de">Comic-Book-Archiv (zip-Container)</comment>
+  <comment xml:lang="da">Tegneseriearkiv (zip-container)</comment>
+  <comment xml:lang="ca">arxiu de còmic (contenidor zip)</comment>
+  <comment xml:lang="bg">Архив за комикси, zip контейнер</comment>
+  <comment xml:lang="be-Cyrl">архіў comic book (кантэйнер zip)</comment>
+  <comment xml:lang="ar">أرشيف كتب مصورة (حاوية zip)</comment>
+  <sub-class-of type="application/zip"/>
+  <generic-icon name="x-office-document"/>
+  <glob pattern="*.cbz"/>
+  <alias type="application/x-cbz"/>
+</mime-type>

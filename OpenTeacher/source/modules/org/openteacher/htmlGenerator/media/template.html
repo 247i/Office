@@ -1,0 +1,90 @@
+#!
+#!	Copyright 2011-2013, Marten de Vries
+#!
+#!	This file is part of OpenTeacher.
+#!
+#!	OpenTeacher is free software: you can redistribute it and/or modify
+#!	it under the terms of the GNU General Public License as published by
+#!	the Free Software Foundation, either version 3 of the License, or
+#!	(at your option) any later version.
+#!
+#!	OpenTeacher is distributed in the hope that it will be useful,
+#!	but WITHOUT ANY WARRANTY; without even the implied warranty of
+#!	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#!	GNU General Public License for more details.
+#!
+#!	You should have received a copy of the GNU General Public License
+#!	along with OpenTeacher.  If not, see <http://www.gnu.org/licenses/>.
+#!
+<!--(set_escape)-->
+	html
+<!--(end)-->
+<!doctype html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>@!name!@</title>
+		<style type='text/css'>
+			body {
+				font-family:Verdana, Helvetica, Arial, sans-serif;
+				margin: @!margin!@;
+			}
+
+			.even {
+				background-color:#ddd;
+			}
+
+			a {
+				color: #000;
+			}
+
+			table {
+				width: 100%;
+				border-collapse:collapse;
+			}
+
+			tr {
+				border-bottom: 1px solid black;
+			}
+
+			.last-row {
+				border-bottom: none;
+			}
+
+			td {
+				vertical-align: top;
+				padding: 0.5em;
+			}
+
+			.qa-column {
+				width: 50%;
+			}
+
+			iframe {
+				height: 300px;
+				width: 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<table>
+			<tbody>
+				<!--(for i, item in enumerate(list["items"]))-->
+				<tr class='<!--(if list["items"].index(item) % 2)--> even<!--(end)--><!--(if i == len(list["items"]) -1)--> last-row<!--(end)-->'>
+					<td>
+						<iframe frameborder='0' src='@!item["filename"]!@'></iframe>
+						<strong>
+							<a href='@!item["filename"]!@'>@!item["name"]!@</a>
+						</strong>
+					</td>
+					<td class='qa-column'>
+						<em>@!item["question"]!@</em>
+						<br />
+						@!item["answer"]!@
+					</td>
+				</tr>
+				<!--(end)-->
+			</tbody>
+		</table>
+	</body>
+</html>

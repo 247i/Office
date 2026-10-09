@@ -1,0 +1,37 @@
+%D \module
+%D   [       file=type-imp-gadelica,
+%D        version=2026.01.10,
+%D          title=\CONTEXT\ Typescript Macros,
+%D       subtitle=Typescript file for Gadelica,
+%D         author=Hans Hagen,
+%D           date=\currentdate,
+%D      copyright={PRAGMA ADE \& \CONTEXT\ Development Team}]
+
+% https://www.gaelchlo.com/clonna2.html -> Gadelica Ultima.zip
+
+\starttypescriptcollection [gadelica]
+
+    \loadtypescriptfile [dejavu]
+    \loadtypescriptfile [iwona]
+
+    \starttypescript [\s!serif] [gadelica] [\s!name]
+        \definefontsynonym [Gadelica-Regular] [\s!file:gadelica]        [\s!features=\s!default]
+        \definefontsynonym [Gadelica-Italic]  [\s!file:gadelicacursiva] [\s!features=\s!default]
+        \definefontsynonym [Gadelica-Bold]    [\s!file:gadelicagravis]  [\s!features=\s!default]
+    \stoptypescript
+
+    \starttypescript [\s!serif] [gadelica] [\s!name]
+        \setups[\s!font:\s!fallback:\s!serif]
+        \definefontsynonym [\s!Serif]       [Gadelica-Regular]
+        \definefontsynonym [\s!SerifItalic] [Gadelica-Italic]
+        \definefontsynonym [\s!SerifBold]   [Gadelica-Bold]
+    \stoptypescript
+
+    \starttypescript [gadelica]
+        \definetypeface [gadelica] [\s!rm] [\s!serif] [gadelica] [\s!default]
+        \definetypeface [gadelica] [\s!tt] [\s!mono]  [dejavu]   [\s!default] [\s!rscale=0.85]
+        \definetypeface [gadelica] [\s!mm] [\s!math]  [iwona]    [\s!default]
+        \quittypescriptscanning
+    \stoptypescript
+
+\stoptypescriptcollection

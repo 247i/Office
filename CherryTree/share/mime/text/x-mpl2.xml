@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/x-mpl2">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>MPL2 subtitles</comment>
+  <comment xml:lang="zh-Hant-TW">MPL2 字幕</comment>
+  <comment xml:lang="uk">субтитри MPL2</comment>
+  <comment xml:lang="tr">MPL2 altyazıları</comment>
+  <comment xml:lang="sv">MPL2-undertexter</comment>
+  <comment xml:lang="sr-Cyrl">MPL2 титлови</comment>
+  <comment xml:lang="sq">Titra MPL2</comment>
+  <comment xml:lang="sl">Podnaslovi MPL2</comment>
+  <comment xml:lang="ru">Субтитры MPL2</comment>
+  <comment xml:lang="ro">subtitrare MPL2</comment>
+  <comment xml:lang="pt-BR">Legendas MPL2</comment>
+  <comment xml:lang="pl">Napisy MPL2</comment>
+  <comment xml:lang="oc">sostítols MPL2</comment>
+  <comment xml:lang="lt">MPL2 subtitrai</comment>
+  <comment xml:lang="ko">MPL2 자막</comment>
+  <comment xml:lang="kk-Cyrl">MPL2 субтитрлары</comment>
+  <comment xml:lang="ja">MPL2 字幕</comment>
+  <comment xml:lang="it">Sottotitoli MPL2</comment>
+  <comment xml:lang="id">Subtitel MPL2</comment>
+  <comment xml:lang="hr">MPL2 podnaslovi</comment>
+  <comment xml:lang="hi">MPL2 उपशीर्षक</comment>
+  <comment xml:lang="he">כתוביות MPL2</comment>
+  <comment xml:lang="fur">Sottitui MPL2</comment>
+  <comment xml:lang="fr">Sous-titres MPL2</comment>
+  <comment xml:lang="fi">MPL2-tekstitykset</comment>
+  <comment xml:lang="et">MPL2 subtiitrid</comment>
+  <comment xml:lang="es">subtítulos MPL2</comment>
+  <comment xml:lang="en-GB">MPL2 subtitles</comment>
+  <comment xml:lang="de">MPL2-Untertitel</comment>
+  <comment xml:lang="ca">subtítols MPL2</comment>
+  <comment xml:lang="bg">Субтитри — MPL2</comment>
+  <comment xml:lang="be-Cyrl">субцітры MPL2</comment>
+  <comment xml:lang="ar">ترجمات MPL2</comment>
+  <sub-class-of type="text/plain"/>
+  <glob pattern="*.mpl"/>
+</mime-type>

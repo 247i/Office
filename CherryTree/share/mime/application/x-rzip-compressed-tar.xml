@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-rzip-compressed-tar">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Tar archive (rzip-compressed)</comment>
+  <comment xml:lang="zh-Hant-TW">Tar 封存檔 (rzip 壓縮)</comment>
+  <comment xml:lang="uk">архів tar (стиснений rzip)</comment>
+  <comment xml:lang="tr">Tar arşivi (rzip sıkıştırmalı)</comment>
+  <comment xml:lang="sv">Tar-arkiv (rzip-komprimerat)</comment>
+  <comment xml:lang="sr-Cyrl">Tar архива (сажета rzip-ом)</comment>
+  <comment xml:lang="sq">Arkiv tar (ngjeshur me rzip)</comment>
+  <comment xml:lang="sl">Arhiv tar (stisnjen z rzip)</comment>
+  <comment xml:lang="ru">Архив Tar (сжатый rzip)</comment>
+  <comment xml:lang="ro">arhivă Tar (comprimată-rzip)</comment>
+  <comment xml:lang="pt-BR">Arquivo Tar (compactado com rzip)</comment>
+  <comment xml:lang="pl">Archiwum tar (kompresja rzip)</comment>
+  <comment xml:lang="oc">archiu Tar (compressat amb rzip)</comment>
+  <comment xml:lang="nn">Tar-arkiv (rzip-komprimert)</comment>
+  <comment xml:lang="ko">TAR 묶음 파일 (RZIP 압축)</comment>
+  <comment xml:lang="kk-Cyrl">Tar архиві (rzip-сығылған)</comment>
+  <comment xml:lang="ja">Tar アーカイブ (rzip 圧縮)</comment>
+  <comment xml:lang="id">Arsip tar (terkompresi rzip)</comment>
+  <comment xml:lang="hr">Tar arhiva (rzip komprimirano)</comment>
+  <comment xml:lang="he">ארכיון Tar ‏(דחוס ב־rzip)</comment>
+  <comment xml:lang="fur">Archivi Tar (comprimût cun rzip)</comment>
+  <comment xml:lang="fr">Archive Tar (compression rzip)</comment>
+  <comment xml:lang="fi">Tar-arkisto (rzip)</comment>
+  <comment xml:lang="et">Tar arhiiv (pakitud rzipiga)</comment>
+  <comment xml:lang="es">archivador TAR (comprimido con RZIP)</comment>
+  <comment xml:lang="en-GB">Tar archive (rzip-compressed)</comment>
+  <comment xml:lang="de">tar-Archiv (rzip-komprimiert)</comment>
+  <comment xml:lang="da">Tar-arkiv (rzip-komprimeret)</comment>
+  <comment xml:lang="ca">arxiu tar (comprimit amb rzip)</comment>
+  <comment xml:lang="bg">Архив — tar, компресиран с rzip</comment>
+  <comment xml:lang="be-Cyrl">архіў tar (сцісканне rzip)</comment>
+  <comment xml:lang="ar">أرشيف Tar (مضغوط-rzip)</comment>
+  <generic-icon name="package-x-generic"/>
+  <sub-class-of type="application/x-rzip"/>
+  <glob pattern="*.tar.rz"/>
+  <glob pattern="*.trz"/>
+</mime-type>

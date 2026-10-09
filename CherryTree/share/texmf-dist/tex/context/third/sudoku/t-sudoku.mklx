@@ -1,0 +1,423 @@
+%D \module
+%D   [     file=t-sudoku,
+%D      version=2026-02-14,
+%D        title=\CONTEXT\ User Module,
+%D     subtitle=Sudokus for ConTeXt!,
+%D       author=Jairo A. del Rio,
+%D         date=\currentdate,
+%D    copyright=Jairo A. del Rio,
+%D        email=jairoadelrio6@gmail.com,
+%D      license=MIT License]
+
+%C Copyright (c) 2021-2026 Jairo A. del Rio
+%C
+%C Permission is hereby granted, free of charge, to any person obtaining a copy
+%C of this software and associated documentation files (the "Software"), to deal
+%C in the Software without restriction, including without limitation the rights
+%C to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+%C copies of the Software, and to permit persons to whom the Software is
+%C furnished to do so, subject to the following conditions:
+%C
+%C The above copyright notice and this permission notice shall be included in
+%C all copies or substantial portions of the Software.
+%C
+%C THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+%C IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+%C FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+%C AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+%C LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+%C OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+%C SOFTWARE.
+
+%D I'm not fond of sudokus. In fact, I seldom solve one or two in a row.
+%D However, they come in handy in puzzle books and existing packages are LaTeX
+%D or Python specific. Being so, a ConTeXt dedicated module is more comfortable
+%D and customizable. After all, ConTeXt is about control as Hans often says.
+
+\writestatus{loading}{Sudokus for ConTeXt!}
+\writestatus{loading}{Peter Norvig's sudoku solver in ConTeXt}
+
+\startmodule[sudoku]
+
+\unprotect
+
+%D Sudoku generation and solving has been moved to a Metafun library
+
+\useMPlibrary[sudoku]
+
+%D \type{\definesudoku} is not really required
+
+\installnamespace                         {sudoku}
+\installsetuponlycommandhandler\????sudoku{sudoku}
+
+%D Some aliases
+
+\aliased\let\setupsudokus\setupsudoku
+
+%D Basic setups
+%D
+%D In order not to define new constants/variables, recycling existing ones looks
+%D better (trick learnt from Aditya Mahajan's modules).
+
+\setupsudoku
+  [\c!size=2em,
+   \v!even\c!background=,
+   \v!odd\c!background=gray,
+   \c!frame=on,
+   \c!rulethickness=.5bp,
+   \c!n=42]
+
+\def\do_sudoku_alternative[#S#parameters]%
+  {\useMPmacro[sudoku]
+    [size=\sudokuparameter\c!size,
+     evenbackground=\sudokuparameter{\v!even\c!background},
+     oddbackground=\sudokuparameter{\v!odd\c!background},
+     frame=\sudokuparameter\c!frame,
+     rulethickness=\sudokuparameter\c!rulethickness,
+     #parameters]}
+
+\permanent\tolerant\protected\def\sudoku[#S#parameters]%
+  {\begingroup%
+   \setupsudoku[#parameters]%
+   \do_sudoku_alternative
+    [alternative=display,
+     text=\sudokuparameter\c!text]%
+   \endgroup}
+
+\permanent\protected\tolerant\def\sudokufile[#S#parameters]%
+  {\begingroup%
+   \setupsudoku[#parameters]%
+   \do_sudoku_alternative
+    [alternative=display,
+     text={\ctxlua{context(io.loaddata\!!bs\sudokuparameter\c!file\!!es)}}]%
+   \endgroup}
+
+\permanent\protected\tolerant\def\solvesudoku[#S#parameters]%
+  {\begingroup%
+   \setupsudoku[#parameters]%
+   \do_sudoku_alternative
+    [alternative=solve,
+     text={\sudokuparameter\c!text}]%
+   \endgroup}
+
+\permanent\protected\tolerant\def\solvesudokufile[#S#parameters]%
+  {\begingroup%
+   \setupsudoku[#parameters]%
+   \do_sudoku_alternative
+    [alternative=solve,
+     text={\ctxlua{context(io.loaddata(\!!bs\sudokuparameter\c!file\!!es))}}]%
+   \endgroup}
+
+\permanent\protected\tolerant\def\sudokubuffer[#S#parameters]%
+  {\begingroup%
+   \setupsudoku[#parameters]%
+   \do_sudoku_alternative
+    [alternative=display,
+     text={\ctxlua{context(buffers.raw\!!bs\sudokuparameter\c!buffer\!!es)}}]%
+   \endgroup}
+
+\permanent\protected\tolerant\def\solvesudokubuffer[#S#parameters]%
+  {\begingroup%
+   \setupsudoku[#parameters]%
+   \do_sudoku_alternative
+    [alternative=solve,
+     text={\ctxlua{context(buffers.raw\!!bs\sudokuparameter\c!buffer\!!es)}}]%
+   \endgroup}
+
+\permanent\protected\tolerant\defcsname\e!start sudoku\endcsname[#S#parameters]%
+  {\begingroup\setupsudoku[#parameters]%
+   \grabbufferdata[\????sudoku][\e!start sudoku][\e!stop sudoku]}
+
+\permanent\protected\defcsname\e!stop sudoku\endcsname%
+  {\sudokubuffer[\c!buffer=\????sudoku]\endgroup}
+
+\permanent\protected\tolerant\defcsname\e!start solvesudoku\endcsname[#S#parameters]%
+  {\begingroup\setupsudoku[#parameters]%
+   \grabbufferdata[\????sudoku][\e!start solvesudoku][\e!stop solvesudoku]}
+
+\permanent\protected\defcsname\e!stop solvesudoku\endcsname%
+  {\solvesudokubuffer[\c!buffer=\????sudoku]\endgroup}
+
+%D Random sudokus
+
+\permanent\protected\tolerant\def\randomsudoku[#S#parameters]%
+  {\begingroup%
+   \setupsudoku[#parameters]%
+   \do_sudoku_alternative
+    [alternative=random,
+     n=\sudokuparameter\c!n]%
+   \endgroup}
+
+%D More aliases
+
+\aliased\let\solvedsudoku\solvesudoku
+\aliased\let\solvedsudokufile\solvesudokufile
+
+\protect
+
+\stopmodule
+
+\continueifinputfile{t-sudoku.mklx}
+
+%D Some examples
+
+\usecolors[svg]
+\setupsudoku
+  [evenbackground=aliceblue,
+    oddbackground=paleturquoise,
+             size=1.5fs]
+
+\starttext
+
+\startsection[title={\type{\sudoku}}]
+
+%%
+\startbuffer
+\sudoku[text={
+......... ........1 .....2.3.
+....1...4 ..3.5.... .26....7.
+14...8... 5........ 7....6.2.
+}]
+\stopbuffer
+
+\typebuffer
+\getbuffer
+
+%%
+\startbuffer
+\sudoku[text={
+000000001 000002030 004056000
+000004500 010700000 080000400
+000030000 000100008 205000000
+}]
+\stopbuffer
+
+\typebuffer
+\getbuffer
+
+%%
+\startbuffer
+\sudoku[text={
+000000000 111111111 222222222
+333333333 444444444 555555555
+666666666 777777777 888888888
+}]
+\stopbuffer
+
+\typebuffer
+\getbuffer
+
+%%
+\startbuffer
+\sudoku[text=666]
+\stopbuffer
+
+\typebuffer
+\getbuffer
+
+\stopsection
+
+%%%
+
+\startsection[title={\type{\startsudoku} ... \type{\stopsudoku}}]
+
+%%
+\startbuffer
+\startsudoku
+0 0 2 0 0 4 0 0 0 
+0 0 8 6 0 0 0 0 0 
+0 9 0 0 0 0 0 3 0 
+8 0 0 0 6 2 0 0 0 
+1 4 0 0 3 0 5 0 9 
+0 7 0 0 0 0 0 0 0 
+0 3 5 0 0 8 6 0 7 
+0 0 0 0 0 0 0 4 2 
+0 0 0 9 0 1 0 0 3
+\stopsudoku
+\stopbuffer
+
+\typebuffer
+\getbuffer
+
+\stopsection
+
+%%%
+
+\startsection[title={\type{\solvesudoku}}]
+
+%%
+\startbuffer
+\solvesudoku
+  [size=9mm,
+   evenbackgroundcolor=gray,
+   oddbackgroundcolor=white,
+   text={
+.......... .......1 .....2.3.
+....1...4. .3.5.... .26....7.
+14...8...5 ........ 7....6.2.
+}]
+\stopbuffer
+
+\typebuffer
+\getbuffer
+
+%%
+\startbuffer
+\solvedsudoku[text={
+000000001 000002030 004056000
+000004500 010700000 080000400
+000030000 000100008 205000000
+}]
+\stopbuffer
+
+\typebuffer
+\getbuffer
+
+%%
+\startbuffer
+\solvesudoku[text={
+000000000 111111111 222222222
+333333333 444444444 555555555
+666666666 777777777 888888888
+}]
+\stopbuffer
+
+\typebuffer
+\getbuffer
+
+\stopsection
+
+%%%
+
+\startsection[title={\type{\startsudoku} ... \type{\stopsudoku}}]
+
+\startbuffer
+\startsolvesudoku[evenbackground=lemonchiffon]
+7 0 0 0 0 4 0 0 1
+0 2 0 0 6 0 0 8 0
+0 0 1 5 0 0 2 0 0
+8 0 0 0 9 0 7 0 0
+0 5 0 3 0 7 0 2 0
+0 0 6 0 5 0 0 0 8
+0 0 8 0 0 9 1 0 0
+0 9 0 0 1 0 0 6 0
+5 0 0 8 0 0 0 0 3
+\stopsolvesudoku
+\stopbuffer
+
+\typebuffer
+\getbuffer
+
+\stopsection
+
+%%%
+
+\startsection[title={\type{\sudokubuffer}}]
+
+\startbuffer
+\startbuffer[lmao]
+.......... .......1 .....2.3.
+....1...4. .3.5.... .26....7.
+14...8...5 ........ 7....6.2.
+\stopbuffer
+
+\sudokubuffer[buffer=lmao]
+\stopbuffer
+
+\typebuffer
+\getbuffer
+
+\stopsection
+
+%%%
+
+\startsection[title={\type{\sudokusolvebuffer}}]
+
+\startbuffer
+\solvesudokubuffer[buffer=lmao]
+\stopbuffer
+
+\typebuffer
+\getbuffer
+
+\stopsection
+
+%%%
+
+\startsection[title={\type{\sudokufile}}]
+
+\startbuffer
+\sudokufile
+  [evenbackground=cornsilk,
+    oddbackground=pink,
+             file=t-sudoku-test-01.txt]
+\stopbuffer
+
+\typebuffer
+\getbuffer
+
+\startbuffer
+\sudokufile[file=t-sudoku-test-03.txt]
+\stopbuffer
+
+\typebuffer
+\getbuffer
+
+\startbuffer
+\sudokufile
+  [evenbackground=cornsilk,
+    rulethickness=2pt,   
+             file=t-sudoku-test-02.txt]
+\stopbuffer
+
+\typebuffer
+\getbuffer
+
+\stopsection
+
+%%%
+
+\startsection[title={\type{\solvesudokufile}}]
+
+\startbuffer
+\setupsudokus[oddbackground=plum,evenbackground=pink]
+\solvesudokufile
+  [oddbackground=thistle,
+            file=t-sudoku-test-01.txt]
+\stopbuffer
+
+\typebuffer
+\getbuffer
+
+\startbuffer
+\solvesudokufile[file=t-sudoku-test-02.txt]
+\stopbuffer
+
+\typebuffer
+\getbuffer
+
+\startbuffer
+\solvesudokufile[file=t-sudoku-test-03.txt]
+\stopbuffer
+
+\typebuffer
+\getbuffer
+
+\stopsection
+
+%%%
+
+\startsection[title={\type{\randomsudoku}}]
+
+\startbuffer
+\randomsudoku[n=45]
+\stopbuffer
+
+\typebuffer
+\getbuffer
+
+\stopsection
+
+\stoptext
+
+% vim: tw=80:ts=2:sts=2:expandtab:wrap:linebreak:breakindent

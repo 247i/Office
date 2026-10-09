@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/x-cython">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Cython source code</comment>
+  <comment xml:lang="zh-Hant-TW">Cython 源碼</comment>
+  <comment xml:lang="uk">початковий код мовою Cython</comment>
+  <comment xml:lang="tr">Cython kaynak kodu</comment>
+  <comment xml:lang="sv">Cython-källkod</comment>
+  <comment xml:lang="sr-Cyrl">Сајтон изворни код</comment>
+  <comment xml:lang="sq">Kod burim Cython</comment>
+  <comment xml:lang="sl">Izvorna koda Cython</comment>
+  <comment xml:lang="ru">Исходный код Cython</comment>
+  <comment xml:lang="ro">cod sursă Cython</comment>
+  <comment xml:lang="pt-BR">Código-fonte Cython </comment>
+  <comment xml:lang="pl">Kod źródłowy Cython</comment>
+  <comment xml:lang="oc">còdi font Cython</comment>
+  <comment xml:lang="nn">Cython-kjeldekode</comment>
+  <comment xml:lang="ko">Cython 소스 코드</comment>
+  <comment xml:lang="kk-Cyrl">Cython бастапқы коды</comment>
+  <comment xml:lang="ja">Cython ソースコード</comment>
+  <comment xml:lang="id">Kode sumber Cython</comment>
+  <comment xml:lang="hr">Cython izvorni kôd</comment>
+  <comment xml:lang="he">קוד מקור Cython</comment>
+  <comment xml:lang="fur">Codiç sorzint Cython</comment>
+  <comment xml:lang="fr">Code source Cython</comment>
+  <comment xml:lang="fi">Cython-lähdekoodi</comment>
+  <comment xml:lang="et">Cythoni lähtekood</comment>
+  <comment xml:lang="es">código fuente en Cython</comment>
+  <comment xml:lang="en-GB">Cython source code</comment>
+  <comment xml:lang="de">Cython-Quelltext</comment>
+  <comment xml:lang="ca">codi font en Cython</comment>
+  <comment xml:lang="bg">Изходен код — Cython</comment>
+  <comment xml:lang="be-Cyrl">зыходны код Cython</comment>
+  <comment xml:lang="ar">شفرة مصدر Cython</comment>
+  <comment xml:lang="af">Cython-bronkode</comment>
+  <sub-class-of type="text/plain"/>
+  <glob pattern="*.pxd"/>
+  <glob pattern="*.pxi"/>
+  <glob pattern="*.pyx"/>
+</mime-type>

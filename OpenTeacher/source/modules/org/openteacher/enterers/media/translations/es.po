@@ -1,0 +1,75 @@
+# Spanish translation for openteacher
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2012-09-04 11:53+0000\n"
+"Last-Translator: Hector A. Mantellini <Unknown>\n"
+"Language-Team: Spanish <es@li.org>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:43+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: media.py:173
+msgid "Title:"
+msgstr ""
+
+#: media.py:175
+msgid "Remove"
+msgstr "Quitar"
+
+#: media.py:176
+msgid "Add local media"
+msgstr "Agregar medios locales"
+
+#: media.py:177
+msgid "Add remote media"
+msgstr "Agregar repositorios remotos"
+
+#: media.py:179
+msgid "Name:"
+msgstr "Nombre:"
+
+#: media.py:180
+msgid "Question:"
+msgstr "Pregunta:"
+
+#: media.py:181
+msgid "Answer:"
+msgstr "Respuesta:"
+
+#: media.py:199
+msgid "Select file(s)"
+msgstr "Seleccione archivo(s)"
+
+#: media.py:201
+msgid "Media"
+msgstr "Media"
+
+#: media.py:222
+msgid "File URL"
+msgstr "URL del fichero"
+
+#: media.py:223
+msgid ""
+"Enter the URL of your website or media item.\n"
+"Supported video sites: "
+msgstr ""
+"Ingrese la dirección URL de su página web o de su item de comunicación.\n"
+"Sitios de videos soportados: "
+
+#: media.py:274
+msgid "Unsupported file type"
+msgstr "Tipo de archivo no soportado"
+
+#: media.py:275
+msgid "This type of file is not supported:\n"
+msgstr "Éste tipo de archivo no está soportado:\n"

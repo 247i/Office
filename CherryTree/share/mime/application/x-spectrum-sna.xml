@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-spectrum-sna">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>ZX Spectrum SNA snapshot</comment>
+  <comment xml:lang="uk">знімок ZX Spectrum SNA</comment>
+  <comment xml:lang="tr">ZX Spectrum SNA anlık görüntüsü</comment>
+  <comment xml:lang="sv">ZX Spectrum SNA-ögonblicksbild</comment>
+  <comment xml:lang="sr-Cyrl">Зет-Икс Спектрум СНА снимак стања</comment>
+  <comment xml:lang="sq">Fotografim ZX Spectrum SNA</comment>
+  <comment xml:lang="sl">Posnetek ZX Spectrum SNA</comment>
+  <comment xml:lang="ru">Снимок состояния ZX Spectrum SNA</comment>
+  <comment xml:lang="ro">instantanee ZX Spectrum SNA</comment>
+  <comment xml:lang="pt-BR">Snapshot de ZX Spectrum SNA</comment>
+  <comment xml:lang="pl">Migawka ZX Spectrum SNA</comment>
+  <comment xml:lang="oc">instantanèu ZX Spectrum SNA</comment>
+  <comment xml:lang="ko">ZX Spectrum SNA 스냅샷</comment>
+  <comment xml:lang="kk-Cyrl">ZX Spectrum SNA снапшоты</comment>
+  <comment xml:lang="fr">instantané ZX Spectrum SNA</comment>
+  <comment xml:lang="fi">ZX Spectrum SNA kuva</comment>
+  <comment xml:lang="et">ZX Spectrum SNA hetktõmmis</comment>
+  <comment xml:lang="es">Captura de SNA de ZX Spectrum</comment>
+  <comment xml:lang="en-GB">ZX Spectrum SNA snapshot</comment>
+  <comment xml:lang="de">ZX-Spectrum-SNA-Speicherauszug</comment>
+  <comment xml:lang="ar">لقطة ZX Spectrum SNA</comment>
+  <glob pattern="*.sna"/>
+</mime-type>

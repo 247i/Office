@@ -1,0 +1,9 @@
+[Nemo Action]
+
+Name=PeaZip, open as archive
+Comment=Try to open file as archive with PeaZip
+Exec=peazip -ext2openasarchive %F
+Selection=s
+Extensions=any;
+Terminal=false
+Icon-Name=peazip

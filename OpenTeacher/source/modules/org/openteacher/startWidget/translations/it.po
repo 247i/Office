@@ -1,0 +1,35 @@
+# Italian translation for openteacher
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2013-02-25 10:52+0000\n"
+"Last-Translator: Guybrush88 <Unknown>\n"
+"Language-Team: Italian <it@li.org>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:43+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: startWidget.py:248
+msgid "Create lesson:"
+msgstr "Crea lezione:"
+
+#: startWidget.py:249
+msgid "Load lesson:"
+msgstr "Carica lezione:"
+
+#: startWidget.py:250
+msgid "Load from the internet"
+msgstr ""
+
+#: startWidget.py:252
+msgid "Recently opened:"
+msgstr "Aperte di recente:"

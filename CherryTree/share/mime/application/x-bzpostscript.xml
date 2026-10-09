@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-bzpostscript">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>PostScript document (bzip2-compressed)</comment>
+  <comment xml:lang="zh-Hant-TW">PostScript 文件 (bzip2 壓縮)</comment>
+  <comment xml:lang="uk">документ PostScript (стиснений bzip2)</comment>
+  <comment xml:lang="tr">PostScript belgesi (bzip2 sıkıştırmalı)</comment>
+  <comment xml:lang="sv">Postscript-dokument (bzip2-komprimerat)</comment>
+  <comment xml:lang="sr-Cyrl">Постскрипт документ (сажет bzip2-ом)</comment>
+  <comment xml:lang="sq">Dokument PostScript (ngjeshur me bzip2)</comment>
+  <comment xml:lang="sl">Dokument PostScript (stisnjen z bzip2)</comment>
+  <comment xml:lang="ru">Документ PostScript (сжатый bzip2)</comment>
+  <comment xml:lang="ro">document PostScript (comprimat bzip2)</comment>
+  <comment xml:lang="pt-BR">Documento PostScript (compactado com bzip2)</comment>
+  <comment xml:lang="pl">Dokument PostScript (kompresja bzip2)</comment>
+  <comment xml:lang="oc">document PostScript (compressat amb bzip2)</comment>
+  <comment xml:lang="nn">PostScript-dokument (bzip2-komprimert)</comment>
+  <comment xml:lang="ko">PostScript 문서 (BZIP2 압축)</comment>
+  <comment xml:lang="kk-Cyrl">PostScript құжаты (bzip2-мен сығылған)</comment>
+  <comment xml:lang="ja">PostScript ドキュメント (bzip2 圧縮)</comment>
+  <comment xml:lang="it">Documento PostScript (compresso con bzip2)</comment>
+  <comment xml:lang="id">Dokumen PostScript (terkompresi bzip2)</comment>
+  <comment xml:lang="hr">PostScript dokument (bzip2 komprimirano)</comment>
+  <comment xml:lang="hi">PostScript दस्तावेज़ (bzip2-संपीड़ित)</comment>
+  <comment xml:lang="he">מסמך PostScript ‏(דחוס ב־bzip2)</comment>
+  <comment xml:lang="fur">Document PostScript (comprimût cun bzip2)</comment>
+  <comment xml:lang="fr">Document PostScript (compression bzip2)</comment>
+  <comment xml:lang="fi">PostScript (bzip2-pakattu)</comment>
+  <comment xml:lang="et">PostScripti dokument (pakitud bzip2-iga)</comment>
+  <comment xml:lang="es">documento PostScript (comprimido con BZIP2)</comment>
+  <comment xml:lang="en-GB">PostScript document (bzip2-compressed)</comment>
+  <comment xml:lang="de">PostScript-Dokument (bzip2-komprimiert)</comment>
+  <comment xml:lang="da">PostScript-dokument (bzip2-komprimeret)</comment>
+  <comment xml:lang="ca">document PostScript (comprimit amb bzip2)</comment>
+  <comment xml:lang="bg">Документ — PostScript, компресиран с bzip2</comment>
+  <comment xml:lang="be-Cyrl">дакумент PostScript (сцісканне bzip2)</comment>
+  <comment xml:lang="ar">مستند PostScript (مضغوط-bzip2)</comment>
+  <sub-class-of type="application/x-bzip2"/>
+  <generic-icon name="x-office-document"/>
+  <glob pattern="*.ps.bz2"/>
+</mime-type>

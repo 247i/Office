@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-shared-library-la">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Libtool shared library</comment>
+  <comment xml:lang="zh-Hant-TW">Libtool 共享函式庫</comment>
+  <comment xml:lang="uk">спільна бібліотека libtool</comment>
+  <comment xml:lang="tr">Libtool paylaşılan kitaplığı</comment>
+  <comment xml:lang="sv">Delat libtool-bibliotek</comment>
+  <comment xml:lang="sr-Cyrl">Либтул дељена библиотека</comment>
+  <comment xml:lang="sq">Bibliotekë e përbashkët Libtool</comment>
+  <comment xml:lang="sl">Deljena knjižnica Libtool</comment>
+  <comment xml:lang="ru">Разделяемая библиотека libtool</comment>
+  <comment xml:lang="ro">bibliotecă partajată Libtool</comment>
+  <comment xml:lang="pt-BR">Biblioteca compartilhada libtool</comment>
+  <comment xml:lang="pl">Biblioteka współdzielona libtool</comment>
+  <comment xml:lang="oc">bibliotèca partejada Libtool</comment>
+  <comment xml:lang="ko">Libtool 공유 라이브러리</comment>
+  <comment xml:lang="kk-Cyrl">Libtool бөлісетін библиотека</comment>
+  <comment xml:lang="ja">Libtool 共有ライブラリ</comment>
+  <comment xml:lang="it">Libreria condivisa libtool</comment>
+  <comment xml:lang="id">Pustaka bersama libtool</comment>
+  <comment xml:lang="hr">Libtool dijeljena biblioteka</comment>
+  <comment xml:lang="hi">Libtool साझा लाइब्रेरी</comment>
+  <comment xml:lang="he">ספרייה משותפת של Libtool</comment>
+  <comment xml:lang="fur">Librarie condividude libtool</comment>
+  <comment xml:lang="fr">Bibliothèque partagée Libtool</comment>
+  <comment xml:lang="fi">Libtool kirjasto</comment>
+  <comment xml:lang="eu">Libtool liburutegi partekatua</comment>
+  <comment xml:lang="et">Libtooli jagatud teek</comment>
+  <comment xml:lang="es">biblioteca compartida de Libtool</comment>
+  <comment xml:lang="en-GB">Libtool shared library</comment>
+  <comment xml:lang="de">gemeinsame libtool-Bibliothek</comment>
+  <comment xml:lang="ca">biblioteca compartida de Libtool</comment>
+  <comment xml:lang="bg">Споделена библиотека — Libtool</comment>
+  <comment xml:lang="be-Cyrl">агульная бібліятэка libtool</comment>
+  <comment xml:lang="ar">مكتبة Libtool مشتركة</comment>
+  <sub-class-of type="text/plain"/>
+  <generic-icon name="text-x-script"/>
+  <glob pattern="*.la"/>
+</mime-type>

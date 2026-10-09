@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="image/x-farbfeld">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Farbfeld</comment>
+  <comment xml:lang="uk">Farbfeld</comment>
+  <comment xml:lang="sv">Farbfeld</comment>
+  <comment xml:lang="sl">Slika Farbfeld</comment>
+  <comment xml:lang="ro">farbfeld</comment>
+  <comment xml:lang="pt-BR">Farbfeld</comment>
+  <comment xml:lang="ko">Farbfeld</comment>
+  <comment xml:lang="kk-Cyrl">Farbfeld</comment>
+  <comment xml:lang="et">Farbfeldi pilt</comment>
+  <comment xml:lang="de">Farbfeld-Bild</comment>
+  <glob pattern="*.ff"/>
+</mime-type>

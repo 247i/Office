@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-bzip1">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Bzip1 archive</comment>
+  <comment xml:lang="zh-Hant-TW">Bzip1 封存檔</comment>
+  <comment xml:lang="uk">архів bzip1</comment>
+  <comment xml:lang="tr">Bzip1 arşivi</comment>
+  <comment xml:lang="sv">Bzip1-arkiv</comment>
+  <comment xml:lang="sr-Cyrl">Bzip1 архива</comment>
+  <comment xml:lang="sq">Arkiv Bzip1</comment>
+  <comment xml:lang="sl">Arhiv bzip1</comment>
+  <comment xml:lang="ru">Архив Bzip1</comment>
+  <comment xml:lang="ro">arhivă bzip1</comment>
+  <comment xml:lang="pt-BR">Pacote Bzip1</comment>
+  <comment xml:lang="pl">Archiwum bzip1</comment>
+  <comment xml:lang="oc">archiu Bzip1</comment>
+  <comment xml:lang="nn">Bzip1-arkiv</comment>
+  <comment xml:lang="lt">Bzip1 archyvas</comment>
+  <comment xml:lang="ko">BZIP1 압축 파일</comment>
+  <comment xml:lang="kk-Cyrl">Bzip1 архиві</comment>
+  <comment xml:lang="kab">Aɣbaṛ Bzip1</comment>
+  <comment xml:lang="ja">Bzip1 アーカイブ</comment>
+  <comment xml:lang="it">Archivio bzip1</comment>
+  <comment xml:lang="id">Arsip Bzip1</comment>
+  <comment xml:lang="hr">Bzip1 arhiva</comment>
+  <comment xml:lang="hi">Bzip1 अभिलेख</comment>
+  <comment xml:lang="he">ארכיון Bzip1</comment>
+  <comment xml:lang="fur">Archivi Bzip1</comment>
+  <comment xml:lang="fr">Archive Bzip1</comment>
+  <comment xml:lang="fi">Bzip1-arkisto</comment>
+  <comment xml:lang="eu">Bzip1 artxiboa</comment>
+  <comment xml:lang="et">Bzip1 arhiiv</comment>
+  <comment xml:lang="es">archivador BZIP1</comment>
+  <comment xml:lang="en-GB">Bzip1 archive</comment>
+  <comment xml:lang="de">bzip1-Archiv</comment>
+  <comment xml:lang="da">Bzip1-arkiv</comment>
+  <comment xml:lang="ca">arxiu bzip1</comment>
+  <comment xml:lang="bg">Архив — bzip1</comment>
+  <comment xml:lang="be-Cyrl">архіў bzip1</comment>
+  <comment xml:lang="ar">أرشيف Bzip1 </comment>
+  <generic-icon name="package-x-generic"/>
+  <glob pattern="*.bz"/>
+</mime-type>

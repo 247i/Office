@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="image/x-sinar-sti">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Sinar STI raw image</comment>
+  <comment xml:lang="uk">цифровий негатив Sinar STI</comment>
+  <comment xml:lang="tr">Sinar STI ham görüntüsü</comment>
+  <comment xml:lang="sv">Sinar STI-råbild</comment>
+  <comment xml:lang="sr-Cyrl">Sinar STI сирова слика</comment>
+  <comment xml:lang="sq">Pamje Sinar STI e papërpunuar</comment>
+  <comment xml:lang="sl">Neobdelana slika Sinar STI</comment>
+  <comment xml:lang="ru">Необработанное изображение Sinar STI</comment>
+  <comment xml:lang="ro">imagine brută Sinar STI</comment>
+  <comment xml:lang="pt-BR">Imagem bruta Sinar STI </comment>
+  <comment xml:lang="pl">Surowy obraz STI Sinar</comment>
+  <comment xml:lang="oc">imatge brut Sinar STI</comment>
+  <comment xml:lang="ko">Sinar STI 로 이미지</comment>
+  <comment xml:lang="kk-Cyrl">Sinar STI өңделмеген бейнесі</comment>
+  <comment xml:lang="fr">image brute Sinar STI</comment>
+  <comment xml:lang="fi">Sinar STI -raakakuva</comment>
+  <comment xml:lang="et">Sinar STI töötlemata pilt</comment>
+  <comment xml:lang="es">imagen en bruto STI de Sinar</comment>
+  <comment xml:lang="en-GB">Sinar STI raw image</comment>
+  <comment xml:lang="de">Sinar STI-Rohbild</comment>
+  <comment xml:lang="ar">صورة Sinar STI خامة</comment>
+  <sub-class-of type="image/x-dcraw"/>
+  <sub-class-of type="image/tiff"/>
+  <glob pattern="*.sti"/>
+</mime-type>

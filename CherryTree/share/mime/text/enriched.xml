@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/enriched">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Enriched text document</comment>
+  <comment xml:lang="zh-Hant-TW">Enriched text 文件</comment>
+  <comment xml:lang="uk">форматований текстовий документ</comment>
+  <comment xml:lang="tr">Zenginleştirilmiş metin belgesi</comment>
+  <comment xml:lang="sv">Enriched text-dokument</comment>
+  <comment xml:lang="sr-Cyrl">Обогаћени текстуални документ</comment>
+  <comment xml:lang="sq">Dokument tekst i pasuruar</comment>
+  <comment xml:lang="sl">Dokument z obogatenim besedilom</comment>
+  <comment xml:lang="ru">Форматированный текстовый документ</comment>
+  <comment xml:lang="ro">document de text îmbunătățit</comment>
+  <comment xml:lang="pt-BR">Documento de texto enriquecido</comment>
+  <comment xml:lang="pl">Wzbogacony dokument tekstowy</comment>
+  <comment xml:lang="oc">document tèxte enriquit</comment>
+  <comment xml:lang="ko">서식화 텍스트 문서</comment>
+  <comment xml:lang="kk-Cyrl">Пішімделген мәтіндік құжаты</comment>
+  <comment xml:lang="ja">装飾された文書</comment>
+  <comment xml:lang="it">Documento testo arricchito</comment>
+  <comment xml:lang="id">Dokumen teks yang diperkaya</comment>
+  <comment xml:lang="hr">Za e-mail formatiran tekstualni dokument</comment>
+  <comment xml:lang="hi">समृद्ध पाठ दस्तावेज़</comment>
+  <comment xml:lang="he">מסמך טקסט מועשר</comment>
+  <comment xml:lang="fur">Document di test inricjît</comment>
+  <comment xml:lang="fr">Document de texte enrichi</comment>
+  <comment xml:lang="fi">Muotoiltu tekstiasiakirja</comment>
+  <comment xml:lang="et">Rikastatud tekstiga dokument</comment>
+  <comment xml:lang="es">documento de texto enriquecido</comment>
+  <comment xml:lang="en-GB">Enriched text document</comment>
+  <comment xml:lang="de">formatierte Textdatei</comment>
+  <comment xml:lang="ca">document de text enriquit</comment>
+  <comment xml:lang="bg">Документ — Enriched text</comment>
+  <comment xml:lang="be-Cyrl">дакумент з фарматаваннем enriched text</comment>
+  <comment xml:lang="ar">مستند نصي مغنى</comment>
+  <sub-class-of type="text/plain"/>
+</mime-type>

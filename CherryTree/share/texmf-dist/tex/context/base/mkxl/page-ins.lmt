@@ -1,0 +1,407 @@
+if not modules then modules = { } end modules ['page-ins'] = {
+    version   = 1.001,
+    comment   = "companion to page-mix.mkiv",
+    author    = "Hans Hagen, PRAGMA-ADE, Hasselt NL",
+    copyright = "PRAGMA ADE / ConTeXt Development Team",
+    license   = "see context related readme files",
+}
+
+local next = next
+local remove = table.remove
+
+structures           = structures or { }
+structures.inserts   = structures.inserts or { }
+local inserts        = structures.inserts
+
+local allocate       = utilities.storage.allocate
+
+inserts.stored       = inserts.stored or allocate { } -- combining them in one is inefficient in the
+inserts.data         = inserts.data   or allocate { } -- bytecode storage pool
+
+local variables      = interfaces.variables
+local v_page         <const> = variables.page
+local v_auto         <const> = variables.auto
+
+local context        = context
+local implement      = interfaces.implement
+
+storage.register("structures/inserts/stored", inserts.stored, "structures.inserts.stored")
+
+local data           = inserts.data
+local stored         = inserts.stored
+
+for name, specification in next, stored do
+    data[specification.number] = specification
+    data[name]                 = specification
+end
+
+function inserts.define(name,specification)
+    specification.name= name
+    local number = specification.number or 0
+    data[name]   = specification
+    data[number] = specification
+    -- only needed at runtime as this get stored in a bytecode register
+    stored[name] = specification
+    if not specification.location then
+        specification.location = v_page
+    end
+    return specification
+end
+
+function inserts.setup(name,settings)
+    local specification = data[name]
+    for k, v in next, settings do
+        -- maybe trace change
+        specification[k] = v
+    end
+    return specification
+end
+
+function inserts.setlocation(name,location) -- a practical fast one
+    data[name].location = location
+end
+
+function inserts.getlocation(name,location)
+    return data[name].location or v_page
+end
+
+function inserts.getdata(name) -- or number
+    return data[name]
+end
+
+function inserts.getname(number)
+    return data[tonumber(number)].name
+end
+
+function inserts.getnumber(name)
+    return data[name].number
+end
+
+-- interface
+
+implement {
+    name      = "defineinsertion",
+    actions   = inserts.define,
+    arguments = {
+        "string",
+        {
+            { "number", "integer" }
+        }
+    }
+}
+
+implement {
+    name      = "setupinsertion",
+    actions   = inserts.setup,
+    arguments = {
+        "string",
+        {
+            { "location" }
+        }
+    }
+}
+
+implement {
+    name      = "setinsertionlocation",
+    actions   = inserts.setlocation,
+    arguments = "2 strings",
+}
+
+implement {
+    name      = "insertionnumber",
+    actions   = function(name) context(data[name].number or 0) end,
+    arguments = "string"
+}
+
+implement {
+    name      = "setinsertmigration",
+    arguments = "string",
+    actions   = function(state)
+        nodes.migrations.setinserts(state == v_auto)
+    end
+}
+
+
+-- nasty
+
+do
+
+    local insert_code   <const> = nodes.nodecodes.insert
+    local integer_value <const> = tokens.values.integer
+
+    local nuts       = nodes.nuts
+    local tonode     = nodes.tonode
+
+    local getpost     = nuts.getpost
+    local setpost     = nuts.setpost
+    local getlist     = nuts.getlist
+    local setlist     = nuts.setlist
+ -- local setboth     = nuts.setboth
+    local getbox      = nuts.getbox
+    local getid       = nuts.getid
+    local getindex    = nuts.getindex
+    local getnext     = nuts.getnext
+    local flushlist   = nuts.flushlist
+    local traverseid  = nuts.traverseid
+
+    local detached    = false
+    local nofdetached = false
+
+    local function detach(n)
+        local box = getbox(n)
+        if box then
+            local post = getpost(box)
+            if post then
+                setpost(box)
+                if detached then
+                    flushlist(detached)
+                end
+                detached = post
+                nofdetached = 0
+                for d in traverseid(insert_code,detached) do
+                    nofdetached = nofdetached + 1
+                end
+                if nofdetached == 0 then
+                    flushlist(detached)
+                    detached = false
+                end
+            end
+        end
+    end
+
+    local function attach(index,cs)
+        if detached then
+            for d in traverseid(insert_code,detached) do
+                local idx = getindex(d)
+                if not index or idx == index or index == 0 then
+                    local list = getlist(d)
+                    context[cs](tonode(list))
+                    setlist(d)
+                    nofdetached = nofdetached - 1
+                end
+            end
+            if nofdetached == 0 then
+                flushlist(detached)
+                detached = false
+            end
+        end
+    end
+
+    local function nofdetached(index)
+        local n = 0
+        if detached then
+            for d in traverseid(insert_code,detached) do
+                local idx = getindex(d)
+                if not index or idx == index or index == 0 then
+                    n = n + 1
+                end
+            end
+        end
+        return integer_value, n
+    end
+
+    implement {
+        name      = "detachinsertions",
+        arguments = "integer",
+        public    = true,
+        protected = true,
+        actions   = detach,
+    }
+
+    implement {
+        name      = "attachinsertions",
+        arguments = "csname",
+        public    = true,
+        protected = true,
+        actions   = function(cs) attach(0,cs) end,
+    }
+
+    implement {
+        name      = "attachinsertion",
+        arguments = { "integer", "csname" },
+        public    = true,
+        protected = true,
+        actions   = attach,
+    }
+
+    implement {
+        name      = "nofdetachedinsertions",
+        actions   = nofdetached,
+        public    = true,
+     -- protected = true,
+        usage     = "value",
+        arguments = "integer",
+    }
+
+    inserts.attach      = attach
+    inserts.detach      = detach
+    inserts.nofdetached = nofdetached
+
+end
+
+-- Maybe this will get its own module.
+
+local tostring = tostring
+local abs = math.abs
+
+local nuts         = nodes.nuts
+local traverselist = nuts.traverselist
+local getlist      = nuts.getlist
+local setlist      = nuts.setlist
+local getattr      = nuts.getattr
+local getheight    = nuts.getheight
+local setheight    = nuts.setheight
+local hpack        = nuts.hpack
+local setattrlist  = nuts.setattrlist
+
+local setbox       = nuts.setbox
+local takebox      = nuts.takebox
+local expandmacro  = token.expandmacro
+
+do
+    -- we actually get a split one
+
+    local report = logs.reporter("balance","uinsert")
+
+    local trace  = false  trackers.register("columnsets.uinsert", function(v) trace = v end)
+
+    local a_balancescaled <const> = attributes.private("balancescaled")
+
+    local threshold <const> = 1.01
+
+    local packlist = { } -- can be reused
+
+    local function locate(p)
+        for n in traverselist(p) do
+            if getattr(n,a_balancescaled) then
+                packlist[#packlist+1] = n
+                return n
+            else
+                packlist[#packlist+1] = p
+                return locate(getlist(p),t)
+            end
+        end
+    end
+
+    local function processuinsert(l,scale)
+        setbox("b_page_inserts_uinsert",hpack(l))
+        expandmacro("page_inserts_handle_uinsert",true,tostring(scale))
+        return takebox("b_page_inserts_uinsert")
+    end
+
+    local function handle_uinsert_callback(callback,index,order,packed,height,amount)
+        if (callback == 1 or callback == 2) and amount ~= 0 then
+            local p = locate(getlist(packed))
+            if p then
+                local oldheight = getheight(p)
+                local newheight = oldheight + amount
+                local scale     = newheight/oldheight
+                if abs(scale) >= threshold then
+                    if trace then
+                        report("index %i, order %i, scaling %.3f",index,order,scale)
+                    end
+                    local l = processuinsert(getlist(p),scale)
+                    setlist(p,l)
+                    setattrlist(l,insert)
+                    local h = getheight(l)
+                    for i=#packlist,1,-1 do
+                        setheight(packlist[i],h)
+                    end
+                end
+            end
+            packlist = { }
+            return packed
+        else
+            return packed
+        end
+    end
+
+    callbacks.register {
+        name    = "handle_uinsert",
+        action  = handle_uinsert_callback,
+        comment = "process user inserts in balancer",
+        frozen  = true,
+    }
+
+end
+
+-- It makes sense to have these here instead of some note module.
+
+do
+
+    local getnormalizedline = nuts.getnormalizedline
+    local insertafter       = nuts.insertafter
+    local insertbefore      = nuts.insertbefore
+ -- local setoffsets         = nuts.setoffsets
+
+    local takebox           = nuts.takebox
+
+    local expandmacro       = token.expandmacro
+
+    local enabled           = false
+
+    trackers.register("inserts.split", function(v) enabled = v end)
+
+    local last_code  = tex.insertsplitcodes.last  -- ignore dummy_last
+    local first_code = tex.insertsplitcodes.first -- ignore dummy_first
+
+    local function insert_check_split_callback(where,index,box)
+        if enabled and (where == last_code or where == first_code) then
+            local line = getnormalizedline(box)
+            if not line then
+                -- do nothing
+            elseif where == last_code then
+                expandmacro("insertchecksplitlast",true,tostring(index))
+                local signal = takebox("scratchbox")
+             -- local right  = line.parinitrightskip + line.parfillrightskip
+             --              + line.righthangskip + line.rightskip
+             -- setoffsets(signal,right)
+                insertbefore(line.head,line.last,signal)
+            elseif where == first_code then
+                expandmacro("insertchecksplitfirst",true,tostring(index))
+                local signal = takebox("scratchbox")
+             -- local left   = line.parinitleftskip + line.parfillleftskip + line.indent
+             --              + line.lefthangskip + line.leftskip
+             -- setoffsets(signal,left)
+                insertafter(line.head,line.first,signal)
+            end
+        end
+    end
+
+    callbacks.register {
+        name    = "insert_check_split",
+        action  = insert_check_split_callback,
+        comment = "process insert split state tracer",
+        frozen  = true,
+    }
+
+end
+
+do
+
+    local maxdimen   <const> = tex.magicconstants.maxdimen
+
+    local setinsertlimit     = tex.setinsertlimit
+    local setinsertmaxplaced = tex.setinsertmaxplaced
+
+    -- these are private numbers
+
+    local function insert_boundary_callback(what,index)
+        if what == 1 then
+            setinsertlimit(index,maxdimen)
+        elseif what == 2 then
+            setinsertmaxplaced(index,0)
+        elseif what == 3 then
+            setinsertlimit(index,maxdimen)
+            setinsertmaxplaced(index,0)
+        end
+    end
+
+    callbacks.register {
+        name    = "insert_boundary",
+        action  = insert_boundary_callback,
+        comment = "process insert specific boundary",
+        frozen  = true,
+    }
+
+end

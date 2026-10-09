@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<teachmaster>
+   <header>
+      <titel>Test</titel>
+      <autor></autor>
+      <bemerkungen></bemerkungen>
+      <spreins>English</spreins>
+      <sprzwei>Nederlands</sprzwei>
+      <version>4.3</version>
+      <font>MS Sans Serif</font>
+      <fontsize>8</fontsize>
+      <fontcharset>MAC_CHARSET</fontcharset>
+      <fontlek>off</fontlek>
+      <fontspreins>off</fontspreins>
+      <fontsprzwei>off</fontsprzwei>
+      <fontsyn>off</fontsyn>
+      <fontbem>off</fontbem>
+      <standardicon>1</standardicon>
+      <iconspreins></iconspreins>
+      <iconsprzwei></iconsprzwei>
+      <sprachdateien></sprachdateien>
+   </header>
+   <vokabelsatz>
+      <lektion>Test</lektion>
+      <spreins>one</spreins>
+      <sprzwei>een</sprzwei>
+      <synonym>uno</synonym>
+      <bemerkung>tést</bemerkung>
+   </vokabelsatz>
+   <vokabelsatz>
+      <lektion>Test</lektion>
+      <spreins>two</spreins>
+      <sprzwei>twee</sprzwei>
+      <synonym></synonym>
+      <bemerkung></bemerkung>
+   </vokabelsatz>
+   <vokabelsatz>
+      <lektion>Test</lektion>
+      <spreins>drié</spreins>
+      <sprzwei>threéµ</sprzwei>
+      <synonym></synonym>
+      <bemerkung>tést</bemerkung>
+   </vokabelsatz>
+</teachmaster>

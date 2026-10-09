@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/sparql-query">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>SPARQL query</comment>
+  <comment xml:lang="zh-Hant-TW">SPARQL 查詢</comment>
+  <comment xml:lang="zh-Hans-CN">SPARQL 查询</comment>
+  <comment xml:lang="uk">запит SPARQL</comment>
+  <comment xml:lang="tr">SPARQL sorgusu</comment>
+  <comment xml:lang="sv">SPARQL-fråga</comment>
+  <comment xml:lang="sr-Cyrl">СПАРКуЛ упит</comment>
+  <comment xml:lang="sq">Kërkesë SPARQL</comment>
+  <comment xml:lang="sl">Poizvedba SPARQL</comment>
+  <comment xml:lang="si">SPARQL විමසුම</comment>
+  <comment xml:lang="ru">Запрос SPARQL</comment>
+  <comment xml:lang="ro">căutare SPARQL</comment>
+  <comment xml:lang="pt-BR">Consulta SPARQL </comment>
+  <comment xml:lang="pl">Zapytanie SPARQL</comment>
+  <comment xml:lang="oc">requèsta SPARQL</comment>
+  <comment xml:lang="nn">SPARQL-spørjing</comment>
+  <comment xml:lang="nl">SPARQL-zoekopdracht</comment>
+  <comment xml:lang="lt">SPARQL užklausa</comment>
+  <comment xml:lang="ko">SPARQL 질의문</comment>
+  <comment xml:lang="kk-Cyrl">SPARQL сұранымы</comment>
+  <comment xml:lang="ka">SPARQL მოთხოვნა</comment>
+  <comment xml:lang="ja">SPARQL クエリー</comment>
+  <comment xml:lang="it">Ricerca SPARQL</comment>
+  <comment xml:lang="id">Kuiri SPARQL</comment>
+  <comment xml:lang="hr">SPARQL zahtjev</comment>
+  <comment xml:lang="hi">SPARQL क्वेरी</comment>
+  <comment xml:lang="he">שאילתת SPARQL</comment>
+  <comment xml:lang="fur">Interogazion SPARQL</comment>
+  <comment xml:lang="fr">Requête SPARQL</comment>
+  <comment xml:lang="fi">SPARQL-kysely</comment>
+  <comment xml:lang="eu">SPARQL kontsulta</comment>
+  <comment xml:lang="et">SPARQL päring</comment>
+  <comment xml:lang="es">consulta SPARQL</comment>
+  <comment xml:lang="en-GB">SPARQL query</comment>
+  <comment xml:lang="de">SPARQL-Abfrage</comment>
+  <comment xml:lang="ca">consulta SPARQL</comment>
+  <comment xml:lang="bg">Заявка — SPARQL</comment>
+  <comment xml:lang="be-Cyrl">запыт SPARQL</comment>
+  <comment xml:lang="ar">استعلام SPARQL</comment>
+  <acronym>SPARQL</acronym>
+  <expanded-acronym>SPARQL Protocol and RDF Query Language</expanded-acronym>
+  <glob pattern="*.qs"/>
+</mime-type>

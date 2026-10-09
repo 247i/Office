@@ -1,0 +1,106 @@
+# Chinese (Simplified) translation for openteacher
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:38+0200\n"
+"PO-Revision-Date: 2013-06-19 02:25+0000\n"
+"Last-Translator: adam liu <xhiyua@gmail.com>\n"
+"Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-20 05:42+0000\n"
+"X-Generator: Launchpad (build 16673)\n"
+
+#: gui.py:423
+msgid "Open from file"
+msgstr "从文件打开"
+
+#: ui.py:51
+msgid "Enter list"
+msgstr "输入列表"
+
+#: ui.py:52
+msgid "Teach me!"
+msgstr "教教我！"
+
+#: ui.py:53
+msgid "Show results"
+msgstr "显示结果"
+
+#: ui.py:272
+msgid "&File"
+msgstr "文件(&F)"
+
+#: ui.py:273
+msgid "&New"
+msgstr "新建(&N)"
+
+#: ui.py:274
+msgid "&Open"
+msgstr "&打开"
+
+#: ui.py:275
+msgid "Open &into current list"
+msgstr "打开&进入当前列表"
+
+#: ui.py:276
+msgid "&Save"
+msgstr "保存(&S)"
+
+#: ui.py:277
+msgid "Save &As"
+msgstr "另存为(&A)"
+
+#: ui.py:278
+msgid "&Print"
+msgstr "打印(&P)"
+
+#: ui.py:279
+msgid "&Quit"
+msgstr "退出(&Q)"
+
+#: ui.py:281
+msgid "&Edit"
+msgstr "编辑(&E)"
+
+#: ui.py:282
+msgid "&Reverse list"
+msgstr "&逆序列表"
+
+#: ui.py:283
+msgid "&Settings"
+msgstr "设置(&S)"
+
+#: ui.py:285
+msgid "&View"
+msgstr "&查看"
+
+#: ui.py:286
+msgid "Fullscreen"
+msgstr "全屏"
+
+#: ui.py:288
+msgid "&Help"
+msgstr "帮助(&H)"
+
+#: ui.py:289
+msgid "&Documentation"
+msgstr "文档(&D)"
+
+#: ui.py:290
+msgid "&About"
+msgstr "关于(&A)"
+
+#: ui.py:292
+msgid "Toolbar"
+msgstr "工具栏"
+
+#~ msgid "Close Tab"
+#~ msgstr "关闭标签"

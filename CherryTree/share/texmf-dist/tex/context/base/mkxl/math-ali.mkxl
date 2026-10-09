@@ -1,0 +1,4285 @@
+%D \module
+%D   [       file=math-ali,
+%D        version=2008.10.20,
+%D          title=\CONTEXT\ Math Macros,
+%D       subtitle=Math Alignments,
+%D         author={Hans Hagen, Taco Hoekwater \& Aditya Mahajan},
+%D           date=\currentdate,
+%D      copyright={PRAGMA ADE \& \CONTEXT\ Development Team}]
+%C
+%C This module is part of the \CONTEXT\ macro||package and is
+%C therefore copyrighted by \PRAGMA. See mreadme.pdf for
+%C details.
+
+\writestatus{loading}{ConTeXt Math Macros / Math Alignments}
+
+\unprotect
+
+\registerctxluafile{math-ali}{autosuffix}
+
+%D The code here has been moved from other files. Beware: the \MKII\ and \MKIV\ code
+%D is not gathered in files with the same name. In the meantime this code has been
+%D adapted to \MKIV\ but more is possible. The code is somewhat complicated by the
+%D fact that alignments are tricky with rspect to tagging.
+
+% export:
+%
+% alignment : ok
+% cases     :
+% matrix    : ok
+% substack  :
+
+% Alignment overhaul timestamp: around watching GhostNote Live in Utrecht 2022
+% (energizing funky professionalism).
+
+%D The following macros are moved to this module because here we deal mostly with
+%D alignment issues. In principle one should see strc-mat, math-ini and math-ali as
+%D a close operation. The \type {\displaywidth} and \type {\displayindent} variables
+%D are only known and used inside a display formula, In \MKXL\ we no longer use
+%D display mode at all.
+
+% \checkeddisplaywidth   % obsolete
+% \maximizeddisplaywidth % obsolete
+
+%D \macros
+%D   {definemathalignment, setupmathalignment, startmathalignment}
+%D
+%D Modules may provide additional alignment features. The following kind of plain
+%D mechanisms are provided by the core.
+
+% \startformula
+%     \startalign[m=3, n=2, align={1:right,2:left},distance=2em]
+%         \NC 1.1 \NC = 1.2 \NC 2.1 \NC = 2.2 \NC 3.1 \NC = 3.2 \NR
+%         \NC 1   \NC = 1   \NC 2   \NC = 2   \NC 3   \NC = 3   \NR
+%         \NC 1.1 \NC = 1.2 \NC 2.1 \NC = 2.2 \NC 3.1 \NC = 3.2 \NR
+%     \stopalign
+% \stopformula
+
+\newtoks     \t_math_align_a
+\newtoks     \t_math_align_b
+\newtoks     \t_math_align_c
+\newgluespec \d_math_eqalign_distance
+\newgluespec \d_math_eqalign_rulethickness
+\newdimension\d_math_eqalign_number_distance
+\newinteger  \c_math_eqalign_repeat
+\newtoks     \t_math_matrix_NL_NR
+
+\mutable\def\displayopenupvalue{.25\bodyfontsize}
+
+\installcorenamespace{mathalignendclass}   % maybe {complexmathendclass}
+
+\global\expandafter\integerdef\csname\??mathalignendclass\the\zerocount\endcsname\mathendcode
+
+\protected\def\math_eqalign_distance
+  {\global\expandafter\integerdef\csname\??mathalignendclass\the\c_math_eqalign_column\endcsname\mathendcode
+   \mathalignmentparameter\c!separator
+   \relax}
+
+%D Really needed when we grid snap (and package):
+
+\appendtoks
+    \parindent\zeropoint
+\to \everybeforedisplayformula
+
+%D For compatibility we have this location stuff. It is kind of messy and uses
+%D tabskip magick plus signal 0x08 for an exception. Contrary to normal left
+%D aligned formulas we keep the number inline.
+
+% \startbuffer
+%     \startformula
+%       A = B
+%     \stopformula
+%
+%     \startplaceformula \startformula
+%       A = B
+%     \stopformula \stopplaceformula
+%
+%     \startformula \startalign
+%       \NC A \EQ B \NR
+%       \NC A \EQ B \NR
+%     \stopalign \stopformula
+%
+%     \startplaceformula \startformula \startalign
+%       \NC A \EQ B \NR[+]
+%       \NC A \EQ B \NR[+]
+%     \stopalign \stopformula \stopplaceformula
+% \stopbuffer
+%
+% \startbuffer[all]
+%     \section[title=middle] \setupmathalignment[location={center,middle}] \getbuffer
+%     \section[title=left]   \setupmathalignment[location={center,left}]   \getbuffer
+%     \section[title=right]  \setupmathalignment[location={center,right}]  \getbuffer
+% \stopbuffer
+%
+% {\setupformula[location=right] \getbuffer[all] \page}
+% {\setupformula[location=left]  \getbuffer[all] \page}
+
+\newcount\c_math_eqalign_slots
+
+\def\math_build_eqalign
+  {\scratchtoks\emptytoks
+   \d_math_eqalign_distance\mathalignmentparameter\c!distance\relax
+   \ifcstok{\mathalignmentparameter\c!align}\v!auto
+     \d_math_eqalign_number_distance{\mathalignmentparameter\c!numberdistance}%
+     \letmathalignmentparameter\c!align\v!middle
+   \else
+     \d_math_eqalign_number_distance\zeropoint
+   \fi
+   \scratchcounterone{\mathalignmentparameter\c!m}%
+   \scratchcountertwo{\mathalignmentparameter\c!n}%
+   \etoksapp\scratchtoks\t_math_align_a
+   \toksapp\scratchtoks{\global\c_math_eqalign_repeat\zerocount}%
+   \scratchcounter\plusone
+   \localcontrolledrepeat{\scratchcounterone*\scratchcountertwo-\plusone}%
+     {\ifnum\scratchcounter=\scratchcountertwo
+        \scratchcounter\plusone
+        % preamble expansion hell ...
+        \toksapp\scratchtoks {\tabskip\d_math_eqalign_distance\relax}%
+        % so ...
+        \toksapp\scratchtoks {\relax\math_eqalign_distance}%
+        \etoksapp\scratchtoks{\global\advanceby\c_math_eqalign_repeat\the\scratchcountertwo\relax}%
+      \else
+        \advanceby\scratchcounter\plusone
+      \fi
+      \etoksapp\scratchtoks\t_math_align_b}%
+   \etoksapp\scratchtoks\t_math_align_c
+   \c_math_eqalign_slots{\scratchcounterone*\scratchcountertwo}%
+   \toksapp\scratchtoks{\global\c_math_eqalign_repeat\zerocount}}
+
+\def\math_eqalign_set_defaults
+  {%\normalbaselines % per januari 2024 commented
+   \mathsurround\zeropoint
+   \mathsurroundskip\zeroskip
+   \tabskip\zeroskip
+   \everycr\emptytoks}
+
+\protected\def\math_math_in_eqalign_start
+  {\mathbeginclass
+     \ifconditional\c_math_eqalign_force_text
+       % really? check mtext
+       \mathordcode
+     \orelse\ifcase\c_math_eqalign_column\or
+       \mathunsetcode
+     \orelse\ifcsname\??mathalignendclass\tointeger{\c_math_eqalign_column-\plusone}\endcsname
+       \lastnamedcs
+     \else
+       \mathunsetcode
+     \fi
+   \mathendclass\mathordinarycode % added
+   \ifconditional\c_math_eqalign_force_text
+     \usemathstyleparameter\mathalignmentparameter\c!textstyle
+   \else
+     \startforceddisplaymath
+     \usemathstyleparameter\mathalignmentparameter\c!mathstyle
+   \fi}
+
+\protected\def\math_math_in_eqalign_stop
+  {\ifconditional\c_math_eqalign_force_text
+     % really? check mtext
+     \global\expandafter\integerdef\csname\??mathalignendclass\the\c_math_eqalign_column\endcsname\mathordcode
+   \else
+      \stopforceddisplaymath
+      \ifnum\lastrightclass<\mathunsetcode
+        \global\expandafter\integerdef\csname\??mathalignendclass\the\c_math_eqalign_column\endcsname\lastrightclass
+      \fi
+   \fi
+   \global\c_math_eqalign_force_text\conditionalfalse}
+
+\protected\def\math_math_in_eqalign#1% protected is not obeyed with \span
+  {% preamble \span ... i really need some extension
+   \tabskip\zeroskip
+   \everycr\emptytoks
+   \math_math_in_eqalign_start % protected
+   #1%
+   \math_math_in_eqalign_stop} % protected
+
+\noaligned\protected\def\math_text_in_eqalign#1%
+  {\mathbeginclass\mathordcode
+   \mathendclass  \mathordcode
+   \startimath
+   \tabskip\zeroskip
+   \everycr\emptytoks
+   #1% huh, imath?
+   \stopimath}
+
+\def\math_place_number_in_alignment#1#2%
+  {\c_strc_formulas_number_in_alignment\conditionaltrue
+   \dostarttaggednodetail\t!mtext
+     \strc_formulas_place_number_nested{#1}{#2}%
+   \dostoptagged}
+
+%D There was a request for rules on the list when we had the 2024 meeting:
+%D
+%D \starttyping
+%D \startformula
+%D \startalign[n=7,align=*:middle,rulecolor=red,rulethickness=.25ex]
+%D \NC 1   \NC + \NC 222 \NC + \NC  33  \NC + \NC  44  \NR
+%D \HL
+%D \NC 11  \NC + \NC 22  \NC + \NC  3   \NC + \NC  4   \NR
+%D \HL[1,green,3mm,3,reset,5,blue,7]
+%D \NC 111 \NC + \NC 2   \NC + \NC  333 \NC + \NC  444 \NR
+%D \stopalign
+%D \stopformula
+%D \stoptyping
+
+% musical timestamp, listening to Anna Von Hausswolff on pipe organ (ctx 2024 after
+% party with Mikael S)
+
+\newdimension\d_math_alignment_HL_width
+
+\lettonothing\p_math_alignment_HL_color
+
+\lettonothing\p_math_alignment_number
+
+\protected\def\math_alignment_HL_rule
+  {\leaders
+     \hrule
+       \s!height \d_math_alignment_HL_width
+       \s!depth  \d_math_alignment_HL_width
+     \relax
+     \hfill}
+
+\def\math_alignment_HL_reset
+  {\d_math_alignment_HL_width{\mathalignmentparameter\c!rulethickness/2}%
+   \edef\p_math_alignment_HL_color{\mathalignmentparameter\c!rulecolor}}
+
+\def\math_alignment_HL_step_add#1%
+  {\ifcase\scratchcounter\else
+     \expandedrepeat{#1-\scratchcounter}{\toksapp\scratchtoks{\aligntab\omit}}%
+   \fi
+   \scratchcounter#1\relax
+   \etoksapp\scratchtoks{%
+   % \noexpand\def\noexpand\p_math_alignment_HL_color{\p_math_alignment_HL_color}%
+     \colo_helpers_activate{\p_math_alignment_HL_color}%
+     \d_math_alignment_HL_width\the\d_math_alignment_HL_width\relax
+     \math_alignment_HL_rule}}
+
+\def\math_alignment_HL_step#1%
+  {\ifcstok{#1}\v!reset
+     \math_alignment_HL_reset
+   \orelse\ifchkdim#1\or
+     \d_math_alignment_HL_width#1\relax
+   \orelse\ifchknum#1\or
+     \math_alignment_HL_step_add{#1}%
+   \else
+     \def\p_math_alignment_HL_color{#1}%
+   \fi}
+
+\tolerant\def\math_alignment_HL[#1]%
+  {\noalign{\nointerlineskip}%
+   \omit\aligntab\omit
+   \math_alignment_HL_reset
+   \novrule
+     \s!height {\mathalignmentparameter\c!toffset}%
+     \s!depth  {\mathalignmentparameter\c!boffset}%
+   \relax
+   \ifparameter#1\or
+     \global\scratchcounter\zerocount
+     \scratchtoks{\aligntab\omit}%
+     \processcommalist[#1]\math_alignment_HL_step
+     \expand\scratchtoks
+   \else
+     \colo_helpers_activate\p_math_alignment_HL_color
+     \math_alignment_HL_rule
+     \expandedrepeat{\c_math_eqalign_slots+\minusone}{\span\omit}%
+   \fi
+   \crcr
+   \noalign{\nointerlineskip}}
+
+% the preamble is scanned for tabskips so we need the span to prevent an error
+% message but we can probably do without that hack now .. best not change this
+% now .. what works now keeps working
+
+\setnewconstant\c_strc_formulas_check_width\plusone
+
+\newboundary\c_math_align_l_marker
+\newboundary\c_math_align_r_marker
+
+\permanent\def\strc_math_effective_width
+  {\dimexpr
+     \ifzeropt\d_strc_formulas_display_width
+       \hsize
+     \else
+       \d_strc_formulas_display_width
+     \fi
+      -\leftskip
+      -\rightskip
+   \relax}
+
+% formula   : numbermethod        down : default
+% formula   : numberlocation   overlay : option
+% mathalign : align           ..| auto :
+% mathalign : adaptive             yes : synchronize glue
+
+% \startplaceformula
+% \startformula[numbermethod=down,numberlocation=normal]
+% \medmuskip 4mu plus 2mu minus 2mu \showmakeup[mathglue]\showglyphs\showboxes
+% \startalign[adaptive=yes,align=auto]
+% \NC aaa+x+xxxxxxxx+x+xxxx \EQ x+xxx                   \NR[eq:two:zz]
+% \NC x+x                   \EQ x+x+x+xxx+x+x+xxx+xx+xx \NR[eq:two:xx]
+% \stopalign
+% \stopformula
+% \stopplaceformula
+%
+% \startplaceformula
+% \startformula[numbermethod=normal,numberlocation=normal]
+% \medmuskip 4mu plus 2mu minus 2mu \showmakeup[mathglue]\showglyphs\showboxes
+% \startalign[adaptive=no,align=middle]
+% \NC aaa+x+xxxxxxxx+x+xxxx \EQ x+xxx                   \NR[eq:two:zz]
+% \NC x+x                   \EQ x+x+x+xxx+x+x+xxx+xx+xx \NR[eq:two:xx]
+% \stopalign
+% \stopformula
+% \stopplaceformula
+
+\newconditional\c_math_align_overflow_mode     \c_math_align_overflow_mode\conditionaltrue
+\newconditional\c_math_align_reformat_mode     \c_math_align_reformat_mode\conditionaltrue
+\newconditional\c_strc_formulas_overlay_number \c_strc_formulas_overlay_number\conditionaltrue
+
+\protected\def\math_text_in_align
+  {\scratchcounter{\c_math_eqalign_row+\plusone}%
+   \usemathalignmentstyleandcolor\c!textstyle\c!textcolor
+   \usemathalignmentstyleandcolor{\c!textstyle:\the\scratchcounter}{\c!textcolor:\the\scratchcounter}%
+   \mathalignmentparameter\c!text
+   \dostarttaggednodetail\t!mtext
+   \mathalignmentparameter{\c!text:\the\scratchcounter}%
+   \dostoptagged}
+
+\def\math_align_initialize_class_states
+  {}
+
+\protected\def\math_align_reset_class_states
+  {\lastleftclass \mathbegincode
+   \lastrightclass\mathendcode}
+
+% the fill skips are somewhat hackery here ...
+
+% left
+
+\def\math_prepare_l_eqalign_no_a
+  {\relax
+   \strut
+   \math_text_in_align
+   \aligncontent % for picking up the number
+   \ifcase\c_strc_formulas_align_alignment
+     \ifnum\c_strc_math_ragged_status=\plusthree
+       \tabskip\zeroskip
+     \else
+       \tabskip\centeringskip
+     \fi
+   \or
+     \ifnum\c_strc_math_ragged_status=\plusthree
+       \tabskip\zeroskip
+     \else
+       \tabskip\centeringskip
+     \fi
+   \or
+     \tabskip\stretchingfillskip
+   \fi
+   \boundary\c_math_align_l_marker
+   \math_align_reset_class_states
+   \aligntab
+   \math_first_in_eqalign
+   \hfil
+   \math_left_of_eqalign
+   \span
+   \math_math_in_eqalign{\aligncontent}%
+   \math_right_of_eqalign
+   \tabskip\zeroskip}
+
+\def\math_prepare_l_eqalign_no_b
+  {\aligntab
+   \math_next_in_eqalign
+   \math_left_of_eqalign
+   \span
+   \math_math_in_eqalign{\aligncontent}%
+   \math_right_of_eqalign
+   \tabskip\zeroskip
+   }
+
+\def\math_prepare_l_eqalign_no_c_three
+  {\hfil
+   \tabskip\zeroskip
+   \aligntab
+   \span
+   \boundary\c_math_align_r_marker
+   \math_alignment_rbox{\aligncontent}%
+   \tabskip\zeroskip}
+
+\def\math_prepare_l_eqalign_no_c_one
+  {\hfil
+   \tabskip\stretchingfillskip
+   \aligntab
+   \span
+   \boundary\c_math_align_r_marker
+   \math_alignment_rbox{\aligncontent}%
+   \tabskip\zeroskip}
+
+\def\math_prepare_l_eqalign_no_c_other
+  {\hfil
+   \tabskip\centeringskip
+   \aligntab
+   \span
+   \boundary\c_math_align_r_marker
+   \math_alignment_rbox{\aligncontent}%
+   \ifcase\c_strc_formulas_align_alignment
+     \tabskip\zeroskip
+   \or
+     \ifconditional\c_strc_formulas_handle_number
+      %\tabskip\zeroskip
+       \tabskip\stretchingfillskip
+     \else
+       \tabskip\stretchingfillskip
+     \fi
+   \or
+     \tabskip\zeroskip
+   \fi
+  }
+
+\def\math_prepare_l_eqalign_no  % \checkeddisplaymath
+  {\math_align_initialize_class_states
+   \t_math_align_a{\math_prepare_l_eqalign_no_a}%
+   \t_math_align_b{\math_prepare_l_eqalign_no_b}%
+   \ifnum\c_strc_math_ragged_status=\plusthree
+     \t_math_align_c{\math_prepare_l_eqalign_no_c_three}%
+   \orelse\ifnum\c_strc_math_ragged_status=\plusone
+     \t_math_align_c{\math_prepare_l_eqalign_no_c_one}%
+   \else
+     \t_math_align_c{\math_prepare_l_eqalign_no_c_other}%
+   \fi
+   \math_build_eqalign
+   \ifnum\c_strc_math_ragged_status=\plusthree
+     \tabskip\stretchingfillskip
+   \else
+     \tabskip\zeroskip
+   \fi}
+
+% right
+
+\def\math_prepare_r_eqalign_no_a
+  {\relax
+   \strut
+   \math_text_in_align
+   \tabskip\centeringskip
+   \aligncontent % for picking up the number
+   \ifcase\c_strc_formulas_align_alignment
+     % middle
+     \boundary\c_math_align_l_marker% This is flush left when number
+     \tabskip\centeringskip
+   \or
+     % left
+     \tabskip\zeroskip
+   \or
+     % right
+     \tabskip\stretchingfilllskip
+   \fi
+   \math_align_reset_class_states
+   \aligntab
+   \math_first_in_eqalign
+   \hfil
+   \math_left_of_eqalign
+   \span
+   \math_math_in_eqalign{\aligncontent}%
+   \math_right_of_eqalign
+   \tabskip\zeroskip}
+
+\def\math_prepare_r_eqalign_no_b
+  {\aligntab
+   \math_next_in_eqalign
+   \math_left_of_eqalign
+   \span
+   \math_math_in_eqalign{\aligncontent}%
+   \math_right_of_eqalign
+   \tabskip\zeroskip}
+
+\def\math_prepare_r_eqalign_no_c_three
+  {\hfil
+   \aligntab
+   \hfill % the only one !
+   \span
+   \boundary\c_math_align_r_marker
+   \math_alignment_lbox{\aligncontent}%
+   \tabskip\zeroskip}
+
+\def\math_prepare_r_eqalign_no_c_one_one
+  {\hfil
+   \tabskip\stretchingfillskip
+   \aligntab
+   \span
+   \boundary\c_math_align_r_marker
+   \math_alignment_lbox{\aligncontent}%
+   \tabskip\zeroskip}
+
+\def\math_prepare_r_eqalign_no_c_one_other
+  {\hfil
+   \tabskip\zeroskip
+   \aligntab
+   \span
+   \boundary\c_math_align_r_marker
+   \math_alignment_lbox{\aligncontent}%
+   \tabskip\stretchingfillskip}
+
+\def\math_prepare_r_eqalign_no_c_other
+  {\hfil
+   \ifcase\c_strc_formulas_align_alignment
+     % middle
+     \tabskip\centeringskip % fails in some cases
+   \or
+     % left
+     \ifconditional\c_strc_formulas_handle_number
+       \tabskip\stretchingfillskip
+     \else
+       \tabskip\zeroskip
+     \fi
+   \or
+     % right
+     \ifconditional\c_strc_formulas_handle_number
+       \tabskip\stretchingfillskip
+     \else
+       \tabskip\zeroskip
+     \fi
+   \fi
+   \aligntab
+   \span
+   \hss % for MS to test this
+   \boundary\c_math_align_r_marker
+   \math_alignment_lbox{\aligncontent}%
+   \ifcase\c_strc_formulas_align_alignment
+     % middle
+     \tabskip\zeroskip
+   \or
+     % left
+     \ifconditional\c_strc_formulas_handle_number
+       \tabskip\zeroskip
+     \else
+       \tabskip\stretchingfillskip
+     \fi
+   \or
+     % right
+     \ifconditional\c_strc_formulas_handle_number
+       \tabskip\stretchingfillskip
+     \else
+       \tabskip\zeroskip
+     \fi
+   \fi}
+
+\def\math_prepare_r_eqalign_no
+  {\math_align_initialize_class_states
+   \t_math_align_a{\math_prepare_r_eqalign_no_a}%
+   \t_math_align_b{\math_prepare_r_eqalign_no_b}%
+   \ifnum\c_strc_math_ragged_status=\plusthree
+     \t_math_align_c{\math_prepare_r_eqalign_no_c_three}%
+   \orelse\ifnum\c_strc_math_ragged_status=\plusone
+     \ifnum\c_strc_math_number_variant=\plusone
+       \t_math_align_c{\math_prepare_r_eqalign_no_c_one_one}%
+     \else
+       \t_math_align_c{\math_prepare_r_eqalign_no_c_one_other}%
+     \fi
+   \else
+     \t_math_align_c{\math_prepare_r_eqalign_no_c_other}%
+   \fi
+   \math_build_eqalign
+   \tabskip\zeroskip}
+
+% done
+%
+% if we have an issue then we need to check the unless case below
+
+\def\math_halign_checked
+  {\enablemathalignrelocate
+   \ifgridlinesnapping
+     \ifcsname\??snapping\mathalignmentparameter\c!snapping\endcsname
+       \alignsnapping\lastnamedcs
+     \fi
+   \fi
+   \halign
+     \ifconditional\c_math_align_overflow_mode
+       \s!callback
+         \align_callback_mathalign
+       \s!attr
+         \mathnumberlocationattribute{% on whole, different on l/rbox
+            %\unless
+            \ifcase\c_strc_formulas_align_alignment
+              \plustwo
+            \orelse\ifconditional\c_math_align_reformat_mode
+              \plusfour
+            \orelse\ifnum\c_strc_formulas_align_alignment=\plusone
+              \ifcstok{\formulaparameter\c!location}\v!left
+                \pluseight
+              \else
+                \plustwo
+              \fi
+            \else
+              \plustwo
+            \fi
+          * \plussixteen % just a signal
+       }%
+     \fi
+     \ifcase\c_strc_formulas_check_width\else
+        to \strc_math_effective_width
+     \fi}
+
+\installcorenamespace {mathalignlocation}
+
+\setnewconstant\c_strc_formulas_align_alignment\zerocount % 1=left 2=right
+\setnewconstant\c_strc_formulas_align_packed   \zerocount
+
+\let\math_alignment_location_box\hpack
+
+\defcsname\??mathalignlocation\v!top   \endcsname{\let\math_alignment_location_box\tpack}
+\defcsname\??mathalignlocation\v!bottom\endcsname{\let\math_alignment_location_box\vpack}
+\defcsname\??mathalignlocation\v!center\endcsname{\let\math_alignment_location_box\vcenter}
+
+\defcsname\??mathalignlocation\v!middle\endcsname{\c_strc_formulas_align_alignment\zerocount}
+\defcsname\??mathalignlocation\v!left  \endcsname{\c_strc_formulas_align_alignment\plusone}
+\defcsname\??mathalignlocation\v!right \endcsname{\c_strc_formulas_align_alignment\plustwo}
+
+\defcsname\??mathalignlocation\v!packed\endcsname
+  {\c_strc_formulas_align_packed\plusone}
+
+\defcsname\??mathalignlocation\v!unpacked\endcsname
+  {\c_strc_formulas_align_packed\plustwo}
+
+\defcsname\??mathalignlocation\v!formula\endcsname
+  {\c_strc_formulas_align_alignment
+     \ifcstok{\formulaparameter\c!align}\v!flushleft
+       \plusone
+   % \orelse\expandafter\ifx\lastnamedcs\v!flushright
+     \orelse\ifcstok{\lastnamedcs}\v!flushright
+       \plustwo
+     \else
+       \zerocount
+     \fi}
+
+\def\math_alignment_location_box_set#1{\begincsname\??mathalignlocation#1\endcsname}
+
+\def\math_alignment_location_check#1%
+  {\c_strc_formulas_align_alignment\zerocount
+   \c_strc_formulas_align_packed\zerocount
+   \let\math_alignment_location_box\vcenter
+   \processcommacommand[#1]\math_alignment_location_box_set}
+
+%D Here we implement the user interface part. We start with basic math alignments:
+
+\newinteger    \c_math_eqalign_column
+\newinteger    \c_math_eqalign_row
+\newconditional\c_math_eqalign_first
+
+\newtoks       \everymathalignment
+\newtoks       \everymathalignmentdone
+
+\newdimension  \d_math_eqalign_number_threshold
+
+\definesystemattribute[mathnumberlocation] [public]
+\definesystemattribute[mathnumberthreshold][public]
+
+\protected\def\math_alignment_lbox#1%
+  {\begingroup
+   \setbox\scratchbox\hbox{\resetformulaparameter\c!location#1}%
+   \ifzeropt\wd\scratchbox\else
+     \hpack
+       \s!attr \mathnumberlocationattribute{%
+        % \c_strc_formulas_align_packed*\pluscclvi % 0x0.00
+          \c_math_alignment_packed_signal          % 0x0.00
+        + \c_strc_math_ragged_status*\plussixteen  % 0x00.0
+        + \plusone                                 % 0x000.
+       }%
+       \s!attr \mathnumberthresholdattribute{%
+         \d_math_eqalign_number_threshold
+       }%
+       {\strc_formulas_add_distance \plustwo\v!left\mathalignmentparameter
+        \box\scratchbox
+        \hskip\d_math_alignment_packed_margin
+        }%
+   \fi
+   \global\d_math_eqalign_number_threshold\zeropoint % move to begin of row
+   \endgroup}
+
+\protected\def\math_alignment_rbox#1%
+  {\begingroup
+   \setbox\scratchbox\hbox{\resetformulaparameter\c!location#1}%
+   \ifzeropt\wd\scratchbox\else
+     \hpack
+       \s!attr \mathnumberlocationattribute{%
+        % \c_strc_formulas_align_packed*\pluscclvi % 0x0.00
+          \c_math_alignment_packed_signal          % 0x0.00
+        + \c_strc_math_ragged_status*\plussixteen  % 0x00.0
+        + \plustwo                                 % 0x000.
+       }%
+       \s!attr \mathnumberthresholdattribute{%
+         \d_math_eqalign_number_threshold
+       }%
+       {\hskip\d_math_alignment_packed_margin
+        \box\scratchbox
+        \strc_formulas_add_distance \plustwo\v!right\mathalignmentparameter}%
+   \fi
+   \global\d_math_eqalign_number_threshold\zeropoint % move to begin of row
+   \endgroup}
+
+\permanent\tolerant\protected\def\math_alignment_NN[#1]#*[#2]%
+  {\aligntab
+   \strc_formulas_place_number_nested{#1}{#2}}
+
+\permanent\tolerant\protected\def\math_alignment_NR[#1]#*[#2]%
+  {\aligntab
+%    \dostarttaggednodetail\t!mtext
+% \c_strc_formulas_number_in_alignment\conditionaltrue
+%    \strc_formulas_place_number_nested{#1}{#2}%
+% \dostoptagged % mtext
+\math_place_number_in_alignment{#1}{#2}%
+\dostoptagged % math
+\dostoptagged % subformla
+   \math_number_right_of_eqalign
+   \global\c_math_eqalign_first\conditionaltrue
+   \crcr}
+
+\permanent\protected\def\math_alignment_NC
+  {\relax
+   \ifconditional\c_math_eqalign_first
+     \ifx\p_math_alignment_number\v!auto
+       \strc_formulas_place_number_nested{+}{}%
+     \fi
+     \global\c_math_eqalign_first\conditionalfalse
+   \fi
+   \math_number_left_of_eqalign
+   \aligntab}
+
+\newconditional\c_math_eqalign_force_text
+
+\permanent\protected\def\math_alignment_TC
+  {\relax
+   \ifconditional\c_math_eqalign_first
+     \ifx\p_math_alignment_number\v!auto
+       \strc_formulas_place_number_nested{+}{}%
+     \fi
+     \global\c_math_eqalign_first\conditionalfalse
+   \fi
+   \math_number_left_of_eqalign
+   \global\c_math_eqalign_force_text\conditionaltrue
+   \aligntab}
+
+\permanent\protected\def\math_alignment_EQ
+  {\NC=}
+
+\noaligned\tolerant\protected\def\math_common_TB[#1]%
+  {\noalign{\blank[#1]}}
+
+\installmacrostack\NC % maybe more to shared table definitions
+\installmacrostack\TC % idem
+\installmacrostack\NN % idem
+\installmacrostack\EQ % idem
+\installmacrostack\NR % idem
+\installmacrostack\BC % idem
+\installmacrostack\EC % idem
+\installmacrostack\HL % idem
+\installmacrostack\TB % idem
+
+\appendtoks
+    \push_macro_NC
+    \push_macro_TC
+    \push_macro_NN
+    \push_macro_EQ
+    \push_macro_NR
+    \push_macro_HL
+    \push_macro_TB
+    \enforced\let\NC\math_alignment_NC
+    \enforced\let\TC\math_alignment_TC
+    \enforced\let\NN\math_alignment_NN
+    \enforced\let\EQ\math_alignment_EQ
+    \enforced\let\NR\math_alignment_NR
+    \enforced\let\HL\math_alignment_HL
+    \enforced\let\TB\math_common_TB
+    \global\c_math_eqalign_first\conditionaltrue
+    \global\s_strc_math_alignment_inbetween\zeroskip
+\to \everymathalignment
+
+\appendtoks
+    \pop_macro_TB
+    \pop_macro_HL
+    \pop_macro_NR
+    \pop_macro_EQ
+    \pop_macro_NN
+    \pop_macro_TC
+    \pop_macro_NC
+    \global\s_strc_math_alignment_inbetween\zeroskip
+\to \everymathalignmentdone
+
+\newconditional\c_math_alignment_auto_number
+
+% \begingroup not permitted ($$...assignments...\halign... ).. check in luametatex
+
+% \definemathmatrix
+%   [pmatrix]
+%   [matrix:parentheses]
+% % [align=1:right]
+%   [align=all:right]
+% % [align=2:right]
+% % [align={1:left,2:middle,3:right}]
+
+\newgluespec\s_strc_math_alignment_inbetween
+
+\def\strc_math_setup_spacing_aligned#1%
+  {\begingroup
+   % here we abuse the whitespace setter
+   \edef\v_spac_whitespace_current{#1\c!spaceinbetween}%
+   \ifempty\v_spac_whitespace_current
+     \global\s_strc_math_alignment_inbetween\zeroskip
+   \orelse\ifgridlinesnapping
+     \global\s_strc_math_alignment_inbetween\zeroskip
+   \orelse\ifgridsnapping
+     \global\s_strc_math_alignment_inbetween\zeroskip
+   \else
+     \spac_whitespace_setup
+     \global\s_strc_math_alignment_inbetween\parskip
+   \fi
+   \endgroup}
+
+\newinteger  \c_math_alignment_packed_signal
+\newdimension\d_math_alignment_packed_margin
+
+\def\math_alignment_packed_start
+  {%\math_eqalign_set_defaults
+   \c_strc_formulas_check_width\zerocount
+   \c_math_alignment_packed_signal{\c_strc_formulas_align_packed*\pluscclvi}%
+   \d_math_alignment_packed_margin\rightskip
+   \mathatom
+     \s!class \mathwrappedcode
+     \s!attr  \mathnumberlocationattribute \c_math_alignment_packed_signal
+   \relax
+   \bgroup
+ % \scratchdimen\mathalignmentparameter\c!leftmargin\relax
+ % \ifzeropt\scratchdimen\else\kern\scratchdimen\fi
+ % \mathalignmentparameter\c!left\relax
+   \math_fenced_start_wrap{\mathalignmentparameter\c!fences}%
+   \mathatom
+     \s!class \mathconstructcode
+   \bgroup}
+
+\def\math_alignment_packed_stop
+  {\egroup
+   \math_fenced_stop_wrap
+ % \mathalignmentparameter\c!right\relax
+ % \scratchdimen\mathalignmentparameter\c!rightmargin\relax
+ % \ifzeropt\scratchdimen\else\kern\scratchdimen\fi
+ % \setbox\scratchbox\hbox{\mathalignmentparameter\c!text}%
+ % \ifvoid\scratchbox\else
+ %   \kern\mathalignmentparameter\c!textdistance
+ %   \vcenter{\box\scratchbox}%
+ % \fi
+   \egroup
+   \d_math_alignment_packed_margin\zeropoint
+   \c_math_alignment_packed_signal\zerocount}
+
+\permanent\tolerant\protected\def\math_alignment_start[#1]#*[#S#2]%
+  {\begingroup
+   \currentmathblobnesting\minusone
+   \cdef\currentmathalignment{#1}%
+   \ifarguments\or\or
+     \setupmathalignment[#1][#2]%
+   \fi
+   \ifcstok{\mathalignmentparameter\c!adaptive}\v!yes
+     \c_math_align_reformat_mode\conditionaltrue
+   \else
+     \c_math_align_reformat_mode\conditionalfalse
+   \fi
+   \math_alignment_location_check{\mathalignmentparameter\c!location}% vcenter etc
+   %
+   \expand\everymathalignment
+   \c_math_eqalign_row   \zerocount
+   \c_math_eqalign_column\zerocount
+   \processcommacommand
+     [\mathalignmentparameter\c!align]%
+     {\advanceby\c_math_eqalign_column\plusone\math_eqalign_set_column}% takes argument
+   \global\c_math_eqalign_column\plusone
+   %
+   \edef\p_math_alignment_number{\mathalignmentparameter\c!number}%
+   \strc_math_setup_spacing_aligned\mathalignmentparameter
+   % make preamble
+   \ifcstok{\formulaparameter\c!location}\v!left
+     \math_prepare_l_eqalign_no
+   \else
+     \math_prepare_r_eqalign_no
+   \fi
+   %
+   \ifcase\c_strc_formulas_align_packed\else
+     \math_alignment_packed_start
+   \fi
+ % \everycr{\ifcase\c_math_eqalign_row\else\noalign{\penalty\interdisplaylinepenalty}\fi}%
+   \math_alignment_location_box
+   \ifgridlinesnapping \s!linesnapping \linesnapping \fi
+   \bgroup
+   \math_halign_checked\expandafter\bgroup\the\scratchtoks\crcr}
+
+
+\def\math_alignment_stop % can be protected
+  {\crcr
+   \egroup
+   \egroup
+   \ifcase\c_strc_formulas_align_packed\else
+     \math_alignment_packed_stop
+   \fi
+   \expand\everymathalignmentdone
+   \endgroup}
+
+\installcorenamespace{mathalignment}
+\installcorenamespace{mathalignmentvariant}
+
+\installcommandhandler \??mathalignment {mathalignment} \??mathalignment
+
+\appendtoks
+              \protected\frozen\instance\edefcsname\e!start\currentmathalignment\endcsname{\math_alignment_start[\currentmathalignment]}%
+    \noaligned\protected\frozen\instance \defcsname\e!stop \currentmathalignment\endcsname{\math_alignment_stop}%
+\to \everydefinemathalignment
+
+% to be tested
+%
+% \appendtoks
+%               \protected\frozen\instance\defcsname\e!start\currentmathalignment\endcsname{\math_alignment_start[\currentmathalignment]}%
+%     \noaligned\protected\frozen\instance\defcsname\e!stop \currentmathalignment\endcsname{\math_alignment_stop}%
+% \to \everydefinemathalignment
+
+\setupmathalignment
+  [\c!n=2,
+   \c!m=1,
+   \c!leftmargin=\zeropoint,
+   \c!rightmargin=\zeropoint,
+   \c!fences=,
+   \c!left=,
+   \c!right=,
+   \c!distance=\emwidth,
+   \c!location=\v!formula,
+   \c!spaceinbetween=\formulaparameter\c!spaceinbetween,
+   \c!numberthreshold=\zeropoint,
+   \c!grid=\v!math,
+  %\c!rulecolor=red,
+   \c!moffset=.25\exheight,
+   \c!toffset=\mathalignmentparameter\c!moffset,
+   \c!boffset=\mathalignmentparameter\c!moffset,
+   \c!rulethickness=\linewidth]
+
+\definemathalignment[align]            % default case (this is what amstex users expect)
+\definemathalignment[\v!mathalignment] % prefered case (this is cleaner, less clashing)
+
+% special case.. in case one mistypes ..
+
+\ifdefined \startalignment
+
+    \pushoverloadmode
+
+    \aliased\let\align_math_normal_start\startalign
+    \aliased\let\align_math_normal_stop \stopalign
+
+    \aliased\let\align_text_normal_start\startalignment
+    \aliased\let\align_text_normal_stop \stopalignment
+
+    \permanent\overloaded\protected\def\startalign
+      {\ifmmode
+         \enforced\let\stopalign\align_math_normal_stop % cannot be a protected def ... lookahead in align
+         \expandafter\align_math_normal_start
+       \orelse\ifinformula
+         \enforced\let\stopalign\align_math_normal_stop
+         \expandafter\align_math_normal_start
+       \else
+         \enforced\let\stopalign\align_text_normal_stop
+         \expandafter\align_text_normal_start
+       \fi}
+
+    \aliased\let\stopalign\relax
+
+    \permanent\overloaded\protected\def\startalignment
+      {\ifmmode
+         \enforced\let\stopalignment\align_math_normal_stop % cannot be a protected def ... lookahead in align
+         \expandafter\align_math_normal_start
+       \orelse\ifinformula
+         \enforced\let\stopalignment\align_math_normal_stop % cannot be a protected def ... lookahead in align
+         \expandafter\align_math_normal_start
+       \else
+         \enforced\let\stopalignment\align_text_normal_stop
+         \expandafter\align_text_normal_start
+       \fi}
+
+    \aliased\let\stopalignment\relax
+
+    \pushoverloadmode
+
+\fi
+
+%
+
+\protected\def\math_first_in_eqalign % protection prevents tagging expansion
+  {\global\c_math_eqalign_column\plusone
+   \global\advanceby\c_math_eqalign_row\plusone
+   \currentmathblobnesting\minusone
+   \dostarttaggednodetail\t!subformula
+   \dostarttaggednodetail\t!math
+   }
+
+\protected\def\math_next_in_eqalign % protection prevents tagging expansion
+  {\global\advanceby\c_math_eqalign_column\plusone
+   \currentmathblobnesting\minusone}
+
+\protected\def\math_left_of_eqalign
+  {\ifcsname\??mathalignmentvariant\the\c_math_eqalign_column\endcsname
+     \ifcase\lastnamedcs \or \relax \or \hfill \or \hfill \fi
+   \orelse\ifcsname\??mathalignmentvariant\the\zerocount\endcsname
+     \ifcase\lastnamedcs \or \relax \or \hfill \or \hfill \fi
+   \orelse\ifcsname\??mathalignmentvariant\tointeger{\c_math_eqalign_column-\c_math_eqalign_repeat}\endcsname
+     \ifcase\lastnamedcs \or \relax \or \hfill \or \hfill \fi
+   \fi}
+
+\protected\def\math_right_of_eqalign
+  {\ifcsname\??mathalignmentvariant\the\c_math_eqalign_column\endcsname
+     \ifcase\lastnamedcs \or \hfill \or \relax \or \hfill \fi
+   \orelse\ifcsname\??mathalignmentvariant\the\zerocount\endcsname
+     \ifcase\lastnamedcs \or \hfill \or \relax \or \hfill \fi
+   \orelse\ifcsname\??mathalignmentvariant\tointeger{\c_math_eqalign_column-\c_math_eqalign_repeat}\endcsname
+     \ifcase\lastnamedcs \or \hfill \or \relax \or \hfill \fi
+   \fi}
+
+\newconditional\c_math_alignment_local_number % not used but when true puts in front (todo)
+
+\def\math_number_right_of_eqalign
+  {\ifcase\d_strc_formulas_number\else
+     \ifconditional\c_math_alignment_local_number
+       \ifcase\c_strc_math_number_location\or\or
+         \strc_math_flush_number_box
+       \fi
+     \else
+       \strc_math_flush_number_box
+     \fi
+   \fi}
+
+\def\math_number_left_of_eqalign
+  {\ifcase\d_strc_formulas_number\else
+     \ifconditional\c_math_alignment_local_number
+       \ifcase\c_strc_math_number_location\or
+         \strc_math_flush_number_box
+       \fi
+     \fi
+   \fi}
+
+\protected\def\math_eqalign_set_column_indeed[#1:#2:#3]% we don't really check for all (so * will do too) ... yet
+  {\ifempty{#2}%
+     % current counter
+   \orelse\ifchknumber#1\or
+     \c_math_eqalign_column\lastchknumber
+   \else
+     \c_math_eqalign_column\zerocount
+   \fi
+   \expandafter\integerdef\csname\??mathalignmentvariant\the\c_math_eqalign_column\endcsname
+     \ifcsname\??mathalignmentvariant#2\endcsname\lastnamedcs\else\zerocount\fi\relax}
+
+\def\math_eqalign_set_column#1%
+  {\expanded{\math_eqalign_set_column_indeed[#1::]}}
+
+\def\math_eqalign_set_columns_step
+  {\advanceby\c_math_eqalign_column\plusone
+  %\c_math_matrix_columns\c_math_eqalign_column
+   \math_eqalign_set_column}
+
+\def\math_eqalign_set_columns#1%
+  {\c_math_eqalign_column\zerocount
+   \rawprocesscommacommand[#1]\math_eqalign_set_columns_step}
+
+% can't we reuse these numbers ?
+
+\letcsname\??mathalignmentvariant\v!normal    \endcsname\zerocount
+\letcsname\??mathalignmentvariant\v!flushright\endcsname\plusone
+\letcsname\??mathalignmentvariant\v!left      \endcsname\plusone
+\letcsname\??mathalignmentvariant\v!right     \endcsname\plustwo
+\letcsname\??mathalignmentvariant\v!flushleft \endcsname\plustwo
+\letcsname\??mathalignmentvariant\v!middle    \endcsname\plusthree
+
+%D \starttyping
+%D \placeformula[eqn0]\startformula \startalign[n=1] a\NR       \stopalign \stopformula See \in[eqn0]
+%D \placeformula[eqn1]\startformula \startalign[n=1] a\NR       \stopalign \stopformula See \in[eqn1]
+%D \placeformula      \startformula \startalign[n=1] a\NR[eqn2] \stopalign \stopformula See \in[eqn2]
+%D \placeformula[eqn3]\startformula \startalign[n=1] a\NR[+]    \stopalign \stopformula See \in[eqn3]
+%D \stoptyping
+
+%D \startbuffer
+%D \placeformula \startformula \startalign
+%D \NC  a \EQ b \NR[+]
+%D \NC  c \EQ d \NR
+%D \NC    \EQ f \NR[for:demo-a-1]
+%D \NC    \EQ g \NR[for:demo-a-2][a]
+%D \NC    \EQ h \NR[for:demo-a-3][b]
+%D \NC    \EQ i \NR
+%D \stopalign \stopformula
+%D \stopbuffer
+%D
+%D \typebuffer \getbuffer
+%D
+%D \startbuffer
+%D \placeformula \startformula \startalign
+%D \NC a \EQ b \NR[+]
+%D \NC c \EQ d \NR
+%D \NC   \EQ f \NR
+%D \NC   \EQ g \NR
+%D \NC   \EQ h \NR
+%D \NC   \EQ i \NR[+]
+%D \stopalign \stopformula
+%D \stopbuffer
+%D
+%D \typebuffer \getbuffer
+%D
+%D \startbuffer
+%D \placeformula \startformula \startalign
+%D \NC  a \NC \eq  b \NR[+]
+%D \NC  c \NC \neq d \NR
+%D \NC    \NC \neq f \NR[for:demo-b-1]
+%D \NC    \NC \geq g \NR[for:demo-b-2][a]
+%D \NC    \NC \leq h \NR[for:demo-b-3][b]
+%D \NC    \NC \neq i \NR
+%D \stopalign \stopformula
+%D \stopbuffer
+%D
+%D \typebuffer \getbuffer
+%D
+%D \startbuffer
+%D \placeformula \startformula \startalign[n=3,align={left,middle,right}]
+%D \NC       l \NC = \NC r     \NR
+%D \NC    left \NC = \NC right \NR
+%D \stopalign \stopformula
+%D \stopbuffer
+%D
+%D \typebuffer \getbuffer
+%D
+%D \startbuffer
+%D \placeformula \startformula \startalign[n=3,align={right,middle,left}]
+%D \NC       l \NC = \NC r     \NR
+%D \NC    left \NC = \NC right \NR
+%D \stopalign \stopformula
+%D \stopbuffer
+%D
+%D \typebuffer \getbuffer
+%D
+%D \startbuffer
+%D \placeformula \startformula \startalign[n=3,align={middle,middle,middle}]
+%D \NC       l \NC = \NC r     \NR
+%D \NC    left \NC = \NC right \NR
+%D \stopalign \stopformula
+%D \stopbuffer
+%D
+%D \typebuffer \getbuffer
+%D
+%D \startbuffer
+%D \placeformula
+%D \startformula
+%D     \startalign[n=3,align={middle,middle,middle}]
+%D         \NC a  \NC = \NC b  \NR[+]
+%D         \NC 2a \NC = \NC 2b \NR
+%D     \stopalign
+%D \stopformula
+%D \stopbuffer
+%D
+%D \typebuffer \getbuffer
+%D
+%D \startbuffer
+%D \placeformula
+%D \startformulas
+%D     \setupmathalignment[n=3,align={middle,middle,middle}]%
+%D     \startformula
+%D         \startalign
+%D             \NC a  \NC = \NC b  \NR[+]
+%D             \NC 2a \NC = \NC 2b \NR
+%D         \stopalign
+%D     \stopformula
+%D     \startformula
+%D         \startalign
+%D             \NC a  \NC = \NC b  \NR[+]
+%D             \NC 2a \NC = \NC 2b \NR
+%D         \stopalign
+%D     \stopformula
+%D \stopformulas
+%D \stopbuffer
+%D
+%D \typebuffer \getbuffer
+%D
+%D \startbuffer
+%D \placeformula
+%D \startformulas
+%D     \dorecurse{5}{\startformula
+%D         \startalign[n=3,align={middle,middle,middle}]
+%D             \NC a  \NC = \NC b  \NR[+]
+%D             \NC 2a \NC = \NC 2b \NR
+%D         \stopalign
+%D     \stopformula}
+%D \stopformulas
+%D \stopbuffer
+%D
+%D \typebuffer \getbuffer
+
+%D \macros
+%D   {definemathcases, setupmathcases, startmathcases}
+%D
+%D Another wish \unknown
+
+\installcorenamespace{mathcases}
+
+\installcommandhandler \??mathcases {mathcases} \??mathcases
+
+\setupmathcases
+  [\c!distance=\emwidth,
+   \c!strut=\v!yes, % new
+   \c!spaceinbetween=\mathalignmentparameter\c!spaceinbetween,
+  %\c!numberdistance=2.5\emwidth,
+   \c!numberdistance=\zeropoint]
+
+\appendtoks
+    \protected\frozen\instance\edefcsname\e!start\currentmathcases\endcsname{\math_cases_start[\currentmathcases]}%
+    \frozen\instance          \defcsname \e!stop \currentmathcases\endcsname{\math_cases_stop}%
+\to \everydefinemathcases
+
+%D Why not \unknown:
+%D
+%D \starttyping
+%D \definemathcases[mycases][simplecommand=mycases]
+%D
+%D \startformula
+%D \startmycases
+%D \NC 1  \NC x>0 \NR
+%D \NC -1 \NC x<0 \NR
+%D \stopmycases
+%D \stopformula
+%D
+%D \startformula
+%D     \mycases{1,x>0;-1,x<0}
+%D \stopformula
+%D \stoptyping
+
+\permanent\tolerant\protected\def\math_cases_simple[#1]#*[#2]#:#3%
+  {\begingroup
+   \cdef\currentmathcases{#1}%
+   \setupcurrentmathcases[#2]%
+   \math_cases_start[\currentmathcases]%
+   \clf_simplecases{\mathcasesparameter\c!action}{#3}%
+   \math_cases_stop
+   \endgroup}
+
+\appendtoks
+    \edef\p_simplecommand{\mathcasesparameter\c!simplecommand}%
+    \ifempty\p_simplecommand\else
+        \protected\frozen\instance\edefcsname\p_simplecommand\endcsname{\math_cases_simple[\currentmathcases]}%
+    \fi
+\to \everydefinemathcases
+
+\let\math_cases_strut\relax
+
+\newinteger\c_math_cases_nc
+
+\def\math_cases_NC_zero
+  {\ifmmode\else
+     \startimath
+     \usemathstyleparameter\mathcasesparameter\c!mathstyle
+   \fi}
+
+\def\math_cases_NC_one
+  {\mathcasesparameter\c!lefttext\relax
+   \ifmmode\stopimath\fi
+   \aligntab
+   \ifmmode\else
+     \startimath
+     \usemathstyleparameter\mathcasesparameter\c!mathstyle
+   \fi
+   \mathcasesparameter\c!righttext\relax}
+
+\def\math_cases_NC_two
+  {\ifmmode\stopimath\fi}
+
+\def\math_cases_TC_zero % needs checking
+ %{\ifmmode\else\startimath\fi}
+  {}
+
+\def\math_cases_TC_one
+  {\ifmmode\stopimath\fi
+   \aligntab}
+
+\def\math_cases_TC_two
+ %{\ifmmode\stopimath\fi} % needs checking
+  {}
+
+\permanent\protected\def\math_cases_NC
+  {\ifcase\c_math_cases_nc
+     \expandafter\math_cases_NC_zero
+   \or
+     \expandafter\math_cases_NC_one
+   \or
+     \expandafter\math_cases_NC_zero
+   \else
+     % error
+   \fi
+   \global\advanceby\c_math_cases_nc\plusone}
+
+\permanent\protected\def\math_cases_TC
+  {\ifcase\c_math_cases_nc
+     \expandafter\math_cases_TC_zero
+   \or
+     \expandafter\math_cases_TC_one
+   \or
+     \expandafter\math_cases_TC_two
+   \else
+     % error
+   \fi
+   \global\advanceby\c_math_cases_nc\plusone}
+
+%D The \type {#.} catches this case:
+%D
+%D \starttyping
+%D \dm {
+%D     \startcases[righttext=\mtext{if }]
+%D         \NC -x \NC x < 0 \NR % see (**)
+%D         \NC  x \NC x > 0 \NR
+%D
+%D     \stopcases
+%D }
+%D \stoptyping
+
+\noaligned\tolerant\permanent\protected\def\math_cases_NR#.[#1]#*[#2]%
+  {\unskip
+   \ifmmode\stopimath\fi
+   \aligntab
+   \global\c_math_cases_nc\zerocount
+% \c_strc_formulas_number_in_alignment\conditionaltrue
+% \dostarttaggednodetail\t!mtext
+%    \strc_formulas_place_number_nested{#1}{#2}%
+% \dostoptagged
+\math_place_number_in_alignment{#1}{#2}%
+   \math_number_right_of_eqalign
+   \dostarttaggednodetail\t!mtablerow
+   \dostarttaggednodetail\t!mtablecell
+   \hpack{\box\b_strc_formulas_number}%
+   \dostoptagged % cell
+   \dostoptagged % row
+   \crcr}
+
+\installglobalmacrostack\c_math_cases_nc
+
+\permanent\tolerant\protected\def\math_cases_start[#1]#*[#S#2]%
+  {\begingroup
+   \currentmathblobnesting\minusone
+   \cdef\currentmathcases{#1}%
+   \ifarguments\or\or
+     \setupcurrentmathcases[#2]%
+   \fi
+   \edef\p_strut{\mathcasesparameter\c!strut}%
+   \ifx\p_strut\v!yes
+     \enforced\let\math_cases_strut\strut
+   \else
+     \enforced\let\math_cases_strut\relax
+   \fi
+   \push_macro_c_math_cases_nc
+   \mathatom \s!class \mathwrappedcode \bgroup
+   \scratchdimen{\mathcasesparameter\c!leftmargin}%
+   \ifzeropt\scratchdimen\else\kern\scratchdimen\fi
+   \mathcasesparameter\c!left
+   \math_fenced_start_wrap{\mathcasesparameter\c!fences}%
+   \mathatom \s!class \mathconstructcode \bgroup
+   \vcenter\bgroup
+   \mathbeginclass\mathbegincode % not really needed, see (**)
+   \enforced\let\MC\math_cases_NC
+   \enforced\let\NC\math_cases_NC
+   \enforced\let\NR\math_cases_NR
+   \enforced\let\TC\math_cases_TC
+   \enforced\let\TB\math_common_TB
+   \math_eqalign_set_defaults
+   \global\c_math_eqalign_column\plusone
+   \global\c_math_eqalign_row\plusone
+   \global\c_math_cases_nc\zerocount
+   \strc_math_setup_spacing_aligned\mathcasesparameter
+   \enablemathalignrelocate
+   \dostarttagged\t!math{cases}% \empty
+   \dostarttagged\t!mtable\currentmathcases
+   \halign
+     \s!callback
+       \align_callback_mathalign
+     \s!attr
+       \mathnumberlocationattribute \zerocount
+     \bgroup % use \indexofregister here
+     \dostarttaggednodetail\t!mtablerow
+     \ifmmode\else\startimath\fi
+     \usemathstyleparameter\mathcasesparameter\c!mathstyle
+     \dostarttaggednodetail\t!mtablecell
+     \aligncontent
+     \dostoptagged % cell
+     \ifmmode\stopimath\fi
+     \hfil
+     \aligntab
+     \kern{\mathcasesparameter\c!distance}%
+     \math_cases_strut % looks better
+     \dostarttaggednodetail\t!mtablecell
+     \aligncontent
+     \dostoptagged % cell
+     \hfil
+     \aligntab
+     \kern{\mathcasesparameter\c!numberdistance}%
+     \span
+     \math_text_in_eqalign
+       {\dostarttaggednodetail\t!mtablecell
+        \aligncontent
+        \dostoptagged % cell
+        \dostoptagged}% row
+     \crcr} % todo: number
+
+\noaligned\permanent\protected\def\math_cases_stop
+  {\crcr
+   \egroup
+   \dostoptagged % table
+   \dostoptagged % math
+   \egroup
+   \egroup
+   \math_fenced_stop_wrap
+   \mathcasesparameter\c!right\relax
+   \scratchdimen{\mathcasesparameter\c!rightmargin}%
+   \ifzeropt\scratchdimen\else\kern\scratchdimen\fi
+   \egroup
+   \pop_macro_c_math_cases_nc
+   \endgroup}
+
+% \definemathfence [cases] [\c!left="007B,\c!right=\v!none]
+% \definemathfence [sesac] [\c!left=\v!none,\c!right="007D]
+
+\definemathcases[cases]
+\definemathcases[\v!mathcases]
+
+% This might become key=cases in the end:
+
+\setupmathcases
+% [cases]
+  [\c!leftmargin=\zeropoint,
+   \c!rightmargin=\zeropoint,
+   \c!left=,
+   \c!right=,
+   \c!fences=cases]
+
+\definemathcases
+  [sesac]
+  [\c!fences=sesac]
+
+%D \startbuffer
+%D \placeformula \startformula \startcases
+%D \NC 2 \NC y > 0     \NR
+%D \NC 7 \NC x = 7     \NR[+]
+%D \NC 4 \TC otherwise \NR
+%D \stopcases \stopformula
+%D \stopbuffer
+%D
+%D \typebuffer \getbuffer
+%D
+%D \startbuffer
+%D \placeformula \startformula x \startcases
+%D \NC 2 \NC y > 0     \NR[+]
+%D \NC 7 \NC x = 7     \NR
+%D \NC 4 \TC otherwise \NR
+%D \stopcases \stopformula
+%D \stopbuffer
+%D
+%D \typebuffer \getbuffer
+%D
+%D \startbuffer
+%D \placeformula \startformula \startcases
+%D \NC 2 \NC y > 0     \NR
+%D \NC 7 \NC x = 7     \NR
+%D \NC 4 \TC otherwise \NR
+%D \stopcases \stopformula
+%D \stopbuffer
+%D
+%D \typebuffer \getbuffer
+%D
+%D \startbuffer
+%D \placeformula \startformula x \startcases
+%D \NC 2 \NC y > 0     \NR
+%D \NC 7 \NC x = 7     \NR
+%D \NC 4 \TC otherwise \NR
+%D \stopcases \stopformula
+%D \stopbuffer
+%D
+%D \typebuffer \getbuffer
+
+%D \macros
+%D   {definemathmatrix, setupmathmatrix, startmathmatrix}
+%D
+%D Yet another one \unknown. This time we implement the lot a bit
+%D different which is a side effect of getting the tagging right. In
+%D retrospect the main alignment could be done this way but \unknown
+
+%D In the end is is way easier to not use alignments and just paste boxes
+%D together but let's be a bit texie.
+
+\installcorenamespace{mathmatrix}
+
+\installcommandhandler \??mathmatrix {mathmatrix} \??mathmatrix
+
+\setupmathmatrix
+  [\c!distance=\emwidth,
+   \c!fences=,
+   \c!left=,
+   \c!right=,
+   \c!align=\v!middle,
+   \c!leftmargin=\zeropoint,
+   \c!rightmargin=\zeropoint,
+   \c!rulecolor=,
+   \c!rulethickness=\linewidth]
+
+\appendtoks
+    \protected\frozen\instance\edefcsname\e!start\currentmathmatrix\endcsname{\math_matrix_start[\currentmathmatrix]}%
+    % \noaligned\protected should work here:
+    \frozen\instance          \defcsname \e!stop \currentmathmatrix\endcsname{\math_matrix_stop}% no u else lookahead problem
+\to \everydefinemathmatrix
+
+\newinteger\c_math_matrix_columns
+
+\def\math_matrix_start_table
+  {\global\c_math_eqalign_column\zerocount
+   \global\c_math_eqalign_row\zerocount
+   \global\c_math_matrix_columns\zerocount
+   \dostarttaggednodetail\t!math
+   \dostarttaggednodetail\t!mtable}
+
+\def\math_matrix_stop_table
+  {\dostoptagged
+   \dostoptagged}
+
+\def\math_matrix_start_row
+  {\beginlocalcontrol
+   \global\c_math_matrix_columns\c_math_eqalign_column
+   \global\c_math_eqalign_column\zerocount
+   \global\advanceby\c_math_eqalign_row\plusone
+   \dostarttaggednodetail\t!mtablerow
+   \endlocalcontrol}
+
+\def\math_matrix_stop_row
+  {\beginlocalcontrol
+   \dostoptagged
+   \endlocalcontrol}
+
+\protected\def\math_matrix_start_cell
+  {\currentmathblobnesting\minusone
+   \dostarttaggednodetail\t!mtablecell
+   \hss
+   \math_left_of_eqalign
+   \everycr\emptytoks
+   \startimath
+   \usemathstyleparameter\mathmatrixparameter\c!mathstyle}
+
+\protected\def\math_matrix_stop_cell
+  {\stopimath
+   \math_right_of_eqalign
+   \hss
+   \dostoptagged}
+
+% \dorecurse{10}{test }
+%
+% \startformula
+%     \startmatrix[left=\left(,right=\right)]
+%       \NC x \NC       \NC yy \NC       \NC zzz \NR
+%       \NC x \NC \dots \NC yy \NC \dots \NC zzz \NR
+%       \HF[2]                                   \NR
+%       \NC x \NC \dots \NC yy \NC \dots \NC zzz \NR
+%       \HF                                      \NR
+%       \NC x \NC \dots \NC yy \NC \dots \NC zzz \NR
+%       \NC \HF[2]                               \NR
+%       \NC x \NC \dots \NC yy \NC \dots \NC zzz \NR
+%       \NC \NC \HF[2][rule]                     \NR
+%       \NC x \NC \dots \NC yy \NC \dots \NC zzz \NR
+%       \HL
+%       \NC x \VL \dots \VL yy \NC \dots \VL zzz \NR
+%       \NC x \VL \dots \VL yy \NC \dots \VL zzz \NR
+%       \HL
+%     \stopmatrix
+% \stopformula
+%
+% \dorecurse{10}{test }
+%
+% \startformula
+%     \startmatrix[left=\left(,right=\right)]
+%       \NC        \TT \ttx 1 \NC       \TT \ttx 2 \NC       \TT \ttx 3 \NC        \NR
+%       \LT \ttx 1 \NC a      \NC \dots \NC aa     \NC \dots \NC aaa    \RT \ttx 1 \NR
+%       \LT \ttx 2 \NC b      \NC \dots \NC bb     \NC \dots \NC bbb    \RT \ttx 2 \NR
+%       \LT \ttx 3 \NC c      \NC \dots \NC cc     \NC \dots \NC ccc    \RT \ttx 3 \NR
+%       \NC        \BT \ttx 1 \NC       \BT \ttx 2 \NC       \BT \ttx 3 \NC        \NR
+%     \stopmatrix
+% \stopformula
+%
+% \dorecurse{10}{test }
+%
+% \startformula
+%     \startmatrix[left=\left(,right=\right)]
+%       \NC        \TT \ttx 1 \NC       \TT \ttx 2 \NC       \TT \ttx 3 \NR
+%       \LT \ttx 1 \NC a      \NC \dots \NC aa     \NC \dots \NC aaa    \NR
+%       \LT \ttx 2 \NC b      \NC \dots \NC bb     \NC \dots \NC bbb    \NR
+%       \LT \ttx 3 \NC c      \NC \dots \NC cc     \NC \dots \NC ccc    \NR
+%       \NC        \BT \ttx 1 \NC       \BT \ttx 2 \NC       \BT \ttx 3 \NR
+%     \stopmatrix
+% \stopformula
+%
+% \dorecurse{10}{test }
+
+\newtoks\everymathmatrix
+
+\tolerant\permanent\def\math_matrix_HF[#1]#*[#2]% [n] [name] | [name] | [n]
+  {\expandedloop
+     \plusone
+     {\ifchknumber#1\or\lastchknumber\else(\c_math_matrix_columns+\minusone)\fi}%
+     \plusone
+   {\omit\span}%
+   \kern-.25\d_math_eqalign_distance % bah but needed
+   \expanded{\filler[%
+     \ifcsname\??filleralternative matrix:#1\endcsname matrix:#1\orelse
+     \ifcsname\??filleralternative matrix:#2\endcsname matrix:#2\orelse
+     \ifcsname\??filleralternative        #1\endcsname        #1\orelse
+     \ifcsname\??filleralternative        #2\endcsname        #2\else
+                                                matrix:\v!normal\fi
+   ]}}
+
+\appendtoks
+   \enforced\let\HF\math_matrix_HF
+\to \everymathmatrix
+
+\definefiller
+  [matrix:\v!normal]
+  [\c!symbol=\textperiod,
+  %\c!style=\v!normal,
+   \c!method=\v!broad,
+   \c!width=\emwidth,
+   \c!leftmargin=-.1\emwidth,
+   \c!rightmargin=-.1\emwidth]
+
+\definefiller
+  [matrix:\v!middle]
+  [\c!symbol=\textperiod,
+  %\c!style=\v!normal,
+   \c!method=\v!middle,
+   \c!width=\emwidth,
+   \c!leftmargin=.5\emwidth,
+   \c!rightmargin=.5\emwidth]
+
+\definefiller
+  [matrix:ldots]
+  [matrix:\v!normal]
+
+\definefiller
+  [matrix:cdots]
+  [matrix:\v!normal]
+  [\c!symbol=\cdot]
+
+% We could construct a preamble with alignment and such embedded but the number
+% of matrices with many rows is normally so low that it doesn't pay of at all.
+
+\newconditional\c_math_matrix_first
+\newconstant   \c_math_matrix_anchor_mode
+\newconditional\c_math_matrix_sl_seen
+
+% enabled    : 1
+% left/both  : 2
+% right/both : 4
+
+\permanent\protected\def\setmathmatrixanchoring[#1]%
+  {\c_math_matrix_anchor_mode\zerocount
+   \processaction
+     [#1]%
+     [\v!both=>\c_math_matrix_anchor_mode\plusone,%
+       \v!yes=>\c_math_matrix_anchor_mode\plusone]}
+
+\def\math_matrix_anchor
+  {\ifcase\c_math_matrix_anchor_mode\else
+     \markanchor{matrix}{\numexpr\c_math_eqalign_column+\plusone\relax}\c_math_eqalign_row
+   \fi}
+
+\def\math_matrix_preamble
+  {\math_matrix_strut
+   \kern-.25\d_math_eqalign_distance
+   \math_matrix_anchor
+   \kern.25\d_math_eqalign_distance
+   \global\advanceby\c_math_eqalign_column\plusone
+   \math_matrix_start_cell
+   \aligncontent
+   \math_matrix_stop_cell
+   % from here we repeat
+   \aligntab
+   \aligntab
+   \kern.25\d_math_eqalign_distance
+   \math_matrix_anchor
+   \kern.25\d_math_eqalign_distance
+   \global\advanceby\c_math_eqalign_column\plusone
+   \math_matrix_start_cell
+   \aligncontent
+   \math_matrix_stop_cell}
+
+\permanent\protected\def\math_matrix_NR
+  {% we need to make sure we end the cell first (otherwise export looses mtd)
+   \math_matrix_stop_cell
+   \let\math_matrix_stop_cell\relax
+   %
+   \kern.25\d_math_eqalign_distance
+   \math_matrix_anchor
+   \kern-.25\d_math_eqalign_distance
+   \math_matrix_stop_row
+   \math_matrix_pickup
+   \crcr
+   \math_matrix_start_row}
+
+\permanent\protected\def\math_matrix_NC
+  {\ifconditional\c_math_matrix_first
+     \expandafter\math_matrix_NC_yes
+   \else
+     \expandafter\math_matrix_NC_nop
+   \fi
+   \grph_line_inject_VL_space} % see later
+
+\permanent\protected\def\math_matrix_pickup{\global\c_math_matrix_first\conditionaltrue}
+\permanent\protected\def\math_matrix_NC_yes{\global\c_math_matrix_first\conditionalfalse}
+\permanent\protected\def\math_matrix_NC_nop{\aligntab} % avoids lookahead
+
+\def\math_matrix_check_rule_step#1%
+  {\ifchkdim#1\or
+     \scratchdimen#1\relax
+ % \orelse\ifchknum#1\or
+   \orelse\ifchkdim#1pt\or
+     \scratchdimen#1\d_math_eqalign_rulethickness
+   \else
+     \edef\p_rulecolor{#1}
+   \fi}
+
+\def\math_matrix_check_rule[#1]%
+  {\d_math_eqalign_rulethickness{\mathmatrixparameter\c!rulethickness}%
+   \scratchdimen\d_math_eqalign_rulethickness
+   \edef\p_rulecolor{\mathmatrixparameter\c!rulecolor}%
+   \ifempty{#1}\else
+     \rawprocesscommalist[#1]\math_matrix_check_rule_step
+   \fi
+   \ifempty\p_rulecolor\else
+     \dousecolorparameter\p_rulecolor
+   \fi}
+
+% These offset are an experiment so we abuse some existing keys or we have to
+% cook up new ones. Maybe we then should provide small medium big halfline etc.
+% but all depends on actual demand for this feature.
+
+% Musical timestamp VL, NL, SL: Bad Hombre II by Antonio Sanches
+%
+% \startformula
+% \startmatrix[left=\left(,right=\right)]
+% \NC 0  \NL 0  \NC 0  \NC 2x \NC 1  \NC 0  \NC 0  \NL \NR
+% \NC 0  \VL 0  \NC 0  \NC 0  \NC 2x \NC 0  \NC 0  \NL \NR
+% \NC 0  \VL 0  \NC 0  \NC 0  \NC 0  \NC 3x \NC 0  \NL \NR
+% \NC 0  \NL 0  \NC 0  \NC 0  \NC 0  \NC 0  \NC 4x \VL \NR
+% \stopmatrix
+% \stopformula
+%
+% \startformula
+% \startmatrix[left=\left(,right=\right)]
+% \SL[3]               \NL    \NL    \NL    \NL    \NL \NR
+% \VL 2x \NL 1  \NL 0  \VL 0  \NL 0  \NL 0  \NL 0  \NL \NR
+% \VL 0  \NL 2x \NL 1  \VL 0  \NL 0  \NL 0  \NL 0  \NL \NR
+% \VL 0  \NL 0  \NL 2x \VL 0  \NL 0  \NL 0  \NL 0  \NL \NR
+% \SL[5]                             \NL    \NL    \NL \NR
+% \NL 0  \NL 0  \NL 0  \VL 2x \NL 1  \VL 0  \NL 0  \NL \NR
+% \NL 0  \NL 0  \NL 0  \VL 0  \NL 2x \VL 0  \NL 0  \NL \NR
+% \NL    \NL    \NL    \SL[3]               \NL    \NL \NR
+% \NL 0  \NL 0  \NL 0  \NL 0  \NL 0  \VL 3x \VL 0  \NL \NR
+% \NL    \NL    \NL    \NL    \NL    \SL[2]        \NL \NR
+% \NL 0  \NL 0  \NL 0  \NL 0  \NL 0  \NL 0  \VL 3x \VL \NR
+% \NL    \NL    \NL    \NL    \NL    \NL    \SL[1] \NL \NR
+% \stopmatrix
+% \stopformula
+
+\definesystemattribute[mathalignmentvrule][public]
+\definesystemattribute[mathalignmenthrule][public]
+\definesystemattribute[mathalignmenttop]  [public]
+\definesystemattribute[mathalignmentmid]  [public]
+\definesystemattribute[mathalignmentbot]  [public]
+
+\setupmathmatrix
+  [\c!moffset=.25\exheight,
+   \c!toffset=\mathmatrixparameter\c!moffset,
+   \c!boffset=\mathmatrixparameter\c!toffset]
+
+\newconditional\c_math_matrix_trace_hl
+
+\installtextracker
+  {math.matrices.hl}
+  {\c_math_matrix_trace_hl\conditionaltrue}
+  {\c_math_matrix_trace_hl\conditionalfalse}
+
+\def\math_matrix_HL_indeed#1#2%
+  {\noalign\bgroup
+     \math_matrix_check_rule[#2]%
+     \divideby\scratchdimen\plustwo
+     \ifdim\scratchdimen>\zeropoint
+       \attribute\mathalignmenttopattribute\dimexpr\mathmatrixparameter\c!toffset\relax
+       \attribute\mathalignmentbotattribute\dimexpr\mathmatrixparameter\c!boffset\relax
+       \scratchdistance{\mathmatrixparameter\c!moffset}%
+       \ifdim\scratchdistance>\zeropoint
+         \begingroup
+         \ifconditional\c_math_matrix_trace_hl
+           \darkred \hrule \s!width \onepoint
+         \else
+           \nohrule
+         \fi
+           \s!attr  \mathalignmentvruleattribute\plustwo
+           \s!height\scratchdistance
+           \s!depth \zeropoint
+         \relax
+         \endgroup
+       \fi
+       \hrule
+         \s!attr  \mathalignmentvruleattribute\plusthree
+         \s!height\scratchdimen
+         \s!depth \scratchdimen
+       \relax
+       \scratchdimentwo\zeropoint
+       \ifnum#1>\plusone
+         \scratchdimenone.125\d_math_eqalign_distance
+         \localcontrolledloop\plustwo#1\plusone
+            {\kern\scratchdimenone
+             \advanceby\scratchdimentwo\scratchdimenone
+             \hrule
+               \s!attr  \mathalignmentvruleattribute\plusthree
+               \s!height\scratchdimen
+               \s!depth \scratchdimen
+             \relax
+             \advanceby\scratchdimentwo\scratchdimen
+             \advanceby\scratchdimentwo\scratchdimen
+            }%
+       \fi
+       \ifdim\scratchdistance>\zeropoint
+         \begingroup
+         \ifconditional\c_math_matrix_trace_hl
+           \darkgreen \hrule \s!width \onepoint
+         \else
+           \nohrule
+         \fi
+           \s!attr  \mathalignmentvruleattribute\plusfour
+           \s!attr  \mathalignmentmidattribute\scratchdimentwo
+           \s!height\zeropoint
+           \s!depth \scratchdistance
+         \relax
+         \endgroup
+       \fi
+     \else
+        % zero dimensions disable the rule
+     \fi
+   \egroup}
+
+\permanent\tolerant\noaligned\protected\def\math_matrix_HL  [#1]#*{\math_matrix_HL_indeed\plusone{#1}}
+\permanent\tolerant\noaligned\protected\def\math_matrix_HLHL[#1]#*{\math_matrix_HL_indeed\plustwo{#1}}
+
+\protected\def\math_matrix_vertical_rule_indeed#1#2%
+  {\math_matrix_check_rule[#2]%
+   \enablematrixrules
+   #1
+      \s!attr   \mathalignmentvruleattribute\plusone
+      \s!width  \scratchdimen
+      \s!top   -\dimexpr\mathmatrixparameter\c!toffset\relax
+      \s!bottom-\dimexpr\mathmatrixparameter\c!boffset\relax
+   \relax}
+
+\protected\def\math_matrix_vertical_rule_yes{\math_matrix_vertical_rule_indeed\vrule  }
+\protected\def\math_matrix_vertical_rule_nop{\math_matrix_vertical_rule_indeed\novrule}
+
+\installcorenamespace{mathmatrixrulealternative}
+
+\newboundary\c_math_matrix_vl_boundary
+%newboundary\c_math_matrix_sl_boundary
+
+\protected\def\math_matrix_horizontal_rule_indeed#1#2%
+  {\math_matrix_check_rule[#2]%
+   \global\c_math_matrix_first\conditionalfalse
+   \global\c_math_matrix_sl_seen\conditionaltrue
+   \enablematrixrules
+ % \begingroup
+ % \attribute\mathalignmenthruleattribute\plusone % we check the glue
+   \leaders#1%
+      \s!attr   \mathalignmenthruleattribute\plusone
+      \s!height .5\scratchdimen
+      \s!depth  .5\scratchdimen
+    % \s!top   -\dimexpr\mathmatrixparameter\c!toffset\relax
+    % \s!bottom-\dimexpr\mathmatrixparameter\c!boffset\relax
+   \hfilll
+ % \endgroup
+   \kern.5\d_math_eqalign_distance\relax
+   \aligntab}
+
+\protected\def\math_matrix_horizontal_rule_yes{\math_matrix_horizontal_rule_indeed\hrule  }
+\protected\def\math_matrix_horizontal_rule_nop{\math_matrix_horizontal_rule_indeed\nohrule}
+
+\def\math_matrix_hrule_progress_rest#1%
+  {\expandedloop
+     \plusone
+     {(\ifchknumber#1\or\lastchknumber\else\c_math_matrix_columns\fi)*\plustwo+\minusone}%
+     \plusone
+   {\span\omit}}%
+
+\def\math_matrix_hrule_progress_first#1%
+  {\expandedloop
+     \plusone
+     {(\ifchknumber#1\or\lastchknumber\else\c_math_matrix_columns\fi+\minusone)*\plustwo+\plusone}%
+     \plusone
+   {\span\omit}}%
+
+\def\math_matrix_hrule_progress
+  {\NL
+   \ifconditional\c_math_matrix_first
+     \expandafter\math_matrix_hrule_progress_first
+   \else
+     \expandafter\math_matrix_hrule_progress_rest
+   \fi}
+
+\tolerant\permanent\protected\def\math_matrix_SL[#1]#*[#2]#*% [n] [name] | [name] | [n]
+  {\ifcsname\??mathmatrixrulealternative#2\endcsname
+     \lastnamedcs{#1}{#2}%
+   \orelse\ifcsname\??mathmatrixrulealternative#1\endcsname
+     \lastnamedcs{#2}{#1}%
+   \else
+     \csname\??mathmatrixrulealternative\v!auto\endcsname{#1}{#2}%
+   \fi}
+
+\defcsname\??mathmatrixrulealternative\v!auto\endcsname#1#2%
+  {\math_matrix_hrule_progress{#1}%
+ % \ifzero\c_math_matrix_first
+ %   \kern-\dimexpr\linewidth\relax
+ % \else
+ %   \kern-\dimexpr.5\d_math_eqalign_distance+\linewidth\relax
+ % \fi
+   \kern-\dimexpr\ifzero\c_math_matrix_first\else.5\d_math_eqalign_distance+\fi\linewidth\relax
+   \math_matrix_horizontal_rule_yes{#2}%
+   %boundary\c_math_matrix_sl_boundary
+   \enforced\let\SL\math_matrix_SL
+   \enforced\let\NR\math_matrix_NL_NR}
+
+\def\math_matrix_VL_indeed#1#2%
+  {\aligntab
+   \math_matrix_vertical_rule_yes{#2}%
+   \localcontrolledloop\plustwo#1\plusone
+     {\kern.125\d_math_eqalign_distance
+      \math_matrix_vertical_rule_yes{#2}}%
+%    \kern.5\d_math_eqalign_distance
+   \global\c_math_matrix_first\conditionalfalse
+   \aligntab
+   \boundary\c_math_matrix_vl_boundary
+   \enforced\let\NR\math_matrix_NL_NR}
+
+\appendtoks
+    % vl delegated to lua tex rules
+    \ifnum\lastboundary=\c_math_matrix_vl_boundary
+        \kern\ifconditional \c_math_matrix_sl_seen-1.5\else-.5\fi\d_math_eqalign_distance
+    \fi
+\to \t_math_matrix_NL_NR
+
+\permanent\tolerant\protected\def\math_matrix_VL  [#1]#*{\math_matrix_VL_indeed\plusone{#1}}
+\permanent\tolerant\protected\def\math_matrix_VLVL[#1]#*{\math_matrix_VL_indeed\plustwo{#1}}
+
+\permanent\tolerant\protected\def\math_matrix_NL[#1]#*%
+  {\aligntab % \span\omit
+%    \ifconditional\c_math_matrix_first\else
+%      \kern.5\d_   math_eqalign_distance
+%    \fi
+   \math_matrix_vertical_rule_nop{#1}%
+%    \kern.5\d_math_eqalign_distance
+   \global\c_math_matrix_first\conditionalfalse
+   \aligntab
+   \boundary\c_math_matrix_vl_boundary
+   \enforced\let\NR\math_matrix_NL_NR}
+
+\permanent\protected\def\math_matrix_NL_NR
+  {\expand\t_math_matrix_NL_NR
+   \math_matrix_anchor
+   \math_matrix_stop_row
+   \math_matrix_pickup
+   \crcr
+   \math_matrix_start_row}
+
+\appendtoks
+   \enforced\let\NL\math_matrix_NL
+   \global\c_math_matrix_sl_seen\conditionalfalse
+\to \everymathmatrix
+
+\permanent\tolerant\protected\def\math_matrix_VC[#1]#*%
+  {\NC
+   \math_matrix_vertical_rule_yes{#1}%
+   \NC}
+
+\permanent\tolerant\protected\def\math_matrix_VT[#1]#*%
+  {\span\omit
+   \math_matrix_vertical_rule_yes{#1}%
+   \aligntab}
+
+\def\math_matrix_start_row
+  {\beginlocalcontrol
+   \global\c_math_matrix_columns\c_math_eqalign_column
+   \global\c_math_eqalign_column\zerocount
+   \global\advanceby\c_math_eqalign_row\plusone
+   \dostarttaggednodetail\t!mtablerow
+   \endlocalcontrol}
+
+\appendtoks
+   \enforced\let\NR\math_matrix_NR
+   \enforced\let\NC\math_matrix_NC
+   \enforced\let\MC\math_matrix_NC
+   \enforced\let\HL\math_matrix_HL % like the old ones
+   \enforced\let\VL\math_matrix_VL % like the old ones
+   \enforced\let\VC\math_matrix_VC % bonus, extra column
+   \enforced\let\VT\math_matrix_VT % bonus, idem but tight
+   \enforced\let\TB\math_common_TB
+   % just because it's easy:
+   \enforced\let\VLVL\math_matrix_VLVL
+   \enforced\let\HLHL\math_matrix_HLHL
+\to \everymathmatrix
+
+% \definesystemattribute[mathmatrixornament][public]
+
+\newdimension\d_math_matrix_margin_l
+\newdimension\d_math_matrix_margin_r
+\newdimension\d_math_matrix_margin_t
+\newdimension\d_math_matrix_margin_b
+
+\newdimension\d_math_matrix_max_left
+\newdimension\d_math_matrix_max_right
+
+\newboundary \c_math_matrix_ornament_l
+\newboundary \c_math_matrix_ornament_r
+\newboundary \c_math_matrix_ornament_t
+\newboundary \c_math_matrix_ornament_b
+
+% anchors are wrong now
+
+\newconditional\c_math_matrix_text
+\newconditional\c_math_matrix_text_l
+\newconditional\c_math_matrix_text_r
+\newconditional\c_math_matrix_text_t
+\newconditional\c_math_matrix_text_b
+
+\def\math_matrix_ornaments#1#2%
+  {\NC
+   \enablematrixornaments
+   \global\c_math_matrix_text\conditionaltrue
+   \global#1\conditionaltrue
+   \boundary#2%
+   \ignorespaces}
+
+\permanent\protected\def\math_matrix_LT{\math_matrix_ornaments\c_math_matrix_text_l\c_math_matrix_ornament_l}
+\permanent\protected\def\math_matrix_RT{\math_matrix_ornaments\c_math_matrix_text_r\c_math_matrix_ornament_r}
+\permanent\protected\def\math_matrix_TT{\math_matrix_ornaments\c_math_matrix_text_t\c_math_matrix_ornament_t}
+\permanent\protected\def\math_matrix_BT{\math_matrix_ornaments\c_math_matrix_text_b\c_math_matrix_ornament_b}
+
+\appendtoks
+   \global\c_math_matrix_text\conditionalfalse
+   \global\c_math_matrix_text_l\conditionalfalse
+   \global\c_math_matrix_text_r\conditionalfalse
+   \global\c_math_matrix_text_t\conditionalfalse
+   \global\c_math_matrix_text_b\conditionalfalse
+   \enforced\let\LT\math_matrix_LT
+   \enforced\let\RT\math_matrix_RT
+   \enforced\let\TT\math_matrix_TT
+   \enforced\let\BT\math_matrix_BT
+\to \everymathmatrix
+
+\newconditional\c_math_matrix_text_mode
+
+% \def\math_matrix_start_processing
+%   {%
+%    \ifmmode
+%      \c_math_matrix_text_mode\conditionalfalse
+%    \else
+%      \c_math_matrix_text_mode\conditionaltrue
+%    \fi
+%    \ifconditional\c_math_matrix_text_mode
+%      \dontleavehmode
+%    \else
+%      \mathmatrixparameter\c!left\relax
+%      \math_fenced_start_wrap{\mathmatrixparameter\c!fences}%
+%      \mathatom \s!class \mathconstructcode
+%    \fi
+%    \bgroup
+%    \d_math_matrix_margin_l\mathmatrixparameter\c!leftmargin \relax
+%    \d_math_matrix_margin_r\mathmatrixparameter\c!rightmargin\relax
+%    \d_math_matrix_margin_t\strutdp
+%    \d_math_matrix_margin_b\strutht
+%    \global\d_math_matrix_max_left \zeropoint
+%    \global\d_math_matrix_max_right\zeropoint
+%   %\tabskip.5\d_math_eqalign_distance
+%    \tabskip\zeroskip
+%    \math_matrix_pickup
+%    \expand\everymathmatrix
+%    %
+%    \setbox\nextbox\vbox\bgroup
+%    \math_matrix_start_table
+%    \halign
+%       \s!callback
+%         \align_callback_mathmatrix
+%    \bgroup
+%      % preamble
+%      \span\math_matrix_preamble
+%      % done
+%      \crcr
+%      \math_matrix_start_row}
+%
+% \def\math_matrix_stop_processing
+%   {%\math_matrix_stop_wrapup % optional
+%    \math_matrix_stop_row
+%    \egroup
+%    \math_matrix_stop_table
+%    \egroup
+%    \mathmatrixleft  % experimental hook
+%    \math_matrix_finish_nextbox
+%    \mathmatrixright % experimental hook
+%    \egroup
+%    \ifconditional\c_math_matrix_text_mode\else
+%      \math_fenced_stop_wrap
+%      \mathmatrixparameter\c!right\relax
+%    \fi}
+
+\def\math_matrix_start_processing
+  {\bgroup % outer
+   \ifmmode
+     \c_math_matrix_text_mode\conditionalfalse
+   \else
+     \c_math_matrix_text_mode\conditionaltrue
+     \dontleavehmode
+     \startimath
+   \fi
+   \d_math_matrix_margin_l{\mathmatrixparameter\c!leftmargin }%
+   \d_math_matrix_margin_r{\mathmatrixparameter\c!rightmargin}%
+   \d_math_matrix_margin_t\strutdp
+   \d_math_matrix_margin_b\strutht
+   \global\d_math_matrix_max_left \zeropoint
+   \global\d_math_matrix_max_right\zeropoint
+   \tabskip\zeroskip
+   \math_matrix_pickup
+   \expand\everymathmatrix
+   %
+   \setbox\nextbox\vbox
+   \bgroup % vbox
+   \math_matrix_start_table
+   \halign \s!callback \align_callback_mathmatrix
+   \bgroup % halign
+     % preamble
+     \span\math_matrix_preamble
+     % done
+     \crcr
+     \math_matrix_start_row}
+
+\def\math_matrix_stop_processing
+  {%\math_matrix_stop_wrapup % optional
+   \math_matrix_stop_row
+   \egroup % halign
+   \math_matrix_stop_table
+   \egroup % vbox
+   \mathmatrixleft  % experimental hook
+   \math_matrix_finish_nextbox
+   \mathmatrixright % experimental hook
+   \ifconditional\c_math_matrix_text_mode
+     \stopimath
+   \fi
+   \egroup} % outer
+
+\permanent\protected\def\mathmatrixmaxleftwidth {\d_math_matrix_max_left }
+\permanent\protected\def\mathmatrixmaxrightwidth{\d_math_matrix_max_right}
+
+\let\math_matrix_strut\strut
+
+\def\math_matrix_check_settings
+  {\edef\p_strut{\mathmatrixparameter\c!strut}%
+   \ifx\p_strut\v!no
+     \enforced\let\math_matrix_strut\relax
+   \else
+     \enforced\let\math_matrix_strut\strut
+     \ifx\p_strut\v!yes\else
+       \spacing\p_strut
+     \fi
+   \fi
+   \d_math_eqalign_distance\mathmatrixparameter\c!distance\relax}
+ % \d_math_eqalign_rulethickness\mathmatrixparameter\c!rulethickness\relax
+ % \edef\p_rulecolor{\mathmatrixparameter\c!rulecolor}
+
+\newinteger\c_math_eqalign_column_saved
+\newinteger\c_math_eqalign_row_saved
+
+% \installglobalmacrostack\c_math_matrix_first
+
+\tolerant\protected\def\math_matrix_start[#1]#*[#S#2]%
+  {\begingroup
+   \currentmathblobnesting\minusone
+   \globalpushmacro\c_math_matrix_first % hm, does that work?
+   \c_math_eqalign_column_saved\c_math_eqalign_column
+   \c_math_eqalign_row_saved\c_math_eqalign_row
+   \globalpushmacro\c_math_eqalign_first
+   \cdef\currentmathmatrix{#1}%
+   \setupcurrentmathmatrix[#2]%
+   \math_matrix_check_settings
+   \math_eqalign_set_defaults
+   \math_eqalign_set_columns{\mathmatrixparameter\c!align}%
+   \math_matrix_start_processing}
+
+\def\math_matrix_stop
+  {\math_matrix_stop_processing
+   \globalpushmacro\c_math_eqalign_first
+   \global\c_math_eqalign_column\c_math_eqalign_column_saved
+   \global\c_math_eqalign_row\c_math_eqalign_row_saved
+   \globalpopmacro\c_math_matrix_first
+   \endgroup}
+
+% vcenter:
+%
+% delta     = (height(v) + depth(v))/2
+% axis      = math_axis_size(cur_size)
+% height(v) = delta + axis
+% depth(v)  = delta - axis
+
+\installcorenamespace{mathmatrixalignlocation}
+
+\mutable\lettonothing\mathmatrixleft  % experimental hook
+\mutable\lettonothing\mathmatrixright % experimental hook
+
+% This alignment option will either go away or become a atom property (key).
+
+\defcsname\??mathmatrixalignlocation\v!top   \endcsname{\raise{(\nextboxdp-\nextboxht)/2+\mathaxisheight\mathstyle}}
+\defcsname\??mathmatrixalignlocation\v!high  \endcsname{\raise{(\nextboxdp-\nextboxht)/2}}
+\defcsname\??mathmatrixalignlocation\v!center\endcsname{\relax}
+\defcsname\??mathmatrixalignlocation\v!lohi  \endcsname{\relax}
+\defcsname\??mathmatrixalignlocation\v!normal\endcsname{\relax}
+\defcsname\??mathmatrixalignlocation\v!bottom\endcsname{\lower{(\nextboxdp-\nextboxht)/2+\mathaxisheight\mathstyle}}
+\defcsname\??mathmatrixalignlocation\v!low   \endcsname{\lower{(\nextboxdp-\nextboxht)/2}}
+
+% \def\math_matrix_finish_nextbox
+%   {\scratchcounter\mathstyle\relax
+%    \scratchwidth\wd\nextbox
+% \setbox\scratchbox\hbox\bgroup
+%    \begincsname\??mathmatrixalignlocation\mathmatrixparameter\c!location\endcsname\hbox\bgroup
+%      \normalstartimath
+%      \givenmathstyle\scratchcounter
+%      \ifzeropt\d_math_matrix_margin_l\else\kern\d_math_matrix_margin_l\fi
+%      \ifconditional\c_math_matrix_text_mode
+%        \mathmatrixparameter\c!left\relax
+%        \math_fenced_start_wrap{\mathmatrixparameter\c!fences}%
+%        \mathatom \s!class \mathconstructcode {\vcenter{\box\nextbox}}% \was \vcenter
+%        \math_fenced_stop_wrap
+%        \mathmatrixparameter\c!right\relax
+%      \else
+%         \vcenter{\box\nextbox}% \was \vcenter
+%      \fi
+%      \ifzeropt\d_math_matrix_margin_r\else\kern\d_math_matrix_margin_r\fi
+%      \normalstopimath
+%    \egroup
+% \egroup
+%    \ifconditional\c_math_matrix_text
+%      \ifempty{\mathmatrixparameter\c!left\mathmatrixparameter\c!right\mathmatrixparameter\c!fences}\else
+%        \scratchdistance\dimexpr(\wd\scratchbox-\scratchwidth)/\plustwo\relax
+%        \advanceby\d_math_matrix_margin_l\scratchdistance
+%        \advanceby\d_math_matrix_margin_r\scratchdistance
+%        \clf_shiftmatrixornaments\scratchbox
+%      \fi
+%    \fi
+%    \ifconditional\c_math_matrix_text_b
+%      \dp\scratchbox\dimexpr\dp\scratchbox+\lineheight\relax
+%    \fi
+%    \ifconditional\c_math_matrix_text_t
+%      \ht\scratchbox\dimexpr\ht\scratchbox+\lineheight\relax
+%    \fi
+%    \edef\p_leftedge {\mathmatrixparameter\c!leftedge }%
+%    \edef\p_rightedge{\mathmatrixparameter\c!rightedge}%
+%    \ifempty\p_leftedge\else
+%      \hskip\dimexpr\d_math_matrix_max_left+\p_leftedge\relax
+%    \fi
+% %    \ifconditional\c_math_matrix_text_mode
+%      \box\scratchbox
+% %    \else
+% %      \mathatom \s!class \mathconstructcode {\box\scratchbox}%
+% %    \fi
+%    \ifempty\p_rightedge\else
+%      \hskip\dimexpr\d_math_matrix_max_right+\p_rightedge\relax
+%    \fi
+%    }
+
+%D \starttyping
+%D \ruledhbox{\im{
+%D     \startmatrix[left=\left(,right=\right)]
+%D       \NC        \TT \ttx 1 \NC       \TT \ttx 2 \NC       \TT \ttx 3 \NC        \NR
+%D       \LT \ttx 1 \NC a      \NC \dots \NC aa     \NC \dots \NC aaa    \RT \ttx 1 \NR
+%D       \LT \ttx 2 \NC b      \NC \dots \NC bb     \NC \dots \NC bbb    \RT \ttx 2 \NR
+%D       \LT \ttx 3 \NC c      \NC \dots \NC cc     \NC \dots \NC ccc    \RT \ttx 3 \NR
+%D       \NC        \BT \ttx 1 \NC       \BT \ttx 2 \NC       \BT \ttx 3 \NC        \NR
+%D     \stopmatrix
+%D }}
+%D \ruledhbox{\im{
+%D     \startmatrix[left=\left(,right=\right),rightedge=none,leftedge=none]
+%D       \NC        \TT \ttx 1 \NC       \TT \ttx 2 \NC       \TT \ttx 3 \NC        \NR
+%D       \LT \ttx 1 \NC a      \NC \dots \NC aa     \NC \dots \NC aaa    \RT \ttx 1 \NR
+%D       \LT \ttx 2 \NC b      \NC \dots \NC bb     \NC \dots \NC bbb    \RT \ttx 2 \NR
+%D       \LT \ttx 3 \NC c      \NC \dots \NC cc     \NC \dots \NC ccc    \RT \ttx 3 \NR
+%D       \NC        \BT \ttx 1 \NC       \BT \ttx 2 \NC       \BT \ttx 3 \NC        \NR
+%D     \stopmatrix
+%D }}
+%D \stoptyping
+
+\newconstant\c_math_last_l_class
+\newconstant\c_math_last_r_class
+
+\setupmathmatrix
+  [\c!rightedge=\zeropoint,
+   \c!leftedge=\zeropoint]
+
+\def\math_matrix_finish_nextbox
+  {\scratchcounter\mathstyle\relax
+   \scratchwidth\wd\nextbox
+   \dostarttagged\t!math\empty % needed !
+   \setbox\scratchbox\hbox\bgroup
+     \begincsname\??mathmatrixalignlocation\mathmatrixparameter\c!location\endcsname\hbox\bgroup
+       \normalstartimath
+       \givenmathstyle\scratchcounter
+       \ifzeropt\d_math_matrix_margin_l\else\kern\d_math_matrix_margin_l\fi
+       \mathmatrixparameter\c!left\relax
+       \math_fenced_start_wrap{\mathmatrixparameter\c!fences}%
+       \mathatom \s!class \mathconstructcode {%
+            \vcenter{%
+                \box\nextbox
+            }%
+       }%
+       \math_fenced_stop_wrap
+       \mathmatrixparameter\c!right\relax
+       \ifzeropt\d_math_matrix_margin_r\else\kern\d_math_matrix_margin_r\fi
+       \normalstopimath
+       % or carry over one group
+       \global\c_math_last_l_class\lastleftclass
+       \global\c_math_last_r_class\lastrightclass
+     \egroup
+   \egroup
+   \ifconditional\c_math_matrix_text % not _mode
+     \ifempty{\mathmatrixparameter\c!left\mathmatrixparameter\c!right\mathmatrixparameter\c!fences}\else
+       \scratchdistance{(\wd\scratchbox-\scratchwidth)/\plustwo}%
+       \advanceby\d_math_matrix_margin_l\scratchdistance
+       \advanceby\d_math_matrix_margin_r\scratchdistance
+       \clf_shiftmatrixornaments\scratchbox
+     \fi
+   \fi
+   \ifconditional\c_math_matrix_text_b
+     \dp\scratchbox{\dp\scratchbox+\lineheight}%
+   \fi
+   \ifconditional\c_math_matrix_text_t
+     \ht\scratchbox{\ht\scratchbox+\lineheight}%
+   \fi
+   \mathatom
+     \s!leftclass  \c_math_last_l_class
+     \s!rightclass \c_math_last_r_class
+     \bgroup
+       \edef\p_leftedge {\mathmatrixparameter\c!leftedge }%
+       \edef\p_rightedge{\mathmatrixparameter\c!rightedge}%
+       \ifempty\p_leftedge\orelse\ifx\p_leftedge\v!none\else
+         \hkern{\d_math_matrix_max_left+\p_leftedge}%
+       \fi
+       \box\scratchbox
+       \ifempty\p_rightedge\orelse\ifx\p_rightedge\v!none\else
+         \hkern{\d_math_matrix_max_right+\p_rightedge}%
+       \fi
+     \egroup
+   \dostoptagged}
+
+%D Begin of plugin.
+%D
+%D Fancy:
+%D
+%D \starttyping
+%D \startformula \showstruts
+%D     \startmatrix
+%D         \NC 1         \NC   \NC \GL[2][m,s,h]  \NC 3 \NC \NR
+%D         \NC 1         \NC   \NC               \NC 3 \NC \NR
+%D         \NC 1         \NC   \NC               \NC 3 \NC \NR
+%D         \NC \GL[2][d] \NC 2 \NC \GL[2][s,d,c] \NC 3 \NC \NR
+%D     \stopmatrix
+%D \stopformula
+%D
+%D \startformula \showstruts
+%D     \startmatrix[fences=bracket,rulecolor=red]
+%D         \NC 1 \NC \GL[2][a]      \NC \GL[2][a,e] \NC \NR
+%D         \NC 1 \NC \GL[2][x,blue] \NC \GL[2][x,e] \NC \NR
+%D         \NC 1 \NC 2              \NC 3           \NC \NR
+%D         \NC 1 \NC 2              \NC 3           \NC \NR
+%D         \NC 1 \NC \GL[2][a]      \NC \GL[2][a,e] \NC \NR
+%D     \stopmatrix
+%D \stopformula
+%D
+%D \startformula \showstruts
+%D     \startmatrix[fences=bracket]
+%D         \NC 1 \NC   \NC \GL[2][t] \NC 3 \NC \NR
+%D         \NC 1 \NC   \NC           \NC 3 \NC \NR
+%D         \NC 1 \NC   \NC           \NC 3 \NC \NR
+%D         \NC 1 \NC 2 \NC \GL[2][b] \NC 3 \NC \NR
+%D     \stopmatrix
+%D \stopformula
+%D
+%D \startformula \showstruts
+%D     \startmatrix[fences=bracket,rulecolor=red]
+%D         \NC 1 \NC   \NC \GL[2][T] \NC 3 \NC \NR
+%D         \NC 1 \NC   \NC           \NC 3 \NC \NR
+%D         \NC 1 \NC   \NC           \NC 3 \NC \NR
+%D         \NC 1 \NC 2 \NC \GL[2][B] \NC 3 \NC \NR
+%D     \stopmatrix
+%D \stopformula
+%D
+%D \startformula
+%D     \startmatrix[fences=bracket]
+%D         \NC \GL[2][h] \NC 2 \NC \GL[2][h]   \NC 3 \NC \NR
+%D         \NC           \NC 2 \NC             \NC 3 \NC \NR
+%D         \NC           \NC 2 \NC             \NC 3 \NC \NR
+%D         \NC \GL[2][d] \NC 2 \NC \GL[2][d,c] \NC 3 \NC \NR
+%D     \stopmatrix
+%D \stopformula
+%D
+%D \startformula
+%D     \startmatrix
+%D         \NC \GL[2][h] \NC 2 \NC       \NC \GL[2][h]     \NC             \NC \NR
+%D         \NC \GL[3][d] \NC \GL[3][d,e] \NC \NC \GL[2][d] \NC \GL[2][d]   \NC \NR
+%D         \NC           \NC 2 \NC       \NC 3             \NC \GL[3][d] \hskip1cm \GL[3][d,e] \NC \NR
+%D         \NC \GL[2][d] \NC 2 \NC       \NC 3             \NC \GL[2][d,c] \NC \NR
+%D     \stopmatrix
+%D \stopformula
+%D \stoptyping
+%D
+%D % \graphicline[1][o]\input tufte \removeunwantedspaces\graphicline[1][o,e]
+%D
+%D Easier:
+%D
+%D \starttyping
+%D \startformula
+%D     \startmatrix[fences=bracket,rulecolor=red]
+%D         \NC 1 \NC 2 \VL 3 \NR
+%D         \NC 1 \NC 2 \VL 3 \NR
+%D     \stopmatrix
+%D \stopformula
+%D
+%D \startformula
+%D     \startmatrix[fences=bracket,rulecolor=red]
+%D         \NC 1 \NC 2 \VL 3 \VL \NR
+%D         \NC 1 \NC 2 \VL 3 \VL \NR
+%D     \stopmatrix
+%D \stopformula
+%D
+%D \startformula
+%D     \startmatrix[fences=bracket,rulecolor=red]
+%D         \NC 1 \NC 2 \VLT 3 \VLT[2,blue] 4 \NR
+%D         \NC 1 \NC 2 \NC  3 \NC  4 \NR
+%D         \NC 1 \NC 2 \VLB 3 \VLB 4 \NR
+%D     \stopmatrix
+%D \stopformula
+%D
+%D \startformula
+%D     \startmatrix[fences=bracket,rulecolor=red]
+%D         \NC 1 \NC 2 \VLT 3 \VLT[2pt,blue] 4 \NR
+%D         \NC 1 \NC 2 \NC  3 \NC  4 \NR
+%D         \NC 1 \NC 2 \VLB 3 \VLB 4 \NR
+%D     \stopmatrix
+%D \stopformula
+%D
+%D \startformula
+%D     \startmatrix[fences=bracket,rulecolor=red]
+%D         \NC 1 \NC 2 \VLT 3 \VLT[2pt,blue] 4 \NR
+%D         \NC 1 \NC 2 \NC  3 \NC            4 \NR
+%D         \NC 1 \NC 2 \VLB 3 \VLB           4 \NR
+%D     \stopmatrix
+%D \stopformula
+%D
+%D \startformula
+%D     \startmatrix[fences=bracket]
+%D         \NC 11 \NC 12 \NC 13 \VL 14 \NR
+%D         \NC 21 \NC 22 \NC 23 \NL 24 \NR
+%D         \NC 31 \NC 32 \NC 33 \VL 34 \NR
+%D     \stopmatrix
+%D \stopformula
+%D
+%D
+%D \startformula
+%D     \startmatrix[fences=bracket]
+%D         \NC 11 \NC 12 \NC 13 \VL 14 \NR
+%D         \NC 21 \NC 22 \NC 23 \VL 24 \NR
+%D         \NC 31 \NC 32 \NC 33 \VL 34 \NR
+%D     \stopmatrix
+%D \stopformula
+%D
+%D \startformula
+%D     \startmatrix[fences=bracket]
+%D         \NC A \VL  B \NR
+%D         \HL
+%D         \NC C \VL  D \NR
+%D     \stopmatrix
+%D \stopformula
+
+%D \stoptyping
+
+\installcorenamespace{matrixvl}
+
+\appendtoks
+    \enforced\let\GL\grph_line_inject
+\to \everymathmatrix
+
+\newboundary\c_math_matrix_vlx_boundary
+
+\tolerant\permanent\protected\def\grph_line_inject_VLT[#1]%
+  {\aligntab
+   \grph_line_inject[\??matrixvl:\number\c_math_eqalign_column][T,#1]%
+   \global\expandafter\integerdef\csname\??matrixvl::\number\c_math_eqalign_column\endcsname\plusone
+%    \kern.5\d_math_eqalign_distance
+   \global\c_math_matrix_first\conditionalfalse
+   \aligntab
+   \enforced\let\NR\math_matrix_NL_NR
+   \boundary\c_math_matrix_vlx_boundary
+   }
+
+\tolerant\permanent\protected\def\grph_line_inject_VLB[#1]%
+  {\aligntab
+   \grph_line_inject[\??matrixvl:\number\c_math_eqalign_column][B,#1]%
+   \global\expandafter\integerdef\csname\??matrixvl::\number\c_math_eqalign_column\endcsname\zerocount
+%    \kern.5\d_math_eqalign_distance
+   \global\c_math_matrix_first\conditionalfalse
+   \aligntab
+   \enforced\let\NR\math_matrix_NL_NR
+   \boundary\c_math_matrix_vlx_boundary
+   }
+
+\def\grph_line_inject_VL_tab{\aligntab}
+
+\permanent\protected\def\grph_line_inject_VL_space
+  {\ifcsname\??matrixvl::\number\c_math_eqalign_column\endcsname
+     \ifcase\lastnamedcs\else
+%       \kern.5\d_math_eqalign_distance
+        \expandafter\expandafter\expandafter\grph_line_inject_VL_tab
+     \fi
+   \fi}
+
+\appendtoks
+    \enforced\let\VLT\grph_line_inject_VLT
+    \enforced\let\VLB\grph_line_inject_VLB
+\to \everymathmatrix
+
+\appendtoks
+    % vl delegated to lua graphiclines
+    \ifnum\lastboundary=\c_math_matrix_vlx_boundary
+        \kern\ifconditional \c_math_matrix_sl_seen-1.5\else-.5\fi\d_math_eqalign_distance
+    \fi
+\to \t_math_matrix_NL_NR
+
+%D End of plugin.
+
+\definemathmatrix[matrix]
+\definemathmatrix[\v!mathmatrix]
+
+%D \startbuffer
+%D \placeformula \startformula[-] \startmatrix
+%D \NC 1 \NC x \NC a \NR
+%D \NC 2 \NC y \NC b \NR
+%D \NC 3 \NC z \NC c \NR
+%D \stopmatrix \stopformula
+%D \stopbuffer
+%D
+%D \typebuffer \getbuffer
+%D
+%D \definemathmatrix[bmatrix][left={\left[\mskip\thinmuskip},right={\mskip\thinmuskip\right]},strut=1.25]
+%D
+%D \startbuffer
+%D \placeformula \startformula[-] \startbmatrix
+%D \NC 1 \NC x \NC a \NR
+%D \NC 2 \NC y \NC b \NR
+%D \NC 3 \NC z \NC c \NR
+%D \stopbmatrix \stopformula
+%D \stopbuffer
+%D
+%D \typebuffer \getbuffer
+%D
+%D Taco added some code (dedicated to Aditya Mahajan) that gives more
+%D control over aligments:
+
+%D \startbuffer
+%D \startformula
+%D   \startmatrix
+%D    \NC a + x \NC = \NC a + d \NR
+%D    \NC y     \NC = \NC d     \NR
+%D   \stopmatrix
+%D \stopformula
+%D \stopbuffer
+%D
+%D \typebuffer \getbuffer
+
+%D \startbuffer
+%D \startformula
+%D   \startmatrix [distance=3pt,align={right,left}]
+%D    \NC a + x \NC = a + d \NR
+%D    \NC y     \NC = d     \NR
+%D   \stopmatrix
+%D \stopformula
+%D \stopbuffer
+%D
+%D \typebuffer \getbuffer
+
+%D \startbuffer
+%D \startformula
+%D   \startmatrix [left=\left(,right=\right)]
+%D    \NC a + x \NR
+%D    \NC y    \NR
+%D   \stopmatrix
+%D \stopformula
+%D \stopbuffer
+%D
+%D \typebuffer \getbuffer
+%D
+%D A bit more complex code:
+%D
+%D \startbuffer
+%D \startformula
+%D    \text{Let }{\cal R} = \bigcup_{P_{X_1},P_{X_2}}
+%D    \left\{ (R_1, R_2) :
+%D    \startmatrix[distance=1em,align={left,left,right}]
+%D      \NC R_1        \NC < I(X_1 ; Y \mid X_2)      \NC R_1       \NR
+%D      \NC \hfill Q_2 \NC < I(X_2 ; Y \mid X_1)      \NC R_2       \NR
+%D      \NC R_1 + R_2  \NC < I(X_1 ; Y)               \NC R_1 + R_2 \NR
+%D    \stopmatrix
+%D    \right\}
+%D \stopformula
+%D \stopbuffer
+%D
+%D \typebuffer \getbuffer
+
+%D \macros
+%D   {startmatrices}
+%D
+%D Just a handy keystroke safer:
+
+\permanent\protected\def\startmatrices
+  {\begingroup
+   \setupmathmatrix}
+
+\permanent\protected\def\stopmatrices
+  {\endgroup}
+
+%D \startbuffer
+%D \startformula
+%D   \startmatrix[left={\left(},right={\right)}]
+%D     \NC A \NC B \NR \NC C \NC D \NR
+%D   \stopmatrix
+%D   =
+%D   \startmatrix[left={\left(},right={\right)},location=low]
+%D     \NC A \NC B \NR \NC C \NC D \NR
+%D   \stopmatrix
+%D   =
+%D   \startmatrix[left={\left(},right={\right)},location=high]
+%D     \NC A \NC B \NR \NC C \NC D \NR
+%D   \stopmatrix
+%D \stopformula
+%D \stopbuffer
+%D
+%D \typebuffer \getbuffer
+%D
+%D \startbuffer
+%D \startformula
+%D   \startmatrices[left={\left(},right={\right)}]
+%D     \startmatrix
+%D       \NC A \NC B \NR \NC C \NC D \NR
+%D     \stopmatrix
+%D     =
+%D     \startmatrix[location=bottom]
+%D       \NC A \NC B \NR \NC C \NC D \NR
+%D     \stopmatrix
+%D     =
+%D     \startmatrix[location=top]
+%D       \NC A \NC B \NR \NC C \NC D \NR
+%D     \stopmatrix
+%D   \stopmatrices
+%D \stopformula
+%D \stopbuffer
+%D
+%D \typebuffer  % does not run well: \getbuffer
+
+%D Handy for the \type {m-matrix} module:
+
+\permanent\tolerant\protected\def\startnamedmatrix[#1]#*[#S#2]%
+  {\begingroup
+   \cdef\currentmathmatrix{#1}%
+   \setupcurrentmathmatrix[#2]%
+   \math_matrix_start[\currentmathmatrix]}
+
+\noaligned\permanent\protected\def\stopnamedmatrix
+  {\math_matrix_stop
+   \endgroup}
+
+%D The following code is derived from Aditya's simplematrix prototype but adapted to
+%D regular mathmatrices. With a little help from \LUA\ we now have this:
+%D
+%D \startbuffer
+%D \definemathmatrix [Pmatrix] [matrix:parentheses]
+%D   [align={all:right},
+%D    simplecommand=Pmatrix]
+%D
+%D \definemathmatrix [Tmatrix] [Pmatrix]
+%D   [action=transpose,
+%D    simplecommand=Tmatrix]
+%D
+%D \definemathmatrix [Nmatrix] [Pmatrix]
+%D   [action=negate,
+%D    simplecommand=Nmatrix]
+%D
+%D \startformula
+%D     \Pmatrix{ -1, 2, 3; 4,-5, 6; 7, 8,-9 } \neq
+%D     \Tmatrix{ -1, 2, 3; 4,-5, 6; 7, 8,-9 } \neq
+%D     \Nmatrix{ -1, 2, 3; 4,-5, 6; 7, 8,-9 }
+%D \stopformula
+%D
+%D \startformula
+%D     \bmatrix { {A__1(x,y)} ; {A__2(x,y)} } =
+%D     \bmatrix { {A__1(x,y)}; {A__2(x,y)} } =
+%D     \bmatrix {{A__1(x,y)};{A__2(x,y)}}
+%D \stopformula
+%D \stopbuffer
+%D
+%D \typebuffer \getbuffer
+
+\permanent\tolerant\protected\def\math_matrix_simple[#1]#*[#S#2]#:#3%
+  {\begingroup
+   \cdef\currentmathmatrix{#1}%
+   \setupcurrentmathmatrix[#2]%
+   \math_matrix_start[\currentmathmatrix]%
+   \clf_simplematrix{\mathmatrixparameter\c!action}{#3}%
+   \math_matrix_stop
+   \endgroup}
+
+%D We hook it into the normal mathmatrix code:
+
+\appendtoks
+    \edef\p_simplecommand{\mathmatrixparameter\c!simplecommand}%
+    \ifempty\p_simplecommand\else
+        \protected\frozen\instance\edefcsname\p_simplecommand\endcsname{\math_matrix_simple[\currentmathmatrix]}%
+    \fi
+\to \everydefinemathmatrix
+
+%D And predefine some matrices:
+
+% \definemathmatrix[matrix:parentheses][\c!left={\left(\mskip\thinmuskip},\c!right={\mskip\thinmuskip\right)},\c!align=\v!middle]
+% \definemathmatrix[matrix:brackets]   [\c!left={\left[\mskip\thinmuskip},\c!right={\mskip\thinmuskip\right]},\c!align=\v!middle]
+% \definemathmatrix[matrix:bars]       [\c!left={\left|\mskip\thinmuskip},\c!right={\mskip\thinmuskip\right|},\c!align=\v!middle]
+
+\definemathmatrix
+  [matrix:none]
+  [\c!align=\v!middle,
+   \c!simplecommand=matrix]
+
+\definemathmatrix
+  [matrix:brackets]
+  [\c!fences=bracket,
+   \c!align=\v!middle,
+   \c!simplecommand=bmatrix]
+
+\definemathmatrix
+  [matrix:parentheses]
+  [\c!fences=parenthesis,
+   \c!align=\v!middle,
+   \c!simplecommand=pmatrix]
+
+\definemathmatrix
+  [matrix:bars]
+  [\c!fences=bar,
+   \c!align=\v!middle,
+   \c!simplecommand=vmatrix]
+
+\definemathmatrix
+  [matrix:doublebars]
+  [\c!fences=doublebar,
+   \c!align=\v!middle,
+   \c!simplecommand=vvmatrix]
+
+\definemathmatrix
+  [matrix:triplebars]
+  [\c!fences=triplebar,
+   \c!align=\v!middle,
+   \c!simplecommand=vvvmatrix]
+
+\definemathmatrix
+  [matrix:groups]
+  [\c!fences=group,
+   \c!align=\v!middle,
+   \c!simplecommand=gmatrix]
+
+\definemathmatrix
+  [matrix:braces]
+  [\c!fences=brace,
+   \c!align=\v!middle,
+   \c!simplecommand=bracematrix] % Seldom used, bmatrix occupied by brackets
+
+% MPS: Is this one really used? Yes, in the test suite ...
+
+\definemathmatrix
+  [thematrix]
+  [matrix:parentheses]
+  [\c!simplecommand=thematrix]
+
+%D \startbuffer
+%D \startformula
+%D \thematrix{1,2,3,4;5,6,7,8;9,10,11,12}
+%D \stopformula
+%D \stopbuffer
+%D
+%D \typebuffer \getbuffer
+%D
+%D \startbuffer
+%D \startformula
+%D \startthematrix
+%D     \NC 1\NC 2\NC 3\NC 4\NR
+%D     \NC 5\NC 6\NC 7\NC 8\NR
+%D     \NC 9\NC10\NC11\NC12\NR
+%D \stopthematrix
+%D \stopformula
+%D \stopbuffer
+%D
+%D \typebuffer \getbuffer
+
+%D Mikael needed this matrix in one of his advanced math courses that ran begin april 2022
+%D where new concepts were introduced:
+
+% \definemathfence
+%   [tekcarb]
+%   [\c!left="005D,\c!right="005B]
+
+\definemathmatrix
+  [xıɹʇɐɯ]
+  [\c!fences=tekcarb]
+
+%D Fortunately we were read for it:
+%D
+%D \startbuffer
+%D \startformula
+%D \startxıɹʇɐɯ
+%D   \NC a_1 \NC b_1 \NC c_1 \NR
+%D   \NC a_2 \NC b_2 \NC c_2 \NR
+%D \stopxıɹʇɐɯ
+%D \stopformula
+%D \stopbuffer
+%D
+%D \typebuffer \getbuffer
+
+%D \macros
+%D   {startintertext}
+%D
+%D Preliminary feature:
+%D
+%D {\em example code}
+%D
+%D The intertext commands have to be expandable (in aligment lookahead) so
+%D we cannot use \type {\protected}.
+
+\permanent\def\startintertext#1\stopintertext
+  {\noalign{\math_intertext{#1}}}
+
+\permanent\let\stopintertext\relax
+
+\permanent\def\intertext#1%
+  {\noalign{\math_intertext{#1}}}
+
+\protected\def\math_intertext#1%
+  {\penalty\postdisplaypenalty % this will go .. replaced
+   \afterdisplayspace
+   \vbox{\forgetall\noindent#1\par}%
+   \penalty\predisplaypenalty  % this will do .. replaced
+   \beforedisplayspace}
+
+%D \macros
+%D   {substack}
+%D
+%D Preliminary code:
+%D
+%D \startbuffer
+%D \startformula
+%D    \sum_{%
+%D      \startsubstack
+%D       i = 1 \NR
+%D       i \neq n \NR
+%D       i \neq m
+%D       \stopsubstack
+%D     }a_i
+%D \stopformula
+%D \stopbuffer
+%D
+%D \getbuffer which was typed as \typebuffer
+%D
+%D Notice that these macros give the correct spacing for
+%D subscripts. Compare for example
+%D
+%D \startbuffer
+%D \startformula
+%D \sum_{\startsubstack a \NR b \NR \stopsubstack}
+%D \text{ and }
+%D \sum_{\scriptstyle a \atop \scriptstyle}
+%D \stopformula
+%D \stopbuffer
+%D
+%D \typebuffer which gives \getbuffer
+
+% \permanent\protected\def\startsubstack
+%   {\begingroup
+%    \vcenter\bgroup
+%    \currentmathblobnesting\minusone
+%    \baselineskip\mathstacktotal
+%    \lineskip\mathstackvgap
+%    \lineskiplimit\lineskip
+%    \mathsurround\zeropoint
+%    \mathsurroundskip\zeroskip
+%    \everycr\emptytoks
+%    \enforced\let\NC\relax
+%    \enforced\let\MC\relax
+%    \enforced\let\NR\crcr
+%  % \enablemathalignrelocate
+%    \dostarttagged\t!math{substack}% needed, otherwise no mtr
+%    \dostarttaggednodetail\t!mtable
+%    \halign\bgroup
+%     \dostarttaggednodetail\t!mtablerow
+%     \hfil
+%     \dostarttaggednodetail\t!mtablecell
+%     \normalstartimath
+%     \scriptstyle
+%     \aligncontent
+%     \normalstopimath
+%     \dostoptagged
+%     \hfil
+%     \dostoptagged
+%     \crcr}
+%
+% \noaligned\permanent\protected\def\stopsubstack
+%   {\crcr
+%    \egroup
+%    \dostoptagged
+%    \dostoptagged
+%    \egroup
+%    \endgroup}
+
+\newinteger\c_align_substack
+
+\permanent\protected\def\startsubstack
+  {\begingroup
+   \vcenter\bgroup
+   \currentmathblobnesting\minusone
+   \baselineskip\mathstacktotal
+   \lineskip\mathstackvgap
+   \lineskiplimit\lineskip
+   \mathsurround\zeropoint
+   \mathsurroundskip\zeroskip
+%    \tabskip\zeropoint
+   \everycr\emptytoks
+   \enforced\let\NC\relax
+   \enforced\let\MC\relax
+   \enforced\let\NR\crcr
+   \dostarttagged\t!math{substack}% \empty
+   \pushmacro\c_align_substack
+   \global\c_align_substack\plusone
+   \halign\bgroup
+    \dostarttaggednodetail\t!mstack
+    \global\advanceby\c_align_substack\plusone
+    \hfil
+    \normalstartimath
+    \scriptstyle
+    \aligncontent
+    \normalstopimath
+    \hfil
+    \crcr}
+
+\noaligned\permanent\protected\def\stopsubstack
+  {\crcr
+   \egroup
+   \dorecurse\c_align_substack\dostoptagged
+   \egroup
+   \popmacro\c_align_substack
+   \endgroup}
+
+%D \macros{overset, underset}
+%D
+%D The macros \type {\overset} and \type {\underset} are provided by \AMS\ packages
+%D in \LATEX. These macro allows you to place a symbol above or below another
+%D symbol, irrespective of whether the other symbol is a relation or something else,
+%D and without influencing the spacing. Because in \LUAMETATEX\ we're less limited,
+%D we have rather simple definitions compared to \MKIV. One cna also do:
+%D
+%D \starttyping
+%D $b\limits^a$
+%D $<\limits^a$
+%D \stoptyping
+
+\permanent\protected\def\overset #1#2{\mathrel{#2}\limits\normalsuperscript{#1}}
+\permanent\protected\def\underset#1#2{\mathrel{#2}\limits\normalsubscript  {#1}}
+
+%D The following code comes from \type {math-str.mkiv}.
+%D
+%D Here we implement a basic math alignment mechanism. Numbers are also handled. The
+%D macros \type {\startinnermath} and \type {\stopinnermath} can be overloaded in
+%D specialized modules.
+
+\installcorenamespace{mathinnerstart}
+\installcorenamespace{mathinnerstop}
+
+\permanent\protected\def\startinnermath{\expandnamespaceparameter\??mathinnerstart\formulaparameter\c!align\v!normal}
+\permanent\protected\def\stopinnermath {\expandnamespaceparameter\??mathinnerstop \formulaparameter\c!align\v!normal}
+
+\permanent\protected\def\defineinnermathhandler#1#2#3%
+  {\defcsname\??mathinnerstart#1\endcsname{#2}%
+   \defcsname\??mathinnerstop #1\endcsname{#3}}
+
+\def\strc_math_flush_number_box_normal{\box\b_strc_formulas_number}
+\def\strc_math_flush_number_box_visual{\ruledhbox{\box\b_strc_formulas_number}}
+
+\let\strc_math_flush_number_box\strc_math_flush_number_box_normal
+
+% \newdimension  \d_strc_math_display_width
+% \newdimension  \d_strc_math_indent
+% \newconditional\c_strc_math_indent
+
+\newconditional\c_strc_math_display_overflow
+\newconstant   \c_strc_math_number_location
+\newconstant   \c_strc_math_number_variant
+\newconstant   \c_strc_formulas_frame_mode
+\newdimension  \d_strc_math_framed_width
+
+\defcsname\??formulaoption\v!frame\endcsname
+  {\edef\p_frame{\formulaparameter\c!frame}%
+   \ifx\p_frame\v!number
+     \c_strc_formulas_frame_mode\plustwo % inside frame
+   \else
+     \c_strc_formulas_frame_mode\plusone % outside frame
+   \fi}
+
+% The next section is experimental ...
+
+\permanent\protected\def\grph_handle_formula_image_tagged#1#2%
+  {\begingroup
+   \global\advanceby\nofexportedboxes\plusone
+   \edef\figureexported{\the\nofexportedboxes}%
+   \def\figurecategory{formula}%
+   \dostarttagged\t!image
+   \setbox\b_grph_image\vpack\bgroup
+     \vkern\zeropoint
+     \hpack\bgroup
+       \hkern-\d_strc_math_left_shift
+       \copy#2%
+       \hkern-\d_strc_math_right_shift
+     \egroup
+     \vkern\zeropoint
+   \egroup
+ % \copy\b_grph_image
+   \dotagexported
+   \dostoptagged
+   \dotagregisterformula{\number\c_strc_formulas_n}{\number\nofexportedboxes}%
+   \ifconditional\c_grph_exported % move up
+     \putboxincache\s!exported{\the\nofexportedboxes}\b_grph_image
+   \fi
+   #1#2%
+   \endgroup}
+
+\permanent\protected\def\grph_handle_formula_image_normal#1#2%
+  {#1#2}
+
+\enforced\let\handle_formula_image\grph_handle_formula_image_normal
+
+\appendtoks % this might move
+    \enforced\let\handle_formula_image\grph_handle_formula_image_tagged
+\to \everyenableelements
+
+\appendtoks % this might move
+    \enforced\let\handle_formula_image\grph_handle_formula_image_normal
+\to \everydisableelements
+
+% ... till here.
+
+% mode: 0=no frame | 1=number inside frame | 2=number outside frame
+
+% it is a bit of a mess because we solve all kind of bordercases but at some
+% point it will become clean
+
+\def\strc_math_flush_aligned_boxed_direct_yes
+  {\dontleavehmode
+   \handle_formula_image\box\b_strc_math_display
+   \llap{\strc_math_flush_number_box}}
+
+\def\strc_math_flush_aligned_boxed_direct_nop
+  {\dontleavehmode
+   \handle_formula_image\box\b_strc_math_display}
+
+\def\strc_math_flush_aligned_left_number_indeed#1%
+  {\ifvoid\b_strc_formulas_number\else
+     \setbox\b_strc_formulas_number\hbox to \d_strc_formulas_display_width\bgroup
+       \hss
+     % \ifcase#1\orelse\ifdim\dimexpr\d_strc_math_max_left-\d_strc_math_first_left\relax>\zeropoint
+     %    \raise\htdp\b_strc_formulas_number % horrible hack
+     % \fi
+       \hbox{\strc_math_flush_number_box}%
+     \egroup
+     \ifcase\c_strc_math_number_location\or
+       \boxxoffset\b_strc_formulas_number{-\d_strc_formulas_display_width+\d_strc_formulas_number+\s_strc_formulas_margin_left}% brrrrr
+       \boxyoffset\b_strc_formulas_number-\d_strc_math_first_height
+       \htdp\b_strc_formulas_number\zeropoint
+       \strc_math_flush_number_box % left
+     \fi
+   \fi}
+
+\def\strc_math_flush_aligned_right_number_indeed#1%
+  {\ifvoid\b_strc_formulas_number\else
+     \setbox\b_strc_formulas_number\hbox to \d_strc_formulas_display_width\bgroup
+       \hss
+       \ifcase#1\orelse\ifdim{\d_strc_math_max_right-\d_strc_math_last_right}>\zeropoint
+          \lower\htdp\b_strc_formulas_number % horrible hack
+       \fi
+       \hbox{\strc_math_flush_number_box}%
+     \egroup
+     \ifcase\c_strc_math_number_location\or\else
+       \boxxoffset\b_strc_formulas_number-\s_strc_formulas_margin_right
+       \boxyoffset\b_strc_formulas_number\d_strc_math_last_depth
+       \htdp\b_strc_formulas_number\zeropoint
+     \strc_math_flush_number_box % right
+     \fi
+   \fi}
+
+% \c_strc_math_ignore_number\conditionaltrue
+
+% cleanup timestamp: tales of time, joe bonamassa (live blu-ray in loop mode, 2023)
+
+\dimensiondef\d_strc_math_number_eps 5\scaledpoint
+
+% line mode
+
+\def\strc_math_flush_line_mode
+  {\ifcase\c_strc_math_ragged_status\or\or\hfill\or\hfill\fi
+   \handle_formula_image\box\b_strc_math_display
+   \ifcase\c_strc_math_ragged_status\or\hfill\or\hfill\or\fi}
+
+% wrap/flow mode
+
+\def\strc_math_grid_snapped_box#1%
+  {\scratchtotal\htdp\scratchbox
+   \getnoflines\scratchtotal
+   \ifnum\noflines>\plusone
+     \scratchwidth \wd\scratchbox
+    %\scratchheight\ht\scratchbox
+     \scratchdepth \dp\scratchbox
+     \scratchdimen\noflines\lineheight
+     \scratchdistance{\scratchdimen-\scratchtotal}%
+     \advanceby\scratchdimen-\strutdp
+     \setbox\scratchbox\tpack\bgroup
+       \novrule
+         \s!pair  \scratchdimen \strutdp
+         \s!width \zeropoint
+       \relax
+       \ifcase#1\or
+         \begingroup
+           \gray
+           \virtualvrule
+             \s!pair  \scratchdimen \strutdp
+             \s!width \scratchwidth
+         \endgroup
+       \fi
+       \boxyoffset\scratchbox{%
+           \scratchdepth
+          -\strutdp
+          +\scratchdistance/\plustwo
+         %+2pt % can be an optional parameter
+        }%
+       \box\scratchbox
+     \egroup
+     \ht\scratchbox\scratchdimen
+   \else
+     \ht\scratchbox\strutht
+   \fi
+   \dp\scratchbox\strutdp
+   \box\scratchbox}
+
+\def\strc_math_flush_result_normal_begin
+  {\ifconditional\c_strc_math_pack_mode
+     \ifgridlinesnapping
+       \setbox\scratchbox
+     \orelse\ifgridsnapping
+       \setbox\scratchbox
+     \fi
+     \vpack\bgroup
+   \fi}
+
+\def\strc_math_flush_result_normal_end
+  {\ifconditional\c_strc_math_pack_mode
+     \egroup
+     % We just use the math snapper for both cases.
+     \ifgridlinesnapping
+       \strc_math_grid_snapped_box\zerocount
+     \orelse\ifgridsnapping
+       \strc_math_grid_snapped_box\zerocount
+     \fi
+   \fi}
+
+\def\strc_math_flush_result_traced_begin
+  {\ifconditional\c_strc_math_pack_mode
+     \ifgridlinesnapping
+       \setbox\scratchbox
+     \orelse\ifgridsnapping
+       \setbox\scratchbox
+     \fi
+     \ruledvpack\bgroup
+    %\ruledvpack\bgroup
+    %\ruleddpack\bgroup
+     \hpack\bgroup
+        \begingroup
+        \darkgray
+        \virtualvrule
+           \s!pair  \ht\b_strc_math_display \dp\b_strc_math_display
+           \c!width 2\onepoint
+        \virtualvrule
+           \s!pair  \onepoint \onepoint
+           \c!width 10\onepoint
+        \endgroup
+        \ruleddpack\bgroup
+   \fi}
+
+\def\strc_math_flush_result_traced_end
+  {\ifconditional\c_strc_math_pack_mode
+     \egroup
+     \egroup
+     \egroup
+     \ifgridlinesnapping
+       \strc_math_grid_snapped_box\plusone
+     \orelse\ifgridsnapping
+       \strc_math_grid_snapped_box\plusone
+     \fi
+   \fi}
+
+\let\strc_math_flush_result_begin\strc_math_flush_result_normal_begin
+\let\strc_math_flush_result_end  \strc_math_flush_result_normal_end
+
+\installtextracker{math.nosplit}
+  {\let\strc_math_flush_result_begin\strc_math_flush_result_traced_begin
+   \let\strc_math_flush_result_end  \strc_math_flush_result_traced_end}
+  {\let\strc_math_flush_result_begin\strc_math_flush_result_normal_begin
+   \let\strc_math_flush_result_end  \strc_math_flush_result_normal_end}
+
+
+\def\strc_math_flush_v_box_bottom
+  {\ifdone
+     \global\c_strc_math_positioning42\relax
+\strc_math_flush_result_begin
+     \handle_formula_image\unvbox\b_strc_math_display
+     \strc_math_flush_number_box
+\strc_math_flush_result_end
+   \else
+     \global\c_strc_math_positioning43\relax
+\strc_math_flush_result_begin
+     \handle_formula_image\unvbox\b_strc_math_display
+     \nointerlineskip
+     \ht\b_strc_formulas_number\zeropoint
+     \dp\b_strc_formulas_number\zeropoint
+     \boxyoffset\b_strc_formulas_number\d_strc_math_last_depth
+     \strc_math_flush_number_box % right
+\strc_math_flush_result_end
+     \prevdepth\d_strc_math_last_depth
+   \fi}
+
+\def\strc_math_flush_v_box_top
+  {\ifdone
+     \global\c_strc_math_positioning45\relax
+     \dontleavehmode
+\strc_math_flush_result_begin
+     \strc_math_flush_number_box
+     \handle_formula_image\unvbox\b_strc_math_display
+\strc_math_flush_result_end
+   \else
+     \scratchdepth\dp\b_strc_formulas_number
+     \global\c_strc_math_positioning46\relax
+     \ht\b_strc_formulas_number\strutht
+     \dp\b_strc_formulas_number\strutdp
+     \dontleavehmode
+\strc_math_flush_result_begin
+     \vkern{\d_strc_math_first_height+\scratchdepth-\lineheight}%
+% or \ht\b_strc_formulas_number{\d_strc_math_first_height+\scratchdepth-\strutdp}%
+     \nointerlineskip
+     \strc_math_flush_number_box % left
+     \vkern{-\d_strc_math_first_height-\scratchdepth}%
+     \handle_formula_image\unvbox\b_strc_math_display
+\strc_math_flush_result_end   \fi}
+
+\def\strc_math_flush_v_box_right
+  {\ifconditional\c_strc_math_ignore_number
+     \d_strc_formulas_number\zeropoint
+   \fi
+   \strc_formulas_start_side_box
+   \ifzeropt\d_strc_formulas_number
+     \global\c_strc_math_positioning41\relax
+\strc_math_flush_result_begin
+     \handle_formula_image\unvbox\b_strc_math_display
+\strc_math_flush_result_end
+   \else
+     % better verbose than compact so some overlap in code here
+     \ifcase\c_strc_math_number_variant\or
+       \s_strc_formulas_margin_right\zeroskip
+     \fi
+     \setbox\b_strc_formulas_number\hbox to \d_strc_formulas_display_width\bgroup
+       \hss
+       \strc_math_flush_number_box
+       \kern\s_strc_formulas_margin_right
+     \egroup
+     \ifcstok{\formulaparameter\c!order}\v!reverse
+       \ifdim{\d_strc_math_first_right-\s_strc_formulas_margin_right}<{\d_strc_formulas_number-\d_strc_math_number_eps}%
+         \donetrue
+       \else
+         \donefalse
+       \fi
+       \strc_math_flush_v_box_top
+     \else
+       \ifdim{\d_strc_math_last_right-\s_strc_formulas_margin_right}<{\d_strc_formulas_number-\d_strc_math_number_eps}%
+         \donetrue
+       \else
+         \donefalse
+       \fi
+       \strc_math_flush_v_box_bottom
+     \fi
+   \fi
+   \strc_formulas_stop_side_box}
+
+\def\strc_math_flush_v_box_left
+  {\ifconditional\c_strc_math_ignore_number
+     \d_strc_formulas_number\zeropoint
+   \fi
+   \strc_formulas_start_side_box
+   \ifzeropt\d_strc_formulas_number
+     \global\c_strc_math_positioning44\relax
+\strc_math_flush_result_begin
+     \handle_formula_image\unvbox\b_strc_math_display
+\strc_math_flush_result_end
+   \else
+     % better verbose than compact so some overlap in code here
+     \ifcase\c_strc_math_number_variant\or
+       \s_strc_formulas_margin_left\zeroskip
+     \fi
+     \setbox\b_strc_formulas_number\hbox to \d_strc_formulas_display_width\bgroup
+       \kern\s_strc_formulas_margin_left
+       \strc_math_flush_number_box
+       \hss
+     \egroup
+     \ifcstok{\formulaparameter\c!order}\v!reverse
+       \ifdim{\d_strc_math_last_left-\s_strc_formulas_margin_left}<{\d_strc_formulas_number-\d_strc_math_number_eps}%
+         \donetrue
+       \else
+         \donefalse
+       \fi
+       \strc_math_flush_v_box_bottom
+     \else
+       \ifdim{\d_strc_math_first_left-\s_strc_formulas_margin_left}<{\d_strc_formulas_number-\d_strc_math_number_eps}%
+         \donetrue
+       \else
+         \donefalse
+       \fi
+       \strc_math_flush_v_box_top
+     \fi
+   \fi
+   \strc_formulas_stop_side_box}
+
+\def\strc_math_flush_h_mode
+  {\global\c_strc_math_positioning\plusthree
+   \dontleavehmode
+   \strc_math_flush_aligned_left_number_indeed\zerocount
+   \handle_formula_image\box\b_strc_math_display
+   \strc_math_flush_aligned_right_number_indeed\zerocount}
+
+\def\strc_math_flush_h_box
+  {\global\c_strc_math_positioning\plusfive
+   \dontleavehmode
+   \strc_math_flush_aligned_left_number_indeed\zerocount
+   \handle_formula_image\box\b_strc_math_display
+   \strc_math_flush_aligned_right_number_indeed\zerocount}
+
+\def\strc_math_flush_text_mode
+  {\strc_math_setup_align_auto
+   \bgroup
+     \leftskip \zeroskip
+     \rightskip\zeroskip
+     \ifhmode
+       % nil the tracing
+       \strc_math_flush_h_mode
+     \orelse\ifvbox\b_strc_math_display
+       \ifnum\c_strc_math_number_location=\plusone
+         \strc_math_flush_v_box_left
+       \else
+         \strc_math_flush_v_box_right
+       \fi
+     \else
+       % nil the tracing, might never happen
+       \strc_math_flush_h_box
+     \fi
+   \egroup
+   \ifvmode
+     \nointerlineskip
+   \fi}
+
+% all modes:
+
+\protected\def\strc_math_flush_aligned
+  {\ifconditional\c_strc_math_split_mode
+     \strc_math_flush_text_mode
+   \else
+     \strc_math_flush_line_mode
+   \fi}
+
+\def\strc_math_flush_box_normal
+  {\ifconditional\c_strc_math_split_mode
+     \strc_math_flush_aligned
+   \else
+     \hbox to \d_strc_formulas_display_width\bgroup
+        \strc_math_flush_aligned
+     \egroup
+   \fi}
+
+\def\strc_math_flush_box_framed_common
+  {\d_strc_math_framed_width\d_strc_formulas_display_width
+   \setformulaframedparameter\c!align{\formulaparameter\c!align}%
+   \letformulaframedparameter\c!strut\v!no
+   \d_framed_formula\ht\b_strc_math_display
+   \ifcase\c_strc_math_ragged_status\or      \or\hfill\or\hfill\fi
+   \inheritedformulaframedframed{\handle_formula_image\box\b_strc_math_display}%
+   \ifcase\c_strc_math_ragged_status\or\hfill\or\hfill         \fi}
+
+\def\strc_math_flush_box_framed_display
+  {\let\currentformulaframed\currentformula
+   \letformulaframedparameter\c!location\v!formula
+   \setformulaframedparameter\c!width{\d_strc_math_framed_width}%
+   \strc_math_flush_box_framed_common}
+
+\def\strc_math_flush_box_framed_fit_inline
+  {\let\currentformulaframed\currentformula
+   \resetformulaframedparameter\c!location
+   \letformulaframedparameter\c!width\v!fit
+   \strc_math_flush_box_framed_common}
+
+\def\strc_math_flush_box_framed_fit_display
+  {\let\currentformulaframed\currentformula
+   \letformulaframedparameter\c!location\v!formula
+   \letformulaframedparameter\c!width\v!fit
+   \strc_math_flush_box_framed_common}
+
+% combiners
+
+\def\strc_math_flush_number_box_left {\ifconditional\c_strc_formulas_overlay_number\rlap\fi{\strc_math_flush_number_box}}
+\def\strc_math_flush_number_box_right{\ifconditional\c_strc_formulas_overlay_number\llap\fi{\strc_math_flush_number_box}}
+
+\def\strc_math_flush_box
+  {\ifcase\c_strc_formulas_frame_mode
+     \strc_math_flush_box_normal
+   \else
+     \strc_math_flush_box_framed_display
+   \fi}
+
+\def\strc_math_number_right_normal
+  {\strc_math_flush_aligned
+   \hss % hss makes room for number
+   \strc_math_flush_number_box_right}
+
+\def\strc_math_number_left_normal
+  {\strc_math_flush_number_box_left
+   \strc_math_flush_aligned
+   \hss} % hss makes room for number
+
+\def\strc_math_number_right_normal_outside
+  {\ifconditional\c_strc_formulas_tight
+     \strc_math_flush_box_framed_fit_display
+   \else
+     \strc_math_flush_box_framed_display
+   \fi
+   \hss % hss makes room for number
+   \rlap{\strc_math_flush_number_box}} % needs checking
+
+\def\strc_math_number_left_normal_outside
+  {\llap{\strc_math_flush_number_box}% needs checking
+   \hss % hss makes room for number
+   \ifconditional\c_strc_formulas_tight
+     \strc_math_flush_box_framed_fit_display
+   \else
+     \strc_math_flush_box_framed_display
+   \fi}
+
+\def\strc_math_number_right_normal_inside
+  {\setbox\b_strc_math_display\hpack to {\d_strc_formulas_display_width-\d_framed_locator_lo-\d_framed_locator_ro}\bgroup
+     \strc_math_flush_aligned
+     \hss
+     \strc_math_flush_number_box
+   \egroup
+   \strc_math_flush_box_framed_fit_inline}
+
+\def\strc_math_number_left_normal_inside
+  {\setbox\b_strc_math_display\hpack to {\d_strc_formulas_display_width-\d_framed_locator_lo-\d_framed_locator_ro}\bgroup
+     \strc_math_flush_number_box
+     \hss
+     \strc_math_flush_aligned
+   \egroup
+   \strc_math_flush_box_framed_fit_inline}
+
+\def\strc_math_number_right_overflow
+  {\vpack\bgroup
+     \strc_math_flush_box
+     \par
+     \hpack to \d_strc_formulas_display_width\bgroup
+       \hss
+       \strc_math_flush_number_box_right
+     \egroup
+   \egroup}
+
+\def\strc_math_number_left_overflow
+  {\vpack\bgroup
+     \hpack to \d_strc_formulas_display_width\bgroup
+       \strc_math_flush_number_box_left
+       \hss
+     \egroup
+     \strc_math_flush_box
+   \egroup}
+
+\def\strc_math_number_right_overflow_outside
+  {\vpack\bgroup
+     \strc_math_flush_box_framed_fit_inline
+    %\hskip\zeroskip % nicely breaks the line without introducing funny vertical spacing ... why o why
+     \hpack to \d_strc_formulas_display_width\bgroup
+       \hss
+       \strc_math_flush_number_box
+     \egroup
+   \egroup}
+
+\def\strc_math_number_left_overflow_outside
+  {\vpack\bgroup
+     \hpack to {\d_strc_formulas_display_width-\d_framed_locator_lo}\bgroup
+       \strc_math_flush_number_box
+       \hss
+     \egroup
+     \hskip\zeroskip % nicely breaks the line without introducing funny vertical spacing ... why o why
+     \strc_math_flush_box_framed_fit_inline
+   \egroup}
+
+\def\strc_math_number_right_overflow_inside
+  {\setbox\b_strc_math_display\vpack\bgroup
+     \handle_formula_image\box\b_strc_math_display
+     \hpack to \d_strc_formulas_display_width\bgroup
+       \hss
+       \strc_math_flush_number_box
+       \kern\d_framed_locator_ro
+     \egroup
+   \egroup
+   \strc_math_flush_box_framed_fit_inline}
+
+\def\strc_math_number_left_overflow_inside
+  {\setbox\b_strc_math_display\vpack\bgroup
+     \hpack to \d_strc_formulas_display_width\bgroup
+     % \kern\d_framed_locator_lo
+       \strc_math_flush_number_box
+       \hss
+     \egroup
+     \handle_formula_image\box\b_strc_math_display
+   \egroup
+   \strc_math_flush_box_framed_fit_inline}
+
+% checkers
+
+\setupmathalignment
+  [\c!numberdistance=\formulaparameter\c!numberdistance]
+
+\protected\def\d_strc_math_total_display_width
+  {\dimexpr
+     \d_strc_math_display_width+\d_strc_formulas_number
+     \ifconditional\c_strc_formulas_overlay_number
+        \ifcase\c_strc_math_ragged_status\or\or+\d_strc_formulas_number\or\fi
+     \fi
+   \relax}
+
+\def\strc_math_number_check
+  {\d_strc_math_display_width\wd\b_strc_math_display
+   \ifconditional\c_strc_formulas_tight
+     \ifdim\d_strc_math_total_display_width>\d_strc_formulas_display_width
+       \c_strc_math_display_overflow\conditionaltrue
+     \else
+       \d_strc_formulas_display_width\d_strc_math_total_display_width
+       \c_strc_math_display_overflow\conditionalfalse
+     \fi
+   \else
+     \ifdim{\d_strc_math_total_display_width+(\formulaparameter\c!numberthreshold)}>\d_strc_formulas_display_width
+       \c_strc_math_display_overflow\conditionaltrue
+     \else
+       \c_strc_math_display_overflow\conditionalfalse
+     \fi
+   \fi}
+
+\def\strc_math_number_check_outside
+  {\d_strc_math_display_width\naturalwd\b_strc_math_display
+   \ifdim{\d_strc_math_total_display_width+\d_framed_locator_lo+\d_framed_locator_ro}>\d_strc_formulas_display_width
+     \c_strc_math_display_overflow\conditionaltrue
+   \else
+     \c_strc_math_display_overflow\conditionalfalse
+   \fi
+   % still ok?
+   \ifnum\c_strc_math_ragged_status=\plustwo
+     \d_strc_math_framed_width{\d_strc_formulas_display_width-2\d_strc_formulas_number}%
+   \else
+     \d_strc_math_framed_width{\d_strc_formulas_display_width- \d_strc_formulas_number}%
+   \fi}
+
+\let\strc_math_number_check_inside\strc_math_number_check_outside
+
+% offsets
+
+\def\strc_math_number_check_offsets
+  {\begingroup
+     \setbox\scratchbox\hbox
+       {\inheritedformulaframedframed
+          {\pack_framed_locator_set_lo\pack_framed_locator_set_ro}}%
+   \endgroup}
+
+% tracing
+
+\def\strc_math_traced_state_yes
+  {\llap{\setbox\scratchbox\hbox{\infofont
+   \ifcase\c_strc_math_ragged_status unset\or flushleft\or middle\or flushright\fi
+   \space
+   \ifcase\c_strc_formulas_frame_mode no\or out\or in\fi
+   \space
+   \ifconditional\c_strc_math_display_overflow overflow\else fit\fi
+   \quad}\ht\scratchbox\zeropoint\dp\scratchbox\zeropoint\box\scratchbox}}
+
+\let\strc_math_traced_state\relax
+
+\installtextracker
+  {formulas.framed}
+  {\let\strc_math_traced_state\strc_math_traced_state_yes}
+  {\let\strc_math_traced_state\relax}
+
+% packaging
+
+\installcorenamespace{mathboxlocation}
+
+\defcsname\??mathboxlocation\v!left \endcsname
+  {\c_strc_math_number_location\plusone}
+
+\defcsname\??mathboxlocation\v!right\endcsname
+  {\c_strc_math_number_location\plustwo}
+
+\defcsname\??mathboxlocation\v!atleftmargin\endcsname
+  {\c_strc_math_number_location\plusone
+   \ifzeropt\s_strc_formulas_margin_left
+     % this can be a helper as now mixed in math-ali
+     \parinitleftskip\zeroskip
+   \else
+     \c_strc_math_number_variant \plusone
+   \fi}
+
+\defcsname\??mathboxlocation\v!atrightmargin\endcsname
+  {\c_strc_math_number_location\plustwo
+   \ifzeropt\s_strc_formulas_margin_right
+     % this can be a helper as now mixed in math-ali
+     \parfillrightskip\zeroskip
+   \else
+     \c_strc_math_number_variant \plusone
+   \fi}
+
+\newconditional\c_strc_math_signal
+
+\protected\def\strc_math_check_location
+  {\c_strc_math_signal\conditionalfalse}
+
+\protected\def\strc_math_signal_location
+  {\ifconditional\c_strc_math_signal
+     \signalrightpage
+   \fi}
+
+\defcsname\??mathboxlocation\v!outer\endcsname
+  {\c_strc_math_signal\conditionaltrue
+   \doifelseupcomingrightpage
+     {\letformulaparameter\c!location\v!right}%
+     {\letformulaparameter\c!location\v!left}%
+   \begincsname\??mathboxlocation\formulaparameter\c!location\endcsname}
+
+\defcsname\??mathboxlocation\v!inner\endcsname
+  {\c_strc_math_signal\conditionaltrue
+   \doifelseupcomingrightpage
+     {\letformulaparameter\c!location\v!left}%
+     {\letformulaparameter\c!location\v!right}%
+   \begincsname\??mathboxlocation\formulaparameter\c!location\endcsname}
+
+\protected\def\strc_math_box_start#1%
+  {\c_strc_math_ragged_status#1\relax % already set
+   \useformulacolorparameter\c!color
+   \c_strc_math_number_location\zerocount
+   \c_strc_math_number_variant \zerocount
+   \strc_math_check_location
+   \begincsname\??mathboxlocation\formulaparameter\c!location\endcsname
+   %
+   % We collect the math formula in an hbox. Dimensions don't really play
+   % a role yet but beware of nesting!
+   %
+   \dontcomplain
+  %\holdingmigrations\plusfour
+   \setbox\b_strc_math_display\hbox retain \plusfour\bgroup
+     \strc_math_signal_location
+     \startforceddisplaymath}
+
+\protected\def\strc_math_box_stop
+  {\stopforceddisplaymath
+   \egroup
+   % preroll left and right offsets
+   \ifcase\c_strc_formulas_frame_mode
+     % no frame
+   \else
+     \strc_math_number_check_offsets
+   \fi
+   \ifcase\c_strc_formulas_frame_mode
+     \strc_math_number_check
+   \or
+     \strc_math_number_check_outside
+   \else
+     \strc_math_number_check_inside
+   \fi
+   \strc_math_traced_state
+   \ifconditional\c_strc_math_split_mode
+     \bgroup
+   \else
+     \noindent % \noindentation % not \dontleavehmode
+     \hbox to \strc_math_effective_width \bgroup
+   \fi
+   \ifcase\c_strc_math_number_location
+     \strc_math_flush_box
+   \or % number left
+     \ifzeropt\d_strc_formulas_number
+       \strc_math_flush_number_no
+     \else
+       \strc_math_flush_number_left
+     \fi
+   \else % number right
+     \ifzeropt\d_strc_formulas_number
+       \strc_math_flush_number_no
+     \else
+       \strc_math_flush_number_right
+     \fi
+   \fi
+   \egroup
+   \ifconditional\c_strc_math_split_mode
+     \ifhmode \else
+       \strc_math_show_margins
+     \fi
+   \fi}
+
+\defineinnermathhandler\v!left      {\strc_math_box_start\plusthree}{\strc_math_box_stop}
+\defineinnermathhandler\v!flushright{\strc_math_box_start\plusthree}{\strc_math_box_stop}
+\defineinnermathhandler\v!right     {\strc_math_box_start\plusone  }{\strc_math_box_stop}
+\defineinnermathhandler\v!flushleft {\strc_math_box_start\plusone  }{\strc_math_box_stop}
+\defineinnermathhandler\v!center    {\strc_math_box_start\plustwo  }{\strc_math_box_stop}
+\defineinnermathhandler\v!middle    {\strc_math_box_start\plustwo  }{\strc_math_box_stop}
+\defineinnermathhandler\v!normal    {\strc_math_box_start\plustwo  }{\strc_math_box_stop}
+\defineinnermathhandler\v!atmargin  {\strc_math_box_start\plusfour }{\strc_math_box_stop}
+
+\def\strc_math_flush_number_no
+  {\ifconditional\c_strc_math_split_mode
+     \strc_math_flush_box
+   \orelse\ifconditional\c_strc_math_display_overflow
+     \ifcase\c_strc_formulas_frame_mode
+       \strc_math_flush_box_normal
+     \else
+       \strc_math_flush_box_framed_fit_inline
+     \fi
+   \orelse\ifcase\c_strc_formulas_frame_mode
+     \strc_math_flush_box_normal
+   \orelse\ifconditional\c_strc_formulas_tight
+      \strc_math_flush_box_framed_fit_inline
+   \else
+      \strc_math_flush_box_framed_display
+   \fi}
+
+\def\strc_math_flush_number_left
+  {\ifconditional\c_strc_math_split_mode
+     \strc_math_flush_aligned % we flush in here, otherwise wrong positioning of number (we need to unvbox)
+   \orelse\ifconditional\c_strc_math_display_overflow
+     \ifcase\c_strc_formulas_frame_mode
+       \strc_math_number_left_overflow
+     \or
+       \strc_math_number_left_overflow_outside
+     \or
+       \strc_math_number_left_overflow_inside
+     \fi
+   \else
+     \ifcase\c_strc_formulas_frame_mode
+       \strc_math_number_left_normal
+     \or
+       \strc_math_number_left_normal_outside
+     \or
+       \strc_math_number_left_normal_inside
+     \fi
+   \fi}
+
+\def\strc_math_flush_number_right
+  {\ifconditional\c_strc_math_split_mode
+     \strc_math_flush_aligned
+   \orelse\ifconditional\c_strc_math_display_overflow
+     \ifcase\c_strc_formulas_frame_mode
+       \strc_math_number_right_overflow
+     \or
+       \strc_math_number_right_overflow_outside
+     \or
+       \strc_math_number_right_overflow_inside
+     \fi
+   \else
+     \ifcase\c_strc_formulas_frame_mode
+       \strc_math_number_right_normal
+     \or
+       \strc_math_number_right_normal_outside
+     \or
+       \strc_math_number_right_normal_inside
+     \fi
+   \fi}
+
+%D Some inline math tweak.
+
+\appendtoks
+    \ifcase\mathnestinglevel\or
+        % 4=disable 6=only when no spaces
+        \mathsurroundskip{\mathematicsparameter\c!textdistance}%
+        \ifzeropt\mathsurroundskip
+          \ifzeropt\gluestretch\mathsurroundskip
+            \ifzeropt\glueshrink\mathsurroundskip
+              \mathsurroundmode\plussix
+            \else
+              \mathsurroundskip\zeroskip
+              \mathsurroundmode\plusfour
+            \fi
+          \else
+            \mathsurroundmode\plussix
+          \fi
+        \else
+          \mathsurroundmode\plussix
+        \fi
+    \else
+      \mathsurroundmode\plusfour
+      \mathsurroundskip\zeroskip
+    \fi
+\to \everymathematics
+
+\setupmathematics
+  [\c!textdistance=\zeropoint]
+
+%D Kind of new (February 2022):
+
+\installcorenamespace {maththreshold}
+
+\setupmathematics[\c!threshold=\zeropoint]
+
+\permanent\protected\def\installmaththreshold#1#2%
+  {\expandafter\gluespecdef\csname\??maththreshold#1\endcsname#2\relax}
+
+\installmaththreshold\v!none  {\zeropoint}
+\installmaththreshold\v!small {3\emwidth plus 0.50\emwidth minus 0.25\emwidth}
+\installmaththreshold\v!medium{4\emwidth plus 0.75\emwidth minus 0.50\emwidth}
+\installmaththreshold\v!big   {5\emwidth plus 1.00\emwidth minus 0.75\emwidth}
+
+\appendtoks
+    \edef\p_threshold{\mathematicsparameter\c!threshold}%
+    \maththreshold\ifcsname\??maththreshold\p_threshold\endcsname\lastnamedcs\else\p_threshold\fi\relax
+% \to \everymath % \everymathematics
+\to \everymathematics
+
+%D Here is simple alignment mechanism:
+
+\installcorenamespace{mathsimplealign}
+
+\installcommandhandler \??mathsimplealign {mathsimplealign} \??mathsimplealign
+
+\setupmathsimplealign
+  [\c!distance=\v!math,
+   \c!leftmargin=\zeropoint,
+   \c!rightmargin=\zeropoint,
+   \c!left=,
+   \c!right=,
+   \c!strut=\v!yes,
+   \c!spaceinbetween=\mathalignmentparameter\c!spaceinbetween,
+   \c!align=\v!all:\v!middle,
+   \c!textdistance=.25\emwidth]
+
+\appendtoks
+    \protected\frozen\instance\edefcsname\e!start\currentmathsimplealign\endcsname{\math_simplealign_start[\currentmathsimplealign]}%
+    \frozen\instance          \defcsname \e!stop \currentmathsimplealign\endcsname{\math_simplealign_stop}%
+\to \everydefinemathsimplealign
+
+\permanent\protected\def\math_simplealign_NC
+  {\aligntab}
+
+% \permanent\protected\def\math_simplealign_EQ
+%   {\aligntab=\aligntab}
+
+\permanent\protected\def\math_simplealign_EQ
+  {\aligntab=}
+
+\noaligned\tolerant\permanent\protected\def\math_simplealign_NR[#1]#*[#2]%
+  {\unskip
+%    \strc_formulas_place_number_nested{#1}{#2}%
+\math_place_number_in_alignment{#1}{#2}%
+   \math_number_right_of_eqalign
+   \crcr}
+
+\aliased\let\math_align_strut\relax
+
+\newconditional\c_math_align_text
+
+\permanent\protected\def\math_simplealign_NC{\relax\global\c_math_align_text\conditionalfalse\aligntab}
+\permanent\protected\def\math_simplealign_EQ{\relax\global\c_math_align_text\conditionalfalse\aligntab=}
+\permanent\protected\def\math_simplealign_TC{\relax\global\c_math_align_text\conditionaltrue \aligntab}
+
+\installcorenamespace{mathsimpleendclass}
+
+\global\expandafter\integerdef\csname\??mathsimpleendclass\the\zerocount\endcsname\mathendcode
+
+% \permanent\tolerant\protected\def\math_simplealign_start[#1]#*[#S#2]%
+%   {\begingroup
+%    \cdef\currentmathsimplealign{#1}%
+%    \ifarguments\or\or
+%      \setupcurrentmathsimplealign[#2]%
+%    \fi
+%    \edef\p_strut{\mathsimplealignparameter\c!strut}%
+%    \ifx\p_strut\v!yes
+%      \enforced\let\math_align_strut\strut
+%    \else
+%      \enforced\let\math_align_strut\relax
+%    \fi
+%    \mathatom \s!class \mathwrappedcode \bgroup
+%    \scratchdimen\mathsimplealignparameter\c!leftmargin\relax
+%    \ifzeropt\scratchdimen\else\kern\scratchdimen\fi
+%    \mathsimplealignparameter\c!left\relax
+%    \math_fenced_start_wrap{\mathsimplealignparameter\c!fences}%
+%    \mathatom \s!class \mathconstructcode \bgroup
+%    \math_alignment_location_check{\mathsimplealignparameter\c!location}% vcenter etc
+%    \math_alignment_location_box
+%    \bgroup
+%    \enforced\let\MC\math_simplealign_NC
+%    \enforced\let\NC\math_simplealign_NC
+%    \enforced\let\TC\math_simplealign_TC
+%    \enforced\let\NR\math_simplealign_NR
+%    \enforced\let\EQ\math_simplealign_EQ
+%    \enforced\let\TB\math_common_TB
+%    \math_eqalign_set_defaults
+%    \math_eqalign_set_columns{\mathsimplealignparameter\c!align}%
+%    \global\c_math_eqalign_column\zerocount
+%    \global\c_math_eqalign_row\plusone
+%    \edef\m_simplealign_distance{\mathsimplealignparameter\c!distance}%
+%    \strc_math_setup_spacing_aligned\mathsimplealignparameter
+%    \enablemathalignrelocate
+%    \halign
+%      \s!callback
+%        \align_callback_mathalign
+%      \s!attr
+%        \mathnumberlocationattribute \zerocount
+%      \bgroup
+%      \global\c_math_eqalign_column\zerocount
+%      \global\advanceby\c_math_eqalign_row\zerocount
+%      \ignorespaces
+%      \aligncontent % dummy
+%      \removeunwantedspaces
+%      \lastleftclass \mathbegincode
+%      \lastrightclass\mathendcode
+%      \aligntab
+%      \global\advanceby\c_math_eqalign_column\plusone
+%      \math_left_of_eqalign  % \hfil
+%      \ignorespaces
+%      \math_align_strut
+%    % \mathbeginclass\ifcsname\??mathsimpleendclass\the\numexpr\c_math_eqalign_column-\plusone\relax\endcsname\lastnamedcs\else\mathunsetcode\fi
+%      \mathbeginclass\mathbegincode
+%      \startforceddisplaymath
+%      \aligncontent
+%      \stopforceddisplaymath
+%      \ifnum\lastrightclass<\mathunsetcode
+%        \global\expandafter\integerdef\csname\??mathsimpleendclass\the\c_math_eqalign_column\endcsname\lastrightclass
+%      \fi
+%      \removeunwantedspaces
+%      \math_right_of_eqalign % \hfil
+%      \aligntab
+%      \aligntab
+%      % repeater
+%      \global\advanceby\c_math_eqalign_column\plusone
+%      \math_left_of_eqalign  % \hfil
+%      \ifx\m_simplealign_distance\v!math
+%        \mathbeginclass\ifcsname\??mathsimpleendclass\the\numexpr\c_math_eqalign_column-\plusone\relax\endcsname\lastnamedcs\else\mathunsetcode\fi
+%      \else
+%        \kern\m_simplealign_distance
+%      \fi
+%      \ignorespaces
+%      \math_align_strut
+%      \ifconditional\c_math_align_text
+%        % somehow we can't use content as an argument
+%      \else
+%        \startforceddisplaymath
+%      \fi
+%      \aligncontent
+%      \ifmmode
+%        \stopforceddisplaymath
+%      \fi
+%      \ifnum\lastrightclass<\mathunsetcode
+%        \global\expandafter\integerdef\csname\??mathsimpleendclass\the\c_math_eqalign_column\endcsname\lastrightclass
+%      \fi
+%      \removeunwantedspaces
+%      \math_right_of_eqalign % \hfil
+%      \crcr}
+%
+% \noaligned\permanent\protected\def\math_simplealign_stop
+%   {\crcr
+%    \egroup
+%    \egroup
+%    \egroup
+%    \math_fenced_stop_wrap
+%    \mathsimplealignparameter\c!right\relax
+%    \scratchdimen\mathsimplealignparameter\c!rightmargin\relax
+%    \ifzeropt\scratchdimen\else\kern\scratchdimen\fi
+%    \setbox\scratchbox\hbox{\mathsimplealignparameter\c!text}%
+%    \ifvoid\scratchbox\else
+%      \kern\mathsimplealignparameter\c!textdistance
+%      \vcenter{\box\scratchbox}%
+%    \fi
+%    \egroup
+%    \endgroup}
+
+% Split up so we can better compare to the normal align:
+
+\newtoks\everymathsimplealign
+\newtoks\everymathsimplealigndone
+
+\lettonothing\m_simplealign_distance
+
+\def\math_simplealign_preamble
+  {\global\c_math_eqalign_column\zerocount
+   \global\advanceby\c_math_eqalign_row\zerocount
+   \ignorespaces
+   \aligncontent % dummy
+   \removeunwantedspaces
+   \lastleftclass \mathbegincode
+   \lastrightclass\mathendcode
+   \aligntab
+   \global\advanceby\c_math_eqalign_column\plusone
+   \math_left_of_eqalign  % \hfil
+   \ignorespaces
+   \math_align_strut
+  %\mathbeginclass\ifcsname\??mathsimpleendclass\tointeger{\c_math_eqalign_column-\plusone}\endcsname\lastnamedcs\else\mathunsetcode\fi
+   \mathbeginclass\mathbegincode
+   \startforceddisplaymath
+   \aligncontent
+   \stopforceddisplaymath
+   \ifnum\lastrightclass<\mathunsetcode
+     \global\expandafter\integerdef\csname\??mathsimpleendclass\the\c_math_eqalign_column\endcsname\lastrightclass
+   \fi
+   \removeunwantedspaces
+   \math_right_of_eqalign % \hfil
+   \aligntab
+   \aligntab
+   % repeater
+   \global\advanceby\c_math_eqalign_column\plusone
+   \math_left_of_eqalign  % \hfil
+   \ifx\m_simplealign_distance\v!math
+     \mathbeginclass\ifcsname\??mathsimpleendclass\tointeger{\c_math_eqalign_column-\plusone}\endcsname\lastnamedcs\else\mathunsetcode\fi
+   \else
+     \kern\m_simplealign_distance
+   \fi
+   \startforceddisplaymath
+   \aligncontent
+   \stopforceddisplaymath
+   \ifnum\lastrightclass<\mathunsetcode
+     \global\expandafter\integerdef\csname\??mathsimpleendclass\the\c_math_eqalign_column\endcsname\lastrightclass
+   \fi
+   \math_right_of_eqalign} % \hfil
+
+\appendtoks
+   \enforced\let\MC\math_simplealign_NC
+   \enforced\let\NC\math_simplealign_NC
+   \enforced\let\TC\math_simplealign_TC
+   \enforced\let\NR\math_simplealign_NR
+   \enforced\let\EQ\math_simplealign_EQ
+   \enforced\let\TB\math_common_TB
+\to \everymathsimplealign
+
+\appendtoks
+\to \everymathsimplealigndone
+
+\def\math_simple_halign_checked
+  {\enablemathalignrelocate
+   \halign
+     \s!callback
+       \align_callback_mathalign
+     \s!attr
+       \mathnumberlocationattribute \zerocount}
+
+\permanent\tolerant\protected\def\math_simplealign_start[#1]#*[#S#2]%
+  {\begingroup
+   \currentmathblobnesting\minusone
+   \cdef\currentmathsimplealign{#1}%
+   \ifarguments\or\or
+     \setupcurrentmathsimplealign[#2]%
+   \fi
+   \edef\p_strut{\mathsimplealignparameter\c!strut}%
+   \ifx\p_strut\v!yes
+     \enforced\let\math_align_strut\strut
+   \else
+     \enforced\let\math_align_strut\relax
+   \fi
+   \expand\everymathsimplealign
+   \global\c_math_eqalign_column\zerocount
+   \global\c_math_eqalign_row\plusone
+   \math_eqalign_set_defaults
+   \math_eqalign_set_columns{\mathsimplealignparameter\c!align}%
+   \math_alignment_location_check{\mathsimplealignparameter\c!location}% vcenter etc
+   \edef\m_simplealign_distance{\mathsimplealignparameter\c!distance}%
+   \strc_math_setup_spacing_aligned\mathsimplealignparameter
+   %
+   \mathatom \s!class \mathwrappedcode \bgroup
+   \scratchdimen{\mathsimplealignparameter\c!leftmargin}%
+   \ifzeropt\scratchdimen\else\kern\scratchdimen\fi
+   \mathsimplealignparameter\c!left\relax
+   \math_fenced_start_wrap{\mathsimplealignparameter\c!fences}%
+   \mathatom \s!class \mathconstructcode \bgroup
+   \math_alignment_location_box
+   \ifgridlinesnapping \s!linesnapping \linesnapping \fi
+   \bgroup
+   \math_simple_halign_checked\expandafter\bgroup\math_simplealign_preamble\crcr}
+
+\noaligned\permanent\protected\def\math_simplealign_stop
+  {\crcr
+   \egroup % halign
+   \egroup % box
+   \egroup % construct
+   \math_fenced_stop_wrap
+   \mathsimplealignparameter\c!right\relax
+   \scratchdimen{\mathsimplealignparameter\c!rightmargin}%
+   \ifzeropt\scratchdimen\else\kern\scratchdimen\fi
+   \setbox\scratchbox\hbox{\mathsimplealignparameter\c!text}%
+   \ifvoid\scratchbox\else
+     \kern{\mathsimplealignparameter\c!textdistance}%
+     \vcenter{\box\scratchbox}%
+   \fi
+   \egroup % wrapped
+   \expand\everymathsimplealigndone
+   \endgroup}
+
+%D It's not that spectacular apart from spacing being proper inter atom spacing
+%D using one of the new \LUAMETATEX\ mechanisms.
+%D
+%D \starttyping
+%D \definemathsimplealign
+%D   [whatever]
+%D   [left={\startmathfenced[sesac]},
+%D    right=\stopmathfenced]
+%D
+%D  % distance=math,
+%D  % distance=\zeropoint,
+%D  % distance=1cm,
+%D  % align={all:left}]
+%D
+%D \startformula
+%D     \startwhatever[text=simple]
+%D       \NC x \NC = r           \cos\theta \NR
+%D       \NC y \NC = \frac{1}{2} \sin\theta \NR
+%D       \NC 9 \NC = 123         \sin\theta \NR
+%D     \stopwhatever
+%D \stopformula
+%D \stoptyping
+
+%D Usage \type {\sum _ {\mstack {i \in V_{0}, i \neq j}}}, documented by Mikael:
+
+\permanent\protected\def\mstack#1% todo: make it configurable
+   {\begingroup
+    \scratchtoks\emptytoks \setcharstrut(\relax
+    \processcommalist[#1]{\ifempty\scratchtoks\else\toksapp\scratchtoks{\mathstrut\NR}\fi\toksapp\scratchtoks}%
+    \expandafter\startsubstack\the\scratchtoks\mathstrut\stopsubstack
+    \endgroup}
+
+%D Similar to simplecases:
+%D
+%D \starttyping
+%D \startformula
+%D     \equationsystem {
+%D        {(1-a)}x^{2x} - 3y_2 + 14z  = 2 + x,
+%D        {(1-a)}x^2    - 3y_2 +  4z <= 62,
+%D        {(1-a)}x^a    - 3y_2 +  4z >= 12,
+%D        {(1-a)}x^{2a} - 3y_2 + 24z != 4,
+%D               x^^2   - 3y_2 +  4z ~  1,
+%D               x^^2   - 3y_2 +  4z ≠  1,
+%D             -2x      -         4z <> 10,
+%D     }
+%D \stopformula
+%D \stoptyping
+
+\permanent\tolerant\protected\def\math_align_simple[#1]#*[#S#2]#:#3%
+  {\begingroup
+   \cdef\currentmathsimplealign{#1}%
+   \setupcurrentmathsimplealign[#2]%
+   \math_simplealign_start[\currentmathsimplealign]%
+   \clf_simplealign{\mathsimplealignparameter\c!alternative}{\mathsimplealignparameter\c!action}{#3}%
+   \math_simplealign_stop
+   \endgroup}
+
+\appendtoks
+    \edef\p_simplecommand{\mathsimplealignparameter\c!simplecommand}%
+    \ifempty\p_simplecommand\else
+        \protected\frozen\instance\edefcsname\p_simplecommand\endcsname{\math_align_simple[\currentmathsimplealign]}%
+    \fi
+\to \everydefinemathsimplealign
+
+\definemathsimplealign % new !
+  [equationsystem]
+  [\c!simplecommand=equationsystem,
+   \c!alternative=equationsystem, % for the moment we use this key
+   \c!align={all:right},
+   \c!distance=\v!math,
+   \c!left=,
+   \c!right=]
+
+\definemathsimplealign
+  [lequationsystem]
+  [equationsystem]
+  [\c!simplecommand=lequationsystem,
+   \c!left={\startmathfenced[cases]},
+   \c!right=\stopmathfenced]
+
+\definemathsimplealign
+  [requationsystem]
+  [equationsystem]
+  [\c!simplecommand=requationsystem,
+   \c!left={\startmathfenced[sesac]},
+   \c!right=\stopmathfenced]
+
+%D There are users who use this so let's for now keep it (I also need to adapt
+%D x-mathml.mkxl):
+
+\newskip \math_old_hideskip   \math_old_hideskip  = -1000pt plus 1fill
+\newskip \math_old_centering  \math_old_centering =     0pt plus 1000pt minus 1000pt
+
+\ifdefined\hidewidth \else \aliased\let\hidewidth\relax \fi
+
+\permanent\protected\def\eqalign#1% rather plain, is this used at all ...
+  {\dontleavehmode
+   \mskip\thinmuskip\vcenter\bgroup % \vcenter \s!class \mathwrappercode \bgroup
+     \currentmathblobnesting\minusone
+     \mathsurround\zeropoint        % \math_eqalign_set_defaults
+     \everycr\emptytoks
+     \tabskip\zeroskip
+     \enforced\let\hideskip\math_old_hideskip
+     \enforced\let\centering\math_old_centering
+     \enforced\def\hidewidth{\hskip\hideskip} % for alignment entries that can stick out
+     \amcode\ampersandasciicode\alignmentcatcode
+     \halign
+       {\strut
+        \hfil
+        \mathbeginclass\mathordcode
+        \mathendclass  \mathordcode
+        \startforceddisplaymath\aligncontent\stopforceddisplaymath
+        \aligntab
+        \mathbeginclass\mathordcode
+        \mathendclass  \mathordcode
+        \startforceddisplaymath\aligncontent\stopforceddisplaymath
+        \hfil
+        \crcr
+        #1%
+        \crcr}%
+   \egroup\mskip\thinmuskip}        % \egroup
+
+\protect \endinput
+
+% \placeformula \startformula[-] \startmatrix
+% \NC 1 \NC x \NC a \NR
+% \NC 2 \NC y \NC b \NR
+% \NC 3 \NC z \NC c \NR
+% \stopmatrix \stopformula
+
+% \definemathmatrix[bordermatrix][left={\left[\mskip\thinmuskip},right={\mskip\thinmuskip\right]}]
+
+% \placeformula \startformula[-] \startbordermatrix
+% \NC 1 \NC x \NC a \NR
+% \NC 2 \NC y \NC b \NR
+% \NC 3 \NC z \NC c \NR
+% \stopbordermatrix \stopformula

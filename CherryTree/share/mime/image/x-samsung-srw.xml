@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="image/x-samsung-srw">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Samsung SRW raw image</comment>
+  <comment xml:lang="uk">цифровий негатив Samsung SRW</comment>
+  <comment xml:lang="tr">Samsung SRW ham görüntüsü</comment>
+  <comment xml:lang="sv">Samsung SRW-råbild</comment>
+  <comment xml:lang="sr-Cyrl">Samsung SRW сирова слика</comment>
+  <comment xml:lang="sq">Pamje Samsung SRW e papërpunuar</comment>
+  <comment xml:lang="sl">Neobdelana slika Samsung SRW</comment>
+  <comment xml:lang="ru">Необработанное изображение Samsung SRW</comment>
+  <comment xml:lang="ro">imagine brută Samsung SRW</comment>
+  <comment xml:lang="pt-BR">Imagem bruta Samsung SRW</comment>
+  <comment xml:lang="pl">Surowy obraz SRW Samsung</comment>
+  <comment xml:lang="oc">imatge brut SRW de Samsung</comment>
+  <comment xml:lang="ko">삼성 SRW RAW 사진</comment>
+  <comment xml:lang="kk-Cyrl">Samsung SRW өңделмеген бейнесі</comment>
+  <comment xml:lang="fr">image brute Samsung SRW</comment>
+  <comment xml:lang="fi">Samsung SRW -raakakuva</comment>
+  <comment xml:lang="et">Samsung SRW töötlemata pilt</comment>
+  <comment xml:lang="es">imagen en bruto SRW de Samsung</comment>
+  <comment xml:lang="en-GB">Samsung SRW raw image</comment>
+  <comment xml:lang="de">Samsung SRW-Rohbild</comment>
+  <comment xml:lang="ar">صورة سامسونج الخام بتنسيق SRW</comment>
+  <sub-class-of type="image/x-dcraw"/>
+  <sub-class-of type="image/tiff"/>
+  <glob pattern="*.srw"/>
+</mime-type>

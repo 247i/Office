@@ -1,0 +1,1507 @@
+%D \module
+%D   [     file=t-pocketdiary,
+%D      version=2023-04-15,
+%D        title=PocketDiary \CONTEXT\ User Module,
+%D     subtitle=PocketDiary,
+%D       author=Willi Egger,
+%D         date=\currentdate,
+%D    copyright=Willi Egger,
+%D        email=w.egger@boede.nl,
+%D      license=Public Domain]
+
+\startmodule[pocketdiary]
+
+\writestatus{loading}{ConTeXt User Module / PocketDiary}
+
+%D \startsubject[title={Introduction}]
+%D 
+%D It is already some time ago, that my brother Heinz asked me to prepare him a 
+%D special page-arrangement scheme.
+%D This scheme is suitable to form a section with a single-sided printed sheet
+%D of paper. 
+%D He wanted to use it for special kind of greeting-cards. By coincidence I 
+%D detected an article by U. Ziegenhagen in de \TEX nische 
+%D Kommödie nr. 3/2010. This article deals with the preparation of a PocketMod, 
+%D which is a personal organizer 
+%D based on the mentioned arranging scheme. In the article there is also a 
+%D link mentioned to an online 
+%D version of the PocketMod. (http://www.pocketmod.com/). 
+%D -- After reading the article and visiting the web-site I got
+%D intrigued by the fact, that \CONTEXT\ has built in arranging capabilities
+%D and 
+%D due to the \LUATEX\ engine and herewith the possibility to perform 
+%D calculations in Lua it
+%D should be possible to build such a personal organizer in \CONTEXT.
+%D 
+%D The result is contained in this module. I would like to thank Hans Hagen 
+%D and Taco Hoekwater for the great
+%D \LUATEX\ machinery and Wolfgang Schuster for supporting me in tackling 
+%D the multi-lingual interface.
+%D
+%D After the first version in 2011, we are now 11 years older, a lot 
+%D has changed in and around the \CONTEXT
+%D -machinery. We are now using \LMTX\  (\LUAMETATEX ) the latest development. 
+%D
+%D During the \CONTEXT -meeting 2021 Thomáš Hála presented his solution 
+%D for generating an agenda, while the shops were closed during the Covid-19
+%D pandemic. Discussing issues with calendars revealed, that it could be
+%D interesting to integrate into a calendar also data concerning the moon
+%D phase and possibly information on the sun rise and sun set time.
+%D
+%D I thought, that I would like to do such calculations and give it a try.
+%D After having found information how to perform such astronomical
+%D calculations, slowly two new modules appeared. The calculations of the 
+%D moon phases is quite straight forward and this can be considered the
+%D easy part of the new development. The only remark must be made, that 
+%D those calculations are not super accurate. A deviation of about 1 day has
+%D to be accepted.
+%D 
+%D Finding a way to calculate the sun rise and sun set times is much more
+%D tedious. Collecting articles on such calculations and building the 
+%D formulas in Lua is not the issue, but that the given information in those
+%D articles looks 
+%D incomplete for a layman like me. -- Finally I found a Lua-module written for
+%D an
+%D application for presenting the required data on screen (the reference
+%D to the authors is given in the Lua-file for the sun data calculations). 
+%D I adapted
+%D this to Lua/\CONTEXT\ and it looks like it works fine. -- I have a Raspberry
+%D Pi Nano with a screen attached where I display weather information together
+%D with the sun data, which are fetched from the Open Weather Map
+%D (https://openweathermap.org). Due to the fact that the development of the
+%D solar data module took a long time I was able to compare the calculated
+%D results with those displayed on the Raspberry Pi screen. Happily they are
+%D completely congruent.
+%D
+%D \blank[big]
+%D
+%D Without the help of Hans Hagen, this module would not have been finished. I
+%D would like to thank him for all the support and patience with my struggles! 
+%D \stopsubject
+
+%D \startsubject[title={Subpaths}]
+
+%D In order to keep the hole module clearly organized the moon phase 
+%D as well as the sun rise/set calculation files are situated in 
+%D separate folders.
+%D We tell \CONTEXT\ where to find the requested files
+
+\usepath[{Moonphase,Solar}]
+
+%D \stopsubject
+
+%D \startsubject[title={Lua-files}]
+%D All calculations for dates are performed with Lua functions. 
+%D The functions are contained in \type{t-calendar.lua}
+
+%\ctxloadluafile{t-calendar}{}
+\ctxloadluafile{t-calendar}{}
+
+%D The calculations for the moon phase are done by Lua functions. 
+%D The functions are contained in \type{t-moonphase.lua}
+%D in the folder \quotation{Moonphase}
+
+\ctxloadluafile{t-moonphase}{}
+
+%D The calculations for the sun rise and set time are calculated in Lua too.
+%D The 
+%D functions are contained in the file \type{t-solar.lua} in the folder
+%D \quotation{Solar}
+
+\ctxloadluafile{t-solar}{}
+%D \stopsubject
+
+%D \startsubject[title={International interface}]
+%D
+%D The PocketDiary is aware of different languages. The language to be used is 
+%D selected with \type{\mainlanguage[en]}. The following interfaces 
+%D are available
+%D 
+%D \startitemize[2,packed]
+%D    \item Englisch interface
+%D    \item Dutch interface
+%D    \item German interface
+%D    \item Italian interface
+%D    \item French interface
+%D    \item Spanish interface
+%D    \item Polish interface
+%D \stopitemize 
+%D \stopsubject
+
+%D English interface
+\setuplabeltext[en][calendar=Calendar]
+\setuplabeltext[en][weekagenda=Week calendar]
+\setuplabeltext[en][week=Week]
+\setuplabeltext[en][month=Month]
+\setuplabeltext[en][contact=Contact]
+\setuplabeltext[en][name=Name]
+\setuplabeltext[en][address=Address]
+\setuplabeltext[en][zip=Zip]
+\setuplabeltext[en][place=Place]
+\setuplabeltext[en][country=Country]
+\setuplabeltext[en][phone=Phone]
+\setuplabeltext[en][mail=e-mail]
+\setuplabeltext[en][notes=Notes]
+\setuplabeltext[en][todo=Todo]
+\setuplabeltext[en][found={If found\textcomma\ please return to:}]
+
+\setuplabeltext[en][nyd={New Year's Day}]
+\setuplabeltext[en][epi={Epiphany}]
+\setuplabeltext[en][ashw={Ash Wednesday}]
+\setuplabeltext[en][palms={Palm Sunday} ]
+\setuplabeltext[en][gfri={Good Friday} ]
+\setuplabeltext[en][esun={Easter Sunday}]
+\setuplabeltext[en][esmo={Easter Monday}]
+\setuplabeltext[en][ascd={Ascension Day}]
+\setuplabeltext[en][pcst=Pentecost]
+\setuplabeltext[en][pcstmo={Pentecost Monday}]
+\setuplabeltext[en][xmas=Christmas]
+\setuplabeltext[en][bxd={Boxing Day}]
+\setuplabeltext[en][day=Day]
+\setuplabeltext[en][mon=Mon]
+\setuplabeltext[en][tue=Tue]
+\setuplabeltext[en][wed=Wed]
+\setuplabeltext[en][thu=Thu]
+\setuplabeltext[en][fri=Fri]
+\setuplabeltext[en][sat=Sat]
+\setuplabeltext[en][sun=Sun]
+
+\setuplabeltext[en][january=January]
+\setuplabeltext[en][february=February]
+\setuplabeltext[en][march=March]
+\setuplabeltext[en][april=April]
+\setuplabeltext[en][may=May]
+\setuplabeltext[en][june=June]
+\setuplabeltext[en][july=July]
+\setuplabeltext[en][august=August]
+\setuplabeltext[en][september=September]
+\setuplabeltext[en][october=October]
+\setuplabeltext[en][november=November]
+\setuplabeltext[en][december=December]
+
+\setuplabeltext[en][moondays=Lunar days]
+\setuplabeltext[en][moon=Moon]
+\setuplabeltext[en][sunrise=Sunrise]
+\setuplabeltext[en][sunset=Sunset]
+\setuplabeltext[en][lighthours=Lighthours]
+\setuplabeltext[en][sunstar=Sun]
+
+%D German interface
+\setuplabeltext[de][calendar=Planer] % Terminkalender, Kalender
+\setuplabeltext[de][weekagenda=Wochenagenda]
+\setuplabeltext[de][week=Woche]
+\setuplabeltext[de][month=Monat]
+\setuplabeltext[de][contact=Kontakt]
+\setuplabeltext[de][name=Name]
+\setuplabeltext[de][address=Adresse]
+\setuplabeltext[de][zip=Postleitzahl]
+\setuplabeltext[de][place=Ort]
+\setuplabeltext[de][country=Land]
+\setuplabeltext[de][phone=Telefon]
+\setuplabeltext[de][mail=e-Mail]
+\setuplabeltext[de][notes=Notizen]
+\setuplabeltext[de][todo={Zu erledigen}]
+\setuplabeltext[de][found={Wenn gefunden\textcomma\ bitte retournieren an:}]
+
+\setuplabeltext[de][nyd=Neujahr]
+\setuplabeltext[de][epi=Dreikönigstag]
+\setuplabeltext[de][ashw=Aschermittwoch]
+\setuplabeltext[de][palms=Palmsonntag]
+\setuplabeltext[de][gfri=Karfreitag]
+\setuplabeltext[de][esun=Ostern]
+\setuplabeltext[de][esmo=Ostermontag]
+\setuplabeltext[de][ascd=Himmelfahrt]
+\setuplabeltext[de][pcst=Pfingsten]
+\setuplabeltext[de][pcstmo=Pfingstmontag]
+\setuplabeltext[de][xmas=Weihnachten]
+\setuplabeltext[de][bxd=Stephanstag]
+\setuplabeltext[de][day=Tag]
+\setuplabeltext[de][mon=Mo]
+\setuplabeltext[de][tue=Di]
+\setuplabeltext[de][wed=Mi]
+\setuplabeltext[de][thu=Do]
+\setuplabeltext[de][fri=Fr]
+\setuplabeltext[de][sat=Sa]
+\setuplabeltext[de][sun=So]
+
+\setuplabeltext[de][january=Januar]
+\setuplabeltext[de][february=Februar]
+\setuplabeltext[de][march=März]
+\setuplabeltext[de][april=April]
+\setuplabeltext[de][may=Mai]
+\setuplabeltext[de][june=Juni]
+\setuplabeltext[de][july=Juli]
+\setuplabeltext[de][august=August]
+\setuplabeltext[de][september=September]
+\setuplabeltext[de][october=Oktober]
+\setuplabeltext[de][november=November]
+\setuplabeltext[de][december=Dezember]
+
+\setuplabeltext[de][moondays=Mondtage]
+\setuplabeltext[de][moon=Mond]
+\setuplabeltext[de][sunrise=Sonnenaufgang]
+\setuplabeltext[de][sunset=Sonnenuntergang]
+\setuplabeltext[de][lighthours=Taglichtstunden]
+\setuplabeltext[de][sunstar=Sonne]
+
+%D Dutch interface
+\setuplabeltext[nl][calendar=Kalender]
+\setuplabeltext[nl][weekagenda=Weekagenda]
+\setuplabeltext[nl][week=Week]
+\setuplabeltext[nl][month=Maand]
+\setuplabeltext[nl][contact=Kontakt]
+\setuplabeltext[nl][name=Naam]
+\setuplabeltext[nl][address=Adres]
+\setuplabeltext[nl][zip=Postcode]
+\setuplabeltext[nl][place=Plaats]
+\setuplabeltext[nl][country=Land]
+\setuplabeltext[nl][phone=Tel.]
+\setuplabeltext[nl][mail=e-mail]
+\setuplabeltext[nl][notes=Notities]
+\setuplabeltext[nl][todo=Todo]
+\setuplabeltext[nl][found={Wanneer gevonden\textcomma\ aub sturen naar:}]
+
+\setuplabeltext[nl][nyd={Nieuw jaar}]
+\setuplabeltext[nl][epi=Driekoningen]
+\setuplabeltext[nl][ashw=Aswoensdag]
+\setuplabeltext[nl][palms=Palmpasen]
+\setuplabeltext[nl][gfri={Goede vrijdag}]
+\setuplabeltext[nl][esun=Pasen]
+\setuplabeltext[nl][esmo={2\high{de} Paasdag}]
+\setuplabeltext[nl][ascd=Hemelvaart]
+\setuplabeltext[nl][pcst=Pinksteren]
+\setuplabeltext[nl][pcstmo={2\high{de} Pinksterdag}]
+\setuplabeltext[nl][xmas=Kerst]
+\setuplabeltext[nl][bxd={2\high{de} Kerstdag}]
+\setuplabeltext[nl][day=Dag]
+\setuplabeltext[nl][mon=Ma]
+\setuplabeltext[nl][tue=Di]
+\setuplabeltext[nl][wed=Woe]
+\setuplabeltext[nl][thu=Do]
+\setuplabeltext[nl][fri=Fr]
+\setuplabeltext[nl][sat=Za]
+\setuplabeltext[nl][sun=Zo]
+
+\setuplabeltext[nl][january=Januari]
+\setuplabeltext[nl][february=Februari]
+\setuplabeltext[nl][march=Maart]
+\setuplabeltext[nl][april=April]
+\setuplabeltext[nl][may=Mei]
+\setuplabeltext[nl][june=Juni]
+\setuplabeltext[nl][july=Juli]
+\setuplabeltext[nl][august=Augustus]
+\setuplabeltext[nl][september=September]
+\setuplabeltext[nl][october=October]
+\setuplabeltext[nl][november=November]
+\setuplabeltext[nl][december=December]
+
+\setuplabeltext[nl][moondays=Maandagen]
+\setuplabeltext[nl][moon=Maan]
+\setuplabeltext[nl][sunrise=Zonsopg.]
+\setuplabeltext[nl][sunset=Zonsonderg.]
+\setuplabeltext[nl][lighthours=Lichturen]
+\setuplabeltext[nl][sunstar=Zon]
+
+%D French interface
+\setuplabeltext[fr][calendar=Calendrier]
+\setuplabeltext[fr][weekagenda={Cal. de la semaine}]
+\setuplabeltext[fr][week=Sem.]
+\setuplabeltext[fr][month=Mois]
+\setuplabeltext[fr][contact=Contact]
+\setuplabeltext[fr][name=Nom]
+\setuplabeltext[fr][address=Adresse]
+\setuplabeltext[fr][zip=CP]
+\setuplabeltext[fr][place=Lieu]
+\setuplabeltext[fr][country=Pays]
+\setuplabeltext[fr][phone=Tél.]
+\setuplabeltext[fr][mail=e-mail]
+\setuplabeltext[fr][notes=Observations]
+\setuplabeltext[fr][todo=Tâches]
+\setuplabeltext[fr][found={Si trouvé\textcomma\ retourner s.v.p. à: }]
+           
+\setuplabeltext[fr][nyd={Jour de l'an}]
+\setuplabeltext[fr][epi={Épiphany}]
+\setuplabeltext[fr][ashw={Mercredi des Cendres}]
+\setuplabeltext[fr][palms={Dimanche des Rameaux}]
+\setuplabeltext[fr][gfri={Vendredi saint}]
+\setuplabeltext[fr][esun={Pâques}]
+\setuplabeltext[fr][esmo={Lundi de Pâques}]
+\setuplabeltext[fr][ascd={Jour de l'ascension}]
+\setuplabeltext[fr][pcst=Pentecôte]
+\setuplabeltext[fr][pcstmo={Lundi de Pentecôte}]
+\setuplabeltext[fr][xmas=Noël]
+\setuplabeltext[fr][bxd=]
+\setuplabeltext[fr][day=Jour]
+\setuplabeltext[fr][mon=Lun]
+\setuplabeltext[fr][tue=Mar]
+\setuplabeltext[fr][wed=Mer]
+\setuplabeltext[fr][thu=Jeu]
+\setuplabeltext[fr][fri=Ven]
+\setuplabeltext[fr][sat=Sam]
+\setuplabeltext[fr][sun=Dim]
+
+\setuplabeltext[fr][january=Janvier]
+\setuplabeltext[fr][february=Février]
+\setuplabeltext[fr][march=Mars]
+\setuplabeltext[fr][april=Avril]
+\setuplabeltext[fr][may=Mai]
+\setuplabeltext[fr][june=Juin]
+\setuplabeltext[fr][july=Juillet]
+\setuplabeltext[fr][august=Août]
+\setuplabeltext[fr][september=Septembre]
+\setuplabeltext[fr][october=Octobre]
+\setuplabeltext[fr][november=Novembre]
+\setuplabeltext[fr][december=Décembre]
+
+\setuplabeltext[fr][moondays=Jours lun.] % jours lunaires
+\setuplabeltext[fr][moon=Lune]
+\setuplabeltext[fr][sunrise=Lever du s.]  %soleil
+\setuplabeltext[fr][sunset=Coucher du s.] %soleil
+\setuplabeltext[fr][lighthours=Heures de l.] %lumière
+\setuplabeltext[fr][sunstar=Soleil]
+
+% Italian interface
+\setuplabeltext[it][calendar=Calendario]
+\setuplabeltext[it][weekagenda=Calendario di settimana]
+\setuplabeltext[it][week=Sett.] %Settimana
+\setuplabeltext[it][month=Mese]
+\setuplabeltext[it][contact=Contatto]
+\setuplabeltext[it][name=Nome]
+\setuplabeltext[it][address=Indirizzo]
+\setuplabeltext[it][zip=C.A.P.]
+\setuplabeltext[it][place=Luogo]
+\setuplabeltext[it][country=Paese]
+\setuplabeltext[it][phone=Tel.]
+\setuplabeltext[it][mail=e-mail]
+\setuplabeltext[it][notes=Osservazioni]
+\setuplabeltext[it][todo=Compiti]
+\setuplabeltext[it][found={Se trovato\textcomma\ prego speditelo à:}]
+ 
+%D Italian interface               
+\setuplabeltext[it][nyd=Capodanno]
+\setuplabeltext[it][epi={Epifania}]
+\setuplabeltext[it][ashw={Giorno delle Ceneri}]
+\setuplabeltext[it][palms={Domenica delle Palme}]
+\setuplabeltext[it][gfri={Venerdi santo}]
+\setuplabeltext[it][esun=Pasqua]
+\setuplabeltext[it][esmo={Lunedì dell'Angelo}]
+\setuplabeltext[it][ascd=Ascensione]
+\setuplabeltext[it][pcst=Pentecoste]
+\setuplabeltext[it][pcstmo={Lunedì di Pentecoste}]
+\setuplabeltext[it][xmas=Natale]
+\setuplabeltext[it][bxd={Giorno di S. Stefano}]
+\setuplabeltext[it][day=Giorno]
+\setuplabeltext[it][mon=Lun]
+\setuplabeltext[it][tue=Mar]
+\setuplabeltext[it][wed=Mer]
+\setuplabeltext[it][thu=Gio]
+\setuplabeltext[it][fri=Ven]
+\setuplabeltext[it][sat=Sab]
+\setuplabeltext[it][sun=Dom]
+
+\setuplabeltext[it][january=Gennaio]
+\setuplabeltext[it][february=Febbraio]
+\setuplabeltext[it][march=Marzo]
+\setuplabeltext[it][april=Aprile]
+\setuplabeltext[it][may=Maggio]
+\setuplabeltext[it][june=Giugno]
+\setuplabeltext[it][july=Luglio]
+\setuplabeltext[it][august=Agosto]
+\setuplabeltext[it][september=Settembre]
+\setuplabeltext[it][october=Ottobre]
+\setuplabeltext[it][november=Novembre]
+\setuplabeltext[it][december=Dicembre]
+
+\setuplabeltext[it][moondays=Giorni lun.] %Giorni lunari
+\setuplabeltext[it][moon=Luna]
+\setuplabeltext[it][sunrise=Albo]
+\setuplabeltext[it][sunset=Tramonto]
+\setuplabeltext[it][lighthours={O. di luce}] %Ore di luce
+\setuplabeltext[it][sunstar=Sole]
+
+%D Spanish interface
+\setuplabeltext[es][calendar=Agenda]
+\setuplabeltext[es][weekagenda=Agenda semanal]
+\setuplabeltext[es][week=Sem.] %Semana
+\setuplabeltext[es][month=Mes]
+\setuplabeltext[es][contact=Contacto]
+\setuplabeltext[es][name=Nombre]
+\setuplabeltext[es][address=Dirección]
+\setuplabeltext[es][zip=C.P.]
+\setuplabeltext[es][place=Población]
+\setuplabeltext[es][country=País]
+\setuplabeltext[es][phone=Tel.]
+\setuplabeltext[es][mail=Correo-e]
+\setuplabeltext[es][notes=Observaciones]
+\setuplabeltext[es][todo=Pendiente]
+\setuplabeltext[es][found={Por favor\textcomma\ devuélvalo a:}]
+
+\setuplabeltext[es][nyd=Año Nuevo]
+\setuplabeltext[es][epi={Reyes Magos}]
+\setuplabeltext[es][ashw={Miércoles de Ceniza}]
+\setuplabeltext[es][palms={Domingo de Palmas}]
+\setuplabeltext[es][gfri={Viernes santo}]
+\setuplabeltext[es][esun=Domingo de Pascua]
+\setuplabeltext[es][esmo={Lunes de Pascua}]
+\setuplabeltext[es][ascd=Ascensión]
+\setuplabeltext[es][pcst=Pentecostes]
+\setuplabeltext[es][pcstmo={Lunes de Pentecostes}]
+\setuplabeltext[es][xmas=Navidad]
+\setuplabeltext[es][bxd={San Esteban}]
+\setuplabeltext[es][day=Día]
+\setuplabeltext[es][mon=Lu]
+\setuplabeltext[es][tue=Ma]
+\setuplabeltext[es][wed=Mi]
+\setuplabeltext[es][thu=Ju]
+\setuplabeltext[es][fri=Vi]
+\setuplabeltext[es][sat=Sá]
+\setuplabeltext[es][sun=Do]
+
+\setuplabeltext[es][january=Enero]
+\setuplabeltext[es][february=Febrero]
+\setuplabeltext[es][march=Marzo]
+\setuplabeltext[es][april=Abril]
+\setuplabeltext[es][may=Mayo]
+\setuplabeltext[es][june=Junio]
+\setuplabeltext[es][july=Julio]
+\setuplabeltext[es][august=Agosto]
+\setuplabeltext[es][september=Septiembre]
+\setuplabeltext[es][october=Octubre]
+\setuplabeltext[es][november=Noviembre]
+\setuplabeltext[es][december=Diciembre]
+
+\setuplabeltext[es][moondays=Días lunares]
+\setuplabeltext[es][moon=Luna]
+\setuplabeltext[es][sunrise=Alba]
+\setuplabeltext[es][sunset=Ocaso]
+\setuplabeltext[es][lighthours={Horas de luz}]
+\setuplabeltext[es][sunstar=Sol]
+
+%D Polish interface
+\setuplabeltext[pl][calendar=Kalendarz]
+\setuplabeltext[pl][weekagenda={Kalendarz tygodniowy}]
+\setuplabeltext[pl][week=Tydzień]
+\setuplabeltext[pl][month=Miesiąc]
+\setuplabeltext[pl][contact=Kontakt]
+\setuplabeltext[pl][name=Nazwisko]
+\setuplabeltext[pl][address=Adres]
+\setuplabeltext[pl][zip=Kod pocztowy]
+\setuplabeltext[pl][place=Miejsce zamieszkania]
+\setuplabeltext[pl][country=Kraj]
+\setuplabeltext[pl][phone=Telefon]
+\setuplabeltext[pl][mail=e-mail]
+\setuplabeltext[pl][notes=Notatki]
+\setuplabeltext[pl][todo=Do zrobienia]
+\setuplabeltext[pl][found={W przypadku znalezienia proszę o odesłanie na adres}]
+
+\setuplabeltext[pl][nyd={Nowy Rok}]
+\setuplabeltext[pl][epi={Trzech Króli}]
+\setuplabeltext[pl][ashw={Środa Popielcowa}]
+\setuplabeltext[pl][palms={Niedziela Palmowa} ]
+\setuplabeltext[pl][gfri={Wielki Piątek} ]
+\setuplabeltext[pl][esun={Niedziela Wielkanocna}]
+\setuplabeltext[pl][esmo={Pn. Wielkanocny}]
+\setuplabeltext[pl][ascd={Wniebowstąpienie}]
+\setuplabeltext[pl][pcst={Zesłanie Ducha Świętego}]
+\setuplabeltext[pl][pcstmo={}]
+\setuplabeltext[pl][xmas=Święta] %Święta Bożego Narodzenia .
+\setuplabeltext[pl][bxd={Drugi dzień świąt}]
+\setuplabeltext[pl][day=Dzień]
+\setuplabeltext[pl][mon=Pn.]
+\setuplabeltext[pl][tue=Wt.]
+\setuplabeltext[pl][wed=Śr.]
+\setuplabeltext[pl][thu=Czw.]
+\setuplabeltext[pl][fri=Pt.]
+\setuplabeltext[pl][sat=Sob.]
+\setuplabeltext[pl][sun=Ndz.] 
+
+\setuplabeltext[pl][january=Styczeń]
+\setuplabeltext[pl][february=Luty]
+\setuplabeltext[pl][march=Marzec]
+\setuplabeltext[pl][april=Kwiecień]
+\setuplabeltext[pl][may=Maj]
+\setuplabeltext[pl][june=Czerwiec]
+\setuplabeltext[pl][july=Lipiec]
+\setuplabeltext[pl][august=Sierpień]
+\setuplabeltext[pl][september=Wrzesień]
+\setuplabeltext[pl][october=Październik]
+\setuplabeltext[pl][november=Listopad]
+\setuplabeltext[pl][december=Grudzień]
+
+\setuplabeltext[pl][moondays=Dzień lunarny]
+\setuplabeltext[pl][moon=Księżyc]
+\setuplabeltext[pl][sunrise={Wschód słońca}]
+\setuplabeltext[pl][sunset={Zachód słońca}]
+\setuplabeltext[pl][lighthours=Długość dnia]
+\setuplabeltext[pl][sunstar=Słońce]
+
+%D \startsubject[title={PocketDiary layout}]
+%D
+%D This module uses different page templates, whereof one uses a symbol 
+%D out of the set 2 of the Martin Vogel collection. So we load these symbols:
+
+\usesymbols[mvs]
+\setupsymbolset[martinvogel 2]
+
+%D The placement of the page numbers is switched off for the moment.
+ 
+\setuppagenumbering[location=]
+
+%D Because we will place 8 pages on an A4 landscape, we define our own pagesize
+ 
+\definepapersize[Arrangingformat][width=7.42cm, height=10.5cm]
+\setuppapersize[Arrangingformat][A4,landscape]
+
+%D In the templates a light gray color for (grid)lines is used. Separator 
+%D lines can have 
+%D an  individual color too. We define the two colors with arbitrary values.
+%D These preset colors can be adjusted in the user file \type{PocketDiary.mkiv}.
+
+\definecolor[Grid][s=.75]
+\definecolor[Separatorline][blue]
+
+%D The page of the PocketDiary has a fairly simple layout. We use a 
+%D header- and a footer-space. 
+%D The header has a rule beneath and the footer one on top.
+%D
+%D The preset body-font is Pagella at 10pt
+%D
+%D We will also use tabular figures throughout the typesetting:
+%D \stopsubject
+
+\setuplayout
+  [topspace=.6cm,
+    backspace=.6cm,
+    header=3\bodyfontsize,
+    headerdistance=.5\bodyfontsize,
+    footer=1.2\bodyfontsize,
+    footerdistance=.5\bodyfontsize,
+    margin=0pt,
+    height=middle,
+    width=middle]
+
+\setupbackgrounds
+    [header]
+    [text]
+    [state=repeat,
+     frame=off,
+     bottomframe=on,
+     framecolor=\getvariable{PocketDiaryColors}{Separatorline}]
+		
+\setupbackgrounds
+    [footer]
+    [text]
+    [state=repeat,
+     frame=off,
+     topframe=on,
+     framecolor=\getvariable{PocketDiaryColors}{Separatorline}]
+
+\setupbodyfont[pagella,rm,10pt]
+\definefontfeature[f:tabular]  [tnum=yes]
+\definefontfeature[f:smallcaps][smcp=yes]
+
+\addfeature[f:tabular]
+
+%D \startsubject[title={\METAFUN\ drawings}]
+%D
+%D There are three templates which are made up in \METAPOST. The drawings are
+%D used as backgrounds to the typesetting area in the form of an overlay. So the
+%D drawings adapt themselves to the actual dimensions
+%D \stopsubject
+
+\startuniqueMPgraphic{Caro}
+  numeric w; w:= floor(OverlayWidth/4mm);
+  numeric h; h:= floor((OverlayHeight)/4mm);
+  path p,q;
+  p := unitsquare xscaled (4mm*w) yscaled (4mm*h);
+  q:= ulcorner p -- llcorner p;
+  for i = 0 upto w : 
+    draw q shifted (i*4mm,0) withpen pencircle scaled .5pt 
+      withcolor \MPcolor{Grid};
+  endfor;
+  q:= llcorner p -- lrcorner p;
+  for i = 0 upto h :
+    draw q  shifted (0,i*4mm) withpen pencircle scaled .5pt 
+      withcolor \MPcolor{Grid};
+  endfor;
+\stopuniqueMPgraphic
+
+\startuniqueMPgraphic{Lines}
+  numeric w; w:= OverlaytWidth;
+  numeric h; h:= floor(OverlayHeight/7mm);
+  path p,q;
+  p := unitsquare xscaled OverlayWidth yscaled (7mm*(h-1));
+  q:= llcorner p -- lrcorner p;
+  for i = 1 upto (h-1) :
+    draw q  shifted (0,i*7mm) withpen pencircle scaled .5pt
+       withcolor \MPcolor{Grid};
+  endfor; 
+\stopuniqueMPgraphic
+
+\startuniqueMPgraphic{Todo}
+  numeric w; w:= OverlayWidth;
+  numeric h; h:= floor(OverlayHeight/8mm);
+  path p,q;
+  p := unitsquare xscaled OverlayWidth yscaled OverlayHeight;
+  q:= llcorner p -- lrcorner p;
+  for i = 0 upto h :
+    draw q shifted (0,i*7mm)  withpen pencircle scaled .5pt 
+      withcolor \MPcolor{Grid};
+    label.top(textext("\tfd \symbol[HollowBox]"), point 0 of q 
+      shifted (2mm,i*7mm));
+  endfor; 
+\stopuniqueMPgraphic
+
+%D \startsubject[title={The moon phase}]
+%D 
+%D The moon phase calculation from SubsySTEMs, an American education institute,
+%D for this module is based on a simple calculation.
+%D The consequence is, that the results give a good idea only of the moon phase
+%D but this is most probably precise enough for the purpose of the diary.
+%D The return value of the moon phase calculation can be either a number,
+%D representing the day number in the lunar month, or a command to put a
+%D \METAFUN -graphic (New moon, growing moon, full moon, waning moon).
+%D These little graphics are stored in the file \type{moons-MP.mkiv}. 
+
+\input moons-MP.mkiv
+
+%D In this file 4 overlays are defined which are used in a dedicated
+%D \type{\framed[]{}} to typeset the pictograms.
+%D
+%M \input ./Moonphase/moons-MP.mkiv
+%M \defineoverlay[waningmoon][\useMPgraphic{Moon::Waning_moon}]
+%M \defineoverlay[growingmoon][\useMPgraphic{Moon::Growing_moon}]
+%M \defineoverlay[newmoon][\useMPgraphic{Moon::Newmoon}]
+%M \defineoverlay[fullmoon][\useMPgraphic{Moon::Fullmoon}]
+%M \defineframed
+%M   [Moon]
+%M   [height=1.5\bodyfontsize,
+%M    width=1.5\bodyfontsize,
+%M    frame=off]
+%D
+%D \starttabulate[|l|r|l|]
+%D  \NC \bf Moon phase
+%D      \NC \bf Lunar day
+%D      \NC \bf Macro
+%D      \NC \bf Pictogram \NC\NR   
+%D  \NC New moon 
+%D      \NC 0     
+%D      \NC \type{\Moon[background=newmoon]{}} 
+%D      \NC \Moon[background=newmoon]{} \NC\NR
+%D 	\NC Growing moon
+%D      \NC 7 
+%D      \NC \type{\Moon[background=growingmoon]{}}
+%D      \NC \Moon[background=growingmoon]{} \NC\NR
+%D 	\NC Full moon
+%D      \NC 15    
+%D      \NC \type{\Moon[background=fullmoon]{}}
+%D      \NC \Moon[background=fullmoon]{} \NC\NR
+%D 	\NC Waning moon 
+%D      \NC 22 
+%D      \NC \type{\Moon[background=waningmoon]{}}
+%D      \NC \Moon[background=waningmoon]{} \NC\NR
+%D \stoptabulate
+%D \stopsubject
+
+%D \startsubject[title=Sun pictograms]
+%D
+%D The calculations for the sun rise and sun set times is based on work of
+%D Alexander Yakushev. The results of his calculations nicely correspond with
+%D results obtained from the Open Weather Map website.
+%D
+%D For sunrise, sunset and light hours exist three \METAFUN\ drawings. 
+%D These are included in the directory \type{Solar} in the file
+%D \type{sun-MP.mkiv}. 
+
+\input sun-MP.mkiv
+
+%D In this file 3 overlays are defined which can then be used as a 
+%D background in a dedicated framed environment.
+%M \input ./solar/sun-MP.mkiv
+%M \defineoverlay[Sunrise][\useMPgraphic{Sun::Sunrise}]
+%M \defineoverlay[Sunset][\useMPgraphic{Sun::Sunset}]
+%M \defineoverlay[Light][\useMPgraphic{Sun::Light}]
+%M \defineframed
+%M 	[SunA]
+%M 	[strut=yes,
+%M 	 height=\lineheight,
+%M 	 width=\emwidth,
+%M   frame=off,
+%M   offset=0pt]
+%M
+%M \defineframed
+%M 	[SunB]
+%M 	[strut=yes,
+%M 	 height=\lineheight,
+%M 	 width=\emwidth,
+%M   frame=off,
+%M   offset=0pt,
+%M   location=depth]
+%D
+%D \starttabulate[|l|l|l|]
+%D  \NC \bf Sun
+%D      \NC \bf Macro
+%D      \NC \bf Pictogram \NC\NR
+%D  \NC Sunrise    
+%D      \NC \type{\SunA[background=Sunrise,height=8pt]{\strut}} 
+%D      \NC \SunA[background=Sunrise,height=8pt]{\strut} \NC\NR
+%D 	\NC Sunset     
+%D      \NC \type{\SunA[background=Sunset,height=8pt]{\strut}}
+%D      \NC \SunA[background=Sunset,height=8pt]{\strut} \NC\NR
+%D 	\NC Light hours 
+%D      \NC \type{\SunB[background=Light,height=8pt]{\strut}}
+%D      \NC \SunB[background=Light,height=8pt]{\strut} \NC\NR
+%D \stoptabulate
+%D \stopsubject
+
+%D \startsubject[title={The variable sets}]
+%D
+%D The module uses six sets of variables. The first set contains 
+%D the information on the
+%D calendars to be calculated.
+
+%D First of all it has to be stated, that the whole idea behind 
+%D this module is to prepare a personal organizer with as few 
+%D parameters as possible. After the initial setup of the variables
+%D it is sufficient to adapt the values in the first set and once 
+%D every year the information on the dates of the Day Light Saving 
+%D Time in the last set  must be adjusted.
+%D 
+%D \startsubsubject[title={Variable set \bf PocketDiary}]
+%D
+%D \starttabulate[|l|l|p|]
+%D   \NC \bf Variable \NC \bf Value  \NC \bf Comment \NC\NR
+%D   \NC WeekDay  \NC number \NC Values between 1 and 7. \NC\NR
+%D   \NC Week     \NC number \NC Values between 1 and 53 \NC\NR
+%D   \NC Month    \NC number \NC Values between 1 and 12 \NC\NR
+%D   \NC Year     \NC number \NC Year numbers in the range 1900 and 4099. 
+%D       The lower limit is computer dependent (OS-timestamp), the upper limit
+%D       is depending on the Easter Sunday calculation.\crlf 
+%D       (http://www.assa.org.au/edm.html, R.W. Mallen, 1985).\NC\NR
+%D   \NC Nextyear \NC yes/no \NC The testing is done on \quote{yes}. If set 
+%D       to \quote{yes} the next year instead of the current year is used for
+%D       the calculation of the year calendar. \NC\NR
+%D   \NC Daybyday \NC yes/no \NC The testing is done on \quote{yes}. If this
+%D       variable is set to \quote{yes} then a diary is typeset with 1 page per
+%D       day and the weekend is typeset with Saturday and Sunday on one page.
+%D       This uses 6 pages and we can freely choose what should be typeset on
+%D       the pages 7 and 8. \NC\NR
+%D \stoptabulate
+%D \stopsubsubject
+
+\setvariables
+  [PocketDiary]
+  [WeekDay=1,
+   Week=17,
+   Month=5,
+   Year=2011,
+   Nextyear=no,
+   Daybyday=no]
+
+%D \startsubsubject[title={Variable set \bf PocketDiaryLayout}]
+%D
+%D The PocketDiary can be given a layout according to your own ideas.
+%D There are 8 variables (Page1 up to Page 
+%D 8) which can be given different values.
+%D 
+%D \starttabulate[|l|p|]
+%D   \NC \bf Variable     \NC \bf Comment \NC\NR
+%D   \NC Dayplan      \NC The weekday indicated in the variable \quote{WeekDay} 
+%D       in the previous section is used to make a PocketDiary page. \NC\NR
+%D  \NC Weekendplan \NC The weekend of the chosen week (variable \quote{Week}) 
+%D      is typeset on a single page \NC\NR
+%D   \NC Weekcurrentplan     \NC A week calendar based on the variable
+%D       \quote{Week}
+%D       in the previous section is used for the presentation of a week table.
+%D  \NC\NR
+%D  \NC Weeknextplan     \NC A week calendar based on the variable \quote{Week}
+%D      $+$ 1 in the previous section is used for the presentation of the nexts 
+%D      week's table. \NC\NR
+%D   \NC Monthcurrentplan \NC A month table based on the value in the variable
+%D      \quote{Month} in the previous section is typeset. \NC\NR
+%D   \NC Monthnextplan    \NC   A month table of the next month based on the
+%D       value 
+%D       in the variable \quote{Month} of the previous section is typeset.
+%D       \NC\NR
+%D   \NC Yearcurrentplan \NC A complete year calendar of the year given in the
+%D       variable \quote{Year} in the previous section is typeset. \NC\NR
+%D   \NC Yearnextplan    \NC If the \quote{Nextyear} 
+%D       variable in the previous section is \quote{yes}, then a complete year
+%D       calendar for the next year indicated in the
+%D       variable \quote{Year} of the previous section is typeset. \NC\NR
+%D   \NC Lost-Returnto  \NC A page with the indicated information in the
+%D       PocketDiaryAddress variable set is used to  compose and typeset
+%D       a lost and return page (see next section). \NC\NR
+%D   \NC Blank        \NC This page carries a header and a footer but is 
+%D       empty for the rest. \NC\NR
+%D   \NC Todo         \NC A todo-list template is typeset. \NC\NR
+%D   \NC Caro         \NC A page with full-grid-paper is typeset. \NC\NR
+%D   \NC Lines        \NC A page with grid lines is typeset. \NC\NR
+%D   \NC Contact      \NC A form with two sets of preprinted fields 
+%D       for marking down contact information is typeset. \NC\NR
+%D \stoptabulate
+%D 
+%D A basic setup could look as follows:
+
+\setvariables
+  [PocketDiaryLayout]
+  [Page1=Lost-Returnto,  
+   Page2=Weekplan,
+   Page3=Dayplan,
+   Page4=Monthcurrentplan,
+   Page5=Blank,
+   Page6=Lines,
+   Page7=Caro,
+   Page8=Contact]
+
+%D \stopsubsubject
+%D
+%D \startsubsubject[title={Variable set \bf PocketDiaryAddress}]
+%D
+%D The third section of variables contains information used for the footer 
+%D and the lost-return form.
+%D \stopsubsubject
+  
+\setvariables
+  [PocketDiaryAddress]
+  [Familyname=Egger,
+   Forename=Willi,
+   Street={Townstreet 3B},
+   Zipcode=5000,
+   City={New Beach},
+   Country=TEX-world,
+   Phone={+22 444 55 88 66},
+   Mobile={+22 6 19 19 1717},
+   E-mail={info at pocketdiary.org},
+   Web=www.pocketdiary.org]
+
+%D \startsubsubject[title={Variable set \bf PocketDiaryColors}]
+%D
+%D The PocketDiary uses some color. The header and footer separator lines can
+%D be given a color.  Standard color is blue. 
+%D 
+%D For those who want gridlines other than light gray can set a 
+%D color for the gridlines too.
+%D \stopsubsubject
+
+\setvariables
+  [PocketDiaryColors]
+  [Separatorline=blue,
+   Gridline={s=.55}]
+
+%D \startsubsubject[title={Variable set \bf PocketDiaryFooter}]
+%D
+%D The footer is filled with three fields. These fields may contain the contents
+%D of variables or \TEX\ commands. The setup of the footer is done with a buffer
+%D in order to be able to call it later on. 
+%D \stopsubsubject
+%D \stopsubject
+%D
+%D \startsubject[title={Footer setup}]
+%D \stopsubject
+
+\setvariables
+  [PocketDiaryFooter]
+  [Lefttext=PocketDiary,
+   Centertext=\pagenumber,
+   Righttext={\getvariable{PocketDiaryAddress}{Forename},~\currentdate[year]}] %{\currentdate[year]}
+
+\startbuffer[Footertext]
+  \setupfootertexts[%
+    \tfx
+    \getvariable{PocketDiaryFooter}{Lefttext}
+    \hfill
+    \getvariable{PocketDiaryFooter}{Centertext}
+    \hfill
+    \getvariable{PocketDiaryFooter}{Righttext}]
+\stopbuffer
+
+\getbuffer[Footertext]
+
+%D \startsubject[title={Variable set \bf PocketDiaryGeoPosition}]
+%D
+%D For the sun data calculations you need to know the latitude and longitude of
+%D your location.
+%D 
+%D For correct calculations you need also to pass the timezone offset to Lua.
+%D 
+%D The dates for the begin and end of the day light saving time (DST) 
+%D are calculated based on the continent information. Possible values are
+%D \quote{EU} and \quote{US}. If the field is empty, then no DST is calculated.
+%D
+%D For the US (except for Arizona and Hawaii) currently the DST starts on the
+%D second Sunday of March and ends on the first Sunday of November.
+%D 
+%D for Europe currently the DST starts on the last Sunday of March and ends on
+%D the last Sunday of October.
+%D
+%D Sun data are typeset on the \quote{Dayplan} and \quote{Weekendplan} as well
+%D as on Tuesdays in the week-calendar. 
+%D \stopsubject
+
+\setvariables %Koziegłowy
+  [PocketDiaryGeoPosition]
+  [lat=52.467860,
+   lon=16.981240,
+   timeoffset=1,
+   continent=EU]
+
+%D \startsubject[title={The various calendar pages}]
+%D
+%D Most of the activities for creating the contents and layout of the 
+%D different pages like day, weekend, week, month and year calendars 
+%D is delegated to Lua. Those pages are made-up as 
+%D \CONTEXT -Lua-documents (cld).
+%D We preload the Lua -file with
+
+\ctxloadluafile{t-pocketdiary}{}
+
+%D \startsubsubject[title={Day plan}]
+%D
+%D \startplacefigure
+%D   [location={middle,here},
+%D    reference=fig:Singleday,
+%D    title={Example Day-calendar}]
+%D  {\externalfigure[docu-figures][page=1,width=.4\textwidth,frame=on]}
+%D \stopplacefigure
+%D
+%D The day calendar looks as in \in{figure}[fig:Singleday].
+%D
+%D Next to the day number of the selected month the day name is given. If the
+%D day is a christian feast day, its name is following after the day name.
+%D To the right the week number and the year is typeset.
+%D
+%D The configuration of the page looks as follows:
+
+\startsetups table:topinfo
+  \setupTABLE[each][each][frame=off]
+  \setupTABLE[r][1][offset=0pt,loffset=1pt,roffset=1pt,align=lohi]  % Date row
+  \setupTABLE[r][2][height=1.3\bodyfontsize,frame=off,offset=0pt] % Astronomy row
+  \setupTABLE[c][1][style=bold,width=0.25\textwidth] % Day 
+  \setupTABLE[c][2][width=0.35\textwidth,align=lohi] % Feastname column
+  \setupTABLE[c][3][width=0.4\textwidth,
+	                  align={flushright,lohi}] % Month / year column
+\stopsetups
+
+\startsetups table:topweekplan
+  \setupTABLE[each][each][frame=off]
+  \setupTABLE[r][1][offset=0pt,loffset=3pt,roffset=3pt,align=lohi]  % Date row 
+  \setupTABLE[c][1][style=bold,width=0.5\textwidth,align=lohi] % Name
+  \setupTABLE[c][2][style={\switchtobodyfont[6pt]},width=0.5\textwidth,
+	                  align={flushright,lohi}] % Week, year
+\stopsetups
+
+%D For the creation of the page a command with 8 parameters is defined:
+
+\define[8]\Dayplan{\ctxlua{thirddata.diary.dayplan(#1,#2,#3,#4,#5,#6,#7,#8)}}
+
+%D The Dayplan-command with the collected parameters is placed in a buffer. This buffer is later called from the user-file  \type{PocketDiary.mkiv} .
+ 
+\startbuffer[Dayplan]
+  \Dayplan %Weekday,Week,Month,Year,lat,lon,timeoffset,continent
+     {\getvariable{PocketDiary}{WeekDay}}
+     {\getvariable{PocketDiary}{Week}}
+     {\getvariable{PocketDiary}{Month}}
+     {\getvariable{PocketDiary}{Year}}
+     {\getvariable{PocketDiaryGeoPosition}{lat}}
+     {\getvariable{PocketDiaryGeoPosition}{lon}}
+     {\getvariable{PocketDiaryGeoPosition}{timeoffset}}
+     {"\getvariable{PocketDiaryGeoPosition}{continent}"}
+\stopbuffer
+
+%D \stopsubsubject
+
+%D \startsubsubject[title={Weekend}]
+%D
+%D The weekend calendar shows Saturday and Sunday on one page 
+%D (see \in{figure}[fig:Weekend]).
+%D 
+%D The typeset data are identical to those of the \quote{Dayplan}
+%D
+%D \startplacefigure
+%D   [location={middle,here},
+%D    reference=fig:Weekend,
+%D    title={Example Weekend-calendar}]
+%D   {\externalfigure[docu-figures][page=2,width=.4\textwidth,frame=on]}
+%D \stopplacefigure
+
+%D Comparable to the Dayplan the Weekendplan command is defined with 8 parameters.
+
+\define[8]\Weekendplan{\ctxlua{thirddata.diary.weekendplan(#1,#2,#3,#4,#5,#6,#7,#8)}}
+
+%D Again this command with the collected information of the 8 parameters is placed in a buffer which is called then from the user-file \type{PocketDiary.mkiv} .
+
+\startbuffer[Weekendplan]
+  \Weekendplan %Weekday,Week,Month,Year,lat,lon,timeoffset,continent
+    {6}
+    {\getvariable{PocketDiary}{Week}}
+    {\getvariable{PocketDiary}{Month}}
+    {\getvariable{PocketDiary}{Year}}
+    {\getvariable{PocketDiaryGeoPosition}{lat}}
+    {\getvariable{PocketDiaryGeoPosition}{lon}}
+    {\getvariable{PocketDiaryGeoPosition}{timeoffset}}
+    {"\getvariable{PocketDiaryGeoPosition}{continent}"}
+\stopbuffer
+
+%D \stopsubsubject
+
+%D \startsubsubject[title={Week plan and next week plan}]
+%D
+%D The week calendar is a one-column table for working days. 
+%D Saturday and Sunday are placed next to each other in the last table row. An
+%D example is given
+%D in \in{figure}[fig:Week].
+%D 
+%D In the \quote{Weekplan} header appears \quote{Weeek agenda} or its
+%D correspondent name in the supported languages. To the right the month's
+%D number, weeknumber and year are typeset.
+
+%D \startplacefigure
+%D   [location={middle,here},
+%D    reference=fig:Week,
+%D    title={Example Week-calendar}]
+%D   {\externalfigure[docu-figures][page=3,width=.4\textwidth,frame=on]}
+%D \stopplacefigure
+%D By means of a setups-sequence the table is defined as follows:
+
+\startsetups table:week
+  \setupTABLE[r][each][height=.158\textheight,align=flushleft] %.165
+  \setupTABLE[r][even][background=color,backgroundcolor=.5s]
+  \setupTABLE[c][1][width=.5\textwidth]
+  \setupTABLE[c][2][width=.5\textwidth]
+\stopsetups
+
+%D Again the Weekcurrentplan-command is defined with 8 parameters
+
+\define[8]\Weekcurrentplan{\ctxlua{thirddata.diary.weekplan(#1,#2,#3,#4,#5,#6,#7,#8)}}
+
+%D And the command together with the gathered parameters is stored in a buffer, which will be used by the user-file \type{PocketDiary.mkiv} .
+
+\startbuffer[Weekcurrentplan]
+  \Weekcurrentplan %Weekday,Week,Month,Year,lat,lon,timeoffset,continent
+     {1}
+     {\getvariable{PocketDiary}{Week}}
+     {\getvariable{PocketDiary}{Month}}
+     {\getvariable{PocketDiary}{Year}}
+     {\getvariable{PocketDiaryGeoPosition}{lat}}
+     {\getvariable{PocketDiaryGeoPosition}{lon}}
+     {\getvariable{PocketDiaryGeoPosition}{timeoffset}}
+     {"\getvariable{PocketDiaryGeoPosition}{continent}"}
+  \page[yes]
+\stopbuffer
+
+%D Similar to the week plan the next week plan is built.
+ 
+\define[8]\Weeknextplan{\ctxlua{thirddata.diary.weekplan(#1,#2,#3,#4,#5,#6,#7,#8)}}
+
+\startbuffer[Weeknextplan]
+  \Weeknextplan %Weekday,Week,Month,Year,lat,lon,timeoffset,dst_start,dst_stop
+    {1}
+    {\directlua{tex.print{\getvariable{PocketDiary}{Week}+1}}}
+    {\getvariable{PocketDiary}{Month}}
+    {\getvariable{PocketDiary}{Year}}
+    {\getvariable{PocketDiaryGeoPosition}{lat}}
+    {\getvariable{PocketDiaryGeoPosition}{lon}}
+    {\getvariable{PocketDiaryGeoPosition}{timeoffset}}
+    {"\getvariable{PocketDiaryGeoPosition}{continent}"}
+  \page[yes]
+\stopbuffer
+
+%D \stopsubsubject
+
+%D \startsubsubject[title={Month current and month next}]
+%D
+%D The month calendar looks as in \in{figure}[fig:Month].
+%D
+%D Left in the header appears the month name in the chosen language. To the
+%D right the year is typeset.
+%D 
+%D \startplacefigure
+%D   [location={middle,here},
+%D    reference=fig:Month,
+%D    title={Example Month-calendar}]
+%D  {\externalfigure[docu-figures][page=4,width=.4\textwidth,frame=on]}
+%D \stopplacefigure
+%D In the same fashion as the previous items also the month and 
+%D next month calendars are defined respectively setup:
+
+\startsetups table:month
+  \setupTABLE[column][each][width=.143\textwidth,align=flushright,offset=3pt]
+  \setupTABLE[column][7][style=\red]
+\stopsetups
+
+%D For the Month-calendars we need only two parameters: month and year.
+
+\define[2]\Monthcurrentplan{\ctxlua{thirddata.diary.monthcurrentplan(#1,#2)}}
+
+%D The command is kept together with the gathered parameters in a buffer again.
+%D This will be called from the user-file \type{PocketDiary.mkiv} .
+
+\startbuffer[Monthcurrentplan]
+  \Monthcurrentplan
+    {\getvariable{PocketDiary}{Month}}
+    {\getvariable{PocketDiary}{Year}}
+\stopbuffer
+
+\define[2]\Monthnextplan{\ctxlua{thirddata.diary.monthnextplan(#1,#2)}}
+
+\startbuffer[Monthnextplan]
+  \Monthnextplan
+    {\getvariable{PocketDiary}{Month}}
+    {\getvariable{PocketDiary}{Year}}
+\stopbuffer
+
+%D \stopsubsubject
+
+
+%D \startsubsubject[title={Year current and year next}]
+%D
+%D The year calendar looks as in \in{figure}[fig:Year].
+%D
+%D In the header the year only is typeset.
+%D 
+%D \startplacefigure
+%D   [location=middle,
+%D    reference=fig:Year,
+%D    title={Example Year-calendar}]
+%D  {\externalfigure[docu-figures][page=5,width=.4\textwidth,frame=on]}
+%D \stopplacefigure
+%D The year table(s) are prepared as the week tables with a table-setup
+%D sequence, a custom command which resides with the parameters assigned in a
+%D buffer, which will again be called from the user-file \type{PocketDiary.mkiv} 
+
+\startsetups table:year
+  \setupTABLE[column]
+             [each]
+             [width=.032\textwidth,align=flushright,offset=1pt,frame=off]
+  \setupTABLE[column][1][width=.052\textwidth,align=flushleft]
+  \setupTABLE[row][each][offset=1pt,height=1.5\bodyfontsize]
+\stopsetups
+
+\define[2]\Yearcurrentplan{\ctxlua{thirddata.diary.yearplan(#1,#2)}}
+\define[2]\Yearnextplan{\ctxlua{thirddata.diary.yearplan(#1,#2)}}
+
+\startbuffer[Yearcurrentplan]
+  \Yearcurrentplan
+    {\getvariable{PocketDiary}{Year}}
+    {"no"}
+\stopbuffer
+
+\startbuffer[Yearnextplan]
+  \Yearnextplan
+    {\getvariable{PocketDiary}{Year}}
+    {"\getvariable{PocketDiary}{Nextyear}"}
+\stopbuffer
+
+%D \stopsubsubject
+
+%D \startsubsubject[title= {One week\dots}]
+%D
+%D As mentioned before, the result will be 5 pages with one working day per
+%D page and the weekend on one page i.e. 6 pages. For the pages 7 and 8 the
+%D values defined in the \quote{PocketDiaryLayout} variable set is used.
+%D As for the Dayplan we need a command carrying 8 parameters:
+
+\define[8]\Daybyday{\ctxlua{thirddata.diary.daybydayplan(#1,#2,#3,#4,#5,#6,#7,#8)}}
+
+%D A buffer contains the command just defined with the gathered information for the parameters. The buffer then is called from the user-file \type{PocketDiary.mkiv} .
+
+\startbuffer[Daybyday]
+  \Daybyday
+    {1} %Weekday
+    {\getvariable{PocketDiary}{Week}}
+    {\getvariable{PocketDiary}{Month}}
+    {\getvariable{PocketDiary}{Year}}
+    {\getvariable{PocketDiaryGeoPosition}{lat}}
+    {\getvariable{PocketDiaryGeoPosition}{lon}}
+    {\getvariable{PocketDiaryGeoPosition}{timeoffset}}
+    {"\getvariable{PocketDiaryGeoPosition}{continent}"}
+\stopbuffer
+
+%D \stopsubsubject
+
+%D \startsubsubject[title={Templates}]
+%D
+%D The PocketDiary comes with a couple of templates for writing down
+%D information:
+
+%D For the pages with (grid)lines we use an overlay in the background of 
+%D the text area which will contain the \METAPOST -graphic.
+%D 
+%D \startplacefigure
+%D    [location={middle,here},
+%D     title={The set of available templates}]
+%D    {\startcombination[3*2]
+%D    {\externalfigure
+%D        [docu-figures]
+%D        [page=6,width=.25\textwidth,frame=on]}{The blank page}
+%D    {\externalfigure
+%D        [docu-figures]
+%D        [page=7,width=.25\textwidth,frame=on]}{Caro paper}
+%D    {\externalfigure
+%D        [docu-figures]
+%D        [page=8,width=.25\textwidth,frame=on]}{Lines}
+%D    {\externalfigure
+%D        [docu-figures]
+%D        [page=9,width=.25\textwidth,frame=on]}{Todo}
+%D    {\externalfigure
+%D        [docu-figures]
+%D        [page=10,width=.25\textwidth,frame=on]}{Contact information}
+%D    {\externalfigure
+%D 				[docu-figures]
+%D        [page=11,width=.25\textwidth,frame=on]}{Lost-return-to information}
+%D    \stopcombination}
+%D \stopplacefigure
+%D \stopsubsubject
+%D The setups for the Contacts page look as follows:
+
+\startsetups table:contacts
+  \setupTABLE[r][each][frame=off,bottomframe=on,height=2\lineheight]
+  \setupTABLE[c][1][width=.3\textwidth]
+  \setupTABLE[c][2][width=.5\textwidth]
+  \setupTABLE[c][3][width=.2\textwidth]
+\stopsetups 
+
+%D The setups for the Lost-Returnto page is setup in the following way:
+
+\startsetups table:returnto
+  \setupTABLE[r][each][frame=off]
+  \setupTABLE[c][each][width=\textwidth]
+\stopsetups
+
+%D Another setups covers the reset of the used Background
+
+\startsetups Background:stop
+  \defineoverlay
+    [Textarea]
+    [\resetMPdrawing]
+  \setupbackgrounds[text][text][background=]  
+\stopsetups
+
+%D All templates for these pages are contained in buffers in order to call them from the user-file \type{PocketDiary.mkiv} 
+
+\startbuffer[Contact]
+  \setupheadertexts[{\bf \labeltext{contact}\hfill}] 
+  \switchtobodyfont[6pt]
+  \dorecurse{2}{\bTABLE[setups=table:contacts]
+    \bTR
+      \bTD \labeltext{name}: \eTD
+      \bTD \eTD
+      \bTD \eTD
+    \eTR
+    \bTR
+      \bTD \labeltext{address}:\eTD
+      \bTD \eTD
+      \bTD \eTD
+    \eTR
+    \bTR
+      \bTD \strut\eTD
+      \bTD \eTD
+      \bTD \eTD
+    \eTR
+    \bTR
+      \bTD \labeltext{zip}:\eTD
+      \bTD \labeltext{place}:\eTD
+      \bTD \labeltext{country}:\eTD
+    \eTR
+    \bTR
+      \bTD \labeltext{phone}:\eTD
+      \bTD \eTD
+      \bTD \eTD
+    \eTR
+    \bTR
+      \bTD \labeltext{mail}:\eTD
+      \bTD \eTD
+      \bTD \eTD
+    \eTR
+  \eTABLE
+  \blank}
+  \page[yes]
+\stopbuffer
+
+\startbuffer[Caro]
+  \setupheadertexts[{\bf \labeltext{notes}\hfill}]
+  \defineoverlay
+    [Textarea]
+    [\useMPgraphic{Caro}]
+  \setupbackgrounds[text][background=Textarea]
+  \strut
+  \page[yes]
+  \setups{Background:stop}
+\stopbuffer
+
+\startbuffer[Lines]
+  \setupheadertexts[{\bf \labeltext{notes}\hfill}]
+  \defineoverlay
+    [Textarea]
+    [\useMPgraphic{Lines}]
+  \setupbackgrounds[text][text][background=Textarea]
+  \strut
+  \page[yes]
+  \setups{Background:stop}
+\stopbuffer
+
+\startbuffer[Todo]
+  \defineoverlay
+    [Textarea]
+    [\useMPgraphic{Todo}]
+  \setupbackgrounds[text][text][background=Textarea]
+  \setupheadertexts[\bf \labeltext{todo}\hfill]
+  \strut
+  \page[yes]
+  \setups{Background:stop}
+\stopbuffer
+
+\startbuffer[Blank]
+  \setupheadertexts[{\bf \labeltext{notes}\hfill}]
+  \strut
+	\page[yes]
+\stopbuffer
+
+\startbuffer[Lost-Returnto]
+  \strut
+  \setupheadertexts[{\bf \labeltext{calendar}}]
+  \setupfooter[state=empty]
+  \setupbackgrounds[footer][text][topframe=off]
+  \setups{Background:stop}
+  \strut
+  \blank[2*line]
+  \framed[width=\textwidth,
+          frame=off,
+          bottomframe=on,
+          align=flushleft,
+          rulethickness=1pt,
+          foregroundcolor=\getvariable{PocketDiaryColors}{Separatorline},
+          framecolor=\getvariable{PocketDiaryColors}{Separatorline}]
+          {\labeltext{found}}
+  \bTABLE[setups=table:returnto]
+    \bTR
+      \bTD \getvariable{PocketDiaryAddress}{Forename}~
+           \getvariable{PocketDiaryAddress}{Familyname} \eTD
+    \eTR
+    \bTR
+      \bTD \getvariable{PocketDiaryAddress}{Street} \eTD
+    \eTR
+    \bTR
+      \bTD \getvariable{PocketDiaryAddress}{Zipcode}
+           {\addff{f:smallcaps}\getvariable{PocketDiaryAddress}{City}}\eTD
+    \eTR
+    \bTR
+      \bTD Tel: \getvariable{PocketDiaryAddress}{Phone}\eTD
+    \eTR    
+    \bTR    
+      \bTD Mob: \getvariable{PocketDiaryAddress}{Mobile}\eTD
+    \eTR    
+    \bTR    
+      \bTD E-mail: \getvariable{PocketDiaryAddress}{E-mail} \eTD
+    \eTR    
+    \bTR    
+      \bTD Web: \getvariable{PocketDiaryAddress}{Web} \eTD
+    \eTR
+  \eTABLE
+  \page[yes]
+  \getbuffer[Footertext]
+  \setupbackgrounds[footer][text][topframe=on]
+\stopbuffer
+
+%D \stopsubject
+%D
+%D \startsubject[title={The setup of the PocketDiary}]
+%D
+%D When filling the 8 pages we can do two things. Either we let \CONTEXT\
+%D typeset the pages as we choose them in the section \quote{PocketDiaryLayout}
+%D or we set the variable \quote{Daybyday} in the variable set
+%D \quote{PocketDiary} to \quote{yes}. This leads to the typesetting of 5 pages
+%D with each a working day and the weekend on one page. The remaining two pages
+%D are typeset according to the values given in \quote{PocketDiaryLayout.} 
+
+\startbuffer[Pocketdiary]
+  \definecolor[Grid][\getvariable{PocketDiaryColors}{Gridline}]
+  \definecolor[Separatorline][\getvariable{PocketDiaryColors}{Separatorline}]
+
+  \doifelse{\getvariable{PocketDiary}{Daybyday}}{yes}
+    {\Daybyday %creates 6 pages
+       {1}
+       {\getvariable{PocketDiary}{Week}}
+       {\getvariable{PocketDiary}{Month}}
+       {\getvariable{PocketDiary}{Year}}
+       {\getvariable{PocketDiaryGeoPosition}{lat}}
+       {\getvariable{PocketDiaryGeoPosition}{lon}}
+       {\getvariable{PocketDiaryGeoPosition}{timeoffset}}
+       {"\getvariable{PocketDiaryGeoPosition}{continent}"}
+     \getbuffer[\getvariable{PocketDiaryLayout}{Page7}]
+     \getbuffer[\getvariable{PocketDiaryLayout}{Page8}]
+    }
+    {\getbuffer[\getvariable{PocketDiaryLayout}{Page1}]
+     \getbuffer[\getvariable{PocketDiaryLayout}{Page2}]
+     \getbuffer[\getvariable{PocketDiaryLayout}{Page3}]
+     \getbuffer[\getvariable{PocketDiaryLayout}{Page4}]
+     \getbuffer[\getvariable{PocketDiaryLayout}{Page5}]
+     \getbuffer[\getvariable{PocketDiaryLayout}{Page6}]
+     \getbuffer[\getvariable{PocketDiaryLayout}{Page7}]
+     \getbuffer[\getvariable{PocketDiaryLayout}{Page8}]
+    }
+\stopbuffer
+
+%D \stopsubject
+
+%D \startsubject[title={Arranging the pages}]
+%D
+%D For the arrangement of the 8 pages on the paper we need a
+%D special arranging scheme, which is included in the distribution. 
+%D Invoking the scheme is performed with
+%D
+%D \type{\setuparranging[1*8]}
+%D
+%D The arrangement of the 8 pages is not switched on in this file. For the
+%D purpose of experimenting it is better to keep this command in the user file
+%D \type{\type{PocketDiary.mkiv} }
+%D
+%D \stopsubject
+
+%D \startsubject[title={How to fold the PocketDiary}]
+%D 
+%D The eight printed pages are folded in such a way, that the PocketDiary
+%D presents itself as a small booklet. 
+%D There are no empty pages visible.
+%D 
+%D \startplacefigure
+%D   [location=middle,
+%D    reference=fig:schemeA,
+%D    title={The basic folding scheme}]
+%D   {\externalfigure[docu-figures][page=12,width=.6\textwidth]}
+%D \stopplacefigure
+%D   
+%D First make two mountain-folds as indicated with the straight lines in 
+%D \in{figure}[fig:schemeA].
+%D Unfold the paper and turn it face up and \unit{90 Degrees} to the left. 
+%D Make a valley-fold with the lower part 
+%D of the sheet on the previously made mountain-fold. Unfold and turn the
+%D sheet \unit{180 Degrees}. 
+%D Make another valley-fold as described before. Unfold the sheet.
+%D 
+%D Take a sharp knife and a ruler. Slit the paper open between Cuttingpoint A
+%D and B (see \in{figure}[fig:schemeA]).
+%D 
+%D Now we can fold the booklet. First fold the paper again in the length. Then
+%D hold the double folded paper 
+%D with the mountain-fold up. Push from both sides towards the center in order
+%D to get a form similar 
+%D to \in{figure}[fig:schemeB]. Fold then the upper double-page in direction B,
+%D the lower double-page 
+%D in direction C and finally the lefthand double-sided page in direction D.
+%D 
+%D \startplacefigure
+%D   [location=middle,
+%D    reference=fig:schemeB,
+%D    title={The basic folding scheme}]
+%D   {\externalfigure[docu-figures][page=13,width=.6\textwidth]}
+%D \stopplacefigure
+%D 
+%D Before creasing the booklet at the spine it is worthwhile to put the section
+%D on table and adjust 
+%D folds where needed. Finally the spine is creased with preference with a
+%D bone-folder. 
+%D \stopsubject
+
+\stopmodule

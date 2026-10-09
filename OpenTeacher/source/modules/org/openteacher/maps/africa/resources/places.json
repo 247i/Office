@@ -1,0 +1,102 @@
+[
+	{
+		"x": 231,
+		"y": 12,
+		"names": ["Alger", "Algiers"]
+	},
+	{
+		"x": 142,
+		"y": 40,
+		"names": ["Rabat"]
+	},
+	{
+		"x": 325,
+		"y": 53,
+		"names": ["Tripoli"]
+	},
+	{
+		"x": 479,
+		"y": 68,
+		"names": ["Alexandria"]
+	},
+	{
+		"x": 490,
+		"y": 85,
+		"names": ["Cairo"]
+	},
+	{
+		"x": 371,
+		"y": 766,
+		"names": ["Cape Town"]
+	},
+	{
+		"x": 458,
+		"y": 687,
+		"names": ["Johannesburg"]
+	},
+	{
+		"x": 234,
+		"y": 334,
+		"names": ["Lagos"]
+	},
+	{
+		"x": 347,
+		"y": 452,
+		"names": ["Kinshasa"]
+	},
+	{
+		"x": 498,
+		"y": 240,
+		"names": ["Khartoum"]
+	},
+	{
+		"x": 158,
+		"y": 345,
+		"names": ["Abidjan"]
+	},
+	{
+		"x": 129,
+		"y": 48,
+		"names": ["Casablanca"]
+	},
+	{
+		"x": 481,
+		"y": 728,
+		"names": ["Durban"]
+	},
+	{
+		"x": 549,
+		"y": 412,
+		"names": ["Nairobi"]
+	},
+	{
+		"x": 277,
+		"y": 280,
+		"names": ["Kano"]
+	},
+	{
+		"x": 242,
+		"y": 321,
+		"names": ["Ibadan"]
+	},
+	{
+		"x": 569,
+		"y": 477,
+		"names": ["Dar es Salaam"]
+	},
+	{
+		"x": 566,
+		"y": 311,
+		"names": ["Addis Ababa"]
+	},
+	{
+		"x": 326,
+		"y": 500,
+		"names": ["Luanda"]
+	},
+	{
+		"x": 39,
+		"y": 244,
+		"names": ["Dakar"]
+	}
+]

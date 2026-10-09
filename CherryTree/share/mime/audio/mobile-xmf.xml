@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="audio/mobile-xmf">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Mobile XMF audio</comment>
+  <comment xml:lang="zh-Hant-TW">行動 XMF 音訊</comment>
+  <comment xml:lang="uk">звукові дані Mobile XMF</comment>
+  <comment xml:lang="tr">Mobile XMF sesi</comment>
+  <comment xml:lang="sv">Mobile XMF-ljud</comment>
+  <comment xml:lang="sr-Cyrl">Мобилни XMF звук</comment>
+  <comment xml:lang="sq">Audio Mobile XMF</comment>
+  <comment xml:lang="sl">Zvok Mobile XMF</comment>
+  <comment xml:lang="si">ජංගම XMF ශ්රව්ය</comment>
+  <comment xml:lang="ru">Аудио Mobile XMF</comment>
+  <comment xml:lang="ro">audio XMF Mobile</comment>
+  <comment xml:lang="pt-BR">Áudio Mobile XMF</comment>
+  <comment xml:lang="pl">Plik dźwiękowy Mobile XMF</comment>
+  <comment xml:lang="oc">àudio Mobile XMF</comment>
+  <comment xml:lang="nn">Mobile XMF-lyd</comment>
+  <comment xml:lang="nl">Mobile XMF-audio</comment>
+  <comment xml:lang="ko">모바일 XMF 오디오</comment>
+  <comment xml:lang="kk-Cyrl">Mobile XMF аудиосы</comment>
+  <comment xml:lang="ja">Mobile XMF オーディオ</comment>
+  <comment xml:lang="it">Audio XMF mobile</comment>
+  <comment xml:lang="id">Audio XMF seluler</comment>
+  <comment xml:lang="hr">Mobilni XMF zvuk</comment>
+  <comment xml:lang="hi">Mobile XMF ऑडियो</comment>
+  <comment xml:lang="he">שמע Mobile XMF</comment>
+  <comment xml:lang="fur">Audio XMF mobil</comment>
+  <comment xml:lang="fr">Audio Mobile XMF</comment>
+  <comment xml:lang="fi">Mobile XMF audio</comment>
+  <comment xml:lang="eu">Mobile XMF audioa</comment>
+  <comment xml:lang="et">Mobile XMF helifail</comment>
+  <comment xml:lang="es">audio Mobile XMF</comment>
+  <comment xml:lang="en-GB">Mobile XMF audio</comment>
+  <comment xml:lang="de">Mobile-XMF-Audio</comment>
+  <comment xml:lang="ca">àudio Mobile XMF</comment>
+  <comment xml:lang="bg">Аудио — Mobile XMF</comment>
+  <comment xml:lang="be-Cyrl">аўдыя MXMF</comment>
+  <comment xml:lang="ar">صوت Mobile XMF</comment>
+  <acronym>XMF</acronym>
+  <expanded-acronym>eXtensible Music Format</expanded-acronym>
+  <glob pattern="*.mxmf"/>
+  <alias type="audio/vnd.nokia.mobile-xmf"/>
+</mime-type>

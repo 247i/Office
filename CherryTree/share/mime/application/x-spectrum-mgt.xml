@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-spectrum-mgt">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>ZX Spectrum/SAM Coupé MGT floppy disk image</comment>
+  <comment xml:lang="uk">образ дискети ZX Spectrum/SAM Coupé MGT</comment>
+  <comment xml:lang="tr">ZX Spectrum/SAM Coupé MGT disket kalıbı</comment>
+  <comment xml:lang="sv">ZX Spectrum/SAM Coupé MGT-diskettavbild</comment>
+  <comment xml:lang="sr-Cyrl">Одраз дискете за Зет-Икс Спектрум / СЕМ Купе МГТ</comment>
+  <comment xml:lang="sq">Pamje diskete ZX Spectrum/SAM Coupé MGT</comment>
+  <comment xml:lang="sl">Odtis diskete ZX Spectrum/SAM Coupé MGT</comment>
+  <comment xml:lang="ru">Образ гибкого диска ZX Spectrum/SAM Coupé MGT</comment>
+  <comment xml:lang="ro">imagine de dischetă ZX Spectrum/SAM Coupé MGT</comment>
+  <comment xml:lang="pt-BR">Imagem de disquete ZX Spectrum/SAM Coupé MGT</comment>
+  <comment xml:lang="pl">Obraz dyskietki ZX Spectrum/SAM Coupé MGT</comment>
+  <comment xml:lang="oc">imatge de disqueta MGT per ZX Spectrum/SAM Coupé</comment>
+  <comment xml:lang="ko">ZX Spectrum/SAM Coupé MGT 플로피 디스크 이미지</comment>
+  <comment xml:lang="kk-Cyrl">ZX Spectrum/SAM Coupé MGT иілгіш диск бейнесі</comment>
+  <comment xml:lang="fr">image disquette ZX Spectrum/SAM Coupé MGT</comment>
+  <comment xml:lang="fi">ZX Spectrum/SAM Coupé MGT diskettikuva</comment>
+  <comment xml:lang="et">ZX Spectrum/SAM Coupé MGT flopikettatõmmis</comment>
+  <comment xml:lang="es">Imagen de disquete de ZX Spectrum/SAM Coupé MGT</comment>
+  <comment xml:lang="en-GB">ZX Spectrum/SAM Coupé MGT floppy disk image</comment>
+  <comment xml:lang="de">ZX-Spectrum-/SAM-Coupé-MGT-Diskettenabbild</comment>
+  <acronym>MGT</acronym>
+  <expanded-acronym>Miles Gordon Technology</expanded-acronym>
+  <glob pattern="*.mgt"/>
+</mime-type>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="multipart/encrypted">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Encrypted message</comment>
+  <comment xml:lang="zh-Hant-TW">已加密訊息</comment>
+  <comment xml:lang="uk">зашифроване повідомлення</comment>
+  <comment xml:lang="tr">Şifreli ileti</comment>
+  <comment xml:lang="sv">Krypterat meddelande</comment>
+  <comment xml:lang="sr-Cyrl">Шифрована порука</comment>
+  <comment xml:lang="sq">Mesazh i fshehtëzuar</comment>
+  <comment xml:lang="sl">Šifrirano sporočilo</comment>
+  <comment xml:lang="ru">Зашифрованное сообщение</comment>
+  <comment xml:lang="ro">mesaj criptat</comment>
+  <comment xml:lang="pt-BR">Mensagem criptografada</comment>
+  <comment xml:lang="pl">Wiadomość zaszyfrowana</comment>
+  <comment xml:lang="oc">messatge chifrat</comment>
+  <comment xml:lang="nn">Kryptert melding</comment>
+  <comment xml:lang="ko">암호화 메시지</comment>
+  <comment xml:lang="kk-Cyrl">Шифрленген мәлімдеме</comment>
+  <comment xml:lang="ka">დაშიფრული შეტყობინება</comment>
+  <comment xml:lang="ja">暗号化メッセージ</comment>
+  <comment xml:lang="it">Messaggio cifrato</comment>
+  <comment xml:lang="id">Pesan terenkripsi</comment>
+  <comment xml:lang="hr">Šifrirana poruka</comment>
+  <comment xml:lang="hi">कूटलेखित संदेश</comment>
+  <comment xml:lang="he">הודעה מוצפנת</comment>
+  <comment xml:lang="fur">Messaç cifrât</comment>
+  <comment xml:lang="fr">Message chiffré</comment>
+  <comment xml:lang="fi">Salattu viesti</comment>
+  <comment xml:lang="et">Krüptitud e-kiri</comment>
+  <comment xml:lang="es">mensaje cifrado</comment>
+  <comment xml:lang="en-GB">Encrypted message</comment>
+  <comment xml:lang="de">verschlüsselte Nachricht</comment>
+  <comment xml:lang="ca">missatge xifrat</comment>
+  <comment xml:lang="bg">Шифрирано съобщение</comment>
+  <comment xml:lang="be-Cyrl">зашыфраванае паведамленне</comment>
+  <comment xml:lang="ar">رسالة معماة</comment>
+</mime-type>

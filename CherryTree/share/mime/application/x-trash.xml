@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-trash">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Backup file</comment>
+  <comment xml:lang="zh-Hant-TW">備份檔</comment>
+  <comment xml:lang="uk">Файл резервної копії</comment>
+  <comment xml:lang="tr">Yedek dosyası</comment>
+  <comment xml:lang="sv">Säkerhetskopia</comment>
+  <comment xml:lang="sr-Cyrl">Датотека резервне копије</comment>
+  <comment xml:lang="sq">Kartelë kopjeruajtje</comment>
+  <comment xml:lang="sl">Varnostna kopija</comment>
+  <comment xml:lang="ru">Резервная копия</comment>
+  <comment xml:lang="ro">fișier copie de rezervă</comment>
+  <comment xml:lang="pt-BR">Arquivo de backup</comment>
+  <comment xml:lang="pl">Plik zapasowy</comment>
+  <comment xml:lang="oc">fichièr de salvagarda</comment>
+  <comment xml:lang="nn">Reservekopi-fil</comment>
+  <comment xml:lang="lt">Atsarginės kopijos failas</comment>
+  <comment xml:lang="ko">백업 파일</comment>
+  <comment xml:lang="kk-Cyrl">Қор көшірме файлы</comment>
+  <comment xml:lang="ja">控え</comment>
+  <comment xml:lang="it">File di backup</comment>
+  <comment xml:lang="id">Berkas cadangan</comment>
+  <comment xml:lang="hr">Datoteka sigurnosne kopije</comment>
+  <comment xml:lang="hi">बैकअप फाइल</comment>
+  <comment xml:lang="he">קובץ גיבוי</comment>
+  <comment xml:lang="gl">Ficheiro de respaldo</comment>
+  <comment xml:lang="fur">File di backup</comment>
+  <comment xml:lang="fr">Fichier de sauvegarde</comment>
+  <comment xml:lang="fi">Varmuuskopio</comment>
+  <comment xml:lang="eu">Babeskopia-fitxategia</comment>
+  <comment xml:lang="et">Varukoopia fail</comment>
+  <comment xml:lang="es">archivo de copia de respaldo</comment>
+  <comment xml:lang="en-GB">Backup file</comment>
+  <comment xml:lang="de">Sicherungsdatei</comment>
+  <comment xml:lang="ca">fitxer de còpia de seguretat</comment>
+  <comment xml:lang="bg">Резервен файл</comment>
+  <comment xml:lang="be-Cyrl">рэзервовая копія файла</comment>
+  <comment xml:lang="ar">ملف نسخ احتياطي</comment>
+  <glob pattern="*~"/>
+  <glob pattern="*%"/>
+  <glob pattern="*.bak"/>
+  <glob pattern="*.old"/>
+  <glob pattern="*.sik"/>
+</mime-type>

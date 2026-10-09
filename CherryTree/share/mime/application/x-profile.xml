@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-profile">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Profiler results</comment>
+  <comment xml:lang="zh-Hant-TW">效能分析結果</comment>
+  <comment xml:lang="uk">результати профілювання</comment>
+  <comment xml:lang="tr">Profilleyici sonuçları</comment>
+  <comment xml:lang="sv">Profilerarresultat</comment>
+  <comment xml:lang="sr-Cyrl">Резултати профајлера</comment>
+  <comment xml:lang="sq">Përfundime profilizuesi</comment>
+  <comment xml:lang="sl">Rezultati profilirnika</comment>
+  <comment xml:lang="ru">Результаты профилирования</comment>
+  <comment xml:lang="ro">rezultate profilare</comment>
+  <comment xml:lang="pt-BR">Resultados do profiler</comment>
+  <comment xml:lang="pl">Wyniki profilowania</comment>
+  <comment xml:lang="oc">resultats de perfilador</comment>
+  <comment xml:lang="ko">프로파일러 결과</comment>
+  <comment xml:lang="kk-Cyrl">Прифильдеу нәтижелері</comment>
+  <comment xml:lang="ja">プロファイラー出力データ</comment>
+  <comment xml:lang="it">Risultati profiler</comment>
+  <comment xml:lang="id">Hasil profiler</comment>
+  <comment xml:lang="hr">Rezultati profiliranja</comment>
+  <comment xml:lang="hi">प्रोफाइलर परिणाम</comment>
+  <comment xml:lang="gl">Resultados dos perfiladores</comment>
+  <comment xml:lang="fur">Risultâts dal profiladôr</comment>
+  <comment xml:lang="fr">Résultats du profileur</comment>
+  <comment xml:lang="fi">Profilointitulokset</comment>
+  <comment xml:lang="eu">Profilatzaile-emaitzak</comment>
+  <comment xml:lang="et">Profiileri andmefail</comment>
+  <comment xml:lang="es">resultados de generador de perfiles</comment>
+  <comment xml:lang="en-GB">Profiler results</comment>
+  <comment xml:lang="de">Profiler-Ergebnisse</comment>
+  <comment xml:lang="ca">resultats d'analitzador de rendiment</comment>
+  <comment xml:lang="bg">Резултати от програма за профилиране</comment>
+  <comment xml:lang="be-Cyrl">вынікі прафіліроўшчыка</comment>
+  <comment xml:lang="ar">نتائج محلل</comment>
+  <sub-class-of type="text/plain"/>
+  <generic-icon name="text-x-generic"/>
+  <glob pattern="gmon.out"/>
+</mime-type>

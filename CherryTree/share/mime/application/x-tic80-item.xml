@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-tic80-item">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>TIC-80 cartridge</comment>
+  <comment xml:lang="uk">картридж TIC-80</comment>
+  <comment xml:lang="tr">TIC-80 kartuşu</comment>
+  <comment xml:lang="sv">TIC-80-kassett</comment>
+  <comment xml:lang="sr-Cyrl">TIC-80 кертриџ</comment>
+  <comment xml:lang="sq">Kasetë TIC-80</comment>
+  <comment xml:lang="sl">Vložek TIC-80</comment>
+  <comment xml:lang="ru">Картридж TIC-80</comment>
+  <comment xml:lang="ro">cartuș TIC-80</comment>
+  <comment xml:lang="pt-BR">Cartucho TIC-80 </comment>
+  <comment xml:lang="pl">Kartridż TIC-80</comment>
+  <comment xml:lang="oc">cartocha TIC-80</comment>
+  <comment xml:lang="ko">TIC-80 카트리지</comment>
+  <comment xml:lang="kk-Cyrl">TIC-80 картриджі</comment>
+  <comment xml:lang="fr">cartouche TIC-80</comment>
+  <comment xml:lang="fi">TIC-80 moduuli</comment>
+  <comment xml:lang="et">TIC-80 mälukaart</comment>
+  <comment xml:lang="es">Cartucho TIC-80</comment>
+  <comment xml:lang="en-GB">TIC-80 cartridge</comment>
+  <comment xml:lang="de">TIC-80-Kassettendatei</comment>
+  <comment xml:lang="ar">خرطوشة TIC-80</comment>
+  <acronym>TIC</acronym>
+  <expanded-acronym>TIny Computer</expanded-acronym>
+  <sub-class-of type="application/x-executable"/>
+  <glob pattern="*.tic"/>
+</mime-type>

@@ -1,0 +1,92 @@
+# Russian translation for openteacher
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2012-12-26 20:09+0000\n"
+"Last-Translator: Nkolay Parukhin <parukhin@gmail.com>\n"
+"Language-Team: Russian <ru@li.org>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:44+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: manpage.templ:29
+msgid "SYNOPSIS"
+msgstr "РЕЗЮМЕ"
+
+#: manpage.templ:33
+msgid "DESCRIPTION"
+msgstr "ОПИСАНИЕ"
+
+#: manpage.templ:37
+msgid "OPERATION"
+msgstr "ДЕЙСТВИЕ"
+
+#: manpage.templ:38
+msgid ""
+"After startup, OpenTeacher allows you to load a lesson or to create one."
+msgstr "После запуска OpenTeacher позволяет загрузить урок или создать его."
+
+#: manpage.templ:39
+msgid "Lessons can be loaded from both files and the internet."
+msgstr "Уроки могут быть загружены из файлов и интернета."
+
+#: manpage.templ:40
+msgid ""
+"There are a number of different lesson types: you can use OpenTeacher to "
+"learn vocabulary, geography and media."
+msgstr ""
+"Есть целый ряд различных типов уроков: вы можете использовать OpenTeacher, "
+"чтобы изучать лексику, географию и мультимедиа."
+
+#: manpage.templ:41
+msgid "Also, OpenTeacher has a typing lesson course built in."
+msgstr "Также, OpenTeacher имеет встроенный курс машинописи."
+
+#: manpage.templ:43
+msgid ""
+"When you open a lesson you can view the items in that lesson or enter new "
+"ones, and learn those items."
+msgstr ""
+"Когда вы открываете урок можно просмотреть элементы этого урока или ввести "
+"новые и изучать их."
+
+#: manpage.templ:44
+msgid "At the end of the session, you can view your results."
+msgstr "В конце занятия, вы можете просмотреть свои результаты."
+
+#: manpage.templ:45
+msgid "Also, it's possible to browse results of older tests."
+msgstr "Кроме того, можно просматривать результаты предыдущих тестов."
+
+#: manpage.templ:47
+msgid "OPTIONS"
+msgstr "ПАРАМЕТРЫ"
+
+#: manpage.templ:49
+msgid "show a help message"
+msgstr "показать справку"
+
+#: manpage.templ:51
+msgid "run {name} as specified by {profile}, {profile} should be one of:"
+msgstr "запуск {name} как указано в {profile}, {profile} должен быть одним из:"
+
+#: manpage.templ:54
+msgid "(advanced)"
+msgstr "(расширенные)"
+
+#: manpage.templ:58
+msgid "AUTHOR"
+msgstr "АВТОР"
+
+#: manpage.templ:61
+msgid "Contact: {email}"
+msgstr "Контакты: {email}"

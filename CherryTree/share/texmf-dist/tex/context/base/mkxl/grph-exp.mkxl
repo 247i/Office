@@ -1,0 +1,231 @@
+%D \module
+%D   [       file=grph-exp,
+%D        version=2024.07.05,
+%D          title=\CONTEXT\ Graphic Macros,
+%D       subtitle=Figure Export,
+%D         author=Hans Hagen,
+%D           date=\currentdate,
+%D      copyright={PRAGMA ADE \& \CONTEXT\ Development Team}]
+%C
+%C This module is part of the \CONTEXT\ macro||package and is
+%C therefore copyrighted by \PRAGMA. See mreadme.pdf for
+%C details.
+
+\writestatus{loading}{ConTeXt Graphic Macros / Figure Export}
+
+\unprotect
+
+%D Assuming \type {test.tex}:
+%D
+%D \starttyping
+%D \startmode [images]
+%D      \collectexported
+%D \stopmode
+%D
+%D \usemodule[article-basic]
+%D
+%D \setupbackend
+%D   [export=yes]
+%D
+%D \setupinteraction
+%D   [title={\documentvariable{title}}]
+%D
+%D \startdocument[title=Runtime graphics]
+%D
+%D \samplefile{tufte}
+%D
+%D \starttextdisplay
+%D     \startimage
+%D         \startMPcode
+%D             fill fullcircle scaled 3cm withcolor darkred ;
+%D         \stopMPcode
+%D     \stopimage
+%D \stoptextdisplay
+%D
+%D \samplefile{tufte}
+%D
+%D \stopdocument
+%D \stoptyping
+%D
+%D This should do the job:
+%D
+%D \starttyping
+%D mtxrun test
+%D mtxrun --script epub --images test
+%D \stoptyping
+
+\newinteger\nofexportedboxes
+
+\newconditional\c_grph_exported
+\newconditional\c_grph_in_image
+
+\definesystemconstant{exported}
+
+\def\grph_exported_discard#1%
+  {\ctxlua{backends.codeinjections.discardpages(\ifcase#1\else true\fi)}}
+
+\permanent\protected\def\collectexported
+  {\grph_exported_discard\plusone
+   \c_grph_exported\conditionaltrue
+   \appendtoks
+     \grph_exported_flush
+   \to \everystoptext}
+
+\appendtoks
+   \enforced\let\dotagexported\grph_exported_tag
+\to \everyenableelements
+
+\permanent\protected\def\grph_exported_tag
+  {\enforced\def \figurefileoriginal{\jobname-\s!exported-\the\nofexportedboxes.svg}%
+   \enforced\let \figurefullname    \figurefileoriginal
+   \enforced\let \figurefilepage    \!!plusone
+   \enforced\let \figurelabel       \empty
+   \enforced\edef\figurewidth       {\the\wd\b_grph_image}%
+   \enforced\edef\figureheight      {\the\ht\b_grph_image}%
+   \enforced\edef\figuredepth       {\the\dp\b_grph_image}%
+   \dotagfigure}
+
+\permanent\protected\def\grph_exported_flush
+  {\page
+   % todo block writing to the tuc file
+   \grph_exported_discard\zerocount
+   \dorecurse \nofexportedboxes {%
+     \startTEXpage
+       \dontleavehmode\directboxfromcache\s!exported{##1}%
+     \stopTEXpage}%
+   \writestatus\m!system\empty
+   \writestatus\m!system{if needed run: mtxrun --script epub --images \jobname}%
+   \writestatus\m!system\empty}
+
+\newbox\b_grph_image
+
+% todo : simple handler as with mp
+
+\permanent\tolerant\protected\def\grph_start_image_tagged[#1]%
+  {\begingroup
+   \c_grph_in_image\conditionaltrue
+   %
+   \resetdummyparameter\c!descriptiontext
+   \resetdummyparameter\c!alternativetext
+   \getdummyparameters[#1]%
+   \enforced\edef\figuredescriptiontext{\dummyparameter\c!descriptiontext}%
+   \enforced\edef\figurealternativetext{\dummyparameter\c!alternativetext}%
+   %
+   \global\advanceby\nofexportedboxes\plusone
+   \edef\figureexported{\the\nofexportedboxes}%
+   \dostarttaggednodetail\t!image
+   \setbox\b_grph_image\hpack attr \imageattribute \plustwo\bgroup
+   \ignorepars
+   \ignorespaces}
+
+\permanent\protected\def\grph_stop_image_tagged
+  {\removeunwantedspaces
+   \egroup
+   \dotagexported
+   \dostoptagged
+   \ifconditional\c_grph_exported
+     \setbox\scratchbox\box\b_grph_image
+     \putboxincache\s!exported{\the\nofexportedboxes}\scratchbox
+   \fi
+   \box\b_grph_image
+   \endgroup}
+
+%D We want to get compatible packaging (beware of spaces)
+
+\permanent\tolerant\protected\def\grph_start_image_normal[#1]%
+  {\hpack\bgroup
+   \c_grph_in_image\conditionaltrue
+   \ignorepars
+   \ignorespaces}
+
+\permanent\protected\def\grph_stop_image_normal
+  {\removeunwantedspaces
+   \egroup}
+
+\enforced\let\startimage\grph_start_image_normal
+\enforced\let\stopimage \grph_stop_image_normal
+
+\appendtoks
+    \enforced\let\startimage\grph_start_image_tagged
+    \enforced\let\stopimage \grph_stop_image_tagged
+\to \everyenableelements
+
+%D Maybe more hooks are needed. We need for instance to deal with
+%D reuse and also need to be able to bypass background graphics. It is
+%D anyway better to be explicit and just wrap in an image.
+
+% \aliased\let\meta_process_graphic_start_normal\meta_process_graphic_start
+% \aliased\let\meta_process_graphic_stop_normal \meta_process_graphic_stop
+%
+% \def\meta_process_graphic_start_tagged
+%   {\startimage
+%    \meta_process_graphic_start_normal}
+%
+% \def\meta_process_graphic_stop_tagged
+%   {\meta_process_graphic_stop_normal
+%    \stopimage}
+%
+% \appendtoks
+%     \let\meta_process_graphic_start\meta_process_graphic_start_tagged
+%     \let\meta_process_graphic_stop \meta_process_graphic_stop_tagged
+% \to \everyenableelements
+
+%D So we go for explicit wrapping plus an extra MP command:
+
+\permanent\tolerant\protected\def\startMPimage[#1]#2\stopMPimage
+  {\startimage[#1]%
+   \startMPcode#2\stopMPcode
+   \stopimage}
+
+\permanent\protected\lettonothing\stopMPimage
+
+% bonus
+
+\newdimension\justimageoffset
+\newdimension\justimagetopoffset
+\newdimension\justimagebottomoffset
+\newdimension\justimageleftoffset
+\newdimension\justimagerightoffset
+
+\permanent\tolerant\protected\def\grph_start_image_only[#1]%
+  {\begingroup
+   \setbox\b_grph_image\hpack\bgroup
+   \c_grph_in_image\conditionaltrue
+   \ignorepars
+   \ignorespaces}
+
+\permanent\protected\def\grph_stop_image_only
+  {\removeunwantedspaces
+   \egroup
+   \global\advanceby\nofexportedboxes\plusone
+   \ifzeropt{%
+          \justimageoffset
+         +\justimageleftoffset
+         +\justimagerightoffset
+         +\justimagetopoffset
+         +\justimagebottomoffset
+       }%
+     \setbox\scratchbox\box\b_grph_image
+   \else
+     \setbox\scratchbox\hpack\bgroup
+       \kern{\justimageoffset+\justimageleftoffset}%
+       \box\b_grph_image
+       \kern{\justimageoffset+\justimagerightoffset}%
+     \egroup
+     \ht\scratchbox{\ht\scratchbox+\justimageoffset+\justimagetopoffset}%
+     \dp\scratchbox{\dp\scratchbox+\justimageoffset+\justimagebottomoffset}%
+   \fi
+   \putboxincache\s!exported{\the\nofexportedboxes}\scratchbox
+   \box\b_grph_image
+   \endgroup}
+
+\permanent\protected\def\justimages
+  {\exportingtrue
+   \ctxlua{backends.codeinjections.discardpages(true)}%
+   \appendtoks
+     \grph_exported_flush
+   \to \everystoptext
+   \enforced\let\startimage\grph_start_image_only
+   \enforced\let\stopimage \grph_stop_image_only}
+
+\protect \endinput

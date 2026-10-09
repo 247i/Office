@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="image/x-kiss-cel">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>KiSS cel</comment>
+  <comment xml:lang="zh-Hant-TW">KiSS cel 影像</comment>
+  <comment xml:lang="uk">KiSS cel</comment>
+  <comment xml:lang="tr">KiSS cel</comment>
+  <comment xml:lang="sv">KiSS cel</comment>
+  <comment xml:lang="sr-Cyrl">KiSS cel</comment>
+  <comment xml:lang="sl">Datoteka KiSS cel</comment>
+  <comment xml:lang="ru">Изображение KiSS cel</comment>
+  <comment xml:lang="ro">fișier cel(luloid) de KiSS</comment>
+  <comment xml:lang="pt-BR">cel KiSS</comment>
+  <comment xml:lang="pl">Cel KiSS</comment>
+  <comment xml:lang="oc">cellula KiSS</comment>
+  <comment xml:lang="ko">KiSS cel</comment>
+  <comment xml:lang="kk-Cyrl">KiSS cel суреті</comment>
+  <comment xml:lang="ja">KiSS セル</comment>
+  <comment xml:lang="id">KiSS cel</comment>
+  <comment xml:lang="hr">KiSS cel</comment>
+  <comment xml:lang="fur">KiSS cel</comment>
+  <comment xml:lang="fr">Celluloïd KiSS</comment>
+  <comment xml:lang="fi">KiSS cel</comment>
+  <comment xml:lang="et">KiSS cel pilt</comment>
+  <comment xml:lang="es">cel de KiSS</comment>
+  <comment xml:lang="en-GB">KiSS cel</comment>
+  <comment xml:lang="de">KiSS CEL</comment>
+  <comment xml:lang="ca">cel de KiSS</comment>
+  <comment xml:lang="bg">Растер — KiSS cel</comment>
+  <comment xml:lang="be-Cyrl">відарыс KiSS cel</comment>
+  <comment xml:lang="ar">صورة KiSS cel</comment>
+  <acronym>KiSS</acronym>
+  <expanded-acronym>Kisekae Set System</expanded-acronym>
+  <glob pattern="*.cel"/>
+  <glob pattern="*.kcf"/>
+</mime-type>

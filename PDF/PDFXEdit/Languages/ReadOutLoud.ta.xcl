@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Localization>
+	<Version date="20180123215752">2.00.00</Version>
+	<Author>Angel Herráez</Author>
+	<Copyright></Copyright>
+	<Product id="PDFXEditor"/>
+	<Language eName="Tamil" lName="தமிழ்" code="ta" R2L="false"/>
+	<Module name="ReadOutLoud" namespace="speech" version="7.0.323.3"/>
+	<Strings>
+		<text id="opt.btn.test" h="D799C8E8">Lee este &amp;texto</text>
+		<text id="opt.cb.defAttr" h="232D9E03">Utilizar los &amp;atributos de voz predeterminados</text>
+		<text id="opt.cb.defVoice" h="57A5382A">Utilizar la voz pre&amp;determinada</text>
+		<text id="opt.cb.readComments" h="070A2526">Leer los &amp;comentarios</text>
+		<text id="opt.cb.readFields" h="4331E3A2">Leer los campos de formulario</text>
+		<text id="opt.group.title" h="54357DDF">Opciones de lectura en voz alta</text>
+		<text id="opt.l.max" h="284585D5">Máx.</text>
+		<text id="opt.l.min" h="F16918ED">Mín.</text>
+		<text id="opt.l.pitch" h="A6915A2C">&amp;Tono:</text>
+		<text id="opt.l.rate" h="10B1E128">Velo&amp;cidad:</text>
+		<text id="opt.l.voice" h="5026E016">&amp;Voz:</text>
+		<text id="opt.l.volume" h="8C0E20F2">V&amp;olumen:</text>
+		<text id="opt.l.wpm" h="9421CA7D">palabras por minuto</text>
+		<text id="opt.test.title" h="44732FAA">Prueba</text>
+		<text id="prefs.name" h="06D67BEF">Habla</text>
+		<text id="prefs.tips" h="110DB02C">Opciones de lectura</text>
+		<text id="prefs.title" h="110DB02C">Opciones del habla</text>
+		<text id="speech.opt.title" h="54357DDF">Opciones de lectura en voz alta</text>
+		<text id="test.text" h="6B245451">El viejo Señor Gómez pedía queso, kiwi y habas, pero le ha tocado un saxofón.</text>
+		<text id="cmd.readSelection" h="D503AA0C">Leer en voz alta el texto seleccionado</text>
+		<text id="cmd.readStop" h="06B322F6">Detener la lectura</text>
+		<text id="cmd.category" h="A1EB605F">Lectura en voz alta</text>
+	</Strings>
+</Localization>

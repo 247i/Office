@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="image/x-pfm">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Portable FloatMap</comment>
+  <comment xml:lang="uk">портативна FloatMap</comment>
+  <comment xml:lang="tr">Taşınabilir FloatMap</comment>
+  <comment xml:lang="sv">Portabel flytkarta</comment>
+  <comment xml:lang="sr-Cyrl">Portable FloatMap</comment>
+  <comment xml:lang="sl">Prenosni FloatMap</comment>
+  <comment xml:lang="ru">Portable FloatMap</comment>
+  <comment xml:lang="ro">portable float-map (pfm)</comment>
+  <comment xml:lang="pt-BR">Portable FloatMap</comment>
+  <comment xml:lang="pl">Obraz PFM</comment>
+  <comment xml:lang="oc">Portable FloatMap</comment>
+  <comment xml:lang="ko">Portable FloatMap</comment>
+  <comment xml:lang="kk-Cyrl">Portable FloatMap суреті</comment>
+  <comment xml:lang="ja">ポータブル FloatMap</comment>
+  <comment xml:lang="hr">Prenosiv FloatMap</comment>
+  <comment xml:lang="fr">Image portable FloatMap</comment>
+  <comment xml:lang="fi">FloatMap</comment>
+  <comment xml:lang="et">Portable FloatMapi pilt</comment>
+  <comment xml:lang="es">FloatMap portátil</comment>
+  <comment xml:lang="en-GB">Portable FloatMap</comment>
+  <comment xml:lang="de">portable FloatMap</comment>
+  <comment xml:lang="ca">FloatMap portable</comment>
+  <comment xml:lang="bg">Данни — FloatMap, преносими</comment>
+  <comment xml:lang="be-Cyrl">Portable FloatMap</comment>
+  <comment xml:lang="ar">صورة FloatMap محمولة</comment>
+  <glob pattern="*.pfm"/>
+</mime-type>

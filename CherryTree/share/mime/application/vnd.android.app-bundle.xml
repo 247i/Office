@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/vnd.android.app-bundle">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Android App Bundle</comment>
+  <comment xml:lang="uk">комплект програми Android</comment>
+  <comment xml:lang="sv">Android-appbunt</comment>
+  <comment xml:lang="sl">Paket programa za Android</comment>
+  <comment xml:lang="ro">pachet de aplicații Android</comment>
+  <comment xml:lang="ko">안드로이드 앱 번들</comment>
+  <comment xml:lang="kk-Cyrl">Android қолданба дестесі</comment>
+  <comment xml:lang="et">Androidi rakendusekobar</comment>
+  <comment xml:lang="de">Android-Paketbündel</comment>
+  <sub-class-of type="application/java-archive"/>
+  <glob pattern="*.aab"/>
+</mime-type>

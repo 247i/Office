@@ -1,0 +1,28 @@
+#!	Copyright 2012, Marten de Vries
+#!	Copyright 2012, Milan Boers
+#!
+#!	This file is part of OpenTeacher.
+#!
+#!	OpenTeacher is free software: you can redistribute it and/or modify
+#!	it under the terms of the GNU General Public License as published by
+#!	the Free Software Foundation, either version 3 of the License, or
+#!	(at your option) any later version.
+#!
+#!	OpenTeacher is distributed in the hope that it will be useful,
+#!	but WITHOUT ANY WARRANTY; without even the implied warranty of
+#!	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#!	GNU General Public License for more details.
+#!
+#!	You should have received a copy of the GNU General Public License
+#!	along with OpenTeacher.  If not, see <http://www.gnu.org/licenses/>.
+#!
+<div data-role='header' data-id='header'>
+	$!titleHeader!$
+	<a href="#menu-dialog" data-icon="gear" class="menu-dialog-link ui-btn-right"></a>
+	<div class='navbar' data-role='navbar'>
+		<ul>
+			<li><a href='#enter-page' class='enter-page-link<!--(if tab == "enter")--> ui-btn-active ui-state-persist<!--(end)-->' data-transition='none' data-icon='data-plus'></a></li>
+			<li><a href='#teach-page' class='teach-page-link<!--(if tab == "teach")--> ui-btn-active ui-state-persist<!--(end)-->' data-transition='none' data-icon='check' data-ajax='false'></a></li>
+		</ul>
+	</div>
+</div>

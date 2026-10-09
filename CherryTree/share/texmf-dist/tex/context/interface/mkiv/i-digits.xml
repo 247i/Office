@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?context-directive job ctxfile x-setups.ctx ?>
+
+<cd:interface xmlns:cd="http://www.pragma-ade.com/commands">
+
+    <cd:command name="setdigitsmanipulation" level="system" category="symbols" keywords="fonts" file="typo-dig.mkxl">
+        <cd:arguments>
+            <cd:keywords>
+                <cd:constant type="reset"/>
+                <cd:constant type="cd:number"/>
+            </cd:keywords>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="resetdigitsmanipulation" level="system" category="symbols" keywords="fonts" file="typo-dig.mkxl"/>
+
+    <cd:command name="equaldigits" level="document" category="symbols" keywords="fonts" file="typo-dig.mkxl">
+        <cd:arguments>
+            <cd:resolve name="argument-text"/>
+        </cd:arguments>
+    </cd:command>
+
+    <cd:command name="dummydigit" level="document" category="symbols" keywords="fonts" file="typo-dig.mkxl"/>
+
+    <cd:command name="digitsbreak" level="document" category="symbols" keywords="fonts" file="phys-dim.mkxl"/>
+
+    <cd:command name="hyphenateddigits" file="phys-dim.lmt">
+        <cd:arguments>
+            <cd:resolve name="keyword-csname-optional"/>
+            <cd:resolve name="argument-number"/>
+        </cd:arguments>
+    </cd:command>
+
+</cd:interface>

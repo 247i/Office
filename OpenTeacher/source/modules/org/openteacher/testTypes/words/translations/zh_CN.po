@@ -1,0 +1,61 @@
+# Chinese (Simplified) translation for openteacher
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:38+0200\n"
+"PO-Revision-Date: 2013-06-19 01:15+0000\n"
+"Last-Translator: adam liu <xhiyua@gmail.com>\n"
+"Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-20 05:42+0000\n"
+"X-Generator: Launchpad (build 16673)\n"
+
+#: words.py:80
+msgid "Word most done wrong:"
+msgstr "最常错的单词:"
+
+#: words.py:109
+msgid "Title:"
+msgstr "标题:"
+
+#: words.py:110
+msgid "Question language:"
+msgstr "问题的语言:"
+
+#: words.py:111
+msgid "Answer language:"
+msgstr "答案的语言:"
+
+#: words.py:117
+msgid "Question"
+msgstr "问题"
+
+#: words.py:118
+msgid "Answer"
+msgstr "答案"
+
+#: words.py:119
+msgid "Given answer"
+msgstr "给定的答案"
+
+#. TRANSLATORS: a label of a table column that tells if the user had the answer correct by showing a checkbox.
+#: words.py:121
+msgid "Correct"
+msgstr "更正"
+
+#. TRANSLATORS: - means 'none' here. If there's a better
+#. symbol for that in your language, please go ahead and
+#. use it. Or if both aren't sufficient, just translate
+#. the word 'none' or 'empty' or whatever you think is
+#. appropriate.
+#: words.py:151
+msgid "-"
+msgstr "-"

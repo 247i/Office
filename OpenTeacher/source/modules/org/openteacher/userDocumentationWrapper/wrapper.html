@@ -1,0 +1,71 @@
+<!doctype html>
+<!--
+	Copyright 2011, Milan Boers
+	Copyright 2011-2013, Marten de Vries
+
+	This file is part of OpenTeacher.
+
+	OpenTeacher is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 3 of the License, or
+	(at your option) any later version.
+
+	OpenTeacher is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with OpenTeacher.  If not, see <http://www.gnu.org/licenses/>.
+
+	This is also the license for the image files that are in the
+	subdirectory 'static'. (Those are all used by this file.)
+-->
+<html>
+	<head>
+		<title>OpenTeacher - Documentation</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<style>
+			html, body {
+				background-color:@!QColor.fromHsv(hue, 44, 229).name()!@;
+				margin:0 3%;
+				font-family:Verdana, Geneva, sans-serif;
+				color:@!QColor.fromHsv(hue, 64, 64).name()!@;
+				font-size:12px;
+			}
+			h1
+			{
+				font-weight:bold;
+				margin:0;
+				padding-bottom:0.75em;
+			}
+			#content {
+				background-color:@!QColor.fromHsv(hue, 12, 255).name()!@;
+				padding:1em;
+				padding-bottom:0;
+				margin:1em 1em 2em 0;
+				box-shadow:10px 10px 10px #888;
+				-webkit-box-shadow:10px 10px 10px #888;
+				border-radius: 15px;
+				border:1px solid @!QColor.fromHsv(hue, 26, 184)!@;
+			}
+			.docThumb {
+				width:80%;
+				box-shadow:10px 10px 10px #888;
+				-webkit-box-shadow:5px 5px 5px #888;
+			}
+			p, li {
+				margin:0;
+				padding-bottom:1em;
+			}
+			img {
+				margin:1em 0 1.5em 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="content">
+			$!content!$
+		</div>
+	</body>
+</html>

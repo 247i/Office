@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x.sf3-archive">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>SF3 Archive</comment>
+  <comment xml:lang="uk">архів SF3</comment>
+  <comment xml:lang="tr">SF3 arşivi</comment>
+  <comment xml:lang="sv">SF3-arkiv</comment>
+  <comment xml:lang="sr-Cyrl">SF3 архива</comment>
+  <comment xml:lang="sq">Arkiv SF3</comment>
+  <comment xml:lang="sl">Arhiv SF3</comment>
+  <comment xml:lang="ru">Архив SF3</comment>
+  <comment xml:lang="ro">arhivă SF3</comment>
+  <comment xml:lang="pt-BR">Arquivo SF3</comment>
+  <comment xml:lang="pl">Archiwum SF3</comment>
+  <comment xml:lang="oc">archiu SF3</comment>
+  <comment xml:lang="ko">SF3 묶음 파일</comment>
+  <comment xml:lang="kk-Cyrl">SF3 архиві</comment>
+  <comment xml:lang="hr">SF3 arhiva</comment>
+  <comment xml:lang="fr">Archive SF3</comment>
+  <comment xml:lang="fi">SF3-arkisto</comment>
+  <comment xml:lang="et">SF3 arhiiv</comment>
+  <comment xml:lang="es">archivador SF3</comment>
+  <comment xml:lang="en-GB">SF3 Archive</comment>
+  <comment xml:lang="de">SF3-Archiv</comment>
+  <comment xml:lang="ar">أرشيف SF3</comment>
+  <acronym>SF3</acronym>
+  <expanded-acronym>Simple File Format Family</expanded-acronym>
+  <glob pattern="*.ar.sf3"/>
+  <glob pattern="*.sf3"/>
+</mime-type>

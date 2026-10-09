@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/octet-stream">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Unknown</comment>
+  <comment xml:lang="zh-Hant-TW">未知</comment>
+  <comment xml:lang="uk">невідомий</comment>
+  <comment xml:lang="tr">Bilinmeyen</comment>
+  <comment xml:lang="sv">Okänd</comment>
+  <comment xml:lang="sr-Cyrl">Непознато</comment>
+  <comment xml:lang="sq">I panjohur</comment>
+  <comment xml:lang="sl">Neznano</comment>
+  <comment xml:lang="ru">Неизвестно</comment>
+  <comment xml:lang="ro">necunoscut</comment>
+  <comment xml:lang="pt-BR">Desconhecido</comment>
+  <comment xml:lang="pt">Desconhecido</comment>
+  <comment xml:lang="pl">Nieznany typ</comment>
+  <comment xml:lang="oc">Desconegut</comment>
+  <comment xml:lang="nn">Ukjend</comment>
+  <comment xml:lang="lt">Nežinoma</comment>
+  <comment xml:lang="ko">알 수 없음</comment>
+  <comment xml:lang="kk-Cyrl">Белгісіз</comment>
+  <comment xml:lang="ka">უცნობი</comment>
+  <comment xml:lang="kab">Arussin</comment>
+  <comment xml:lang="ja">不明</comment>
+  <comment xml:lang="it">Sconosciuto</comment>
+  <comment xml:lang="id">Tidak dikenal</comment>
+  <comment xml:lang="ia">Incognite</comment>
+  <comment xml:lang="hr">Nepoznato</comment>
+  <comment xml:lang="hi">अज्ञात</comment>
+  <comment xml:lang="he">לא ידוע</comment>
+  <comment xml:lang="gl">Descoñecido</comment>
+  <comment xml:lang="fur">No cognossût</comment>
+  <comment xml:lang="fr">Inconnu</comment>
+  <comment xml:lang="fi">Tuntematon</comment>
+  <comment xml:lang="eu">Ezezaguna</comment>
+  <comment xml:lang="et">Teadmata</comment>
+  <comment xml:lang="es">desconocido</comment>
+  <comment xml:lang="en-GB">Unknown</comment>
+  <comment xml:lang="de">unbekannt</comment>
+  <comment xml:lang="da">Ukendt</comment>
+  <comment xml:lang="ca">desconegut</comment>
+  <comment xml:lang="bg">Неизвестно</comment>
+  <comment xml:lang="be-Cyrl">невядома</comment>
+  <comment xml:lang="ar">مجهول</comment>
+  <comment xml:lang="af">Onbekend</comment>
+</mime-type>

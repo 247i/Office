@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/x-kaitai-struct">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Kaitai Struct definition file</comment>
+  <comment xml:lang="zh-Hant-TW">Kaitai Struct 定義檔</comment>
+  <comment xml:lang="uk">файл визначень Kaitai Struct</comment>
+  <comment xml:lang="tr">Kaitai Struct tanım dosyası</comment>
+  <comment xml:lang="sv">Kaitai Struct-definitionsfil</comment>
+  <comment xml:lang="sr-Cyrl">Kaitai Struct датотека дефиниције</comment>
+  <comment xml:lang="sq">Kartelë përkufizimi Kaitai Struct</comment>
+  <comment xml:lang="sl">Definicija Kaitai Struct</comment>
+  <comment xml:lang="si">Kaitai Struct නිර්වචන ගොනුව</comment>
+  <comment xml:lang="ru">Файл Kaitai Struct definition</comment>
+  <comment xml:lang="ro">fișier definiție Kaitai Struct</comment>
+  <comment xml:lang="pt-BR">Arquivo de definição da Kaitai Struct</comment>
+  <comment xml:lang="pl">Plik definicji Kaitai Struct</comment>
+  <comment xml:lang="oc">fichièr de definicion Kaitai Struct</comment>
+  <comment xml:lang="nn">Kaitai Struct-definisjonsfil</comment>
+  <comment xml:lang="nl">Kaitai Struct-definitiebestand</comment>
+  <comment xml:lang="ko">Kaitai 구조체 정의 파일</comment>
+  <comment xml:lang="kk-Cyrl">Kaitai Struct сипаттама файлы</comment>
+  <comment xml:lang="ja">Kaitai Struct 定義ファイル</comment>
+  <comment xml:lang="it">File definizione Kaitai Struct</comment>
+  <comment xml:lang="is">Kaitai Struct skilgreiningarskrá</comment>
+  <comment xml:lang="id">Berkas definisi Kaitai Struct</comment>
+  <comment xml:lang="hu">Kaitai szerkezetdefiníciós fájl</comment>
+  <comment xml:lang="hr">Kaitai Struct datoteka definicije</comment>
+  <comment xml:lang="hi">Kaitai Struct परिभाषा फाइल</comment>
+  <comment xml:lang="he">קובץ הגדרת Kaitai Struct</comment>
+  <comment xml:lang="fur">File definizions di Kaitai Struct</comment>
+  <comment xml:lang="fr">Fichier de définition Kaitai Struct</comment>
+  <comment xml:lang="fi">Kaitai Struct -määritystiedosto</comment>
+  <comment xml:lang="et">Kaitai Structi definitsioonifail</comment>
+  <comment xml:lang="es">archivo de definición de Kaitai Struct</comment>
+  <comment xml:lang="en-GB">Kaitai Struct definition file</comment>
+  <comment xml:lang="de">Kaitai Struct-Datei</comment>
+  <comment xml:lang="da">Kaitai Struct-definitionsfil</comment>
+  <comment xml:lang="ca">fitxer de definicions Kaitai Struct</comment>
+  <comment xml:lang="bg">Файл с дефиниции — Kaitai Struct</comment>
+  <comment xml:lang="be-Cyrl">файл азначэння Kaitai Struct</comment>
+  <comment xml:lang="ar">ملف تعريف Kaitai Struct</comment>
+  <sub-class-of type="application/yaml"/>
+  <glob pattern="*.ksy"/>
+</mime-type>

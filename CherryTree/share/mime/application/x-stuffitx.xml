@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-stuffitx">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>StuffIt X archive</comment>
+  <comment xml:lang="zh-Hant-TW">StuffIt X 封存檔</comment>
+  <comment xml:lang="uk">архів StuffIt X</comment>
+  <comment xml:lang="tr">StuffIt X arşivi</comment>
+  <comment xml:lang="sv">StuffIt X-arkiv </comment>
+  <comment xml:lang="sr-Cyrl">StuffIt X архива</comment>
+  <comment xml:lang="sq">Arkiv StuffIt X</comment>
+  <comment xml:lang="sl">Arhiv StuffIt X</comment>
+  <comment xml:lang="ru">Архив StuffIt X</comment>
+  <comment xml:lang="ro">arhivă StuffIt X</comment>
+  <comment xml:lang="pt-BR">Pacote StuffIt X</comment>
+  <comment xml:lang="pl">Archiwum StuffIt X</comment>
+  <comment xml:lang="oc">archiu Stuffit X</comment>
+  <comment xml:lang="nn">StuffIt X-arkiv</comment>
+  <comment xml:lang="lt">StuffIt X archyvas</comment>
+  <comment xml:lang="ko">StufffIt X 묶음 파일</comment>
+  <comment xml:lang="kk-Cyrl">StuffIt X архиві</comment>
+  <comment xml:lang="kab">Aɣbaṛ StuffIt X</comment>
+  <comment xml:lang="ja">StuffIt X アーカイブ</comment>
+  <comment xml:lang="it">Archivio StuffIt X</comment>
+  <comment xml:lang="id">Arsip StuffIt X</comment>
+  <comment xml:lang="hr">StuffIt X arhiva</comment>
+  <comment xml:lang="hi">StuffIt X अभिलेख</comment>
+  <comment xml:lang="he">ארכיון StuffIt X</comment>
+  <comment xml:lang="fur">Archivi StuffIt X</comment>
+  <comment xml:lang="fr">Archive Stuffit X</comment>
+  <comment xml:lang="fi">StuffIt X arkisto</comment>
+  <comment xml:lang="eu">StuffIt X artxiboa</comment>
+  <comment xml:lang="et">StuffIt X arhiiv</comment>
+  <comment xml:lang="es">archivador de StuffIt X</comment>
+  <comment xml:lang="en-GB">StuffIt X archive</comment>
+  <comment xml:lang="de">StuffIt-X-Archiv</comment>
+  <comment xml:lang="ca">arxiu StuffIt X</comment>
+  <comment xml:lang="bg">Архив — StuffIt X</comment>
+  <comment xml:lang="be-Cyrl">архіў StuffIt X</comment>
+  <comment xml:lang="ar">أرشيف StuffIt X</comment>
+  <generic-icon name="package-x-generic"/>
+  <alias type="application/x-sitx"/>
+  <glob pattern="*.sitx"/>
+</mime-type>

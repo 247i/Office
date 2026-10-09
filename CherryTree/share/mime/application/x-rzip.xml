@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-rzip">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Rzip archive</comment>
+  <comment xml:lang="zh-Hant-TW">Rzip 封存檔</comment>
+  <comment xml:lang="uk">архів rzip</comment>
+  <comment xml:lang="tr">Rzip arşivi</comment>
+  <comment xml:lang="sv">Rzip-arkiv</comment>
+  <comment xml:lang="sr-Cyrl">Rzip архива</comment>
+  <comment xml:lang="sq">Arkiv Rzip</comment>
+  <comment xml:lang="sl">Arhiv rzip</comment>
+  <comment xml:lang="ru">Архив Rzip</comment>
+  <comment xml:lang="ro">arhivă rzip</comment>
+  <comment xml:lang="pt-BR">Pacote Rzip</comment>
+  <comment xml:lang="pl">Archiwum rzip</comment>
+  <comment xml:lang="oc">archiu Rzip</comment>
+  <comment xml:lang="nn">Rzip-arkiv</comment>
+  <comment xml:lang="lt">Rzip archyvas</comment>
+  <comment xml:lang="ko">RZIP 압축 파일</comment>
+  <comment xml:lang="kk-Cyrl">Rzip архиві</comment>
+  <comment xml:lang="kab">Aɣbaṛ Rzip</comment>
+  <comment xml:lang="ja">Rzip アーカイブ</comment>
+  <comment xml:lang="id">Arsip Rzip</comment>
+  <comment xml:lang="hr">Rzip arhiva</comment>
+  <comment xml:lang="he">ארכיון Rzip</comment>
+  <comment xml:lang="fur">Archivi Rzip</comment>
+  <comment xml:lang="fr">Archive Rzip</comment>
+  <comment xml:lang="fi">Rzip-arkisto</comment>
+  <comment xml:lang="et">Rzip arhiiv</comment>
+  <comment xml:lang="es">Archivador Rzip</comment>
+  <comment xml:lang="en-GB">Rzip archive</comment>
+  <comment xml:lang="de">rzip-Archiv</comment>
+  <comment xml:lang="da">Rzip-arkiv</comment>
+  <comment xml:lang="ca">arxiu rzip</comment>
+  <comment xml:lang="bg">Архив — rzip</comment>
+  <comment xml:lang="be-Cyrl">архіў Rzip</comment>
+  <comment xml:lang="ar">أرشيف Rzip</comment>
+  <generic-icon name="package-x-generic"/>
+  <glob pattern="*.rz"/>
+</mime-type>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/font-tdpfr">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>TDPFR font</comment>
+  <comment xml:lang="zh-Hant-TW">TDPFR 字型</comment>
+  <comment xml:lang="uk">шрифт TDPFR</comment>
+  <comment xml:lang="tr">TDPFR yazı tipi</comment>
+  <comment xml:lang="sv">TDPFR-typsnitt</comment>
+  <comment xml:lang="sr-Cyrl">TDPFR фонт</comment>
+  <comment xml:lang="sq">Shkronja TDPFR</comment>
+  <comment xml:lang="sl">Pisava TDPFR</comment>
+  <comment xml:lang="ru">Шрифт TDPFR</comment>
+  <comment xml:lang="ro">font TDPFR</comment>
+  <comment xml:lang="pt-BR">Fonte TDPFR</comment>
+  <comment xml:lang="pl">Czcionka TDPFR</comment>
+  <comment xml:lang="oc">polissa TDPFR</comment>
+  <comment xml:lang="lt">TDPFR šriftas</comment>
+  <comment xml:lang="ko">TDPFR 글꼴</comment>
+  <comment xml:lang="kk-Cyrl">TDPFR қарібі</comment>
+  <comment xml:lang="kab">Tasefsit TDPFR</comment>
+  <comment xml:lang="ja">TDPFR フォント</comment>
+  <comment xml:lang="it">Carattere TDPFR</comment>
+  <comment xml:lang="id">Fonta TDPFR</comment>
+  <comment xml:lang="hr">TDPFR font</comment>
+  <comment xml:lang="hi">TDPFR फॉन्ट</comment>
+  <comment xml:lang="he">גופן TDPFR</comment>
+  <comment xml:lang="gl">Tipo de letra TDPFR</comment>
+  <comment xml:lang="fur">Caratar TDPFR</comment>
+  <comment xml:lang="fr">Police TDPFR</comment>
+  <comment xml:lang="fi">TDPFR-fontti</comment>
+  <comment xml:lang="eu">TDPFR letra-tipoa</comment>
+  <comment xml:lang="et">TDPFR font</comment>
+  <comment xml:lang="es">tipo de letra TDPFR</comment>
+  <comment xml:lang="en-GB">TDPFR font</comment>
+  <comment xml:lang="de">TDPFR-Schrift</comment>
+  <comment xml:lang="da">TDPFR-skrifttype</comment>
+  <comment xml:lang="ca">lletra TDPFR</comment>
+  <comment xml:lang="bg">Шрифт — TDPFR</comment>
+  <comment xml:lang="be-Cyrl">шрыфт TDPFR</comment>
+  <comment xml:lang="ar">خط TDPFR</comment>
+  <acronym>TDPFR</acronym>
+  <expanded-acronym>TrueDoc Portable Font Resource</expanded-acronym>
+  <generic-icon name="font-x-generic"/>
+  <glob pattern="*.pfr"/>
+  <alias type="application/vnd.truedoc"/>
+</mime-type>

@@ -1,0 +1,439 @@
+%D \module
+%D   [     file=t-calendar-examples.tex,
+%D      version=2023.04.15,
+%D        title=Calendar examples based on PocketDiary,
+%D     subtitle=Sun and moon data calendar,
+%D       author=W. Egger,
+%D         date=\currentdate,
+%D    copyright=W. Egger,
+%D      license=Public Domain]
+
+%D This examples creates a small calendar, containing the sunrise and 
+%D sunset time as well as the lunar days for each day of a given year.
+
+%D In order to create this calendar the PocketDiary module must be installed 
+%D on the computer
+
+%D For placing collating marks on the outside of the sections, the 
+%D Collating Marks module is required.
+
+%D Load the PocketDiary module
+
+\usemodule[pocketdiary]
+
+%D Load the Collating Marks module
+
+\usemodule[collatingmarks][Collatingmarks=yes]
+ 
+%D Setup the main language. This determines the interface to be used
+
+\mainlanguage[en]
+
+
+% Setup of the variable sets for the PocketDiary module
+
+\setvariables
+  [PocketDiary]
+  [Year=2023,
+   Week=1,
+   Day=1,
+   Month=1,
+   Nextyear=no,
+   Place=Koziegłowy,
+   Country=PL]
+
+\setvariables
+  [PocketDiaryFooter]
+  [Lefttext={\jobname .pdf},
+   Centertext=\pagenumber,
+   Righttext=]
+
+\setvariables
+  [PocketDiaryColors]
+  [Separatorline=blue,
+   Gridline={s=.75}]
+
+\setvariables
+  [PocketDiaryGeoPosition]
+  [lat=52.464588,
+   lon=16.981689,
+   timezoneoffset=1,
+   continent=EU] %EU, US or empty for no DST
+
+
+%D Choose and setup the desired font to be used
+
+\setupbodyfont[ibmplex,ss,10pt]
+
+%D Make the document doublesided and switch off automatic page number placement
+
+\setuppagenumbering[alternative=doublesided,location=]
+
+%D Setup paper size
+
+\setuppapersize[A6][A4]
+
+%D Setup the layout of the page
+
+\setuplayout
+  [topspace=.6cm,
+   backspace=.6cm,
+   header=2\bodyfontsize,
+   headerdistance=.5\bodyfontsize,
+   footer=1.2\bodyfontsize,
+   footerdistance=.5\bodyfontsize,
+   margin=0pt,
+   height=middle,
+   width=88mm,
+   location=middle]
+
+
+%D Setup page arrangement
+
+\setuparranging[2*4*2]
+
+% Setup the variables for the Collating Marks module
+
+\setupMPvariables % for collatingmarks
+   [pages=8,  % pages per sheet of paper doublesided
+    sheets=2,  % sheets of paper used per section
+    horpageshift=0mm]
+
+%D Let lua do the calculations
+
+\startluacode
+
+local report = logs.reporter("Sundata calendar")
+
+function thirddata.diary.year_of_monthtables(
+  year,lat,lon,timeoffset,continent)
+  
+  report("Working in function: diary.year_of_monthtables")
+  
+  local dst_start,dst_stop = thirddata.diary.DST(year,continent)
+  
+  report("DST start: %s, DST stop: %s",dst_start,dst_stop)
+    
+--  for i= 1,12 do
+  for i= 4,4 do
+    local monthname = string.lower(os.date
+                      ("%B",os.time{year=year,month=i,day=1}))
+    
+    context.setupheadertexts(
+      {
+        function()
+          context("\\bf")
+          context.labeltext(monthname)
+          return true
+        end
+      },
+      {
+        function()
+          context(year)
+          return true
+        end
+      },
+      { 
+        function()
+          context("\\bf")
+          context.labeltext(monthname)
+          return true
+        end
+      },
+      {
+        function()
+          context(year)
+          return true
+        end
+      })
+      
+    thirddata.diary.monthblock(i,year,lat,lon,timeoffset,dst_start,dst_stop)
+  end
+end
+
+function thirddata.diary.monthblock(
+  month,year,lat,lon,timeoffset,dst_start,dst_stop)
+  
+  report("Working in function diary.monthblock")
+  
+  local c = thirddata.calendar.month(month,year) --returns number of weeks in a given month
+  local wkf = thirddata.calendar.weeknumber(1,month,year)
+  
+  --report("Weeks in the selected month: %s", c)
+  --report("Week number : %s", wkf)
+  
+  local nofdays = 1
+  
+  if month == 2 and thirddata.calendar.isleapyear(year) ~= 365 then
+    nofdays = thirddata.calendar.nofdays_month(month,year) + 1
+  else
+    nofdays = thirddata.calendar.nofdays_month(month,year)
+  end
+  
+  report("Number of days in month: %s", nofdays)
+  
+  local wkl = thirddata.calendar.weeknumber(nofdays,month,year)
+  
+  local monthname = thirddata.calendar.select_nameofmonth(month,year)
+
+  context.bTABLE({setups="table:monthblock"})
+  
+    for i = 1,nofdays do
+    
+      local ordinalday  = thirddata.calendar.ordinalday(i,month,year)
+      local weeknumber = thirddata.calendar.weeknumber(i,month,year)
+      local holiday    = thirddata.calendar.checkchristianfeast(i,month,year) 
+      local moondata   = thirddata.moonphase.lunardays(year,month,i)
+      local sunrise,sunset,lighthours =
+              thirddata.srss.sundata(
+                i,month,year,lat,lon,timeoffset,dst_start,dst_stop)
+    
+      context.bTR()
+         context.bTD()
+          
+          local dayname = string.lower(os.date
+                            ("%a",os.time{day=i,month=month,year=year}))
+          
+          --report("Dayname: %s",dayname)
+          context.starttabulate{"|lw(0.1\\textwidth)|lw(0.06\\textwidth)|l|"}
+            context.NC()
+              if  dayname == "sun" or holiday ~= "" and holiday ~= "asw" then
+                local dnu = i
+                local dna = dayname
+                context.color({"red"},
+                function() context(dnu) end)                --day number
+                context("~")
+                context.color({"red"},
+                function() context.labeltext(dna) end)--dayname
+              else  
+                context(i)                 --day
+                context("~")
+                context.labeltext(dayname) --dayname
+              end
+            context.NC()
+            context.switchtobodyfont{"6pt"}
+              context.labeltext("week")
+              context(": ")
+              context(weeknumber)
+            context.NC()
+              context.switchtobodyfont{"6pt"}
+              context.labeltext("day")
+              context(": ")
+              context(ordinalday)
+            context.NC()
+            context.NR()
+          context.stoptabulate()
+        context.eTD()
+        context.bTD()
+          context.starttabulate{"|lw(0.2\\textwidth)|l|l|l|l|"}
+          context.NC()
+            if holiday == "" then
+              context.strut()
+              context.NC()
+              context.NC()
+              context.NC()
+              context.NC()              
+            else
+              context.labeltext(holiday)
+              context.NC()
+              context.NC()
+              context.NC()
+              context.NC()            
+            end
+            context.NR()
+              context.NC()
+                if tonumber(moondata) then
+                  context.labeltext("moondays")
+                else
+                  context.labeltext("moon")
+                end          
+                  context(":~")
+                  context(moondata)
+               context.NC()
+                 --context.labeltext("sunrise")
+                 context("\\SunA[background=Sunrise]{}")
+                 context("\\quad :~")
+                 context(sunrise)
+               context.NC()
+                 context("\\SunA[background=Sunset]{}") 
+                 context("\\quad :~")
+                 context(sunset)
+               context.NC()
+                 context("\\SunB[background=Light]{}")
+                 context("~:~")
+                 context(lighthours)
+               context.NC()
+             context.NR()
+           context.stoptabulate()
+        context.eTD()
+      context.eTR()
+    end
+  context.eTABLE()
+  context.page()
+end
+
+\stopluacode   
+
+%D Setup the table for the months
+
+\startsetups[table:monthblock]
+  \setupTABLE[split=yes]
+  \setupTABLE[each][each][frame=on]
+  \setupTABLE[r][each][offset=0pt,loffset=3pt,roffset=3pt,align=lohi] 
+  \setupTABLE[c][1][width=0.35\textwidth,align=lohi] 
+  \setupTABLE[c][2][style={\switchtobodyfont[6pt]},width=0.65\textwidth] \stopsetups
+
+%D Define the macro to call lua
+
+\define[5]\Yearofmonthtables{\ctxlua{thirddata.diary.year_of_monthtables(#1,#2,#3,#4,#5)}}
+
+%D Create a buffer containing all required variables for the calculations
+
+\startbuffer[Yearofmonthtables]
+  \Yearofmonthtables %Year,lat,lon,timeoffset,dst_start,dst_stop
+     {\getvariable{PocketDiary}{Year}}
+     {\getvariable{PocketDiaryGeoPosition}{lat}}
+     {\getvariable{PocketDiaryGeoPosition}{lon}}
+     {\getvariable{PocketDiaryGeoPosition}{timeoffset}}
+     {"\getvariable{PocketDiaryGeoPosition}{continent}"}
+\stopbuffer
+
+%D Setup label texts for the different interfaces
+
+\setuplabeltext[en][week=Wk.~]
+\setuplabeltext[de][week=Wo.~]
+
+\setuplabeltext[en][title=Title]
+\setuplabeltext[nl][title=Titel]
+\setuplabeltext[de][title=Titel]
+\setuplabeltext[fr][title=Titre]
+\setuplabeltext[it][title=Titolo]
+\setuplabeltext[es][title=Título]
+
+\setuplabeltext[en][author=Author]
+\setuplabeltext[nl][author=Auteur]
+\setuplabeltext[de][author=Autor]
+\setuplabeltext[fr][author=Auteur]
+\setuplabeltext[it][author=autore]
+\setuplabeltext[es][author=Autor]
+
+\setuplabeltext[en][typography=Typography]
+\setuplabeltext[nl][typography=Typografie]
+\setuplabeltext[de][typography=Typographie]
+\setuplabeltext[fr][typography=Typographie]
+\setuplabeltext[it][typography=Tipografia]
+\setuplabeltext[es][typography=Tipografía]
+
+\setuplabeltext[en][compilation=Compilation date]
+\setuplabeltext[nl][compilation=Compilatie datum]
+\setuplabeltext[de][compilation=Kompilationsdatum]
+\setuplabeltext[fr][compilation=Date de compilation]
+\setuplabeltext[it][compilation=Dato di compilazione]
+\setuplabeltext[es][compilation=Fecha de compilación]
+
+%D Setup the document at the \TEX\ side
+\starttext
+
+%D Add a title page
+
+ \startstandardmakeup[page=yes,doublesided=no]
+   \strut
+   \startalignment [middle]
+      \godown[.3\textheight]
+       \startmode[**en]
+        {\bfc \labeltext{sunstar}- and \labeltext{moon}-\labeltext{calendar}}
+       \stopmode
+       \startmode[**nl]
+        {\bfc \labeltext{sunstar}- en \labeltext{moon}-\labeltext{calendar}}
+       \stopmode
+       \startmode[**de]
+         {\bfc \labeltext{sunstar}n- und \labeltext{moon}-\labeltext{calendar} }
+       \stopmode
+       \startmode[**fr]
+        {\bfc \labeltext{calendar} du \labeltext{sunstar} et de la \labeltext{moon}}
+       \stopmode
+       \startmode[**it]
+        {\bfc \labeltext{calendar} di \labeltext{sunstar} e della \labeltext{moon}}
+       \stopmode
+       \startmode[**es]
+        {\labeltext{calendar} del \labeltext{sunstar} y la
+          \labeltext{moon}}
+       \stopmode
+       \blank
+       {\bfb \getvariable{PocketDiary}{Place}}
+      \vfill
+      {\tfa \getvariable{PocketDiary}{Year}}
+    \stopalignment
+    \vfil
+  \stopstandardmakeup
+
+%D Add an editorial and info page
+
+  \startstandardmakeup[page=yes,doublesided=no]
+    \starttabulate[|l|p|]
+        \NC \labeltext{title}
+       \EQ
+         \startmode[**en]
+         {\labeltext{sunstar}- and \labeltext{moon}-\labeltext{calendar}}
+          \stopmode
+          \startmode[**nl]
+           {\labeltext{sunstar}- en \labeltext{moon}-\labeltext{calendar}}
+          \stopmode
+          \startmode[**de]
+            {\labeltext{sunstar}n- und \labeltext{moon}-\labeltext{calendar} }
+          \stopmode
+          \startmode[**fr]
+           {\labeltext{calendar} du \labeltext{sunstar} et de la
+              \labeltext{moon}}
+          \stopmode
+          \startmode[**it]]
+           {\labeltext{calendar} di \labeltext{sunstar} e della
+             \labeltext{moon}}
+          \stopmode
+          \startmode[**es]
+           {\labeltext{calendar} del \labeltext{sunstar} y la
+             \labeltext{moon}}
+          \stopmode
+       \NC\NR
+       \NC \labeltext{author}
+       \EQ \getvariable{PocketDiaryAddress}{Forename}~
+           \getvariable{PocketDiaryAddress}{Familyname} \NC\NR
+       \NC \labeltext{typography} \EQ \CONTEXT\ with \LUAMETATEX \NC\NR
+       \NC \labeltext[compilation] \EQ \currentdate \NC\NR
+     \stoptabulate
+     \vfil
+     \startmode[**en]
+       This calendar is generated for \getvariable{PocketDiary}{Place},
+         \getvariable{PocketDiary}{Country}
+     \stopmode
+     \startmode[**de]
+       Dieser Kalender ist berechnet für \getvariable{PocketDiary}{Place},
+         \getvariable{PocketDiary}{Country}
+     \stopmode
+     \startmode[**nl]
+       Deze kalender is opgemaakt voor \getvariable{PocketDiary}{Place},
+         \getvariable{PocketDiary}{Country}
+     \stopmode
+     \startmode[**fr]
+       Ce calendrier est fait pour \getvariable{PocketDiary}{Place},
+         \getvariable{PocketDiary}{Country}
+     \stopmode
+     \startmode[**it]
+      Questo calendario è prodotto per \getvariable{PocketDiary}{Place},
+        \getvariable{PocketDiary}{Country}
+     \stopmode
+     \startmode[**es]
+       Este calendario está calculado para \getvariable{PocketDiary}{Place},
+         \getvariable{PocketDiary}{Country}
+     \stopmode
+     \starttabulate[|l|r|]
+        \NC Longitude \EQ \getvariable{PocketDiaryGeoPosition}{lon} \NC\NR
+       \NC Latitude  \EQ  \getvariable{PocketDiaryGeoPosition}{lat} \NC\NR
+     \stoptabulate
+  \stopstandardmakeup
+
+%D Call the buffer for creating the contents of the calendar
+
+  \getbuffer[Yearofmonthtables]
+
+\stoptext

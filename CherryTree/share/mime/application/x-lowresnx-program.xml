@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-lowresnx-program">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>LowRes NX program</comment>
+  <comment xml:lang="uk">програма LowRes NX</comment>
+  <comment xml:lang="tr">LowRes NX programı</comment>
+  <comment xml:lang="sv">LowRes NX-program</comment>
+  <comment xml:lang="sr-Cyrl">LowRes NX програм</comment>
+  <comment xml:lang="sq">Program LowRes NX</comment>
+  <comment xml:lang="sl">Program LowRes NX</comment>
+  <comment xml:lang="ru">Программа LowRes NX</comment>
+  <comment xml:lang="ro">program LowRes NX</comment>
+  <comment xml:lang="pt-BR">Programa LowRes NX </comment>
+  <comment xml:lang="pl">Program LowRes NX</comment>
+  <comment xml:lang="oc">programa LowRes NX</comment>
+  <comment xml:lang="ko">LowRes NX 프로그램</comment>
+  <comment xml:lang="kk-Cyrl">LowRes NX бағдарламасы</comment>
+  <comment xml:lang="fr">programme LowRes NX</comment>
+  <comment xml:lang="fi">LowRes NX-ohjelma</comment>
+  <comment xml:lang="et">LowRes NX programm</comment>
+  <comment xml:lang="es">programa LowRes NX</comment>
+  <comment xml:lang="en-GB">LowRes NX program</comment>
+  <comment xml:lang="de">LowRes-NX-Programm</comment>
+  <comment xml:lang="ar">برنامج LowRes NX</comment>
+  <sub-class-of type="text/plain"/>
+  <glob pattern="*.nx"/>
+</mime-type>

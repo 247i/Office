@@ -1,0 +1,426 @@
+%D \module
+%D   [     file=t-calendar-examples.tex
+%D      version=2023.04.15,
+%D        title=Calendar examples based on PocketDiary,
+%D     subtitle=A5 format 1 day per page calendar,
+%D       author=W. Egger,
+%D         date=\currentdate,
+%D    copyright=W. Egger,
+%D      license=Public Domain]
+
+%D This is an example of how to use the PocketDiary-module outside the built-in
+%D structure of a PocketDiary.
+%D In order to use this example you need to have the PocketDiary-module
+%D installed from:
+%D https://modules.contextgarden.net/cgi-bin/module.cgi/action=view/id=132
+%D If you want collating marks placed on the outermost sheet of a section, 
+%D then you need to install also the Collatingmarks-module from:
+%D https://modules.contextgarden.net/cgi-bin/module.cgi/action=view/id=129
+%D The used imposition scheme is contained in the \CONTEXT\ distro.
+
+%D This is an example how to prepare a calendar, where each page contains one
+%D day. On  the left side there is a time-schedule starting at 06:00 ending
+%D at 22:00. The header contains left the month and right the year. Below the
+%D header there is a table showing left the day and the short dayname followed
+%D by
+%D the weeknumber and the daynumber of the year. If the day in question is a
+%D Chrstian holiday, then the name of it is stated in the center. 
+%D To the right astronomical data
+%D are shown: Lunar days/moonphase, sun rise, sun set and light hours.
+%D In order to have complete sections a number of pages with lines are added.
+
+\usemodule[pocketdiary]
+\usemodule[collatingmarks][Collatingmarks=yes]
+
+%D Setup the language to be used: EN,DE,NL,FR,IT,ES
+
+\mainlanguage[en]
+
+%D The variable sets for the PocketDiary module:
+
+\setvariables
+  [PocketDiary]
+  [Year=2023,
+   Week=1,
+   Day=1,
+   Month=1,
+   Nextyear=yes,
+   Yearnext=2024]
+
+\setvariables
+  [PocketDiaryFooter]
+  [Lefttext={\jobname .pdf},
+   Centertext=\pagenumber,
+   Righttext=]
+
+\setvariables
+  [PocketDiaryColors]
+  [Separatorline=blue,
+   Gridline={s=.75}]
+
+\setvariables %Koziegłowy 52.467860 16.981240
+  [PocketDiaryGeoPosition]
+  [lat=52.467860, 
+   lon=16.981240,
+   timezoneoffset=1,
+   continent=US] % EU, US or empty for no Daylight Saving Time (DST)
+
+\setvariables
+  [PocketDiaryAddress]
+  [Familyname={\bf YourFamilyName},
+   Forename=YourName,
+   Street=YourStreet and Number,
+   Zipcode=YourPostalCode,
+   City=YourPlace,
+   Country=YourCountry,
+   Phone=YourPhoneNumber,
+   Mobile=YourMobilePhoneNumber,
+   E-mail=YourEmail@YourProvider,
+   Web=YourWWW]
+
+\setupbodyfont[ibmplex,ss,10pt]
+
+\definefontfeature[f:Tabular][tnum=yes]
+
+\addfeature[f:Tabular]
+
+%D The document is double sided printed, the page number will be set in the
+%D \setupfootertexts:
+
+\setuppagenumbering[alternative=doublesided,location=]
+
+\setuppapersize[A5][A4,landscape]
+% \setuppapersize[A5][A5]
+
+%D Adapt the page layout to the size of the page:
+
+\setuplayout
+  [topspace=.6cm,
+   backspace=1.5cm,
+   header=2\bodyfontsize,
+   headerdistance=.5\bodyfontsize,
+   footer=1.2\bodyfontsize,
+   footerdistance=.5\bodyfontsize,
+   margin=0pt,
+   height=middle,
+   width=middle,
+   location=middle]
+
+%D Enable the imposition: 2 pages recto and verso using 4 sheets of A4 for forming one section
+
+\setuparranging[2*2*4]
+
+
+%D Setup of the Collating marks module:
+
+\setupMPvariables % for collatingmarks
+  [pages=8,  % pages per sheet of paper doublesided
+   sheets=2,  % sheets of paper used per section
+   horpageshift=-0.5mm]
+
+
+% \showframe
+
+%D Let Lua do the work:
+
+\startluacode
+
+  local report = logs.reporter("Calendar-1-day-per-page")
+  
+  function thirddata.diary.year_of_monthtables(
+    year,lat,lon,timeoffset,continent)
+    
+    report("Working in function: diary.year_of_monthtables")
+
+    for i = 1,12 do
+      local monthname = string.lower(os.date
+                        ("%B",os.time{year=year,month=i,day=1}))
+      
+      thirddata.diary.header_text(monthname,year)
+        
+      thirddata.diary.monthblock(i,year,lat,lon,timeoffset,continent)
+    end
+  end
+  
+  function thirddata.diary.monthblock(month,year,lat,lon,timeoffset,continent)
+    
+    report("Working in function diary.monthblock")
+    
+    local nofdays = 1
+    
+    local monthname = thirddata.calendar.select_nameofmonth(month,year)
+  	local yeardays   = thirddata.calendar.isleapyear(year)
+		
+    if month == 2 and yeardays == 366 then
+      nofdays = thirddata.calendar.nofdays_month(month,year) + 1
+    else
+      nofdays = thirddata.calendar.nofdays_month(month,year)
+    end
+    
+    --report("Number of days in month: %s", nofdays)
+  
+    for i = 1,nofdays do
+      local ordinalday = thirddata.calendar.ordinalday(i,month,year)
+      local weeknumber = thirddata.calendar.weeknumber(i,month,year)
+	    local dayname    = string.lower(os.date			                                      ("%a",os.time{day=i,month=month,year=year}))
+      local holiday    = thirddata.calendar.checkchristianfeast(i,month,year) 
+      local moondata   = thirddata.moonphase.lunardays(year,month,i)
+			local dst_start,dst_stop = thirddata.diary.DST(year,continent)
+      local sunrise,sunset,lighthours =
+              thirddata.srss.sundata(
+  						           i,month,year,lat,lon,timeoffset,dst_start,dst_stop)
+
+  	  if holiday ~= "" then
+  	    report("Holiday: %s", holiday)
+  	  	report("Day number: %s", i)
+  	  end
+                
+      context.bTABLE({setups="table:dayblock"})
+        context.bTR()
+           context.bTD()
+              context.starttabulate{"|lw(0.1\\textwidth)|p(0.06\\textwidth)|p|"}
+              context.NC()
+                context("\\bf")
+                --report("Daynumber: %s Month %s", i,month)
+                if  dayname == "sun" or holiday ~= "" and holiday ~= "ashw"   
+                  then  local dnu = i
+                  local dna = dayname
+                  context.color({"red"},
+                    function() context(dnu) end)          --day number
+                  context("~")
+                  context.color({"red"},
+                    function() context.labeltext(dna) end)--dayname
+                else  
+                  context(i)                 --day
+                  context("~")
+                  context.labeltext(dayname) --dayname
+                end
+              context.NC()
+                context.switchtobodyfont{"6pt"}
+                context.labeltext("week")
+                context(":")
+                context.par()
+                context(weeknumber)
+              context.NC()
+                context.switchtobodyfont{"6pt"}
+                context.labeltext("day")
+                context(":")
+                context.par()
+                context(ordinalday)
+                context("/")
+                context(yeardays)
+              context.NC()
+              context.NR()
+            context.stoptabulate()
+          context.eTD()
+          context.bTD()
+            context.starttabulate{"|lw(0.2\\textwidth)|p|p|p|p|"}
+              context.NC()
+                if holiday == "" then
+                  context.strut()
+                else
+                  context.labeltext(holiday)
+                end  
+              context.NC()
+                if tonumber(moondata) then
+                  context.labeltext("moondays")
+                else
+                  context.labeltext("moon")
+                end
+                context(":~")
+                context.par()
+                context(moondata)
+              context.NC()
+                context("\\SunA[background=Sunrise]{}")
+                context.par()
+                context(sunrise)
+              context.NC()
+                context("\\SunA[background=Sunset]{}") 
+                context.par()
+                context(sunset)
+              context.NC()
+                context("\\SunB[background=Light]{}")
+                context.par()
+                context(lighthours)
+              context.NC()            
+              context.NR()
+            context.stoptabulate()
+          context.eTD()
+        context.eTR()
+      context.eTABLE()
+      context.page()
+    end
+  end
+
+  function thirddata.diary.header_text(monthname,year)
+    context.setupheadertexts(
+      {function()
+         context("\\bf")
+         context.labeltext(monthname)
+         return true
+       end
+      },
+      {function()
+         context(year)
+         return true
+       end
+      },
+      {function()
+         context("\\bf")
+         context.labeltext(monthname)
+         return true
+       end
+      },
+      {function()
+         context(year)
+         return true
+       end
+      })
+	end
+	
+\stopluacode   
+
+%D Setup the tab;e for the day page
+
+\startsetups[table:dayblock]
+  \setupTABLE[each][each][frame=off]
+  \setupTABLE[r][each][offset=0pt,loffset=3pt,roffset=3pt,align=lohi] 
+  \setupTABLE[c][1][width=0.35\textwidth,align=lohi] 
+  \setupTABLE[c][2][style={\switchtobodyfont[6pt]},width=0.65\textwidth] \stopsetups
+
+%D Define the macro for invoking the lua calculations
+
+\define[5]\Yearofmonthtables{%
+  \ctxlua{thirddata.diary.year_of_monthtables(#1,#2,#3,#4,#5)}}
+
+%D Create a buffer containing the contents of the variables to be used
+
+\startbuffer[Yearofmonthtables]
+  \Yearofmonthtables %Year,lat,lon,timeoffset,continent
+     {\getvariable{PocketDiary}{Year}}
+     {\getvariable{PocketDiaryGeoPosition}{lat}}
+     {\getvariable{PocketDiaryGeoPosition}{lon}}
+     {\getvariable{PocketDiaryGeoPosition}{timeoffset}}
+     {"\getvariable{PocketDiaryGeoPosition}{continent}"}
+\stopbuffer
+
+%D Create a time-table in \METAFUN\ as a background to the page
+
+\startreusableMPgraphic{Time-Lines}
+  numeric w; w:= OverlaytWidth;
+  numeric h; h:= (OverlayHeight-2cm)/18;
+  numeric t;
+  path p,q;
+  p := unitsquare xscaled OverlayWidth yscaled (OverlayHeight-2cm);
+  
+  q:= llcorner p -- lrcorner p;
+  draw q withpen pencircle scaled .5pt
+      withcolor \MPcolor{Grid};
+  for i = 1 upto 17:
+    draw q  shifted (0,i*h) withpen pencircle scaled .5pt
+      withcolor \MPcolor{Grid};
+      t :=   24 - 1 - i ;
+      label.top(textext(""& decimal t & ":00"),point 0 of q) shifted (15pt,((i-1)*h)+1pt);
+  endfor; 
+\stopreusableMPgraphic
+
+%D Make the timetable available as a background on the page
+
+\defineoverlay[Textbackground][\reuseMPgraphic{Time-Lines}]
+
+%D Implement international interface:
+\setuplabeltext[en][title=Title]
+\setuplabeltext[nl][title=Titel]
+\setuplabeltext[de][title=Titel]
+\setuplabeltext[fr][title=Titre]
+\setuplabeltext[it][title=Titolo]
+\setuplabeltext[es][title=Título]
+
+\setuplabeltext[en][author=Author]
+\setuplabeltext[nl][author=Auteur]
+\setuplabeltext[de][author=Autor]
+\setuplabeltext[fr][author=Auteur]
+\setuplabeltext[it][author=autore]
+\setuplabeltext[es][author=Autor]
+
+\setuplabeltext[en][typography=Typography]
+\setuplabeltext[nl][typography=Typografie]
+\setuplabeltext[de][typography=Typographie]
+\setuplabeltext[fr][typography=Typographie]
+\setuplabeltext[it][typography=Tipografia]
+\setuplabeltext[es][typography=Tipografía]
+
+\setuplabeltext[en][compilation=Compilation date]
+\setuplabeltext[nl][compilation=Compilatie datum]
+\setuplabeltext[de][compilation=Kompilationsdatum]
+\setuplabeltext[fr][compilation=Date de compilation]
+\setuplabeltext[it][compilation=Dato di compilazione]
+\setuplabeltext[es][compilation=Fecha de compilación]
+
+%D Setup the TeX side of the document:
+
+\starttext
+
+%D Create the title pages
+
+  \startstandardmakeup[page=yes,doublesided=no]
+    \strut
+    \startalignment [middle]
+      \godown[.3\textheight]
+      {\bfa \labeltext{calendar}}
+      \vfil
+      {\bf \getvariable{PocketDiary}{Year}}
+    \stopalignment
+  \stopstandardmakeup
+
+  \startstandardmakeup[page=yes,doublesided=no]
+    \starttabulate[|l|p|]
+      \NC \labeltext{title}
+      \EQ {\bf \labeltext{calendar}} \NC\NR
+      \NC \labeltext{author}
+      \EQ \getvariable{PocketDiaryAddress}{Forename}
+          \getvariable{PocketDiaryAddress}{Familyname} \NC\NR
+      \NC \labeltext{typography} 
+      \EQ \CONTEXT\ with \LUAMETATEX \NC\NR
+      \NC \labeltext{compilation}
+      \EQ \currentdate \NC\NR
+    \stoptabulate
+  \stopstandardmakeup
+
+%D Load the Lost-Returnto template
+
+  \getbuffer[Lost-Returnto]
+  
+  \setupbackgrounds[text][background=]
+  
+  \setupbackgrounds[text][background=Textbackground]
+
+%D Insert all day pages
+  
+  \getbuffer[Yearofmonthtables]
+  
+  \setupbackgrounds[text][background=]
+
+%D Add a year table with all months
+  
+  \getbuffer[Yearcurrentplan]
+  
+  \setupheadertexts[\bfa \getvariable{PocketDiary}{Yearnext}]
+
+%D Insert a year table with all months of the following year
+  
+  \getbuffer[Yearnextplan]
+	
+%D Add some todo-lists
+
+  \dorecurse
+    {3}
+    {\getbuffer[Todo]}
+
+%D Add notes pages
+
+  \dorecurse
+    {10}
+    {\getbuffer[Lines]}
+  
+\stoptext

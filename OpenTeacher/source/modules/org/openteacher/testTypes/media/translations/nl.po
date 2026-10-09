@@ -1,0 +1,40 @@
+# Dutch translation for openteacher
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2012-04-07 20:28+0000\n"
+"Last-Translator: Marten de Vries <marten@marten-de-vries.nl>\n"
+"Language-Team: Dutch <nl@li.org>\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:43+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: media.py:66
+msgid "Name"
+msgstr "Naam"
+
+#: media.py:67
+msgid "Question"
+msgstr "Vraag"
+
+#: media.py:68
+msgid "Answer"
+msgstr "Antwoord"
+
+#: media.py:69
+msgid "Given answer"
+msgstr "Gegeven antwoord"
+
+#. TRANSLATORS: the label of a table column that shows if the user answered a word in the same row correctly.
+#: media.py:71
+msgid "Correct"
+msgstr "Correct"

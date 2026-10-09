@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/x-gettext-translation">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Translation file</comment>
+  <comment xml:lang="zh-Hant-TW">翻譯檔</comment>
+  <comment xml:lang="uk">Файл перекладу</comment>
+  <comment xml:lang="tr">Çeviri dosyası</comment>
+  <comment xml:lang="sv">Översättningsfil</comment>
+  <comment xml:lang="sr-Cyrl">Датотека превода</comment>
+  <comment xml:lang="sq">Kartelë përkthimi</comment>
+  <comment xml:lang="sl">Prevajalska datoteka</comment>
+  <comment xml:lang="ru">Файл перевода</comment>
+  <comment xml:lang="ro">fișier de traducere</comment>
+  <comment xml:lang="pt-BR">Arquivo de tradução</comment>
+  <comment xml:lang="pl">Plik tłumaczenia</comment>
+  <comment xml:lang="oc">fichièr de traduccion</comment>
+  <comment xml:lang="nn">Omsetjingsfil</comment>
+  <comment xml:lang="lt">Vertimo failas</comment>
+  <comment xml:lang="ko">번역 파일</comment>
+  <comment xml:lang="kk-Cyrl">Аудармалар файлы</comment>
+  <comment xml:lang="kab">Afaylu n tsuqilt</comment>
+  <comment xml:lang="ja">翻訳文書</comment>
+  <comment xml:lang="it">File traduzione</comment>
+  <comment xml:lang="id">Berkas terjemahan</comment>
+  <comment xml:lang="hr">Datoteka prijevoda</comment>
+  <comment xml:lang="hi">अनुवाद फाइल</comment>
+  <comment xml:lang="he">קובץ תרגום</comment>
+  <comment xml:lang="gl">Ficheiro de traducións</comment>
+  <comment xml:lang="fur">File di traduzion</comment>
+  <comment xml:lang="fr">Fichier de traduction</comment>
+  <comment xml:lang="fi">Kielipaketti</comment>
+  <comment xml:lang="eu">Itzulpen-fitxategia</comment>
+  <comment xml:lang="et">Tõlkefail</comment>
+  <comment xml:lang="es">archivo de traducción</comment>
+  <comment xml:lang="en-GB">Translation file</comment>
+  <comment xml:lang="de">Übersetzungsdatei</comment>
+  <comment xml:lang="ca">fitxer de traduccions</comment>
+  <comment xml:lang="bg">Превод</comment>
+  <comment xml:lang="be-Cyrl">файл перакладу</comment>
+  <comment xml:lang="ar">ملف ترجمة</comment>
+  <comment xml:lang="af">Vertaallêer</comment>
+  <sub-class-of type="text/plain"/>
+  <glob pattern="*.po"/>
+  <alias type="text/x-po"/>
+  <alias type="application/x-gettext"/>
+</mime-type>

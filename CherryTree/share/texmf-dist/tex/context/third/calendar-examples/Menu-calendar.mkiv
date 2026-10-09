@@ -1,0 +1,313 @@
+%D \module
+%D   [     file=t-calendar-examples.tex
+%D      version=2023.04.15
+%D        title=Calendar examples based on PocketDiary
+%D     subtitle=Menu calendar,
+%D       author=W. Egger,
+%D         date=\currentdate
+%D    copyright=W. Egger
+%D      license=Public Domain
+
+
+%D This is an example of how to use the PocketDiary-module outside the built-in
+%D structure of a PocketDiary.
+%D In order to use this example you need to have the PocketDiary-module
+%D installed from:
+%D https://modules.contextgarden.net/cgi-bin/module.cgi/action=view/id=132
+%D
+%D If you want collating marks placed on the outermost sheet of a section, 
+%D then you need to install also the Collatingmarks-module from:
+%D https://modules.contextgarden.net/cgi-bin/module.cgi/action=view/id=129
+%D The used imposition scheme is contained in the \CONTEXT\ distribution.
+
+%D Load the PocketDiary module
+
+\usemodule[pocketdiary]
+
+%D Load the Collating marks module
+
+\usemodule[collatingmarks][Collatingmarks=yes]
+
+%% Choose and setup the desired font
+ 
+\setupbodyfont[ibmplex,ss,10pt]
+
+%D Add a path to the picture placed on page 3:
+
+\setupexternalfigures
+  [directory=/Path-to-the-picture/]
+
+%D Choose the main language which determines the interface:
+
+\mainlanguage[en]
+
+%D This document will be doublesided, the pagenumber will be placed in the
+%D footer by means of \type{\setupfootertexts}:
+
+\setuppagenumbering[alternative=doublesided,location=]
+
+%D The calendar has a pagesize of A6 and with the imposition 4 pages recto and
+%D verso are placed on a A4. Two sheets of A4 form one section:
+
+%D Setup paper size and map it on the size of the print paper
+
+\setuppapersize[A6][A4]
+
+%D Invoke the arranging of the pages
+
+\setuparranging[2*4*2]
+
+%D Setup the appropriate information for the collating marks module:
+
+\setupMPvariables
+   [pages=8,   % pages per sheet of paper doublesided
+    sheets=2,  % sheets of paper used per section
+    horpageshift=0mm]
+
+
+%D Adapt the layout of the page to the size of the page:
+
+\setuplayout
+  [topspace=.6cm,
+  backspace=.6cm,
+  header=2\bodyfontsize,
+  headerdistance=.5\bodyfontsize,
+  footer=1.2\bodyfontsize,
+  footerdistance=.5\bodyfontsize,
+  margin=0pt,
+  height=middle,
+  width=middle,
+  location=middle]
+
+%D Setup the variable sets from the PocketDiary module to be set:
+
+\setvariables
+  [PocketDiary]
+  [Year=2023]
+
+\setvariables
+  [PocketDiaryFooter]
+  [Lefttext=\labeltext{menu}-\labeltext{calendar},
+   Centertext=\pagenumber,
+   Righttext=\getvariable{PocketDiary}{Year}]
+
+\setvariables
+  [PocketDiaryColors]
+  [Separatorline=blue,
+   Gridline={s=.75}]
+
+%D The data are presented in table form. The setup of the table is
+%D as follows:
+ 
+\startsetups table:week
+   \setupTABLE[split=yes]
+   \setupTABLE[c][1][width=.35\textwidth,frame=off]
+   \setupTABLE[c][2][width=.65\textwidth,frame=off]
+   \setupTABLE[r][height=2\lineheight,align=lohi]
+   \setupTABLE[r][2,3,5,6,8,9,11,12,14,15,17,18,20,21][bottomframe=on]
+\stopsetups
+
+%D There are currently 6 interfaces supported: EN,DE,NL,FR,IT,ES
+%D Create some label texts for each language
+
+%D English interface
+
+\setuplabeltext[en][menu=Menu]
+\setuplabeltext[en][comment=Comment]
+
+%D German interface
+
+\setuplabeltext[de][menu=Menü]
+\setuplabeltext[de][comment=Kommentar]
+
+%D French interface
+
+\setuplabeltext[fr][menu=Menu]
+\setuplabeltext[fr][comment=Commentaire]
+
+%D Dutch interface
+
+\setuplabeltext[nl][menu=Menu]
+\setuplabeltext[nl][comment=Commentaar]
+
+%D Italian interface
+
+\setuplabeltext[it][menu=Menu]
+\setuplabeltext[it][comment=Commento]
+
+%D Spanish interface
+
+\setuplabeltext[es][menu=Menú]
+\setuplabeltext[es][comment=Comentario]
+
+
+%D Let lua perform all the magic:
+
+\startluacode
+
+  local report = logs.reporter("Menu calendar")
+  
+  function thirddata.calendar.menuweektable(mondaytimestamp,year,w)
+    local stamp = mondaytimestamp
+    local year = year
+    local week = w
+    local daynumber,dayname,monthname,holiday
+    
+    local day = stamp + 1 * 24 * 60 * 60
+    
+    report("Working in function: thirddata.calendar.menuweektable")
+    
+    local monthname = string.lower(os.date("%B",day))
+    
+    --report("Month: %s Week: %s", monthname,week)
+    
+    thirddata.calendar.myheadertext(monthname,week)
+    
+    context.bTABLE({setups="table:week"})
+    
+    for i = 1,7 do
+      local day = stamp + i * 24 * 60 * 60
+
+     --report("Day-inloop: %s", day)
+
+      daynumber   = tonumber(os.date("%d",day)) --day number
+      dayname     = string.lower(os.date("%a",day)) -- day name short
+      monthnumber = tonumber(os.date("%m",day)) -- month name
+      holiday     = thirddata.calendar.checkchristianfeast(daynumber,monthnumber,year) -- Christian holida
+
+      if holiday ~= "" then
+        report("Holiday (before table row): %s", holiday)
+        report("Day number (before table row): %s", daynumber)
+        report("Day name (before table row): %s",dayname)
+      end
+      
+      context.bTR()
+        context.bTD({style="bfa"})
+
+          if dayname == "sun"  or holiday ~= "" and f ~= "ashw" then
+            local dnu = daynumber
+            local dna = dayname
+            context.color({"red"},function() context(dnu) end)
+            context("~")
+            context.color({"red"},function() context.labeltext(dna) end)
+          else
+            context(daynumber)
+            context("~")
+            context.labeltext(dayname)
+          end
+        context.eTD()
+        context.bTD()
+          context.labeltext(holiday)
+        context.eTD()
+      context.eTR()
+      context.bTR()
+        context.bTD({nx="2"})
+          context.labeltext("menu")
+        context.eTD()
+      context.eTR()
+      context.bTR()
+        context.bTD({nx="2"})
+          context.labeltext("comment")
+        context.eTD()
+      context.eTR()
+    end
+    context.eTABLE()
+    context.page({"yes"})
+  end
+  
+  function thirddata.calendar.myheadertext(monthname,week)
+  
+    report("Working in function myheadertext")
+    
+    context.setupheadertexts{
+      function()
+        context("\\bgroup\\bfa")
+        context.labeltext(monthname)
+        context("\\egroup")
+        context("\\hfill")
+        context.labeltext("week")
+        context(": ")
+        context(week)
+        return true
+      end}
+  end
+  
+  function thirddata.calendar.week(weeknumber,year)
+     local w = weeknumber
+     local year = year
+     local month = thirddata.calendar.select_month(1,w,year)
+     local mondaytimestamp = thirddata.calendar.weekcalendar(w,month,year)
+  
+     report("Working in function: thirddata.calendar.week")
+     --report("Mondaytimestamp %s", mondaytimestamp)
+     
+     thirddata.calendar.menuweektable(mondaytimestamp,year,w)
+  end
+
+\stopluacode
+
+%D We need a macro to call the lua-code: this macro has two parameters 
+%D week number and year
+
+\define[2]\MenuWeektable{\ctxlua{thirddata.calendar.week(#1,#2)}}
+
+% \showframe
+
+%D The setup of the document at the TeX-side:
+
+\starttext
+
+%D Add a title page
+
+  \startstandardmakeup[page=yes,doublsided=yes]
+    \strut
+    \godown[.3\textheight]
+    \startalignment [middle]
+      {\bfc \labeltext{menu}-\labeltext{calendar}}
+      \vfill
+      {\tfa \getvariable{PocketDiary}{Year}}
+    \stopalignment
+    \vfil
+  \stopstandardmakeup
+
+%D Add a picture on page 3
+
+  \setupheadertexts[][]
+  
+  \strut\vfil
+
+  \startplacefigure
+    [number=,
+     title=,
+     location=middle]
+     {\externalfigure[YourPicture.jpg][width=0.75\textwidth]}
+  \stopplacefigure
+
+  \vfill
+
+  \page
+
+%D Call the footer text setups
+
+  \setups{Footertext}
+  
+%D Place the week tables for the indicated year
+
+  \dorecurse{52}
+     {\setvariables
+        [PocketDiary]
+        [Week=\recurselevel]
+     \MenuWeektable{\recurselevel}{\getvariable{PocketDiary}{Year}}\page}
+
+  \page
+
+%D Add some empty pages for notes
+
+  \setupheadertexts[\bf \labeltext{notes}]
+
+  \dorecurse
+    {3}
+    {\strut\page}
+
+\stoptext
+

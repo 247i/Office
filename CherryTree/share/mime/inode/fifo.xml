@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="inode/fifo">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Pipe</comment>
+  <comment xml:lang="zh-Hant-TW">管線 (Pipe)</comment>
+  <comment xml:lang="uk">Канал</comment>
+  <comment xml:lang="tr">Boru</comment>
+  <comment xml:lang="sv">Rör</comment>
+  <comment xml:lang="sr-Cyrl">Спојка</comment>
+  <comment xml:lang="sl">Cev</comment>
+  <comment xml:lang="ru">Канал</comment>
+  <comment xml:lang="ro">conductă</comment>
+  <comment xml:lang="pt-BR">Pipe</comment>
+  <comment xml:lang="pl">Potok</comment>
+  <comment xml:lang="oc">tub</comment>
+  <comment xml:lang="nn">Røyr</comment>
+  <comment xml:lang="ko">파이프</comment>
+  <comment xml:lang="kk-Cyrl">Арна</comment>
+  <comment xml:lang="ka">ფაიფი</comment>
+  <comment xml:lang="ja">パイプ</comment>
+  <comment xml:lang="it">Pipe</comment>
+  <comment xml:lang="id">Pipa</comment>
+  <comment xml:lang="hr">Slijed obrade podataka</comment>
+  <comment xml:lang="hi">पाइप</comment>
+  <comment xml:lang="he">צינור</comment>
+  <comment xml:lang="gl">Tubería</comment>
+  <comment xml:lang="fur">Condot</comment>
+  <comment xml:lang="fr">Pipe</comment>
+  <comment xml:lang="fi">Putki</comment>
+  <comment xml:lang="eu">Kanalizazioa</comment>
+  <comment xml:lang="et">Lihtjärjekorratoru</comment>
+  <comment xml:lang="es">canalización</comment>
+  <comment xml:lang="en-GB">Pipe</comment>
+  <comment xml:lang="de">Datenstrom</comment>
+  <comment xml:lang="ca">canonada</comment>
+  <comment xml:lang="bg">Канал</comment>
+  <comment xml:lang="be-Cyrl">канал</comment>
+  <comment xml:lang="ar">أنبوب</comment>
+</mime-type>

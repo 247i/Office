@@ -1,0 +1,92 @@
+# Dutch translation for openteacher
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:38+0200\n"
+"PO-Revision-Date: 2013-04-05 14:22+0000\n"
+"Last-Translator: Marten de Vries <marten@marten-de-vries.nl>\n"
+"Language-Team: Dutch <nl@li.org>\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:44+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: getting-started.html:2
+msgid "Using OpenTeacher 3: A Quick Start"
+msgstr "OpenTeacher 3 gebruiken: Snel aan de slag"
+
+#: getting-started.html:6
+msgid ""
+"This quick start guide shows you how to do a simple self-test using "
+"OpenTeacher. We're going to learn counting to ten in French today! For this "
+"example we are assuming that you already know English, and you want to learn "
+"French."
+msgstr ""
+
+#: getting-started.html:10
+msgid ""
+"The screenshots are all taken in Ubuntu, but this should all work exactly "
+"the same in Windows and Mac OS X."
+msgstr ""
+"De schermafbeeldingen zijn gemaakt onder Ubuntu, maar alles zou precies "
+"hetzelfde moeten werken onder Windows en Mac OS X."
+
+#: getting-started.html:14
+msgid ""
+"Start OpenTeacher and click the 'Create words lesson' button to make a new "
+"word lesson."
+msgstr ""
+
+#: getting-started.html:19
+msgid ""
+"Enter a title for the word list you are going to enter. Also enter the known "
+"language, which, in our case, is English, and the foreign language (the "
+"language you want to learn), which, in our case, is French."
+msgstr ""
+"Voer een titel in voor de woordjeslijst die u gaat invoeren. Voer ook de al "
+"bekende taal in, in ons geval Engels, en de onbekende taal (de taal die u "
+"wilt leren), in ons geval Frans."
+
+#: getting-started.html:21
+msgid ""
+"Then enter all words you want to learn in the words table, you can go to the "
+"next question or answer column by pressing tab or '='. See the screenshot "
+"for an example."
+msgstr ""
+
+#: getting-started.html:26
+msgid ""
+"Click the 'Teach me!' tab on the bottom to start the test. You can now "
+"specify in what way you want OpenTeacher to question you, but the defaults "
+"will do in our case. So, we click the 'I'm ready, start the lesson!' button."
+msgstr ""
+
+#: getting-started.html:28
+msgid ""
+"A word will now be asked to you in your own language, and you'll have to "
+"type the translation of it in the text field. When you have entered the "
+"translation, press Enter on your keyboard, or click 'Check!'"
+msgstr ""
+
+#: getting-started.html:32
+msgid ""
+"If you entered the right translation, the next question will be asked to "
+"you. If you did not enter the right translation, OpenTeacher will show you "
+"the correct answer, and the difference from your answer."
+msgstr ""
+"Als u de juiste vertaling heeft ingevoerd, zal de volgende vraag gesteld "
+"worden. Als dat niet het geval was, zal OpenTeacher het correcte antwoord "
+"laten zien en het verschil met uw antwoord."
+
+#: getting-started.html:37
+msgid ""
+"Once the test is completed, OpenTeacher will tell you if you did well by "
+"giving you a note."
+msgstr ""

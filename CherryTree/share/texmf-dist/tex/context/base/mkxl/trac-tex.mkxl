@@ -1,0 +1,65 @@
+%D \module
+%D   [       file=trac-tex,
+%D        version=2009.07.20,
+%D          title=\CONTEXT\ Tracking Macros,
+%D       subtitle=\TEX,
+%D         author=Hans Hagen,
+%D           date=\currentdate,
+%D      copyright={PRAGMA ADE \& \CONTEXT\ Development Team}]
+%C
+%C This module is part of the \CONTEXT\ macro||package and is
+%C therefore copyrighted by \PRAGMA. See mreadme.pdf for
+%C details.
+
+\writestatus{loading}{ConTeXt Tracking Macros / TeX}
+
+\registerctxluafile{trac-tex}{autosuffix}
+
+%D All tracing flags at the \TEX\ end will be redone this way so
+%D that we have a similar mechanism for \TEX\ and \LUA. Also, the
+%D currently used if's might become conditionals.
+
+\unprotect
+
+% \def\enabletextracerwhatever {...}
+% \def\disabletextracerwhatever{...}
+
+\mutable\lettonothing\alltextracers % so that we can report available tracers
+
+\permanent\protected\def\installtextracer#1%
+  {\addtocommalist{#1}\alltextracers}
+
+\permanent\protected\def\enabletextracers [#1]{\processcommalist[#1]\syst_textracers_enable }
+\permanent\protected\def\disabletextracers[#1]{\processcommalist[#1]\syst_textracers_disable}
+
+\def\syst_textracers_enable #1{\begincsname  enabletracer#1\endcsname}
+\def\syst_textracers_disable#1{\begincsname disabletracer#1\endcsname}
+
+%D The next one is for Taco, although we can use directives as well which is the
+%D preferred way!
+
+\permanent\protected\def\nomkivstatistics{\enabledirectives[system.nostatistics]}
+
+%D Finally this one got moved from cont-exp to here (replacing the old one):
+
+\installcorenamespace{profilemacro}
+
+\permanent\protected\def\profilemacro#1% an oldie, but modernized a bit
+  {\edef\p_name{\csstring#1}%
+   \ifcsname\??profilemacro\p_name\endcsname \else
+     \aliased\letcsname\??profilemacro\p_name\endcsname#1%
+   % \enforced\protected\xdef#1%
+     \untraced\enforced\ifflags#1\protected\protected\fi\xdef#1%
+       {\noexpand\clf_profilemacro\noexpand#1%
+        \expandafter\noexpand\csname\??profilemacro\p_name\endcsname}%
+   \fi}
+
+% \appendtoks
+%     {\appendtoks\showprofiledmacros\to\everystoptext}%
+% \to \everydump
+
+\appendtoks
+    \showprofiledmacros
+\to \everystoptext
+
+\protect \endinput

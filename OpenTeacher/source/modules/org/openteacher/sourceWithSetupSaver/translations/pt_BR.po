@@ -1,0 +1,96 @@
+# Brazilian Portuguese translation for openteacher
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2012-12-26 21:17+0000\n"
+"Last-Translator: Adriano Steffler <Unknown>\n"
+"Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:44+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: manpage.templ:29
+msgid "SYNOPSIS"
+msgstr "SINOPSE"
+
+#: manpage.templ:33
+msgid "DESCRIPTION"
+msgstr "DESCRIÇÃO"
+
+#: manpage.templ:37
+msgid "OPERATION"
+msgstr "UTILIZAÇÃO"
+
+#: manpage.templ:38
+msgid ""
+"After startup, OpenTeacher allows you to load a lesson or to create one."
+msgstr ""
+"Depois de iniciado, o OpenTeacher permite carregar uma lição ou criar uma."
+
+#: manpage.templ:39
+msgid "Lessons can be loaded from both files and the internet."
+msgstr "As lições podem ser carregadas tanto de arquivos quanto da Internet."
+
+#: manpage.templ:40
+msgid ""
+"There are a number of different lesson types: you can use OpenTeacher to "
+"learn vocabulary, geography and media."
+msgstr ""
+"Há uma série de diferentes tipos de lição: você pode utilizar o OpenTeacher "
+"para aprender vocabulário, geografia e mídia."
+
+#: manpage.templ:41
+msgid "Also, OpenTeacher has a typing lesson course built in."
+msgstr ""
+"Além disso, o OpenTeacher tem um curso de lições de digitação incluído."
+
+#: manpage.templ:43
+msgid ""
+"When you open a lesson you can view the items in that lesson or enter new "
+"ones, and learn those items."
+msgstr ""
+"Quando você abrir uma lição, você poderá ver os itens daquela lição ou "
+"adicionar novos itens, e aprendê-los."
+
+#: manpage.templ:44
+msgid "At the end of the session, you can view your results."
+msgstr "No final da sessão, você poderá ver os seus resultados."
+
+#: manpage.templ:45
+msgid "Also, it's possible to browse results of older tests."
+msgstr "Além disso, é possível ver os resultados de testes anteriores."
+
+#: manpage.templ:47
+msgid "OPTIONS"
+msgstr "OPÇÕES"
+
+#: manpage.templ:49
+msgid "show a help message"
+msgstr "mostra uma mensagem de ajuda"
+
+#: manpage.templ:51
+msgid "run {name} as specified by {profile}, {profile} should be one of:"
+msgstr ""
+"executa {name} como especificado por {profile}, e {profile} deverá ser um "
+"dos:"
+
+#: manpage.templ:54
+msgid "(advanced)"
+msgstr "(avançado)"
+
+#: manpage.templ:58
+msgid "AUTHOR"
+msgstr "AUTOR"
+
+#: manpage.templ:61
+msgid "Contact: {email}"
+msgstr "Contato: {email}"

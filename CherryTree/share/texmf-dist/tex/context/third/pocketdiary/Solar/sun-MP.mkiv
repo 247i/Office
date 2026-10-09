@@ -1,0 +1,137 @@
+%D \module
+%D   [     file=t-pocketdiary,
+%D      version=2023-04-15,
+%D        title=PocketDiary \CONTEXT\ User Module,
+%D     subtitle=Sun pictogrammes,
+%D       author=Willi Egger,
+%D         date=\currentdate,
+%D    copyright=Willi Egger,
+%D        email=w.egger@boede.nl,
+%D      license=Public Domain]
+
+% \setupbodyfont[plex,ss,14pt]
+
+\defineMPinstance
+	[Sun]
+	[metafun]
+  []
+	
+\startMPinclusions[]{Sun}
+	numeric w,h;
+	path p[];
+	pair ip[];
+	
+	w = OverlayWidth;
+	h = OverlayHeight;
+	
+	p[1]  := fullcircle scaled h;
+	p[100] := tcircle scaled 0.5h; %h
+	p[2] := tcircle scaled 0.6h;  %1.2h;
+	p[3] := tcircle scaled 0.75h; %1.6h;
+	p[4] := tcircle scaled h; %2h;
+	p[5] := (0,0)--point 1 of p[4] ;
+	p[6] := p[5] cutbefore point .3 of p[5];
+	p[7] := p[6] rotatedaround (center p[1],18);
+	 
+  ip[1] :=  p[2] intersectionpoint p[7];
+  ip[2] :=  p[3] intersectionpoint p[7];
+	
+  p[10] := ip[1]--ip[2];
+
+	ip[3] :=  ip[1];
+	ip[4] :=  point 1 of p[7];
+
+	p[11] := ip[3]--ip[4];
+	
+  drawoptions (withpen pencircle scaled 0.25pt withcolor red);
+	
+\stopMPinclusions
+
+\startreusableMPgraphic{Sun::Sunrise}
+  drawoptions (withpen pencircle scaled 0.25pt withcolor red);
+  draw p[100];
+	for i = 36 step 36 until 154  :
+	  draw p[10] rotatedaround (center p[1],i-18);
+	endfor;
+	for i = 18 step 36 until 180  :
+	  draw p[11] rotatedaround (center p[1],i-18);
+ endfor;
+ drawarrow ((0,0)--(0,h)) shifted (0,-0.05h);
+\stopreusableMPgraphic
+
+\startreusableMPgraphic{Sun::Sunset}
+  drawoptions (withpen pencircle scaled 0.25pt withcolor red);
+  draw p[100];
+	for i = 36 step 36 until 154  :
+	  draw p[10] rotatedaround (center p[1],i-18);
+	endfor;
+	for i = 18 step 36 until 180  :
+	  draw p[11] rotatedaround (center p[1],i-18);
+ endfor;
+ drawarrow ((0,h)--(0,0)) shifted (0,-0.05h) xscaled 0.5;
+\stopreusableMPgraphic
+
+\startreusableMPgraphic{Sun::Light}
+  h := OverlayHeight;
+	w := OverlayWidth;
+  drawoptions (withpen pencircle scaled 0.15pt withcolor red);
+	
+	p[11] := ip[3]--ip[4];
+	p[1]  := fullcircle scaled 0.25h;
+	p[2] := tcircle scaled 0.35h;
+	p[3] := tcircle scaled 0.5h;
+	p[4] := tcircle scaled 0.8h;
+	p[5] := (0,0)--point 1 of p[4] ;
+	p[6] := p[5] cutbefore point .3 of p[5];
+	p[7] := p[6] rotatedaround (center p[1],18);
+	 
+  ip[1] :=  p[2] intersectionpoint p[7];
+  ip[2] :=  p[3] intersectionpoint p[7];
+	
+  p[10] := ip[1]--ip[2];
+
+	ip[3] :=  ip[1];
+	ip[4] :=  point 1 of p[7];
+
+	p[11] := ip[3]--ip[4];
+
+  draw p[1];
+	for i = 36 step 36 until 360  :
+	  draw p[10] rotatedaround (center p[1],i-18);
+	endfor;
+	for i = 18 step 36 until 360  :
+	  draw p[11] rotatedaround (center p[1],i-18);
+ endfor;
+ 
+ currentpicture := currentpicture rotatedaround(center p[1],18);
+\stopreusableMPgraphic
+
+\defineoverlay[Sunrise][\useMPgraphic{Sun::Sunrise}]
+\defineoverlay[Sunset][\useMPgraphic{Sun::Sunset}]
+\defineoverlay[Light][\useMPgraphic{Sun::Light}]
+
+\defineframed
+	[SunA]
+	[strut=yes,
+	 height=\lineheight,
+	 width=\emwidth,
+ 	 frame=off,
+   offset=0pt]
+
+\defineframed
+	[SunB]
+	[strut=yes,
+	 height=\lineheight,
+	 width=\emwidth,
+ 	 frame=off,
+   offset=0pt,
+	 location=depth]	 	
+	
+% \starttext
+% \setupbodyfont[8pt] % This is the minimal size which looks still ok.
+%
+%  Sunrise:	{\SunA[background=Sunrise]{\strut}}
+%  Sunset: \SunA[background=Sunset]{\strut}
+%  Light hours: \SunB[background=Light]{\strut} Sunshine
+%
+% \stoptext

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-msdownload">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Windows or DOS program</comment>
+  <comment xml:lang="zh-Hant-TW">Windows 或 DOS 程式</comment>
+  <comment xml:lang="uk">програма Windows або DOS</comment>
+  <comment xml:lang="tr">Windows veya DOS programı</comment>
+  <comment xml:lang="sv">Windows- eller DOS-program</comment>
+  <comment xml:lang="sr-Cyrl">Виндоуз или ДОС програм</comment>
+  <comment xml:lang="sq">Program Windows ose DOS</comment>
+  <comment xml:lang="sl">Program za Windows ali DOS</comment>
+  <comment xml:lang="ru">Программа Windows или DOS</comment>
+  <comment xml:lang="ro">program DOS sau Windows</comment>
+  <comment xml:lang="pt-BR">Programa do Windows ou DOS</comment>
+  <comment xml:lang="pl">Program Windows lub DOS</comment>
+  <comment xml:lang="oc">programa Windows o DOS</comment>
+  <comment xml:lang="nn">Windows- eller DOS-program</comment>
+  <comment xml:lang="lt">Windows ar DOS programa</comment>
+  <comment xml:lang="ko">윈도우/DOS 프로그램</comment>
+  <comment xml:lang="kk-Cyrl">Windows немесе DOS бағдарламасы</comment>
+  <comment xml:lang="ja">Windows または DOS プログラム</comment>
+  <comment xml:lang="it">Programma Windows o DOS</comment>
+  <comment xml:lang="id">Program Windows atau DOS</comment>
+  <comment xml:lang="hr">Windows ili DOS program</comment>
+  <comment xml:lang="hi">Windows or DOS प्रोग्राम</comment>
+  <comment xml:lang="fur">Program Windows o DOS</comment>
+  <comment xml:lang="fr">Programme Windows ou DOS</comment>
+  <comment xml:lang="fi">Windows tai DOS ohjelma</comment>
+  <comment xml:lang="eu">Windows edo DOS programa</comment>
+  <comment xml:lang="et">Windowsi või DOSi programm</comment>
+  <comment xml:lang="es">programa de Windows o DOS</comment>
+  <comment xml:lang="en-GB">Windows or DOS program</comment>
+  <comment xml:lang="de">Windows-/DOS-Programm</comment>
+  <comment xml:lang="ca">programa Windows o DOS</comment>
+  <comment xml:lang="bg">Програма — Windows или DOS</comment>
+  <comment xml:lang="be-Cyrl">праграма Windows або DOS</comment>
+  <comment xml:lang="ar">برنامج ويندوز أو دوس</comment>
+  <acronym>DOS</acronym>
+  <expanded-acronym>Disk Operating System</expanded-acronym>
+  <sub-class-of type="application/x-executable"/>
+  <generic-icon name="application-x-executable"/>
+  <glob pattern="*.exe"/>
+  <glob pattern="*.dll"/>
+  <glob pattern="*.cpl"/>
+  <glob pattern="*.drv"/>
+  <glob pattern="*.scr"/>
+  <alias type="application/x-ms-dos-executable"/>
+</mime-type>

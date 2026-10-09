@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/x-python2">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Python 2 script</comment>
+  <comment xml:lang="zh-Hant-TW">Python 2 命令稿</comment>
+  <comment xml:lang="uk">скрипт мовою Python 2</comment>
+  <comment xml:lang="tr">Python 2 betiği</comment>
+  <comment xml:lang="sv">Python 2-skript</comment>
+  <comment xml:lang="sr-Cyrl">Пајтон 2 скрипта</comment>
+  <comment xml:lang="sq">Programth Python 2</comment>
+  <comment xml:lang="sl">Skript Python 2</comment>
+  <comment xml:lang="ru">Сценарий Python 2</comment>
+  <comment xml:lang="ro">script Python 2</comment>
+  <comment xml:lang="pt-BR">Script Python 2</comment>
+  <comment xml:lang="pl">Skrypt Python 2</comment>
+  <comment xml:lang="oc">escripte Python 2</comment>
+  <comment xml:lang="nn">Python 2-skript</comment>
+  <comment xml:lang="ko">파이썬 2 스크립트</comment>
+  <comment xml:lang="kk-Cyrl">Python 2 скрипті</comment>
+  <comment xml:lang="kab">Askript Python 2</comment>
+  <comment xml:lang="ja">Python 2 スクリプト</comment>
+  <comment xml:lang="id">Skrip Python 2</comment>
+  <comment xml:lang="hr">Python 2 skripta</comment>
+  <comment xml:lang="he">סקריפט Python 2</comment>
+  <comment xml:lang="fur">Script Python 2</comment>
+  <comment xml:lang="fr">Script Python 2</comment>
+  <comment xml:lang="fi">Python 2 -skripti</comment>
+  <comment xml:lang="et">Python 2'e skript</comment>
+  <comment xml:lang="es">secuencia de órdenes en Python 2</comment>
+  <comment xml:lang="en-GB">Python 2 script</comment>
+  <comment xml:lang="de">Python-2-Skript</comment>
+  <comment xml:lang="ca">script Python 2</comment>
+  <comment xml:lang="bg">Скрипт — Python 2</comment>
+  <comment xml:lang="be-Cyrl">скрыпт Python 2</comment>
+  <comment xml:lang="ar">سكربت بايثون 2</comment>
+  <sub-class-of type="text/x-python"/>
+  <glob pattern="*.py"/>
+  <glob pattern="*.py2" weight="60"/>
+</mime-type>

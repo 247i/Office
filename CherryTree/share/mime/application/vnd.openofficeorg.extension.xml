@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/vnd.openofficeorg.extension">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>LibreOffice extension</comment>
+  <comment xml:lang="zh-Hant-TW">LibreOffice 擴充套件</comment>
+  <comment xml:lang="uk">розширення LibreOffice</comment>
+  <comment xml:lang="tr">LibreOffice eklentisi</comment>
+  <comment xml:lang="sv">LibreOffice-tillägg</comment>
+  <comment xml:lang="sr-Cyrl">LibreOffice проширење</comment>
+  <comment xml:lang="sq">Zgjerim LibreOffice</comment>
+  <comment xml:lang="sl">Razširitev LibreOffice</comment>
+  <comment xml:lang="ru">Расширение LibreOffice</comment>
+  <comment xml:lang="ro">extensie LbreOffice</comment>
+  <comment xml:lang="pt-BR">Extensão do LibreOffice</comment>
+  <comment xml:lang="pl">Rozszerzenie LibreOffice</comment>
+  <comment xml:lang="oc">extension LibreOffice</comment>
+  <comment xml:lang="nn">LibreOffice-utviding</comment>
+  <comment xml:lang="ko">LibreOffice 확장</comment>
+  <comment xml:lang="kk-Cyrl">LibreOffice кеңейтуі</comment>
+  <comment xml:lang="kab">Asiɣzaf n LibreOffice</comment>
+  <comment xml:lang="ja">LibreOffice 拡張機能</comment>
+  <comment xml:lang="id">Ekstensi LibreOffice</comment>
+  <comment xml:lang="hr">LibreOffice proširenje</comment>
+  <comment xml:lang="he">הרחבת LibreOffice</comment>
+  <comment xml:lang="fur">Estension di LibreOffice</comment>
+  <comment xml:lang="fr">Extension LibreOffice</comment>
+  <comment xml:lang="fi">LibreOffice laajennus</comment>
+  <comment xml:lang="et">LibreOffice'i laiendus</comment>
+  <comment xml:lang="es">extensión de LibreOffice</comment>
+  <comment xml:lang="en-GB">LibreOffice extension</comment>
+  <comment xml:lang="de">LibreOffice-Erweiterung</comment>
+  <comment xml:lang="da">LibreOffice-udvidelse</comment>
+  <comment xml:lang="ca">extensió del LibreOffice</comment>
+  <comment xml:lang="bg">Разширение — LibreOffice</comment>
+  <comment xml:lang="be-Cyrl">пашырэнне LibreOffice</comment>
+  <comment xml:lang="ar">امتداد ليبرا أوفيس</comment>
+  <comment xml:lang="af">LibreOffice-uitbreiding</comment>
+  <sub-class-of type="application/zip"/>
+  <generic-icon name="x-office-document"/>
+  <glob pattern="*.oxt"/>
+</mime-type>

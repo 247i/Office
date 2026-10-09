@@ -1,0 +1,93 @@
+# Finnish translation for openteacher
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2012-08-09 00:23+0000\n"
+"Last-Translator: Teemu Paavola <tteeemu@gmail.com>\n"
+"Language-Team: Finnish <fi@li.org>\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:43+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: openteacherAuthors.py:71 openteacherAuthors.py:72 openteacherAuthors.py:73
+msgid "Core developer"
+msgstr "Pääkehittäjä"
+
+#: openteacherAuthors.py:76 openteacherAuthors.py:77
+msgid "Patches contributor"
+msgstr "Paikkojen avustaja"
+
+#: openteacherAuthors.py:80
+msgid "Debian/Ubuntu packager"
+msgstr "Debianin/Ubuntun pakkaaja"
+
+#: openteacherAuthors.py:83 openteacherAuthors.py:84
+msgid "Artwork"
+msgstr "Graafinen ilme"
+
+#: openteacherAuthors.py:85
+msgid "Topography maps"
+msgstr "Topografiset kartat"
+
+#: openteacherAuthors.py:88
+msgid "Chat channel spammer"
+msgstr "Keskustelukanavan spämmääjä"
+
+#: openteacherAuthors.py:91
+msgid "Bug hunter"
+msgstr ""
+
+#: openteacherAuthors.py:96 openteacherAuthors.py:97 openteacherAuthors.py:98
+#: openteacherAuthors.py:99 openteacherAuthors.py:100
+#: openteacherAuthors.py:101 openteacherAuthors.py:102
+#: openteacherAuthors.py:103 openteacherAuthors.py:104
+#: openteacherAuthors.py:105 openteacherAuthors.py:106
+#: openteacherAuthors.py:107 openteacherAuthors.py:108
+#: openteacherAuthors.py:109 openteacherAuthors.py:110
+#: openteacherAuthors.py:111 openteacherAuthors.py:112
+#: openteacherAuthors.py:113 openteacherAuthors.py:114
+#: openteacherAuthors.py:115 openteacherAuthors.py:116
+#: openteacherAuthors.py:117 openteacherAuthors.py:118
+#: openteacherAuthors.py:119 openteacherAuthors.py:120
+#: openteacherAuthors.py:121 openteacherAuthors.py:122
+#: openteacherAuthors.py:123 openteacherAuthors.py:124
+#: openteacherAuthors.py:125 openteacherAuthors.py:126
+#: openteacherAuthors.py:127 openteacherAuthors.py:128
+#: openteacherAuthors.py:129 openteacherAuthors.py:130
+#: openteacherAuthors.py:131 openteacherAuthors.py:132
+#: openteacherAuthors.py:133 openteacherAuthors.py:134
+#: openteacherAuthors.py:135 openteacherAuthors.py:136
+#: openteacherAuthors.py:137 openteacherAuthors.py:138
+#: openteacherAuthors.py:139 openteacherAuthors.py:140
+#: openteacherAuthors.py:141 openteacherAuthors.py:142
+#: openteacherAuthors.py:143 openteacherAuthors.py:144
+#: openteacherAuthors.py:145 openteacherAuthors.py:146
+#: openteacherAuthors.py:147 openteacherAuthors.py:148
+#: openteacherAuthors.py:149 openteacherAuthors.py:150
+#: openteacherAuthors.py:151 openteacherAuthors.py:152
+#: openteacherAuthors.py:153 openteacherAuthors.py:154
+#: openteacherAuthors.py:155 openteacherAuthors.py:156
+#: openteacherAuthors.py:157 openteacherAuthors.py:158
+#: openteacherAuthors.py:159 openteacherAuthors.py:160
+#: openteacherAuthors.py:161 openteacherAuthors.py:162
+#: openteacherAuthors.py:163 openteacherAuthors.py:164
+#: openteacherAuthors.py:165 openteacherAuthors.py:166
+#: openteacherAuthors.py:167 openteacherAuthors.py:168
+#: openteacherAuthors.py:169 openteacherAuthors.py:170
+#: openteacherAuthors.py:171 openteacherAuthors.py:172
+#: openteacherAuthors.py:173 openteacherAuthors.py:174
+#: openteacherAuthors.py:175 openteacherAuthors.py:176
+#: openteacherAuthors.py:177 openteacherAuthors.py:178
+#: openteacherAuthors.py:179
+#, python-format
+msgid "Translator (%s)"
+msgstr "Kääntäjä (%s)"

@@ -1,0 +1,27 @@
+# Brazilian Portuguese translation for openteacher
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2013-02-06 19:50+0000\n"
+"Last-Translator: Adriano Steffler <Unknown>\n"
+"Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:44+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#. TRANSLATORS: This is one of the file formats OpenTeacher
+#. TRANSLATORS: can read. It's named after the program that uses
+#. TRANSLATORS: it. See http://www.gnuyork.org/en/gvt-about.html
+#. TRANSLATORS: for more info on the program.
+#: gnuVocabTrain.py:58
+msgid "gnuVocabTrain"
+msgstr "gnuVocabTrain"

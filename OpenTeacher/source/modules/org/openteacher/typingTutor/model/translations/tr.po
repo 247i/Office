@@ -1,0 +1,155 @@
+# Turkish translation for openteacher
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2013-04-29 11:56+0000\n"
+"Last-Translator: kodadiirem <Unknown>\n"
+"Language-Team: Turkish <tr@li.org>\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:44+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: model.py:95
+msgid "Belgian AZERTY"
+msgstr "Belgian AZERTY"
+
+#: model.py:96
+msgid "Colemak"
+msgstr "Colemak"
+
+#: model.py:97
+msgid "Dvorak Simplified Keyboard"
+msgstr "Dvorak Simplified Keyboard"
+
+#: model.py:98
+msgid "French AZERTY"
+msgstr "French AZERTY"
+
+#: model.py:99
+msgid "QWERTY"
+msgstr "QWERTY"
+
+#: model.py:100
+msgid "QWERTZ"
+msgstr "QWERTZ"
+
+#: model.py:183
+msgid ""
+"Welcome, I'm your personal OpenTeacher typing tutor. We'll improve your "
+"typing skills by doing simple exercises. Between the exercises, I'll give "
+"instructions. Let's get started:\n"
+"\n"
+"First place your fingers on the so-called home row: your fingers, from left "
+"to right, should always be on the keys '{a}', '{s}', '{d}', '{f}', "
+"'{space}', '{space}', '{j}', '{k}', '{l}' and '{;}' while not typing another "
+"character. When your fingers are in position, press {space} to start the "
+"first lesson. Work for accuracy at first, not speed."
+msgstr ""
+"Hoş geldiniz, ben sizin kişisel OpenTeacher yazım yardımcınızım. Basit "
+"alıştırmalar yaparak sizin yazım yeteneklerinizi geliştireceğiz. "
+"Alıştırmalar arası, yönlendirmeler yapacağım. Haydi başlayalım:\n"
+"\n"
+"İlk olarak parmaklarınızı ev satırı olarak adlandırılan konuma "
+"yerleştiriniz, parmaklarınız soldan sağa doğru her zaman '{a}', '{s}', "
+"'{d}', '{f}', '{space}', '{space}', '{j}', '{k}', '{l}', '{ş}' üzerinde "
+"durmalıdır. Parmaklarınız doğru yerlerde ise ilk ders için {space} tuşuna "
+"basarak başlayın. Başlangıç için doğru yazıma önem veriyoruz, hıza değil."
+
+#: model.py:198
+msgid ""
+"Congratulations, you finished this typing course! If you want to continue, "
+"you can, but this is the end of the instructions. You did a great job!"
+msgstr ""
+"Tebrikler, yazım kursunu bitirdiniz! Eğer devam etmek istiyorsanız, "
+"edebilirsiniz, ama bu kılavuzun sonudur. Büyük iş hallettiniz!"
+
+#: model.py:208
+msgid "Congratulations, you finished your first exercise!"
+msgstr "Tebrikler, ilk alıştırmanızı tamamladınız!"
+
+#: model.py:225
+#, python-format
+msgid "You made %s mistake, please keep trying until you can do it flawless."
+msgid_plural ""
+"You made %s mistakes, please keep trying until you can do it flawless."
+msgstr[0] "%s tane yanlış yaptınız, lütfen hatasız olana kadar deneyiniz."
+msgstr[1] "%s tane yanlış yaptınız, lütfen hatasız olana kadar deneyiniz."
+
+#: model.py:230
+#, python-format
+msgid "Too bad, you made %s mistake. Keep practising to get better!"
+msgid_plural "Too bad, you made %s mistakes. Keep practising to get better!"
+msgstr[0] ""
+"Çok kötü, %s tane yanlış yaptınız. Daha iyisi için alıştırma yapmaya devam "
+"edin!"
+msgstr[1] ""
+"Çok kötü, %s tane yanlış yaptınız. Daha iyisi için alıştırma yapmaya devam "
+"edin!"
+
+#: model.py:237
+msgid "To archieve that, you might try slowing down a bit."
+msgstr "Başarmak için, biraz daha yavaş deneyebilirsiniz."
+
+#: model.py:241
+msgid "You made zero mistakes. Now try to improve your typing speed a bit."
+msgstr "Hiç hata yapmadınız. Şimdi yazım hızınızı biraz arttırmayı deneyin."
+
+#: model.py:247
+msgid ""
+"You made zero mistakes and are typing fast enough, so you can continue "
+"practising some new letter combinations. Keep up the good work!"
+msgstr ""
+"Hiç hata yapmadınız ve yeterince hızlı yazdınız. Artık yeni harf "
+"kombinasyonları denemeye devam edebilirsiniz. İyi iş çıkarmaya devam edin!"
+
+#: model.py:248
+msgid ""
+"You did it flawlessly and fast! Continue practising some new letters "
+"combinations to get even better!"
+msgstr ""
+"Hatasız ve hızlı bir şekilde yaptınız! Daha iyisini yapmak için alıştırma "
+"yapmaya yeni harf kombinasyonları deneyerek devam edin!"
+
+#: model.py:252
+msgid ""
+"You're now going to learn letters that aren't on the home row. To see which "
+"fingers you need to use, see the keyboard image on your screen. When you're "
+"not using a finger to type a letter, put it back on the home row directly."
+msgstr ""
+"Ev satırında olmayan harfleri öğreneceksiniz. Hangi parmakları "
+"kullanacağınızı görmek için, ekrandaki klavye resmine bakın. Harf yazmak "
+"için bir parmağınızı kullanmıyorsanız hemen ev satırı dediğimiz yere koyun."
+
+#: model.py:255
+msgid ""
+"The keys you're going to practise now are typed by the left and right index "
+"finger and further away from those fingers than the other keys we practised "
+"on the current row. Make sure you return your finger to its position on the "
+"home row when you're typing another letter."
+msgstr ""
+
+#: model.py:259
+msgid ""
+"You made zero mistakes and are typing fast enough, so you can continue "
+"practising with some new words. Keep up the good work!"
+msgstr ""
+"Hiç hata yapmadınız ve yeterince hızlı yazdınız. Artık yeni kelimeleri "
+"denemeye devam edebilirsiniz. İyi iş çıkarmaya devam edin!"
+
+#: model.py:260
+msgid ""
+"You did it flawlessly and fast! Continue practising with new words to get "
+"even better!"
+msgstr ""
+"Kusursuz ve hızlıydı! Daha iyi olmak için yeni kelimelerle denemeye devam "
+"edin!"

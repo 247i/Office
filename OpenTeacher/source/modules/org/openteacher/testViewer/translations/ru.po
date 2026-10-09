@@ -1,0 +1,55 @@
+# Russian translation for openteacher
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:38+0200\n"
+"PO-Revision-Date: 2012-10-24 19:51+0000\n"
+"Last-Translator: Nkolay Parukhin <parukhin@gmail.com>\n"
+"Language-Team: Russian <ru@li.org>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:43+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: testViewer.py:114
+msgid "Results"
+msgstr "Результаты"
+
+#: testViewer.py:118
+msgid "Note:"
+msgstr "Примечание:"
+
+#: testViewer.py:123
+msgid "yes"
+msgstr "да"
+
+#: testViewer.py:123
+msgid "no"
+msgstr "нет"
+
+#: testViewer.py:127
+#, python-format
+msgid "Completed: %s"
+msgstr "Выполнено: %s"
+
+#: testViewer.py:133
+#, python-format
+msgid "Total thinking time: %s second"
+msgid_plural "Total thinking time: %s seconds"
+msgstr[0] "Общее время обдумывания: %s секунда"
+msgstr[1] "Общее время обдумывания: %s секунды"
+msgstr[2] "Общее время обдумывания: %s секунд"
+
+#: testViewer.py:141
+#, python-format
+msgid "Total thinking time: %s minutes"
+msgstr "Общее время обдумывания: %s минут"

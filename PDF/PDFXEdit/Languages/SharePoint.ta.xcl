@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Localization>
+	<Version date="20190812220242">2.00.00</Version>
+	<Author>Angel Herráez</Author>
+	<Copyright>Los términos "desproteger" (check-out) y "proteger" (check-in) suenan extraños pero son los que usa Microsoft en su documentación.</Copyright>
+	<Product id="PDFXEditor"/>
+	<Language eName="Tamil" lName="தமிழ்" code="ta" R2L="false"/>
+	<Module name="SharePoint" namespace="sp" version="8.0.331.0"/>
+	<Strings>
+		<text id="DlgAppPrefs.SharePoint.Name" h="56A5F9B3">SharePoint</text>
+		<text id="DlgAppPrefs.SharePoint.Title" h="07F34B45">Opciones de SharePoint</text>
+		<text id="addFolder.error.message" h="F0B996F8">No se ha podido crear la carpeta &lt;b&gt;%1&lt;/b&gt; en el servidor SharePoint.</text>
+		<text id="addFolder.progress.text" h="8C5EF68A">Se stá creando la carpeta &lt;b&gt;%1&lt;/b&gt;...</text>
+		<text id="addFolder.progress.title" h="7B4FFE6D">Se stá creando la carpeta en SharePoint</text>
+		<text id="addFolder.question.button.create" h="5AFC56A9">Crear una carpeta</text>
+		<text id="addFolder.question.edit.title" h="AD9C0CB3">Escriba un nombre para la nueva carpeta:</text>
+		<text id="addFolder.question.error.alreadyExists" h="C0A47FF7">La carpeta actual ya contiene un elemento con el nombre &lt;b&gt;%1&lt;/b&gt;.</text>
+		<text id="addFolder.question.error.emptyFolderName" h="BB6566D6">El nombre de carpeta no puede estar en blanco.</text>
+		<text id="addFolder.question.error.invalidFolderName" h="0A24FCDF">&lt;b&gt;%1&lt;/b&gt; no es un nombre de carpeta válido: no se permiten los símbolos &lt;b&gt;&lt; &gt; " / \ | ? *&lt;/b&gt;</text>
+		<text id="advancedPreferences.cb.hideFolders" h="56731DD2">Ocultar estas carpetas:</text>
+		<text id="advancedPreferences.group.OpenSaveDialog" h="4D95ED95">Diálogo para abrir y guardar</text>
+		<text id="btn.addFolder.text" h="69FFFB47">&amp;Crear una carpeta</text>
+		<text id="btn.advancedPreferences" h="1EE42724">Avanzadas...</text>
+		<text id="btn.apply" h="51F4FB2C">&amp;Aplicar</text>
+		<text id="btn.cancelSaving" h="36FF91F6">&amp;Cancelar el guardado en el servidor</text>
+		<text id="btn.checkIn" h="09996473">&amp;Proteger</text>
+		<text id="btn.checkInAndKeepCkeckedOut" h="34DA624B">P&amp;roteger y mantener la desprotección</text>
+		<text id="btn.clearLogs" h="848E003C">Borrar todos</text>
+		<text id="btn.connect" h="A79F815C">C&amp;onectar</text>
+		<text id="btn.delete.text" h="ED580C1E">&amp;Borrar</text>
+		<text id="btn.discardCheckOut" h="40AC5603">Descar&amp;tar la desprotección</text>
+		<text id="btn.folder.up.text" h="FDE69FB2">&amp;Subir</text>
+		<text id="btn.keepCkeckedOut" h="AEA0D6B1">&amp;Mantener la desprotección</text>
+		<text id="btn.navigate" h="B03F439E">&amp;Navegar</text>
+		<text id="btn.open" h="B1A510F0">&amp;Abrir</text>
+		<text id="btn.openLog" h="F3E66367">Abrir</text>
+		<text id="btn.openLogFolder" h="0B1D9C13">Abrir carpeta</text>
+		<text id="btn.openWithCheckOut" h="2F774735">Abrir con &amp;comprobación</text>
+		<text id="btn.overwrite" h="48E63C4C">&amp;Reemplazar</text>
+		<text id="btn.resetPreferences" h="A7132527">Reinicializar</text>
+		<text id="btn.save" h="F363C410">&amp;Guardar</text>
+		<text id="btn.saveAndCheckOut" h="E44D9A0A">&amp;Guardar y desproteger</text>
+		<text id="btn.saveReplace" h="11BF9724">Guardar y &amp;reemplazar</text>
+		<text id="btn.settings" h="563BF6B7">&amp;Opciones...</text>
+		<text id="btn.signOut" h="645CEBE2">Cerrar la sesión</text>
+		<text id="cb.url.tip" h="CD81E674">Escriba la dirección...</text>
+		<text id="cbitem.afterSave.ask" h="5F9AC292">Preguntar</text>
+		<text id="cbitem.afterSave.checkIn" h="FA91CFF8">Proteger</text>
+		<text id="cbitem.afterSave.checkInCheckOut" h="C236E112">Proteger y mantener desprotegido</text>
+		<text id="cbitem.afterSave.keepCheckOut" h="F4487016">Mantener la desprotección</text>
+		<text id="cbitem.closeDoesNotNeedCheckIn.ask" h="5F9AC292">Preguntar</text>
+		<text id="cbitem.closeDoesNotNeedCheckIn.discardCheckOut" h="CA75DE00">Descartar la desprotección</text>
+		<text id="cbitem.closeDoesNotNeedCheckIn.keepCheckOut" h="F4487016">Mantener la desprotección</text>
+		<text id="cbitem.closeNeedCheckIn.ask" h="5F9AC292">Preguntar</text>
+		<text id="cbitem.closeNeedCheckIn.checkIn" h="FA91CFF8">Proteger</text>
+		<text id="cbitem.closeNeedCheckIn.checkInCheckOut" h="C236E112">Proteger y mantener desprotegido</text>
+		<text id="cbitem.closeNeedCheckIn.keepCheckOut" h="B1F294B6">Mantener la desprotección</text>
+		<text id="cbitem.defaultCheckInType.major" h="D5227ED6">Aumentar versión principal</text>
+		<text id="cbitem.defaultCheckInType.minor" h="5B8ED168">Aumentar versión secundaria</text>
+		<text id="cbitem.defaultCheckInType.overwrite" h="05A502D0">Reemplazar sin cambiar la versión</text>
+		<text id="cbitem.logLevel.error" h="A393623F">Sólo los errores</text>
+		<text id="cbitem.logLevel.information" h="2039C12A">Todo lo informativo</text>
+		<text id="cbitem.logLevel.none" h="1E317BDF">Sin registro</text>
+		<text id="cbitem.logLevel.verbose" h="C7EEABE5">Registro completo y detallado</text>
+		<text id="cbitem.logLevel.warning" h="427C1C47">Avisos y errores</text>
+		<text id="cbitem.whenOpenDocumentCheckoutNone.ask" h="5F9AC292">Preguntar</text>
+		<text id="cbitem.whenOpenDocumentCheckoutNone.checkOut" h="95775966">Abrir y desproteger</text>
+		<text id="cbitem.whenOpenDocumentCheckoutNone.open" h="38A34D1A">Abrir sin desproteger</text>
+		<text id="cbitem.whenSaveConflict.ask" h="5F9AC292">Preguntar</text>
+		<text id="cbitem.whenSaveConflict.cancel" h="554F5523">Cancelar el guardado en el servidor</text>
+		<text id="cbitem.whenSaveConflict.overwrite" h="B67489D8">Reemplazar la versión del servidor</text>
+		<text id="check.dontShowThisMessageAgain" h="AC16D0EE">No mostrar de nuevo este mensaje</text>
+		<text id="check.whenOpenDocumentCheckoutNoneDisableEditing" h="778336E0">Impedir la edición</text>
+		<text id="check.whenOpenDocumentCheckoutNoneShowWarning" h="E97BFF00">Mostrar un aviso</text>
+		<text id="checkInDialog.typeRaio.Major" h="55515597">Aumentar versión &amp;principal</text>
+		<text id="checkInDialog.typeRaio.Minor" h="DBFDFA29">Aumentar versión &amp;secundaria</text>
+		<text id="checkInDialog.typeRaio.Overwrite" h="FE98B944">&amp;Reemplazar sin cambiar la versión</text>
+		<text id="cmd.checkIn" h="AEF235ED">&amp;Proteger</text>
+		<text id="cmd.checkIn.tip" h="C9DCA405">Protege el archivo del documento en SharePoint.</text>
+		<text id="cmd.checkOut" h="E6A87AFE">&amp;Desproteger</text>
+		<text id="cmd.checkOut.tip" h="E1B64D30">Desprotege el archivo del documento en SharePoint.</text>
+		<text id="cmd.cmdsCategory" h="56A5F9B3">SharePoint</text>
+		<text id="cmd.discardCheckOut" h="40AC5603">Descar&amp;tar la desprotección</text>
+		<text id="cmd.discardCheckOut.tip" h="ED54ACC3">&amp;Descarta la desprotección del archivo del documento en SharePoint.</text>
+		<text id="cmd.enableEditing" h="340AFFD4">Permitir la &amp;edición</text>
+		<text id="cmd.enableEditing.tip" h="8A29948D">Permitir la edición y las características interactivas.</text>
+		<text id="cmd.open" h="68595810">&amp;SharePoint...</text>
+		<text id="cmd.open.tip" h="007B7200">Abre documentos desde SharePoint.</text>
+		<text id="cmd.prepareFileInfo" h="56811CA0">Preparar &amp;información del archivo</text>
+		<text id="cmd.prepareFileInfo.tip" h="E609EA07">Prepara la información para el archivo en SharePoint</text>
+		<text id="cmd.save" h="68595810">&amp;SharePoint...</text>
+		<text id="cmd.save.tip" h="C48C1C25">Guarda un documento activo en SharePoint.</text>
+		<text id="cmd.share_point" h="B7423C0E">&amp;SharePoint</text>
+		<text id="cmd.share_point.tip" h="CA99078B">Trabajar con documentos en SharePoint.</text>
+		<text id="defaultCheckInComment" h="4EF280A5">Comentario de protección por defecto:</text>
+		<text id="defaultCheckInType" h="F606FFC1">Tipo de protección por defecto:</text>
+		<text id="delete.error.file" h="3C348225">No se ha podido borrar el archivo &lt;b&gt;%1&lt;/b&gt; de SharePoint.</text>
+		<text id="delete.error.folder" h="3C348225">No se ha podido borrar el archivo &lt;b&gt;%1&lt;/b&gt; de SharePoint.</text>
+		<text id="delete.error.unknown" h="A3E6F83A">No se ha podido borrar el elemento seleccionado de SharePoint.</text>
+		<text id="delete.progress.status" h="F729DF24">%1 de %2</text>
+		<text id="delete.progress.text.file" h="EFCE4189">Se está borrando el archivo &lt;b&gt;%1&lt;/b&gt;...</text>
+		<text id="delete.progress.text.folder" h="2E89372D">Se está borrando la carpeta &lt;b&gt;%1&lt;/b&gt;...</text>
+		<text id="delete.progress.text.unknown" h="367B0EA7">Se está borrando &lt;b&gt;%1&lt;/b&gt;...</text>
+		<text id="delete.progress.title" h="DFC61F07">Se está borrando de SharePoint</text>
+		<text id="delete.question.file" h="F3B2380C">¿Quiere borrar el archivo &lt;b&gt;%1&lt;/b&gt;?</text>
+		<text id="delete.question.folder" h="DA195BFA">¿Quiere borrar la carpeta &lt;b&gt;%1&lt;/b&gt; y todo su contenido?</text>
+		<text id="delete.question.multi" h="ACA0CEC0">¿Quiere borrar %1 elementos?</text>
+		<text id="delete.question.unknown" h="8C13886E">¿Quiere borrar el elemento seleccionado?</text>
+		<text id="dlg.advancedPreferences.title" h="88234689">Preferencias avanzadas para SharePoint</text>
+		<text id="dlg.liveLogin" h="BFADC685">Acceso en vivo</text>
+		<text id="dlg.openFile" h="435887CD">Abrir un archivo</text>
+		<text id="dlg.saveFile" h="520CB069">Guardar un archivo</text>
+		<text id="group.Logging" h="F9DEFF33">Registro</text>
+		<text id="group.documentActions" h="C2F29B9A">Trabajo con el documento</text>
+		<text id="ibar.cannotEditEditing" h="13F24128">No tiene los permisos para editar el archivo en el servidor. Sólo se permite guardar una copia localmente.</text>
+		<text id="ibar.cannotEditNoEditing" h="52C758B6">No tiene los permisos para editar el archivo en el servidor. Están desactivadas todas las características de edición e interactivas.</text>
+		<text id="ibar.checkedOutToMe" h="B5AF7047">El archivo está desprotegido para usted.</text>
+		<text id="ibar.checkedOutToOtherEditing" h="4F420124">El archivo está desprotegido para %1. No será posible guardar el archivo en el servidor.</text>
+		<text id="ibar.checkedOutToOtherNoEditing" h="B8C2709A">El archivo está desprotegido para %1. Están desactivadas todas las características de edición e interactivas.</text>
+		<text id="ibar.notCheckedOutEditing" h="A4D56FD1">El archivo no está desprotegido. Si otros usuarios cambian el archivo en el servidor, no podrá guardar cambios en este archivo.</text>
+		<text id="ibar.notCheckedOutNoEditing" h="E3EA5586">El archivo no está desprotegido. Están desactivadas todas las características de edición e interactivas.</text>
+		<text id="ibar.sharepoint" h="56A5F9B3">SharePoint</text>
+		<text id="ibar.sharepoint.description" h="6F2E3CDD">Información de contexto y operaciones del documento SharePoint</text>
+		<text id="ibar.sharepoint.title" h="C3F43468">Documento SharePoint</text>
+		<text id="lb.afterSave" h="B8FD9751">Al guardar un documento:</text>
+		<text id="lb.checkInComment" h="694DD18A">Comentario (opcional):</text>
+		<text id="lb.closeDoesNotNeedCheckIn" h="293982D2">Al cerrar un documento desprotegido y no modificado:</text>
+		<text id="lb.closeNeedCheckIn" h="32249D2D">Al cerrar un documento desprotegido y modificado:</text>
+		<text id="lb.currentLogFile" h="79D35843">Registro actual:</text>
+		<text id="lb.name" h="F7B9E475">Nombre archivo:</text>
+		<text id="lb.numberOfDaysToStoreLogs" h="E12F4F23">Días que se guardan los registros:</text>
+		<text id="lb.sharePointPlaceUrl" h="F900769A">URL de SharePoint:</text>
+		<text id="lb.sharePointPlaceValidUrl" h="9BFA1D20">No se ha podido conectar con el servidor SharePoint. Compruebe su conexión a internet y la dirección del servidor.</text>
+		<text id="lb.whenOpenDocumentCheckoutNone" h="D9B6115E">Si el documento no está desprotegido para nadie:</text>
+		<text id="lb.whenOpenDocumentCheckoutOther" h="4C458F62">Si el documento está desprotegido para otro usuario:</text>
+		<text id="lb.whenOpenDocumentWithoutWritePermissions" h="88CBE154">Al abrir documento sin permisos de escritura:</text>
+		<text id="lb.whenSaveConflict" h="6DA89C17">Al guardar un documento modificado en el servidor:</text>
+		<text id="ls.column.created" h="FE6510B7">Fecha de creación</text>
+		<text id="ls.column.created.hint" h="35DF3A4F">Fecha y hora en que el archivo, la carpeta o la lista se crearon</text>
+		<text id="ls.column.extension" h="14FEB836">Extensión</text>
+		<text id="ls.column.extension.hint" h="A8E5A550">Extensión del archivo</text>
+		<text id="ls.column.modified" h="691C3610">Fecha de modificación</text>
+		<text id="ls.column.modified.hint" h="12933E76">Fecha y hora en que el archivo, la carpeta o la lista se modificaron por última vez</text>
+		<text id="ls.column.size" h="17A58A52">Tamaño</text>
+		<text id="ls.column.size.hint" h="E79CA174">Tamaño del archivo</text>
+		<text id="ls.column.title" h="D18643E3">Nombre</text>
+		<text id="ls.column.title.hint" h="81F4F728">Nombre del archivo o de la carpeta, o título de la lista</text>
+		<text id="msg.askForCheckInOnClose" h="8F50A2BC">¿Quiere proteger el archivo &lt;b&gt;%1&lt;/b&gt; antes de cerrarlo, de modo que quede disponible con los cambios para otros usuarios?</text>
+		<text id="msg.askForCheckOutOnOpen" h="B185C3DF">Puede abrir el archivo &lt;b&gt;%1&lt;/b&gt; con desprotección para que otros sólo puedan leerlo y así modificarlo Ud. de modo seguro y guardar sus cambios en SharePoint, o bien permitir que otros usuarios lo modifiquen, en cuyo caso pueden producirse conflictos si intenta cambiarlo Ud. también y guardarlo.</text>
+		<text id="msg.askForDiscardCheckOutOnClose" h="CF92CA4B">El archivo&lt;b&gt;%1&lt;/b&gt; está desprotegido para Ud. ¿Quiere cancelar la desprotección para permitir que otros usuarios lo modifiquen?</text>
+		<text id="msg.checkInDialogMessage" h="8A8CB676">Proteger el archivo &lt;b&gt;%1&lt;/b&gt;.</text>
+		<text id="msg.checkInFailed" h="3E327B8B">No se ha podido proteger el archivo &lt;b&gt;%1&lt;/b&gt;. Compruebe que el archivo existe y que está desprotegido para Ud.</text>
+		<text id="msg.checkOutFailed" h="AE188A1B">No se ha podido desproteger el archivo &lt;b&gt;%1&lt;/b&gt;. Compruebe que el archivo existe en el servidor y que no está desprotegido para otro usuario.</text>
+		<text id="msg.checkedOutToOtherOnOpen" h="0931ED51">No puede abrir el archivo &lt;b&gt;%1&lt;/b&gt; con desprotección, ya que está desprotegido para el usuario "%2".</text>
+		<text id="msg.checkedOutToOtherOnSave" h="2974FCD2">El archivo &lt;b&gt;%1&lt;/b&gt; está desprotegido para el usuario "%2". No puede guardar este archivo en SharePoint a no ser que esté desprotegido para Ud., pero puede guardar sus cambios en una ubicación diferente.</text>
+		<text id="msg.connectError" h="18DFEDBE">No se ha podido conectar con el servidor SharePoint. Compruebe su conexión a internet, la dirección del servidor y sus permisos de acceso al recurso en SharePoint.</text>
+		<text id="msg.discardCheckOutFailed" h="427CEAFC">No se ha podido descartar el estado desprotegido del archivo &lt;b&gt;%1&lt;/b&gt;. Compruebe que el archivo existe y que está desprotegido para Ud.</text>
+		<text id="msg.errorOnCheckOutNoEditPermissions" h="72CACDDF">No puede desproteger el archivo &lt;b&gt;%1&lt;/b&gt; ya que no tiene permisos para editar este archivo.</text>
+		<text id="msg.errorOnOpenWithNoEditPermissionsNeedCheckOut" h="0075F732">No puede abrir el archivo &lt;b&gt;%1&lt;/b&gt; con desprotección, ya que no tiene permisos para editar este archivo.</text>
+		<text id="msg.errorOnOpenWithNoEditPermissionsNeedWriteAccess" h="FD9B1AB1">No puede abrir el archivo &lt;b&gt;%1&lt;/b&gt; para modificarlo, ya que no tiene permisos para editar este archivo.</text>
+		<text id="msg.errorOnReopenWithNoEditPermissionsNeedCheckOut" h="833598E7">El archivo &lt;b&gt;%1&lt;/b&gt; debe desprotegerse antes de poderlo guardar, pero no tiene permisos para editar este archivo.</text>
+		<text id="msg.errorOnReopenWithNoEditPermissionsNeedWriteAccess" h="C492B710">No puede guardar el archivo &lt;b&gt;%1&lt;/b&gt; en SharePoint puesto que no tiene permisos para editarlo.</text>
+		<text id="msg.fileNotFound" h="381368F8">No se ha encontrado el archivo &lt;b&gt;%1&lt;/b&gt; en la carpeta actual.</text>
+		<text id="msg.invalidFileName" h="6BAFE9F2">&lt;b&gt;%1&lt;/b&gt; no es un nombre de archivo válido. El nombre no puede contener &lt;b&gt;%2&lt;/b&gt;</text>
+		<text id="msg.navigateError" h="CF23B4B6">No se ha podido navegar hasta el recurso en SharePoint. Compruebe su conexión a internet, la dirección del servidor y sus permisos de acceso al recurso en SharePoint.</text>
+		<text id="msg.openFailed" h="34DE1259">No se ha podido abrir el archivo. Asegúrese de que existe, que no está desprotegido para otro usuario y que tiene permiso de acceso.</text>
+		<text id="msg.outdatedFileOnWrite" h="93CDEA71">El documento que descargó contiene cambios hechos en &lt;b&gt;%2&lt;/b&gt;, pero el servidor contiene cambios más recientes, hechos en &lt;b&gt;%3&lt;/b&gt;. Guarde sus cambios a un archivo nuevo y luego abra el documento más reciente desde Sharepoint con desprotección, combine los cambios y guárdelo en el servidor.</text>
+		<text id="msg.outdatedFileOnWrite.question" h="4802DC49">El archivo &lt;b&gt;%1&lt;/b&gt; tiene un conflicto de cambios. El documento que descargó contiene cambios hechos en &lt;b&gt;%2&lt;/b&gt;, pero el servidor contiene cambios más recientes, hechos en &lt;b&gt;%3&lt;/b&gt;. Puede optar por (a) reemplazar el documento del servidor o bien (b) cancelar esta operación de guardado, guardar sus cambios a un archivo nuevo y luego abrir el documento más reciente desde Sharepoint con desprotección, combinar los cambios y guardarlo en el servidor.</text>
+		<text id="msg.saveFailed" h="967D2A64">No se ha podido guardar el archivo. Asegúrese de que el nombre de archivo es válido, que no está desprotegido para otro usuario y que tiene permiso para editarlo.</text>
+		<text id="msg.saveReplace" h="B1889DFB">El archivo &lt;b&gt;%1&lt;/b&gt; ya existe. ¿Quiere reemplazarlo?</text>
+		<text id="msg.signOutError" h="0E6A5F45">No se ha podido cerra la sesión de este usuario en el servidor SharePoint. Podría aún acceder a SharePoint sin que se le pida autenticación.</text>
+		<text id="msg.warnOnOpenWithNoEditPermissions" h="69F2FCB2">No tiene permisos pra editar el archivo &lt;b&gt;%1&lt;/b&gt;. Tenga en cuenta que no podrá guardar los cambios en SharePoint a no ser que tenga los permisos necesarios.</text>
+		<text id="msg.warnOnOpenWithOthersCheckOut" h="46080172">El archivo &lt;b&gt;%1&lt;/b&gt; está desprotegido para el usuario "%2". No puede guardar este archivo en SharePoint a no ser que "%2" descarte el estado de desprotección. Si "%2" protege el archivo con sus cambios se producirá un conflicto de cambios.</text>
+		<text id="opt.dontShowAgain" h="492B5D79">N&amp;o mostrar más este mensaje</text>
+		<text id="rbar.sharepoint" h="56A5F9B3">SharePoint</text>
+		<text id="str.sharePoint" h="56A5F9B3">SharePoint</text>
+	</Strings>
+</Localization>

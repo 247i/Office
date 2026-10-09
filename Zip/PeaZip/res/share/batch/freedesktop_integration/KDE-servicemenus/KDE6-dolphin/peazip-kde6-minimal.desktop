@@ -1,0 +1,31 @@
+[Desktop Entry]
+Type=Service
+MimeType=application/octet-stream;inode/directory
+Actions=peazipadd;peazipext;peazipexthere;peazipextfolder;peazipopen;
+X-KDE-Submenu=PeaZip
+X-KDE-Priority=TopLevel
+
+[Desktop Action peazipadd]
+Name=Archive...
+Icon=peazip
+Exec=peazip -add2archive %F
+
+[Desktop Action peazipext]
+Name=Extract...
+Icon=peazip
+Exec=peazip -ext2full %F
+
+[Desktop Action peazipexthere]
+Name=Extract here
+Icon=peazip_extract
+Exec=peazip -ext2here %F
+
+[Desktop Action peazipextfolder]
+Name=Extract here to a new folder
+Icon=peazip_extract
+Exec=peazip -ext2folder %F
+
+[Desktop Action peazipopen]
+Name=Open with PeaZip...
+Icon=peazip
+Exec=peazip -ext2browse %F

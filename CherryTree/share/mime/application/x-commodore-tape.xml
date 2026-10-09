@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-commodore-tape">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Commodore tape image</comment>
+  <comment xml:lang="uk">образ стрічки Commodore</comment>
+  <comment xml:lang="tr">Commodore kaset kalıbı</comment>
+  <comment xml:lang="sv">Commodore-kassettavbild</comment>
+  <comment xml:lang="sr-Cyrl">Комодор одраз траке</comment>
+  <comment xml:lang="sq">Pamje shiriti Commodore</comment>
+  <comment xml:lang="sl">Odtis traku Commodore</comment>
+  <comment xml:lang="ru">Образ магнитной ленты Commodore</comment>
+  <comment xml:lang="ro">imagine casetă Commodore</comment>
+  <comment xml:lang="pt-BR">Imagem da fita Commodore</comment>
+  <comment xml:lang="pl">Obraz taśmy Commodore</comment>
+  <comment xml:lang="oc">imatge casseta per Commodore</comment>
+  <comment xml:lang="ko">Commodore 테이프 이미지</comment>
+  <comment xml:lang="kk-Cyrl">Commodore таспа бейнесі</comment>
+  <comment xml:lang="fr">Image de cassette Commodore</comment>
+  <comment xml:lang="fi">Commodore kasettikuva</comment>
+  <comment xml:lang="et">Commodore'i linditõmmis</comment>
+  <comment xml:lang="es">imagen de cinta de Commodore</comment>
+  <comment xml:lang="en-GB">Commodore tape image</comment>
+  <comment xml:lang="de">Commodore-Datassettenabbild</comment>
+  <comment xml:lang="ar">صورة شريط كومودور</comment>
+  <generic-icon name="application-x-executable"/>
+  <glob pattern="*.tap"/>
+  <glob pattern="*.t64"/>
+</mime-type>

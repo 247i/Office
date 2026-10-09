@@ -1,0 +1,46 @@
+# Chinese (Traditional) translation for openteacher
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2012-07-18 08:51+0000\n"
+"Last-Translator: Louie Chen <louie23@gmail.com>\n"
+"Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:42+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: repeatAnswer.py:72
+msgid "Click the button to start"
+msgstr "點擊按鍵開始"
+
+#: repeatAnswer.py:73
+msgid "Start!"
+msgstr "開始！"
+
+#: repeatAnswer.py:186
+msgid "Repeat answer"
+msgstr "重覆答案"
+
+#: repeatAnswer.py:190
+msgid "Repeat mode fade duration (milliseconds)"
+msgstr "重覆模式淡出的持續時間"
+
+#: repeatAnswer.py:191
+msgid "Lesson"
+msgstr "課程"
+
+#: repeatAnswer.py:192
+msgid "Words lesson"
+msgstr "單字課程"
+
+#~ msgid "Repeat Answer"
+#~ msgstr "重覆答案"

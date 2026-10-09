@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-spectrum-pzx">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>ZX Spectrum PZX tape archival image</comment>
+  <comment xml:lang="uk">архівний образ стрічки ZX Spectrum PZX</comment>
+  <comment xml:lang="tr">ZX Spectrum PZX kaset arşivi kalıbı</comment>
+  <comment xml:lang="sv">ZX Spectrum PZX-kassettarkivavbild</comment>
+  <comment xml:lang="sr-Cyrl">Архивски одраз траке за Зет-Икс Спектрум ПЗ-Икс</comment>
+  <comment xml:lang="sq">Pamje arkivi shirit ZX Spectrum PZX</comment>
+  <comment xml:lang="sl">Arhivski odtis traku ZX Spectrum PZX</comment>
+  <comment xml:lang="ru">Образ архива магнитных лент ZX Spectrum PZX</comment>
+  <comment xml:lang="ro">imagine de arhivă pe casetă ZX Spectrum PZX</comment>
+  <comment xml:lang="pt-BR">Imagem de arquivamento de fita de ZX Spectrum PZX</comment>
+  <comment xml:lang="pl">Archiwalny obraz taśmy ZX Spectrum PZX</comment>
+  <comment xml:lang="oc">imatge d’archiu de casseta ZX Spectrum PZX</comment>
+  <comment xml:lang="ko">ZX Spectrum PZX 테이프 아카이브 이미지</comment>
+  <comment xml:lang="kk-Cyrl">ZX Spectrum PZX таспа архивтеу бейнесі</comment>
+  <comment xml:lang="fr">Image de cassette d'archivage ZX Spectrum PZX</comment>
+  <comment xml:lang="fi">ZX Spectrum PZX pakattu kasettikuva</comment>
+  <comment xml:lang="et">ZX Spectrum PZX linditõmmis arhiveerimiseks</comment>
+  <comment xml:lang="es">Imagen de archivador de cinta PZX de ZX Spectrum</comment>
+  <comment xml:lang="en-GB">ZX Spectrum PZX tape archival image</comment>
+  <comment xml:lang="de">ZX-Spectrum-PZX-Kassettenarchivabbild</comment>
+  <glob pattern="*.pzx"/>
+</mime-type>

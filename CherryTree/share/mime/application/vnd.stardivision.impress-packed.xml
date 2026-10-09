@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/vnd.stardivision.impress-packed">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>StarImpress packed presentation</comment>
+  <comment xml:lang="zh-Hant-TW">StarImpress 包裝簡報</comment>
+  <comment xml:lang="uk">запакована презентація StarImpress</comment>
+  <comment xml:lang="tr">StarImpress paketli sunusu</comment>
+  <comment xml:lang="sv">StarImpress packad presentation</comment>
+  <comment xml:lang="sr-Cyrl">Запакована StarImpress презентација</comment>
+  <comment xml:lang="sq">Paraqitje StarImpress e paketuar</comment>
+  <comment xml:lang="sl">Stisnjena predstavitev StarImpress</comment>
+  <comment xml:lang="ru">Запакованная презентация StarImpress</comment>
+  <comment xml:lang="ro">prezentare împachetată StarImpress</comment>
+  <comment xml:lang="pt-BR">Apresentação empacotada do StarImpress</comment>
+  <comment xml:lang="pl">Spakowana prezentacja StarImpress</comment>
+  <comment xml:lang="oc">presentacion StarImpress lèsta</comment>
+  <comment xml:lang="nn">StarImpress pakka presentasjon</comment>
+  <comment xml:lang="ko">StarImpress 패킹 프리젠테이션</comment>
+  <comment xml:lang="kk-Cyrl">StarImpress дестеленген презентациясы</comment>
+  <comment xml:lang="ja">StarImpress 5 パック済みプレゼンテーション</comment>
+  <comment xml:lang="id">Presentasi StarImpress yang dikemas</comment>
+  <comment xml:lang="hr">StarImpress spakirana prezentacija</comment>
+  <comment xml:lang="fur">Presentazion impachetade di StarImpress</comment>
+  <comment xml:lang="fr">Présentation empaquetée StarImpress</comment>
+  <comment xml:lang="fi">StarImpress pakattu esitys</comment>
+  <comment xml:lang="et">StarImpressi pakitud esitlus</comment>
+  <comment xml:lang="es">presentación empaquetada de StarImpress</comment>
+  <comment xml:lang="en-GB">StarImpress packed presentation</comment>
+  <comment xml:lang="de">StarImpress-Präsentation (gepackt)</comment>
+  <comment xml:lang="da">StarImpress-pakket præsentation</comment>
+  <comment xml:lang="ca">presentació empaquetada StarImpress</comment>
+  <comment xml:lang="bg">Презентация — StarImpress, пакетирана</comment>
+  <comment xml:lang="be-Cyrl">запакаваная прэзентацыя StarImpress</comment>
+  <comment xml:lang="ar">عرض تقديمي StarImpress مرزم </comment>
+  <generic-icon name="x-office-presentation"/>
+  <glob pattern="*.sdp" weight="10"/>
+</mime-type>

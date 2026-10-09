@@ -1,0 +1,480 @@
+if not modules then modules = { } end modules ['lpdf-grp'] = {
+    version   = 1.001,
+    comment   = "companion to lpdf-ini.mkiv",
+    author    = "Hans Hagen, PRAGMA-ADE, Hasselt NL",
+    copyright = "PRAGMA ADE / ConTeXt Development Team",
+    license   = "see context related readme files"
+}
+
+local type, tonumber = type, tonumber
+local formatters, gsub, char = string.formatters, string.gsub, string.char
+local sort = table.sort
+local round = math.round
+
+local colors         = attributes.colors
+local basepoints     = number.dimenfactors.bp
+
+local pdfbackend     = backends.registered.pdf
+local nodeinjections = pdfbackend.nodeinjections
+local codeinjections = pdfbackend.codeinjections
+local registrations  = pdfbackend.registrations
+
+local lpdf                 = lpdf
+local pdfdictionary        = lpdf.dictionary
+local pdfarray             = lpdf.array
+local pdfconstant          = lpdf.constant
+local pdfboolean           = lpdf.boolean
+local pdfreference         = lpdf.reference
+local pdfflushobject       = lpdf.flushobject
+local pdfflushstreamobject = lpdf.flushstreamobject
+
+local createimage = images.create
+local wrapimage   = images.wrap
+local embedimage  = images.embed
+
+-- can also be done indirectly:
+--
+-- 12 : << /AntiAlias false /ColorSpace  8 0 R /Coords [ 0.0 0.0 1.0 0.0 ] /Domain [ 0.0 1.0 ] /Extend [ true true ] /Function 22 0 R /ShadingType 2 >>
+-- 22 : << /Bounds [ ] /Domain [ 0.0 1.0 ] /Encode [ 0.0 1.0 ] /FunctionType 3 /Functions [ 31 0 R ] >>
+-- 31 : << /C0 [ 1.0 0.0 ] /C1 [ 0.0 1.0 ] /Domain [ 0.0 1.0 ] /FunctionType 2 /N 1.0 >>
+
+local function hasopacities(opacities)
+    if opacities then
+        for i=1,#opacities do
+            if type(opacities[i]) ~= "number" then
+                return false
+            end
+        end
+        return true
+    end
+    return false
+end
+
+local function shade(stype,name,domain,color_a,color_b,n,colorspace,coordinates,separation,steps,fractions,opacities)
+    local func = nil
+    --
+    -- domain has to be consistently added in all dictionaries here otherwise
+    -- acrobat fails with a drawing error
+    --
+    domain = pdfarray(domain)
+    n      = tonumber(n)
+    --
+    if steps then
+        local list   = pdfarray()
+        local bounds = pdfarray()
+        local encode = pdfarray()
+
+-- if not opacities then
+--     opacities = { }
+-- end
+-- local hasops = hasopacities(opacities)
+-- if hasops then
+--     for i=1,steps do
+--         local o = opacities[i]
+--         local a = color_a[i]
+--         for i=1,#a do
+--             local c = o * a[i]
+--             a[i] = c > 1 and 1 or c
+--         end
+--     end
+--     color_b[1] = 1
+--     for i=2,steps do
+--         local color_b[i] = color_a[i-1]
+--     end
+--     inspect(color_a)
+--     inspect(color_b)
+-- end
+
+        -- The bounds need to be sorted and we can have illustrator output
+        -- that violates this rule.
+        local tmp = { }
+        for i=1,steps do
+            tmp[i] = { fractions[i], color_a[i], color_b[i] }
+        end
+        sort(tmp, function(a,b)
+            return a[1] < b[1]
+        end)
+        for i=1,steps do
+            local t = tmp[i]
+            fractions[i] = t[1]
+            color_a  [i] = t[2]
+            color_b  [i] = t[3]
+        end
+        -- So far for a fix.
+        for i=1,steps do
+            if i < steps then
+                bounds[i] = fractions[i] or 1
+            end
+            encode[2*i-1] = 0
+            encode[2*i]   = 1
+            list  [i]     = pdfdictionary {
+                FunctionType = 2,
+                Domain       = domain,
+                C0           = pdfarray(color_a[i]),
+                C1           = pdfarray(color_b[i]),
+                N            = n,
+            }
+        end
+        func = pdfdictionary {
+            FunctionType = 3,
+            Bounds       = bounds,
+            Encode       = encode,
+            Functions    = list,
+            Domain       = domain,
+        }
+    else
+        func = pdfdictionary {
+            FunctionType = 2,
+            Domain       = domain,
+            C0           = pdfarray(color_a),
+            C1           = pdfarray(color_b),
+            N            = n,
+        }
+    end
+    separation = separation and registrations.getspotcolorreference(separation)
+    local s = pdfdictionary {
+        ShadingType = stype,
+        ColorSpace  = separation and pdfreference(separation) or pdfconstant(colorspace),
+        Domain      = domain,
+        Function    = pdfreference(pdfflushobject(func)),
+        Coords      = pdfarray(coordinates),
+        Extend      = pdfarray { true, true },
+        AntiAlias   = pdfboolean(true),
+    }
+    lpdf.adddocumentshade(name,pdfreference(pdfflushobject(s)))
+end
+
+function lpdf.circularshade(name,domain,color_a,color_b,n,colorspace,coordinates,separation,steps,fractions,opacities)
+    shade(3,name,domain,color_a,color_b,n,colorspace,coordinates,separation,steps,fractions,opacities)
+end
+
+function lpdf.linearshade(name,domain,color_a,color_b,n,colorspace,coordinates,separation,steps,fractions,opacities)
+    shade(2,name,domain,color_a,color_b,n,colorspace,coordinates,separation,steps,fractions,opacities)
+end
+
+-- inline bitmaps but xform'd
+--
+-- we could derive the colorspace if we strip the data
+-- and divide by x*y
+
+-- todo: map onto png
+
+
+do
+
+    local template = "q BI %s ID %s > EI Q"
+    local factor   = 72/300
+
+    local methods = { }
+
+    methods.hex = function(t)
+        -- encoding is ascii hex, no checking here
+        local xresolution = t.xresolution or 0
+        local yresolution = t.yresolution or 0
+        if xresolution == 0 or yresolution == 0 then
+            return -- fatal error
+        end
+        local colorspace = t.colorspace
+        if colorspace ~= "rgb" and colorspace ~= "cmyk" and colorspace ~= "gray" then
+            -- not that efficient but ok
+            local d = gsub(t.data,"[^0-9a-f]","")
+            local b = round(#d / (xresolution * yresolution))
+            if b == 2 then
+                colorspace = "gray"
+            elseif b == 6 then
+                colorspace = "rgb"
+            elseif b == 8 then
+                colorspace = "cmyk"
+            end
+        end
+        colorspace = lpdf.colorspaceconstants[colorspace]
+        if not colorspace then
+            return -- fatal error
+        end
+        --the original length L is required for pdf 2.0 (4096 max)
+        local d = pdfdictionary {
+            W   = xresolution,
+            H   = yresolution,
+            CS  = colorspace,
+            BPC = 8,
+            F   = pdfconstant("AHx"),
+         -- CS  = nil,
+         -- BPC = 1,
+         -- IM = true,
+        }
+        -- for some reasons it only works well if we take a 1bp boundingbox
+        local urx, ury = 1/basepoints, 1/basepoints
+     -- urx = (xresolution/300)/basepoints
+     -- ury = (yresolution/300)/basepoints
+        local width, height = t.width or 0, t.height or 0
+        if width == 0 and height == 0 then
+            width  = factor * xresolution / basepoints
+            height = factor * yresolution / basepoints
+        elseif width == 0 then
+            width  = height * xresolution / yresolution
+        elseif height == 0 then
+            height = width  * yresolution / xresolution
+        end
+        local a = pdfdictionary {
+            BBox = pdfarray { 0, 0, round(urx * basepoints), round(ury * basepoints) }
+        }
+        local image = createimage {
+            stream = formatters[template](d(),t.data),
+            width  = width,
+            height = height,
+            bbox   = { 0, 0, round(urx), round(ury) },
+            attr   = a(),
+            nobbox = true,
+        }
+        return wrapimage(image)
+    end
+
+ -- local lpegmatch     = lpeg.match
+ -- local pattern       = lpeg.Cs((lpeg.patterns.space/"" + lpeg.patterns.hextobyte)^0)
+
+    local zlibcompress    = xzip.compress
+    local hextocharacters = string.hextocharacters
+    local compresslevel   = 3
+
+    methods.png = function(t)
+        -- encoding is ascii hex, no checking here
+        local xresolution = t.xresolution or 0
+        local yresolution = t.yresolution or 0
+        local data        = t.data or ""
+        if xresolution == 0 or yresolution == 0 or data == "" then
+            return -- fatal error
+        end
+        if not t.bytes then
+            data = hextocharacters(data)
+        end
+        if not data then
+            return
+        end
+        local colorspace = t.colorspace
+        local colordepth = 8
+        local components = 8
+        local colors     = 1
+        if colorspace ~= "rgb" and colorspace ~= "gray" then
+            local b = round(#data / (xresolution * yresolution))
+            if b == 1 then
+                colorspace = "gray"
+                colors     = 1
+            elseif b == 3 then
+                colorspace = "rgb"
+                colors     = 3
+            elseif b == 4 then
+                return -- for now, todo: convert
+            end
+        end
+        colorspace = lpdf.colorspaceconstants[colorspace]
+        if not colorspace then
+            return -- fatal error
+        end
+        local reduce = t.reduce
+        if reduce == "clip" or reduce == "round" then
+            local result = pngdecode.reduce(data,xresolution,yresolution,colors,reduce ~= "clip")
+            if result then
+                data       = result
+                components = 4
+            end
+        end
+        local width  = t.width
+        local height = t.height
+        if width == 0 and height == 0 then
+            width  = factor * xresolution / basepoints
+            height = factor * yresolution / basepoints
+        elseif width == 0 then
+            width  = height * xresolution / yresolution
+        elseif height == 0 then
+            height = width  * yresolution / xresolution
+        end
+        data = zlibcompress(data,compresslevel)
+        --
+        local palette = t.palette
+        if palette then
+            palette = components == 8 and colors == 1 and figures.bytepalette(palette)
+            if palette then
+                palette = pdfarray {
+                    pdfconstant("Indexed"),
+                    pdfconstant("DeviceRGB"),
+                    #palette // 3,
+                    pdfreference(pdfflushstreamobject(palette)),
+                }
+            end
+        end
+        --
+        local xobject = pdfdictionary {
+            Type             = pdfconstant("XObject"),
+            Subtype          = pdfconstant("Image"),
+            Width            = xresolution,
+            Height           = yresolution,
+            BitsPerComponent = components,
+            ColorSpace       = palette or colorspace,
+            Length           = #data,
+            Filter           = pdfconstant("FlateDecode"),
+        }
+        --
+        local mask = tonumber(t.mask)
+        if mask then
+            -- we can share masks when we have the same size and value
+            mask = char(mask > 255 and 255 or mask)
+            mask = zlibcompress(string.rep(mask,xresolution*yresolution),compresslevel)
+            local d = pdfdictionary {
+                Type             = pdfconstant("XObject"),
+                Subtype          = pdfconstant("Image"),
+                Width            = xresolution,
+                Height           = yresolution,
+                BitsPerComponent = components,
+                ColorSpace       = pdfconstant("DeviceGray"),
+                Length           = #mask,
+                Filter           = pdfconstant("FlateDecode"),
+            }
+            xobject.SMask = pdfreference(lpdf.flushstreamobject(mask,d()))
+        end
+        local image = createimage {
+         -- bbox_no  = { 0, 0, round(width/xresolution), round(height/yresolution) }, -- mandate
+            bbox     = { 0, 0, round(width), round(height) }, -- mandate
+            width    = round(width),
+            height   = round(height),
+            nolength = true,
+            nobbox   = true,
+            notype   = true,
+            stream   = data,
+            attr     = xobject(),
+        }
+        return wrapimage(image)
+    end
+
+    function nodeinjections.injectbitmap(t)
+        if t.colorspace == "cmyk" then
+            return methods.hex(t)
+        else
+            return (methods[t.format or "hex"] or methods.hex)(t)
+        end
+    end
+
+end
+
+-- This feature has been removed. It made sense in the previous century but we never
+-- really used it. Also, the standard now recommendates using optional
+--
+-- -- function codeinjections.setfigurealternative(data,figure)
+--        -- gone
+-- -- end
+
+-- This feature is only needed for flash which was introduced as the new thing for
+-- media and then as with other media things removed again.
+--
+-- -- function codeinjections.getpreviewfigure(request)
+--        -- moved to the obsolete lpdf-swf.lua file
+-- -- end
+
+local masks = {
+    demomask = {
+        {   0,  63,   0 },
+        {  64, 127, 127 },
+        { 128, 195, 195 },
+        { 196, 255, 255 },
+    }
+}
+
+local ranges = {
+--     [".75"] = .75,
+--     [".50"] = .50,
+--     [".25"] = .25,
+}
+
+function codeinjections.registerfiguremask(name,specification)
+    masks[name] = specification
+end
+
+function codeinjections.registerfigurerange(name,specification)
+    ranges[name] = specification
+end
+
+function codeinjections.setfiguremask(data,figure) -- mark
+    local request = data.request
+    local mask    = request.mask
+    local range   = request.range
+    if mask and mask ~= ""  then
+        local m = masks[mask]
+        if m then
+            if type(m) == "function" then
+                m = m()
+            end
+            figure.newmask = m
+        else
+            figures.push {
+                name   = mask,
+                page   = request.page,
+                size   = request.size,
+                prefix = request.prefix,
+                cache  = request.cache,
+                width  = request.width,
+                height = request.height,
+            }
+            mask = figures.identify()
+            mask = figures.check(mask)
+            if mask then
+                local image = mask.status.private
+                if image then
+                    figures.include(mask)
+                    embedimage(image)
+                    local d = pdfdictionary {
+                        Interpolate  = false,
+                        SMask        = pdfreference(mask.status.objectnumber),
+                    }
+                    figure.attr = d()
+                end
+            end
+            figures.pop()
+        end
+    end
+    if range and range ~= "" then
+        local r = ranges[range]
+        if not r then
+            r = tonumber(range)
+        end
+        if type(r) == "function" then
+            r = r()
+        end
+        figure.newranges = r
+    end
+end
+
+-- experimental (q Q is not really needed)
+
+local saveboxresource = tex.boxresources.save
+local nofpatterns     = 0
+local f_pattern       = formatters["q /Pattern cs /%s scn 0 0 %.6N %.6N re f Q"]
+
+function lpdf.registerpattern(specification)
+    nofpatterns = nofpatterns + 1
+    local d = pdfdictionary {
+        Type        = pdfconstant("Pattern"),
+        PatternType = 1,
+        PaintType   = 1,
+        TilingType  = 2,
+        XStep       = (specification.width  or 10) * basepoints,
+        YStep       = (specification.height or 10) * basepoints,
+        Matrix      = {
+            1, 0, 0, 1,
+            (specification.hoffset or 0) * basepoints,
+            (specification.voffset or 0) * basepoints,
+        },
+    }
+
+ -- local resources  = lpdf.collectedresources{ patterns = false } -- we don't want duplicates, so no serialize here:
+    local resources  = lpdf.collectedresources{ patterns = false, serialize = false }
+    local attributes = d -- () -- we need to check for patterns
+    local onlybounds = 1
+    local patternobj = saveboxresource(specification.number,attributes,resources,true,onlybounds)
+    lpdf.adddocumentpattern("Pt" .. nofpatterns,lpdf.reference(patternobj ))
+    return nofpatterns
+end
+
+function lpdf.patternstream(n,width,height)
+    return f_pattern("Pt" .. n,width*basepoints,height*basepoints)
+end
+
+codeinjections.registerpattern = lpdf.registerpattern

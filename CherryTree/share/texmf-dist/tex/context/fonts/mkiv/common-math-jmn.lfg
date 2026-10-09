@@ -1,0 +1,322 @@
+if CONTEXTLMTXMODE == 0 then
+
+    fonts.encodings.math["extensible-jmn-private"] = { }
+    fonts.encodings.math["tex-ex-braces"]          = { }
+
+    return false
+
+end
+
+local nps = fonts.helpers.newprivateslot
+
+local fake20D6 = nps("arrow fake 0x20D6")
+local fake20D7 = nps("arrow fake 0x20D7")
+local fake20E1 = nps("arrow fake 0x20E1")
+
+local fake20EE = nps("arrow fake 0x20EE")
+local fake20EF = nps("arrow fake 0x20EF")
+local fake034D = nps("arrow fake 0x034D")
+
+local real034D = nps("arrow real 0x034D")
+
+if not fonts.encodings.math["extensible-jmn-private"] then
+
+    local ps = fonts.helpers.privateslot
+
+    fonts.encodings.math["extensible-jmn-private"] = {
+        [ps("rule middle piece")]        = 200, -- minusjmn
+        [ps("rule right piece")]         = 201, -- minusrightjmn
+        [ps("rule left piece")]          = 202, -- minusleftjmn
+        [ps("double rule middle piece")] = 203, -- equaljmn
+        [ps("double rule right piece")]  = 204, -- equalrightjmn
+        [ps("double rule left piece")]   = 205, -- equalleftjmn
+        [ps("arrow left piece")]         = 206, -- arrowleftjmn
+        [ps("arrow right piece")]        = 207, -- arrowrightjmn
+        [ps("double arrow left piece")]  = 208, -- arrowdblleftjmn
+        [ps("double arrow right piece")] = 209, -- arrowdblrightjmn
+    }
+
+end
+
+return {
+    name = "common-math-jmn",
+    version = "1.00",
+    comment = "Goodies that complement the JMN collection.",
+    author = "Hans, Mikael",
+    copyright = "ConTeXt development team",
+    mathematics = {
+        helpers = {
+            copyrecipes = function(recipes)
+                local list = table.keys(recipes)
+                for i=1,#list do
+                    local n = list[i]
+                    local t = table.copy(recipes[n])
+                    t[1].features = t[1].features .. "-nt"
+                    recipes[n .. "-nt"] = t
+                end
+            end,
+            addmissing = function(main)
+
+                local max            = math.max
+                local copytable      = table.copy
+                local slotcommand    = fonts.helpers.commands.slot
+
+                local builders       = fonts.handlers.vf.math.builders
+                local ps             = fonts.helpers.privateslot
+
+                local characters     = main.characters
+                local variables      = main.goodies.mathematics and main.goodies.mathematics.variables or { }
+                local joinrelfactor  = variables.joinrelfactor or 3
+                local notshiftfactor = variables.notshiftfactor or 0
+
+                local umbracepiece = ps("um brace piece")
+                local lmbracepiece = ps("lm brace piece")
+                local cmbracepiece = ps("cm brace piece")
+
+                local ulbracepiece = ps("ul brace piece")
+                local urbracepiece = ps("ur brace piece")
+                local llbracepiece = ps("ll brace piece")
+                local lrbracepiece = ps("lr brace piece")
+
+                builders.brace(main,0x23DE,ulbracepiece,cmbracepiece,lrbracepiece,llbracepiece,cmbracepiece,urbracepiece,"top")
+                builders.brace(main,0x23DF,llbracepiece,cmbracepiece,urbracepiece,ulbracepiece,cmbracepiece,lrbracepiece,"bottom")
+
+                builders.parent(main,0x23DC,ulbracepiece,umbracepiece,urbracepiece,"top")
+                builders.parent(main,0x23DD,llbracepiece,lmbracepiece,lrbracepiece,"bottom")
+
+                builders.dots(main,0x2026) -- ldots
+                builders.dots(main,0x22EE) -- vdots
+                builders.dots(main,0x22EF) -- cdots
+                builders.dots(main,0x22F1) -- ddots
+                builders.dots(main,0x22F0) -- udots
+
+                builders.jointwo(main,0x21A6,ps("maps to piece"),.15,0x02192) -- \mapstochar\rightarrow
+
+                local srl = ps("rule left piece")
+                local srm = ps("rule middle piece")
+                local srr = ps("rule right piece")
+
+                local drl = ps("double rule left piece")
+                local drm = ps("double rule middle piece")
+                local drr = ps("double rule right piece")
+
+                local sfl = ps("flat rule left piece")
+                local sfm = ps("flat rule middle piece")
+                local sfr = ps("flat rule right piece")
+
+                local mrl = ps("minus rule left piece")
+                local mrm = ps("minus rule middle piece")
+                local mrr = ps("minus rule right piece")
+
+                local dfl = ps("flat double rule left piece")
+                local dfm = ps("flat double rule middle piece")
+                local dfr = ps("flat double rule right piece")
+
+                local sal = ps("arrow left piece")
+                local sar = ps("arrow right piece")
+
+                local dal = ps("double arrow left piece")
+                local dar = ps("double arrow right piece")
+
+                local rad = ps("radical bar extender")
+                local frc = ps("fraction bar extender")
+
+                local antykwa = characters[srm]
+
+                if not antykwa then
+
+                    sal = 0x02190  sar = 0x02192
+                    dal = 0x021D0  dar = 0x021D2
+
+                    srl = 0x0002D  srr = 0x0002D
+                    drl = 0x0003D  drr = 0x0003D
+
+                    sfl = 0x0002D  srm = 0x0002D
+                    dfl = 0x0003D  drm = 0x0003D
+
+                end
+
+                if not characters[sfm] then
+
+                    local csal = characters[sal]  local sheight = csal.height  local sdepth = csal.depth
+                    local cdal = characters[dal]  local dheight = cdal.height  local ddepth = cdal.depth
+
+                    local csfl = copytable(characters[srl])  characters[sfl] = csfl  csfl.height = sheight  csfl.depth = sdepth csfl.italic = nil
+                    local csfm = copytable(characters[srm])  characters[sfm] = csfm  csfm.height = sheight  csfm.depth = sdepth csfm.italic = nil
+                    local csfr = copytable(characters[srr])  characters[sfr] = csfr  csfr.height = sheight  csfr.depth = sdepth csfr.italic = nil
+                    local cdfl = copytable(characters[drl])  characters[dfl] = cdfl  cdfl.height = dheight  cdfl.depth = ddepth cdfl.italic = nil
+                    local cdfm = copytable(characters[drm])  characters[dfm] = cdfm  cdfm.height = dheight  cdfm.depth = ddepth cdfm.italic = nil
+                    local cdfr = copytable(characters[drr])  characters[dfr] = cdfr  cdfr.height = dheight  cdfr.depth = ddepth cdfr.italic = nil
+
+                end
+
+                builders.jointwo(main,0x27F5,sal,joinrelfactor,srr)
+                builders.jointwo(main,0x27F6,srl,joinrelfactor,sar)
+                builders.jointwo(main,0x27F7,sal,joinrelfactor,sar)
+                builders.jointwo(main,0x27F8,dal,joinrelfactor,drr)
+                builders.jointwo(main,0x27F9,drl,joinrelfactor,dar)
+                builders.jointwo(main,0x27FA,dal,joinrelfactor,dar)
+
+                if antykwa then
+                    builders.horibar(main,0x2212,mrm,mrl,mrr,0x2212,true,srm,srl,srr) -- minus
+                    builders.horibar(main,0x203E,srm,srl,srr,0x2212) -- overbar underbar fraction (we take 90/91/92 too!)
+                    builders.horibar(main,frc,srm,srl,srr,0x2212)    -- fraction
+                    builders.rootbar(main,rad,srm,srr,0x2212)        -- radical
+                else
+                    builders.horibar(main,0x2212,false,false,false,0x2212,true) -- minus
+                    builders.horibar(main,0x203E,false,false,false,0x02212)
+                end
+
+                local ffactor = antykwa and 1 or 1   -- check MS
+                local mfactor = antykwa and 1 or .8
+                local lfactor = antykwa and 1 or .8
+
+                builders.extension(main,0x2190,sal,sfm,sfr,ffactor,mfactor,lfactor) -- \leftarrow
+                builders.extension(main,0x2192,sfl,sfm,sar,ffactor,mfactor,lfactor) -- \rightarrow
+                builders.extension(main,0x27F5,sal,sfm,sfr,ffactor,mfactor,lfactor)
+                builders.extension(main,0x27F6,sfl,sfm,sar,ffactor,mfactor,lfactor)
+                builders.extension(main,0x27F7,sal,sfm,sar,ffactor,mfactor,lfactor)
+                builders.extension(main,0x27F8,dal,dfm,dfr,ffactor,mfactor,lfactor)
+                builders.extension(main,0x27F9,dfl,dfm,dar,ffactor,mfactor,lfactor)
+                builders.extension(main,0x27FA,dal,dfm,dar,ffactor,mfactor,lfactor)
+
+             -- local tfactor = antykwa and -0.8 or -1.1  -- move up check MS
+             -- local bfactor = antykwa and  0.1 or  0.2
+
+                local tfactor = antykwa and -0.6 or -.6  -- move up check MS
+                local bfactor = antykwa and  0.1 or  0.2
+
+                local left  = characters[0x27F5]
+                local right = characters[0x27F6]
+                local both  = characters[0x27F7]
+
+                local height = max(left.height or 0,right.height or 0,both.height or 0)
+                local depth  = max(left.depth  or 0,right.depth  or 0,both.depth  or 0)
+
+                left .height = height ; left .depth = depth
+                right.height = height ; right.depth = depth
+                both .height = height ; both .depth = depth
+
+                -- top and bottom arrows : a real mess but now we're drawn into patching it; why are these
+                -- small ones shifted in the bbox; we could do a better job on top and bottom anchors; we
+                -- also could use the bbox as in opentype (\wideoverleftarrow etc)
+
+                local rightarrow  = characters[0x20D7]
+                local leftarrow   = copytable(rightarrow)
+                local doublearrow = copytable(rightarrow)
+                local width       = rightarrow.width
+                local height      = rightarrow.height
+
+                -- top
+
+                characters[0x20D6] = leftarrow
+                characters[0x20E1] = doublearrow
+
+                rightarrow.xoffset = -.2*width
+                leftarrow.commands = {
+                    { "offset", width, 0, 0x20D7, -1, 1 }
+                }
+                doublearrow.commands = {
+                    { "offset", antykwa and .9*width or width, 0, 0x20D7, -1, 1 },
+                    { "offset", antykwa and .1*width or     0, 0, 0x20D7,  1, 1 }
+                }
+
+                -- bottom
+
+                local rightarrow  = copytable(rightarrow)
+                local leftarrow   = copytable(leftarrow)
+                local doublearrow = copytable(doublearrow)
+
+                characters[0x20EE] = leftarrow
+                characters[0x20EF] = rightarrow
+                characters[0x034D] = doublearrow
+
+                local bheight =  .40*height -- can be tuned to match top
+                local yoffset = -.65*height -- can be tuned to match top
+
+                leftarrow  .height = bheight
+                rightarrow .height = bheight
+                doublearrow.height = bheight
+
+                rightarrow .yoffset = yoffset
+                leftarrow  .yoffset = yoffset
+                doublearrow.yoffset = yoffset
+
+                leftarrow.commands = {
+                    { "offset", width, 0, 0x20D7, -1, 1 }
+                }
+                doublearrow.commands = {
+                    { "offset", antykwa and .9*width or width, 0, 0x20D7, -1, 1 },
+                    { "offset", antykwa and .1*width or     0, 0, 0x20D7,  1, 1 }
+                }
+
+                -- extensibles
+
+                local tl = copytable(left)  ; characters[fake20D6] = tl ; characters[0x20D6].next = fake20D6 -- over
+                local tm = copytable(right) ; characters[fake20D7] = tm ; characters[0x20D7].next = fake20D7
+                local tr = copytable(both)  ; characters[fake20E1] = tr ; characters[0x20E1].next = fake20E1
+
+                tl.inneryoffset = tfactor*height ; tl.innerlocation = "top" ; tl.next = nil ; tl.italic = nil
+                tm.inneryoffset = tfactor*height ; tm.innerlocation = "top" ; tm.next = nil ; tm.italic = nil
+                tr.inneryoffset = tfactor*height ; tr.innerlocation = "top" ; tr.next = nil ; tr.italic = nil
+
+                local bl = copytable(left)  ; characters[fake20EE] = bl ; characters[0x20EE].next = fake20EE -- under
+                local bm = copytable(right) ; characters[fake20EF] = bm ; characters[0x20EF].next = fake20EF
+                local br = copytable(both)  ; characters[fake034D] = br ; characters[0x034D].next = fake034D
+
+                bl.inneryoffset = bfactor*height bl.innerlocation = "bottom" ; bl.next = nil ; bl.italic = nil
+                bm.inneryoffset = bfactor*height bm.innerlocation = "bottom" ; bm.next = nil ; bm.italic = nil
+                br.inneryoffset = bfactor*height br.innerlocation = "bottom" ; br.next = nil ; br.italic = nil
+
+                --
+
+                local tfactor = antykwa and -15 or -15
+                local bfactor = antykwa and   1 or   1
+
+                local t = copytable(characters[0x203E]) characters[0x0305] = t t.inneryoffset = tfactor*t.height t.innerlocation = "top"    t.next = nil t.italic = nil
+                local t = copytable(characters[0x203E]) characters[0x0332] = t t.inneryoffset = bfactor*t.height t.innerlocation = "bottom" t.next = nil t.italic = nil
+
+                builders.jointwo(main,0x2016,0x007C,0.20,0x007C)
+                builders.jointwo(main,0x2980,0x007C,0.20,0x007C,0.20,0x007C)
+
+                characters[0x007C].extensible      = true
+                characters[0x007C].varianttemplate = 0x5B
+                characters[0x2016].extensible      = true
+                characters[0x2016].varianttemplate = 0x5B
+                characters[0x2980].extensible      = true
+                characters[0x2980].varianttemplate = 0x5B
+
+-- characters[0x0302].keepbase = true -- can also be a tweak
+
+                -- 21CB leftrightharpoon
+                -- 21CC rightleftharpoon
+
+                builders.stack(main,0x2259,0x0003D,3,0x02227) -- \buildrel\wedge\over=
+
+                builders.jointwo(main,0x22C8,0x022B3,joinrelfactor,0x022B2) -- \mathrel\triangleright\joinrel\mathrel\triangleleft (4 looks better than 3)
+                builders.jointwo(main,0x22A7,0x0007C,joinrelfactor,0x0003D) -- \mathrel|\joinrel=
+
+                builders.overlaytwo(main,0x2260,0x00338,notshiftfactor,0x0003D) -- \not\equal
+                builders.overlaytwo(main,0x2284,0x00338,notshiftfactor,0x02282) -- \not\subset
+                builders.overlaytwo(main,0x2285,0x00338,notshiftfactor,0x02283) -- \not\supset
+                builders.overlaytwo(main,0x2209,0x00338,notshiftfactor,0x02208) -- \not\in
+
+                -- builders.jointwo  (main,0x2254,0x03A,0,0x03D)         -- :=
+                -- builders.jointhree(main,0x2A74,0x03A,0,0x03A,0,0x03D) -- ::=
+                -- builders.jointwo  (main,0x2A75,0x03D,0,0x03D)         -- ==
+
+                builders.repeated(main,0x222B,0x222B,1,1/2)
+                builders.repeated(main,0x222C,0x222B,2,1/2)
+                builders.repeated(main,0x222D,0x222B,3,1/2)
+
+                characters[0x02B9] = characters[0x2032] -- we're nice
+
+                -- some things are done automatically:
+
+                -- add primes
+                -- add equals and alike
+
+            end
+        }
+    }
+}

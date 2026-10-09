@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Localization>
+	<Version date="20190812212453">2.00.00</Version>
+	<Author>LARAMJO y Angel Herráez</Author>
+	<Copyright></Copyright>
+	<Product id="PDFXEditor"/>
+	<Language eName="Spanish (Spain, Traditional Sort)" lName="español" code="es-ES" R2L="false"/>
+	<Module name="SpellChecker" namespace="spell" version="8.0.332.0"/>
+	<Strings>
+		<text id="dict.param.hyphen" h="50549BEC">separación con guiones</text>
+		<text id="dict.param.spell" h="E10DA1DD">revisión</text>
+		<text id="lstDicts.empty" h="FFD5B8BB">&lt;No hay diccionarios&gt;</text>
+		<text id="msg.CopyDictError" h="81324CC9">No se han podido copiar archivos de diccionario</text>
+		<text id="msg.DictExists" h="650ABF1A">Ya existe el diccionario</text>
+		<text id="msg.DictExists.title" h="B025530B">El diccionario ya existe</text>
+		<text id="msg.ErrorTitle" h="D9DB5E01">Error en la revisión ortográfica</text>
+		<text id="msg.LoadDictError" h="D139CD51">No se ha podido cargar el diccionario</text>
+		<text id="msg.RemoveError" h="DDD3D452">No se ha podido eliminar el archivo de diccionario. (Acceso denegado)</text>
+		<text id="msg.WordExists" h="54B206DA">Ya existe esa palabra</text>
+		<text id="msg.WordExists.title" h="A9AFB29B">Ya existe esa palabra</text>
+		<text id="opt.b.AddDict" h="E0BF5FDE">Agregar un diccionario</text>
+		<text id="opt.b.CustomWordList" h="D1505337">Lista personal palabras</text>
+		<text id="opt.b.RemoveDict" h="D94F3439">Eliminar diccionario</text>
+		<text id="opt.b.Updater" h="4A49FCF0">Añadir o actualizar idiomas</text>
+		<text id="opt.cb.AllowAlgoHyphens" h="D8C41308">Permitir en palabras desconocidas</text>
+		<text id="opt.cb.EnableAllHyphens" h="207464CF">Permitir la separación con guiones entre sílabas</text>
+		<text id="opt.cb.EnableHyphens" h="71ECEEC4">Utilizar el diccionario para la separación</text>
+		<text id="opt.cb.EnableSpellChecker" h="1D563674">Activar la revisión ortográfica</text>
+		<text id="opt.cb.IgnoreWordsInUppercase" h="BEB17F5B">Ignorar las palabras en MAYÚSCULAS</text>
+		<text id="opt.cb.IgnoreWordsWithNumbers" h="2AA28F70">Ignorar las palabras que contienen números</text>
+		<text id="opt.title" h="AEF9F007">Configuración para la revisión ortográfica</text>
+		<text id="wrd.b.AddWord" h="8E2EE8C1">Agregar</text>
+		<text id="wrd.b.Delete" h="D8FE3F70">Eliminar</text>
+		<text id="wrd.b.DeleteAll" h="848E003C">Eliminar todas</text>
+		<text id="wrd.l.Dictionary" h="66E4322E">Diccionario:</text>
+		<text id="wrd.l.Word" h="7AFBC23E">Palabra:</text>
+		<text id="wrd.title" h="66DDC653">Lista personalizada de palabras</text>
+	</Strings>
+</Localization>

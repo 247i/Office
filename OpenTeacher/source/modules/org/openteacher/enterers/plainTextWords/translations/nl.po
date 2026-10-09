@@ -1,0 +1,48 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2012-07-06 13:38+0000\n"
+"Last-Translator: Marten de Vries <marten@marten-de-vries.nl>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:42+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: plainTextWords.py:65
+msgid ""
+"Please enter the plain text in the text edit. Separate words with a new line "
+"and questions from answers with an equals sign ('=') or a tab."
+msgstr ""
+"Vul alstublieft de platte tekst in in het tekstinvulvak. Scheid de woorden "
+"met een regelafbreking en vragen en antwoorden met een gelijkheidsteken "
+"('=') of een tab."
+
+#: plainTextWords.py:66
+msgid "Plain text words enterer"
+msgstr "Platte tekst woordeninvoerder"
+
+#: plainTextWords.py:79
+msgid "Missing equals sign or tab"
+msgstr "Missend gelijkheidsteken of tab"
+
+#: plainTextWords.py:80
+msgid ""
+"Please make sure every line contains an '='-sign or tab between the "
+"questions and answers."
+msgstr ""
+"Zorg er alstublieft voor dat iedere regel een '='-teken of een tab tussen de "
+"vragen en de antwoorden bevat."
+
+#: plainTextWords.py:167
+msgid "Create words lesson by entering plain text"
+msgstr "Maak een woordjesles aan door platte tekst in te voeren"

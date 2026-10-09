@@ -1,0 +1,139 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:38+0200\n"
+"PO-Revision-Date: 2013-03-31 09:15+0000\n"
+"Last-Translator: Marten de Vries <marten@marten-de-vries.nl>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:42+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: gui.py:423
+msgid "Open from file"
+msgstr "Open vanuit bestand"
+
+#: ui.py:51
+msgid "Enter list"
+msgstr "Voeg toe"
+
+#: ui.py:52
+msgid "Teach me!"
+msgstr "Overhoor me!"
+
+#: ui.py:53
+msgid "Show results"
+msgstr "Laat resultaten zien"
+
+#: ui.py:272
+msgid "&File"
+msgstr "&Bestand"
+
+#: ui.py:273
+msgid "&New"
+msgstr "&Nieuw"
+
+#: ui.py:274
+msgid "&Open"
+msgstr "&Open"
+
+#: ui.py:275
+msgid "Open &into current list"
+msgstr "&In de huidige lijst openen"
+
+#: ui.py:276
+msgid "&Save"
+msgstr "&Opslaan"
+
+#: ui.py:277
+msgid "Save &As"
+msgstr "Opslaan &als"
+
+#: ui.py:278
+msgid "&Print"
+msgstr "&Print"
+
+#: ui.py:279
+msgid "&Quit"
+msgstr "A&fsluiten"
+
+#: ui.py:281
+msgid "&Edit"
+msgstr "B&ewerken"
+
+#: ui.py:282
+msgid "&Reverse list"
+msgstr "&Lijst omkeren"
+
+#: ui.py:283
+msgid "&Settings"
+msgstr "&Instellingen"
+
+#: ui.py:285
+msgid "&View"
+msgstr "Bee&ld"
+
+#: ui.py:286
+msgid "Fullscreen"
+msgstr "Volledig scherm"
+
+#: ui.py:288
+msgid "&Help"
+msgstr "&Help"
+
+#: ui.py:289
+msgid "&Documentation"
+msgstr "&Documentatie"
+
+#: ui.py:290
+msgid "&About"
+msgstr "&Over"
+
+#: ui.py:292
+msgid "Toolbar"
+msgstr "Toolbar"
+
+#~ msgid "Close Tab"
+#~ msgstr "Sluit tab"
+
+#~ msgid "Choose file to save"
+#~ msgstr "Kies een bestandsnaam voor het opslaan"
+
+#~ msgid "Choose file to open"
+#~ msgstr "Kies een bestand om te openen"
+
+#~ msgid "Create lesson:"
+#~ msgstr "Maak een les aan:"
+
+#~ msgid "Load lesson:"
+#~ msgstr "Laad een les:"
+
+#~ msgid "Recently opened:"
+#~ msgstr "Recent geopend:"
+
+#~ msgid "Ctrl+N"
+#~ msgstr "Ctrl+N"
+
+#~ msgid "Ctrl+O"
+#~ msgstr "Ctrl+O"
+
+#~ msgid "Ctrl+S"
+#~ msgstr "Ctrl+S"
+
+#~ msgid "Ctrl+Shift+S"
+#~ msgstr "Ctrl+Shift+S"
+
+#~ msgid "Ctrl+P"
+#~ msgstr "Ctrl+P"
+
+#~ msgid "Ctrl+Q"
+#~ msgstr "Ctrl+Q"

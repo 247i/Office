@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-ms-ne-executable">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>16-bit Windows program</comment>
+  <comment xml:lang="zh-Hant-TW">16 位元 Windows 程式</comment>
+  <comment xml:lang="uk">16-бітова програма Windows</comment>
+  <comment xml:lang="tr">16 bit Windows programı</comment>
+  <comment xml:lang="sv">16-bitars Windows-program</comment>
+  <comment xml:lang="sr-Cyrl">16-битни Виндоуз програм</comment>
+  <comment xml:lang="sq">Program 16-bit Windows</comment>
+  <comment xml:lang="sl">16-biten program za Windows</comment>
+  <comment xml:lang="ru">16-битная программа Windows</comment>
+  <comment xml:lang="ro">program Windows pe 16 biți</comment>
+  <comment xml:lang="pt-BR">Programa de 16 bits do Windows</comment>
+  <comment xml:lang="pl">16-bitowy program Windows</comment>
+  <comment xml:lang="oc">programa Windows 16-bits</comment>
+  <comment xml:lang="nn">16-bits Windows-program</comment>
+  <comment xml:lang="ko">16비트 윈도우 프로그램</comment>
+  <comment xml:lang="kk-Cyrl">16-биттік Windows бағдарламасы</comment>
+  <comment xml:lang="ja">16ビット Windows プログラム</comment>
+  <comment xml:lang="it">Programma Windows 16-bit</comment>
+  <comment xml:lang="id">Program Windows 16-bit</comment>
+  <comment xml:lang="hr">16-bitni Windows program</comment>
+  <comment xml:lang="hi">16-बिट Windows प्रोग्राम</comment>
+  <comment xml:lang="fur">Program di Windows a 16-bit</comment>
+  <comment xml:lang="fr">Programme 16-bit Windows</comment>
+  <comment xml:lang="fi">16-bit Windows-ohjelma</comment>
+  <comment xml:lang="eu">16 bit-eko Windows programa</comment>
+  <comment xml:lang="et">16-bitine Windowsi programm</comment>
+  <comment xml:lang="es">programa de Windows de 16 bits</comment>
+  <comment xml:lang="en-GB">16-bit Windows program</comment>
+  <comment xml:lang="de">16-Bit-Windows-Programm</comment>
+  <comment xml:lang="ca">programa Windows de 16 bits </comment>
+  <comment xml:lang="bg">Програма — Windows, 16-битова</comment>
+  <comment xml:lang="be-Cyrl">16-бітная праграма Windows</comment>
+  <comment xml:lang="ar">برنامج ويندوز 16-بت</comment>
+  <sub-class-of type="application/x-msdownload"/>
+  <generic-icon name="application-x-executable"/>
+  <glob pattern="*.exe" weight="20"/>
+  <glob pattern="*.dll" weight="20"/>
+  <glob pattern="*.cpl" weight="20"/>
+  <glob pattern="*.drv" weight="20"/>
+  <glob pattern="*.scr" weight="20"/>
+</mime-type>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="image/x-pxr">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Pixar raster</comment>
+  <comment xml:lang="uk">растр Pixar</comment>
+  <comment xml:lang="tr">Pixar raster</comment>
+  <comment xml:lang="sv">Pixar-raster</comment>
+  <comment xml:lang="sr-Cyrl">Pixar растер</comment>
+  <comment xml:lang="sl">Raster Pixar</comment>
+  <comment xml:lang="ru">Растровая графика Pixar</comment>
+  <comment xml:lang="ro">raster (hartă de biți) Pixar</comment>
+  <comment xml:lang="pt-BR">Pixar raster</comment>
+  <comment xml:lang="pl">Obraz rastrowy Pixar</comment>
+  <comment xml:lang="oc">matritz Pixar raster</comment>
+  <comment xml:lang="ko">Pixar 래스터</comment>
+  <comment xml:lang="kk-Cyrl">Pixar растры</comment>
+  <comment xml:lang="ja">Pixar ラスター</comment>
+  <comment xml:lang="hr">Pixar raster</comment>
+  <comment xml:lang="fr">Trame Pixar</comment>
+  <comment xml:lang="fi">Pixar rasteri</comment>
+  <comment xml:lang="et">Pixari rasterpilt</comment>
+  <comment xml:lang="en-GB">Pixar raster</comment>
+  <comment xml:lang="de">Pixar Rasterdatei</comment>
+  <comment xml:lang="ca">ràster de Pixar</comment>
+  <comment xml:lang="bg">Растер — Pixar</comment>
+  <comment xml:lang="be-Cyrl">растравы відарыс Pixar</comment>
+  <comment xml:lang="ar">صورة بيكسار نقطية</comment>
+  <glob pattern="*.pxr"/>
+</mime-type>

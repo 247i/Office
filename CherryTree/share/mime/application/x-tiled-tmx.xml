@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-tiled-tmx">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Tiled map files</comment>
+  <comment xml:lang="zh-Hant-TW">Tiled 地圖檔案</comment>
+  <comment xml:lang="uk">файли мозаїчної карти</comment>
+  <comment xml:lang="tr">Tiled harita dosyaları</comment>
+  <comment xml:lang="sv">Tiled-kartfiler</comment>
+  <comment xml:lang="sr-Cyrl">Tiled датотеке мапа</comment>
+  <comment xml:lang="sl">Mape Tiled</comment>
+  <comment xml:lang="ru">Файлы карты Tiled</comment>
+  <comment xml:lang="ro">fișiere de hartă în mozaic</comment>
+  <comment xml:lang="pt-BR">Arquivos de mapa Tiled</comment>
+  <comment xml:lang="pl">Pliki map Tiled</comment>
+  <comment xml:lang="oc">fichièrs de mapa teulada</comment>
+  <comment xml:lang="ko">바둑판 배치 맵 파일</comment>
+  <comment xml:lang="kk-Cyrl">Tiled map файлдары</comment>
+  <comment xml:lang="ja">Tiled マップファイル</comment>
+  <comment xml:lang="it">File tiled map</comment>
+  <comment xml:lang="id">Berkas peta ubin</comment>
+  <comment xml:lang="hr">Tiled kartografske datoteke</comment>
+  <comment xml:lang="hi">Tiled मैप फाइलें</comment>
+  <comment xml:lang="fur">Files di mape a tassei</comment>
+  <comment xml:lang="fr">Fichiers de cartes Tiled</comment>
+  <comment xml:lang="fi">Vierekkäiset karttakuvat</comment>
+  <comment xml:lang="et">Tiledi kaardifail</comment>
+  <comment xml:lang="es">archivos de mapa en mosaico</comment>
+  <comment xml:lang="en-GB">Tiled map files</comment>
+  <comment xml:lang="de">Tiled-Kartendatei</comment>
+  <comment xml:lang="ca">fitxers de mapa en mosaic</comment>
+  <comment xml:lang="be-Cyrl">файлы карты Tiled</comment>
+  <comment xml:lang="ar">ملفات خريطة مبلطة</comment>
+  <sub-class-of type="application/xml"/>
+  <glob pattern="*.tmx"/>
+</mime-type>

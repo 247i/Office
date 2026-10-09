@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-perf-data">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Perf data</comment>
+  <comment xml:lang="zh-Hant-TW">Perf 資料</comment>
+  <comment xml:lang="uk">дані Perf</comment>
+  <comment xml:lang="tr">Perf verisi</comment>
+  <comment xml:lang="sv">Perf-data</comment>
+  <comment xml:lang="sr-Cyrl">Perf подаци</comment>
+  <comment xml:lang="sl">Podatki perf</comment>
+  <comment xml:lang="ru">Данные Perf</comment>
+  <comment xml:lang="ro">date Perf</comment>
+  <comment xml:lang="pt-BR">Dados do perf</comment>
+  <comment xml:lang="pl">Dane wydajności</comment>
+  <comment xml:lang="oc">donadas de performança</comment>
+  <comment xml:lang="nn">Perf-data</comment>
+  <comment xml:lang="lt">Perf duomenys</comment>
+  <comment xml:lang="ko">Perf 데이터</comment>
+  <comment xml:lang="kk-Cyrl">Perf деректері</comment>
+  <comment xml:lang="ja">Perf データ</comment>
+  <comment xml:lang="it">Dati perf</comment>
+  <comment xml:lang="id">Data perf</comment>
+  <comment xml:lang="hr">Perf podaci</comment>
+  <comment xml:lang="hi">Perf डेटा</comment>
+  <comment xml:lang="he">נתוני ביצועים</comment>
+  <comment xml:lang="gl">Datos de Perf</comment>
+  <comment xml:lang="fur">Dâts di Perf</comment>
+  <comment xml:lang="fr">Données Perf</comment>
+  <comment xml:lang="fi">Perf-tiedot</comment>
+  <comment xml:lang="et">Perfi profileerimisandmed</comment>
+  <comment xml:lang="es">datos de rendimiento</comment>
+  <comment xml:lang="en-GB">Perf data</comment>
+  <comment xml:lang="de">Leistungsdaten</comment>
+  <comment xml:lang="da">Perf-data</comment>
+  <comment xml:lang="ca">dades de Perf</comment>
+  <comment xml:lang="bg">Данни — Perf</comment>
+  <comment xml:lang="be-Cyrl">даныя Perf</comment>
+  <comment xml:lang="ar">بيانات Perf</comment>
+  <glob pattern="perf.data" case-sensitive="true"/>
+</mime-type>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/vnd.sun.xml.math">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>OpenOffice.org 1.0 Math formula</comment>
+  <comment xml:lang="zh-Hant-TW">OpenOffice.org 1.0 Math 公式</comment>
+  <comment xml:lang="uk">формула OpenOffice.org Math 1.0</comment>
+  <comment xml:lang="tr">OpenOffice.org 1.0 Math formülü</comment>
+  <comment xml:lang="sv">OpenOffice.org 1.0 Math-formel</comment>
+  <comment xml:lang="sr-Cyrl">OpenOffice.org 1.0 Math формула</comment>
+  <comment xml:lang="sq">Formulë OpenOffice.org 1.0 Math</comment>
+  <comment xml:lang="sl">Dokument formule OpenOffice.org 1.0 Math</comment>
+  <comment xml:lang="ru">Формула OpenOffice.org 1.0 Math</comment>
+  <comment xml:lang="ro">formulă OpenOffice.org 1.0 Math</comment>
+  <comment xml:lang="pt-BR">Fórmula do OpenOffice.org 1.0 Math</comment>
+  <comment xml:lang="pl">Formuła OpenOffice.org 1.0 Math</comment>
+  <comment xml:lang="oc">formula OpenOffice.org 1.0 Math</comment>
+  <comment xml:lang="nn">OpenOffice.org 1.0 Math-formel</comment>
+  <comment xml:lang="ko">OpenOffice.org 1.0 Math 수식</comment>
+  <comment xml:lang="kk-Cyrl">OpenOffice.org 1.0 Math форумуласы</comment>
+  <comment xml:lang="ja">OpenOffice 1.0 Math 計算式</comment>
+  <comment xml:lang="id">Rumus OpenOffice.org 1.0 Math</comment>
+  <comment xml:lang="hr">OpenOffice.org 1.0 Math formula</comment>
+  <comment xml:lang="fur">Formule di OpenOffice.org 1.0 Math</comment>
+  <comment xml:lang="fr">Formule OpenOffice.org 1.0 Math</comment>
+  <comment xml:lang="fi">OpenOffice.org 1.0 Math kaava</comment>
+  <comment xml:lang="et">OpenOffice.org 1.0 Mathi valemifail</comment>
+  <comment xml:lang="es">fórmula de OpenOffice.org Math 1.0</comment>
+  <comment xml:lang="en-GB">OpenOffice.org 1.0 Math formula</comment>
+  <comment xml:lang="de">OpenOffice.org Math-1.0-Formel</comment>
+  <comment xml:lang="da">OpenOffice.org 1.0 Math-formel</comment>
+  <comment xml:lang="ca">fórmula d'OpenOffice.org 1.0 Math</comment>
+  <comment xml:lang="bg">Формула — OpenOffice.org 1.0 Math</comment>
+  <comment xml:lang="be-Cyrl">формула OpenOffice.org 1.0 Math</comment>
+  <comment xml:lang="ar">صيغة Math المكتب المفتوح 1.0</comment>
+  <sub-class-of type="application/zip"/>
+  <generic-icon name="x-office-document"/>
+  <glob pattern="*.sxm"/>
+</mime-type>

@@ -1,0 +1,63 @@
+# Dutch translation for openteacher
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2013-04-05 13:37+0000\n"
+"Last-Translator: Marten de Vries <marten@marten-de-vries.nl>\n"
+"Language-Team: Dutch <nl@li.org>\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:43+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: uiController.py:196
+msgid ""
+"Couldn't open the file, because the file type is unknown or it can't be "
+"shown."
+msgstr ""
+"Kon het bestand niet openen, omdat het bestandstype onbekend is of niet "
+"weergeven kan worden."
+
+#: uiController.py:198
+msgid ""
+"Couldn't open the file, is it still there and do we have the right to open "
+"it?"
+msgstr ""
+"Kon het bestand niet openen, is het nog steeds aanwezig en hebben we de "
+"rechten om het te openen?"
+
+#: uiController.py:200
+msgid "Couldn't open the file, it seems to be corrupted."
+msgstr "Kon het bestand niet openen, het lijkt beschadigd te zijn."
+
+#: uiController.py:210
+msgid "File opened succesfully."
+msgstr "Bestand succesvol geopend"
+
+#: uiController.py:228
+msgid "Can't merge files of different file types."
+msgstr "Kan bestanden met verschillende types niet samenvoegen."
+
+#: uiController.py:250
+msgid "Opened file into the current list succesfully."
+msgstr "Het bestand is met succes in de huidige lijst geopend."
+
+#: uiController.py:256
+msgid ""
+"Couldn't save the file, is there enough free disk space and do we have the "
+"right to write to the specified location?"
+msgstr ""
+"Kon het bestand niet opslaan, is er genoeg vrije ruimte en zijn we "
+"gemachtigd te schrijven op de aangewezen locatie?"
+
+#: uiController.py:258
+msgid "File saved succesfully."
+msgstr "Bestand succesvol opgeslagen."

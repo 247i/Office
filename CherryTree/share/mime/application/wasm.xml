@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/wasm">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>WASM binary module</comment>
+  <comment xml:lang="zh-Hant-TW">WASM 二進制模組</comment>
+  <comment xml:lang="uk">двійковий модуль WASM</comment>
+  <comment xml:lang="tr">WASM ikili modülü</comment>
+  <comment xml:lang="sv">WASM-binärmodul</comment>
+  <comment xml:lang="sr-Cyrl">WASM бинарни модул</comment>
+  <comment xml:lang="sq">Modul dyor WASM</comment>
+  <comment xml:lang="sl">Dvojiški modul WASM</comment>
+  <comment xml:lang="ru">Двоичный модуль WASM</comment>
+  <comment xml:lang="ro">modul binar WASM</comment>
+  <comment xml:lang="pt-BR">Módulo binário WASM</comment>
+  <comment xml:lang="pl">Moduł binarny WASM</comment>
+  <comment xml:lang="oc">modul binari WASM</comment>
+  <comment xml:lang="nn">WASM-binærmodul</comment>
+  <comment xml:lang="ko">WASM 이진 모듈</comment>
+  <comment xml:lang="kk-Cyrl">WASM бинарлы модулі</comment>
+  <comment xml:lang="ja">WASM バイナリモジュール</comment>
+  <comment xml:lang="it">Modulo binario WASM</comment>
+  <comment xml:lang="id">Modul biner WASM</comment>
+  <comment xml:lang="hr">WASM binarni modul</comment>
+  <comment xml:lang="hi">WASM बाइनरी मॉड्यूल</comment>
+  <comment xml:lang="fur">Modul binari WASM</comment>
+  <comment xml:lang="fr">Module binaire WASM</comment>
+  <comment xml:lang="fi">WASM-binaarimoduuli</comment>
+  <comment xml:lang="et">WASM binaarne moodul</comment>
+  <comment xml:lang="es">módulo binario de WASM</comment>
+  <comment xml:lang="en-GB">WASM binary module</comment>
+  <comment xml:lang="de">WASM-Binärmodul</comment>
+  <comment xml:lang="ca">mòdul binari WASM</comment>
+  <comment xml:lang="bg">Модул —Двоичен файл на WASM</comment>
+  <comment xml:lang="be-Cyrl">бінарны модуль WASM</comment>
+  <comment xml:lang="ar">وحدة ثنائية WASM</comment>
+  <acronym>WASM</acronym>
+  <expanded-acronym>Web Assembly</expanded-acronym>
+  <glob pattern="*.wasm"/>
+</mime-type>

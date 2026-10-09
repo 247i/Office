@@ -1,0 +1,304 @@
+local common  = fonts.goodies.load("common-math.lfg")
+local presets = common.mathematics.tweaks.presets
+
+local integral_variants = {  bottomright = -0.20 }
+----- integral_top      = {  topright    =  0.05 }
+local integral_bottom   = {  bottomright = -0.20 }
+
+return {
+    name = "pagella-math",
+    version = "1.00",
+    comment = "Goodies that complement pagella.",
+    author = "Hans Hagen & Mikael Sundqvist",
+    copyright = "ConTeXt development team",
+    mathematics = {
+        parameters = {
+            AccentTopShiftUp                  =   10,
+            FlattenedAccentTopShiftUp         =   20,
+            AccentBaseDepth                   =   80,
+            DelimiterPercent                  =   85,
+            DelimiterShortfall                =  400,
+            DelimiterDisplayPercent           =   90,
+            DelimiterDisplayShortfall         =  400,
+            DisplayOperatorMinHeight          = 1800, -- 1500 in font
+            SuperscriptShiftUp                =  386, -- 354 in font
+            SubscriptShiftDown                =  200, -- 232 in font
+            SubscriptShiftDownWithSuperscript = "1.4*SubscriptShiftDown", -- 1.5* in math-act
+            PrimeShiftUp                      = "1.1*SuperscriptShiftUp",
+            PrimeShiftUpCramped               = "1.1*SuperscriptShiftUp",
+        },
+        tweaks = {
+            aftercopying = {
+                {
+                    tweak    = "fontname",
+                    expected = "TeXGyrePagellaMath-Regular",
+                    abort    = true,
+                },
+                {
+                    tweak    = "version",
+                    expected = "Version 1.632",
+                },
+                {
+                    tweak   = "fixprimes",
+                    factor  = 0.8,
+                },
+                {
+                    tweak    = "replacealphabets",
+                    feature  = "euleroverpagella",
+                    filename = "euler-math.otf",
+                    list     = {
+                        { source = "lowercasenormal",      target = "lowercaseitalic" },
+                        { source = "lowercasebold",        target = "lowercasebolditalic" },
+                        { source = "lowercasegreeknormal", target = "lowercasegreekitalic" },
+                        { source = "lowercasegreekbold",   target = "lowercasegreekbolditalic" },
+                        { source = "uppercasenormal",      target = "uppercaseitalic" },
+                        { source = "uppercasebold",        target = "uppercasebolditalic" },
+                        { source = "uppercasegreeknormal", target = "uppercasegreekitalic" },
+                        { source = "uppercasegreekbold",   target = "uppercasegreekbolditalic" },
+                        { source = "lowercasenormal",      target = "lowercasenormal" },
+                        { source = "lowercasebold",        target = "lowercasebold" },
+                        { source = "lowercasegreeknormal", target = "lowercasegreeknormal" },
+                        { source = "lowercasegreekbold",   target = "lowercasegreekbold" },
+                        { source = "uppercasenormal",      target = "uppercasenormal" },
+                        { source = "uppercasebold",        target = "uppercasebold" },
+                        { source = "uppercasegreeknormal", target = "uppercasegreeknormal" },
+                        { source = "uppercasegreekbold",   target = "uppercasegreekbold" },
+                        { source = "digitsnormal",         target = "digitsnormal" },
+                        --
+                        -- either
+                        --
+                     -- { source = { first = 0x0007B, last = 0x0007D } }, -- { }
+                     -- { source = { first = 0x0005B, last = 0x0005D } }, -- [ ]
+                     -- { source = { first = 0x00028, last = 0x00029 } }, -- ( )
+                     -- { source = { first = 0x02100, last = 0x02BFF } }, -- symbols -- has snippets of {} () []
+                        --
+                        -- or (probably even more)
+                        --
+                        { source = { first = 0x02100, last = 0x0239A } }, -- symbols -- has snippets of {} () []
+                        { source = { first = 0x023B5, last = 0x02BFF } }, -- symbols -- has snippets of {} () []
+                        --
+                        { source = { first = 0x1D400, last = 0x1D7FF } }, -- various alphabets
+                    },
+                },
+                {
+                    tweak = "addmirrors",
+                },
+                {
+                    tweak = "addcomposites",
+                },
+                {
+                    tweak   = "fixoldschool",
+                    feature = "euleroverpagella",
+                },
+                {
+                    tweak   = "replacealphabets",
+                    list    = {
+                        {
+                            source   = { first = 0x02980 }, -- triplebar
+                            filename = "texgyrepagellamathcompanion-regular.otf",
+                        },
+                    },
+                },
+                presets.scripttocalligraphic { },
+                presets.rsfstoscript         { },
+                presets.rsfsuprighttoscript  { },
+                presets.moderntocalligraphic { },
+                presets.eulertocalligraphic  { },
+                presets.xitsarabic           { rscale  = 0.95 },
+                presets.fallbacks            { },
+                presets.moveitalics          { correct = true },
+                presets.moveitalics          { correct = true, letters = true },
+                presets.moveintegrals        { factor  = 1.5  }, -- we need to check the 1.5
+                presets.wipeanchors          { },
+                presets.wipeitalics          { },
+                {
+                    tweak = "checkaccents",
+                },
+                {
+                    tweak = "wipecues",
+                },
+                {
+                    tweak   = "parameters",
+                    feature = "euleroverpagella",
+                    list    = {
+                        RadicalRuleThickness = 54,
+                    }
+                },
+                {
+                    tweak = "setovershoots",
+                    list  = {
+                        {
+                            target       = "uppercasescript",
+                         -- quad         = true, -- to be decided
+                            topovershoot = 0.05,
+                        },
+                        {
+                            target       = "uppercaseboldscript",
+                         -- quad         = true, -- to be decided
+                            topovershoot = 0.05,
+                        },
+                    },
+                },
+                -- Accents are a mess. We migrate the extensibles from the combiners to the base accent
+                -- and then need to tweak the width (which is auto set because it was zero with a large
+                -- accent anchor offset). First we copy and fix.
+                {
+                    tweak = "extendaccents",
+                },
+                {
+                    tweak = "flattenaccents",
+                },
+                {
+                    tweak = "fixaccents",
+                },
+                -- First we set the dimensions of the initial accent which started out as zero but we want
+                -- a proper width.
+--                 {
+--                     tweak = "dimensions",
+--                     list  = {
+--                         [0x00300] = { width = 0.9 }, -- widegrave
+--                         [0x00301] = { width = 0.9 }, -- wideacute
+--                         [0x00302] = { width = 1.4, anchor = 1.20, xoffset =  .10 }, -- widehat
+--                         [0x00303] = { width = 1.4, anchor = 1.20, xoffset =  .10 }, -- widetilde
+--                         [0x00306] = { width = 1.4, anchor = 1.20, xoffset =  .10 }, -- widebreve
+--                         [0x0030A] = { width = 0.9, xoffset = -.0 }, -- widering -- weird this one
+--                         [0x0030C] = { width = 1.4, anchor = 1.20, xoffset = .10 }, -- widecheck
+--                     },
+--                 },
+                -- Then we deal with all offsets and heights in one go. So we treat the initial accent
+                -- as well as the variants here.
+                {
+                    tweak = "dimensions",
+                    list  = {
+                     -- here we want to apply to all
+                        [0x020DB] = { yoffset = -0.01, height = .95, all = true }, -- widedddot : 0x20DB (self)
+                    },
+                },
+                -- We now copy these to the not wide slots so that we can set these to stretch as well,
+                -- if only because it is less confusing and more consistent.
+                {
+                    tweak = "copyaccents",
+                },
+                -- So far for the accents.
+                {
+                    tweak = "radicaldegreeanchors",
+                    list  = {
+                        ["0x221A.parts.bottom"] = { location = "left", hfactor  = 0.0, vfactor  = 1.1 },
+                    }
+                },
+                {
+                    tweak = "fixslashes",
+                },
+                {
+                    tweak = "kerns",
+                    list  = {
+                        [0x002F]                = { topleft  = -0.2,  bottomright = -0.2  },
+                        --
+                        ["0x7D.parts.top"]      = { topright = -0.15,                     }, -- right brace top
+                        ["0x7D.parts.bottom"]   = {                   bottomright = -0.15 }, -- right brace bottom
+                        ["0x7D.variants.*"]     = { topright = -0.15, bottomright = -0.15 }, -- right brace variants
+                        ["0x29.parts.top"]      = { topright = -0.25,                     }, -- right parenthesis top
+                        ["0x29.parts.bottom"]   = {                   bottomright = -0.25 }, -- right parenthesis bottom
+                        ["0x29.variants.*"]     = { topright = -0.2,  bottomright = -0.2  }, -- right parenthesis variants
+                        ["0x221A.parts.top"]    = { topright =  0.2,                      }, -- right radical top
+                        ["0x221A.parts.bottom"] = {                   bottomright =  0.2  }, -- right radical bottom
+                        ["0x221A.variants.*"]   = { topright =  0.2,  bottomright =  0.2  }, -- right radical variants
+                        -- angle
+                        [0x27E9]                = { topright = -0.2,  bottomright = -0.2  },
+                        ["0x27E9.variants.*"]   = { topright = -0.3,  bottomright = -0.3  },
+                        [0x27EB]                = { topright = -0.2,  bottomright = -0.2  },
+                        ["0x27EB.variants.*"]   = { topright = -0.3,  bottomright = -0.3  },
+                        --
+                        [0x0393]                = { bottomright = -0.20, }, -- upright Gamma
+                        --
+                        ["0x222B.parts.bottom"] = { bottomright = -0.20 }, -- int
+                        ["0x222C.parts.bottom"] = { bottomright = -0.15 }, -- iint
+                        ["0x222D.parts.bottom"] = { bottomright = -0.10 }, -- iiint
+                        ["0x2A0C.parts.bottom"] = { bottomright = -0.05 }, -- iiiint
+                    },
+                },
+                presets.addmathkerns { },
+                {
+                    tweak = "checkspacing",
+                },
+                {
+                    tweak = "addscripts",
+                },
+                {
+                    tweak = "addprivates",
+                },
+                {
+                    tweak = "accentdimensions",
+                },
+                {
+                    tweak = "addrules",
+                },
+                {
+                    tweak = "addarrows",
+                },
+--                 {
+--                     tweak   = "addbars",
+--                     advance = 0.2,
+-- variant = 2,
+--                 },
+                {
+                    tweak    = "replacerules",
+                    fraction = { height = .215, yoffset = .785 },
+                    radical  = { height = .215, yoffset = .785, leftoffset = .1, rightoffset = .1 },
+                    stacker  = { height = .215, yoffset = .785 },
+                },
+                -- on the radical we adapt the offset and give some extra height (prevent clipping)
+                {
+                    tweak    = "replacerules",
+                    feature  = "euleroverpagella",
+                    fraction = { height = .15, yoffset = .85 },
+                    radical  = { height = .22, yoffset = .8, leftoffset = .05, rightoffset = .05, leftoverlap = .01 },
+                    stacker  = { height = .15, yoffset = .85 },
+                },
+                {
+                    tweak = "addactuarian",
+                },
+                {
+                    tweak = "addequals",
+                },
+                {
+                    tweak   = "addfourier",
+                    variant = 1,
+                },
+--                 {
+--                     tweak   = "addprimed",
+--                 },
+                {
+                    tweak = "kernpairs",
+                    list = {
+                        -- beware: we kept the italic correction in spite of punctuation class
+                        [0x1D453] = { -- f
+                            [0x3A] = -.1,
+                            [0x3B] = -.1,
+                        },
+                    },
+                },
+                -- this is the mkiv section
+                {
+                    tweak   = "emulatelmtx",
+                    feature = "emulatelmtx",
+                    comment = "this is for mkiv",
+                },
+                {
+                    tweak   = "parameters",
+                    feature = "emulatelmtx",
+                    comment = "this is for mkiv",
+                    list    = {
+                        AccentBaseHeight = 400,
+                    }
+                },
+            },
+        },
+        bigslots = {
+            1, 3, 5, 7
+        },
+        alternates = {
+            dotless = { feature = 'dtls', value = 1, comment = "Mathematical Dotless Forms" },
+        },
+    },
+}

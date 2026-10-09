@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-pico8-rom">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>PICO-8 binary code</comment>
+  <comment xml:lang="uk">двійковий код PICO-8</comment>
+  <comment xml:lang="tr">PICO-8 ikili kodu</comment>
+  <comment xml:lang="sv">PICO-8-binärkod</comment>
+  <comment xml:lang="sr-Cyrl">PICO-8 бинарни код</comment>
+  <comment xml:lang="sq">Kod dyor PICO-8</comment>
+  <comment xml:lang="sl">Dvojiška koda PICO-8</comment>
+  <comment xml:lang="ru">Бинарный блок кода PICO-8</comment>
+  <comment xml:lang="ro">cod binar PICO-8</comment>
+  <comment xml:lang="pt-BR">Código binário PICO-8</comment>
+  <comment xml:lang="pl">Kod binarny PICO-8</comment>
+  <comment xml:lang="oc">còdi binari PICO-8</comment>
+  <comment xml:lang="ko">PICO-8 바이너리 코드</comment>
+  <comment xml:lang="kk-Cyrl">PICO-8 екілік коды</comment>
+  <comment xml:lang="fr">code binaire PICO-8</comment>
+  <comment xml:lang="fi">PICO-8 binääri koodi</comment>
+  <comment xml:lang="et">PICO-8 binaarkood</comment>
+  <comment xml:lang="es">Código binario PICO-8</comment>
+  <comment xml:lang="en-GB">PICO-8 binary code</comment>
+  <comment xml:lang="de">PICO-8-Binärcode</comment>
+  <comment xml:lang="ar">كود PICO-8 الثنائي</comment>
+  <sub-class-of type="application/x-executable"/>
+  <glob pattern="*.p8.rom"/>
+</mime-type>

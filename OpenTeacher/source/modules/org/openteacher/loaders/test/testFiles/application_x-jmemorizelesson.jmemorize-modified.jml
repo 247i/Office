@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Lesson>
+<Category name="Alle">
+<Deck/>
+<Deck>
+<Card AmountLearnedBack="0" AmountLearnedFront="0" Backside="d" DateCreated="06-Jan-2013 14:13:19" DateExpired="07-Jan-2013 14:13:51" DateModified="06-Jan-2013 14:13:19" DateTested="06-Jan-2013 14:13:51" DateTouched="06-Jan-2013 14:14:00" Frontside="c" TestsHit="1" TestsTotal="2">
+<Side/>
+<Side/>
+</Card>
+<Card AmountLearnedBack="0" AmountLearnedFront="0" Backside="b" DateCreated="06-Jan-2013 14:13:15" DateExpired="07-Jan-2013 14:14:20" DateModified="06-Jan-2013 14:13:15" DateTested="06-Jan-2013 14:14:20" DateTouched="06-Jan-2013 14:14:30" Frontside="a" TestsHit="1" TestsTotal="3">
+<Side/>
+<Side/>
+</Card>
+</Deck>
+</Category>
+<statistics>
+<session end="06-Jan-2013 14:13:39" failed="0" passed="2" relearned="0" skipped="0" start="06-Jan-2013 14:13:28"/>
+<session end="06-Jan-2013 14:14:00" failed="0" passed="1" relearned="0" skipped="0" start="06-Jan-2013 14:13:51"/>
+<session end="06-Jan-2013 14:14:30" failed="0" passed="1" relearned="0" skipped="0" start="06-Jan-2013 14:14:20"/>
+</statistics>
+</Lesson>

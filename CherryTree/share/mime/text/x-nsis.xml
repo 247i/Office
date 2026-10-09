@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/x-nsis">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>NSIS Script</comment>
+  <comment xml:lang="uk">скрипт NSIS</comment>
+  <comment xml:lang="tr">NSIS betiği</comment>
+  <comment xml:lang="sv">NSIS-skript</comment>
+  <comment xml:lang="sr-Cyrl">NSIS скрипта</comment>
+  <comment xml:lang="sq">Programth NSIS</comment>
+  <comment xml:lang="sl">Skript NSIS</comment>
+  <comment xml:lang="ru">Сценарий NSIS</comment>
+  <comment xml:lang="ro">script NSIS</comment>
+  <comment xml:lang="pt-BR">Script NSIS</comment>
+  <comment xml:lang="pl">Skrypt NSIS</comment>
+  <comment xml:lang="oc">escript NSIS</comment>
+  <comment xml:lang="ko">NSIS 스크립트</comment>
+  <comment xml:lang="kk-Cyrl">NSIS скрипті</comment>
+  <comment xml:lang="hr">NSIS scripta</comment>
+  <comment xml:lang="fr">Script NSIS</comment>
+  <comment xml:lang="fi">NSIS skripti</comment>
+  <comment xml:lang="et">NSIS-skript</comment>
+  <comment xml:lang="es">Guión NSIS</comment>
+  <comment xml:lang="en-GB">NSIS Script</comment>
+  <comment xml:lang="de">NSIS-Skript</comment>
+  <comment xml:lang="ar">سكربت NSIS</comment>
+  <acronym>NSIS</acronym>
+  <expanded-acronym>Nullsoft Scriptable Install System</expanded-acronym>
+  <sub-class-of type="text/plain"/>
+  <generic-icon name="text-x-generic"/>
+  <glob pattern="*.nsi"/>
+  <glob pattern="*.nsh"/>
+</mime-type>

@@ -1,0 +1,55 @@
+# Russian translation for openteacher
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2013-02-16 17:58+0000\n"
+"Last-Translator: Nkolay Parukhin <parukhin@gmail.com>\n"
+"Language-Team: Russian <ru@li.org>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:44+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: studyStackApi.py:141
+msgid "Select category"
+msgstr "Выберите категорию"
+
+#: studyStackApi.py:142
+msgid "Please select a category"
+msgstr "Пожалуйста, выберите категорию"
+
+#: studyStackApi.py:147
+msgid "Select list"
+msgstr "Выберите список"
+
+#: studyStackApi.py:148
+msgid "Please select a list"
+msgstr "Пожалуйста, выберите список"
+
+#: studyStackApi.py:224
+msgid "Import from studystack.com"
+msgstr "Импорт с studystack.com"
+
+#: studyStackApi.py:269
+msgid "The word list was imported from Study Stack successfully."
+msgstr "Список слов успешно импортирован с Study Stack."
+
+#: studyStackApi.py:280
+msgid "No Study Stack connection"
+msgstr "Отсутствует подключение к Study Stack"
+
+#: studyStackApi.py:281
+msgid ""
+"Study Stack didn't accept the connection. Are you sure that your internet "
+"connection works and http://www.studystack.com/ is online?"
+msgstr ""
+"Сайт Study Stack не отвечает. Вы уверены, что ваше интернет-соединение "
+"работает и studystack.com доступен?"

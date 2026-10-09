@@ -1,0 +1,43 @@
+# Chinese (Traditional) translation for openteacher
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2012-09-12 07:41+0000\n"
+"Last-Translator: Louie Chen <louie23@gmail.com>\n"
+"Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:43+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: hangman.py:109
+msgid "Check!"
+msgstr "檢查！"
+
+#: hangman.py:110
+msgid "You have already tried this character / word"
+msgstr "你已經嚐試這個字母/單字"
+
+#: hangman.py:142
+msgid "Mistakes:  "
+msgstr "錯誤：  "
+
+#: hangman.py:166
+msgid "hanged man"
+msgstr "吊死鬼"
+
+#: hangman.py:190
+msgid "You lose, the answer was: "
+msgstr "你輸了，答案是： "
+
+#: hangman.py:297
+msgid "Play hangman"
+msgstr "玩吊死鬼"

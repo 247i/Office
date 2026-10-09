@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Localization>
+	<Version date="20180123215742">2.00.00</Version>
+	<Author>Angel Herráez</Author>
+	<Copyright></Copyright>
+	<Product id="PDFXEditor"/>
+	<Language eName="Tamil" lName="தமிழ்" code="ta" R2L="false"/>
+	<Module name="FileOpenSH" namespace="fopw" version="7.0.323.3"/>
+	<Strings>
+		<text id="secure.printer.title" h="448D1D7F">Esta impressora no está permitida.</text>
+		<text id="secure.printer.text" h="7488F002">No se permite esta impresora para una impresión segura. Comience de nuevo y elija otra impresora.</text>
+	</Strings>
+</Localization>

@@ -1,0 +1,51 @@
+<flashcards authoremail="" license="" author="" comment="" writerversion="3" flashqardversion="0.15.0">
+ <box name="test">
+  <stack/>
+  <stage>
+   <card type="regular">
+    <frontsidedocument>
+     <html>twee</html>
+    </frontsidedocument>
+    <backsidedocument>
+     <html>two</html>
+    </backsidedocument>
+    <statistics>
+     <dateCreated>27.2.2013</dateCreated>
+     <answer date="27.2.2013">false</answer>
+    </statistics>
+    <comments></comments>
+   </card>
+  </stage>
+  <stage>
+   <card type="regular">
+    <frontsidedocument>
+     <html>drie</html>
+    </frontsidedocument>
+    <backsidedocument>
+     <html>three</html>
+    </backsidedocument>
+    <statistics>
+     <dateCreated>27.2.2013</dateCreated>
+     <answer date="27.2.2013">true</answer>
+    </statistics>
+    <comments>éß</comments>
+   </card>
+   <card type="regular">
+    <frontsidedocument>
+     <html>een</html>
+    </frontsidedocument>
+    <backsidedocument>
+     <html>one</html>
+    </backsidedocument>
+    <statistics>
+     <dateCreated>27.2.2013</dateCreated>
+     <answer date="27.2.2013">true</answer>
+    </statistics>
+    <comments></comments>
+   </card>
+  </stage>
+  <stage/>
+  <stage/>
+  <stage/>
+ </box>
+</flashcards>

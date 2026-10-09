@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-starwriter">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>StarWriter 3-4 document</comment>
+  <comment xml:lang="zh-Hant-TW">StarWriter 3-4 文件</comment>
+  <comment xml:lang="uk">документ StarWriter 3-4</comment>
+  <comment xml:lang="tr">StarWriter 3-4 belgesi</comment>
+  <comment xml:lang="sv">StarWriter 3-4-dokument</comment>
+  <comment xml:lang="sr-Cyrl">Стар-писац 3-4 документ</comment>
+  <comment xml:lang="sq">Dokument StarWriter 3-4</comment>
+  <comment xml:lang="sl">Dokument StarWriter 3-4</comment>
+  <comment xml:lang="ru">Документ StarWriter 3-4</comment>
+  <comment xml:lang="ro">document StarWriter 3-4</comment>
+  <comment xml:lang="pt-BR">Documento do StarWriter 3-4</comment>
+  <comment xml:lang="pl">Dokument StarWriter 3-4</comment>
+  <comment xml:lang="oc">document StarWriter 3-4</comment>
+  <comment xml:lang="nn">StarWriter 3-4-dokument</comment>
+  <comment xml:lang="ko">StarWriter 3-4 문서</comment>
+  <comment xml:lang="kk-Cyrl">StarWriter 3-4 құжаты</comment>
+  <comment xml:lang="ja">StarWriter 3-4 ドキュメント</comment>
+  <comment xml:lang="id">Dokumen StarWriter 3-4</comment>
+  <comment xml:lang="hr">StarWriter 3-4 dokument</comment>
+  <comment xml:lang="he">מסמך StarWriter 3-4</comment>
+  <comment xml:lang="fur">Document di StarWriter 3-4</comment>
+  <comment xml:lang="fr">Document StarWriter 3-4</comment>
+  <comment xml:lang="fi">StarWriter 3-4 asiakirja</comment>
+  <comment xml:lang="et">StarWriter 3-4 dokument</comment>
+  <comment xml:lang="es">documento de StarWriter 3-4</comment>
+  <comment xml:lang="en-GB">StarWriter 3-4 document</comment>
+  <comment xml:lang="de">StarWriter-3-4-Dokument</comment>
+  <comment xml:lang="da">StarWriter 3-4-dokument</comment>
+  <comment xml:lang="ca">document StarWriter 3-4</comment>
+  <comment xml:lang="bg">Документ — StarWriter 3-4</comment>
+  <comment xml:lang="be-Cyrl">дакумент StarWriter 3-4</comment>
+  <comment xml:lang="ar">مستند StarWriter 3-4</comment>
+  <sub-class-of type="application/x-ole-storage"/>
+  <generic-icon name="x-office-document"/>
+  <glob pattern="*.sdw" weight="40"/>
+  <glob pattern="*.vor" weight="40"/>
+</mime-type>

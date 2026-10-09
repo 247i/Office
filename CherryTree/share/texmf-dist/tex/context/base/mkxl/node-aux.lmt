@@ -1,0 +1,475 @@
+if not modules then modules = { } end modules ['node-aux'] = {
+    version   = 1.001,
+    comment   = "companion to node-ini.mkiv",
+    author    = "Hans Hagen, PRAGMA-ADE, Hasselt NL",
+    copyright = "PRAGMA ADE / ConTeXt Development Team",
+    license   = "see context related readme files"
+}
+
+-- todo: n1 .. n2 : __concat metatable
+
+local type, tostring = type, tostring
+
+local nodes          = nodes
+local context        = context
+
+local utfvalues      = utf.values
+
+local nodecodes      = nodes.nodecodes
+
+local glyph_code     <const> = nodecodes.glyph
+local hlist_code     <const> = nodecodes.hlist
+local vlist_code     <const> = nodecodes.vlist
+----- attribute_code <const> = nodecodes.attribute -- temporary
+local par_code       <const> = nodecodes.par
+
+local nuts           = nodes.nuts
+local tonut          = nuts.tonut
+local tonode         = nuts.tonode
+local vianuts        = nuts.vianuts
+
+local getbox         = nuts.getbox
+local getnext        = nuts.getnext
+local getid          = nuts.getid
+local getlist        = nuts.getlist
+local getattr        = nuts.getattr
+local getboth        = nuts.getboth
+local getprev        = nuts.getprev
+local getwidth       = nuts.getwidth
+local setwidth       = nuts.setwidth
+local getboxglue     = nuts.getboxglue
+local setboxglue     = nuts.setboxglue
+
+local setfield       = nuts.setfield
+local setattr        = nuts.setattr
+local setlink        = nuts.setlink
+local setlist        = nuts.setlist
+local setnext        = nuts.setnext
+local setprev        = nuts.setprev
+local setattrlist    = nuts.setattrlist
+
+local traversers     = nuts.traversers
+local nextnode       = traversers.node
+local nextglyph      = traversers.glyph
+
+local flushnode      = nuts.flush
+local flushlist      = nuts.flushlist
+local hpack_nodes    = nuts.hpack
+local vpack_nodes    = nuts.vpack
+local unsetattribute = nuts.unsetattribute
+----- firstglyphnode = nuts.firstglyphnode
+----- firstglyph     = nuts.firstglyph
+----- firstchar      = nuts.firstchar
+local copy_node      = nuts.copy
+local find_tail      = nuts.tail
+local getbox         = nuts.getbox
+local count          = nuts.count
+local isglyph        = nuts.isglyph
+
+local nodepool       = nuts.pool
+local new_glue       = nodepool.glue
+local new_glyph      = nodepool.glyph
+
+local unsetvalue     <const> = attributes.unsetvalue
+
+local current_font   = font.current
+
+local texsetbox      = tex.setbox
+
+local report_error   = logs.reporter("node-aux:error")
+
+local function takebox(id)
+    local box = getbox(id)
+    if box then
+        local list = getlist(box)
+        setlist(box,nil)
+        local copy = copy_node(box)
+        if list then
+            setlist(copy,list)
+        end
+        texsetbox(id,false)
+        return copy
+    end
+end
+
+function nodes.takebox(id)
+    local b = takebox(id)
+    if b then
+        return tonode(b)
+    end
+end
+
+if not nuts.migratebox then -- todo: add to nodes.direct, or maybe getmigrate, setmigrate
+
+    local setpre  = nuts.setpre
+    local setpost = nuts.setpost
+    local getpre  = nuts.getpre
+    local getpost = nuts.getpost
+
+    function nuts.migratebox(source,target)
+        setpre(target,getpre(source))
+        setpost(target,getpost(source))
+        setpre(source)
+        setpost(source)
+    end
+
+end
+
+local splitbox = tex.splitbox
+nodes.splitbox = splitbox
+
+function nuts.splitbox(id,height)
+    return tonut(splitbox(id,height))
+end
+
+-- function nodes.takelist(n)
+--     -- when we need it
+-- end
+
+function nuts.takelist(n)
+    local l = getlist(n)
+    setlist(n)
+    flushnode(n)
+    return l
+end
+
+nuts.takebox = takebox
+tex.takebox  = nodes.takebox -- sometimes more clear
+
+-- so far
+
+local function repackhlist(list,...)
+    local temp, b = hpack_nodes(list,...)
+    list = getlist(temp)
+    setlist(temp)
+    flushnode(temp)
+    return list, b
+end
+
+nuts.repackhlist = repackhlist
+
+function nodes.repackhlist(list,...)
+    local list, b = repackhlist(tonut(list),...)
+    return tonode(list), b
+end
+
+-- local function setattributes(head,attr,value)
+--     for n, id in nextnode, head do
+--         setattr(n,attr,value)
+--         if id == hlist_node or id == vlist_node then
+--             setattributes(getlist(n),attr,value)
+--         end
+--     end
+-- end
+
+-- local function setunsetattributes(head,attr,value)
+--     for n, id in nextnode, head do
+--         if not getattr(n,attr) then
+--             setattr(n,attr,value)
+--         end
+--         if id == hlist_code or id == vlist_code then
+--             setunsetattributes(getlist(n),attr,value)
+--         end
+--     end
+-- end
+
+-- local function unsetattributes(head,attr)
+--     for n, id in nextnode, head do
+--         setattr(n,attr,unsetvalue)
+--         if id == hlist_code or id == vlist_code then
+--             unsetattributes(getlist(n),attr)
+--         end
+--     end
+-- end
+
+-- function nuts.firstcharacter(n,untagged) -- tagged == subtype > 255
+--     if untagged then
+--         return firstchar(n)
+--     else
+--         return firstglyph(n)
+--     end
+-- end
+--
+-- nodes.firstcharacter = vianuts(firstcharacter)
+--
+-- local function firstcharinbox(n,untagged)
+--     local l = getlist(getbox(n))
+--     if l then
+--         return firstglyphnode(l)
+--     end
+-- end
+--
+-- nuts .firstcharinbox = firstcharinbox
+
+-- this depends on fonts, so we have a funny dependency ... will be
+-- sorted out .. we could make tonodes a plugin into this
+
+local function tonodes(str,fnt,attr) -- (str,template_glyph) -- moved from blob-ini
+    if not str or str == "" then
+        return
+    end
+    local head, tail, space, fnt, template = nil, nil, nil, nil, nil
+    if not fnt then
+        fnt = current_font()
+    elseif type(fnt) ~= "number" and getid(fnt) == glyph_code then -- so it has to be a real node
+        fnt, template = nil, tonut(fnt)
+    end
+    for s in utfvalues(str) do
+        local n
+        if s == 32 then
+            if space then
+                n = copy_node(space)
+            elseif fonts then -- depedency
+                local parameters = fonts.hashes.identifiers[fnt].parameters
+                space = new_glue(parameters.space,parameters.spacestretch,parameters.spaceshrink)
+                n = space
+            end
+        elseif template then
+            n = copy_node(template)
+            setvalue(n,"char",s)
+        else
+            n = new_glyph(fnt,s)
+        end
+        if attr then -- normally false when template
+            setattrlist(n,attr)
+        end
+        if head then
+            setlink(tail,n)
+        else
+            head = n
+        end
+        tail = n
+    end
+    return head, tail
+end
+
+nuts.tonodes = tonodes
+
+nodes.tonodes = function(str,fnt,attr)
+    local head, tail = tonodes(str,fnt,attr)
+    return tonode(head), tonode(tail)
+end
+
+local function link(list,currentfont,currentattr,head,tail) -- an oldie, might be replaced
+    for i=1,#list do
+        local n = list[i]
+        if n then
+            local tn = type(n)
+            if tn == "string" then
+                if #tn > 0 then
+                    if not currentfont then
+                        currentfont = current_font()
+                    end
+                    local h, t = tonodes(n,currentfont,currentattr)
+                    if not h then
+                        -- skip
+                    elseif not head then
+                        head, tail = h, t
+                    else
+                        setnext(tail,h)
+                        setprev(h,t)
+                        tail = t
+                    end
+                end
+            elseif tn == "table" then
+                if #tn > 0 then
+                    if not currentfont then
+                        currentfont = current_font()
+                    end
+                    head, tail = link(n,currentfont,currentattr,head,tail)
+                end
+            elseif not head then
+                head = n
+                tail = find_tail(n)
+--             elseif getid(n) == attribute_code then
+--                 -- weird case
+--                 report_error("weird node type in list at index %s:",i)
+--                 for i=1,#list do
+--                     local l = list[i]
+--                     report_error("%3i: %s %S",i,getid(l) == attribute_code and "!" or ">",l)
+--                 end
+--                 os.exit()
+            else
+                setlink(tail,n)
+                if getnext(n) then
+                    tail = find_tail(n)
+                else
+                    tail = n
+                end
+            end
+        else
+            -- permitting nil is convenient
+        end
+    end
+    return head, tail
+end
+
+nuts.link = link
+
+nodes.link = function(list,currentfont,currentattr,head,tail)
+    local head, tail = link(list,currentfont,currentattr,tonut(head),tonut(tail))
+    return tonode(head), tonode(tail)
+end
+
+local function locate(start,wantedid,wantedsubtype)
+    for n, id, subtype in nextnode, start do
+        if id == wantedid then
+            if not wantedsubtype or subtype == wantedsubtype then
+                return n
+            end
+        elseif id == hlist_code or id == vlist_code then
+            local found = locate(getlist(n),wantedid,wantedsubtype)
+            if found then
+                return found
+            end
+        end
+    end
+end
+
+nuts.locate = locate
+
+function nodes.locate(start,wantedid,wantedsubtype)
+    local found = locate(tonut(start),wantedid,wantedsubtype)
+    return found and tonode(found)
+end
+
+local function rehpack(n,width)
+    local head = getlist(n)
+    local size = width or getwidth(n)
+    local temp = hpack_nodes(head,size,"exactly")
+    setwidth(n,size)
+    local set, order, sign = getboxglue(temp)
+    setboxglue(n,set,order,sign)
+    setlist(temp)
+    flushnode(temp)
+    return n
+end
+
+nuts.rehpack = rehpack
+
+function nodes.rehpack(n,...)
+    rehpack(tonut(n),...)
+end
+
+do
+
+    local parcodes      = nodes.parcodes
+    local hmodepar_code <const> = parcodes.hmodepar
+    local vmodepar_code <const> = parcodes.vmodepar
+
+    local getnest       = tex.getnest
+    local getidsubtype  = nuts.getidsubtype
+
+    function nuts.setparproperty(action,...)
+        local tail = tonut(getnest().tail)
+        while tail do
+            local id, subtype = getidsubtype(tail)
+            if id == par_code then
+                if subtype == hmodepar_code or subtype == vmodepar_code then
+                    return action(tail,...)
+                else
+                    -- something is wrong here
+                end
+            end
+            tail = getprev(tail)
+        end
+    end
+
+    local startofpar = nuts.startofpar
+
+    function nodes.startofpar(n)
+        return startofpar(tonut(n))
+    end
+
+end
+
+function nodes.hpack(h,...) return tonode(hpack_nodes(tonut(h),...)) end
+function nodes.vpack(h,...) return tonode(vpack_nodes(tonut(h),...)) end
+
+--
+
+local report_slide = logs.reporter("nodes", "slide")
+
+function nuts.checkslide(head,banner)
+    local c = head
+    local x = nil
+    local b = false
+    while c do
+        local p, n = getboth(c)
+        if p and p ~= x then
+            b = true
+        end
+        x = c
+        c = n
+    end
+    if b then
+        report_slide("")
+        report_slide(banner or "?")
+        report_slide("")
+        c = head
+        x = nil
+        while c do
+            local p, n = getboth(c)
+            report_slide("%s %s",(p and p ~= x and "!") or " ",tostring(tonode(c)))
+            x = c
+            c = getnext(c)
+        end
+        report_slide("")
+        nuts.show(head)
+        report_slide("")
+        nuts.slide(head)
+    end
+end
+
+-- In the end I moved some older experimental mkiv code here because it was bit cleaner
+-- in math extensions. This is not the best place but the old module was already wiped.
+
+do
+
+    local actions = { }
+
+    local function tail_append_callback(n,data,detail)
+        local action = actions[data]
+        if action then
+            return action(n,data,detail)
+        else
+            return n
+        end
+    end
+
+    callbacks.register {
+        name    = "tail_append",
+        action  = tail_append_callback,
+        comment = "process tail related action",
+        frozen  = true,
+    }
+
+    -- We don't have that many properties (a few in math where we run into a
+    -- processing order issue, otherwise we could use a node list parser).
+
+    local properties   = { }
+
+    local setproperty  = nuts.setproperty
+    local luaboundary  = nuts.pool.luaboundary
+
+    local a_properties <const> = 1
+
+    actions[a_properties] = function(n,data,detail)
+        local property = properties[detail]
+        if property then
+            setproperty(n,property)
+            property[detail] = false
+        end
+        return n
+    end
+
+   function nodes.upcomingproperties(data)
+       for i=1,#properties+1 do
+           if not properties[i] then
+               properties[i] = data
+               return luaboundary(a_properties,i)
+           end
+       end
+   end
+
+end

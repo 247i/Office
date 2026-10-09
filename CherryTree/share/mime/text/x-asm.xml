@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/x-asm">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Assembly code</comment>
+  <comment xml:lang="zh-Hant-TW">組合語言程式碼</comment>
+  <comment xml:lang="uk">код асемблера</comment>
+  <comment xml:lang="tr">Assembly kodu</comment>
+  <comment xml:lang="sv">Assembly-kod</comment>
+  <comment xml:lang="sr-Cyrl">Асемблерски код</comment>
+  <comment xml:lang="sq">Kod aasembly</comment>
+  <comment xml:lang="sl">Koda v zbirnem jeziku</comment>
+  <comment xml:lang="ru">Код Ассемблера</comment>
+  <comment xml:lang="ro">cod de asamblare</comment>
+  <comment xml:lang="pt-BR">Código de Assembly</comment>
+  <comment xml:lang="pl">Kod asemblera</comment>
+  <comment xml:lang="oc">Còdi assemblador</comment>
+  <comment xml:lang="nn">Assembly-kode</comment>
+  <comment xml:lang="ko">어셈블리 코드</comment>
+  <comment xml:lang="kk-Cyrl">Ассемблер коды</comment>
+  <comment xml:lang="ja">アセンブリコード</comment>
+  <comment xml:lang="id">Kode assembly</comment>
+  <comment xml:lang="hr">Assembly kôd</comment>
+  <comment xml:lang="fur">Codiç assembler</comment>
+  <comment xml:lang="fr">Code assembleur</comment>
+  <comment xml:lang="fi">Assembler-koodi</comment>
+  <comment xml:lang="et">Assemblerkood</comment>
+  <comment xml:lang="es">código ensamblador</comment>
+  <comment xml:lang="en-GB">Assembly code</comment>
+  <comment xml:lang="de">Assembler-Code</comment>
+  <comment xml:lang="ca">codi en assemblador</comment>
+  <comment xml:lang="bg">Код - Assembly</comment>
+  <comment xml:lang="be-Cyrl">код Assembly</comment>
+  <comment xml:lang="ar">شفرة ثنائية</comment>
+  <sub-class-of type="text/plain"/>
+  <glob pattern="*.asm"/>
+  <glob pattern="*.s"/>
+</mime-type>

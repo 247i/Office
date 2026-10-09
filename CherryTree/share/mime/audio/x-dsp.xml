@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="audio/x-dsp">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Dynamic Studio module audio</comment>
+  <comment xml:lang="uk">модульний звук Dynamic Studio</comment>
+  <comment xml:lang="tr">Dynamic Studio modülü sesi</comment>
+  <comment xml:lang="sv">Dynamic Studio-modulljud</comment>
+  <comment xml:lang="sr-Cyrl">Dynamic Studio звучни модул</comment>
+  <comment xml:lang="sq">Audio nga modul Dynamic Studio</comment>
+  <comment xml:lang="sl">Zvok modula Dynamic Studio</comment>
+  <comment xml:lang="ru">Звуковой модуль Dynamic Studio</comment>
+  <comment xml:lang="ro">modul audio Dynamic Studio</comment>
+  <comment xml:lang="pt-BR">Áudio de módulo Dynamic Studio</comment>
+  <comment xml:lang="pl">Plik dźwiękowy modułu Dynamic Studio</comment>
+  <comment xml:lang="oc">àudio de modul Dynamic Studio</comment>
+  <comment xml:lang="ko">Dynamic Studio 모듈 오디오</comment>
+  <comment xml:lang="kk-Cyrl">Dynamic Studio модуль аудиосы</comment>
+  <comment xml:lang="hr">Dynamic Studio modul za audio</comment>
+  <comment xml:lang="fr">Module audio Dynamic Studio</comment>
+  <comment xml:lang="fi">Dynamic Studio audiomoduuli</comment>
+  <comment xml:lang="et">Dynamic Studio mooduli helifail</comment>
+  <comment xml:lang="es">Módulo de sonido de Synamic Studio</comment>
+  <comment xml:lang="en-GB">Dynamic Studio module audio</comment>
+  <comment xml:lang="de">Dynamic-Studio-Audiomodul</comment>
+  <comment xml:lang="ar">وحدة الصوت الديناميكية للاستوديو</comment>
+  <glob pattern="*.dsm"/>
+  <glob pattern="*.dsp" weight="40"/>
+</mime-type>

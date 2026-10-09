@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-executable">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Executable</comment>
+  <comment xml:lang="zh-Hant-TW">可執行檔</comment>
+  <comment xml:lang="uk">виконуваний файл</comment>
+  <comment xml:lang="tr">Yürütülebilir</comment>
+  <comment xml:lang="sv">Körbar fil</comment>
+  <comment xml:lang="sr-Cyrl">Извршна датотека</comment>
+  <comment xml:lang="sq">E ekzekutueshme</comment>
+  <comment xml:lang="sl">Izvedljiva datoteka</comment>
+  <comment xml:lang="ru">Исполняемый</comment>
+  <comment xml:lang="ro">executabil</comment>
+  <comment xml:lang="pt-BR">Executável</comment>
+  <comment xml:lang="pl">Program</comment>
+  <comment xml:lang="oc">executable</comment>
+  <comment xml:lang="nn">Programfil</comment>
+  <comment xml:lang="lt">Vykdomasis</comment>
+  <comment xml:lang="ko">실행 파일</comment>
+  <comment xml:lang="kk-Cyrl">Орындалатын</comment>
+  <comment xml:lang="ka">შესრულებადი</comment>
+  <comment xml:lang="ja">実行可能ファイル</comment>
+  <comment xml:lang="it">Eseguibile</comment>
+  <comment xml:lang="id">Executable</comment>
+  <comment xml:lang="hr">Izvršna datoteka</comment>
+  <comment xml:lang="hi">निष्पादनयोग्य</comment>
+  <comment xml:lang="he">קובץ הפעלה</comment>
+  <comment xml:lang="gl">Executábel</comment>
+  <comment xml:lang="fur">Eseguibil</comment>
+  <comment xml:lang="fr">Exécutable</comment>
+  <comment xml:lang="fi">Suoritettava</comment>
+  <comment xml:lang="eu">Exekutagarria</comment>
+  <comment xml:lang="et">Programmifail</comment>
+  <comment xml:lang="es">ejecutable</comment>
+  <comment xml:lang="en-GB">Executable</comment>
+  <comment xml:lang="de">ausführbare Datei</comment>
+  <comment xml:lang="da">Kørbar fil</comment>
+  <comment xml:lang="ca">executable</comment>
+  <comment xml:lang="bg">Изпълним файл</comment>
+  <comment xml:lang="be-Cyrl">выконвальны файл</comment>
+  <comment xml:lang="ar">تنفيذي</comment>
+  <generic-icon name="application-x-executable"/>
+</mime-type>

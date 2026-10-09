@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="x-content/audio-cdda">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Audio CD</comment>
+  <comment xml:lang="zh-Hant-TW">音訊 CD</comment>
+  <comment xml:lang="uk">звуковий компакт-диск</comment>
+  <comment xml:lang="tr">Ses CD’si</comment>
+  <comment xml:lang="sv">Ljud-cd</comment>
+  <comment xml:lang="sr-Cyrl">Звучни ЦД</comment>
+  <comment xml:lang="sq">CD Audio</comment>
+  <comment xml:lang="sl">Zvočni CD</comment>
+  <comment xml:lang="ru">Аудио CD</comment>
+  <comment xml:lang="ro">CD audio</comment>
+  <comment xml:lang="pt-BR">CD de áudio</comment>
+  <comment xml:lang="pl">CD-Audio</comment>
+  <comment xml:lang="oc">CD àudio</comment>
+  <comment xml:lang="nn">Lyd-CD</comment>
+  <comment xml:lang="ko">오디오 CD</comment>
+  <comment xml:lang="kk-Cyrl">Аудио CD</comment>
+  <comment xml:lang="ka">აუდიო CD</comment>
+  <comment xml:lang="kab">Aḍebsi CD n umesliw</comment>
+  <comment xml:lang="ja">オーディオ CD</comment>
+  <comment xml:lang="it">CD audio</comment>
+  <comment xml:lang="id">CD Audio</comment>
+  <comment xml:lang="hr">Audio CD</comment>
+  <comment xml:lang="hi">ऑडियो CD</comment>
+  <comment xml:lang="gl">CD de son</comment>
+  <comment xml:lang="fur">CD Audio</comment>
+  <comment xml:lang="fr">CD audio</comment>
+  <comment xml:lang="fi">Ääni-CD</comment>
+  <comment xml:lang="eu">Audioko CDa</comment>
+  <comment xml:lang="et">Heli-CD</comment>
+  <comment xml:lang="es">CD de audio</comment>
+  <comment xml:lang="en-GB">Audio CD</comment>
+  <comment xml:lang="de">Audio-CD</comment>
+  <comment xml:lang="ca">CD d'àudio</comment>
+  <comment xml:lang="bg">CD — аудио</comment>
+  <comment xml:lang="be-Cyrl">аўдыя CD</comment>
+  <comment xml:lang="ar">صوت CD</comment>
+  <comment xml:lang="af">Oudio-CD</comment>
+</mime-type>

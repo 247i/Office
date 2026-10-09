@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/vnd.tcpdump.pcap">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Network packet capture</comment>
+  <comment xml:lang="zh-Hant-TW">網路封包擷取</comment>
+  <comment xml:lang="uk">перехоплення пакетів мережі</comment>
+  <comment xml:lang="tr">Ağ paketi yakalaması</comment>
+  <comment xml:lang="sv">Nätverkspaketsspårning</comment>
+  <comment xml:lang="sr-Cyrl">Снимак мрежних пакета</comment>
+  <comment xml:lang="sq">Kapje paketi rrjeti</comment>
+  <comment xml:lang="sl">Zajem omrežnih paketov</comment>
+  <comment xml:lang="ru">Захваченные сетевые пакеты</comment>
+  <comment xml:lang="ro">capturare pachet de rețea</comment>
+  <comment xml:lang="pt-BR">Captura de pacotes de rede</comment>
+  <comment xml:lang="pl">Przechwycenie pakietu sieciowego</comment>
+  <comment xml:lang="oc">captura de paquet ret</comment>
+  <comment xml:lang="ko">네트워크 패킷 캡처</comment>
+  <comment xml:lang="kk-Cyrl">Ұсталған желілік пакеттер</comment>
+  <comment xml:lang="ja">ネットワークパケットキャプチャ</comment>
+  <comment xml:lang="it">Cattura pacchetti di rete</comment>
+  <comment xml:lang="id">Tangkapan paket jaringan</comment>
+  <comment xml:lang="hr">Snimka mrežnog paketa</comment>
+  <comment xml:lang="hi">नेटवर्क पैकेट कैप्चर</comment>
+  <comment xml:lang="he">לכידת מנות נתוני רשת</comment>
+  <comment xml:lang="gl">Captura de paquetes de red</comment>
+  <comment xml:lang="fur">Acuisizion di pachets di rêt</comment>
+  <comment xml:lang="fr">Capture de paquet réseau</comment>
+  <comment xml:lang="fi">Verkkopaketin kaappaus</comment>
+  <comment xml:lang="et">Võrgupakettide püügilogi</comment>
+  <comment xml:lang="es">captura de paquetes de red</comment>
+  <comment xml:lang="en-GB">Network packet capture</comment>
+  <comment xml:lang="de">Netzwerkpaket-Aufzeichnung</comment>
+  <comment xml:lang="da">Netværkspakkeoptagelse</comment>
+  <comment xml:lang="ca">captura de paquets de xarxa</comment>
+  <comment xml:lang="bg">Файл на мрежов трафик</comment>
+  <comment xml:lang="be-Cyrl">захопленыя сеткавыя пакеты</comment>
+  <comment xml:lang="ar">التقاطة حزمة شبكة</comment>
+  <glob pattern="*.pcap"/>
+  <glob pattern="*.cap"/>
+  <glob pattern="*.dmp"/>
+  <alias type="application/x-pcap"/>
+  <alias type="application/pcap"/>
+</mime-type>

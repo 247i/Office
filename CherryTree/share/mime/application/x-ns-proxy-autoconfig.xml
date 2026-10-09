@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-ns-proxy-autoconfig">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Proxy Auto-Configuration file</comment>
+  <comment xml:lang="uk">файл автоналаштувань проксі</comment>
+  <comment xml:lang="tr">Vekil otomatik yapılandırma dosyası</comment>
+  <comment xml:lang="sv">Proxy-autokonfigurationsfil</comment>
+  <comment xml:lang="sr-Cyrl">Датотека за самоподешавање посредника</comment>
+  <comment xml:lang="sq">Kartelë Vetëformësimi Ndërmjetësi</comment>
+  <comment xml:lang="sl">Samodejna nastavitev posr. strežnika</comment>
+  <comment xml:lang="ru">Файл автоконфигурации прокси</comment>
+  <comment xml:lang="ro">fișier de autoconfigurare proxy</comment>
+  <comment xml:lang="pt-BR">Arquivo de autoconfiguração de proxy</comment>
+  <comment xml:lang="pl">Plik automatycznej konfiguracji pośrednika</comment>
+  <comment xml:lang="oc">fichièr de configuracion auto de servidor mandatari</comment>
+  <comment xml:lang="ko">프록시 자동 구성 파일</comment>
+  <comment xml:lang="kk-Cyrl">Проксиді автобаптау файлы</comment>
+  <comment xml:lang="hr">Datoteka za automatsku konfiguraciju proxyja</comment>
+  <comment xml:lang="fr">Fichier d'autoconfiguration de proxy</comment>
+  <comment xml:lang="fi">Välityspalvelimen automaattimääritystiedosto</comment>
+  <comment xml:lang="et">Proksiserveri automaatse seadistamise fail</comment>
+  <comment xml:lang="es">Archivo de auto-configuración de Proxy</comment>
+  <comment xml:lang="en-GB">Proxy Auto-Configuration file</comment>
+  <comment xml:lang="de">Proxy-Autokonfigurationsdatei</comment>
+  <comment xml:lang="ar">ملف ضبط آلي للوكيل</comment>
+  <sub-class-of type="text/javascript"/>
+  <glob pattern="*.pac"/>
+</mime-type>

@@ -1,0 +1,56 @@
+# Finnish translation for openteacher
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-05-26 12:49+0200\n"
+"PO-Revision-Date: 2012-08-09 00:10+0000\n"
+"Last-Translator: Teemu Paavola <tteeemu@gmail.com>\n"
+"Language-Team: Finnish <fi@li.org>\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Launchpad-Export-Date: 2012-10-02 05:36+0000\n"
+"X-Generator: Launchpad (build 16061)\n"
+
+#: updates.py:57
+msgid "Update available"
+msgid_plural "Updates available"
+msgstr[0] "Päivitys saatavilla"
+
+#: updates.py:62
+#, python-format
+msgid "There is %s update available, do you want to update?"
+msgid_plural "There are %s updates available, do you want to update?"
+msgstr[0] ""
+msgstr[1] "Saatavilla päivityksiä, haluatko päivittää?"
+
+#: updates.py:66
+msgid "Remember my choice"
+msgstr "Muista valintani"
+
+#: updates.py:113 updates.py:117
+msgid "Updates"
+msgstr "Päivitykset"
+
+#: updates.py:116
+msgid "Remember if I want to install updates or not"
+msgstr "Muista, jos haluan asentaa päivityksiä tai en"
+
+#: updates.py:197
+msgid "Updating completed"
+msgstr "Päivitys valmis"
+
+#: updates.py:197
+msgid ""
+"All updates were succesfully installed. In order for the changes to take "
+"effect, please restart the application."
+msgstr ""
+"Kaikki päivitykset on saatettu onnistuneesti loppuun. Saattaaksesi "
+"päivitykset loppuun, käynnistä sovellus uudelleen."

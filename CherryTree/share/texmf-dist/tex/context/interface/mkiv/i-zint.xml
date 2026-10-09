@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?context-directive job ctxfile x-setups.ctx ?>
+
+<cd:interface xmlns:cd="http://www.pragma-ade.com/commands">
+
+    <cd:command name="barcode" file="libs-imp-zint.mkxl">
+        <cd:arguments>
+            <cd:assignments list="yes">
+                <cd:parameter name="alternative">
+                    <cd:constant type="code&blank;11"/>
+                    <cd:constant type="standard&blank;2of5"/>
+                    <cd:constant type="interleaved&blank;2of5"/>
+                    <cd:constant type="iata&blank;2of5"/>
+                    <cd:constant type="data&blank;logic"/>
+                    <cd:constant type="industrial&blank;2of5"/>
+                    <cd:constant type="code&blank;39"/>
+                    <cd:constant type="extended&blank;code&blank;39"/>
+                    <cd:constant type="ean"/>
+                    <cd:constant type="ean&blank;+&blank;check"/>
+                    <cd:constant type="gs1-128"/>
+                    <cd:constant type="codabar"/>
+                    <cd:constant type="code&blank;128"/>
+                    <cd:constant type="leitcode"/>
+                    <cd:constant type="identcode"/>
+                    <cd:constant type="code&blank;16k"/>
+                    <cd:constant type="code&blank;49"/>
+                    <cd:constant type="code&blank;93"/>
+                    <cd:constant type="flattermarken"/>
+                    <cd:constant type="gs1&blank;databar&blank;omni"/>
+                    <cd:constant type="gs1&blank;databar&blank;ltd"/>
+                    <cd:constant type="gs1&blank;databar&blank;expom"/>
+                    <cd:constant type="telepen&blank;alpha"/>
+                    <cd:constant type="upc-a"/>
+                    <cd:constant type="upc-a&blank;+&blank;check"/>
+                    <cd:constant type="upc-e"/>
+                    <cd:constant type="upc-e&blank;+&blank;check"/>
+                    <cd:constant type="postnet"/>
+                    <cd:constant type="msi&blank;plessey"/>
+                    <cd:constant type="fim"/>
+                    <cd:constant type="logmars"/>
+                    <cd:constant type="pharma&blank;one-track"/>
+                    <cd:constant type="pzn"/>
+                    <cd:constant type="pharma&blank;two-track"/>
+                    <cd:constant type="pdf417"/>
+                    <cd:constant type="pdf417&blank;trunc"/>
+                    <cd:constant type="maxicode"/>
+                    <cd:constant type="qr&blank;code"/>
+                    <cd:constant type="code&blank;128-b"/>
+                    <cd:constant type="ap&blank;standard&blank;customer"/>
+                    <cd:constant type="ap&blank;reply&blank;paid"/>
+                    <cd:constant type="ap&blank;routing"/>
+                    <cd:constant type="ap&blank;redirection"/>
+                    <cd:constant type="isbn"/>
+                    <cd:constant type="rm4scc"/>
+                    <cd:constant type="data&blank;matrix"/>
+                    <cd:constant type="ean-14"/>
+                    <cd:constant type="vin&blank;(north&blank;america)"/>
+                    <cd:constant type="codablock-f"/>
+                    <cd:constant type="nve-18"/>
+                    <cd:constant type="japanese&blank;post"/>
+                    <cd:constant type="korea&blank;post"/>
+                    <cd:constant type="gs1&blank;databar&blank;stack"/>
+                    <cd:constant type="gs1&blank;databar&blank;stack&blank;omni"/>
+                    <cd:constant type="gs1&blank;databar&blank;eso"/>
+                    <cd:constant type="planet"/>
+                    <cd:constant type="micropdf"/>
+                    <cd:constant type="usps&blank;onecode"/>
+                    <cd:constant type="uk&blank;plessey"/>
+                    <cd:constant type="telepen&blank;numeric"/>
+                    <cd:constant type="itf-14"/>
+                    <cd:constant type="kix&blank;code"/>
+                    <cd:constant type="aztec&blank;code"/>
+                    <cd:constant type="daft&blank;code"/>
+                    <cd:constant type="micro&blank;qr&blank;code"/>
+                    <cd:constant type="hibc&blank;code&blank;128"/>
+                    <cd:constant type="hibc&blank;code&blank;39"/>
+                    <cd:constant type="hibc&blank;data&blank;matrix"/>
+                    <cd:constant type="hibc&blank;qr&blank;code"/>
+                    <cd:constant type="hibc&blank;pdf417"/>
+                    <cd:constant type="hibc&blank;micropdf417"/>
+                    <cd:constant type="hibc&blank;codablock-f"/>
+                    <cd:constant type="hibc&blank;aztec&blank;code"/>
+                    <cd:constant type="dotcode"/>
+                    <cd:constant type="han&blank;xin&blank;code"/>
+                    <cd:constant type="rm&blank;mailmark"/>
+                    <cd:constant type="aztec&blank;runes"/>
+                    <cd:constant type="code&blank;32"/>
+                    <cd:constant type="comp&blank;ean"/>
+                    <cd:constant type="comp&blank;gs1-128"/>
+                    <cd:constant type="comp&blank;databar&blank;omni"/>
+                    <cd:constant type="comp&blank;databar&blank;ltd"/>
+                    <cd:constant type="comp&blank;databar&blank;expom"/>
+                    <cd:constant type="comp&blank;upc-a"/>
+                    <cd:constant type="comp&blank;upc-e"/>
+                    <cd:constant type="comp&blank;databar&blank;stack"/>
+                    <cd:constant type="comp&blank;databar&blank;stack&blank;omni"/>
+                    <cd:constant type="comp&blank;databar&blank;eso"/>
+                    <cd:constant type="channel&blank;code"/>
+                    <cd:constant type="code&blank;one"/>
+                    <cd:constant type="grid&blank;matrix"/>
+                    <cd:constant type="upnqr"/>
+                    <cd:constant type="rmqr"/>
+                </cd:parameter>
+                <cd:parameter name="text">
+                    <cd:constant type="cd:text"/>
+                </cd:parameter>
+                <cd:parameter name="option">
+                    <cd:constant type="square"/>
+                </cd:parameter>
+            </cd:assignments>
+        </cd:arguments>
+    </cd:command>
+
+</cd:interface>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-openvpn-profile">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>OpenVPN profile</comment>
+  <comment xml:lang="zh-Hant-TW">OpenVPN 設定檔</comment>
+  <comment xml:lang="uk">профіль OpenVPN</comment>
+  <comment xml:lang="tr">OpenVPN profili</comment>
+  <comment xml:lang="sv">OpenVPN-profil</comment>
+  <comment xml:lang="sr-Cyrl">OpenVPN профил</comment>
+  <comment xml:lang="sq">Profil OpenVPN</comment>
+  <comment xml:lang="sl">Profil OpenVPN</comment>
+  <comment xml:lang="ru">Профиль OpenVPN</comment>
+  <comment xml:lang="ro">profil OpenVPN</comment>
+  <comment xml:lang="pt-BR">Perfil OpenVPN</comment>
+  <comment xml:lang="pl">Profil OpenVPN</comment>
+  <comment xml:lang="oc">perfil OpenVPN</comment>
+  <comment xml:lang="nn">OpenVPN-profil</comment>
+  <comment xml:lang="lt">OpenVPN profilis</comment>
+  <comment xml:lang="ko">OpenVPN 프로파일</comment>
+  <comment xml:lang="kk-Cyrl">OpenVPN профилі</comment>
+  <comment xml:lang="kab">Amaɣnu OpenVPN</comment>
+  <comment xml:lang="ja">OpenVPN プロファイル</comment>
+  <comment xml:lang="it">Profilo OpenVPN</comment>
+  <comment xml:lang="id">Profil OpenVPN</comment>
+  <comment xml:lang="hr">OpenVPN profil</comment>
+  <comment xml:lang="hi">OpenVPN प्रोफाइल</comment>
+  <comment xml:lang="he">פרופיל OpenVPN</comment>
+  <comment xml:lang="fur">Profîl OpenVPN</comment>
+  <comment xml:lang="fr">Profil OpenVPN</comment>
+  <comment xml:lang="fi">OpenVPN-profiili</comment>
+  <comment xml:lang="eu">OpenVPN profila</comment>
+  <comment xml:lang="et">OpenVPNi profiil</comment>
+  <comment xml:lang="es">perfil OpenVPN</comment>
+  <comment xml:lang="en-GB">OpenVPN profile</comment>
+  <comment xml:lang="de">OpenVPN-Profil</comment>
+  <comment xml:lang="ca">perfil OpenVPN</comment>
+  <comment xml:lang="bg">Профил — OpenVPN</comment>
+  <comment xml:lang="be-Cyrl">профіль OpenVPN</comment>
+  <comment xml:lang="ar">تشكيلة OpenVPN</comment>
+  <sub-class-of type="text/plain"/>
+  <generic-icon name="text-x-generic"/>
+  <glob pattern="*.openvpn"/>
+  <glob pattern="*.ovpn"/>
+</mime-type>

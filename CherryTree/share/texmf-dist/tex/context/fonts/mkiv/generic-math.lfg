@@ -1,0 +1,260 @@
+-- We will add a few more examplex to this file.
+
+return {
+    name = "generic-math",
+    version = "1.00",
+    comment = "A starting point.",
+    author = "Hans Hagen & Mikael Sundqvist",
+    copyright = "ConTeXt development team",
+    mathematics = {
+        parameters = {
+            NoLimitSupFactor         = 0,
+            NoLimitSubFactor         = 900,
+            AccentBaseDepth          = 150,
+            PrimeRaisePercent        = 25,
+            PrimeShiftUp             = "SuperscriptShiftUp",
+            PrimeBaselineDropMax     = "SuperscriptBaselineDropMax",
+            PrimeShiftUpCramped      = "SuperscriptShiftUpCramped",
+            PrimeSpaceAfter          =  0,
+            SpaceBeforeScript        = "SpaceAfterScript",
+            SpaceBetweenScript       = "SpaceAfterScript",
+            NoLimitSupFactor         = 0,
+            NoLimitSubFactor         = 0,
+            AccentTopShiftUp         = 0,
+            AccentBottomShiftDown    = 0,
+            AccentBaseDepth          = 0,
+            AccentFlattenedBaseDepth = 0,
+            DelimiterPercent         =   90,
+            DelimiterShortfall       =  400,
+            DisplayOperatorMinHeight = 1800, -- XXXX in font
+        },
+        tweaks = {
+            aftercopying = {
+                {
+                    tweak = "dimensions",
+                    list  = {
+                        -- whatever
+                    },
+                },
+                presets.scripttocalligraphic {            },
+                presets.rsfstoscript         { rscale = 1 },
+                presets.rsfsuprighttoscript  { rscale = 1 },
+                presets.moderntocalligraphic { rscale = 1 },
+                presets.eulertocalligraphic  { rscale = 1 },
+                presets.xitsarabic           { rscale = 1 },
+                presets.fallbacks            { },
+                presets.moveitalics          { correct = true },
+                presets.moveitalics          { correct = true, letters = true },
+                presets.moveintegrals        { factor  = 1.5  }, -- we need to check the 1.5
+                presets.wipeanchors          { },
+                presets.wipeitalics          { },
+                {
+                    tweak = "simplifykerns",
+                },
+                {
+                    tweak = "addcomposites",
+                },
+                presets.moveitalics {
+                    correct = true
+                },                {
+                    tweak   = "fixprimes",
+                    factor  = 0.85, -- accent base height
+                    smaller = true, -- replace multiples
+                    scale   = 0.75, -- glyph scale
+                    fake    = 0.75, -- replace multiples with this width proportion
+                 -- keep    = true, -- keep the text size prime (aka minute)
+                },
+                {
+                    tweak = "fixslashes",
+                },
+                {
+                    tweak = "fixellipses",
+                },
+                {
+                    tweak = "addbreve",
+                },
+                {
+                    tweak = "checkspacing",
+                },
+                {
+                    tweak = "addscripts",
+                },
+                {
+                    tweak = "accentdimensions",
+                    list  = { "over", "under" },
+                 -- list  = {
+                 --     [0x203E] = { factor = "over"  }, -- overbar
+                 --     [0x203E] = { factor = "under" }, -- underbar
+                 --     [0x23DE] = { factor = "over"  }, -- overbrace
+                 --     [0x23DF] = { factor = "under" }, -- underbrace
+                 --     [0x23DC] = { factor = "over"  }, -- overparent
+                 --     [0x23DD] = { factor = "under" }, -- underparent
+                 --     [0x23B4] = { factor = "over"  }, -- overbracket
+                 --     [0x23B5] = { factor = "under" }, -- underbracket
+                 -- }
+                },
+                {
+                    tweak = "checkspacing",
+                },
+                {
+                    tweak = "addscripts",
+                },
+                {
+                    tweak = "accentdimensions",
+                },
+                {
+                    tweak = "addrules",
+                },
+                {
+                    tweak = "addarrows",
+                    left  = 0.1,
+                    right = 0.1,
+                    slack = 0.20,
+                    list  = {
+                        [0x21A9] = false,
+                        [0x21AA] = false,
+                        [0x2190] = false,
+                        [0x2192] = false,
+                        [0x219E] = false,
+                        [0x21A0] = false,
+--                         [0x21A6] = false,
+--                         [0x21CB] = false,
+--                         [0x21CC] = false,
+                    }
+                },
+--                 {
+--                     tweak  = "limits",
+--                     factor = 1.5,
+--                     list   = {
+--                         [0x0222B] = true,
+--                         [0x0222C] = 1.45,
+--                         [0x0222D] = true,
+--                         [0x0222E] = true,
+--                         [0x0222F] = true,
+--                     },
+--                 },
+                {
+                    -- For upright alphabets, we unset the anchor.
+                    -- This means that accents are placed
+                    -- centered over the character
+                     tweak = "wipeanchors",
+                 --  list  = { 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58 }, -- todo: ranges
+                     list = {
+                        "digitsbold",
+                        "digitsdoublestruck",
+                        "digitsmonospace",
+                        "digitsnormal",
+                        "digitssansserifbold",
+                        "digitssansserifnormal",
+                        "lowercasebold",
+                        "lowercaseboldfraktur",
+                        "lowercasedoublestruck",
+                        "lowercasefraktur",
+                        "lowercasegreekbold",
+                        "lowercasegreeknormal",
+                        "lowercasegreeksansserifbold",
+                        "lowercasemonospace",
+                        "lowercasenormal",
+                        "lowercasesansserifbold",
+                        "lowercasesansserifnormal",
+                        "uppercasebold",
+                        "uppercaseboldfraktur",
+                        "uppercasedoublestruck",
+                        "uppercasefraktur",
+                        "uppercasegreekbold",
+                        "uppercasegreeknormal",
+                        "uppercasegreeksansserifbold",
+                        "uppercasemonospace",
+                        "uppercasenormal", -- they are italic!
+                        "uppercasesansserifbold",
+                        "uppercasesansserifnormal",
+                    },
+                },
+                {
+                    -- For non-italic alphabets we
+                    -- remove italic correction.
+                    tweak = "wipeitalics",
+                    list  = {
+                     -- "digitsbold",
+                     -- "digitsdoublestruck",
+                     -- "digitsmonospace",
+                     -- "digitsnormal",
+                     -- "digitssansserifbold",
+                     -- "digitssansserifnormal",
+                     -- "lowercasebold",
+                     -- "lowercaseboldfraktur",
+                     -- "lowercasedoublestruck",
+                     -- "lowercasefraktur",
+                        "lowercasemonospace",
+                        "lowercasenormal",
+                     -- "lowercasesansserifbold",
+                     -- "lowercasesansserifnormal",
+                     -- "lowercasegreeknormal",
+                        "uppercasebold",
+                     -- "uppercaseboldfraktur",
+                     -- "uppercasedoublestruck",
+                     -- "uppercasefraktur",
+                     -- "uppercasegreekbold",
+                     -- "uppercasegreeknormal",
+                     -- "uppercasegreeksansserifbold",
+                        "uppercasemonospace",
+                        "uppercasesansserifbold",
+                        "uppercasesanserifnormal",
+                    },
+                 },
+             -- {
+             --     comment = "example"
+             --     tweak   = "action",
+             --     action  = function(target,original,parameters) mathematics.tweaks.fixdimensions(target, original, parameters)
+             --     list    = fixes, -- one of the parameters
+             -- },
+             -- {
+             --     comment = "example"
+             --     tweak   = "action",
+             --     action  = mathematics.tweaks.fixdimensions,
+             --     list    = fixes, -- one of the parameters
+             -- },
+                 {
+                    -- This one fakes margins to get larger/smaller accents
+                    -- with for example \widetilde.
+                    -- see lm for many examples
+                    tweak = "margins",
+                    list  = {
+                    },
+                },
+             -- {
+             --      tweak  = "fixanchors",
+             --      factor = .5,
+             -- },
+                {
+                    tweak = "addrules",
+                },
+                {
+                    tweak   = "addbars",
+                    advance = 0.1,
+                },
+                {
+                    tweak = "addactuarian",
+                },
+                {
+                    tweak = "addequals",
+                },
+                {
+                    tweak = "wipecues",
+                },
+                -- this is the mkiv section
+                {
+                    tweak   = "emulatelmtx",
+                    feature = "emulatelmtx",
+                    comment = "this is for mkiv",
+                },
+            },
+        },
+        bigslots = {
+            1, 2, 3, 4
+        },
+        alternates = {
+         -- italic = { feature = 'ss01', value = 1, comment = "Mathematical Alternative Lowercase Italic" },
+        },
+    },
+}

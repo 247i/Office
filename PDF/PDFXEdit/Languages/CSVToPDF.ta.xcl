@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Localization>
+	<Version date="20210423005459">2.00.00</Version>
+	<Author>Angel Herráez</Author>
+	<Copyright></Copyright>
+	<Product id="PDFXEditor"/>
+	<Language eName="Tamil" lName="தமிழ்" code="ta" R2L="false"/>
+	<Module name="CSVToPDFPlugin" namespace="csv" version="9.0.354.0"/>
+	<Strings>
+		<text id="DlgCSVToPDF" h="159649A7">De CSV a PDF</text>
+		<text id="converter.desc" h="967CBC0E">Convierte los archivos CSV en tablas dentro del documento PDF</text>
+		<text id="autoInfo" h="27598254">Para modificar los valores, desactive el cálculo automático de anchos</text>
+		<text id="ctp.chb.autoDelimiter" h="BFABCE78">Deducir el delimitador a partir de los datos</text>
+		<text id="ctp.chb.boldHeaders" h="AB4D23E9">Usar tipografía negrita para el texto del encabezado</text>
+		<text id="ctp.chb.calcWidth" h="C8B58489">Ancho de columnas automático a partir de los datos</text>
+		<text id="ctp.chb.drawBorder" h="1C2186D3">Trazar el borde de la tabla</text>
+		<text id="ctp.chb.headersOnEachPage" h="9413CFF2">Trazar la cabecera de tabla en cada página</text>
+		<text id="ctp.chb.showDialogOnOpen" h="D10EC9DE">Mostrar este diálogo al abrir un archivo CSV</text>
+		<text id="ctp.g.Margins" h="62C950A2">Márgenes</text>
+		<text id="ctp.g.delimiterAndQuotes" h="A6EFA0C6">Delimitador y comillas</text>
+		<text id="ctp.g.pageSettings" h="D82087B4">Ajustes de página</text>
+		<text id="ctp.g.style" h="C091D68E">Estilo</text>
+		<text id="ctp.l.borderWidth" h="457515E3">Grosor:</text>
+		<text id="ctp.l.bottom" h="C711C97A">Inferior:</text>
+		<text id="ctp.l.delimiter" h="3480C690">Delimitador</text>
+		<text id="ctp.l.left" h="FC2BB3FB">Izquierdo:</text>
+		<text id="ctp.l.quotes" h="F5FEAC85">Comillas</text>
+		<text id="ctp.l.right" h="FD30D9F1">Derecho:</text>
+		<text id="ctp.l.top" h="99A7C1A9">Superior:</text>
+		<text id="ctp.lst.calcWidth.header" h="608B00E9">Cabecera</text>
+		<text id="ctp.lst.calcWidth.width" h="DADE8BD3">Ancho (%1)</text>
+		<text id="ctp.previewCtl.noDocTip" h="55E892D4">Se está cargando el documento....</text>
+		<text id="message.marginsWarning" h="4388F5CE">Los márgenes son demasiado grandes</text>
+		<text id="message.warning" h="E7AD7A2B">Aviso</text>
+		<text id="newDocFromCSV" h="602EDA1B">Desde un archivo CSV...</text>
+		<text id="prop.source" h="A2415BEA">Archivos CSV</text>
+	</Strings>
+</Localization>

@@ -1,0 +1,200 @@
+-- This font is under active development so we don't want to tweek it too much
+-- before all issues are sorted out.
+
+local common  = fonts.goodies.load("common-math.lfg")
+local presets = common.mathematics.tweaks.presets
+
+return {
+    name = "kpfonts-math",
+    version = "1.00",
+    comment = "KP Fonts.",
+    author = "Hans Hagen & Mikael Sundqvist",
+    copyright = "ConTeXt development team",
+    mathematics = {
+        parameters = {
+            DelimiterPercent                  =   85,
+            DelimiterShortfall                =  400,
+            DelimiterDisplayPercent           =   90,
+            DelimiterDisplayShortfall         =  400,
+            AccentBaseDepth                   =   30,
+            DelimiterPercent                  =   90,
+            DelimiterShortfall                =  400,
+            PrimeShiftUp                      = "1.15*SuperscriptShiftUp",
+            PrimeShiftUpCramped               = "1.15*SuperscriptShiftUp",
+            SubscriptShiftDownWithSuperscript = "1.2*SubscriptShiftDown", -- unclear original value, trial and error
+            RadicalDisplayStyleVerticalGap    = "RadicalVerticalGap", --170, 62
+        },
+        tweaks = {
+            aftercopying = {
+                {
+                    tweak    = "fontname",
+                    expected = {
+                      "KpMath-Regular",
+                      "KpMath-Bold",
+                    },
+                    abort    = true,
+                },
+                {
+                    tweak    = "version",
+                    expected = "Version 0.61",
+                },
+                {
+                    tweak = "checkaccents",
+                },
+                {
+                    tweak = "dimensions",
+                    list  = {
+                        [0x2A3F] = { factor = 0.84625 }
+                    },
+                },
+                {
+                    tweak = "kerns",
+                    list  = {
+                        [0x002F]                = { topleft  = -0.2,  bottomright = -0.2  },
+                        ["0x7D.parts.top"]      = { topright = -0.25                      }, -- right brace top
+                        ["0x7D.parts.bottom"]   = {                   bottomright = -0.25 }, -- right brace bottom
+                        ["0x7D.variants.*"]     = { topright = -0.1,  bottomright = -0.1  }, -- right brace variants
+                        ["0x29.parts.top"]      = { topright = -0.05                      }, -- right parenthesis top
+                        ["0x29.parts.bottom"]   = {                   bottomright = -0.05 }, -- right parenthesis bottom
+                        ["0x29.variants.*"]     = { topright = -0.05, bottomright = -0.05 }, -- right parenthesis variants
+                        ["0x221A.parts.top"]    = { topright = 0.2                        }, -- right radical top
+                        ["0x221A.parts.bottom"] = {                   bottomright =  0.2  }, -- right radical bottom
+                        ["0x221A.variants.*"]   = { topright = 0.2,   bottomright =  0.2  }, -- right radical variants
+
+                    },
+                },
+                {
+                    tweak   = "fixprimes",
+                    factor  = 0.86, -- accent base height
+                    smaller = true, -- replace multiples
+                    scale   = 1, -- glyph scale
+                    fake    = 0.8, -- replace multiples with this width proportion
+                },
+                {
+                    tweak = "addmirrors",
+                },
+                {
+                    tweak = "addcomposites",
+                },
+                {
+                    -- kpfonts have calligraphic at private slots
+                    tweak   = "replacealphabets",
+                    list    = {
+                        {
+                            source   = "uppercasescript",
+                            target   = "uppercasecalligraphic",
+                        },
+                        {
+                            source   = { first = 0x0E7E1, last = 0x0E7FA },
+                            target   = "uppercasecalligraphic",
+                        },
+                        {
+                            source   = "uppercaseboldscript",
+                            target   = "uppercaseboldcalligraphic",
+                        },
+                        {
+                            source   = { first = 0x0E701, last = 0x0E71A },
+                            target   = "uppercaseboldcalligraphic",
+                        },
+                    },
+                },
+                presets.scripttocalligraphic { },
+                presets.rsfstoscript         { rscale  = 0.95 },
+                presets.rsfsuprighttoscript  { rscale  = 0.95 },
+                presets.moderntocalligraphic { rscale  = 0.95 },
+                presets.eulertocalligraphic  { rscale  = 0.95 },
+                presets.xitsarabic           { rscale  = 0.92 },
+                presets.fallbacks            { },
+                presets.moveitalics          { correct = true },
+                presets.moveitalics          { correct = true, letters = true },
+                presets.moveintegrals        { factor  = 1.4 },
+                presets.wipeitalics          { },
+                {
+                    tweak = "checkspacing",
+                },
+                {
+                    tweak   = "radicaldegreeanchors",
+                    list = {
+                        [0x221A]                = { location = "left", hfactor  = .0, vfactor  = .75 },
+                        ["0x221A.variants.*"]   = { location = "left", hfactor  = .0, vfactor  = .55 },
+                        ["0x221A.variants.1"]   = { location = "left", hfactor  = .0, vfactor  = .6 },
+                        ["0x221A.parts.bottom"] = { location = "left", hfactor  = .0, vfactor  = 0.65 },
+                    }
+                },
+                {
+                    tweak = "flattenaccents",
+                },
+                {
+                    tweak = "addscripts",
+                },
+                {
+                    tweak = "accentdimensions",
+                },
+                {
+                    tweak = "addrules",
+                },
+{
+    tweak    = "replacerules",
+    -- minus = {
+    --     height      = 0.1818,
+    --     yoffset     = 0.818,
+    --     leftoffset  = 0.2,
+    --     rightoffset = 0.2,
+    -- },
+    fraction = {
+        height  = .1818,
+        yoffset = .818,
+    },
+    radical = {
+        height      = .1818,
+        yoffset     = .818,
+        leftoffset  = 0.08,
+        rightoffset = 0.08,
+    },
+    stacker = {
+        height  = .1818,
+        yoffset = .818,
+    },
+},
+                {
+                    -- This will be fixed. Check if new version comes out!
+                    tweak   = "addbars",
+                    advance = 0.5,
+                },
+                {
+                    tweak = "addactuarian",
+                },
+                {
+                    tweak = "addequals",
+                },
+                {
+                    tweak = "addfourier",
+                    variant = 2,
+                },
+                {
+                    tweak = "addprimed",
+                },
+                {
+                    tweak = "setoptions",
+                    set   = { "ignorekerndimensions" }
+                },
+-- {
+--     tweak = "inspect",
+--     unicode = 0x2192
+-- },
+-- {
+--     tweak = "inspect",
+--     unicode = 0x20EF
+-- },
+-- {
+            }
+
+        },
+        alternates = {
+         -- italic = { feature = 'ss01', value = 1, comment = "Mathematical Alternative Lowercase Italic" },
+        },
+        bigslots = {
+            1, 2, 3, 4
+        },
+    },
+}

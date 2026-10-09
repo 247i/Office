@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-spectrum-tzx">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>ZX Spectrum TZX tape image</comment>
+  <comment xml:lang="uk">образ стрічки ZX Spectrum TZX</comment>
+  <comment xml:lang="tr">ZX Spectrum TZX kaset kalıbı</comment>
+  <comment xml:lang="sv">ZX Spectrum TZX-kassettavbild</comment>
+  <comment xml:lang="sr-Cyrl">Одраз траке за Зет-Икс Спектрум ТЗ-Икс</comment>
+  <comment xml:lang="sq">Pamje shiriti ZX Spectrum TZX</comment>
+  <comment xml:lang="sl">Odtis traku ZX Spectrum TZX</comment>
+  <comment xml:lang="ru">Образ магнитной ленты ZX Spectrum TZX</comment>
+  <comment xml:lang="ro">imagine casetă ZX Spectrum TZX</comment>
+  <comment xml:lang="pt-BR">Imagem de fita de ZX Spectrum TZX</comment>
+  <comment xml:lang="pl">Obraz taśmy ZX Spectrum TZX</comment>
+  <comment xml:lang="oc">imatge casseta ZX Spectrum TZX</comment>
+  <comment xml:lang="ko">ZX Spectrum TZX 테이프 스냅샷</comment>
+  <comment xml:lang="kk-Cyrl">ZX Spectrum TZX таспа бейнесі</comment>
+  <comment xml:lang="fr">Image de cassette ZX Spectrum TZX</comment>
+  <comment xml:lang="fi">ZX Spectrum TZX kasettikuva</comment>
+  <comment xml:lang="et">ZX Spectrum TZX linditõmmis</comment>
+  <comment xml:lang="es">Imagen de cinta TZX de ZX Spectrum</comment>
+  <comment xml:lang="en-GB">ZX Spectrum TZX tape image</comment>
+  <comment xml:lang="de">ZX-Spectrum-TZX-Kassettenabbild</comment>
+  <glob pattern="*.tzx"/>
+</mime-type>

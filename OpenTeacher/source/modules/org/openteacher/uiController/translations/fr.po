@@ -1,0 +1,63 @@
+# French translation for openteacher
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2013-01-05 13:31+0000\n"
+"Last-Translator: SOMDA Sâaviel Constant <saaviel@gmail.com>\n"
+"Language-Team: French <fr@li.org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:43+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: uiController.py:196
+msgid ""
+"Couldn't open the file, because the file type is unknown or it can't be "
+"shown."
+msgstr ""
+"Le fichier n'a pu être ouvert car le type de fichier est inconnu ou ne peut "
+"être ouvert"
+
+#: uiController.py:198
+msgid ""
+"Couldn't open the file, is it still there and do we have the right to open "
+"it?"
+msgstr ""
+"Le fichier n'a pu être ouvert, vérifier s'il est encore présent ou s'il "
+"n'est pas protégé par des droit d'ouverture"
+
+#: uiController.py:200
+msgid "Couldn't open the file, it seems to be corrupted."
+msgstr "Le fichier n'a pu être ouvert, il semble être corompu"
+
+#: uiController.py:210
+msgid "File opened succesfully."
+msgstr "Fichier ouvert avec succes"
+
+#: uiController.py:228
+msgid "Can't merge files of different file types."
+msgstr ""
+
+#: uiController.py:250
+msgid "Opened file into the current list succesfully."
+msgstr ""
+
+#: uiController.py:256
+msgid ""
+"Couldn't save the file, is there enough free disk space and do we have the "
+"right to write to the specified location?"
+msgstr ""
+"Le fichier n'a pu être sauvegardé, vérifier s'il y a assez d'espace disque "
+"ou si le disque n'est pas protégé en écriture."
+
+#: uiController.py:258
+msgid "File saved succesfully."
+msgstr "Fichier sauvegardé avec succes"

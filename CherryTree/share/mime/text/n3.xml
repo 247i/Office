@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/n3">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Notation3 document</comment>
+  <comment xml:lang="uk">документ Notation3</comment>
+  <comment xml:lang="tr">Notation3 belgesi</comment>
+  <comment xml:lang="sv">Notation3-dokument</comment>
+  <comment xml:lang="sr-Cyrl">Notation3 документ</comment>
+  <comment xml:lang="sq">Dokument Notation3</comment>
+  <comment xml:lang="sl">Dokument Notation3</comment>
+  <comment xml:lang="ru">Документ Нотации 3</comment>
+  <comment xml:lang="ro">document Notation3</comment>
+  <comment xml:lang="pt-BR">Documento Notation3</comment>
+  <comment xml:lang="pl">Dokument Notation3</comment>
+  <comment xml:lang="oc">document Notation3</comment>
+  <comment xml:lang="ko">Notation3 문서</comment>
+  <comment xml:lang="kk-Cyrl">Notation3 құжаты</comment>
+  <comment xml:lang="fr">document Notation3</comment>
+  <comment xml:lang="fi">Notation3 N3-tiedosto</comment>
+  <comment xml:lang="et">Notation3 dokument</comment>
+  <comment xml:lang="es">documento Notation3</comment>
+  <comment xml:lang="en-GB">Notation3 document</comment>
+  <comment xml:lang="de">Notation3-Dokument</comment>
+  <comment xml:lang="ar">مستند Notation3</comment>
+  <glob pattern="*.n3"/>
+  <sub-class-of type="text/plain"/>
+</mime-type>

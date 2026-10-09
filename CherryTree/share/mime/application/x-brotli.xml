@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-brotli">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Brotli archive</comment>
+  <comment xml:lang="uk">архів brotli</comment>
+  <comment xml:lang="tr">Brotli arşivi</comment>
+  <comment xml:lang="sv">Brotli-arkiv</comment>
+  <comment xml:lang="sr-Cyrl">Бротли архива</comment>
+  <comment xml:lang="sq">Arkiv Brotli</comment>
+  <comment xml:lang="sl">Arhiv brotli</comment>
+  <comment xml:lang="ru">Архив Brotli</comment>
+  <comment xml:lang="ro">arhivă Brotli</comment>
+  <comment xml:lang="pt-BR">Pacote Brotli</comment>
+  <comment xml:lang="pl">Archiwum Brotli</comment>
+  <comment xml:lang="oc">archiu Brotli</comment>
+  <comment xml:lang="ko">Brotli 압축 파일</comment>
+  <comment xml:lang="kk-Cyrl">Brotli архиві</comment>
+  <comment xml:lang="fr">Archive Brotli</comment>
+  <comment xml:lang="fi">Brotli-arkisto</comment>
+  <comment xml:lang="et">Brotli arhiiv</comment>
+  <comment xml:lang="es">archivador Brotli</comment>
+  <comment xml:lang="en-GB">Brotli archive</comment>
+  <comment xml:lang="de">Brotli-Archiv</comment>
+  <comment xml:lang="ar">أرشيف Brotli</comment>
+  <generic-icon name="package-x-generic"/>
+  <glob pattern="*.br"/>
+  <alias type="application/brotli"/>
+</mime-type>

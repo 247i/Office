@@ -1,0 +1,111 @@
+# Hungarian translation for openteacher
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2011-09-13 07:53+0000\n"
+"Last-Translator: Richard Somlói <ricsipontaz@gmail.com>\n"
+"Language-Team: Hungarian <hu@li.org>\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:42+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: topo.py:128
+msgid "Create topography lesson"
+msgstr "Topográfiai lecke készítése"
+
+#. TRANSLATORS: used as a label in case a filename of a topo
+#. TRANSLATORS: lesson isn't available. (E.g. because it's
+#. TRANSLATORS: downloaded from some kind of web service.)
+#: topo.py:218
+msgid "Import source"
+msgstr ""
+
+#: topo.py:224 topo.py:291 topo.py:293
+#, python-format
+msgid "Topo lesson: %s"
+msgstr ""
+
+#~ msgid "What's this place's name?"
+#~ msgstr "Mi ennek a helynek a neve?"
+
+#~ msgid "Name for this place"
+#~ msgstr "A hely neve"
+
+#~ msgid "Add a place by doubleclicking it on the map"
+#~ msgstr "Hely hozzáadása dupla kattintással a térképen"
+
+#~ msgid "Map:"
+#~ msgstr "Térkép:"
+
+#~ msgid ""
+#~ "Are you sure you want to use another map? This will remove all your "
+#~ "places!"
+#~ msgstr ""
+#~ "Biztos benne, hogy másik térképet szeretne használni? Így elveszeik az "
+#~ "összes eddig helyszín!"
+
+#~ msgid "Remove selected place"
+#~ msgstr "Kijelölt helyek eltávolítása"
+
+#~ msgid "Places in your test"
+#~ msgstr "A tesztben használt helyek"
+
+#~ msgid "Add a place by name:"
+#~ msgstr "Hely hozzáadása névvel:"
+
+#~ msgid "Warning"
+#~ msgstr "Figyelmeztetés"
+
+#~ msgid "Add"
+#~ msgstr "Hozzáadás"
+
+#~ msgid "Place - Name"
+#~ msgstr "Hely – Név"
+
+#~ msgid ""
+#~ "Are you sure you want to go back to the teach tab? This will end your "
+#~ "lesson!"
+#~ msgstr ""
+#~ "Biztos benne, hogy visszatér a tanulás laphoz? Ezzel befejeződik a lecke!"
+
+#~ msgid "Lesson type:"
+#~ msgstr "Lecketípus:"
+
+#~ msgid "Name - Place"
+#~ msgstr "Név – Hely"
+
+#~ msgid "Which place is here?"
+#~ msgstr "Milyen hely található itt?"
+
+#~ msgid "Lesson order:"
+#~ msgstr "Leckesorrend:"
+
+#~ msgid "Please click this place:"
+#~ msgstr "Kattintson erre a helyre:"
+
+#~ msgid "Check"
+#~ msgstr "Ellenőrzés"
+
+#~ msgid "Not enough items"
+#~ msgstr "Nincs elég elem"
+
+#~ msgid "You need to add items to your test first"
+#~ msgstr "Először hozzá kell adni néhány elemet a teszthez"
+
+#~ msgid "Topo lesson %s"
+#~ msgstr "Topográfiai lecke %s"
+
+#~ msgid "Please click this place: "
+#~ msgstr "Kattintson erre a helyre: "
+
+#~ msgid "Topo Lesson"
+#~ msgstr "Topográfiai leckék"

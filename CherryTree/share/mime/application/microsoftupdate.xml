@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/microsoftupdate">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Windows Update package</comment>
+  <comment xml:lang="zh-Hant-TW">Windows 更新軟體包</comment>
+  <comment xml:lang="uk">пакунок оновлення Windows</comment>
+  <comment xml:lang="tr">Windows Update paketi</comment>
+  <comment xml:lang="sv">Windows Update-paket</comment>
+  <comment xml:lang="sr-Cyrl">Виндоуз пакет ажурирања</comment>
+  <comment xml:lang="sq">Paketë Windows Update</comment>
+  <comment xml:lang="sl">Paket Windows Update</comment>
+  <comment xml:lang="ru">Пакет Windows Update</comment>
+  <comment xml:lang="ro">pachet Windows Update</comment>
+  <comment xml:lang="pt-BR">Pacote do Windows Update</comment>
+  <comment xml:lang="pl">Pakiet Windows Update</comment>
+  <comment xml:lang="oc">paquet Windows Update</comment>
+  <comment xml:lang="nn">Windows Update-pakke</comment>
+  <comment xml:lang="ko">윈도우 업데이트 패키지</comment>
+  <comment xml:lang="kk-Cyrl">Windows Update дестесі</comment>
+  <comment xml:lang="ja">Windows Update パッケージ</comment>
+  <comment xml:lang="id">Paket Pembaruan Windows</comment>
+  <comment xml:lang="hr">Paket Windows nadopune</comment>
+  <comment xml:lang="fur">Pachet di inzornament par Windows</comment>
+  <comment xml:lang="fr">Paquet Windows Update</comment>
+  <comment xml:lang="fi">Windows päivityspaketti</comment>
+  <comment xml:lang="et">Windows Update'i pakett</comment>
+  <comment xml:lang="es">paquete de Windows Update</comment>
+  <comment xml:lang="en-GB">Windows Update package</comment>
+  <comment xml:lang="de">Windows-Aktualisierungspaket</comment>
+  <comment xml:lang="ca">paquet de Windows Update</comment>
+  <comment xml:lang="bg">Пакет — обновление за Windows</comment>
+  <comment xml:lang="be-Cyrl">пакет Windows Update</comment>
+  <comment xml:lang="ar">حزمة تحديث ويندوز</comment>
+  <sub-class-of type="application/vnd.ms-cab-compressed"/>
+  <generic-icon name="package-x-generic"/>
+  <glob pattern="*.msu"/>
+</mime-type>

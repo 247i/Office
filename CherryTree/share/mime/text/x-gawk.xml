@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/x-gawk">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>GNU AWK script</comment>
+  <comment xml:lang="uk">скрипт GNU AWK</comment>
+  <comment xml:lang="tr">GNU AWK betiği</comment>
+  <comment xml:lang="sv">GNU AWK-skript</comment>
+  <comment xml:lang="sr-Cyrl">GNU AWK скрипта</comment>
+  <comment xml:lang="sq">Programth GNU AWK</comment>
+  <comment xml:lang="sl">Skript AWK GNU</comment>
+  <comment xml:lang="ru">Сценарий GNU AWK</comment>
+  <comment xml:lang="ro">script AWK GNU</comment>
+  <comment xml:lang="pt-BR">Script GNU AWK</comment>
+  <comment xml:lang="pl">Skrypt GNU AWK</comment>
+  <comment xml:lang="oc">escript AWK GNU</comment>
+  <comment xml:lang="ko">GNU AWK 스크립트</comment>
+  <comment xml:lang="kk-Cyrl">GNU AWK сценарийі</comment>
+  <comment xml:lang="fr">Script GNU AWK</comment>
+  <comment xml:lang="fi">GNU AWK skripti</comment>
+  <comment xml:lang="et">GNU AWK-skript</comment>
+  <comment xml:lang="es">Guión GNU AWK</comment>
+  <comment xml:lang="en-GB">GNU AWK script</comment>
+  <comment xml:lang="de">GNU-awk-Skript</comment>
+  <comment xml:lang="ar">سكربت GNU AWK</comment>
+  <acronym>GNU AWK</acronym>
+  <expanded-acronym>GNU's Not Unix['s] [Alfred Vaino] Aho, [Peter Jay] Weinberger and [Brian Wilson] Kernighan [language]</expanded-acronym>
+  <sub-class-of type="text/x-awk"/>
+  <generic-icon name="text-x-script"/>
+  <glob pattern="*.awk"/>
+</mime-type>

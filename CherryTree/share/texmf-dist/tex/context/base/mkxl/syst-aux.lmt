@@ -1,0 +1,653 @@
+if not modules then modules = { } end modules ['syst-aux'] = {
+    version   = 1.001,
+    comment   = "companion to syst-aux.mkiv",
+    author    = "Hans Hagen, PRAGMA-ADE, Hasselt NL",
+    copyright = "PRAGMA ADE / ConTeXt Development Team",
+    license   = "see context related readme files"
+}
+
+-- slower than lpeg:
+--
+-- utfmatch(str,"(.?)(.*)$")
+-- utf.sub(str,1,1)
+
+local tonumber, next, type = tonumber, next, type
+local utfsub = utf.sub
+local P, S, R, C, Cc, Cs, Carg, lpegmatch = lpeg.P, lpeg.S, lpeg.R, lpeg.C, lpeg.Cc, lpeg.Cs, lpeg.Carg, lpeg.match
+local find, formatters = string.find, string.formatters
+
+local context           = context
+local implement         = interfaces.implement
+local setmacro          = interfaces.setmacro
+local setcatcode        = tex.setcatcode
+local texget            = tex.get
+local utf8character     = lpeg.patterns.utf8character
+local settings_to_array = utilities.parsers.settings_to_array
+local settings_to_set   = utilities.parsers.settings_to_set
+
+local pattern           = C(utf8character^-1) * C(P(1)^0)
+
+local boolean_value <const> = tokens.values.boolean
+----- string_value  <const> = tokens.values.string
+
+implement {
+    name      = "getfirstcharacter",
+    arguments = "string",
+    actions   = function(str)
+        local first, rest = lpegmatch(pattern,str)
+        setmacro("firstcharacter",first)
+        setmacro("remainingcharacters",rest)
+    end
+}
+
+implement {
+    name      = "thefirstcharacter",
+    arguments = "string",
+    actions   = function(str)
+        local first, rest = lpegmatch(pattern,str)
+        context(first)
+    end
+}
+
+implement {
+    name      = "theremainingcharacters",
+    arguments = "string",
+    actions   = function(str)
+        local first, rest = lpegmatch(pattern,str)
+        context(rest)
+    end
+}
+
+local pattern      = C(utf8character^-1)
+local ctx_doifelse = commands.doifelse
+
+implement {
+    name      = "doifelsefirstchar",
+    arguments = "2 strings",
+    actions   = function(str,chr)
+        ctx_doifelse(lpegmatch(pattern,str) == chr)
+    end
+}
+
+implement {
+    name      = "getsubstring",
+    arguments = "3 strings",
+    actions   = function(str,first,last)
+        context(utfsub(str,tonumber(first),tonumber(last)))
+    end
+}
+
+-- function commands.addtocommalist(list,item)
+--     if list == "" then
+--         context(item)
+--     else
+--         context("%s,%s",list,item) -- using tex.print is some 10% faster
+--     end
+-- end
+--
+-- function commands.removefromcommalist(list,item)
+--     if list == "" then
+--         context(item)
+--     else
+--         -- okay, using a proper lpeg is probably faster
+--         -- we could also check for #l = 1
+--         local l = settings_to_array(list)
+--         local t, n = { }
+--         for i=1,#l do
+--             if l[i] ~= item then
+--                 n = n + 1
+--                 t[n] = item
+--             end
+--         end
+--         if n == 0 then
+--             context(item)
+--         else
+--             context(concat(list,","))
+--         end
+--     end
+-- end
+
+local pattern = (C((1-P("%"))^1) * Carg(1)) / function(n,d)
+    return formatters["%.0fsp"](d * tonumber(n)/100) end * P("%") * P(-1) -- .0 ?
+
+-- percentageof("10%",65536*10)
+
+implement {
+    name      = "percentageof",
+    arguments = { "string", "dimension" },
+    actions   = function(str,dim)
+        context(lpegmatch(pattern,str,1,dim) or str)
+    end
+}
+
+-- \gdef\setpercentdimen#1#2%
+--   {#1=\ctxcommand{percentageof("#2",\number#1)}\relax}
+
+local space     = P(" ")
+local spaces    = space^0
+local nospaces  = spaces / ""
+local nohash    = 1 - P("#")
+local digit     = R("09")
+local double    = P("##") / "#"
+local single    = P("#")
+local sentinel  = nospaces * (nohash^1 / "\\%0")
+local whatever  = S("+-/*_^=:") + digit + R("AZ")
+local sargument = (single * digit)^1
+local dargument = (double * digit)^1
+local swhatever = (single * whatever)^1
+local dwhatever = (double * whatever)^1
+
+-- see syst-aux.lua for historic variants
+
+local global    = nil
+local protected = nil
+local permanent = nil
+local expanded  = nil
+local mutable   = nil
+local immutable = nil
+local optional  = nil
+local tolerant  = nil
+local instance  = nil
+local frozen    = nil
+local csname    = nil
+local rest      = nil
+
+local function catcodes_s()
+    setcatcode(32,10) -- space
+    setcatcode(13, 5) -- endofline
+end
+
+local function catcodes_n()
+    setcatcode(32, 9) -- ignore
+    setcatcode(13, 9) -- ignore
+end
+
+local function oldoption(s)
+    if optional > 1 then
+        optional = optional - 1
+        return s .. "#*"
+    else
+        return s
+    end
+end
+
+local option = (
+        P("single")    * Cc(1)
+      + P("double")    * Cc(2)
+      + P("triple")    * Cc(3)
+      + P("quadruple") * Cc(4)
+      + P("quintuple") * Cc(5)
+      + P("sixtuple")
+  ) * (P("empty") + P("argument"))
+
+local pattern = (
+    (
+        spaces * (
+            ( P("spaces")        * space / catcodes_s )
+          + ( P("nospaces")      * space / catcodes_n )
+          + ( P("global")        * space / function()  global    = true end)
+          + ( P("protected")     * space / function()  protected = 1    end)
+          + ( P("semiprotected") * space / function()  protected = 2    end)
+          + ( P("permanent")     * space / function()  permanent = true end)
+          + ( P("expanded")      * space / function()  expanded  = true end)
+          + ( P("tolerant")      * space / function()  tolerant  = true end)
+          + ( P("instance")      * space / function()  instance  = true end)
+          + ( P("frozen")        * space / function()  frozen    = true end)
+          + ( P("mutable")       * space / function()  mutable   = true end)
+          + ( P("immutable")     * space / function()  immutable = true end)
+          + ( P("unexpanded")    * space / function()  protected = 1    end)
+          + ( option             * space / function(s) tolerant  = true
+                                                       optional  = s    end)
+        )
+    )^0
+  * spaces * ( C((1-S(" #["))^1) )
+  * spaces *   Cs(
+        (Cs(P("[") * dargument * P("]")) / oldoption + nospaces * dwhatever)^1 * sentinel^-1 * double^-1
+      + (Cs(P("[") * sargument * P("]")) / oldoption + nospaces * swhatever)^1 * sentinel^-1 * single^-1
+      + sentinel^-1 * (double+single)^-1
+    )
+)
+
+local ctx_dostarttexdefinition = context.dostarttexdefinition
+
+local function texdefinition_one(str)
+    global    = false
+    protected = false
+    permanent = false
+    expanded  = false
+    mutable   = false
+    immutable = false
+    optional  = 0
+    tolerant  = false
+    instance  = false
+    frozen    = false
+    csname, rest = lpegmatch(pattern,str)
+-- print("str  : " .. str)
+-- print("cs   : " .. csname)
+-- print("rest : " .. rest)
+    ctx_dostarttexdefinition()
+end
+
+local function texdefinition_two()
+    context (
+        (tolerant  and [[\tolerant]]  or "") ..
+        (frozen    and [[\frozen]]    or "") ..
+        (protected and (protected == 1 and [[\protected]] or [[\semiprotected]]) or "") ..
+        (permanent and [[\permanent]] or "") ..
+        (instance  and [[\instance]]  or "") ..
+        (mutable   and [[\mutable]]   or "") ..
+        (immutable and [[\immutable]] or "") ..
+--         [[\expandafter]] .. (global and (expanded and [[\xdef]] or [[\gdef]]) or (expanded and [[\edef]] or [[\def]])) ..
+--         [[\csname ]] .. csname .. [[\endcsname ]] ..
+        (global and (expanded and [[\xdefcsname ]] or [[\gdefcsname ]]) or (expanded and [[\edefcsname ]] or [[\defcsname ]])) ..
+        csname .. [[\endcsname ]] ..
+        rest
+    )
+end
+
+implement { name = "texdefinition_one", actions = texdefinition_one, scope = "private", arguments = "tokenstring" }
+implement { name = "texdefinition_two", actions = texdefinition_two, scope = "private" }
+
+do
+
+    -- These are old helpers from early mkiv and I['ll update them when checking the
+    -- cld manual which might result in a few more here and we now also avoid clf_
+    -- prefixing. In the end, very few users need to apply such low level helpers
+    -- because we operate at the typesetting level. Low level messing around with
+    -- e.g. casing (or any unicode/utf property for that matter) might as well be an
+    -- indication that you're doing something wrong.
+
+    -- Quite probably we don't yet have characters loaded so we delay some aliases
+    -- and redefine the mappers.
+
+    local _lower_, _upper_, _shape_, _strip_
+
+    _lower_ = function(s)
+        if characters and characters.lower then
+            _lower_ = characters.lower
+            return _lower_(s)
+        end
+        return string.lower(s)
+    end
+
+    _upper_ = function(s)
+        if characters and characters.upper then
+            _upper_ = characters.upper
+            return _upper_(s)
+        end
+        return string.upper(s)
+    end
+
+    _shape_ = function(s)
+        if characters and characters.shape then
+            _shape_ = characters.shape
+            return _shape_(s)
+        end
+        return s
+    end
+
+    _strip_ = function(s)
+        -- or utf.strip
+        if string.strip then
+            _strip_ = string.strip
+            return _strip_(s)
+        end
+        return s
+    end
+
+ -- local function lower(s) context(_lower_(s)) end
+ -- local function upper(s) context(_upper_(s)) end
+ -- local function strip(s) context(_strip_(s)) end
+
+ -- implement { name = "upper", arguments = "string", actions = upper }
+ -- implement { name = "lower", arguments = "string", actions = lower }
+ -- implement { name = "strip", arguments = "string", actions = strip }
+
+    implement {
+        name      = "utfupper",
+        public    = true,
+        arguments = "string",
+        actions   = function(s) context(_upper_(s)) end,
+    }
+
+    implement {
+        name      = "utflower",
+        public    = true,
+        arguments = "string",
+        actions   = function(s) context(_lower_(s)) end,
+    }
+
+    implement {
+        name      = "utfshape",
+        public    = true,
+        arguments = "string",
+        actions   = function(s) context(_shape_(s)) end,
+    }
+
+    implement {
+        name      = "utfstrip",
+        public    = true,
+        arguments = "string",
+        actions   = function(s) context(_strip_(s)) end,
+    }
+
+    -- what more ... depends on what users want but no requests so far
+
+end
+
+implement {
+    name      = "converteddimen",
+    arguments = { "dimension", "string" },
+    actions   = function(dimen,unit)
+        context(number.todimen(dimen,unit or "pt","%0.5f")) -- no unit appended (%F)
+    end
+}
+
+-- where, not really the best spot for this:
+
+implement {
+    name      = "immediatemessage",
+    public    = true,
+    arguments = { "'message'", "string" },
+    actions   = logs.status
+}
+
+implement {
+    name      = "writestring",
+    public    = true,
+    protected = true,
+    arguments = "string",
+    actions   = function (s)
+        logs.writer(s,"\n")
+    end,
+}
+
+implement {
+    name      = "writeline",
+    public    = true,
+    protected = true,
+    actions   = logs.newline,
+}
+
+implement {
+    name    = "resettimer",
+    actions = function()
+        statistics.resettiming("whatever")
+        statistics.starttiming("whatever")
+    end
+}
+
+implement {
+    name    = "benchmarktimer",
+    actions = function()
+        statistics.benchmarktimer("whatever")
+    end
+}
+
+implement {
+    name    = "elapsedtime",
+    actions = function()
+        statistics.stoptiming("whatever")
+        context(statistics.elapsedtime("whatever"))
+    end
+}
+
+implement {
+    name      = "elapsedsteptime",
+    arguments = "integer",
+    actions   = function(n)
+        statistics.stoptiming("whatever")
+        local t = statistics.elapsed("whatever")/(n > 0 and n or 1)
+        if t > 0 then
+            context("%0.9f",t)
+        else
+            context(0)
+        end
+    end
+}
+
+local accuracy = table.setmetatableindex(function(t,k)
+    local v = formatters["%0." ..k .. "f"]
+    t[k] = v
+    return v
+end)
+
+implement {
+    name      = "rounded",
+    arguments = "integer",
+    actions   = function(n,m) context(accuracy[n](m)) end
+}
+
+-- not faster but just less tracing:
+
+local ctx_protected_cs         = context.protected.cs -- more efficient
+
+local ctx_firstoftwoarguments  = ctx_protected_cs.firstoftwoarguments
+local ctx_secondoftwoarguments = ctx_protected_cs.secondoftwoarguments
+local ctx_firstofoneargument   = ctx_protected_cs.firstofoneargument
+local ctx_gobbleoneargument    = ctx_protected_cs.gobbleoneargument
+
+context.firstoftwoarguments    = ctx_firstoftwoarguments
+context.secondoftwoarguments   = ctx_secondoftwoarguments
+context.firstofoneargument     = ctx_firstofoneargument
+context.gobbleoneargument      = ctx_gobbleoneargument
+
+local hash = utilities.parsers.hashes.settings_to_set
+
+implement {
+    name      = "if_common",
+    usage     = "condition",
+    arguments = "2 arguments",
+    actions   = function(a,b)
+        if a == b then
+            setmacro("commalistelement",a)
+            return boolean_value, a ~= ""
+        end
+        local ba = find(a,",",1,true)
+        local bb = find(b,",",1,true)
+        if ba and bb then
+            local ha = hash[a]
+            local hb = hash[b]
+            for k in next, ha do
+                if hb[k] then
+                    setmacro("commalistelement",k)
+                    return boolean_value, true
+                end
+            end
+        elseif ba then
+            if hash[a][b] then
+                setmacro("commalistelement",b)
+                return boolean_value, true
+            end
+        elseif bb then
+            if hash[b][a] then
+                setmacro("commalistelement",a)
+                return boolean_value, true
+            end
+        end
+        setmacro("commalistelement","")
+        return boolean_value, false
+    end
+}
+
+implement {
+    name      = "ifcommon",
+    public    = true,
+    usage     = "condition",
+    arguments = "2 arguments",
+    actions   = function(a,b)
+        if a == b then
+            return boolean_value, a ~= ""
+        end
+        local ba = find(a,",",1,true)
+        local bb = find(b,",",1,true)
+        if ba and bb then
+            local ha = hash[a]
+            local hb = hash[b]
+            for k in next, ha do
+                if hb[k] then
+                    return boolean_value, true
+                end
+            end
+        elseif ba then
+            if hash[a][b] then
+                return boolean_value, true
+            end
+        elseif bb then
+            if hash[b][a] then
+                return boolean_value, true
+            end
+        end
+        return boolean_value, false
+    end
+}
+
+-- -- This one slower than the tex based one:
+--
+-- implement {
+--     name      = "if_inset",
+--     usage     = "condition",
+--     arguments = "2 arguments",
+--     actions   = function(a,b)
+--         if a == b then
+--             setmacro("commalistelement",a)
+--             return boolean_value, a ~= ""
+--         end
+--         local bb = find(b,",",1,true)
+--         if bb then
+--             if hash[b][a] then
+--                 setmacro("commalistelement",a)
+--                 return boolean_value, true
+--             end
+--         end
+--         setmacro("commalistelement","")
+--         return boolean_value, false
+--     end
+-- }
+
+implement {
+    name      = "ifinset",
+    public    = true,
+    usage     = "condition",
+    arguments = "2 arguments",
+    actions   = function(a,b)
+        if a == b then
+            return boolean_value, a ~= ""
+        end
+        local bb = find(b,",",1,true)
+        if bb then
+            if hash[b][a] then
+                return boolean_value, true
+            end
+        end
+        return boolean_value, false
+    end
+}
+
+local bp = number.dimenfactors.bp
+
+implement {
+    name      = "tobigpoints",
+    actions   = function(d) context("%.5F",bp * d) end,
+    arguments = "dimension",
+}
+
+implement {
+    name      = "towholebigpoints",
+    actions   = function(d) context("%r",bp * d) end,
+    arguments = "dimension",
+}
+
+-- for now here:
+
+local function getshape(s)
+    local t = texget(s)
+    local n = t and #t or 0
+    context(n)
+    if n > 0 then
+        for i=1,n do
+            local ti = t[i]
+            if type(ti) == "table" then
+                context(" %isp %isp",ti[1],ti[2])
+            else
+                context(" %i",ti)
+            end
+        end
+    end
+end
+
+implement {
+    name    = "getparshape",
+    public  = true,
+    actions = function() getshape("parshape") end,
+}
+implement {
+    name    = "getclubpenalties",
+    public  = true,
+    actions = function() getshape("clubpenalties") end,
+}
+implement {
+    name    = "getinterlinepenalties",
+    public  = true,
+    actions = function() getshape("interlinepenalties") end,
+    }
+implement {
+    name    = "getdisplaywidowpenalties",
+    public  = true,
+    actions = function() getshape("displaywidowpenalties") end,
+}
+implement {
+    name    = "getwidowpenalties",
+    public  = true,
+    actions = function() getshape("widowpenalties") end,
+}
+
+-- These have been replaced by loop primitives:
+
+implement {
+    name      = "loopcs",
+    public    = true,
+    arguments = { "integer", "csname" },
+    actions   = function(n,cs)
+       local c = context[cs]
+       if n < 0 then
+           for i=-n,1 do c() end
+       else
+           for i= 1,n do c() end
+       end
+    end
+}
+
+implement {
+    name      = "loopcsn",
+    public    = true,
+    arguments = { "integer", "csname" },
+    actions   = function(n,cs)
+       local c = context[cs]
+       if n < 0 then
+           for i=-n,1 do c(i) end
+       else
+           for i= 1,n do c(i) end
+       end
+    end
+}
+
+local output = io.output
+
+implement {
+    name      = "nologbuffering",
+    public    = true,
+    protected = true,
+    actions   = function()
+        output():setvbuf("no")
+    end,
+}
+
+implement {
+    name      = "linebuffering",
+    public    = true,
+    protected = true,
+    actions   = function()
+        output():setvbuf("line")
+    end,
+}

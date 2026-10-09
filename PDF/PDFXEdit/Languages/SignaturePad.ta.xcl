@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Localization>
+	<Version date="20180402175534">2.00.00</Version>
+	<Author>Michael Dodl</Author>
+	<Copyright></Copyright>
+	<Product id="PDFXEditor"/>
+	<Language eName="Spanish (Spain, Traditional Sort)" lName="Español" code="es-ES" R2L="false"/>
+	<Module name="SignaturePad" namespace="sigpad" version="7.0.324.4"/>
+	<Strings>
+		<text id="btn.clear" h="8A6A002B">&amp;Borrar</text>
+		<text id="dgl.drawsign.title" h="8BE10CB7">Dibujo de una firma</text>
+		<text id="signature.pad" h="1CB89F08">Tableta de firmas</text>
+		<text id="signature.pad.desc" h="B2E4D573">Utilice la tableta de firmas en su ordenador para generar firmas.</text>
+		<text id="msg.nodevice" h="69EAAE3A">No se dispone de ningún &lt;i&gt;dispositivo compatible&lt;/i&gt;.Compruebe que el dispositivo está conectado yque se han instalado los controladores adecuadose inténtelo de nuevo.</text>
+	</Strings>
+</Localization>

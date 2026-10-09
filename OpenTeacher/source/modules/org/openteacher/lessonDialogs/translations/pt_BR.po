@@ -1,0 +1,48 @@
+# Brazilian Portuguese translation for openteacher
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2012-09-19 03:23+0000\n"
+"Last-Translator: Adriano Steffler <Unknown>\n"
+"Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:43+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: lessonDialogs.py:84
+msgid "Unsaved data"
+msgstr "Informações não salvas"
+
+#: lessonDialogs.py:85
+msgid "There are unsaved items or results. Are you sure you want to close?"
+msgstr ""
+"Há itens ou resultados que não foram salvos. Você tem certeza de que deseja "
+"fechar?"
+
+#: lessonDialogs.py:101
+msgid "Warning"
+msgstr "Atenção"
+
+#: lessonDialogs.py:103
+msgid ""
+"Are you sure you want to go back to the enter tab? This will end your lesson!"
+msgstr ""
+"Você tem certeza de que deseja retornar à aba de inserção? Esta ação "
+"terminará a sua lição!"
+
+#: lessonDialogs.py:114
+msgid "Not enough items"
+msgstr "Não há itens o suficiente"
+
+#: lessonDialogs.py:115
+msgid "You need to add items to your test first"
+msgstr "Você deve primeiramente adicionar itens ao seu teste"

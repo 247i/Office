@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="image/vnd.radiance">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Radiance HDR image</comment>
+  <comment xml:lang="zh-Hant-TW">Radiance HDR 影像</comment>
+  <comment xml:lang="uk">зображення HDR Radiance</comment>
+  <comment xml:lang="tr">Radiance HDR görüntüsü</comment>
+  <comment xml:lang="sv">Radiance HDR-bild</comment>
+  <comment xml:lang="sr-Cyrl">Radiance HDR слика</comment>
+  <comment xml:lang="sq">Pamje Radiance HDR</comment>
+  <comment xml:lang="sl">Slika Radiance HDR</comment>
+  <comment xml:lang="ru">Изображение Radiance HDR</comment>
+  <comment xml:lang="ro">imagine Radiance HDR</comment>
+  <comment xml:lang="pt-BR">Imagem Radiance HDR</comment>
+  <comment xml:lang="pl">Obraz Radiance HDR</comment>
+  <comment xml:lang="oc">imatge Radiance HDR</comment>
+  <comment xml:lang="ko">Radiance HDR 이미지</comment>
+  <comment xml:lang="kk-Cyrl">Radiance HDR суреті</comment>
+  <comment xml:lang="hr">HDR slika u radiance formatu</comment>
+  <comment xml:lang="fr">Image Radiance HDR</comment>
+  <comment xml:lang="fi">Radiance HDR-kuva</comment>
+  <comment xml:lang="et">Radiance'i HDR-pilt</comment>
+  <comment xml:lang="es">imagen HDR de Radiance</comment>
+  <comment xml:lang="en-GB">Radiance HDR image</comment>
+  <comment xml:lang="de">Radiance HDR-Bild</comment>
+  <comment xml:lang="bg">Изображение — Radiance HDR</comment>
+  <comment xml:lang="ar">صورة Radiance HDR</comment>
+  <alias type="image/x-hdr"/>
+  <glob pattern="*.hdr"/>
+  <glob pattern="*.pic"/>
+  <glob pattern="*.rgbe"/>
+  <glob pattern="*.xyze"/>
+</mime-type>

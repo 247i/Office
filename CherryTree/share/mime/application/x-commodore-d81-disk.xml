@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-commodore-d81-disk">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Commodore 1581 floppy disk image</comment>
+  <comment xml:lang="uk">образ дискети Commodore 1581</comment>
+  <comment xml:lang="tr">Commodore 1581 disket kalıbı</comment>
+  <comment xml:lang="sv">Commodore 1581-diskettavbild</comment>
+  <comment xml:lang="sr-Cyrl">Одраз дискете за Комодор 1581</comment>
+  <comment xml:lang="sq">Pamje diskete Commodore 1581</comment>
+  <comment xml:lang="sl">Odtis diskete Commodore 1581</comment>
+  <comment xml:lang="ru">Образ гибкого диска Commodore 1581</comment>
+  <comment xml:lang="ro">imagine de dischetă Commodore 1581</comment>
+  <comment xml:lang="pt-BR">Imagem do disquete Commodore 1581</comment>
+  <comment xml:lang="pl">Obraz dyskietki Commodore 1581</comment>
+  <comment xml:lang="oc">imatge disqueta per Commodore 1581</comment>
+  <comment xml:lang="ko">Commodore 1581 플로피 디스크 이미지</comment>
+  <comment xml:lang="kk-Cyrl">Commodore 1581 иілгіш диск бейнесі</comment>
+  <comment xml:lang="fr">Image disquette Commodore 1581</comment>
+  <comment xml:lang="fi">Commodore 1581 diskettikuva</comment>
+  <comment xml:lang="et">Commodore 1581 flopikettatõmmis</comment>
+  <comment xml:lang="es">Imagen de disquete Commodore 1581</comment>
+  <comment xml:lang="en-GB">Commodore 1581 floppy disk image</comment>
+  <comment xml:lang="de">Commodore-1581-Diskettenabbild</comment>
+  <comment xml:lang="ar">صورة قرص مرن لكومودور 1581</comment>
+  <generic-icon name="application-x-executable"/>
+  <glob pattern="*.d81"/>
+</mime-type>

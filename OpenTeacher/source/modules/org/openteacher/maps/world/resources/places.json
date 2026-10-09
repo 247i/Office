@@ -1,0 +1,202 @@
+[
+	{
+		"x": 184,
+		"y": 271,
+		"names": ["Seattle"]
+	},
+	{
+		"x": 397,
+		"y": 438,
+		"names": ["Miami"]
+	},
+	{
+		"x": 141,
+		"y": 346,
+		"names": ["San Francisco"]
+	},
+	{
+		"x": 469,
+		"y": 322,
+		"names": ["New York City"]
+	},
+	{
+		"x": 497,
+		"y": 308,
+		"names": ["Boston"]
+	},
+	{
+		"x": 447,
+		"y": 337,
+		"names": ["Washington DC"]
+	},
+	{
+		"x": 337,
+		"y": 410,
+		"names": ["New Orleans"]
+	},
+	{
+		"x": 156,
+		"y": 378,
+		"names": ["Los Angeles"]
+	},
+	{
+		"x": 935,
+		"y": 324,
+		"names": ["Madrid"]
+	},
+	{
+		"x": 899,
+		"y": 340,
+		"names": ["Lisboa", "Lisbon"]
+	},
+	{
+		"x": 979,
+		"y": 258,
+		"names": ["Paris"]
+	},
+	{
+		"x": 990,
+		"y": 243,
+		"names": ["Bruxelles", "Brussel", "Brussels"]
+	},
+	{
+		"x": 995,
+		"y": 229,
+		"names": ["Amsterdam"]
+	},
+	{
+		"x": 1723,
+		"y": 327,
+		"names": ["Beijing"]
+	},
+	{
+		"x": 426,
+		"y": 615,
+		"names": ["Bogotá"]
+	},
+	{
+		"x": 563,
+		"y": 935,
+		"names": ["Buenos Aires"]
+	},
+	{
+		"x": 1169,
+		"y": 413,
+		"names": ["Cairo"]
+	},
+	{
+		"x": 1484,
+		"y": 421,
+		"names": ["New Delhi"]
+	},
+	{
+		"x": 1748,
+		"y": 468,
+		"names": ["Guangzhou"]
+	},
+	{
+		"x": 1150,
+		"y": 320,
+		"names": ["Istanbul"]
+	},
+	{
+		"x": 1718,
+		"y": 703,
+		"names": ["Jakarta"]
+	},
+	{
+		"x": 1585,
+		"y": 460,
+		"names": ["Dhaka"]
+	},
+	{
+		"x": 1423,
+		"y": 451,
+		"names": ["Karachi"]
+	},
+	{
+		"x": 1063,
+		"y": 690,
+		"names": ["Kinshasa"]
+	},
+	{
+		"x": 408,
+		"y": 752,
+		"names": ["Lima"]
+	},
+	{
+		"x": 979,
+		"y": 601,
+		"names": ["Lagos"]
+	},
+	{
+		"x": 960,
+		"y": 236,
+		"names": ["London"]
+	},
+	{
+		"x": 1809,
+		"y": 533,
+		"names": ["Manila"]
+	},
+	{
+		"x": 253,
+		"y": 496,
+		"names": ["Mexico City"]
+	},
+	{
+		"x": 1179,
+		"y": 203,
+		"names": ["Moscow", "Moskva"]
+	},
+	{
+		"x": 1468,
+		"y": 499,
+		"names": ["Mumbai"]
+	},
+	{
+		"x": 1871,
+		"y": 373,
+		"names": ["Osaka"]
+	},
+	{
+		"x": 627,
+		"y": 849,
+		"names": ["São Paulo"]
+	},
+	{
+		"x": 1806,
+		"y": 351,
+		"names": ["Seoul"]
+	},
+	{
+		"x": 1789,
+		"y": 402,
+		"names": ["Shanghai"]
+	},
+	{
+		"x": 655,
+		"y": 838,
+		"names": ["Rio de Janeiro"]
+	},
+	{
+		"x": 1299,
+		"y": 367,
+		"names": ["Tehran", "Teheran"]
+	},
+	{
+		"x": 1896,
+		"y": 363,
+		"names": ["Tokyo"]
+	},
+	{
+		"x": 445,
+		"y": 296,
+		"names": ["Toronto"]
+	},
+	{
+		"x": 193,
+		"y": 253,
+		"names": ["Vancouver"]
+	}
+]

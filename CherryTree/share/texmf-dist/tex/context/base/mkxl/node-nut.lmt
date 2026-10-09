@@ -1,0 +1,716 @@
+if not modules then modules = { } end modules ['node-nut'] = {
+    version   = 1.001,
+    comment   = "companion to node-ini.mkiv",
+    author    = "Hans Hagen, PRAGMA-ADE, Hasselt NL",
+    copyright = "PRAGMA ADE / ConTeXt Development Team",
+    license   = "see context related readme files"
+}
+
+-- Some comments anbout going nuts can be found in the mkiv file with the
+-- suffix "lua", including some timing and musings. We copy the direct table
+-- (1) because that's what we did while things evolved and (2) because we
+-- also add some more helpers.
+
+local type, rawget = type, rawget
+
+local nodes           = nodes
+local direct          = node.direct
+
+local fastcopy        = table.fastcopy
+
+local nodecodes       = nodes.nodecodes
+local hlist_code      <const> = nodecodes.hlist
+local vlist_code      <const> = nodecodes.vlist
+local glyph_code      <const> = nodecodes.glyph
+
+local tonode          = direct.tonode
+local tonut           = direct.todirect
+
+local isnode          = direct.isnode
+local isnut           = direct.isdirect
+local isdirect        = direct.isdirect
+
+local d_remove_node   = direct.remove
+local d_flushnode     = direct.flushnode
+local d_getnext       = direct.getnext
+local d_getprev       = direct.getprev
+local d_getid         = direct.getid
+local d_getlist       = direct.getlist
+local d_find_tail     = direct.tail
+local d_insertafter   = direct.insertafter
+local d_insertbefore  = direct.insertbefore
+local d_slide         = direct.slide
+local d_traverse      = direct.traverse
+local d_setlink       = direct.setlink
+local d_getboth       = direct.getboth
+
+local nuts = {
+    addmargins              = direct.addmargins,
+    addxoffset              = direct.addxoffset,
+    addxymargins            = direct.addxymargins,
+    addyoffset              = direct.addyoffset,
+    append                  = direct.append,
+    appendaftertail         = direct.appendaftertail,
+    checkdiscretionaries    = direct.checkdiscretionaries,
+    checkdiscretionary      = direct.checkdiscretionary,
+    collapsing              = direct.collapsing,
+    copy                    = direct.copy,
+    copylist                = direct.copylist,
+    copynode                = direct.copy,
+    copyonly                = direct.copyonly,
+    count                   = direct.count,
+    currentattributes       = direct.currentattributes,
+    delete                  = direct.delete,
+    dimensions              = direct.dimensions,
+    effectiveglue           = direct.effectiveglue,
+    beginofmath             = direct.beginofmath,
+    endofmath               = direct.endofmath,
+    exchange                = direct.exchange,
+    findattribute           = direct.findattribute,
+    findattributerange      = direct.findattributerange,
+    findnode                = direct.findnode,
+    firstchar               = direct.firstchar,
+    firstglyph              = direct.firstglyph,
+    firstglyphnode          = direct.firstglyphnode,
+    firstitalicglyph        = direct.firstitalicglyph,
+    flattendiscretionaries  = direct.flattendiscretionaries,
+    flattenleaders          = direct.flattenleaders,
+    flush                   = d_flushnode,
+    flushlist               = direct.flushlist,
+    flushnode               = d_flushnode,
+    free                    = direct.free,
+    freeze                  = direct.freeze,
+    getanchors              = direct.getanchors,
+    getattr                 = direct.getattribute,
+    getattribute            = direct.getattribute,
+    getattributelist        = direct.getattributelist,
+    getattributes           = direct.getattributes,
+    getattrlist             = direct.getattributelist,
+    getattrs                = direct.getattributes,
+    getboth                 = d_getboth,
+    getbottom               = direct.getbottom,
+    getbottomdelimiter      = direct.getbottomdelimiter,
+    getbox                  = direct.getbox,
+    getboxglue              = direct.getglue,
+    getchar                 = direct.getchar,
+    getchardict             = direct.getchardict,
+    getcharspec             = direct.getcharspec,
+    getchoice               = direct.getchoice,
+    getclass                = direct.getclass,
+    getcornerkerns          = direct.getcornerkerns,
+    getdata                 = direct.getdata,
+    getdegree               = direct.getdegree,
+    getdelimiter            = direct.getdelimiter,
+    getdenominator          = direct.getdenominator,
+    getdepth                = direct.getdepth,
+    getdir                  = direct.getdir,
+    getdirection            = direct.getdirection,
+    getdisc                 = direct.getdisc,
+    getdiscpart             = direct.getdiscpart,
+    getdiscretionary        = direct.getdisc,
+    getexcept               = direct.getexcept,
+    getexpansion            = direct.getexpansion,
+    getfam                  = direct.getfam,
+    getfield                = direct.getfield,
+    getfirstdirectioninlist = direct.getfirstdirectioninlist,
+    getfont                 = direct.getfont,
+    getgeometry             = direct.getgeometry,
+    getglue                 = direct.getglue,
+    getglyphdata            = direct.getglyphdata,
+    getglyphdimensions      = direct.getglyphdimensions,
+    getheight               = direct.getheight,
+    getid                   = d_getid,
+    getidsubtype            = direct.getidsubtype,
+    getidsubtypenext        = direct.getidsubtypenext,
+    getindex                = direct.getindex,
+    getinputfields          = direct.getinputfields,
+    getkern                 = direct.getkern,
+    getkerndimension        = direct.getkerndimension,
+    getlang                 = direct.getlanguage,-- will become obsolete
+    getlanguage             = direct.getlanguage,
+    getleader               = direct.getleader,
+    getleftdelimiter        = direct.getleftdelimiter,
+    getlist                 = d_getlist,
+    getlistdimensions       = direct.getlistdimensions,
+    getmiddle               = direct.getdelimiter,
+    getmiddledelimiter      = direct.getdelimiter,
+    getmvllist              = direct.getmvllist,
+    getnext                 = d_getnext,
+    getnormalizedline       = direct.getnormalizedline,
+    getnucleus              = direct.getnucleus,
+    getnumerator            = direct.getnumerator,
+    getoffsets              = direct.getoffsets,
+    getoptions              = direct.getoptions,
+    getorientation          = direct.getorientation,
+    getparstate             = direct.getparstate,
+    getpenalty              = direct.getpenalty,
+    getpost                 = direct.getpost,
+    getpre                  = direct.getpre,
+    getprev                 = d_getprev,
+    getprime                = direct.getprime,
+    getreplace              = direct.getreplace,
+    getrightdelimiter       = direct.getrightdelimiter,
+    getruledata             = direct.getdata, -- obsolete when we have the split
+    getruledimensions       = direct.getruledimensions,
+    getscale                = direct.getscale,
+    getscales               = direct.getscales,
+    getscript               = direct.getscript,
+    getscripts              = direct.getscripts,
+    getshift                = direct.getshift,
+    getslant                = direct.getslant,
+    getspeciallist          = direct.getspeciallist,
+    getstate                = direct.getstate,
+    getsub                  = direct.getsub,
+    getsubpre               = direct.getsubpre,
+    getsubtype              = direct.getsubtype,
+    getsup                  = direct.getsup,
+    getsuppre               = direct.getsuppre,
+    getsurround             = direct.getkern,
+    gettop                  = direct.gettop,
+    gettopdelimiter         = direct.gettopdelimiter,
+    gettotal                = direct.gettotal,
+    getusedattributes       = direct.getusedattributes,
+    getvalue                = direct.getdata, -- obsolete
+    getweight               = direct.getweight,
+    getwhd                  = direct.getwhd,
+    getnaturalwhd           = direct.getnaturalwhd,
+    getwidth                = direct.getwidth,
+    getwordrange            = direct.getwordrange,
+    getxscale               = direct.getxscale,
+    getxyscales             = direct.getxyscales,
+    getyscale               = direct.getyscale,
+    gluetostring            = direct.gluetostring,
+    hasattribute            = direct.hasattribute,
+    hasdimensions           = direct.hasdimensions,
+    hasdiscoption           = direct.hasdiscoption,
+    hasfield                = direct.hasfield,
+    hasgeometry             = direct.hasgeometry,
+    hasglyph                = direct.hasglyph,
+    hasglyphoption          = direct.hasglyphoption,
+    hasidsubtype            = direct.hasidsubtype,
+    hpack                   = direct.hpack,
+    hyphenating             = direct.hyphenating,
+    ignoremathskip          = direct.ignoremathskip,
+    insertafter             = d_insertafter,
+    insertbefore            = d_insertbefore,
+    isboth                  = direct.isboth,
+    ischar                  = direct.ischar,
+    isdirect                = isdirect,
+    isglyph                 = direct.isglyph,
+    isitalicglyph           = direct.isitalicglyph,
+    isnext                  = direct.isnext,
+    isnextchar              = direct.isnextchar,
+
+    ischarcheck             = direct.ischarcheck,
+    isnextcharcheck         = direct.isnextcharcheck,
+    isprevcharcheck         = direct.isprevcharcheck,
+    setfontcheck            = direct.setfontcheck,
+    getfontcheck            = direct.getfontcheck,
+    newfontcheck            = direct.newfontcheck,
+
+    issnapped               = direct.issnapped,
+    setsnapped              = direct.setsnapped,
+
+    isnextglyph             = direct.isnextglyph,
+    isnode                  = isnode,
+    isnut                   = isdirect,
+    isprev                  = direct.isprev,
+    isprevchar              = direct.isprevchar,
+    isprevglyph             = direct.isprevglyph,
+    issimilarglyph          = direct.issimilarglyph,
+    iszeroglue              = direct.iszeroglue,
+    kerning                 = direct.kerning,
+    lastnode                = direct.lastnode,
+    length                  = direct.length,
+    ligaturing              = direct.ligaturing,
+    makextensible           = direct.makextensible,
+    migrate                 = direct.migrate,
+    mlisttohlist            = direct.mlisttohlist,
+    naturalhsize            = direct.naturalhsize,
+    naturalwidth            = direct.naturalwidth,
+    new                     = direct.new,
+    newcontinuationatom     = direct.newcontinuationatom,
+    newmathglyph            = direct.newmathglyph,
+    patchattributes         = direct.patchattributes,
+    patchparshape           = direct.patchparshape,
+    prependbeforehead       = direct.prependbeforehead,
+    protectglyph            = direct.protectglyph,
+    protectglyphs           = direct.protectglyphs,
+    protectglyphsnone       = direct.protectglyphsnone,
+    protectglyphsbase       = direct.protectglyphsbase,
+    protrusionskippable     = direct.protrusionskippable,
+    rangedimensions         = direct.rangedimensions,
+    remove                  = d_remove_node,
+    removefromlist          = direct.removefromlist,
+    repack                  = direct.repack,
+    reverse                 = direct.reverse,
+    serialized              = direct.serialized,
+    setanchors              = direct.setanchors,
+    setattr                 = direct.setattribute,
+    setattribute            = direct.setattribute,
+    setattributelist        = direct.setattributelist,
+    setattributes           = direct.setattributes,
+    setattributesinlist     = direct.setattributesinlist,
+    setattrlist             = direct.setattributelist,
+    setattrs                = direct.setattributes,
+    setattrsinlist          = direct.setattributesinlist,
+    setboth                 = direct.setboth,
+    setbottom               = direct.setbottom,
+    setbox                  = direct.setbox,
+    setboxglue              = direct.setglue,
+    setchar                 = direct.setchar,
+    setchardict             = direct.setchardict,
+    setchoice               = direct.setchoice,
+    setclass                = direct.setclass,
+    setdata                 = direct.setdata,
+    setdegree               = direct.setdegree,
+    setdelimiter            = direct.setdelimiter,
+    setdenominator          = direct.setdenominator,
+    setdepth                = direct.setdepth,
+    setdir                  = direct.setdir,
+    setdirection            = direct.setdirection,
+    setdisc                 = direct.setdisc,
+    setdiscpart             = direct.setdiscpart,
+    setdiscretionary        = direct.setdisc,
+    setexcept               = direct.setexcept,
+    setexpansion            = direct.setexpansion,
+    setfam                  = direct.setfam,
+    setfield                = direct.setfield,
+    setfont                 = direct.setfont,
+    setgeometry             = direct.setgeometry,
+    setglue                 = direct.setglue,
+    setglyphdata            = direct.setglyphdata,
+    setheight               = direct.setheight,
+    setinputfields          = direct.setinputfields,
+    setkern                 = direct.setkern,
+    setlang                 = direct.setlanguage,
+    setlanguage             = direct.setlanguage,
+    setleader               = direct.setleader,
+    setleftdelimiter        = direct.setleftdelimiter,
+    setlink                 = d_setlink,
+    setlist                 = direct.setlist,
+    setmvllist              = direct.setmvllist,
+    setmiddledelimiter      = direct.setdelimiter,
+    setnext                 = direct.setnext,
+    setnucleus              = direct.setnucleus,
+    setnumerator            = direct.setnumerator,
+    setoffsets              = direct.setoffsets,
+    setoptions              = direct.setoptions,
+    setorientation          = direct.setorientation,
+    setpenalty              = direct.setpenalty,
+    setpost                 = direct.setpost,
+    setpre                  = direct.setpre,
+    setprev                 = direct.setprev,
+    setprime                = direct.setprime,
+    setreplace              = direct.setreplace,
+    setrightdelimiter       = direct.setrightdelimiter,
+    setruledata             = direct.setdata, -- obsolete when we have the split
+    setruledimensions       = direct.setruledimensions,
+    setscale                = direct.setscale or direct.setscales,
+    setscales               = direct.setscales,
+    setscript               = direct.setscript,
+    setscripts              = direct.setscripts,
+    setshift                = direct.setshift,
+    setslant                = direct.setslant,
+    setspeciallist          = direct.setspeciallist,
+    setsplit                = direct.setsplit,
+    setstate                = direct.setstate,
+    setsub                  = direct.setsub,
+    setsubpre               = direct.setsubpre,
+    setsubtype              = direct.setsubtype,
+    setsup                  = direct.setsup,
+    setsuppre               = direct.setsuppre,
+    setsurround             = direct.setkern,
+    settop                  = direct.settop,
+    setvalue                = direct.setdata, -- obsolete
+    setweight               = direct.setweight,
+    setwhd                  = direct.setwhd,
+    setwidth                = direct.setwidth,
+    show                    = direct.show,
+    slide                   = d_slide,
+    softenhyphens           = direct.softenhyphens,
+    startofpar              = direct.startofpar,
+    tail                    = d_find_tail,
+    takeattr                = direct.unsetattribute, -- ?
+    tonode                  = tonode,
+    tonut                   = tonut,
+    tostring                = direct.tostring,
+    traverse                = d_traverse,
+    traversechar            = direct.traversechar,
+    traversecontent         = direct.traversecontent,
+    traversepossible        = direct.traversepossible,
+    traverseglyph           = direct.traverseglyph,
+    traverseid              = direct.traverseid,
+    traverseitalic          = direct.traverseitalic,
+    traverseleader          = direct.traverseleader,
+    traverselist            = direct.traverselist,
+    unprotectglyph          = direct.unprotectglyph,
+    unprotectglyphs         = direct.unprotectglyphs,
+    unsetattribute          = direct.unsetattribute,
+    unsetattributes         = direct.unsetattributes,
+    usedlist                = direct.usedlist,
+    usesfont                = direct.usesfont,
+    verticalbreak           = direct.verticalbreak,
+    vpack                   = direct.vpack,
+    write                   = direct.write,
+    xscaled                 = direct.xscaled,
+    yscaled                 = direct.yscaled,
+
+    updatetopmarks          = direct.updatetopmarks,
+    updatemarks             = direct.updatemarks,
+    updatefirstmarks        = direct.updatefirstmarks,
+    updatefirstandbotmark   = direct.updatefirstandbotmark,
+}
+
+nodes.nuts     = nuts
+
+nodes.isnode   = isnode
+nodes.isdirect = isnut
+nodes.isnut    = isnut
+
+nodes.tonode   = tonode
+nodes.tonut    = tonut
+
+function nuts.delete(head,current)
+    return d_remove_node(head,current,true)
+end
+
+function nuts.replace(head,current,new) -- no head returned if false
+    if not new then
+        head, current, new = false, head, current
+    end
+    local prev, next = d_getboth(current)
+    if prev or next then
+        d_setlink(prev,new,next)
+    end
+    if head then
+        if head == current then
+            head = new
+        end
+        d_flushnode(current)
+        return head, new
+    else
+        d_flushnode(current)
+        return new
+    end
+end
+
+local function countall(stack,flat)
+    local n = 0
+    while stack do
+        local id = d_getid(stack)
+        if not flat and id == hlist_code or id == vlist_code then
+            local list = d_getlist(stack)
+            if list then
+                n = n + 1 + countall(list) -- self counts too
+            else
+                n = n + 1
+            end
+        else
+            n = n + 1
+        end
+        stack = d_getnext(stack)
+    end
+    return n
+end
+
+nuts.countall = countall
+
+function nodes.countall(stack,flat)
+    return countall(tonut(stack),flat)
+end
+
+function nuts.append(head,current,...)
+    for i=1,select("#",...) do
+        head, current = d_insertafter(head,current,(select(i,...)))
+    end
+    return head, current
+end
+
+function nuts.prepend(head,current,...)
+    for i=1,select("#",...) do
+        head, current = d_insertbefore(head,current,(select(i,...)))
+    end
+    return head, current
+end
+
+function nuts.linked(...) -- slides !
+    local head, last
+    for i=1,select("#",...) do
+        local next = select(i,...)
+        if next then
+            if head then
+                d_setlink(last,next)
+            else
+                head = next
+            end
+            last = d_find_tail(next) -- we could skip the last one
+        end
+    end
+    return head
+end
+
+function nuts.concat(list) -- consider tail instead of slide
+    local head, tail
+    for i=1,#list do
+        local li = list[i]
+        if li then
+            if head then
+                d_setlink(tail,li)
+            else
+                head = li
+            end
+            tail = d_slide(li)
+        end
+    end
+    return head, tail
+end
+
+function nuts.reference(n)
+    return n or "<none>"
+end
+
+function nuts.vianuts (f) return function(n,...) return tonode(f(tonut (n),...)) end end
+function nuts.vianodes(f) return function(n,...) return tonut (f(tonode(n),...)) end end
+
+nodes.vianuts  = nuts.vianuts
+nodes.vianodes = nuts.vianodes
+
+function nodes.insertlistafter(h,c,n)
+    local t = n_tail(n)
+    if c then
+        local cn = n_getnext(c)
+        if cn then
+            -- no setboth here yet
+            n_setfield(t,"next",cn)
+            n_setfield(cn,"prev",t)
+        else
+            n_setfield(t,"next",nil)
+        end
+        n_setfield(c,"next",n)
+        n_setfield(n,"prev",c)
+        return h, n
+    end
+    return n, t
+end
+
+function nuts.insertlistafter(h,c,n)
+    local t = d_tail(n)
+    if c then
+        local cn = d_getnext(c)
+        if cn then
+            d_setlink(t,cn)
+        else
+            d_setnext(t)
+        end
+        d_setlink(c,n)
+        return h, n
+    end
+    return n, t
+end
+
+-- test code only
+
+-- collectranges and mix
+
+local report = logs.reporter("sliding")
+
+local function message(detail,head,current,previous)
+    report("error: %s, current: %s:%s, previous: %s:%s, list: %s, text: %s",
+        detail,
+        nodecodes[d_getid(current)],
+        current,
+        nodecodes[d_getid(previous)],
+        previous,
+        nodes.idstostring(head),
+        nodes.listtoutf(head)
+    )
+    utilities.debugger.showtraceback(report)
+end
+
+local function warn()
+    report()
+    report("warning: the slide tracer is enabled")
+    report()
+    warn = false
+end
+
+local function tracedslide(head)
+    if head then
+        if warn then
+            warn()
+        end
+        local next = d_getnext(head)
+        if next then
+            local prev = head
+            for n in d_traverse(next) do
+                local p = d_getprev(n)
+                if not p then
+                    message("unset",head,n,prev)
+                 -- break
+                elseif p ~= prev then
+                    message("wrong",head,n,prev)
+                 -- break
+                end
+                prev = n
+            end
+        end
+        return d_slide(head)
+    end
+end
+
+local function nestedtracedslide(head,level) -- no sliding !
+    if head then
+        if warn then
+            warn()
+        end
+        local id = d_getid(head)
+        local next = d_getnext(head)
+        if next then
+            report("%whead:%s",level or 0,nodecodes[id])
+            local prev = head
+            for n in d_traverse(next) do
+                local p = d_getprev(n)
+                if not p then
+                    message("unset",head,n,prev)
+                 -- break
+                elseif p ~= prev then
+                    message("wrong",head,n,prev)
+                 -- break
+                end
+                prev = n
+                local id = d_getid(n)
+                if id == hlist_code or id == vlist_code then
+                    nestedtracedslide(d_getlist(n),(level or 0) + 1)
+                end
+            end
+        elseif id == hlist_code or id == vlist_code then
+            report("%wlist:%s",level or 0,nodecodes[id])
+            nestedtracedslide(d_getlist(head),(level or 0) + 1)
+        end
+     -- return d_slide(head)
+    end
+end
+
+local function untracedslide(head)
+    if head then
+        if warn then
+            warn()
+        end
+        local next = d_getnext(head)
+        if next then
+            local prev = head
+            for n in d_traverse(next) do
+                local p = d_getprev(n)
+                if not p then
+                    return "unset", d_getid(n)
+                elseif p ~= prev then
+                    return "wrong", d_getid(n)
+                end
+                prev = n
+            end
+        end
+        return d_slide(head)
+    end
+end
+
+nuts.tracedslide       = tracedslide
+nuts.untracedslide     = untracedslide
+nuts.nestedtracedslide = nestedtracedslide
+
+-- this might move
+
+local propertydata = direct.getpropertiestable(true)
+
+local getattr = nuts.getattr
+local setattr = nuts.setattr
+
+nodes.properties = {
+    data = propertydata,
+}
+
+-- experimental code with respect to copying attributes has been removed
+-- as it doesn't pay of (most attributes are only accessed once anyway)
+
+function nuts.getprop(n,k)
+    local p = propertydata[n]
+    if p then
+        if k then
+            return p[k]
+        else
+            return p
+        end
+    end
+end
+
+function nuts.rawprop(n,k)
+    local p = rawget(propertydata,n)
+    if p then
+        if k then
+            return p[k]
+        else
+            return p
+        end
+    end
+end
+
+function nuts.setprop(n,k,v)
+    local p = propertydata[n]
+    if p then
+        p[k] = v
+    else
+        propertydata[n] = { [k] = v }
+    end
+end
+
+function nuts.theprop(n) -- obsolete
+    local p = propertydata[n]
+    if not p then
+        p = { }
+        propertydata[n] = p
+    end
+    return p
+end
+
+
+function nuts.isdone(n,k)
+    local p = propertydata[n]
+    if not p then
+        propertydata[n] = { [k] = true }
+        return false
+    end
+    local v = p[k]
+    if v == nil then
+        propertydata[n] = { [k] = true }
+        return false
+    end
+    return v
+end
+
+function nuts.copy_properties(source,target,what)
+    local newprops = propertydata[source]
+    if not newprops then
+        -- nothing to copy
+        return
+    end
+    if what then
+        -- copy one category
+        newprops = rawget(source,what)
+        if newprops then
+            newprops = fastcopy(newprops)
+            local p = rawget(propertydata,target)
+            if p then
+                p[what] = newprops
+            else
+                propertydata[target] = {
+                    [what] = newprops,
+                }
+            end
+        end
+    else
+        -- copy all properties
+        newprops = fastcopy(newprops)
+        propertydata[target] = newprops
+    end
+    return newprops -- for checking
+end

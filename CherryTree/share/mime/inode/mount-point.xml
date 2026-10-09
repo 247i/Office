@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="inode/mount-point">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Mount point</comment>
+  <comment xml:lang="zh-Hant-TW">掛載點</comment>
+  <comment xml:lang="uk">Точка монтування</comment>
+  <comment xml:lang="tr">Bağlama noktası</comment>
+  <comment xml:lang="sv">Monteringspunkt</comment>
+  <comment xml:lang="sr-Cyrl">Тачка качења</comment>
+  <comment xml:lang="sq">Pikë montimi</comment>
+  <comment xml:lang="sl">Priklopna točka</comment>
+  <comment xml:lang="ru">Точка монтирования</comment>
+  <comment xml:lang="ro">punct de montare</comment>
+  <comment xml:lang="pt-BR">Ponto de montagem</comment>
+  <comment xml:lang="pl">Punkt montowania</comment>
+  <comment xml:lang="oc">ponch de montatge</comment>
+  <comment xml:lang="nn">Monteringspunkt</comment>
+  <comment xml:lang="lt">Prijungimo taškas</comment>
+  <comment xml:lang="ko">마운트 지점</comment>
+  <comment xml:lang="kk-Cyrl">Тіркеу нүктесі</comment>
+  <comment xml:lang="ka">მიმაგრების წერტილი</comment>
+  <comment xml:lang="ja">マウント箇所</comment>
+  <comment xml:lang="it">Punto di mount</comment>
+  <comment xml:lang="id">Titik kait</comment>
+  <comment xml:lang="hr">Točka montiranja</comment>
+  <comment xml:lang="hi">माउंट पॉइंट</comment>
+  <comment xml:lang="he">נקודת עיגון</comment>
+  <comment xml:lang="gl">Punto de montaxe</comment>
+  <comment xml:lang="fur">Pont di montaç</comment>
+  <comment xml:lang="fr">Point de montage</comment>
+  <comment xml:lang="fi">Liitospiste</comment>
+  <comment xml:lang="eu">Muntatze-puntua</comment>
+  <comment xml:lang="et">Haakepunkt</comment>
+  <comment xml:lang="es">punto de montaje</comment>
+  <comment xml:lang="en-GB">Mount point</comment>
+  <comment xml:lang="de">Einhängepunkt</comment>
+  <comment xml:lang="ca">punt de muntatge</comment>
+  <comment xml:lang="bg">Точка на монтиране</comment>
+  <comment xml:lang="be-Cyrl">пункт мантавання</comment>
+  <comment xml:lang="ar">نقطة وصْل</comment>
+  <sub-class-of type="inode/directory"/>
+</mime-type>

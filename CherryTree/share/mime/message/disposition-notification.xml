@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="message/disposition-notification">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Mail disposition report</comment>
+  <comment xml:lang="zh-Hant-TW">郵件處理回報</comment>
+  <comment xml:lang="uk">звіт щодо розташування пошти</comment>
+  <comment xml:lang="tr">Posta tahsis raporu</comment>
+  <comment xml:lang="sv">E-postdispositionsrapport</comment>
+  <comment xml:lang="sr-Cyrl">Извештај о приспећу поште</comment>
+  <comment xml:lang="sl">Poročilo o usodi pošte</comment>
+  <comment xml:lang="ru">Отчёт о перемещении почты</comment>
+  <comment xml:lang="ro">raport privind localizarea corespondenței</comment>
+  <comment xml:lang="pt-BR">Relatório de disposição de correspondência</comment>
+  <comment xml:lang="pl">Raport z wysyłania poczty</comment>
+  <comment xml:lang="oc">rapòrt de disposicion de corrièrs electronics</comment>
+  <comment xml:lang="ko">메일 처리 보고서</comment>
+  <comment xml:lang="kk-Cyrl">Пошта жылжытылғаны туралы есептеме</comment>
+  <comment xml:lang="ja">メール停止レポート</comment>
+  <comment xml:lang="it">Rapporto di disposizione posta</comment>
+  <comment xml:lang="id">Laporan disposisi surat</comment>
+  <comment xml:lang="hr">Izvještaj o odlaganju e-pošte</comment>
+  <comment xml:lang="hi">मेल स्वभाव रिपोर्ट</comment>
+  <comment xml:lang="fur">Rapuart di disposizion pueste</comment>
+  <comment xml:lang="fr">Rapport de traitement de courriel</comment>
+  <comment xml:lang="fi">Viestin kuittausilmoitus</comment>
+  <comment xml:lang="et">E-kirja asukohateade</comment>
+  <comment xml:lang="es">informe de disposición de correo</comment>
+  <comment xml:lang="en-GB">Mail disposition report</comment>
+  <comment xml:lang="de">E-Mail-Übertragungsbericht</comment>
+  <comment xml:lang="ca">informe de processament de correu</comment>
+  <comment xml:lang="bg">Доклад за състояние на поща</comment>
+  <comment xml:lang="be-Cyrl">справаздача пра дзеянні з поштай</comment>
+  <comment xml:lang="ar">تقرير ترتيب بريد</comment>
+  <generic-icon name="text-x-generic"/>
+  <sub-class-of type="text/plain"/>
+</mime-type>

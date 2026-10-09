@@ -1,0 +1,3 @@
+auth.py is under the AGPL. See testserver/COPYING for more info.
+
+the other files are shipped with django, see ../admin_files/COPYING for details.

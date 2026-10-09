@@ -1,0 +1,69 @@
+# Russian translation for openteacher
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2012-12-09 09:19+0000\n"
+"Last-Translator: Nkolay Parukhin <parukhin@gmail.com>\n"
+"Language-Team: Russian <ru@li.org>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:44+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: vocatrainApi.py:130
+msgid "Select category"
+msgstr "Выберите категорию"
+
+#: vocatrainApi.py:131
+msgid "Please select a category"
+msgstr "Пожалуйста, выберите категорию"
+
+#: vocatrainApi.py:136
+msgid "Select book"
+msgstr "Выберите книгу"
+
+#: vocatrainApi.py:137
+msgid "Please select a book"
+msgstr "Пожалуйста, выберите книгу"
+
+#: vocatrainApi.py:142
+msgid "Select list"
+msgstr "Выберите список"
+
+#: vocatrainApi.py:143
+msgid "Please select a list"
+msgstr "Пожалуйста, выберите список"
+
+#: vocatrainApi.py:223
+msgid "Import from vocatrain.com"
+msgstr "Импорт с vocatrain.com"
+
+#: vocatrainApi.py:224
+msgid "Import from woordjesleren.nl"
+msgstr "Импорт с woordjesleren.nl"
+
+#: vocatrainApi.py:284
+#, python-format
+msgid "The word list was imported from %s successfully."
+msgstr "Список слов успешно импортирован с %s."
+
+#: vocatrainApi.py:302
+#, python-format
+msgid "No %s connection"
+msgstr "Отсутствует подключение к %s"
+
+#: vocatrainApi.py:303
+msgid ""
+"{serviceName} didn't accept the connection. Are you sure that your internet "
+"connection works and {serviceName} is online?"
+msgstr ""
+"Не удалось подключиться к {serviceName}. Проверьте ваше подключение к "
+"интернету и работу  {serviceName}."

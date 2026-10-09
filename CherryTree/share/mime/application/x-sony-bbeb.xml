@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-sony-bbeb">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>BroadBand eBook</comment>
+  <comment xml:lang="zh-Hant-TW">BroadBand 電子書</comment>
+  <comment xml:lang="uk">електронна книга BroadBand</comment>
+  <comment xml:lang="tr">BroadBand eBook</comment>
+  <comment xml:lang="sv">BroadBand e-bok</comment>
+  <comment xml:lang="sr-Cyrl">BroadBand е-књига</comment>
+  <comment xml:lang="sq">eLibër BroadBand</comment>
+  <comment xml:lang="sl">E-knjiga BroadBand eBook</comment>
+  <comment xml:lang="ru">BroadBand eBook</comment>
+  <comment xml:lang="ro">carte electronică BroadBand</comment>
+  <comment xml:lang="pt-BR">BroadBand eBook</comment>
+  <comment xml:lang="pl">E-book BroadBand</comment>
+  <comment xml:lang="oc">libre electronic BroadBand</comment>
+  <comment xml:lang="ko">브로드밴드 전자책</comment>
+  <comment xml:lang="kk-Cyrl">BroadBand эл. кітабы</comment>
+  <comment xml:lang="ka">BroadBand eBook</comment>
+  <comment xml:lang="ja">BroadBand 電子書籍</comment>
+  <comment xml:lang="id">eBook BroadBand</comment>
+  <comment xml:lang="hr">BroadBand e-knjiga</comment>
+  <comment xml:lang="fur">eBook BroadBand</comment>
+  <comment xml:lang="fr">eBook à large bande</comment>
+  <comment xml:lang="fi">BroadBand e-kirja</comment>
+  <comment xml:lang="et">BroadBandi e-raamat</comment>
+  <comment xml:lang="es">libro electrónico de BroadBand</comment>
+  <comment xml:lang="en-GB">BroadBand eBook</comment>
+  <comment xml:lang="de">BroadBand E-Book</comment>
+  <comment xml:lang="ca">llibre electrònic BroadBand</comment>
+  <comment xml:lang="bg">Електронна книга — BroadBand</comment>
+  <comment xml:lang="be-Cyrl">электронная кніга BroadBand</comment>
+  <comment xml:lang="ar">كتاب إلكتروني BroadBand</comment>
+  <generic-icon name="x-office-document"/>
+  <glob pattern="*.lrf"/>
+</mime-type>

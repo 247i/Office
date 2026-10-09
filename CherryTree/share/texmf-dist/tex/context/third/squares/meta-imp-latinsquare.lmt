@@ -1,0 +1,119 @@
+if not modules then modules = {} end modules["meta-imp-latinsquare"] = {
+	version = "2026-02-14",
+	comment = "Latin squares. Companion to t-squares",
+	author = "Jairo A. del Rio",
+	copyright = "Jairo A. del Rio",
+	license = "MIT License",
+}
+
+local latin_reporter = logs.reporter("squares", "latin")
+local random = math.random
+
+local function rand2(a, b)
+	if random(2) == 1 then
+		return a, b
+	else
+		return b, a
+	end
+end
+
+local function latinsquare(n)
+	local xy = {}
+	local xz = {}
+	local yz = {}
+
+	for i = 1, n do
+		xy[i] = {}
+		xz[i] = {}
+		yz[i] = {}
+		for j = 1, n do
+			xy[i][j] = 0
+			xz[i][j] = 0
+			yz[i][j] = 0
+		end
+	end
+
+	for i = 1, n do
+		for j = 1, n do
+			local k = (i + j - 2) % n + 1
+			xy[i][j] = k
+			xz[i][k] = j
+			yz[j][k] = i
+		end
+	end
+
+	local mxy, mxz, myz = 0, 0, 0
+	local m = { 0, 0, 0 }
+	local proper = true
+	local minIter = n * n * n
+	local iter = 0
+
+	while iter < minIter or not proper do
+		local i, j, k, i2, j2, k2
+		local i2_, j2_, k2_
+
+		if proper then
+			i, j, k = random(n), random(n), random(n)
+			while xy[i][j] == k do
+				i, j, k = random(n), random(n), random(n)
+			end
+
+			i2 = yz[j][k]
+			j2 = xz[i][k]
+			k2 = xy[i][j]
+			i2_, j2_, k2_ = i, j, k
+		else
+			i, j, k = m[1], m[2], m[3]
+
+			i2, i2_ = rand2(yz[j][k], myz)
+			j2, j2_ = rand2(xz[i][k], mxz)
+			k2, k2_ = rand2(xy[i][j], mxy)
+		end
+
+		proper = xy[i2][j2] == k2
+		if not proper then
+			m = { i2, j2, k2 }
+			mxy = xy[i2][j2]
+			myz = yz[j2][k2]
+			mxz = xz[i2][k2]
+		end
+
+		xy[i][j] = k2_
+		xy[i][j2] = k2
+		xy[i2][j] = k2
+		xy[i2][j2] = k
+
+		yz[j][k] = i2_
+		yz[j][k2] = i2
+		yz[j2][k] = i2
+		yz[j2][k2] = i
+
+		xz[i][k] = j2_
+		xz[i][k2] = j2
+		xz[i2][k] = j2
+		xz[i2][k2] = j
+
+		iter = iter + 1
+	end
+	return xy
+end
+
+local currentlatin = nil
+
+function MP.currentlatincell(x, y)
+	mp.print(currentlatin and currentlatin[x][y] or "")
+end
+
+function MP.latinsquareinit(n)
+	if n > 0 then
+		currentlatin = latinsquare(n)
+		mp.print("true")
+	else
+		latin_reporter(("Invalid number %d: nothing will be provided"):format(n))
+		mp.print("false")
+	end
+end
+
+function MP.latinsquarereset()
+	currentlatin = nil
+end

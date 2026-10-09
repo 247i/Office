@@ -1,0 +1,271 @@
+%D \module
+%D   [       file=page-pls,
+%D        version=2003.03.16,
+%D          title=\CONTEXT\ Page Macros,
+%D       subtitle=Page Setup,
+%D         author=Hans Hagen,
+%D           date=\currentdate,
+%D      copyright={PRAGMA ADE \& \CONTEXT\ Development Team}]
+%C
+%C This module is part of the \CONTEXT\ macro||package and is
+%C therefore copyrighted by \PRAGMA. See mreadme.pdf for
+%C details.
+
+\writestatus{loading}{ConTeXt Page Macros / Extra Page Building}
+
+%D This still needs some work, especially the dimensions need to be checked cq.\
+%D optimized. Beware: method has become alternative!
+
+%D This feature has been present for a while but has never been exploited: pluggable
+%D pagebuilders. The next example code demonstrates the application of one such a
+%D plug-in. This variant support \type {page}, \type {leftpage} and \type
+%D {rightpage} definitions where specific areas are placed with the \type
+%D {\pagearea} command.
+%D
+%D \starttyping
+%D \setupheadertexts[the header text]
+%D \setupfootertexts[a pretty long left footer text][something footer right]
+%D \setupbottomtexts[a not so long left bottom text][another right footer thing]
+%D \setuptexttexts  [margin][something marginal][indeed]
+%D
+%D \startsetups pagelayout:table:left
+%D     \setupTABLE[offset=overlay]%
+%D     \setupTABLE[c][1][width=\leftmarginwidth]%
+%D     \setupTABLE[c][2][width=\textwidth]%
+%D     \setupTABLE[c][3][width=\rightmarginwidth]%
+%D \stopsetups
+%D
+%D \startsetups pagelayout:table:right
+%D     \setupTABLE[offset=overlay]%
+%D     \setupTABLE[c][1][width=\leftmarginwidth]%
+%D     \setupTABLE[c][2][width=\textwidth]%
+%D     \setupTABLE[c][3][width=\rightmarginwidth]%
+%D \stopsetups
+%D
+%D \startpagelayout[leftpage]
+%D   \directsetup{pagelayout:table:left}%
+%D   \bTABLE
+%D     \bTR
+%D       \bTD[nx=3,background=color,backgroundcolor=green]
+%D         \pagearea[header][text][middle]
+%D       \eTD
+%D     \eTR
+%D     \bTR
+%D       \bTD \pagearea[text][margin][left] \eTD
+%D       \bTD[nx=2] \pagearea[text] \eTD
+%D     \eTR
+%D     \bTR
+%D       \bTD[nx=3,offset=overlay]
+%D         {\directsetup{pagelayout:table:left}%
+%D          \bTABLE
+%D            \bTR
+%D              \bTD[nx=2] \pagearea[footer][text][left] \eTD
+%D              \bTD \pagearea[bottom][text][left] \eTD
+%D            \eTR
+%D          \eTABLE}
+%D        \eTD
+%D     \eTR
+%D   \eTABLE
+%D \stoppagelayout
+%D
+%D \startpagelayout[rightpage]
+%D   \directsetup{pagelayout:table:right}%
+%D   \bTABLE
+%D     \bTR
+%D       \bTD[nx=3] \pagearea[header][text][middle] \eTD
+%D     \eTR
+%D     \bTR
+%D       \bTD \pagearea[text][margin][left] \eTD
+%D       \bTD[nx=2] \pagearea[text] \eTD
+%D     \eTR
+%D     \bTR
+%D       \bTD[nx=3,offset=overlay]
+%D         {\directsetup{pagelayout:table:right}%
+%D          \bTABLE
+%D            \bTR
+%D              \bTD \pagearea[bottom][text][right] \eTD
+%D              \bTD[nx=2] \pagearea[footer][text][right] \eTD
+%D            \eTR
+%D          \eTABLE}
+%D       \eTD
+%D     \eTR
+%D   \eTABLE
+%D \stoppagelayout
+%D
+%D \startpagelayout[page]
+%D     \pagelayout[rightpage]
+%D \stoppagelayout
+%D
+%D \enabletrackers[pagelayout]
+%D
+%D \setuppagenumbering[alternative=doublesided,location=middle]
+%D
+%D \setuplayout
+%D   [alternative=makeup,
+%D    backspace=15mm,
+%D    cutspace=20mm,
+%D    leftmargin=15mm,
+%D    rightmargin=25mm,
+%D    topspace=0pt,
+%D    width=10cm]
+%D
+%D \definetextbackground
+%D   [test]
+%D   [state=start,
+%D    background=color,
+%D    backgroundcolor=yellow]
+%D
+%D \starttext
+%D
+%D     \dorecurse{10}{\samplefile{tufte}\par}
+%D
+%D     \samplefile{tufte} \starttest \samplefile{tufte} \stoptest \samplefile{tufte}
+%D
+%D     \starttabulate
+%D     \NC test \NC \starttest \samplefile{tufte} \stoptest \NC \NR
+%D     \stoptabulate
+%D
+%D     \dorecurse{10}{\samplefile{tufte}\par}
+%D
+%D \stoptext
+%D \stoptyping
+
+\unprotect
+
+\startcontextdefinitioncode
+
+\installcorenamespace{layoutmakeupalternative}
+
+\definecolor[\v!makeup:trace][s=.5,a=1,t=.5]
+
+\installtextracker
+  {pagelayout}
+  {\def\page_boxes_show_box{\backgroundline[\v!makeup:trace]}}
+  {\let\page_boxes_show_box\relax}
+
+\let\page_boxes_show_box\relax
+
+\def\page_boxes_construct_content_makeup#1#2#3% targetbox flusher box
+  {\setbox#1\vpack\bgroup
+     \offinterlineskip
+     \calculatereducedvsizes
+     \calculatehsizes
+     \page_layouts_swap_margins\v!page
+     \setbox#1\hbox\bgroup
+       \vbox to \textheight\bgroup
+          \offinterlineskip
+          \vskip{-1\topskip+\strutheight}% could be an option
+          \textwidth\makeupwidth
+          \hsize\textwidth
+          \boxmaxdepth\maxdepth
+          \noindent
+          \hpack to \zeropoint{\anch_positions_place_anchors}%
+          \page_boxes_show_box\bgroup
+            \page_otr_command_package_contents#2#3%
+          \egroup
+       \egroup
+     \egroup
+     \wd#1\makeupwidth
+     \ht#1\textheight
+     \dp#1\zeropoint
+     \hsize\paperwidth
+     \vsize\paperheight
+     \setbox#1\vbox\bgroup
+      %\settexthoffset
+      %\doifbothsidesoverruled\relax\relax{\hkern{-\texthoffset-\cutspace+\backspace}}%
+       \doifbothsidesoverruled\relax\relax{\hkern{-\paperwidth+\backspace+\makeupwidth-\cutspace+\backspace}}%
+       \page_boxes_show_box\bgroup
+         \csname\??layoutmakeupalternative\doifbothsidesoverruled\v!page\v!rightpage\v!leftpage\endcsname
+       \egroup
+     \egroup
+     \wd#1\paperwidth
+     \ht#1\paperheight
+     \dp#1\zeropoint
+    %\smashbox#1%
+     \box#1%
+   \egroup}
+
+\installlayoutalternative\v!makeup{\page_boxes_construct_content_makeup}
+
+\newbox\b_page_area
+
+\permanent\tolerant\protected\def\pagearea[#1]#*[#2]#*[#3]%
+  {\ifarguments
+     \expandafter\gobblethreeoptionals
+   \or
+     \expandafter\page_area_one
+   \or
+     \expandafter\page_area_two
+   \or
+     \expandafter\page_area_three
+   \fi[#1][#2][#3]}
+
+\lettonothing\m_page_area_three
+
+\def\page_area_three[#1][#2][#3]%
+  {\edef\m_page_area_three{#3}%
+   \ifx\m_page_area_three\v!left
+     \let\m_page_area_three\c!lefttext
+   \orelse\ifx\m_page_area_three\v!right
+     \let\m_page_area_three\c!righttext
+   \else
+     \let\m_page_area_three\c!middletext
+   \fi
+   \page_area_indeed{#1}{#2}\m_page_area_three}
+
+\def\page_area_two[#1][#2][#3]%
+  {\edef\m_page_area_three{\doifbothsidesoverruled\c!righttext\c!righttext\c!lefttext}%
+   \page_area_indeed{#1}{#2}\m_page_area_three}
+
+\def\page_area_one[#1][#2][#3]%
+  {\ifcstok{#1}\v!text
+     \iftrialtypesetting
+       \fakebox\pagebox
+     \else
+       \page_backgrounds_add_to_text\pagebox
+       \page_grids_add_to_box\pagebox
+       \box\pagebox
+     \fi
+   \fi}
+
+\def\page_area_indeed#1#2#3%
+  {\setbox\b_page_area\vbox{\getspecificlayouttext{#1}{#2}{#3}}%
+   \iftrialtypesetting
+     \fakebox\b_page_area
+   \orelse\ifcsname\??layoutbackgrounds#1#2\endcsname
+     \page_area_indeed_yes{#1}{#2}%
+   \else
+     \box\b_page_area
+   \fi}
+
+\def\page_area_indeed_yes#1#2%
+  {% todo: \localbackgroundframed{\??layoutbackgrounds#1#2}{#1:#2}
+   \localframed % todo:
+     [\??layoutbackgrounds#1#2]
+     [\c!width=\wd\b_page_area,
+      \c!height=\ht\b_page_area,
+      \c!offset=\v!overlay]
+     {\box\b_page_area}}
+
+% to be done nicely (proper namespacing)
+
+\defcsname\??layoutmakeupalternative\v!leftpage \endcsname{\csname\??layoutmakeupalternative\v!page\endcsname}
+\defcsname\??layoutmakeupalternative\v!rightpage\endcsname{\csname\??layoutmakeupalternative\v!page\endcsname}
+
+\permanent\protected\def\startpagelayout
+  {\bgroup
+   \catcode\endoflineasciicode\ignorecatcode
+   \page_layouts_start_layout}
+
+\aliased\let\stoppagelayout\relax
+
+\def\page_layouts_start_layout[#1]#2\stoppagelayout
+  {\egroup
+   \defcsname\??layoutmakeupalternative#1\endcsname{#2}}
+
+\permanent\protected\def\pagelayout[#1]% new
+  {\csname\??layoutmakeupalternative#1\endcsname}
+
+\stopcontextdefinitioncode
+
+\protect \endinput

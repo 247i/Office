@@ -1,0 +1,222 @@
+%D \module
+%D   [     file=t-calendar-examples.tex
+%D      version=2023.04.14
+%D        title=Calendar examples based on PocketDiary
+%D     subtitle=Photo calendar,
+%D       author=W. Egger,
+%D         date=\currentdate
+%D    copyright=W. Egger
+%D      license=Public Domain
+
+%D Mind you that Thomas Schmitz put on the \CONTEXT -wiki a lua-script, which 
+%D creates a tex-file which can be compiled with \CONTEXT\ already back in 2007 
+%D for the preparation of a photo-calendar.
+%D The nice thing about it is, that it uses a small number of formulae. Nice is,
+%D that it also uses the Sohael Babwani formulae. See:
+%D https://wiki.contextgarden.net/Calendar_script
+
+%D This eaxmple creates a photo calender. It has a front page with a photo and
+%D the year. The following pages have a photo at the top and at the bottom a 
+%D month table. On top of the month table there is the month name and the year.
+%D This photo calendar is based on the PocketDiary.
+
+%D Load the PocketDiary module
+
+% This example file creates a photo calendar based on the PocketDiary-module.
+% In order to use this example you need to have the PocketDiary-module
+% installed from:
+% https://modules.contextgarden.net/cgi-bin/module.cgi/action=view/id=132
+
+% The calendar is typeset on A4 portrait. The calendar is a flip-over type,
+% where in the top-part is a photo and thereunder the month-table with
+% indication of the month name and year.
+% The pictures to be used are placed in a subdirectory. Each picture gets
+% a symbolic name (number) to be used in the \dorecurse loop.
+% For completing the calendar we need 13 pictures. The picture 13 is used on
+% the title page.
+% This file supports 6 languages, which are selected through the \mainlanguage[]
+
+%D Load the PockeDiary module
+
+\usemodule[pocketdiary]
+
+%D Choose and setup the font to be used
+
+\setupbodyfont[ibmplex,ss,12pt]
+
+%D Switch off the page numbering
+
+\setuppagenumbering[location=]
+
+%D Setup the paper size
+
+\setuppapersize[A4,portrait][A4,portrait]
+
+%D Adjust the layout of the page
+
+\setuplayout
+  [topspace=20mm,
+  backspace=8.6mm,
+  header=0pt,
+  footer=0pt,
+  height=middle,
+  width=middle]
+
+%% Supported languages: EN,DE,NL,FR,IT,ES
+\mainlanguage[en]
+
+%D Setup the path where to find the calendar pictures
+\setupexternalfigures
+  [directory=./MyPhotoDirectory]
+
+% Give pictures symbolic names for using in a loop
+\useexternalfigure
+  [1]
+  [A.jpg]
+
+\useexternalfigure
+  [2]
+  [B.jpg]
+
+\useexternalfigure
+  [3]
+  [C.jpg]
+
+\useexternalfigure
+  [4]
+  [D.jpg]
+
+\useexternalfigure
+  [5]
+  [E.jpg]
+
+\useexternalfigure
+  [6]
+  [F.jpg] %[TV-Kasten-Flurin.jpg]
+
+\useexternalfigure
+  [7]
+  [G.jpg]
+
+\useexternalfigure
+  [8]
+  [H.jpg]
+
+\useexternalfigure
+  [9]
+  [I.jpg]
+
+\useexternalfigure
+  [10]
+  [J.jpg]
+
+\useexternalfigure
+  [11]
+  [K.jpg]
+
+\useexternalfigure
+  [12]
+  [L.jpg]
+
+\useexternalfigure
+  [13]  
+  [M.jpg]
+
+%D Setup the variables for the Pocket diary, only year is used for the
+%D calculations.
+
+\setvariables
+  [PocketDiary]
+  [Year=2023]
+  
+%D Let the header and the footer be empty:
+
+\setupheadertexts[][]
+
+\setupfootertexts[][]
+
+%D Add some label texts for the international interfaces: 
+
+\setuplabeltext[en][fotocal={Photo Calendar}]
+\setuplabeltext[nl][fotocal=Fotokalender]
+\setuplabeltext[de][fotocal=Fotokalender]
+\setuplabeltext[fr][fotocal={Calendrier photo}]
+\setuplabeltext[it][fotocal={Calendario fotografico}]
+\setuplabeltext[es][fotocal={Calendario fotográfico}]
+
+%D Let lua is perform the magic:
+
+\startluacode
+  local report = logs.reporter("Photo calendar")
+
+  function thirddata.calendar.Photo_calendar_page(y)
+
+    report("Working in function: calendar.Foto_calendar_page")
+
+    local year = y
+    --local path = file.dirname("./Fotokalender-fotos/")
+    for i = 1,12 do
+
+      local monthname = string.lower(os.date("%B",
+        os.time{year=year,month=i,day=1}))
+            
+      context.startplacefigure({number="",title=""})
+         context.externalfigure({i}, {width = "0.8\\textwidth"})
+      context.stopplacefigure()
+      context.strut()
+      context("\\vfill")
+      context.startalign({"middle"})
+        context("\\bfa")
+        context.labeltext(monthname)
+        context("~")
+        context(year)
+      context.stopalign()
+      context.blank()
+      
+      thirddata.diary.monthtableH(i,year)
+
+      context.page()
+    end
+  end
+\stopluacode
+
+% Setup of the month table
+ 
+\startsetups table:month
+   \setupTABLE[c]
+              [each]
+              [width=\dimexpr\textwidth/7,
+               frame=on,
+               style=\tfa]
+   \setupTABLE[r][each][height=1.8\lineheight,align={center,lohi}]
+   \setupTABLE[c][7][foregroundcolor=red]
+\stopsetups
+
+%D Define the macro for calling lua
+
+\define[1]\Photocalendarpages
+  {\ctxlua{thirddata.calendar.Photo_calendar_page(#1)}}
+
+%D Setup the \TEX\ side of the document
+
+\starttext
+
+%D Add a title page
+
+\startstandardmakeup[page=yes,doublesided=yes]
+  \startplacefigure
+    [location=middle,
+     title=,
+     number=]
+    {\externalfigure[13][width=\paperwidth]}
+  \stopplacefigure
+  \midaligned{\bfc \labeltext{fotocal}~\getvariable{PocketDiary}{Year}}
+\stopstandardmakeup
+
+%D Call the defined macro
+
+\Photocalendarpages{\getvariable{PocketDiary}{Year}}
+
+\stoptext
+
+

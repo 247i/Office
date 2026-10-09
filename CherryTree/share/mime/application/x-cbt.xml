@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-cbt">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Comic book archive (tar container)</comment>
+  <comment xml:lang="zh-Hant-TW">漫畫書封存 (tar 容器)</comment>
+  <comment xml:lang="uk">архів коміксів (контейнер tar)</comment>
+  <comment xml:lang="tr">Çizgi roman arşivi (tar kapsayıcısı)</comment>
+  <comment xml:lang="sv">Serietidningsarkiv (tar-behållare)</comment>
+  <comment xml:lang="sr-Cyrl">Архива стрипа (tar контејнер)</comment>
+  <comment xml:lang="sq">Arkiv librash me figura (kontejner tar)</comment>
+  <comment xml:lang="sl">Stripovski arhiv (vsebnik tar)</comment>
+  <comment xml:lang="ru">Архив комиксов (tar-контейнер)</comment>
+  <comment xml:lang="ro">arhivă carte Comic (container tar)</comment>
+  <comment xml:lang="pt-BR">Arquivo de revista eletrônica (contêiner tar)</comment>
+  <comment xml:lang="pl">Archiwum komiksu (kontener tar)</comment>
+  <comment xml:lang="oc">archiu de benda dessenhada (contenedor tar)</comment>
+  <comment xml:lang="ko">만화책 묶음 파일 (TAR 컨테이너)</comment>
+  <comment xml:lang="kk-Cyrl">Comic book архиві (tar-контейнері)</comment>
+  <comment xml:lang="ja">コミックブックアーカイブ (tar コンテナ)</comment>
+  <comment xml:lang="it">Archivio comic book (contenitore tar)</comment>
+  <comment xml:lang="id">Arsip buku komik (kontainer tar)</comment>
+  <comment xml:lang="hr">Arhiva stripova (tar spremnik)</comment>
+  <comment xml:lang="hi">कॉमिक बुक अभिलेख (tar कंटेनर)</comment>
+  <comment xml:lang="he">ארכיון ספר קומיקס (מעטפת tar)</comment>
+  <comment xml:lang="gl">Arquivo de libro de banda deseñada (contedor tar)</comment>
+  <comment xml:lang="fur">Archivi Comic book (contignidôr tar)</comment>
+  <comment xml:lang="fr">Archive de bandes dessinées (conteneur tar)</comment>
+  <comment xml:lang="fi">Sarjakuva-arkisto (tar)</comment>
+  <comment xml:lang="et">Koomiksivihiku arhiiv (tar-konteineris)</comment>
+  <comment xml:lang="es">archivador de libro de historietas (contenedor TAR)</comment>
+  <comment xml:lang="en-GB">Comic book archive (tar container)</comment>
+  <comment xml:lang="de">Comic-Book-Archiv (tar-Container)</comment>
+  <comment xml:lang="da">Tegneseriearkiv (tar-container)</comment>
+  <comment xml:lang="ca">arxiu de còmic (contenidor tar)</comment>
+  <comment xml:lang="bg">Архив за комикси, tar контейнер</comment>
+  <comment xml:lang="be-Cyrl">архіў comic book (кантэйнер tar)</comment>
+  <comment xml:lang="ar">أرشيف كتب مصورة (حاوية rar)</comment>
+  <sub-class-of type="application/x-tar"/>
+  <generic-icon name="x-office-document"/>
+  <glob pattern="*.cbt"/>
+</mime-type>

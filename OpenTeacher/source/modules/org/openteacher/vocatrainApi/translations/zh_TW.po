@@ -1,0 +1,67 @@
+# Chinese (Traditional) translation for openteacher
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2013-05-29 16:01+0000\n"
+"Last-Translator: Louie Chen <louie23@gmail.com>\n"
+"Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:44+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: vocatrainApi.py:130
+msgid "Select category"
+msgstr "選擇分類"
+
+#: vocatrainApi.py:131
+msgid "Please select a category"
+msgstr "請選擇分類"
+
+#: vocatrainApi.py:136
+msgid "Select book"
+msgstr "選擇書籍"
+
+#: vocatrainApi.py:137
+msgid "Please select a book"
+msgstr "請選擇書籍"
+
+#: vocatrainApi.py:142
+msgid "Select list"
+msgstr "選擇列表"
+
+#: vocatrainApi.py:143
+msgid "Please select a list"
+msgstr "請選擇列表"
+
+#: vocatrainApi.py:223
+msgid "Import from vocatrain.com"
+msgstr "從 vocatrain.com 匯入"
+
+#: vocatrainApi.py:224
+msgid "Import from woordjesleren.nl"
+msgstr "從 woordjesleren.nl 匯入"
+
+#: vocatrainApi.py:284
+#, python-format
+msgid "The word list was imported from %s successfully."
+msgstr "單字列表從 %s 匯入成功"
+
+#: vocatrainApi.py:302
+#, python-format
+msgid "No %s connection"
+msgstr "沒有 %s 連線"
+
+#: vocatrainApi.py:303
+msgid ""
+"{serviceName} didn't accept the connection. Are you sure that your internet "
+"connection works and {serviceName} is online?"
+msgstr ""

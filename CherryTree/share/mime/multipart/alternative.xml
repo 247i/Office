@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="multipart/alternative">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Message in several formats</comment>
+  <comment xml:lang="zh-Hant-TW">多種格式的訊息</comment>
+  <comment xml:lang="uk">повідомлення у кількох форматах</comment>
+  <comment xml:lang="tr">Birçok biçimde ileti</comment>
+  <comment xml:lang="sv">Meddelande i flera format</comment>
+  <comment xml:lang="sr-Cyrl">Порука у више записа</comment>
+  <comment xml:lang="sq">Mesazh në disa formate</comment>
+  <comment xml:lang="sl">Sporočilo v več oblikah</comment>
+  <comment xml:lang="ru">Сообщение в нескольких форматах</comment>
+  <comment xml:lang="ro">mesaj în mai multe formate</comment>
+  <comment xml:lang="pt-BR">Mensagem em vários formatos</comment>
+  <comment xml:lang="pl">Wiadomość w wielu formatach</comment>
+  <comment xml:lang="oc">messatge en formats divèrses</comment>
+  <comment xml:lang="nn">Melding i fleire format</comment>
+  <comment xml:lang="ko">여러 형식의 메시지</comment>
+  <comment xml:lang="kk-Cyrl">Бірнеше пішімдегі мәлімдеме</comment>
+  <comment xml:lang="ja">いくつかの形式でのメッセージ</comment>
+  <comment xml:lang="it">Messaggio in diversi formati</comment>
+  <comment xml:lang="id">Pesan dalam beberapa format</comment>
+  <comment xml:lang="hr">Poruka u raznim formatima</comment>
+  <comment xml:lang="hi">कई प्रारूपों में संदेश</comment>
+  <comment xml:lang="he">הודעה במספר תסדירים</comment>
+  <comment xml:lang="fur">Messaç in diviers formâts</comment>
+  <comment xml:lang="fr">Message en formats divers</comment>
+  <comment xml:lang="fi">Monimuotoinen viesti</comment>
+  <comment xml:lang="et">E-kiri erinevates vormingutes</comment>
+  <comment xml:lang="es">mensaje en varios formatos</comment>
+  <comment xml:lang="en-GB">Message in several formats</comment>
+  <comment xml:lang="de">Nachricht in verschiedenen Formaten</comment>
+  <comment xml:lang="ca">missatge en diversos formats</comment>
+  <comment xml:lang="bg">Писмо в няколко формата</comment>
+  <comment xml:lang="be-Cyrl">паведамленне ў некалькіх фарматах</comment>
+  <comment xml:lang="ar">رسالة في عدة صيغ</comment>
+</mime-type>

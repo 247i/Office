@@ -1,0 +1,174 @@
+%D \module
+%D   [       file=t-collatingmarks,
+%D        version=2023.04.15,
+%D          title=Collating Marks \CONTEXT\ User Module,
+%D       subtitle=Environment for collating marks,
+%D         author={W. Egger},
+%D           date=\currentdate,
+%D      copyright={W. Egger},
+%D          email=w.egger@boede.nl,
+%D        license=Public Domain]
+%D
+%D The documentation can be generated with:
+%D mtxrun --script modules --process t-collatingmarks.tex
+
+\startmodule[collatingmarks]
+
+\writestatus{loading}{Context Module for Collating Marks}
+
+%D\enablemode[demo]
+
+%D \startsubject[title={Introduction}]
+%D
+%D This code is based on the work of Thomas A. Schmitz, who created the module for
+%D different crop marks.
+%D
+%D If a book consists of multiple sections, each section should be marked
+%D along the spine with a collating mark. This mark moves down along the spine
+%D according to the number of the section. After collating the book it becomes
+%D easy tho check whether the sequence of the sections is correct. One should
+%D see a \quotation{stair case} on the spine of the book.
+%D \stopsubject
+%D
+%D \startsubject[title={Using the module}]
+%D 
+%D If the collating marks should be placed, then the system should be setup with
+%D \type{\setupMPvariables[pages=8,sheets=2,shift=0mm,frenchdoors=false,wickel=false]} Note that the
+%D collating marks-setup needs to know how many pages are placed on a
+%D doublesided printed sheet of paper and how many such sheets result in a
+%D section i.e. these values depend on the \type{\setuparranging} command.  The
+%D shift-option is 0mm if no horizontal page shifting is issued during
+%D imposition.  If a horizontal page shifting is used, then the shift option is
+%D used to position the collating mark precisely on the spine. 
+%D
+%D The two keys \quotation{frenchdoors} and \quotation{wickel} are used for
+%D special purposes. These are not intended for general use.
+%D For the preparation of a binding called
+%D French doors, where there is a left (normal) and a right book, which opens
+%D from left to right the MPvariable \quotation{frenchdoors} must be set to true
+%D (boolean).
+%D For preparing a section with parallelfolding/letterfolding/Wickelfalz the
+%D MPvariable \quotation{wickel} must be set to true (boolean).
+%D\stopsubject
+
+%D \startsubject[title={Vocabulary}]
+%D
+%D EN: Collating mark, DE: Kollationiermarke, NL: collationeerblokje
+%D \stopsubject
+
+
+\unprotect
+
+\setupmodule[Collatingmarks=yes]
+
+\setupMPvariables
+    [Collatingmarks]
+    [pages=16, %pages per sheet doublesided
+		sheets=1,% number of sheets forming one section
+		horpageshift=0,
+	  frenchdoors=false,
+	  wickel=false]
+
+%D We prepare collating marks:
+
+\processaction[\currentmoduleparameter{Collatingmarks}]
+	[yes=>\def\Collatingmarks{Collatingmarks},
+	no=>\def\Collatingmarks{},
+	\v!unknown=>\def\Collatingmarks{},
+	\v!default=>\def\Collatingmarks{}]
+
+%D The newly prepared macros go into the page background:
+
+\setupbackgrounds[page][state=repeat,background={\Collatingmarks}]
+
+%D We define an overlay for the collating marks.
+
+\defineoverlay[Collatingmarks][\useMPgraphic{Collatingmarks}]
+
+%D We let \METAPOST do the calculations and draw de collating marks. 
+
+\startusableMPgraphic{Collatingmarks}
+StartPage;
+
+numeric offset, sectionno, pages, sheets, factor, correction, offset, pageshift;
+path p,q;
+boolean frenchdoors,wickel;
+
+pages       := \MPvar{pages};
+sheets      := \MPvar{sheets};
+pageshift   := \MPvar{horpageshift};
+frenchdoors := \MPvar{frenchdoors};
+wickel      := \MPvar{wickel};
+
+z5colm = ulcorner Page;
+z6colm = (x5colm, y5colm-10mm);
+
+p := unitsquare xscaled 1mm yscaled 7mm;
+
+if \realpagenumber mod 2 = 1 : % on uneven pages only
+		sectionno := \realpagenumber div (sheets*pages)+1;
+      label.lrt(textext("\switchtobodyfont[5pt]"& decimal sectionno &""),llcorner Page shifted (1mm,-2mm));
+	if \realpagenumber mod (sheets*pages) = 1 : % on the first page of a section only
+		nofmarkings := (y6colm-7mm) div 7mm;
+		offset := y6colm-sectionno*7mm;
+		if sectionno > nofmarkings : 
+			correction := sectionno div nofmarkings;
+			offset := y6colm-(sectionno-correction*nofmarkings)*7mm; 
+		fi;
+		if frenchdoors or wickel :
+			p := p shifted ((PaperWidth),offset);
+		else :
+			p := p shifted (-1mm-2pageshift,offset);
+		fi;
+		fill p withcolor black;
+		if sectionno < 9 : 
+			label.rt(textext("\switchtobodyfont[3pt] \white "& decimal sectionno &""), center p shifted (-1.3mm,0));
+		else :
+			label.rt(textext("\switchtobodyfont[3pt] \white "& decimal sectionno &""), center p shifted (-1.5mm,0));
+		fi;
+	fi;
+fi;
+\stopusableMPgraphic
+
+\protect
+\stopmodule
+
+\doifnotmode{demo}{\endinput}
+
+
+
+%D Example:
+%D \usemodule[collatingmarks][Collatingmarks=yes]
+%D \setuppapersize[A5][A2]
+%D \setuplayout[location=middle,marking=on]
+%D \setuppagenumbering[alternative=doublesided]
+%D \setuparranging[2*4]
+%D 
+%D \setupMPvariables
+%D 	[pages=8,  % pages per sheet of paper doublesided
+%D 	sheets=1,  % sheets of paper used per section
+%D 	horpageshift=0mm, % used for correction if horizontal page-shifting is used
+%D  frenchdoors=false,
+%D  wickel=false]
+%D
+%D \starttext
+%D 	\dorecurse{10}{\section{Text \recurselevel}\input tufte \par\subject{Ward} \input ward\par}
+%D \stoptext
+
+
+\usemodule[collatingmarks][Collatingmarks=yes]
+\setuppapersize[A5][A2]
+\setuplayout[location=middle,marking=on]
+\setuppagenumbering[alternative=doublesided]
+\setuparranging[2*4*2]
+
+\setupMPvariables
+	[pages=8,  % pages per sheet of paper doublesided
+	sheets=2,  % sheets of paper used per section
+	horpageshift=0mm, % used for correction if horizontal page-shifting is used
+	frenchdoors=false,
+	wickel=false]
+	
+\starttext
+	\dorecurse{10}{\section{Text \recurselevel}\input tufte \par\subject{Ward} \input ward\par}
+\stoptext

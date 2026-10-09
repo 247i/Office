@@ -1,0 +1,199 @@
+if not modules then modules = { } end modules ['lpdf-tag-imp-mkiv'] = {
+    version   = 1.001,
+    comment   = "companion to lpdf-tag.mkiv",
+    author    = "Hans Hagen",
+    copyright = "PRAGMA ADE / ConTeXt Development Team",
+    license   = "see context related readme files"
+}
+
+-- This is the mapping used in MkIV and you can enable it by:
+--
+-- \enabledirectives[backend.usetags=mkiv]
+
+return {
+    name      = "old school pdf tagging",
+    version   = "1.00",
+    comment   = "This is the old mapping, more a historic note.",
+    author    = "Hans Hagen",
+    copyright = "ConTeXt development team",
+    mapping   = {
+
+        document           = { pdf = "Document"   },
+        documentpart       = { pdf = "Div"        },
+
+        division           = { pdf = "Div"        },
+        paragraph          = { pdf = "P"          },
+        p                  = { pdf = "P"          },
+        highlight          = { pdf = "Span"       },
+        ornament           = { pdf = "Span"       },
+        textdisplay        = { pdf = "Div"        },
+        placeholder        = { pdf = "Span"       },
+
+     -- ["break"]          = { pdf = "Div"        },
+
+        construct          = { pdf = "Span"       },
+        constructleft      = { pdf = "Span"       },
+        constructright     = { pdf = "Span"       },
+        constructcontent   = { pdf = "Span"       },
+
+        sectionblock       = { pdf = "Div"        },
+
+        section            = { pdf = "Sect"       },
+        sectioncaption     = { pdf = "H"          },
+        sectiontitle       = { pdf = "Span"       },
+        sectionnumber      = { pdf = "Span"       },
+        sectioncontent     = { pdf = "Div"        },
+
+        itemgroup          = { pdf = "L"          },
+        item               = { pdf = "LI"         },
+        itemtag            = { pdf = "Lbl"        },
+        itemcontent        = { pdf = "LBody"      },
+        itemhead           = { pdf = "Div"        },
+        itembody           = { pdf = "Div"        },
+
+        items              = { pdf = "Div"        },
+        itemsymbols        = { pdf = "Div"        },
+        itemsymbol         = { pdf = "Span"       },
+        itemtexts          = { pdf = "Div"        },
+        itemtext           = { pdf = "Span"       },
+
+        description        = { pdf = "Div"        },
+        descriptiontag     = { pdf = "Div"        },
+        descriptioncontent = { pdf = "Div"        },
+        descriptionsymbol  = { pdf = "Span"       },
+
+        verbatimblock      = { pdf = "Div"        },
+        verbatimlines      = { pdf = "Div"        },
+        verbatimline       = { pdf = "Code"       },
+        verbatim           = { pdf = "Code"       },
+
+        lines              = { pdf = "Div"        },
+        line               = { pdf = "Code"       },
+        linenumber         = { pdf = "Span"       },
+
+        synonym            = { pdf = "Span"       },
+        sorting            = { pdf = "Span"       },
+
+        register           = { pdf = "Div"        },
+        registerlocation   = { pdf = "Span"       },
+        registersection    = { pdf = "Div"        },
+        registertag        = { pdf = "Span"       },
+        registerentries    = { pdf = "Div"        },
+        registerentry      = { pdf = "Div"        },
+        registercontent    = { pdf = "Span"       },
+        registersee        = { pdf = "Span"       },
+        registerpages      = { pdf = "Span"       },
+        registerpage       = { pdf = "Span"       },
+        registerseparator  = { pdf = "Span"       },
+        registerpagerange  = { pdf = "Span"       },
+
+        table              = { pdf = "Table"      },
+        tablerow           = { pdf = "TR"         },
+        tablecell          = { pdf = "TD"         },
+        tableheadcell      = { pdf = "TH"         },
+        tablehead          = { pdf = "THEAD"      },
+        tablebody          = { pdf = "TBODY"      },
+        tablefoot          = { pdf = "TFOOT"      },
+
+        tabulate           = { pdf = "Table"      },
+        tabulaterow        = { pdf = "TR"         },
+        tabulatecell       = { pdf = "TD"         },
+        tabulateheadcell   = { pdf = "TH"         },
+        tabulatehead       = { pdf = "THEAD"      },
+        tabulatebody       = { pdf = "TBODY"      },
+        tabulatefoot       = { pdf = "TFOOT"      },
+
+        list               = { pdf = "TOC"        },
+        listitem           = { pdf = "TOCI"       },
+        listtag            = { pdf = "Lbl"        },
+        listcontent        = { pdf = "P"          },
+        listdata           = { pdf = "P"          },
+        listpage           = { pdf = "Reference"  },
+        listtext           = { pdf = "Span"       },
+
+        delimitedblock     = { pdf = "BlockQuote" },
+        delimited          = { pdf = "Quote"      },
+        delimitedcontent   = { pdf = "Span"       },
+        delimitedsymbol    = { pdf = "Span"       },
+
+        subsentence        = { pdf = "Span"       },
+        subsentencecontent = { pdf = "Span"       },
+        subsentencesymbol  = { pdf = "Span"       },
+
+        label              = { pdf = "Span"       },
+        number             = { pdf = "Span"       },
+
+        float              = { pdf = "Div"        },
+        floatcaption       = { pdf = "Caption"    },
+        floatlabel         = { pdf = "Span"       },
+        floatnumber        = { pdf = "Span"       },
+        floattext          = { pdf = "Span"       },
+        floatcontent       = { pdf = "P"          },
+
+        image              = { pdf = "P"          },
+        mpgraphic          = { pdf = "P"          },
+
+        formulaset         = { pdf = "Div"        },
+        formula            = { pdf = "Div"        },
+        formulacaption     = { pdf = "Span"       },
+        formulalabel       = { pdf = "Span"       },
+        formulanumber      = { pdf = "Span"       },
+        formulacontent     = { pdf = "P"          },
+        subformula         = { pdf = "Div"        },
+
+        link               = { pdf = "Link"       },
+        reference          = { pdf = "Span"       },
+
+        navigation         = { pdf = "Div"        },
+        navigationbutton   = { pdf = "Span"       },
+        navigationmenu     = { pdf = "Div"        },
+        navigationmenuitem = { pdf = "Span"       },
+        navigationaction   = { pdf = "Span"       },
+        navigationpage     = { pdf = "Span"       },
+
+        margintextblock    = { pdf = "Span"       },
+        margintext         = { pdf = "Span"       },
+        marginanchor       = { pdf = "Span"       },
+
+        linetext           = { pdf = "Div"        },
+
+       -- no math here
+
+        ignore             = { pdf = "Span"       },
+        private            = { pdf = "Span"       },
+        metadata           = { pdf = "Div"        },
+        metavariable       = { pdf = "Span"       },
+
+        mid                = { pdf = "Span"       },
+        sub                = { pdf = "Span"       },
+        sup                = { pdf = "Span"       },
+        subsup             = { pdf = "Span"       },
+
+        combination        = { pdf = "Span"       },
+        combinationpair    = { pdf = "Span"       },
+        combinationcontent = { pdf = "Span"       },
+        combinationcaption = { pdf = "Span"       },
+
+        publications       = { pdf = "Div"        },
+        publication        = { pdf = "Div"        },
+        pubfld             = { pdf = "Span"       },
+
+        citation           = { pdf = "Span"       },
+        cite               = { pdf = "Span"       },
+
+        narrower           = { pdf = "Div"        },
+
+        block              = { pdf = "Div"        },
+
+        userdata           = { pdf = "Div"        },
+
+        quantity           = { pdf = "Span"       },
+        unit               = { pdf = "Span"       },
+
+        verse              = { pdf = "Div"        },
+        versetag           = { pdf = "Span"       },
+        verseseparator     = { pdf = "Span"       },
+        versecontent       = { pdf = "Span"       },
+
+    }
+}

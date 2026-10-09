@@ -1,0 +1,51 @@
+# Spanish translation for openteacher
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:38+0200\n"
+"PO-Revision-Date: 2012-09-02 14:40+0000\n"
+"Last-Translator: Hector A. Mantellini <Unknown>\n"
+"Language-Team: Spanish <es@li.org>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:42+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: gui.py:111
+msgid "Correct answer: <b>{answers}</b> [{diff}]"
+msgstr "Respuesta correcta: <b>{answers}</b> [{diff}]"
+
+#: gui.py:113
+msgid "Correct answer: <b>{answers}</b>"
+msgstr "Respuesta correcta: <b>{answers}</b>"
+
+#: gui.py:126
+msgid "Check!"
+msgstr "¡Revisar!"
+
+#: gui.py:127
+msgid "Correct anyway"
+msgstr "Corregir de todas formas"
+
+#: gui.py:128
+msgid "Skip"
+msgstr "Omitir"
+
+#: gui.py:248
+msgid "Fade duration when wrong (milliseconds)"
+msgstr "Duración del fundido cuando incorrecta (milisegundos)"
+
+#: gui.py:249
+msgid "Lesson"
+msgstr "Lección"
+
+#: gui.py:250
+msgid "Words lesson"
+msgstr "Palabra de lección"

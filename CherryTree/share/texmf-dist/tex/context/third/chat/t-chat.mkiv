@@ -1,0 +1,231 @@
+%D \module
+%D   [       file=t-chat,
+%D        version=2024.08.10,
+%D          title=\CONTEXT\ User Module,
+%D       subtitle=Chat,
+%D         author=Henning Hraban Ramm,
+%D           date=\currentdate,
+%D      copyright={fiëé visuëlle, H. Ramm},
+%D        license={GPL 3.0+}]
+
+\unprotect
+
+%D First we define a few colors.
+%D Don’t rely on these names, use the “Chat” palet instead.
+\definecolor[ChatColorI][c=0,m=.03,y=.15,k=0]
+\definecolor[ChatColorII][c=.1,m=0,y=0,k=0]
+\definecolor[ChatNameColor][c=0,m=0,y=0,k=.1]
+\definecolor[ChatColor][ChatColorI]
+\definecolor[ChatFrameColor][ChatNameColor]
+
+%D The palet contains all used colors.
+%D ATM there are only 2 different colors for recipient and sender,
+%D there should be more colors to distinguish senders.
+\definepalet[Chat][
+  frame=ChatFrameColor,
+  name=ChatNameColor,
+  1=ChatColorI,
+  2=ChatColorII,
+]
+
+\installcorenamespace {chat}
+
+\installsimplecommandhandler \??chat {Chat} \??chat
+
+\setupChat[
+  recipient=,
+  person=,
+  \c!distance=.25em,
+  \c!style={\ss},
+  \c!width=.8\textwidth,
+  senderstyle={\ss\bf},
+]
+
+% \Chatparameter
+
+\startuniqueMPgraphic{ChatBubble}
+% side: 0=right, 1=left
+% pos: 0 solo, 1 top, 2 middle, 3 bottom
+
+  numeric side, pos ;
+  string bgcol ;
+
+  if "\getvariable{Chat}{Person}" = "\Chatparameter{recipient}" :
+      side := 0;
+      bgcol := "Chat:1";
+  ; else :
+      side := 1;
+      bgcol := "Chat:2";
+  ; fi ;
+
+  if "\getvariable{Chat}{Person}" = "\getvariable{Chat}{PrevPerson}" :
+    % same as previous person: omit tail
+      pos := 3;
+  ; else :
+    % since we can’t know what’s next, go with "solo"
+      pos := 0;
+  ; fi ;
+
+  cradius := .125cm;
+  tailoffset := .125cm;
+  tailsize := .25cm;
+  h := OverlayHeight;
+  w := OverlayWidth;
+
+  if h < (2*cradius + 2*tailsize):
+    % if the box is too small, reduce radius and tail size
+    cradius := h/3;
+    tailsize := h/3;
+    tailoffset := 0;
+  fi;
+
+  pair ll[],lr[],tl[],tr[],s[];
+
+  % corners
+  ll1 := (0,cradius);
+  ll2 := (cradius,0);
+  lr1 := (w,cradius);
+  lr2 := (w-cradius,0);
+  % tail points
+  tl1 := (0,h-cradius);
+  tl2 := (cradius,h);
+  tr1 := (w,h-cradius);
+  tr2 := (w-cradius,h);
+
+  s1 := (w,h-cradius-tailoffset);
+  s2 := (w+tailsize,h-cradius-tailoffset);
+  s3 := (w,h-cradius-tailoffset-tailsize);
+
+  if pos > 1: % disable tail on middle/bottom
+    %s1 := (w,h-cradius-tailoffset);
+    s2 := (w,h-cradius-tailoffset);
+    %s3 := (w,h-cradius-tailoffset-tailsize);
+  fi;
+  if (pos = 1) or (pos = 2): % top/middle
+    lr1 := (w,cradius/3);
+    lr2 := (w-cradius/3,0);
+  fi;
+  if (pos = 2) or (pos = 3): % middle/bottom
+    tr1 := (w,h-cradius/3);
+    tr2 := (w-cradius/3,h);
+  fi;
+
+  path p ;
+  p := (ll1 ... ll2 --- lr2 ... lr1 -- s3 -- s2 -- s1 -- tr1 ... tr2 --- tl2 ... tl1 --- cycle);
+
+  % mirror the bubble for left side
+  if side = 1:
+    p := p reflectedabout ((w/2,0),(w/2,h));
+  fi;
+
+  fill p withcolor bgcol ;
+  draw p withpen pencircle scaled 0.75 withcolor "Chat:frame";
+
+  setbounds currentpicture to OverlayBox ;
+\stopuniqueMPgraphic
+
+\defineframedtext[ChatBubbleFrame][
+  style=\Chatparameter\s!style,
+  align=flushleft,
+  frame=off,
+  width=\Chatparameter\s!width,
+  autowidth=force,
+  offset=0pt,
+  loffset=2pt,
+  roffset=3pt,
+  before={\vskip\dimexpr-1em+\Chatparameter\c!distance\relax},
+  after={\vskip\dimexpr-\Chatparameter\c!distance\relax},
+]
+
+%D Receive text (left-facing).
+\defineoverlay[ChatGetOverlay][\uniqueMPgraphic{ChatBubble}]
+\defineframedtext[ChatGetFrame][ChatBubbleFrame][
+  background=ChatGetOverlay,
+  location=left,
+]
+
+%D Send text (right-facing).
+\defineoverlay[ChatSendOverlay][\uniqueMPgraphic{ChatBubble}]
+\defineframedtext[ChatSendFrame][ChatBubbleFrame][
+  background=ChatSendOverlay,
+  location=right,
+]
+
+%D This should become an avatar
+%D or simply initials in a circle
+\defineframed[ChatSenderFramed][
+  width=1em,
+  offset=overlay,
+  frame=off,
+  style=\Chatparameter{senderstyle},
+  %offset=0pt,
+  %loffset=0.25em,
+  %roffset=0.25em,
+  %corner=rounded,
+  %frameradius=.5em,
+  %background=color,
+  %backgroundcolor=Chat:frame,
+]
+
+%D Only show names (avatars) if person is different from last one
+% Sender name: #1 x-offset
+\define[1]\ChatSender{\offset[x=#1]{%
+  \doifnot{\getvariable{Chat}{Person}}{\getvariable{Chat}{PrevPerson}}{
+    % TODO: style \ss\tfx if more than 2 chars
+  \ChatSenderFramed{\style[style=\Chatparameter{senderstyle}]{\getvariable{Chat}{Person}}}}%
+  }%
+}
+
+\define[1]\startChat{%
+  \setevariable{Chat}{PrevPerson}{\getvariable{Chat}{Person}}
+  \setevariable{Chat}{Person}{#1}
+  \testpage[1]
+  \doifelse{\getvariable{Chat}{Person}}{\Chatparameter{recipient}}{
+    % recipient
+    \ChatSender{\dimexpr\textwidth-1.25em\relax}
+    \startnarrow[left=.5em]\startChatSendFrame
+  }{
+    % other sender
+    \ChatSender{-0.25em}
+    \startnarrow[right=.5em]\startChatGetFrame
+  }
+}
+
+\def\resetChat{%
+  \setevariable{Chat}{Recipient}{}%
+  \setevariable{Chat}{Person}{}%
+  \setevariable{Chat}{PrevPerson}{0}%
+}
+
+\def\stopChat{
+\doifelse{\getvariable{Chat}{Person}}{\Chatparameter{recipient}}{
+  % recipient
+  \stopChatSendFrame%
+}{
+  % other sender
+  \stopChatGetFrame%
+}
+\stopnarrow%
+}
+
+\resetChat
+
+\protect
+
+\continueifinputfile{t-chat.mkiv}
+
+\starttext
+
+\setupChat[
+  recipient=A,
+]
+
+\starttext
+\startChat{A} Do you wanna chat?\stopChat
+\startChat{B} Maybe. What about?\stopChat
+\startChat{A} How about cats?\stopChat
+\startChat{A} or squirrels?\stopChat
+\stoptext
+
+
+\stoptext

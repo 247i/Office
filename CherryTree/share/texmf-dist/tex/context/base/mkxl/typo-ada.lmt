@@ -1,0 +1,279 @@
+if not modules then modules = { } end modules ['typo-adj'] = {
+    version   = 1.001,
+    optimize  = true,
+    comment   = "companion to typo-adj.mkxl",
+    author    = "Hans Hagen, PRAGMA-ADE, Hasselt NL",
+    copyright = "PRAGMA ADE / ConTeXt Development Team",
+    license   = "see context related readme files"
+}
+
+local setdimen          = tex.setdimen
+local isdimen           = tex.isdimen
+local setmacro          = tokens.setters.macro
+local expandmacro       = token.expandmacro
+
+local nuts              = nodes.nuts
+local getattr           = nuts.getattr
+local getdepth          = nuts.getdepth
+local getlistdimensions = nuts.getlistdimensions
+local getexcept         = nuts.getexcept
+local getheight         = nuts.getheight
+local getid             = nuts.getid
+local getleader         = nuts.getleader
+local getlist           = nuts.getlist
+local getnext           = nuts.getnext
+local getprop           = nuts.getprop
+local gettail           = nuts.tail
+local getwhd            = nuts.getwhd
+local getwidth          = nuts.getwidth
+local setattr           = nuts.setattr
+local setdepth          = nuts.setdepth
+local setexcept         = nuts.setexcept
+local setheight         = nuts.setheight
+local setlink           = nuts.setlink
+local setlist           = nuts.setlist
+local setoffsets        = nuts.setoffsets
+local setprop           = nuts.setprop
+local setstate          = nuts.setstate
+
+local hpacknodes        = nuts.hpack
+
+local hlist_code        <const> = nodes.nodecodes.hlist
+local vlist_code        <const> = nodes.nodecodes.vlist
+
+local getbox            = nuts.getbox
+local takebox           = nuts.takebox
+
+local new_kern          = nuts.pool.kern
+local new_vlist         = nuts.pool.vlist
+
+local flattenleaders    = nuts.flattenleaders
+local traverselist      = nuts.traverselist
+local traverseleader    = nuts.traverseleader
+
+local a_adaptive        <const> = attributes.private("adaptive")
+
+local registervalue     = attributes.registervalue
+local getvalue          = attributes.getvalue
+local hasvalues         = attributes.hasvalues
+local texsetattribute   = tex.setattribute
+
+local v_right           <const> = interfaces.variables.right
+
+local adaptive          = nodes.adaptive or { }
+nodes.adaptive          = adaptive
+local enabled           = false
+
+----- enableaction      = nodes.tasks.enableaction
+
+local d_adaptive_width  <const> = isdimen("d_adaptive_width")
+local d_adaptive_height <const> = isdimen("d_adaptive_height")
+local d_adaptive_depth  <const> = isdimen("d_adaptive_depth")
+local d_adaptive_line   <const> = isdimen("d_adaptive_line")
+
+local function setadaptive(w,h,d,l,c,a)
+    setdimen(d_adaptive_width,w)
+    setdimen(d_adaptive_height,h)
+    setdimen(d_adaptive_depth,d)
+    setdimen(d_adaptive_line,l)
+    setmacro("m_adaptive_color",c)
+    setmacro("m_adaptive_alternative",a)
+end
+
+local methods = {
+    -- overlay
+    [1] = function(settings,parent,box)
+        local setups = settings.setups
+        if setups and setups ~= ""  then
+            local w, h, d, s, list = getlistdimensions(parent)
+            setadaptive(w,h,d,settings.rulethickness,settings.color,settings.alternative)
+            expandmacro("setup",true,setups)
+            local l = takebox("b_adaptive_box")
+            if l then
+                setlist(parent,setlink(l,new_kern(-getwidth(l)),list))
+            end
+        end
+    end
+}
+
+adaptive.methods = methods
+--------.set     = setadaptive
+
+local function handle_uleader_callback(n,grp,index,box,location)
+    if enabled then
+        local a = getattr(n,a_adaptive) or index -- index will become a selector
+        if a then
+            local settings = getvalue(a_adaptive,a) -- index triggers ...
+            if settings then
+                setstate(n,0) -- hm ...
+                local action = methods[settings.method or 1]
+                if action then
+                    action(settings,n,box)
+                end
+            end
+        end
+    end
+    return n
+end
+
+callbacks.register {
+    name    = "handle_uleader",
+    action  = handle_uleader_callback,
+    comment = "resolve user leaders",
+    frozen  = true,
+}
+
+function adaptive.set(settings)
+    if not enabled then
+     -- enableaction("vboxbuilders","nodes.adaptive.handlehorizontal")
+     -- enableaction("vboxhandlers","nodes.adaptive.handlevertical")
+        enabled = true
+    end
+    texsetattribute(a_adaptive,registervalue(a_adaptive,settings))
+end
+
+interfaces.implement {
+    name      = "setadaptive",
+    actions   = adaptive.set,
+    arguments = {
+        {
+            { "setups", "string" },
+            { "method", "integer" },
+            { "mp", "string" },
+            { "location", "string" },
+            { "color", "string" },
+            { "rulethickness", "dimension" },
+            { "alternative", "string" },
+        }
+    }
+}
+
+-- The hlist leaders get done before we enter vpacking, so that is where the
+-- first call kicks in. Then we do a vpack (so one can indeed also adapt the
+-- ht/dp). After packing we know the glue and do the vlist leaders.
+
+-- This is now done via a callback but it is still experimental!
+
+local function handlehorizontal(n)
+    if hasvalues(a_adaptive) then
+        for _, t, _, l in traverselist(n) do
+            if t == hlist_code then
+                for m, _, _, ll in traverseleader(l) do
+                    local a = getattr(m,a_adaptive)
+                    if a then
+                        local settings = getvalue(a_adaptive,a)
+                        if settings then
+                            setstate(m,0)
+                            local action = methods[settings.method or 1]
+                            if action then
+                                action(settings,m,ll)
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+    return n
+end
+
+local function handlevertical(n)
+    if hasvalues(a_adaptive) then
+        -- not a list just a node
+        for _, t, _, l in traverselist(n) do
+            if t == vlist_code then
+                for m, _, _, ll in traverseleader(l) do
+                    local a = getattr(m,a_adaptive)
+                    if a then
+                        local settings = getvalue(a_adaptive,a)
+                        if settings then
+                            setstate(m,0)
+                            local action = methods[settings.method or 1]
+                            if action then
+                                action(settings,m,ll)
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+    return n
+end
+
+adaptive.handlehorizontal = handlehorizontal
+adaptive.handlevertical   = handlevertical
+
+interfaces.implement {
+    name      = "adaptivecheckbox",
+    arguments = "integer",
+    public    = true,
+    protected = true,
+    actions   = function(n)
+        local b = getbox(n)
+        if b and flattenleaders(b) > 0 then
+            if getid(b) == hlist_code then
+                handlehorizontal(b)
+            else
+                handlevertical(b)
+            end
+        end
+    end,
+}
+
+-- Excepts:
+--
+-- By using the adaptive uleaders we don't need a callback although we can hook it
+-- into the par node and just look at that one instead. However, now we can do it
+-- anyplace. Of course this only works per line unless we also look back but that is
+-- kind of tricky because then we also need to jump over glue and penalty nodes and
+-- compensate for the glue: a mess.
+
+nodes.adaptive.methods[2] = function(settings,parent,box)
+    local list = getlist(parent)
+    if list then
+        local except,
+              amount  = getexcept(box)
+        local left    = nil
+        local right   = nil
+        local current = except
+        while current do
+            local location = getprop(current,"exceptlocation")
+            if location == "left" then
+                left = current
+            elseif location == "right" then
+                right = current
+            end
+            current = getnext(current)
+        end
+        if not left then
+            left  = new_vlist()
+            right = new_vlist()
+            setprop(left, "exceptlocation","left")
+            setprop(right,"exceptlocation","right")
+            setlink(left,except,right)
+            setexcept(box,left)
+            except = left
+        end
+        -- todo: check for leaks !
+        local target = settings.location == v_right and right or left
+        -- wrapped in phantom
+        local n = getlist(list)
+        local nw, nh, nd = getwhd(n)
+        local h = hpacknodes(n)
+        if getprop(target,"except") then
+            nd = getdepth(target) + nh + nd
+            setlink(gettail(getlist(target)),h)
+        else
+            setheight(target,nh)
+            setlist(target,h)
+            setprop(target,"except",true)
+        end
+        setdepth(target,nd)
+        setexcept(box,except,nd > amount and nd or amount)
+        setoffsets(n,target == right and getwidth(box) or -nw)
+        setlist(list)
+        setlist(real)
+    end
+end
+

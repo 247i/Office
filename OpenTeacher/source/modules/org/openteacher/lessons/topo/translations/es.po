@@ -1,0 +1,112 @@
+# Spanish translation for openteacher
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2012-09-02 15:13+0000\n"
+"Last-Translator: Rose <Unknown>\n"
+"Language-Team: Spanish <es@li.org>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:42+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: topo.py:128
+msgid "Create topography lesson"
+msgstr "Crear lección topográfico"
+
+#. TRANSLATORS: used as a label in case a filename of a topo
+#. TRANSLATORS: lesson isn't available. (E.g. because it's
+#. TRANSLATORS: downloaded from some kind of web service.)
+#: topo.py:218
+msgid "Import source"
+msgstr "Importar fuente"
+
+#: topo.py:224 topo.py:291 topo.py:293
+#, python-format
+msgid "Topo lesson: %s"
+msgstr "Lección topográfico: % s"
+
+#~ msgid "What's this place's name?"
+#~ msgstr "¿Cuál es el nombre de este sitio?"
+
+#~ msgid "Name for this place"
+#~ msgstr "Nombre para este sitio"
+
+#~ msgid "Add a place by doubleclicking it on the map"
+#~ msgstr "Añada un sitio pulsándolo dos veces en el mapa"
+
+#~ msgid "Map:"
+#~ msgstr "Mapa:"
+
+#~ msgid ""
+#~ "Are you sure you want to use another map? This will remove all your "
+#~ "places!"
+#~ msgstr ""
+#~ "¿Está seguro de que quiere usar otro mapa? Esto eliminará todos sus "
+#~ "sitios."
+
+#~ msgid "Remove selected place"
+#~ msgstr "Quitar sitio seleccionado"
+
+#~ msgid "Add a place by name:"
+#~ msgstr "Añada un sitio por nombre:"
+
+#~ msgid "Warning"
+#~ msgstr "Aviso"
+
+#~ msgid "Add"
+#~ msgstr "Añadir"
+
+#~ msgid "Place - Name"
+#~ msgstr "Sitio - Nombre"
+
+#~ msgid "Lesson type:"
+#~ msgstr "Tipo de lección:"
+
+#~ msgid "Name - Place"
+#~ msgstr "Nombre - Sitio"
+
+#~ msgid "Which place is here?"
+#~ msgstr "¿Qué lugar es éste?"
+
+#~ msgid "Lesson order:"
+#~ msgstr "Orden de lección:"
+
+#~ msgid "Please click this place:"
+#~ msgstr "Pulse este sitio:"
+
+#~ msgid "Check"
+#~ msgstr "Comprobar"
+
+#~ msgid "Not enough items"
+#~ msgstr "No hay elementos suficientes"
+
+#~ msgid "You need to add items to your test first"
+#~ msgstr "Necesita añadir elementos a su prueba primero"
+
+#~ msgid "Please click this place: "
+#~ msgstr "Pulse este sitio: "
+
+#~ msgid "Places in your test"
+#~ msgstr "Sitios en su prueba"
+
+#~ msgid "Topo lesson %s"
+#~ msgstr "Lección de topo %s"
+
+#~ msgid "Topo Lesson"
+#~ msgstr "Lección de topo"
+
+#~ msgid ""
+#~ "Are you sure you want to go back to the teach tab? This will end your "
+#~ "lesson!"
+#~ msgstr ""
+#~ "¿Está seguro de que quiere regresar a la pestaña de enseñar? Esto "
+#~ "terminará su lección."

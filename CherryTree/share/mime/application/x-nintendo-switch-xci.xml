@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-nintendo-switch-xci">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Nintendo Switch encrypted ROM</comment>
+  <comment xml:lang="zh-Hant-TW">Nintendo Switch 加密 ROM</comment>
+  <comment xml:lang="uk">зашифрований ROM Nintendo Switch</comment>
+  <comment xml:lang="tr">Nintendo Switch şifreli ROM’u</comment>
+  <comment xml:lang="sv">Nintendo Switch krypterad ROM </comment>
+  <comment xml:lang="sr-Cyrl">Nintendo Switch шифровани РОМ</comment>
+  <comment xml:lang="sq">ROM o fshehtëzuar Nintendo Switch</comment>
+  <comment xml:lang="sl">Šifrirani ROM Nintendo Switch</comment>
+  <comment xml:lang="ru">Зашифрованный ROM для Nintendo Switch</comment>
+  <comment xml:lang="ro">ROM criptată Nintendo Switch</comment>
+  <comment xml:lang="pt-BR">ROM criptografada do Nintendo Switch</comment>
+  <comment xml:lang="pl">Zaszyfrowany plik ROM konsoli Nintendo Switch</comment>
+  <comment xml:lang="oc">ROM chifrada Nintendo Switch</comment>
+  <comment xml:lang="nn">Nintendo Switch kryptert ROM</comment>
+  <comment xml:lang="ko">닌텐도 스위치 암호화 롬</comment>
+  <comment xml:lang="kk-Cyrl">Nintendo Switch шифрленген ROM</comment>
+  <comment xml:lang="ja">Nintendo Switch 暗号化 ROM</comment>
+  <comment xml:lang="id">ROM terenkripsi Nintendo Switch</comment>
+  <comment xml:lang="hr">Nintendo Switch šifrirani ROM</comment>
+  <comment xml:lang="fur">ROM cifrade di Nintendo Switch</comment>
+  <comment xml:lang="fr">ROM chiffrée de Nintendo Switch</comment>
+  <comment xml:lang="fi">Nintendo Switch ROM</comment>
+  <comment xml:lang="et">Nintendo Switchi mälukaardi krüptitud tõmmis</comment>
+  <comment xml:lang="es">ROM cifrada de Nintendo Switch</comment>
+  <comment xml:lang="en-GB">Nintendo Switch encrypted ROM</comment>
+  <comment xml:lang="de">Nintendo-Switch-ROM (verschlüsselt)</comment>
+  <comment xml:lang="da">Nintendo Switch-krypteret ROM</comment>
+  <comment xml:lang="ca">ROM xifrada de la Nintendo Switch</comment>
+  <comment xml:lang="bg">ROM — Nintendo Switch, шифриран</comment>
+  <comment xml:lang="be-Cyrl">Зашыфраваны ROM для Nintendo Switch</comment>
+  <comment xml:lang="ar">روم نينتندو سويتش معمى</comment>
+  <alias type="application/x-nx-xci"/>
+  <glob pattern="*.xci"/>
+</mime-type>

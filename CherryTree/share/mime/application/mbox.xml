@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/mbox">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Mailbox file</comment>
+  <comment xml:lang="zh-Hant-TW">Mailbox 檔案</comment>
+  <comment xml:lang="uk">файл поштової скриньки</comment>
+  <comment xml:lang="tr">Mailbox dosyası</comment>
+  <comment xml:lang="sv">Brevlådefil</comment>
+  <comment xml:lang="sr-Cyrl">Датотека поштанског сандучета</comment>
+  <comment xml:lang="sq">Kartelë kutie email-esh</comment>
+  <comment xml:lang="sl">Poštni nabiralnik</comment>
+  <comment xml:lang="ru">Файл почтового ящика</comment>
+  <comment xml:lang="ro">fișier de căsuță poștală</comment>
+  <comment xml:lang="pt-BR">Arquivo de caixa de correio</comment>
+  <comment xml:lang="pt">Ficheiro da caixa de correio</comment>
+  <comment xml:lang="pl">Plik poczty (Mailbox)</comment>
+  <comment xml:lang="oc">fichièr Mailbox</comment>
+  <comment xml:lang="nn">Mailbox-fil</comment>
+  <comment xml:lang="ko">Mailbox 파일</comment>
+  <comment xml:lang="kk-Cyrl">Пошта жәшігінің файлы</comment>
+  <comment xml:lang="kab">Afaylu Mailbox</comment>
+  <comment xml:lang="ja">メールボックスファイル</comment>
+  <comment xml:lang="it">File mailbox</comment>
+  <comment xml:lang="id">Berkas kotak surat</comment>
+  <comment xml:lang="hr">Datoteka poštanskog sandučića</comment>
+  <comment xml:lang="hi">मेलबॉक्स फाइल</comment>
+  <comment xml:lang="he">קובץ תיבת דואר</comment>
+  <comment xml:lang="gl">Ficheiro Mailbox</comment>
+  <comment xml:lang="fur">File di casele di pueste</comment>
+  <comment xml:lang="fr">Fichier de boite mail</comment>
+  <comment xml:lang="fi">Mailbox</comment>
+  <comment xml:lang="eu">Mailbox fitxategia</comment>
+  <comment xml:lang="et">Postkastifail</comment>
+  <comment xml:lang="es">archivo de buzón de correo</comment>
+  <comment xml:lang="en-GB">Mailbox file</comment>
+  <comment xml:lang="de">Mailbox-Datei</comment>
+  <comment xml:lang="da">Postkassefil</comment>
+  <comment xml:lang="ca">fitxer Mailbox</comment>
+  <comment xml:lang="bg">Файл на пощенска кутия</comment>
+  <comment xml:lang="be-Cyrl">файл паштовай скрынкі</comment>
+  <comment xml:lang="ar">ملف صندوق بريد</comment>
+  <generic-icon name="emblem-mail"/>
+  <sub-class-of type="text/plain"/>
+  <glob pattern="*.mbox"/>
+</mime-type>

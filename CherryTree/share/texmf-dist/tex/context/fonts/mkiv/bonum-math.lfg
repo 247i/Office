@@ -1,0 +1,342 @@
+local common  = fonts.goodies.load("common-math.lfg")
+local presets = common.mathematics.tweaks.presets
+
+local integral_variants = { bottomright = -0.20 }
+local integral_top      = { topright    =  0 }
+local integral_bottom   = { bottomright = -0.10 } -- if too big it looks bad with triple integrals
+
+return {
+    name = "bonum-math",
+    version = "1.00",
+    comment = "Goodies that complement bonum.",
+    author = "Hans Hagen & Mikael Sundqvist",
+    copyright = "ConTeXt development team",
+    mathematics = {
+        parameters = {
+            AccentTopShiftUp                  =  -15,
+            FlattenedAccentTopShiftUp         =  -15,
+            AccentBaseDepth                   =   50,
+            DelimiterPercent                  =   85,
+            DelimiterShortfall                =  400,
+            DelimiterDisplayPercent           =   90,
+            DelimiterDisplayShortfall         =  400,
+            DisplayOperatorMinHeight          = 1900, -- 1250 in font
+            SubscriptShiftDown                =  201, -- 231 in font
+            SuperscriptShiftUp                =  364, -- 334 in font
+            SubscriptShiftDownWithSuperscript = "1.4*SubscriptShiftDown", -- trial and error
+            PrimeShiftUp                      = "1.25*SuperscriptShiftUp",
+            PrimeShiftUpCramped               = "1.25*SuperscriptShiftUp",
+        },
+        tweaks = {
+            aftercopying = {
+                {
+                    tweak    = "fontname",
+                    expected = "TeXGyreBonumMath-Regular",
+                    abort    = true,
+                },
+                {
+                    tweak    = "version",
+                    expected = "Version 1.005",
+                },
+                {
+                    tweak   = "fixprimes",
+                    factor  = 0.77,
+                },
+                {
+                    tweak = "addmirrors",
+                },
+                {
+                    tweak = "addcomposites",
+                },
+                {
+                    tweak   = "replacealphabets",
+                    list    = {
+                        {
+                            source   = { first = 0x003B1 }, -- upright alpha
+                            filename = "texgyrebonummathcompanion-regular.otf",
+                        },
+                        {
+                            source   = { first = 0x1D6FC }, -- italic alpha
+                            filename = "texgyrebonummathcompanion-regular.otf",
+                        },
+                        {
+                            source   = { first = 0x1D6C2 }, -- bold upright alpha
+                            filename = "texgyrebonummathcompanion-regular.otf",
+                        },
+                        {
+                            source   = { first = 0x1D736 }, -- bold italic alpha
+                            filename = "texgyrebonummathcompanion-regular.otf",
+                        },
+                        {
+                            source   = { first = 0x02980 }, -- triplebar
+                            filename = "texgyrebonummathcompanion-regular.otf",
+                        },
+                    },
+                },
+                presets.smalldigits          { factor  = 0.95 },
+                presets.scripttocalligraphic { },
+                presets.rsfstoscript         { rscale  = 0.98 },
+                presets.rsfsuprighttoscript  { rscale  = 0.98 },
+                presets.moderntocalligraphic { rscale  = 0.98 },
+                presets.eulertocalligraphic  { rscale  = 0.98 },
+                presets.xitsarabic           { rscale  = 1    },
+                presets.fallbacks            { },
+                presets.moveintegrals        { factor  = 1.5  },
+                presets.moveitalics          { correct = true },
+                presets.wipeanchors          { },
+                presets.wipeitalics          { },
+                {
+                    tweak = "checkaccents",
+                },
+                {
+                    tweak = "wipecues",
+                },
+                {
+                    -- We need to check these, are the tweaks necessary or not?
+                    tweak = "dimensions",
+                    list  = {
+                        ["lowercasefraktur"] = {
+                            width    = 1.25,
+                            extend   = 1.25,
+                            height   = 1.15,
+                            depth    = 1.15,
+                            squeeze  = 1.15,
+                        },
+
+                        ["lowercasescript"] = {
+                            factor = 1.2,
+                        },
+                    },
+                },
+                {
+                    tweak = "kerns",
+                    list  = {
+                        [0x002F]                = { topleft  = -0.2,  bottomright = -0.2  },
+                        ["0x002F.variants.*"]   = { topleft  = -0.2,  bottomright = -0.2  },
+                        [0x007D]                = { topright = -0.05, bottomright = -0.05 }, -- right brace variants
+                        ["0x7D.variants.*"]     = { topright = -0.05, bottomright = -0.05 }, -- right brace variants
+                        ["0x7D.parts.top"]      = { topright = -0.15,                     }, -- right brace top
+                        ["0x7D.parts.bottom"]   = {                   bottomright = -0.15 }, -- right brace bottom
+                        [0x0029]                = { topright = -0.15, bottomright = -0.15 }, -- right parenthesis variants
+                        ["0x29.variants.*"]     = { topright = -0.15, bottomright = -0.15 }, -- right parenthesis variants
+                        ["0x29.parts.top"]      = { topright = -0.15,                     }, -- right parenthesis top
+                        ["0x29.parts.bottom"]   = {                   bottomright = -0.15 }, -- right parenthesis bottom
+                        [0x221A]                = { topright =  0.2,  bottomright =  0.2  }, -- radical
+                        ["0x221A.variants.*"]   = { topright =  0.2,  bottomright =  0.2  },
+                        ["0x221A.parts.top"]    = { topright =  0.2,                      },
+                        ["0x221A.parts.bottom"] = {                   bottomright =  0.2  },
+                        [0x27E9]                = { topright = -0.1,  bottomright = -0.1  }, -- angle
+                        ["0x27E9.variants.*"]   = { topright = -0.2,  bottomright = -0.2  },
+                        [0x27EB]                = { topright = -0.1,  bottomright = -0.1  },
+                        ["0x27EB.variants.*"]   = { topright = -0.2,  bottomright = -0.2  },
+                        --
+                        [0x1D465]               = { bottomright = -0.05 }, -- italic x (ic is too large)
+                        [0x00393]               = { bottomright = -0.30 }, -- upright Gamma
+                        [0x1D43F]               = { bottomright =  0.01 }, -- upright L
+                        ["0x222B.parts.bottom"] = { bottomright = -0.20 }, -- int
+                        ["0x222C.parts.bottom"] = { bottomright = -0.15 }, -- iint
+                        ["0x222D.parts.bottom"] = { bottomright = -0.10 }, -- iiint
+                        ["0x2A0C.parts.bottom"] = { bottomright = -0.05 }, -- iiiint
+                    },
+                },
+                -- Accents are a mess. We migrate the extensibles from the combiners to the base accent
+                -- and then need to tweak the width (which is auto set because it was zero with a large
+                -- accent anchor offset). First we copy and fix.
+                {
+                    tweak = "extendaccents",
+                },
+                {
+                    tweak = "flattenaccents",
+                },
+                {
+                    tweak = "fixaccents", -- after flatten (zero width intefrerence)
+                },
+                {
+                    tweak   = "radicaldegreeanchors",
+                    list = {
+                        [0x221A]                = { location = "left", hfactor  = .1, vfactor  = .3 },
+                        ["0x221A.variants.*"]   = { location = "left", hfactor  = .1, vfactor  = .625 },
+                        ["0x221A.variants.1"]   = { location = "left", hfactor  = .1, vfactor  = .575 },
+                        ["0x221A.parts.bottom"] = { location = "left", hfactor  = .1, vfactor  = 1.15 },
+                    }
+                },
+                {
+                    tweak = "dimensions",
+                    list  = {
+                     -- [0x007D]              = { topright = -0.05, bottomright = -0.05 }, -- right brace variants
+                        ["0x7C"]              = { width = 1.4, xoffset=0.2 },              -- vertical bar (just looks better tis way)
+                     -- ["0x7C.variants.*"]   = { width = 1, extend = 2.4 },
+                     -- ["0x7C.parts.top"]    = { },
+                     -- ["0x7C.parts.bottom"] = { bottomright = -0.15 },
+                    },
+                },
+                -- First we set the dimensions of the initial accent which started out as zero but we want
+                -- a proper width. Thjis is no longer needed because we tweak the dimensions automatically,
+                -- so this is just some documented history.
+             -- {
+             --     tweak = "dimensions",
+             --     list  = {
+             --         [0x00302]              = { width = 1.4, anchor = 1.20, xoffset = .10 }, -- widehat
+             --         ["0x00302.flataccent"] = { width = 1.4, anchor = 1.20 },                -- no offset, because we copy
+             --     },
+             -- },
+                -- Then we deal with all offsets and heights in one go. So we treat the initial accent
+                -- as well as the variants here. But none for Bonum.
+                -- We now copy these to the not wide slots so that we can set these to stretch as well,
+                -- if only because it is less confusing and more consistent.
+                {
+                    tweak = "copyaccents",
+                },
+                -- So far for the accents.
+                {
+                    -- This one fakes margins to get larger/smaller accents with for example the
+                    -- \widetilde.
+                    tweak = "margins",
+                    list  = {
+                        [0x1D7DC] = { left = -.1,  right = -.1 }, -- doublestruck 4
+
+                        [0x1D712] = { left = -.1,  right = -.1 }, -- italic chi
+                        [0x1D713] = { left = -.1,  right = -.1 }, -- italic psi
+                        [0x1D714] = { left = -.1,  right = -.1 }, -- italic omega
+
+                        [0x003B1] = { left = -.1,  right = -.1 }, -- upright alpha
+                        [0x003B3] = { left = -.1,  right = -.1 }, -- upright gamma
+                        [0x003BA] = { left = -.1,  right = -.1 }, -- upright kappa
+                        [0x003BC] = { left = -.1,  right = -.1 }, -- upright mu
+                        [0x003C0] = { left = -.1,  right = -.1 }, -- upright pi
+                        [0x003C3] = { left = -.1,  right = -.1 }, -- upright sigma
+                        [0x003C5] = { left = -.1,  right = -.1 }, -- upright upsilon
+                        [0x003C6] = { left = -.1,  right = -.1 }, -- upright phi
+                        [0x003C8] = { left = -.1,  right = -.1 }, -- upright psi
+                        [0x003C9] = { left = -.1,  right = -.1 }, -- upright omega
+
+                        -- Greek lowercase sans (bold, italic) can be improved
+
+                        [0x1D451] = { left = -.1,  right = -.1 }, -- italic d
+                        [0x1D453] = { left = -.1,  right = -.1 }, -- italic f
+
+                        [0x00394] = { left =  .1,  right =  .1 }, -- upright Delta
+                        [0x003A3] = { left =  .1,  right =  .1 }, -- upright Sigma
+
+                        [0x00046] = { left =  .1,  right =  .1 }, -- F
+                        [0x0004C] = { left =  .1,  right =  .1 }, -- L
+                        [0x00050] = { left =  .1,  right =  .1 }, -- P
+                        [0x00053] = { left =  .1,  right =  .1 }, -- S
+                        [0x00054] = { left =  .1,  right =  .1 }, -- T
+                        [0x0005A] = { left =  .1,  right =  .1 }, -- Z
+
+                        [0x1D43D] = { left = -.1,  right = -.1  }, -- italic J
+                        [0x1D44B] = { left = -.05, right = -.05 }, -- italic X
+                    },
+                },
+                {
+                    -- The v could have a bit more sidebearing
+                    tweak = "dimensions",
+                    list  = {
+                        ["0x1D463"] = { width = 1.075, }, -- italic v
+                    },
+                },
+                {
+                    tweak = "addprivates",
+                },
+                {
+                    tweak = "addscripts",
+                },
+                {
+                    tweak = "accentdimensions",
+                },
+                {
+                    tweak = "addrules",
+                },
+                {
+                    tweak    = "replacerules",
+                    fraction = { height = .244, yoffset = .758 },
+                    radical  = { height = .244, yoffset = .758, leftoffset = .1, rightoffset = .1 },
+                    stacker  = { height = .244, yoffset = .758 },
+                },
+                {
+                    -- This tweak is only needed for the funny arrows and these now get properly
+                    -- centered. (Could actually be done in the engine).
+                    tweak = "addarrows",
+                    -- These are for documentation purposed as they are the defaults anyway:
+                    left  = 0.05,
+                    right = 0.05,
+                    slack = 0.10,
+                    -- The equal doesn't really match the double arrows, as in plain etc, so it still
+                    -- looks somewhat bad when zoomed in. This is the best we could do. Anyway, this
+                    -- in only used when testing (forced) so it doesn't kick in normally.
+                    list  = { [0x3D] = { squeeze = .85, yoffset = .0975 } }
+                },
+                {
+                    -- Do we need these in the future?
+                    -- Maybe a more general setup?
+                    -- Maybe "reset llx"
+                    tweak = "kernpairs",
+                    list = {
+                        [mathematics.tweaks.subsets.acenorsuvxz] = {
+                            [0x1D453] = -.1, -- f
+                            [0x1D457] = -.1, -- j
+                        },
+                        [mathematics.tweaks.subsets.bhklt] = {
+                            [0x1D453] = -.1, -- f
+                            [0x1D457] = -.1, -- j
+                        },
+                        [mathematics.tweaks.subsets.d] = {
+                            [0x1D453] = -.075, -- f
+                            [0x1D457] = -.075, -- j
+                        },
+                        [mathematics.tweaks.subsets.f] = {
+                            -- [mathematics.tweaks.subsets.aceimnorsuvwxz] = -.05,
+                            [mathematics.tweaks.subsets.gjqy] = -.15,
+                            [0x1D453] = -.2, -- ff
+                        },
+                        [mathematics.tweaks.subsets.i] = {
+                            [0x1D453] = -.2, -- f
+                            [0x1D457] = -.2, -- j
+                        },
+                        [mathematics.tweaks.subsets.mw] = {
+                            [0x1D453] = -.05, -- f
+                            [0x1D457] = -.05, -- j
+                        },
+                        [mathematics.tweaks.subsets.p] = {
+                            [0x1D453] = -.05, -- f
+                            [0x1D457] = -.05, -- j
+                        },
+                        [0x1D45F] = { -- r
+                            [0x1D460] = -.1, -- s
+                        },
+                    }
+                },
+                -- {
+                --     tweak   = "addbars",
+                --     advance = 0.475,
+                -- },
+                {
+                    tweak = "addactuarian",
+                },
+                {
+                    tweak = "addequals",
+                },
+                {
+                    tweak   = "addfourier",
+                    variant = 1,
+                },
+                {
+                    tweak   = "addprimed",
+                },
+                -- this is the mkiv section
+                {
+                    tweak   = "emulatelmtx",
+                    feature = "emulatelmtx",
+                    comment = "this is for mkiv",
+                },
+            },
+        },
+        alternates = {
+            dotless = { feature = 'dtls', value = 1, comment = "Mathematical Dotless Forms" },
+        },
+        bigslots = {
+            1, 3, 5, 7
+        },
+    },
+}

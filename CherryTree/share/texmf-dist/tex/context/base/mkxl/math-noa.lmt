@@ -1,0 +1,2961 @@
+if not modules then modules = { } end modules ['math-noa'] = {
+    version   = 1.001,
+    optimize  = true,
+    comment   = "companion to math-ini.mkiv",
+    author    = "Hans Hagen, PRAGMA-ADE, Hasselt NL",
+    copyright = "PRAGMA ADE / ConTeXt Development Team",
+    license   = "see context related readme files"
+}
+
+-- TODO: SET CLASSES !
+
+-- if specials and (specials[1] == "char" or specials[1] == "font") then -- can we avoid this
+-- ... better create a reverse mapping from the already present vectors
+
+-- beware: this is experimental code and there will be a more generic (attribute value
+-- driven) interface too but for the moment this is ok (sometime in 2015-2016 i will
+-- start cleaning up as by then the bigger picture is clear and code has been used for
+-- years; the main handlers will get some extensions)
+--
+-- we will also make dedicated processors (faster)
+--
+-- beware: names will change as we wil make noads.xxx.handler i.e. xxx
+-- subnamespaces
+
+-- 20D6 -> 2190
+-- 20D7 -> 2192
+
+-- todo: most is mathchar_code so we can have simple dedicated loops
+
+-- nota bene: uunderdelimiter uoverdelimiter etc are radicals (we have 5 types)
+
+local next, tonumber = next, tonumber
+local formatters, gmatch, match = string.formatters, string.gmatch, string.match
+local insert, remove, concat, sortedhash = table.insert, table.remove, table.concat, table.sortedhash
+local div, round = math.div, math.round
+
+local fonts              = fonts
+local nodes              = nodes
+local node               = node
+local mathematics        = mathematics
+
+local privateattribute   = attributes.private
+local registertracker    = trackers.register
+local registerdirective  = directives.register
+local logreporter        = logs.reporter
+local setmetatableindex  = table.setmetatableindex
+
+local texgetmode         = tex.getmode
+local mathmode_code      = tex.modelevels.math
+
+local colortracers       = nodes.tracers.colors
+
+-- most trace/report will move into the closures
+
+local trace_remapping    = false  registertracker("math.remapping",    function(v) trace_remapping    = v end)
+local trace_processing   = false  registertracker("math.processing",   function(v) trace_processing   = v end)
+local trace_analyzing    = false  registertracker("math.analyzing",    function(v) trace_analyzing    = v end)
+local trace_normalizing  = false  registertracker("math.normalizing",  function(v) trace_normalizing  = v end)
+local trace_collapsing   = false  registertracker("math.collapsing",   function(v) trace_collapsing   = v end)
+local trace_goodies      = false  registertracker("math.goodies",      function(v) trace_goodies      = v end)
+
+local check_coverage     = true   registerdirective("math.checkcoverage", function(v) check_coverage   = v     end)
+local use_math_goodies   = true   registerdirective("math.nogoodies",     function(v) use_math_goodies = not v end)
+
+local report_processing  = logreporter("mathematics","processing")
+local report_remapping   = logreporter("mathematics","remapping")
+local report_normalizing = logreporter("mathematics","normalizing")
+local report_collapsing  = logreporter("mathematics","collapsing")
+local report_goodies     = logreporter("mathematics","goodies")
+
+local a_mathrendering    <const> = privateattribute("mathrendering")
+local a_exportstatus     <const> = privateattribute("exportstatus")
+
+local nuts               = nodes.nuts
+local nodepool           = nuts.pool
+local nutstring          = nuts.tostring
+
+local setfield           = nuts.setfield
+local setlink            = nuts.setlink
+local setlist            = nuts.setlist
+local setnext            = nuts.setnext
+local setprev            = nuts.setprev
+local setchar            = nuts.setchar
+local setfam             = nuts.setfam
+local setsubtype         = nuts.setsubtype
+local setattr            = nuts.setattr
+local setattrlist        = nuts.setattrlist
+local setwidth           = nuts.setwidth
+local setheight          = nuts.setheight
+local setdepth           = nuts.setdepth
+local setdelimiter       = nuts.setdelimiter
+local setclass           = nuts.setclass
+
+local getfield           = nuts.getfield
+local getnext            = nuts.getnext
+local getprev            = nuts.getprev
+local getboth            = nuts.getboth
+local isnext             = nuts.isnext
+local isprev             = nuts.isprev
+local isboth             = nuts.isboth
+local getid              = nuts.getid
+local getsubtype         = nuts.getsubtype
+local getchar            = nuts.getchar
+local getfont            = nuts.getfont
+local getfam             = nuts.getfam
+local getcharspec        = nuts.getcharspec
+local getattr            = nuts.getattr
+local getattrs           = nuts.getattrs
+local getlist            = nuts.getlist
+local getwidth           = nuts.getwidth
+local getheight          = nuts.getheight
+local getdepth           = nuts.getdepth
+local getwhd             = nuts.getwhd
+local getdelimiter       = nuts.getdelimiter
+local getleftdelimiter   = nuts.getleftdelimiter
+local getrightdelimiter  = nuts.getrightdelimiter
+local gettopdelimiter    = nuts.gettopdelimiter
+local getbottomdelimiter = nuts.getbottomdelimiter
+local getnumerator       = nuts.getnumerator
+local getdenominator     = nuts.getdenominator
+local getdegree          = nuts.getdegree
+local gettop             = nuts.gettop
+local getmiddle          = nuts.getmiddle
+local getbottom          = nuts.getbottom
+local getchoice          = nuts.getchoice
+
+local getnucleus         = nuts.getnucleus
+local getsub             = nuts.getsub
+local getsup             = nuts.getsup
+local getsubpre          = nuts.getsubpre
+local getsuppre          = nuts.getsuppre
+local getprime           = nuts.getprime
+
+local setnucleus         = nuts.setnucleus
+local setsub             = nuts.setsub
+local setsup             = nuts.setsup
+local setsubpre          = nuts.setsubpre
+local setsuppre          = nuts.setsuppre
+local setprime           = nuts.setprime
+
+local getoffsets         = nuts.getoffsets
+local setoffsets         = nuts.setoffsets
+
+local getscripts         = nuts.getscripts
+local setscripts         = nuts.setscripts
+
+local getoptions         = nuts.getoptions
+local setoptions         = nuts.setoptions
+
+local setprop            = nuts.setprop
+
+local flushnode          = nuts.flush
+local copy_node          = nuts.copy
+local slide_nodes        = nuts.slide
+local set_visual         = nuts.setvisual
+
+local mlisttohlist       = nuts.mlisttohlist
+
+local new_kern           = nodepool.kern
+local new_submlist       = nodepool.submlist
+local new_noad           = nodepool.noad
+local new_delimiter      = nodepool.delimiter
+local new_fence          = nodepool.fence
+
+local fonthashes         = fonts.hashes
+local fontdata           = fonthashes.identifiers
+local fontcharacters     = fonthashes.characters
+local fontitalics        = fonthashes.italics
+local fontparameters     = fonthashes.parameters
+
+local variables          = interfaces.variables
+local texsetattribute    = tex.setattribute
+local texgetattribute    = tex.getattribute
+local getfontoffamily    = tex.getfontoffamily
+local implement          = interfaces.implement
+
+local unsetvalue         <const> = attributes.unsetvalue
+
+local v_reset            <const> = variables.reset
+local v_small            <const> = variables.small
+local v_medium           <const> = variables.medium
+local v_big              <const> = variables.big
+local v_line             <const> = variables.line
+
+local chardata           = characters.data
+
+noads                    = noads or { }  -- todo: only here
+local noads              = noads
+
+noads.processors         = noads.processors or { }
+local processors         = noads.processors
+
+noads.handlers           = noads.handlers   or { }
+local handlers           = noads.handlers
+
+local tasks              = nodes.tasks
+local enableaction       = tasks.enableaction
+local setaction          = tasks.setaction
+
+local nodecodes          = nodes.nodecodes
+----- noadcodes          = nodes.noadcodes
+----- fencecodes         = nodes.fencecodes
+local classes            = mathematics.classes -- or nodes.noadcodes
+
+local ordinary_class     <const> = classes.ordinary
+local operator_class     <const> = classes.operator
+local binary_class       <const> = classes.binary
+local relation_class     <const> = classes.relation
+local open_class         <const> = classes.open
+local close_class        <const> = classes.close
+local middle_class       <const> = classes.middle
+local punctuation_class  <const> = classes.punctuation
+local fenced_class       <const> = classes.fenced
+local fraction_class     <const> = classes.fraction
+local radical_class      <const> = classes.radical
+local accent_class       <const> = classes.accent
+local numbergroup_class  <const> = classes.numbergroup
+local digit_class        <const> = classes.digit
+
+local noad_code          <const> = nodecodes.noad
+local accent_code        <const> = nodecodes.accent
+local radical_code       <const> = nodecodes.radical
+local fraction_code      <const> = nodecodes.fraction
+local subbox_code        <const> = nodecodes.subbox
+local submlist_code      <const> = nodecodes.submlist
+local mathchar_code      <const> = nodecodes.mathchar
+local mathtextchar_code  <const> = nodecodes.mathtextchar
+local delimiter_code     <const> = nodecodes.delimiter
+----- style_code         <const> = nodecodes.style
+----- parameter_code     <const> = nodecodes.parameter
+local math_choice        <const> = nodecodes.choice
+local fence_code         <const> = nodecodes.fence
+
+-- this initial stuff is tricky as we can have removed and new nodes with the same address
+-- the only way out is a free-per-page list of nodes (not bad anyway)
+
+-- local gf = getfield local gt = setmetatableindex("number") getfield = function(n,f)   gt[f] = gt[f] + 1 return gf(n,f)   end mathematics.GETFIELD = gt
+-- local sf = setfield local st = setmetatableindex("number") setfield = function(n,f,v) st[f] = st[f] + 1        sf(n,f,v) end mathematics.SETFIELD = st
+
+-- TODO : get rid of done
+
+local function newprocesstable()
+    return { }
+ -- return lua.newindex(32,false) -- no gain over hash
+end
+
+
+experiments.register("optimize.math.indexed",function()
+    newprocesstable = function()
+        return lua.newindex(32,false)
+    end
+end)
+
+
+local process, processnested, processstep
+
+process = function(start,what,n,parent)
+
+    if n then
+        n = n + 1
+    else
+        n = 0
+    end
+    --
+    local initial = start
+    --
+--     slide_nodes(start) -- we still miss a prev in noads -- fences test code
+    --
+    while start do
+        local noad = nil
+        local id   = getid(start)
+        if trace_processing then
+            if id == noad_code then
+                report_processing("%w%S, class %a",n*2,nutstring(start),classes[getsubtype(start)])
+            elseif id == mathchar_code then
+                local char, font, fam = getcharspec(start)
+                report_processing("%w%S, family %a, font %a, char %a, shape %c",n*2,nutstring(start),fam,font,char,char)
+            else
+                report_processing("%w%S",n*2,nutstring(start))
+            end
+        end
+        local proc = what[id]
+        if proc then
+         -- report_processing("start processing")
+            local done, newstart, newinitial = proc(start,what,n,parent) -- prev is bugged:  or getprev(start)
+            if newinitial then
+                initial = newinitial -- temp hack .. we will make all return head
+                if newstart then
+                    start = newstart
+                 -- report_processing("stop processing (new start)")
+                else
+                 -- report_processing("quit processing (done)")
+                    break
+                end
+            else
+                if newstart then
+                    start = newstart
+                 -- report_processing("stop processing (new start)")
+                else
+                 -- report_processing("stop processing")
+                end
+            end
+        elseif id == noad_code then
+            -- single characters are like this
+            noad = getnucleus(start)         if noad then process(noad,what,n,start) end -- list
+            noad = getsup(start)             if noad then process(noad,what,n,start) end -- list
+            noad = getsub(start)             if noad then process(noad,what,n,start) end -- list
+            noad = getsuppre(start)          if noad then process(noad,what,n,start) end -- list
+            noad = getsubpre(start)          if noad then process(noad,what,n,start) end -- list
+            noad = getprime(start)           if noad then process(noad,what,n,start) end -- list
+        elseif id == mathchar_code or id == mathtextchar_code or id == delimiter_code then
+            break
+        elseif id == subbox_code or id == submlist_code then
+            noad = getlist(start)            if noad then process(noad,what,n,start) end -- list (not getlist !)
+        elseif id == fraction_code then
+            noad = getnumerator(start)       if noad then process(noad,what,n,start) end -- list
+            noad = getdenominator(start)     if noad then process(noad,what,n,start) end -- list
+            noad = getleftdelimiter(start)   if noad then process(noad,what,n,start) end -- delimiter
+            noad = getdelimiter(start)       if noad then process(noad,what,n,start) end -- delimiter
+            noad = getrightdelimiter(start)  if noad then process(noad,what,n,start) end -- delimiter
+        elseif id == fence_code then
+            noad = getdelimiter(start)       if noad then process(noad,what,n,start) end -- delimiter
+            noad = gettopdelimiter(start)    if noad then process(noad,what,n,start) end -- list
+            noad = getbottomdelimiter(start) if noad then process(noad,what,n,start) end -- list
+        elseif id == radical_code then
+            noad = getnucleus(start)         if noad then process(noad,what,n,start) end -- list
+            noad = getsup(start)             if noad then process(noad,what,n,start) end -- list
+            noad = getsub(start)             if noad then process(noad,what,n,start) end -- list
+            noad = getsuppre(start)          if noad then process(noad,what,n,start) end -- list
+            noad = getsubpre(start)          if noad then process(noad,what,n,start) end -- list
+            noad = getprime(start)           if noad then process(noad,what,n,start) end -- delimiter
+            noad = getleftdelimiter(start)   if noad then process(noad,what,n,start) end -- delimiter
+            noad = getrightdelimiter(start)  if noad then process(noad,what,n,start) end -- delimiter
+            noad = gettopdelimiter(start)    if noad then process(noad,what,n,start) end -- delimiter
+            noad = getbottomdelimiter(start) if noad then process(noad,what,n,start) end -- delimiter
+            noad = getdegree(start)          if noad then process(noad,what,n,start) end -- list
+        elseif id == accent_code then
+            noad = getnucleus(start)         if noad then process(noad,what,n,start) end -- list
+            noad = getsup(start)             if noad then process(noad,what,n,start) end -- list
+            noad = getsub(start)             if noad then process(noad,what,n,start) end -- list
+            noad = getsuppre(start)          if noad then process(noad,what,n,start) end -- list
+            noad = getsubpre(start)          if noad then process(noad,what,n,start) end -- list
+            noad = getprime(start)           if noad then process(noad,what,n,start) end -- list
+            noad = gettop(start)             if noad then process(noad,what,n,start) end -- list
+            noad = getmiddle(start)          if noad then process(noad,what,n,start) end -- list
+            noad = getbottom(start)          if noad then process(noad,what,n,start) end -- list
+        elseif id == math_choice then
+            noad = getchoice(start,1)        if noad then process(noad,what,n,start) end -- list
+            noad = getchoice(start,2)        if noad then process(noad,what,n,start) end -- list
+            noad = getchoice(start,3)        if noad then process(noad,what,n,start) end -- list
+            noad = getchoice(start,4)        if noad then process(noad,what,n,start) end -- list
+     -- elseif id == style_code then
+     --     -- has a next
+     -- elseif id == parameter_code then
+     --     -- has a next
+     -- else
+     --     -- glue, penalty, etc
+        end
+        start = getnext(start)
+    end
+    if not parent then
+        return initial -- only first level -- for now
+    end
+end
+
+processnested = function(current,what,n)
+    local noad = nil
+    local id   = getid(current)
+    if id == noad_code then
+        noad = getnucleus(current)         if noad then process(noad,what,n,current) end -- list
+        noad = getsup(current)             if noad then process(noad,what,n,current) end -- list
+        noad = getsub(current)             if noad then process(noad,what,n,current) end -- list
+        noad = getsuppre(current)          if noad then process(noad,what,n,current) end -- list
+        noad = getsubpre(current)          if noad then process(noad,what,n,current) end -- list
+        noad = getprime(current)           if noad then process(noad,what,n,current) end -- list
+    elseif id == subbox_code or id == submlist_code then
+        noad = getlist(current)            if noad then process(noad,what,n,current) end -- list (not getlist !)
+    elseif id == fraction_code then
+        noad = getnumerator(current)       if noad then process(noad,what,n,current) end -- list
+        noad = getdenominator(current)     if noad then process(noad,what,n,current) end -- list
+        noad = getleftdelimiter(current)   if noad then process(noad,what,n,current) end -- delimiter
+        noad = getdelimiter(current)       if noad then process(noad,what,n,current) end -- delimiter
+        noad = getrightdelimiter(current)  if noad then process(noad,what,n,current) end -- delimiter
+    elseif id == fence_code then
+        noad = getdelimiter(current)       if noad then process(noad,what,n,current) end -- delimiter
+        noad = gettopdelimiter(current)    if noad then process(noad,what,n,current) end -- list
+        noad = getbottomdelimiter(current) if noad then process(noad,what,n,current) end -- list
+    elseif id == radical_code then
+        noad = getnucleus(current)         if noad then process(noad,what,n,current) end -- list
+        noad = getsup(current)             if noad then process(noad,what,n,current) end -- list
+        noad = getsub(current)             if noad then process(noad,what,n,current) end -- list
+        noad = getsuppre(current)          if noad then process(noad,what,n,current) end -- list
+        noad = getsubpre(current)          if noad then process(noad,what,n,current) end -- list
+        noad = getprime(current)           if noad then process(noad,what,n,current) end -- list
+        noad = getleftdelimiter(current)   if noad then process(noad,what,n,current) end -- delimiter
+        noad = getrightdelimiter(current)  if noad then process(noad,what,n,current) end -- delimiter
+        noad = gettopdelimiter(current)    if noad then process(noad,what,n,current) end -- delimiter
+        noad = getbottomdelimiter(current) if noad then process(noad,what,n,current) end -- delimiter
+        noad = getdegree(current)          if noad then process(noad,what,n,current) end -- list
+    elseif id == accent_code then
+        noad = getnucleus(current)         if noad then process(noad,what,n,current) end -- list
+        noad = getsup(current)             if noad then process(noad,what,n,current) end -- list
+        noad = getsub(current)             if noad then process(noad,what,n,current) end -- list
+        noad = getsuppre(current)          if noad then process(noad,what,n,current) end -- list
+        noad = getsubpre(current)          if noad then process(noad,what,n,current) end -- list
+        noad = getprime(current)           if noad then process(noad,what,n,current) end -- list
+        noad = gettop(current)             if noad then process(noad,what,n,current) end -- list
+        noad = getmiddle(current)          if noad then process(noad,what,n,current) end -- list
+        noad = getbottom(current)          if noad then process(noad,what,n,current) end -- list
+    elseif id == math_choice then
+        noad = getchoice(start,1)          if noad then process(noad,what,n,current) end -- list
+        noad = getchoice(start,2)          if noad then process(noad,what,n,current) end -- list
+        noad = getchoice(start,3)          if noad then process(noad,what,n,current) end -- list
+        noad = getchoice(start,4)          if noad then process(noad,what,n,current) end -- list
+    end
+end
+
+processstep = function(current,process,n,id)
+    local noad = nil
+    local id   = id or getid(current)
+    if id == noad_code then
+        noad = getnucleus(current)         if noad then process(noad,n,current) end -- list
+        noad = getsup(current)             if noad then process(noad,n,current) end -- list
+        noad = getsub(current)             if noad then process(noad,n,current) end -- list
+        noad = getsuppre(current)          if noad then process(noad,n,current) end -- list
+        noad = getsubpre(current)          if noad then process(noad,n,current) end -- list
+        noad = getprime(current)           if noad then process(noad,n,current) end -- list
+    elseif id == subbox_code or id == submlist_code then
+        noad = getlist(current)            if noad then process(noad,n,current) end -- list (not getlist !)
+    elseif id == fraction_code then
+        noad = getnumerator(current)       if noad then process(noad,n,current) end -- list
+        noad = getdenominator(current)     if noad then process(noad,n,current) end -- list
+        noad = getleftdelimiter(current)   if noad then process(noad,n,current) end -- delimiter
+        noad = getdelimiter(current)       if noad then process(noad,n,current) end -- delimiter
+        noad = getrightdelimiter(current)  if noad then process(noad,n,current) end -- delimiter
+    elseif id == fence_code then
+        noad = getdelimiter(current)       if noad then process(noad,n,current) end -- delimiter
+        noad = gettopdelimiter(current)    if noad then process(noad,n,current) end -- list
+        noad = getbottomdelimiter(current) if noad then process(noad,n,current) end -- list
+    elseif id == radical_code then
+        noad = getnucleus(current)         if noad then process(noad,n,current) end -- list
+        noad = getsup(current)             if noad then process(noad,n,current) end -- list
+        noad = getsub(current)             if noad then process(noad,n,current) end -- list
+        noad = getsuppre(current)          if noad then process(noad,n,current) end -- list
+        noad = getsubpre(current)          if noad then process(noad,n,current) end -- list
+        noad = getprime(current)           if noad then process(noad,n,current) end -- delimiter
+        noad = getleftdelimiter(current)   if noad then process(noad,n,current) end -- delimiter
+        noad = getrightdelimiter(current)  if noad then process(noad,n,current) end -- delimiter
+        noad = gettopdelimiter(current)    if noad then process(noad,n,current) end -- delimiter
+        noad = getbottomdelimiter(current) if noad then process(noad,n,current) end -- delimiter
+        noad = getdegree(current)          if noad then process(noad,n,current) end -- list
+    elseif id == accent_code then
+        noad = getnucleus(current)         if noad then process(noad,n,current) end -- list
+        noad = getsup(current)             if noad then process(noad,n,current) end -- list
+        noad = getsub(current)             if noad then process(noad,n,current) end -- list
+        noad = getsuppre(current)          if noad then process(noad,n,current) end -- list
+        noad = getsubpre(current)          if noad then process(noad,n,current) end -- list
+        noad = getprime(current)           if noad then process(noad,n,current) end -- list
+        noad = gettop(current)             if noad then process(noad,n,current) end -- list
+        noad = getmiddle(current)          if noad then process(noad,n,current) end -- list
+        noad = getbottom(current)          if noad then process(noad,n,current) end -- list
+    elseif id == math_choice then
+        noad = getchoice(start,1)          if noad then process(noad,n,current) end -- list
+        noad = getchoice(start,2)          if noad then process(noad,n,current) end -- list
+        noad = getchoice(start,3)          if noad then process(noad,n,current) end -- list
+        noad = getchoice(start,4)          if noad then process(noad,n,current) end -- list
+    end
+end
+
+local function processnoads(head,actions,banner)
+    if trace_processing then
+        report_processing("start %a",banner)
+        head = process(head,actions)
+        report_processing("stop %a",banner)
+    else
+        head = process(head,actions)
+    end
+    return head
+end
+
+noads.process       = processnoads
+noads.processnested = processnested
+noads.processouter  = process
+
+experiments.register("optimize.math.process",function()
+    if helper then
+        process       = helper.mathprocess or process
+        processnested = helper.mathnested  or processnested
+        processstep   = helper.mathstep    or processstep
+    end
+end)
+
+-- This is used in tagging and export. It's also a test for three methods
+-- of detecting. See \TEX\ source for comments on that. We could, in the
+-- case of boundaries, look at a few nodes.
+
+do
+
+    local getdata     = nuts.getdata
+    local texgetcount = tex.getcount
+
+    local boundary_code           <const> = nodecodes.boundary
+    local user_boundary_code      <const> = nodes.boundarycodes.user
+    local attribute_boundary_code <const> = nodes.boundarycodes.attribute or -1
+
+    local a_mathmode              <const> = privateattribute('mathmode')
+    local c_mathmode              <const> = tex.getcount("c_math_display_mode_boundary")
+
+    local trace_mathmode  = false  registertracker("math.mode", function(v) trace_mathmode = v end)
+
+    function noads.getmathmode(head)
+        local mode = "inline"
+        if getid(head) == boundary_code and getsubtype(head) == user_boundary_code then
+            -- easy
+            if getdata(head) == c_mathmode then
+                mode = "display"
+            end
+        elseif getid(head) == boundary_code and getsubtype(head) == attribute_boundary_code then
+            -- test case for this kind of boundary (more granular)
+            local k, v = getdata(head)
+            if k == c_mathmode and v == 1 then
+                mode = "display"
+            end
+        elseif (getattr(head,a_mathmode) or 0) == 1 then
+            -- old method, attribute all over the place
+            mode = "display"
+        end
+        if trace_mathmode then
+            -- this is mostly for development
+            report_processing("%s math environment",mode)
+        end
+        return mode
+    end
+
+end
+
+-- experiment (when not present fall back to fam 0) -- needs documentation
+
+local unknowns = setmetatableindex("table")
+local checked  = setmetatableindex("table")
+local cached   = setmetatableindex("table") -- complex case
+
+local tracked  = false  trackers.register("fonts.missing", function(v) tracked = v end)
+
+local variantselectors = {
+    [0xFE00] = true,
+    [0xFE01] = true
+}
+
+local function errorchar(font,char)
+    if variantselectors[char] then
+        return char
+    end
+    local done = unknowns[font]
+    done[char] = (done[char] or 0) + 1
+    if tracked then
+        -- slower as we check each font too and we always replace as math has
+        -- more demands than text
+        local fake = cached[font][char]
+        if fake then
+            return fake
+        else
+            local kind, fake = fonts.checkers.placeholder(font,char)
+            if not fake or kind ~= "char" then -- Also check for "with" here?
+                fake = 0x3F
+            end
+            cached[font][char] = fake
+            return fake
+        end
+    else
+        -- only simple checking, report at the end so one should take
+        -- action anyway ... we can miss a few checks but that is ok
+        -- as there is at least one reported
+        if not checked[font][char] then
+            if trace_normalizing then
+                report_normalizing("character %C is not available",char)
+            end
+            checked[font][char] = true
+        end
+        return 0x3F
+    end
+end
+
+-- 0-2 regular
+-- 3-5 bold
+-- 6-8 pseudobold
+
+-- this could best be integrated in the remapper, and if we run into problems, we
+-- might as well do this
+
+do
+
+    local a_mathfamily <const> = privateattribute("mathfamily")
+
+    local trace_families  = false  registertracker("math.families", function(v) trace_families = v end)
+    local report_families = logreporter("mathematics","families")
+
+    local families = newprocesstable()
+    local boldmap  = mathematics.boldmap
+
+    local familymap = { [0] =
+        "regular",
+        "regular",
+        "regular",
+        "bold",
+        "bold",
+        "bold",
+        "pseudobold",
+        "pseudobold",
+        "pseudobold",
+    }
+
+    families[noad_code] = function(pointer,what,n,parent)
+        local a = getattr(pointer,a_mathfamily)
+        if a and a >= 0 then
+            if a > 0 then
+                setattr(pointer,a_mathfamily,0)
+                if a > 5 then
+                    a = a - 3
+                end
+            end
+            setfam(pointer,a)
+        end
+        processnested(pointer,families,n+1)
+    end
+
+    function mathematics.familyname(n)
+        return familymap[n] or "regular"
+    end
+
+    families[fraction_code] = families[noad_code]
+    families[accent_code]   = families[noad_code] -- added 2023-07
+    families[radical_code]  = families[noad_code] -- added 2023-07
+    families[fence_code]    = families[noad_code] -- added 2023-07
+
+    families[mathchar_code] = function(pointer)
+        if getfam(pointer) == 0 then
+            local a = getattr(pointer,a_mathfamily)
+            if a and a > 0 then
+                setattr(pointer,a_mathfamily,0)
+                if a > 5 then
+                    local char = getchar(pointer)
+                    local bold = boldmap[char]
+                    local newa = a - 3
+                    if not bold then
+                        if trace_families then
+                            report_families("no bold replacement for %C, family %s with remap %s becomes %s with remap %s",char,a,familymap[a],newa,familymap[newa])
+                        end
+                        setfam(pointer,newa)
+                    elseif not fontcharacters[getfontoffamily(newa)][bold] then
+                        if trace_families then
+                            report_families("no bold character for %C, family %s with remap %s becomes %s with remap %s",char,a,familymap[a],newa,familymap[newa])
+                        end
+                        if newa > 3 then
+                            setfam(pointer,newa-3)
+                        end
+                    else
+                        setattr(pointer,a_exportstatus,char)
+                        setchar(pointer,bold)
+                        if trace_families then
+                            report_families("replacing %C by bold %C, family %s with remap %s becomes %s with remap %s",char,bold,a,familymap[a],newa,familymap[newa])
+                        end
+                        setfam(pointer,newa)
+                    end
+                else
+                    local char = getchar(pointer)
+                    if not fontcharacters[getfontoffamily(a)][char] then
+                        if trace_families then
+                            report_families("no bold replacement for %C",char)
+                        end
+                    else
+                        if trace_families then
+                            report_families("family of %C becomes %s with remap %s",char,a,familymap[a])
+                        end
+                        setfam(pointer,a)
+                    end
+                end
+            end
+        end
+    end
+
+    -- has become:
+
+    families[delimiter_code] = function(pointer)
+        if getfam(pointer) == 0 then
+            local a = getattr(pointer,a_mathfamily)
+            if a and a > 0 then
+                setattr(pointer,a_mathfamily,0)
+                if a > 5 then
+                    -- no bold delimiters in unicode
+                    a = a - 3
+                end
+                local char = getchar(pointer)
+                local okay = fontcharacters[getfontoffamily(a)][char]
+                if okay then
+                    setfam(pointer,a)
+                elseif a > 2 then
+                    setfam(pointer,a-3)
+                end
+            else
+                setfam(pointer,0)
+            end
+        end
+    end
+
+    families[mathtextchar_code] = families[mathchar_code]
+
+    function handlers.families(head)
+        processnoads(head,families,"families")
+    end
+
+end
+
+-- character remapping
+
+do
+
+    local a_mathalphabet <const> = privateattribute("mathalphabet")
+    local a_mathgreek    <const> = privateattribute("mathgreek")
+
+    local relocate = newprocesstable()
+
+    local remapalphabets       = mathematics.remapalphabets
+    local fallbackstyleattr    = mathematics.fallbackstyleattr
+    local fallbackalphabetattr = mathematics.fallbackalphabetattr
+
+    local setnodecolor = colortracers.set
+
+    local function report_remap(tag,id,old,new,extra)
+        if new then
+            report_remapping("remapping %s in font (%s,%s) from %C to %C%s",
+                tag,id,fontdata[id].properties.fontname or "",old,new,extra)
+        else
+            -- error !
+            report_remapping("remapping %s in font (%s,%s) from %C to ?",
+                tag,id,fontdata[id].properties.fontname or "",old)
+        end
+    end
+
+    local function checked(pointer)
+        local char, font = getcharspec(pointer)
+        local data = fontcharacters[font]
+        if not data[char] then
+            local specials = chardata[char].specials
+            if specials and (specials[1] == "char" or specials[1] == "font") then
+                local newchar = specials[#specials]
+                if trace_remapping then
+                    report_remap("fallback",font,char,newchar)
+                end
+                if trace_analyzing then
+                    setnodecolor(pointer,"font:isol")
+                end
+                setattr(pointer,a_exportstatus,char) -- testcase: exponentiale
+                setchar(pointer,newchar)
+                return true
+            end
+        end
+    end
+
+    -- We can optimize this if we really think that math is a bottleneck which it never
+    -- really is. Beware: the font is the text font in the family, so we only check the
+    -- text font here.
+
+    relocate[mathchar_code] = function(pointer)
+        local greek, alpha = getattrs(pointer,a_mathgreek,a_mathalphabet)
+        local char, font, fam = getcharspec(pointer)
+        local characters = fontcharacters[font]
+        if not alpha then alpha = 0 end
+        if not greek then greek = 0 end
+        if alpha > 0 or greek > 0 then
+            if alpha > 0 then
+                -- not really critital but we could use properties
+                setattr(pointer,a_mathgreek,0)
+            end
+            if greek > 0 then
+                -- not really critital but we could use properties
+                setattr(pointer,a_mathalphabet,0)
+            end
+            local newchar = remapalphabets(char,alpha,greek)
+            if newchar then
+                local newchardata = characters[newchar]
+                if newchardata then
+                    if trace_remapping then
+                        report_remap("char",font,char,newchar,newchardata.commands and " (virtual)" or "")
+                    end
+                    if trace_analyzing then
+                        setnodecolor(pointer,"font:isol")
+                    end
+                    setchar(pointer,newchar)
+                    return true
+                else
+                    local fallback = fallbackstyleattr(alpha)
+                    if fallback then
+                        local newchar = remapalphabets(char,fallback,greek)
+                        if newchar then
+                            if characters[newchar] then
+                                if trace_remapping then
+                                    report_remap("char",font,char,newchar," (fallback remapping used)")
+                                end
+                                if trace_analyzing then
+                                    setnodecolor(pointer,"font:isol")
+                                end
+                                setchar(pointer,newchar)
+                                return true
+                            elseif trace_remapping then
+                                report_remap("char",font,char,newchar," fails (no fallback character)")
+                            end
+                        elseif trace_remapping then
+                            report_remap("char",font,char,newchar," fails (no fallback remap character)")
+                        end
+                    elseif trace_remapping then
+                        report_remap("char",font,char,newchar," fails (no fallback style)")
+                    end
+                end
+            elseif trace_remapping then
+                local chardata = characters[char]
+                if chardata and chardata.commands then
+                    report_remap("char",font,char,char," (virtual)")
+                end
+            end
+        end
+        if not characters[char] then
+            local fnt = getfontoffamily(fam,1)
+            setchar(pointer,errorchar(font,char))
+            if font ~= fnt then
+                errorchar(fnt,char)
+                errorchar(getfontoffamily(fam,2),char)
+            end
+        end
+        if trace_analyzing then
+            setnodecolor(pointer,"font:medi")
+        end
+        if check_coverage then
+            return checked(pointer)
+        end
+    end
+
+    relocate[mathtextchar_code] = function(pointer)
+        if trace_analyzing then
+            setnodecolor(pointer,"font:init")
+        end
+    end
+
+    relocate[delimiter_code] = function(pointer)
+        if trace_analyzing then
+            setnodecolor(pointer,"font:fina")
+        end
+    end
+
+    function handlers.relocate(head)
+        processnoads(head,relocate,"relocate")
+    end
+
+end
+
+-- rendering (beware, not exported)
+
+do
+
+    local render     = newprocesstable()
+    local rendersets = mathematics.renderings.numbers or { } -- store
+
+    render[mathchar_code] = function(pointer)
+        local attr = getattr(pointer,a_mathrendering)
+        if attr and attr > 0 then
+            local char, font = getcharspec(pointer)
+            local renderset = rendersets[attr]
+            if renderset then
+                local newchar = renderset[char]
+                if newchar then
+                    local characters = fontcharacters[font]
+                    if characters and characters[newchar] then
+                        setchar(pointer,newchar)
+                        setattr(pointer,a_exportstatus,char) -- yes or no
+                    end
+                end
+            end
+        end
+    end
+
+    function handlers.render(head)
+        processnoads(head,render,"render")
+    end
+
+end
+
+-- -- We now use the engine feature and a bit of different lua interfacing to it but
+-- -- that code is located elsewhere.
+--
+-- do
+--
+--     local a_mathsize <const> = privateattribute("mathsize") -- this might move into other fence code
+--     local resize     = { }
+--
+--     resize[fence_code] = function(pointer)
+--         local subtype = getsubtype(pointer)
+--      -- if subtype == leftfence_code or subtype == rightfence_code then
+--             local a = getattr(pointer,a_mathsize)
+--             if a and a > 0 then
+--                 local method = div(a,100)
+--                 local size   = a % 100
+--                 setattr(pointer,a_mathsize,0)
+--                 if size ~= 0 then
+--                     local delimiter = getdelimiter(pointer)
+--                     if delimiter then
+--                         local oldchar, font, fam = getcharspec(delimiter)
+--                         if oldchar > 0 and font > 0 then
+--                             local ht         = getheight(pointer)
+--                             local dp         = getdepth(pointer)
+--                             local data       = fontdata[font]
+--                             local characters = data.characters
+--                             local olddata    = characters[oldchar]
+--                             if olddata then
+--                                 local template  = olddata.varianttemplate
+--                                 local newchar   = mathematics.big(data,template or oldchar,size,method)
+--                                 local newdata   = characters[newchar]
+--                                 local newheight = newdata.height or 0
+--                                 local newdepth  = newdata.depth or 0
+--                                 if template then
+--                                     setheight(pointer,newheight)
+--                                     setdepth(pointer,newdepth)
+--                                     if not olddata.extensible then
+--                                         -- check this on bonum and antykwa
+--                                         setoptions(pointer,0)
+--                                     end
+--                                     setoptions(pointer,tex.noadoptioncodes.scale                        )
+--                                     if trace_fences then
+--                                         report_fences("replacing %C using method %a, size %a and template %C",newchar,method,size,template)
+--                                     end
+--                                 else
+--                                     -- 1 scaled point is a signal, for now
+--                                     if ht == 1 then
+--                                         setheight(pointer,newheight)
+--                                     end
+--                                     if dp == 1 then
+--                                         setdepth(pointer,newdepth)
+--                                     end
+--                                     setchar(delimiter,newchar)
+--                                     if trace_fences then
+--                                         report_fences("replacing %C by %C using method %a and size %a",oldchar,char,method,size)
+--                                     end
+--                                 end
+--                             elseif trace_fences then
+--                                 report_fences("not replacing %C using method %a and size %a",oldchar,method,size)
+--                             end
+--                         end
+--                     end
+--                 end
+--             end
+--      -- end
+--     end
+--
+--     function handlers.resize(head)
+--         processnoads(head,resize,"resize")
+--     end
+--
+-- end
+
+-- still not perfect:
+
+do
+
+    local a_autofence <const> = privateattribute("mathautofence")
+
+    local trace_fences  = false  registertracker("math.fences", function(v) trace_fences = v end)
+    local report_fences = logreporter("mathematics","fences")
+
+    local autofences = newprocesstable()
+
+    local fencecodes               = nodes.fencecodes
+    local leftfence_code   <const> = fencecodes.left
+    local middlefence_code <const> = fencecodes.middle
+    local rightfence_code  <const> = fencecodes.right
+    local dummyfencechar   <const> = 0x2E
+
+    local function makefence(what,char,template)
+        local d = new_delimiter()
+        local f = new_fence()
+        if char then
+            local sym = getnucleus(char)
+            local chr, fnt, fam = getcharspec(sym)
+            if chr == dummyfencechar then
+                chr = 0
+            end
+            setchar(d,chr)
+            setfam(d,fam)
+            flushnode(sym)
+        end
+        setattrlist(d,template)
+        setattrlist(f,template)
+        setsubtype(f,what)
+        setdelimiter(f,d)
+        setclass(f,-1) -- tex itself does this, so not fenceclasses[what]
+        return f
+    end
+
+    local function show(where,pointer)
+        print("")
+        local i = 0
+        for n in nuts.traverse(pointer) do
+            i = i + 1
+            print(i,where,nuts.tonode(n))
+        end
+        print("")
+    end
+
+    local function makelist(middle,noad,f_o,o_next,c_prev,f_c)
+-- report_fences(
+--     "middle %s, noad %s, open %s, opennext %s, closeprev %s, close %s",
+--     middle or "?",
+--     noad   or "?",
+--     f_o    or "?",
+--     o_next or "?",
+--     c_prev or "?",
+--     f_c    or "?"
+-- )
+        local list = new_submlist()
+        setsubtype(noad,fenced_class)
+        setnucleus(noad,list)
+        setattrlist(list,noad)
+        setlist(list,f_o)
+        setlink(f_o,o_next) -- prev of list is nil
+        setlink(c_prev,f_c) -- next of list is nil
+-- show("list",f_o)
+        if middle and next(middle) then
+            local prev    = f_o
+            local current = o_next
+            while current ~= f_c do
+                local midl = middle[current]
+                local next = getnext(current)
+                if midl then
+                    local fence = makefence(middlefence_code,current,current)
+                    setnucleus(current)
+                    flushnode(current)
+                    middle[current] = nil
+                    -- replace_node
+                    setlink(prev,fence,next)
+                    prev = fence
+                else
+                    prev = current
+                end
+                current = next
+            end
+        end
+        return noad
+    end
+
+    -- relinking is now somewhat overdone
+
+    local function convert_both(open,close,middle)
+        local o_next = getnext(open)
+        if o_next == close then
+            return close
+        else
+            local c_prev, c_next = getboth(close)
+            local f_o = makefence(leftfence_code,open,open)
+            local f_c = makefence(rightfence_code,close,close)
+            makelist(middle,open,f_o,o_next,c_prev,f_c)
+            setnucleus(close)
+            flushnode(close)
+            -- open is now a list
+            setlink(open,c_next)
+            return open
+        end
+    end
+
+    local function convert_open(open,last,middle) -- last is really last (final case)
+        local f_o = makefence(leftfence_code,open,open)
+        local f_c = makefence(rightfence_code,nil,open)
+        local o_next = getnext(open)
+        makelist(middle,open,f_o,o_next,last,nil)
+        -- open is now a list
+        setlink(open,l_next)
+        return open
+    end
+
+    local function convert_close(first,close,middle)
+        local f_o = makefence(leftfence_code,nil,close)
+        local f_c = makefence(rightfence_code,close)
+        local c_prev = getprev(close)
+        local f_next = getnext(first)
+        makelist(middle,close,f_o,f_next,c_prev,f_c)
+        -- close is now a list : inner but should be fenced
+        if c_prev ~= first then
+            setlink(first,close)
+        end
+        return close
+    end
+
+    local stacks = setmetatableindex("table")
+
+    -- 1=open 2=close 3=middle 4=both : todo check both
+
+    local function processfences(pointer,n,parent)
+        local current = pointer
+        local last    = pointer
+        local start   = pointer
+        local done    = false
+        local initial = pointer
+        local stack   = nil
+        local middle  = nil -- todo: use properties
+        while current do
+-- show("before",pointer)
+            local id = getid(current)
+            if id == noad_code then
+                local a = getattr(current,a_autofence)
+                if a and a > 0 then
+                    local stack = stacks[n]
+                    setattr(current,a_autofence,0) -- hm, better use a property
+                    local level = #stack
+                    if a == 1 then
+                        if trace_fences then
+                            report_fences("%2i: level %i, handling %s, action %s",n,level,"open","open")
+                        end
+                        insert(stack,current)
+                    elseif a == 2 then
+                        local open = remove(stack)
+                        if open then
+                            if trace_fences then
+                                report_fences("%2i: level %i, handling %s, action %s",n,level,"close","both")
+                            end
+                            local prime, sup, sub, presup, presub = getscripts(current)
+                            setscripts(current)
+                            current = convert_both(open,current,middle)
+                            setscripts(current,prime, sup, sub, presup, presub)
+                         elseif current == start then
+                            if trace_fences then
+                                report_fences("%2i: level %i, handling %s, action %s",n,level,"close","skip")
+                            end
+                        else
+                            if trace_fences then
+                                report_fences("%2i: level %i, handling %s, action %s",n,level,"close","close")
+                            end
+                            local prime, sup, sub, presup, presub = getscripts(current)
+                            setscripts(current)
+                            current = convert_close(initial,current,middle)
+                            setscripts(current,prime, sup, sub, presup, presub)
+                            if not parent then
+                                initial = current
+                            end
+                        end
+                    elseif a == 3 then
+                        if trace_fences then
+                            report_fences("%2i: level %i, handling %s, action %s",n,level,"middle","middle")
+                        end
+                        if middle then
+                            middle[current] = last
+                        else
+                            middle = { [current] = last }
+                        end
+                    elseif a == 4 then
+                        if not stack or #stack == 0 then
+                            if trace_fences then
+                                report_fences("%2i: level %i, handling %s, action %s",n,level,"both","open")
+                            end
+                            insert(stack,current)
+                        else
+                            local open = remove(stack)
+                            if open then
+                                if trace_fences then
+                                    report_fences("%2i: level %i, handling %s, action %s",n,level,"both","both")
+                                end
+                                current = convert_both(open,current,middle)
+                            elseif current == start then
+                                if trace_fences then
+                                    report_fences("%2i: level %i, handling %s, action %s",n,level,"both","skip")
+                                end
+                            else
+                                if trace_fences then
+                                    report_fences("%2i: level %i, handling %s, action %s",n,level,"both","close")
+                                end
+                                current = convert_close(initial,current,middle)
+                                if not parent then
+                                    initial = current
+                                end
+                            end
+                        end
+                    end
+                    done = true
+                else
+                    processstep(current,processfences,n+1,id)
+                end
+            else
+                -- next at current level
+                processstep(current,processfences,n,id)
+            end
+-- show("after",pointer)
+            last    = current
+            current = getnext(current)
+        end
+        if done then
+            local stack = stacks[n]
+            local s = #stack
+            if s > 0 then
+                for i=1,s do
+                    local open = remove(stack)
+                    if trace_fences then
+                        report_fences("%2i: level %i, handling %s, action %s",n,#stack,"flush","open")
+                    end
+                    last = convert_open(open,last,middle)
+                end
+-- show("done",pointer)
+            end
+        end
+    end
+
+    -- we can have a first changed node .. an option is to have a leading dummy node in math
+    -- lists like the par node as it can save a  lot of mess
+
+    local enabled = false
+
+    implement {
+        name     = "enableautofences",
+        onlyonce = true,
+        actions  = function()
+            enableaction("math","noads.handlers.autofences")
+            enabled = true
+        end
+    }
+
+    function handlers.autofences(head)
+        if enabled then -- tex.modes.c_math_fences_auto
+         -- inspect(nodes.totree(head))
+            processfences(head,1)
+         -- inspect(nodes.totree(head))
+        end
+    end
+
+end
+
+-- normalize scripts
+
+do
+
+    local superscripts = characters.superscripts
+    local subscripts   = characters.subscripts
+    local fractions    = characters.fractions
+    local replaced     = { }
+
+    local unscript     = newprocesstable() noads.processors.unscript = unscript
+
+    local function replace(pointer,what,n,parent)
+        pointer = parent -- we're following the parent list (chars trigger this)
+        local next = getnext(pointer)
+        local start_super, stop_super, start_sub, stop_sub
+        local mode = "unset"
+        while next and getid(next) == noad_code do
+            local nextnucleus = getnucleus(next)
+            if nextnucleus and getid(nextnucleus) == mathchar_code and not getsub(next) and not getsup(next) then
+                local char = getchar(nextnucleus)
+                local s = superscripts[char]
+                if s then
+                    if not start_super then
+                        start_super = next
+                        mode = "super"
+                    elseif mode == "sub" then
+                        break
+                    end
+                    stop_super = next
+                    next = getnext(next)
+                    setchar(nextnucleus,s)
+                    replaced[char] = (replaced[char] or 0) + 1
+                    if trace_normalizing then
+                        report_normalizing("superscript %C becomes %C",char,s)
+                    end
+                else
+                    local s = subscripts[char]
+                    if s then
+                        if not start_sub then
+                            start_sub = next
+                            mode = "sub"
+                        elseif mode == "super" then
+                            break
+                        end
+                        stop_sub = next
+                        next = getnext(next)
+                        setchar(nextnucleus,s)
+                        replaced[char] = (replaced[char] or 0) + 1
+                        if trace_normalizing then
+                            report_normalizing("subscript %C becomes %C",char,s)
+                        end
+                    else
+                        break
+                    end
+                end
+            else
+                break
+            end
+        end
+        if start_super then
+            if start_super == stop_super then
+                setsup(pointer,getnucleus(start_super))
+            else
+                local list = new_submlist()
+                setattrlist(list,pointer)
+                setlist(list,start_super)
+                setsup(pointer,list)
+            end
+            if mode == "super" then
+                setnext(pointer,getnext(stop_super))
+            end
+            setnext(stop_super)
+        end
+        if start_sub then
+            if start_sub == stop_sub then
+                setsub(pointer,getnucleus(start_sub))
+            else
+                local list = new_submlist()
+                setattrlist(list,pointer)
+                setlist(list,start_sub)
+                setsub(pointer,list)
+            end
+            if mode == "sub" then
+                setnext(pointer,getnext(stop_sub))
+            end
+            setnext(stop_sub)
+        end
+        -- we could return stop
+    end
+
+    unscript[mathchar_code] = replace -- not noads as we need to recurse
+
+    function handlers.unscript(head)
+        processnoads(head,unscript,"unscript")
+    end
+
+end
+
+do
+
+    local a_mathunstack <const> = privateattribute("mathunstack")
+
+    local trace_unstacking  = false  registertracker("math.unstack", function(v) trace_unstacking  = v end)
+    local report_unstacking = logreporter("mathematics","unstack")
+
+    local enabled = false
+    local unstack = newprocesstable() noads.processors.unstack = unstack
+
+    local indexedsubscript_code   <const> = tex.noadoptioncodes.indexedsubscript
+    local indexedsuperscript_code <const> = tex.noadoptioncodes.indexedsuperscript
+
+    unstack[noad_code] = function(pointer)
+        local a = getattr(pointer,a_mathunstack)
+        if a then
+            local sup = getsup(pointer)
+            local sub = getsub(pointer)
+            if sup and sub then
+             -- if trace_unstacking then
+             --     report_unstacking() -- todo ... what to show ...
+             -- end
+                if a == 1 then
+                    a = indexedsubscript_code
+                elseif a == 2 then
+                    a = indexedsuperscript_code
+                else
+                    a = 0
+                end
+                setoptions(pointer,a)
+            end
+        end
+    end
+
+    function handlers.unstack(head)
+        if enabled then
+            processnoads(head,unstack,"unstack")
+        end
+    end
+
+    implement {
+        name     = "enablescriptunstacking",
+        onlyonce = true,
+        actions  = function()
+            enableaction("math","noads.handlers.unstack")
+            enabled = true
+        end
+    }
+
+end
+
+do
+
+    local function collected(fontlist)
+        if fontlist and next(fontlist) then
+            local properties = fonts.hashes.properties
+            local result     = { }
+            for font, list in sortedhash(fontlist) do
+                if list and next(list) then
+                    local n, t = 0, { }
+                    for k, v in sortedhash(list) do
+                        n = n + 1
+                        t[n] = formatters["%C"](k)
+                    end
+                    local p = properties[font]
+                    result[#result+1] = formatters["%s : %i : [ % t ]"](p and p.fontname or "unknown",n,t)
+                end
+            end
+            if #result > 0 then
+                return concat(result, ", ")
+            end
+        end
+    end
+
+    statistics.register("math script replacements", function()
+        return collected(replaced)
+    end)
+
+    statistics.register("unknown math characters", function()
+        return collected(unknowns)
+    end)
+
+end
+
+-- math alternates: (in xits     lgf: $ABC$ $\cal ABC$ $\mathalternate{cal}\cal ABC$)
+-- math alternates: (in lucidaot lgf: $ABC \mathalternate{italic} ABC$)
+
+-- todo: set alternate for specific symbols
+-- todo: no need to do this when already loaded
+-- todo: use a fonts.hashes.mathalternates
+
+do
+
+    local trace_alternates  = false  registertracker("math.alternates", function(v) trace_alternates = v end)
+    local report_alternates = logreporter("mathematics","alternates")
+
+    local last = 0
+
+    local known = setmetatableindex(function(t,k)
+        local v = 0 | 2^last
+        t[k] = v
+        last = last + 1
+        return v
+    end)
+
+    local defaults = {
+        dotless = { feature = 'dtls', value = 1, comment = "Mathematical Dotless Forms" },
+     -- zero    = { feature = 'zero', value = 1, comment = "Slashed or Dotted Zero" }, -- in no math font (yet)
+    }
+
+    local function initializemathalternates(tfmdata)
+        if use_math_goodies then
+
+            local goodies  = tfmdata.goodies
+            local autolist = defaults -- table.copy(defaults)
+
+            local function setthem(newalternates)
+                local resources      = tfmdata.resources -- was tfmdata.shared
+                local mathalternates = resources.mathalternates
+                local alternates, attributes, registered, presets
+                if mathalternates then
+                    alternates = mathalternates.alternates
+                    attributes = mathalternates.attributes
+                    registered = mathalternates.registered
+                else
+                    alternates, attributes, registered = { }, { }, { }
+                    mathalternates = {
+                        attributes = attributes,
+                        alternates = alternates,
+                        registered = registered,
+                        presets    = { },
+                        resets     = { },
+                        hashes     = setmetatableindex("table")
+                    }
+                    resources.mathalternates = mathalternates
+                end
+                --
+                for name, data in sortedhash(newalternates) do
+                    if alternates[name] then
+                        -- ignore
+                    else
+                        local attr = known[name]
+                        attributes[attr] = data
+                        alternates[name] = attr
+                        registered[#registered+1] = attr
+                    end
+                end
+            end
+
+            if goodies then
+                local done = { }
+                for i=1,#goodies do
+                    -- first one counts
+                    -- we can consider sharing the attributes ... todo (only once scan)
+                    local mathgoodies = goodies[i].mathematics
+                    local alternates  = mathgoodies and mathgoodies.alternates
+                    if alternates then
+                        if trace_goodies then
+                            report_goodies("loading alternates for font %a",tfmdata.properties.name)
+                        end
+                        for k, v in next, autolist do
+                            if not alternates[k] then
+                                alternates[k] = v
+                            end
+                        end
+                        setthem(alternates)
+                        return
+                    end
+                end
+            end
+
+            if trace_goodies then
+                report_goodies("loading default alternates for font %a",tfmdata.properties.name)
+            end
+            setthem(autolist)
+        end
+
+    end
+
+    local otf                = fonts.handlers.otf
+    local registerotffeature = fonts.constructors.features.otf.register
+    ----- getalternate       = otf.getalternate (runtime new method so ...)
+
+    registerotffeature {
+        name        = "mathalternates",
+        description = "additional math alternative shapes",
+        initializers = {
+            base = initializemathalternates,
+            node = initializemathalternates,
+        }
+    }
+
+    -- todo: not shared but copies ... one never knows
+
+    local a_mathalternate <const> = privateattribute("mathalternate")
+
+    local fontdata      = fonts.hashes.identifiers
+    local fontresources = fonts.hashes.resources
+
+    local alternate = newprocesstable()
+
+    local function getalternate(fam,tag,current)
+        -- fam is always zero, so we assume a very consistent setup
+        local resources = fontresources[getfontoffamily(fam)]
+        local attribute = unsetvalue
+        if resources then
+            local mathalternates = resources.mathalternates
+            if mathalternates then
+                local presets = mathalternates.presets
+                if presets then
+                    local resets = mathalternates.resets
+                    attribute = presets[tag]
+                    if not attribute then
+                        attribute = 0
+                        local alternates = mathalternates.alternates
+                        for s in gmatch(tag,"[^, ]+") do
+                            local n, s = match(s,"^([+-]*)(.*)$")
+                            if s == v_reset then
+                                resets[tag] = true
+                                current = unsetvalue
+                            else
+                                local a = alternates[s] -- or known[s]
+                                if a then
+                                    if n == "-" then
+                                        attribute = attribute & ~a
+                                    else
+                                        attribute = attribute | a
+                                    end
+                                end
+                            end
+                        end
+                        if attribute == 0 then
+                            attribute = unsetvalue
+                        end
+                        presets[tag] = attribute
+                    elseif resets[tag] then
+                        current = unsetvalue
+                    end
+                end
+            end
+        end
+        if attribute > 0 and current and current > 0 then
+            return current | attribute
+        else
+            return attribute
+        end
+    end
+
+    implement {
+        name      = "presetmathfontalternate",
+        arguments = "argument",
+        public    = true,
+        protected = true,
+        actions   = function(tag)
+            if texgetmode() == mathmode_code then
+                texsetattribute(a_mathalternate,getalternate(0,tag))
+            end
+        end,
+    }
+
+    implement {
+        name      = "setmathfontalternate",
+        arguments = "argument",
+        public    = true,
+        protected = true,
+        actions   = function(tag)
+            if texgetmode() == mathmode_code then
+                texsetattribute(a_mathalternate,getalternate(0,tag,texgetattribute(a_mathalternate)))
+            end
+        end,
+    }
+
+    alternate[mathchar_code] = function(pointer) -- slow
+        local a = getattr(pointer,a_mathalternate)
+        if a and a > 0 then
+            setattr(pointer,a_mathalternate,0)
+            local fontid    = getfont(pointer)
+            local resources = fontresources[fontid]
+            if resources then
+                local mathalternates = resources.mathalternates
+                if mathalternates then
+                    local attributes = mathalternates.attributes
+                    local registered = mathalternates.registered
+                    local hashes     = mathalternates.hashes
+                    local newchar    = nil
+                    for i=1,#registered do
+                        local r = registered[i]
+                        if (a & r) ~= 0 then
+                            local char = newchar or getchar(pointer)
+                            local alt  = hashes[i][char]
+                            if alt == nil then
+                                local what = attributes[r]
+                                local list = what.list
+                                if not list or list[char] then
+                                alt = otf.getalternate(fontdata[fontid],char,what.feature,what.value) or false
+                                    if alt == char then
+                                        alt = false
+                                    end
+                                    hashes[i][char] = alt
+                                end
+                            end
+                            if alt then
+                                if trace_alternates then
+                                    local what = attributes[r]
+                                    report_alternates("alternate %a, value %a, replacing glyph %U by glyph %U",
+                                        tostring(what.feature),tostring(what.value),char,alt)
+                                end
+                             -- setchar(pointer,alt)
+                             -- break
+                                newchar = alt
+                            end
+                        end
+                    end
+                    if newchar then
+                        setchar(pointer,newchar)
+                    end
+                end
+            end
+        end
+    end
+
+    alternate[delimiter_code] = alternate[mathchar_code]
+
+    function handlers.alternates(head)
+        processnoads(head,alternate,"alternate")
+    end
+
+end
+
+-- Italic correction control has been removed here. You can find it in the files
+-- for \MKIV. The left-over code deals with text-math boundaries.
+
+do
+
+    local function enable()
+        if trace_italics then
+            report_italics("enabling math italics")
+        end
+        -- we enable math (unless already enabled elsewhere)
+        typesetters.italics.enablemath()
+        enable = false
+    end
+
+    implement {
+        name      = "initializemathitalics",
+        actions   = enable,
+        onlyonce  = true,
+    }
+
+end
+
+do
+
+    -- math kerns (experiment) in goodies:
+    --
+    -- mathematics = {
+    --     kernpairs = {
+    --         [0x1D44E] = {
+    --             [0x1D44F] = 400, -- 𝑎𝑏
+    --         }
+    --     },
+    -- }
+
+    local a_kernpairs <const> = privateattribute("mathkernpairs")
+
+    local trace_kernpairs  = false  registertracker("math.kernpairs", function(v) trace_kernpairs = v end)
+    local report_kernpairs = logreporter("mathematics","kernpairs")
+
+    local kernpairs = newprocesstable()
+
+    local function enable()
+        enableaction("math", "noads.handlers.kernpairs")
+        if trace_kernpairs then
+            report_kernpairs("enabling math kern pairs")
+        end
+        enable = false
+    end
+
+    implement {
+        name      = "initializemathkernpairs",
+        actions   = enable,
+        onlyonce  = true,
+    }
+
+    local hash = setmetatableindex(function(t,font)
+        local g = fontdata[font].goodies
+        local m = g and g[1] and g[1].mathematics
+        local k = m and m.kernpairs
+        t[font] = k
+        return k
+    end)
+
+    -- no correction after prime because that moved to a superscript
+
+    kernpairs[mathchar_code] = function(pointer,what,n,parent)
+        if getattr(pointer,a_kernpairs) == 1 then
+            local first, firstfont = getcharspec(pointer)
+            local list = hash[firstfont]
+            if list then
+                local found = list[first]
+                if found then
+                    local next = isnext(parent,noad_code)
+                    if next then
+--                         pointer = getnucleus(next)
+--                         if pointer then
+                            local second, secondfont = getcharspec(pointer)
+                            if secondfont == firstfont then
+                                local kern = found[second]
+                                if kern then
+                                    kern = kern * fontparameters[firstfont].hfactor
+                                    if trace_kernpairs then
+                                        report_kernpairs("adding %p kerning between %C and %C",kern,first,second)
+                                    end
+                                    kern = new_kern(kern)
+                                    setlink(parent,kern,getnext(parent))
+                                    setattrlist(kern,pointer)
+                                end
+                            end
+--                         end
+                    end
+                end
+            end
+        end
+    end
+
+    function handlers.kernpairs(head)
+        if use_math_goodies then
+            processnoads(head,kernpairs,"kernpairs")
+        end
+    end
+
+end
+
+do
+
+    local a_numbers <const> = privateattribute("mathnumbers")
+    local a_spacing <const> = privateattribute("mathspacing")
+    local a_fencing <const> = privateattribute("mathfencing")
+
+    local numbers = newprocesstable()
+    local spacing = newprocesstable()
+    local fencing = newprocesstable()
+
+    local separators = {
+        [0x2E] = { 0x2E, 0x2C, 0x002E, 0x002C, 0x2008, 0x2008 }, -- . -- punctuationspace
+        [0x2C] = { 0x2C, 0x2E, 0x2008, 0x2008, 0x002E, 0x002C }, -- ,
+    }
+
+    local digits = {
+        [0x30] = true, [0x31] = true,
+        [0x32] = true, [0x33] = true,
+        [0x34] = true, [0x35] = true,
+        [0x36] = true, [0x37] = true,
+        [0x38] = true, [0x39] = true,
+    }
+
+    local snoloc = {
+        [punctuation_class] = 0x003A,
+        [relation_class]    = 0x2236,
+    }
+
+    local colons = {
+        [0x003A] = snoloc,
+        [0x2236] = snoloc,
+    }
+
+    local middles = {
+        [0x007C] = true,
+        [0x2016] = true,
+        [0x2980] = true,
+    }
+
+    local singles = {
+        0x007C,
+        0x2016,
+        0x2980,
+    }
+
+    local followedbyspace_code <const> = tex.noadoptioncodes.followedbyspace
+
+    local function followedbyspace(n)
+        return n and (getoptions(n) & followedbyspace_code == followedbyspace_code)
+    end
+
+    local function followbyspace(n)
+        setoptions(n,followedbyspace_code)
+    end
+
+    numbers[mathchar_code] = function(pointer,what,n,parent)
+        local alternative = getattr(pointer,a_numbers)
+        if alternative then
+            local oldchar = getcharspec(pointer)
+            local found   = separators[oldchar]
+            if found then
+                local prev, next = isboth(parent,noad_code)
+                if prev and next then
+                 -- local lc = getcharspec(getnucleus(prev))
+                    local lc = getcharspec(prev)
+                    if digits[lc] then
+                     -- local rc = getcharspec(getnucleus(next))
+                        local rc = getcharspec(next)
+                        if digits[rc] then
+                            local newchar = found[alternative]
+                            local class   = followedbyspace(parent) and punctuation_class or ordinary_class
+                            -- noad class == subtype
+--                             setsubtype(parent,class)
+setclass(parent,class)
+                            if newchar ~= oldchar then
+                                setchar(pointer,newchar)
+                            end
+                         -- if trace_numbers then
+                         --     report_numbers("digit separator digit")
+                         -- end
+                        end
+                    end
+                end
+                return
+            end
+            found = digits[oldchar]
+            if found then
+                if followedbyspace(parent) then
+                    local next = isnext(parent,noad_code)
+                    if next then
+                 --     local rc = getcharspec(getnucleus(next))
+                        local rc = getcharspec(next)
+                        if rc and digits[rc] then
+                            local n = new_noad(numbergroup_class)
+                            local s = new_submlist()
+                            setnucleus(n,s)
+                            setattrlist(n,pointer)
+                            setattrlist(s,pointer)
+                            setlink(parent,n,next)
+                         -- if trace_numbers then
+                         --     report_numbers("digit spacer digit")
+                         -- end
+                        end
+                    end
+                end
+                return
+            end
+        end
+    end
+
+    spacing[mathchar_code] = function(pointer,what,n,parent)
+        if getattr(pointer,a_spacing) then
+            local oldchar = getcharspec(pointer)
+            local found   = colons[oldchar]
+            if found then
+                local prev = isprev(parent,noad_code)
+                if prev then
+                    local class   = followedbyspace(prev) and relation_class or punctuation_class
+                    local newchar = found[class]
+--                     setsubtype(parent,class)
+setclass(parent,class)
+                    if newchar ~= oldchar then
+                        setchar(pointer,newchar)
+                    end
+                 -- if trace_spacing then
+                 --     report_spacing("spacer colon")
+                 -- end
+                end
+                return
+            end
+        end
+    end
+
+    -- we can share code, see earlier
+
+    local function makefence(chr,fam,subtype,class,template)
+        local f = new_fence()
+        local d = new_delimiter()
+        setchar(d,chr)
+        setfam(d,fam)
+        setattrlist(d,template)
+        setattrlist(f,template)
+        setsubtype(f,subtype)
+        setdelimiter(f,d)
+        setclass(f,class) -- tex itself does this, so not fenceclasses[what]
+        return f
+    end
+
+    -- we loose scripts so maybe also copy these
+
+    fencing[mathchar_code] = function(pointer,what,n,parent)
+        if getattr(pointer,a_fencing) and pointer == getnucleus(parent) then
+            local oldchar = getcharspec(pointer)
+            local found   = middles[oldchar]
+            if found then
+                local prev, next = getboth(parent)
+                if getcharspec(next) == oldchar and not followedbyspace(parent) then
+                    local nextnext = getnext(next)
+                    -- we need to preserve the followed property
+                    if getcharspec(nextnext) == oldchar and not followedbyspace(next) then
+                        oldchar = singles[3]
+                        prev, parent = nuts.remove(prev,parent,true)
+                        prev, parent = nuts.remove(prev,parent,true)
+                    else
+                        oldchar = singles[2]
+                        prev, parent = nuts.remove(prev,parent,true)
+                    end
+                    next = getnext(parent)
+                    pointer = getnucleus(parent)
+                    setchar(pointer,oldchar)
+                end
+                if followedbyspace(prev) and followedbyspace(parent) then
+                    local chr, fnt, fam = getcharspec(pointer)
+                    local f1 = makefence(0,0,0,0,pointer)
+                    local f2 = makefence(chr,fam,middlefence_code,middle_class,pointer)
+                    setlink(prev,f1,f2,next)
+                    flushnode(parent)
+                    followbyspace(f1)
+                    followbyspace(f2)
+                    return true, f2
+                else
+                    return true, parent
+                end
+            end
+        end
+    end
+
+    -- numbers
+
+    function handlers.numbers(head)
+        processnoads(head,numbers,"numbers")
+    end
+
+    local function enable()
+        enableaction("math", "noads.handlers.numbers")
+     -- if trace_numbers then
+     --     report_numbers("enabling math numbers")
+     -- end
+        enable = false
+    end
+
+    implement {
+        name     = "initializemathnumbers",
+        actions  = enable,
+        onlyonce = true,
+    }
+
+    -- spacing
+
+    function handlers.spacing(head)
+        processnoads(head,spacing,"spacing")
+    end
+
+    local function enable()
+        enableaction("math", "noads.handlers.spacing")
+     -- if trace_spacing then
+     --     report_spacing("enabling math spacing")
+     -- end
+        enable = false
+    end
+
+    implement {
+        name     = "initializemathspacing",
+        actions  = enable,
+        onlyonce = true,
+    }
+
+    -- fences
+
+    function handlers.fencing(head)
+        processnoads(head,fencing,"fencing")
+    end
+
+    local function enable()
+        enableaction("math", "noads.handlers.fencing")
+     -- if trace_fencing then
+     --     report_fencing("enabling math fencing")
+     -- end
+        enable = false
+    end
+
+    implement {
+        name     = "initializemathfencing",
+        actions  = enable,
+        onlyonce = true,
+    }
+
+end
+
+-- primes and such
+
+do
+
+    -- is validpair stil needed? why not always now?
+
+    local a_mathcollapsing <const> = privateattribute("mathcollapsing")
+
+    local collapse  = newprocesstable()
+    local mathlists = characters.mathlists
+
+    local validpair = { -- todo: indexed instead of hash
+        [ordinary_class]    = true,
+        [operator_class]    = true,
+        [binary_class]      = true, -- new
+        [relation_class]    = true,
+        [open_class]        = true, -- new
+        [middle_class]      = true, -- new
+        [close_class]       = true, -- new
+        [punctuation_class] = true, -- new
+        [fraction_class]    = true,
+        [accent_class]      = true,
+    }
+
+    local reported = setmetatableindex("table")
+
+    -- We could move primes to its own handler but we need to run this one anyway
+    -- so for now we keep it here.
+
+    mathlists[39] = { [39] = { [39] = { enforced = 0x2034, [39] = { enforced = 0x2057 } }, enforced = 0x2033 }, enforced = 0x2032 }
+    mathlists[96] = { [96] = { [96] = { enforced = 0x2037                               }, enforced = 0x2036 }, enforced = 0x2035 }
+
+    local getchardict  = nuts.getchardict
+    local setchardict  = nuts.setchardict
+
+    local groups       = mathematics.dictionaries.groups
+
+    collapse[mathchar_code] = function(pointer,what,n,parent)
+        if parent and mathlists[getchar(pointer)] then
+            local found, last, lucleus, lsup, lsub, lprime, category
+            local tree    = mathlists
+            local current = parent
+            while current and validpair[getsubtype(current)] do
+                local nucleus, prime, sup, sub = getnucleus(current,true)
+                local char = getchar(nucleus)
+                if char then
+                    local match = tree[char]
+                    if match then
+                        local method = getattr(current,a_mathcollapsing)
+                        if method and method > 0 and method <= 3 then
+                            local enforced = match.enforced
+                            local specials = match.specials
+                            local mathlist = match.mathlist
+                            local ligature
+                            if method == 0 then
+                                ligature = enforced
+                            elseif method == 1 then
+                                ligature = enforced or specials
+                            elseif method == 2 then
+                                ligature = enforced or specials or mathlist
+                            else -- 3
+                                ligature = enforced or mathlist or specials
+                            end
+                            if ligature then
+                                category = mathlist and "mathlist" or "specials"
+                                found    = ligature
+                                last     = current
+                                lucleus  = nucleus
+                                lsup     = sup
+                                lsub     = sub
+                                lprime   = prime
+                            end
+                            tree = match
+                            if sub or sup or prime then
+                                break
+                            else
+                                current = getnext(current)
+                            end
+                        else
+                            break
+                        end
+                    else
+                        break
+                    end
+                else
+                    break
+                end
+            end
+            if found and last and lucleus then
+                local id         = getfont(lucleus)
+                local characters = fontcharacters[id]
+                local replace    = characters and characters[found]
+                if not replace then
+                    if not reported[id][found] then
+                        reported[id][found] = true
+                        report_collapsing("%s ligature %C from %s","ignoring",found,category)
+                    end
+                elseif trace_collapsing then
+                    report_collapsing("%s ligature %C from %s","creating",found,category)
+                end
+-- we need to use the chardict of the replacement
+
+local properties, group = getchardict(pointer)
+local c = chardata[found]
+if c then
+    local g = c.mathgroup
+    if g then
+        group = groups[g] or 0xFFFF
+    else
+        group = 0xFFFF
+    end
+else
+    group = 0xFFFF
+end
+setchardict(pointer,properties,group,found)
+
+                setchar(pointer,found)
+                local l = getnext(last)
+                local c = getnext(parent)
+                if lsub then
+                    setsub(parent,lsub)
+                    setsub(last)
+                end
+                if lsup then
+                    setsup(parent,lsup)
+                    setsup(last)
+                end
+                if lprime then
+                    setprime(parent,lprime)
+                    setprime(last)
+                end
+                while c ~= l do
+                    local n = getnext(c)
+                    flushnode(c)
+                    c = n
+                end
+                setlink(parent,l)
+            end
+        end
+    end
+
+    function noads.handlers.collapse(head)
+        processnoads(head,collapse,"collapse")
+    end
+
+    local function enable()
+        enableaction("math", "noads.handlers.collapse")
+        if trace_collapsing then
+            report_collapsing("enabling math collapsing")
+        end
+        enable = false -- already onlyonce
+    end
+
+    implement {
+        name     = "initializemathcollapsing",
+        actions  = enable,
+        onlyonce = true,
+    }
+
+end
+
+do
+
+    local a_variant <const> = privateattribute("mathvariant")
+
+    local trace_variants  = false  registertracker("math.variants", function(v) trace_variants = v end)
+    local report_variants = logreporter("mathematics","variants")
+
+    local variants = newprocesstable()
+
+    local function setvariant(pointer,selector,char)
+        local tfmdata      = fontdata[getfont(pointer)]
+        local mathvariants = tfmdata.resources.variants -- and variantdata / can be a hash
+        if mathvariants then
+            mathvariants = mathvariants[selector]
+            if mathvariants then
+                local variant = mathvariants[char]
+                if variant then
+                    setchar(pointer,variant)
+                    setattr(pointer,a_exportstatus,char) -- we don't export the variant as it's visual markup
+                    if trace_variants then
+                        report_variants("variant (%U,%U) replaced by %U",char,selector,variant)
+                    end
+                else
+                    if trace_variants then
+                        report_variants("no variant (%U,%U)",char,selector)
+                    end
+                end
+            end
+        end
+    end
+
+    variants[mathchar_code] = function(pointer,what,n,parent) -- also set export value
+        local char = getchar(pointer)
+        local data = chardata[char]
+        if data then
+            local variants = data.variants
+            if variants then
+                local next = isnext(parent,noad_code)
+                if next then
+                    local nucleus = getnucleus(next)
+                    if nucleus and getid(nucleus) == mathchar_code then
+                        local selector = getchar(nucleus)
+                        if variants[selector] then
+                            setvariant(pointer,selector,char)
+                            setprev(next,pointer)
+                            setnext(parent,getnext(next))
+                            flushnode(next)
+                        end
+                    end
+                end
+                local selector = getattr(pointer,a_variant)
+                if selector and variants[selector] then
+                    setvariant(pointer,selector,char)
+                end
+            end
+        end
+    end
+
+    function mathematics.addvariant(tfmdata,char,variant,selector)
+        if char and variant and selector then
+            local data = chardata[char]
+            if data then
+                local variants = data.variants
+                if variants and variants[selector] then
+                    local resources = tfmdata.resources
+                    local variants  = resources.variants -- and variantdata
+                    if not variants then
+                        variants           = { }
+                        resources.variants = variants
+                    end
+                    local selectors = variants[selector]
+                    if not selectors then
+                        selectors          = { }
+                        variants[selector] = selectors
+                    end
+                    selectors[char] = variant
+                    return true
+                end
+            end
+        end
+        return false
+    end
+
+    function handlers.variants(head)
+        processnoads(head,variants,"unicode variant")
+    end
+
+    local valid = {
+        calligraphic = 0xFE00,
+        calligraphy  = 0xFE00,
+        script       = 0xFE01,
+        handwriting  = 0xFE01,
+    }
+
+    function mathematics.setvariant(s)
+        texsetattribute(a_variant,valid[s] or unsetvalue)
+    end
+
+    implement {
+        name      = "setmathvariant",
+        public    = true,
+        protected = true,
+        arguments = "argument",
+        actions   = mathematics.setvariant,
+    }
+
+end
+
+-- for manuals
+
+do
+
+    -- Given the amount of classes this no longer makes much sense or we need to
+    -- extend it.
+
+    local classes = newprocesstable()
+
+    local colors  = {
+        [relation_class]    = "trace:dr",
+        [ordinary_class]    = "trace:db",
+        [binary_class]      = "trace:dg",
+        [open_class]        = "trace:dm",
+        [middle_class]      = "trace:dm",
+        [close_class]       = "trace:dm",
+        [punctuation_class] = "trace:dc",
+    }
+
+    local setcolor   = colortracers.set
+    local resetcolor = colortracers.reset
+
+    classes[mathchar_code] = function(pointer,what,n,parent)
+        local color = colors[getsubtype(parent)]
+        if color then
+            setcolor(pointer,color)
+        else
+            resetcolor(pointer)
+        end
+    end
+
+    function handlers.classes(head)
+        processnoads(head,classes,"classes")
+    end
+
+    registertracker("math.classes",function(v)
+        setaction("math","noads.handlers.classes",v)
+    end)
+
+end
+
+do
+
+    local traversehlist = nuts.traversers.hlist
+
+    local getshift      = nuts.getshift
+    local setwhd        = nuts.setwhd
+    local setshift      = nuts.setshift
+
+    -- normalizer: can become engine feature (native tex loves shifts)
+
+    local function normalize(h)
+        for n, s in traversehlist, h do
+            if s > 0 then
+                local sh = getshift(n)
+                local ox, oy = getoffsets(n)
+                if sh ~= 0 then
+                    local w, h, d = getwhd(n)
+                    h = h - sh
+                    d = d + sh
+                    setshift(n)
+                    setwhd(n,w,h > 0 and h or 0,d > 0 and d or 0)
+                    setoffsets(n,ox,oy - sh)
+                end
+            end
+            local l = getlist(l)
+            if l then
+                normalize(l)
+            end
+        end
+    end
+
+    function handlers.normalize(h)
+        return normalize(h)
+    end
+
+end
+
+do
+
+    local traversehlist = nuts.traversers.hlist
+
+    local texgetdimen   = tex.getdimen
+    local texgetcount   = tex.getcount
+
+    local newrule       = nuts.pool.outlinerule
+    local newkern       = nuts.pool.kern
+    local setcolor      = nodes.tracers.colors.set
+
+    local a_mathsnap    <const> = privateattribute("mathsnap")
+
+    local d_mathstrutht <const> = tex.isdimen("mathstrutht")
+    local d_mathstrutdp <const> = tex.isdimen("mathstrutdp")
+    local c_mathnesting <const> = tex.iscount("mathnestinglevel")
+
+    local trace_snapping  = false  registertracker("math.snapping", function(v) trace_snapping = v end)
+    local report_snapping = logreporter("mathematics","snapping")
+
+    -- head,style,penalties,beginclass,endclass,level,mainstyle,options
+
+    function handlers.snap(h,_,_,_,_,level)
+     -- if not level or level == 0 then
+        if texgetcount(c_mathnesting) == 1 then
+            local trace_color
+            if trace_snapping == "frame" then
+                trace_color = "darkgray"
+            elseif type(trace_snapping) == "string" then
+                trace_color = trace_snapping
+            else
+                trace_color = false
+            end
+            local ht, dp, dd, hs, ds, hd
+            -- x + 1 = y : only struts glyphs glue and penalties ...
+-- node.direct.show(h)
+            for n, s in traversehlist, h do
+                local step = getattr(n,a_mathsnap)
+-- print("!",a_mathsnap,step,node.direct.serialized(n))
+                if step then
+                    local done = false
+                    if not dd then
+                        ht = texgetdimen(d_mathstrutht)
+                        dp = texgetdimen(d_mathstrutdp)
+                        hd = ht + dp
+                        -- lineskip can be large in alignments
+                     -- dd = hd / 12
+                        dd = hd / 6
+                        if step == 0xFFFF then
+                            hs = dd
+                            ds = dd
+                        else
+                            hs = ht/step
+                            ds = dp/step
+                        end
+                    end
+                    local w, h, d = getwhd(n)
+                    -- snap to line
+                  ::height::
+                    if h-dd < ht then
+                        if trace_snapping == true then
+                            report_snapping("adapting ht: old %p, new %p, lineskip %p",h,ht,dd)
+                        end
+                        done = true
+                        setheight(n,ht)
+                        goto depth
+                    end
+                    if h > ht then
+--                         while ht < (h-dd) do
+                        while ht < h do
+                            ht = round(ht + hs)
+                        end
+                        if h ~= ht then
+                            setheight(n,ht)
+                            if trace_snapping == true then
+                                report_snapping("enlarging ht: old %p, new %p, step %p",h,ht,hs)
+                            end
+                            done = true
+                        end
+                    end
+                  ::depth::
+                    if d-dd < dp then
+                        if trace_snapping == true then
+                            report_snapping("adapting dp: old %p, new %p, lineskip %p",d,dp,dd)
+                        end
+                        setdepth(n,dp)
+                        done = true
+                        goto done
+                    end
+                    if d > dp then
+--                         while dp < (d-dd) do
+                        while dp < d do
+                            dp = round(dp + ds)
+                        end
+                        if d ~= dp then
+                            setdepth(n,dp)
+                            if trace_snapping == true then
+                                report_snapping("enlarging dp: old %p, new %p, step %p",d,dp,ds)
+                            end
+                            done = true
+                        end
+                    end
+                  ::done::
+                    if done and trace_color then
+                     -- w, h, d = getwhd(n)
+                     -- local r = newrule(w,h,d,65536)
+                     -- setcolor(r,trace_color)
+                     -- setlink(r,newkern(-w),getlist(n))
+                     -- setlist(n,r)
+
+                        local old = newrule(w,h,d,65536)
+                        setcolor(old,"middlegray")
+                        w, h, d = getwhd(n)
+                        local new = newrule(w,h,d,65536/4)
+                        setcolor(new,trace_color)
+                        setlink(old,newkern(-w),new,newkern(-w),getlist(n))
+                        local ox, oy = getoffsets(n)
+                        setoffsets(old,-ox,-oy)
+                        setoffsets(new,-ox,-oy)
+                        setlist(n,old)
+                    end
+                end
+            end
+        end
+    end
+
+    local valid = {
+        [v_reset]  = unsetvalue,
+        [v_line]   = 0xFFFF,
+        [v_small]  = 8,
+        [v_medium] = 4,
+        [v_big]    = 2,
+    }
+
+    local enabled = false
+
+    function mathematics.setsnapping(s)
+        if not enabled then
+            enableaction("math","noads.handlers.snap")
+            enabled = true
+        end
+        texsetattribute(a_mathsnap,valid[s] or unsetvalue)
+    end
+
+    implement {
+        name      = "setmathsnapping",
+        public    = true,
+        protected = true,
+        arguments = "argument",
+        actions   = mathematics.setsnapping,
+    }
+
+end
+
+-- experimental : replaced by dictionaries but for now we keep the code
+--
+-- do
+--
+--  -- mathematics.registerdomain {
+--  --     name       = "foo",
+--  --     parents    = { "bar" },
+--  --     characters = {
+--  --         [0x123] = { char = 0x234, class = binary },
+--  --     },
+--  -- }
+--
+--     local trace_domains  = false  registertracker("math.domains", function(v) trace_domains = v end)
+--     local report_domains = logreporter("mathematics","domains")
+--
+--     local domains       = { }
+--     local categories    = { }
+--     local numbers       = { }
+--     local a_mathdomain  <const> = privateattribute("mathdomain")
+--     mathematics.domains = categories
+--     local permitted     = {
+--         ordinary    = ordinary_class,
+--         binary      = binary_class,
+--         relation    = relation_class,
+--         punctuation = punctuation_class,
+--         inner       = innernoad_code,
+--         fenced      = fenced_class,
+--      -- fraction    = fraction_class,
+--      -- radical     = radical_class,
+--     }
+--
+--     function mathematics.registerdomain(data)
+--         local name = data.name
+--         if not name then
+--             return
+--         end
+--         local attr       = #numbers + 1
+--         categories[name] = data
+--         numbers[attr]    = data
+--         data.attribute   = attr
+--         -- we delay hashing
+--         return attr
+--     end
+--
+--     local function enable()
+--         enableaction("math", "noads.handlers.domains")
+--         if trace_domains then
+--             report_domains("enabling math domains")
+--         end
+--         enable = false
+--     end
+--
+--     function mathematics.setdomain(name)
+--         if enable then
+--             enable()
+--         end
+--         local data = name and name ~= v_reset and categories[name]
+--         texsetattribute(a_mathdomain,data and data.attribute or unsetvalue)
+--     end
+--
+--     function mathematics.getdomain(name)
+--         if enable then
+--             enable()
+--         end
+--         local data = name and name ~= v_reset and categories[name]
+--         context(data and data.attribute or unsetvalue)
+--     end
+--
+--     implement {
+--         name      = "initializemathdomain",
+--         actions   = enable,
+--         onlyonce  = true,
+--     }
+--
+--     implement {
+--         name      = "setmathdomain",
+--         arguments = "string",
+--         actions   = mathematics.setdomain,
+--     }
+--
+--     implement {
+--         name      = "getmathdomain",
+--         arguments = "string",
+--         actions   = mathematics.getdomain,
+--     }
+--
+--     local function makehash(data)
+--         local hash    = { }
+--         local parents = data.parents
+--         if parents then
+--             local function merge(name)
+--                 if name then
+--                     local c = categories[name]
+--                     if c then
+--                         local hash = c.hash
+--                         if not hash then
+--                             hash = makehash(c)
+--                         end
+--                         for k, v in next, hash do
+--                             hash[k] = v
+--                         end
+--                     end
+--                 end
+--             end
+--             if type(parents) == "string" then
+--                 merge(parents)
+--             elseif type(parents) == "table" then
+--                 for i=1,#parents do
+--                     merge(parents[i])
+--                 end
+--             end
+--         end
+--         local characters = data.characters
+--         if characters then
+--             for k, v in next, characters do
+--              -- local chr = n.char
+--                 local cls = v.class
+--                 if cls then
+--                     v.code = permitted[cls]
+--                 else
+--                     -- invalid class
+--                 end
+--                 hash[k] = v
+--             end
+--         end
+--         data.hash = hash
+--         return hash
+--     end
+--
+--     domains[mathchar_code] = function(pointer,what,n,parent)
+--         local attr = getattr(pointer,a_mathdomain)
+--         if attr then
+--             local domain = numbers[attr]
+--             if domain then
+--                 local hash = domain.hash
+--                 if not hash then
+--                     hash = makehash(domain)
+--                 end
+--                 local char = getchar(pointer)
+--                 local okay = hash[char]
+--                 if okay then
+--                     local chr = okay.char
+--                     local cls = okay.code
+--                     if chr and chr ~= char then
+--                         setchar(pointer,chr)
+--                     end
+--                     if cls and cls ~= getsubtype(parent) then
+--                         setsubtype(parent,cls)
+--                     end
+--                 end
+--             end
+--         end
+--     end
+--
+--     function handlers.domains(head)
+--         processnoads(head,domains,"domains")
+--     end
+--
+-- end
+
+-- just for me
+
+function handlers.showtree(head)
+    inspect(nodes.totree(head))
+end
+
+registertracker("math.showtree",function(v)
+    setaction("math","noads.handlers.showtree",v)
+end)
+
+-- also for me
+
+do
+
+    local applyvisuals = nuts.applyvisuals
+    local visual       = false
+
+    function handlers.makeup(head)
+        applyvisuals(head,visual)
+    end
+
+    registertracker("math.makeup",function(v)
+        visual = v
+        setaction("math","noads.handlers.makeup",v)
+    end)
+
+end
+
+-- Musical timestamp: August 2022 with "Meditation by Cory Wong (Live @ Brooklyn
+-- Steel FEB 2022). Seen live earlier that year and its gets better and better!
+--
+-- As we also try to do here:
+
+do
+
+    local trace_dictionaries  = false  registertracker("math.dictionaries",         function(v) trace_dictionaries = v end)
+    local trace_details       = false  registertracker("math.dictionaries.details", function(v) trace_details      = v end)
+
+    local report_dictionaries = logreporter("mathematics","dictionaries")
+
+    local setnodecolor = colortracers.set
+    local getchardict  = nuts.getchardict
+    local setchardict  = nuts.setchardict
+
+    local dictionaries = newprocesstable()
+    local groups       = mathematics.dictionaries.groups
+    local sets         = mathematics.dictionaries.sets
+    local variants     = mathematics.dictionaries.variants
+    local defaults     = mathematics.dictionaries.defaults
+
+    noads.processors.dictionaries = dictionaries
+
+    local function check(pointer,group,index)
+        local v = variants[index]
+        if v then
+            local c = v[group]
+            if c then
+                return group, c
+            end
+        end
+        return 1
+    end
+
+    dictionaries[mathchar_code] = function(pointer,what,n,parent)
+        local properties, oldgroup, index, font, char = getchardict(pointer)
+        local newgroup = 1
+        local newclass = false
+--         local oldclass = getsubtype(pointer)
+        local oldclass = getsubtype(parent)
+        if (properties & 0x1) == 0x1 then
+            newclass = oldclass
+            newgroup = oldgroup
+        else
+            local set = sets[oldgroup]
+            if set then
+                local groups    = set.groups
+                local nofgroups = groups and #groups
+                if nofgroups > 0 then
+                    for i=1,nofgroups do
+                        local group = groups[i]
+                        local real, class = check(pointer,group,index)
+                        if real ~= 1 then
+                            newclass = class
+                            newgroup = group
+                            goto done
+                        end
+                    end
+                end
+            else
+                newgroup, newclass = check(pointer,oldgroup,index)
+            end
+          ::done::
+            if newgroup == 1 then
+                newgroup = defaults[index] or 1
+            end
+            setchardict(pointer,properties,newgroup,index)
+            if type(newclass) == "number" then
+-- print(newgroup,newclass,oldclass)
+                setsubtype(parent,newclass)
+--                 setsubtype(pointer,newclass)
+            else
+                newclass = oldclass
+            end
+        end
+        if trace_dictionaries or trace_details then
+            if newgroup > 1 then
+                local groupname = groups[newgroup]
+                if groupname then
+                    setnodecolor(pointer,"dictionary:"..groupname)
+                end
+            end
+            if trace_details then
+                report_dictionaries("properties 0x%02X, group 0x%02X -> 0x%02X, class 0x%02X -> 0x%02X, index %05X, %U %c",properties,oldgroup,newgroup,oldclass,newclass,index,char,char)
+            end
+        end
+    end
+
+    function handlers.dictionaries(head)
+        processnoads(head,dictionaries,"dictionaries")
+    end
+
+end
+
+do
+
+    local trace_suspicious  = false  registertracker("math.suspicious", function(v) trace_suspicious = v end)
+    local report_suspicious = logreporter("mathematics","suspicious")
+
+    local suspicious = newprocesstable() noads.processors.suspicious = suspicious
+
+    local candidates = {
+        [classes.maybeordinary] = "maybeordinary",
+        [classes.mayberelation] = "mayberelation",
+        [classes.maybebinary  ] = "maybebinary",
+    }
+
+    local registered = setmetatableindex("table")
+
+    suspicious[mathchar_code] = function(pointer,what,n,parent)
+        local class = getsubtype(pointer)
+        local found = candidates[class]
+        if found then
+            local char = getchar(pointer)
+            if not registered[class][char] then
+                report_suspicious("class %a, %U %c",found,char,char)
+                registered[class][char] = true
+            end
+        end
+    end
+
+    function handlers.suspicious(head)
+        if trace_suspicious then
+            processnoads(head,suspicious,"suspicious")
+        end
+    end
+
+end
+
+do  -- we don't need to support nesting here unless we run over sublists
+
+    local a_intervals <const> = privateattribute("mathintervals")
+
+    local trace_intervals  = false  registertracker("math.intervals", function(v) trace_intervals = v end)
+    local report_intervals = logreporter("mathematics","intervals")
+
+    local intervals = newprocesstable() noads.processors.intervals = intervals
+
+    -- ] a,b [ | [ a,b ] | ] a, b ] | [ a, b [
+
+    local firstclass   = false
+    local firstparent  = false
+    local firstpointer = false
+    local punctuation  = false
+
+    local ignored = {
+        [relation_class] = true,
+        [middle_class]   = true,
+        [fenced_class]   = true,
+        [fraction_class] = true,
+        [radical_class]  = true,
+        [accent_class]   = true,
+    }
+
+    intervals[mathchar_code] = function(pointer,what,n,parent)
+        local class = getsubtype(pointer)
+        if class == open_class or class == close_class then
+            local c = getchar(pointer)
+            if c == 0x5B or c == 0x5D then -- c = 0x27E6 or c = 0x27E7 double ones
+                local a = getattr(pointer,a_intervals)
+                if not a then
+                    firstclass  = false
+                    punctuation = false
+                elseif firstclass then
+                    if not punctuation then
+                        --
+                    else
+                        if firstclass ~= open_class then
+                            setclass(firstparent, open_class)
+                            setprop(firstpointer,"swappedclass",open_class)
+                            if trace_intervals then
+                                report_intervals("setting class of %C to %a",getchar(firstpointer),"open")
+                            end
+                        end
+                        if class ~= close_class then
+                            setclass(parent, close_class)
+                            setprop(pointer,"swappedclass",close_class)
+                            if trace_intervals then
+                                report_intervals("setting class of %C to %a",getchar(pointer),"close")
+                            end
+                        end
+                    end
+                    firstclass  = false
+                    punctuation = false
+                else
+                    firstclass   = class
+                    firstpointer = pointer
+                    firstparent  = parent
+                end
+            else
+                firstclass  = false
+                punctuation = false
+            end
+        elseif class == punctuation_class then
+            local c = getchar(pointer)
+            if c == 0x2C or c == 0x3A or c == 0x3B then -- , : ;
+                punctuation = true
+            else
+                punctuation = false
+            end
+        elseif ignored[class] then
+            firstclass  = false
+            punctuation = false
+        end
+    end
+
+    function handlers.intervals(head)
+        processnoads(head,intervals,"intervals")
+    end
+
+end
+
+-- the normal builder
+
+-- do
+--
+--     local force_penalties = false
+--
+--     function builders.kernel.mlisttohlist(head,style,penalties)
+--         return mlisttohlist(head,style,force_penalties or penalties)
+--     end
+--
+--     implement {
+--         name      = "setmathpenalties",
+--         arguments = "integer",
+--         actions   = function(p)
+--             force_penalties = p > 0
+--         end,
+--     }
+--
+-- end
+
+builders.kernel.mlisttohlist = mlisttohlist
+
+local actions = tasks.actions("math") -- head, style, penalties
+
+local starttiming, stoptiming = statistics.starttiming, statistics.stoptiming
+
+-- local function mlist_to_hlist_callback(head,style,penalties,beginclass,endclass,level,style,options)
+--     starttiming(noads)
+--     head = actions(head,style,penalties,beginclass,endclass,level,style,options)
+--     stoptiming(noads)
+--     return head
+-- end
+
+local function mlist_to_hlist_callback(head,style,penalties,beginclass,endclass,level,style,options)
+    return actions(head,style,penalties,beginclass,endclass,level,style,options)
+end
+
+callbacks.register {
+    name    = "mlist_to_hlist",
+    action  = mlist_to_hlist_callback,
+    comment = "convert a noad list into a node list",
+    frozen  = true,
+}
+
+-- tracing
+
+-- statistics.register("math processing time", function()
+--     return statistics.elapsedseconds(noads)
+-- end)

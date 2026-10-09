@@ -1,0 +1,54 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenTeacher 3.2\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: courseHeroApi.py:163
+msgid ""
+"Enter a search term and press the search button to search coursehero.com for "
+"sets. Then select the set or sets you want to import and click OK."
+msgstr ""
+
+#: courseHeroApi.py:164
+msgid "E.g.: french holiday vocabulary"
+msgstr ""
+
+#: courseHeroApi.py:165
+msgid "Search"
+msgstr ""
+
+#: courseHeroApi.py:166
+msgid "Search coursehero.com"
+msgstr ""
+
+#: courseHeroApi.py:244
+msgid "Import from coursehero.com"
+msgstr ""
+
+#: courseHeroApi.py:270
+msgid "No coursehero.com connection"
+msgstr ""
+
+#: courseHeroApi.py:271
+msgid ""
+"coursehero.com didn't accept the connection. Are you sure that your internet "
+"connection works and coursehero.com is online?"
+msgstr ""
+
+#: courseHeroApi.py:313
+msgid "The word list was imported from coursehero.com successfully."
+msgstr ""

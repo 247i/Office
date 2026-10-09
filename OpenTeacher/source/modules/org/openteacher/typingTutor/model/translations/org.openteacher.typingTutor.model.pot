@@ -1,0 +1,128 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenTeacher 3.2\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: model.py:95
+msgid "Belgian AZERTY"
+msgstr ""
+
+#: model.py:96
+msgid "Colemak"
+msgstr ""
+
+#: model.py:97
+msgid "Dvorak Simplified Keyboard"
+msgstr ""
+
+#: model.py:98
+msgid "French AZERTY"
+msgstr ""
+
+#: model.py:99
+msgid "QWERTY"
+msgstr ""
+
+#: model.py:100
+msgid "QWERTZ"
+msgstr ""
+
+#: model.py:183
+msgid ""
+"Welcome, I'm your personal OpenTeacher typing tutor. We'll improve your "
+"typing skills by doing simple exercises. Between the exercises, I'll give "
+"instructions. Let's get started:\n"
+"\n"
+"First place your fingers on the so-called home row: your fingers, from left "
+"to right, should always be on the keys '{a}', '{s}', '{d}', '{f}', "
+"'{space}', '{space}', '{j}', '{k}', '{l}' and '{;}' while not typing another "
+"character. When your fingers are in position, press {space} to start the "
+"first lesson. Work for accuracy at first, not speed."
+msgstr ""
+
+#: model.py:198
+msgid ""
+"Congratulations, you finished this typing course! If you want to continue, "
+"you can, but this is the end of the instructions. You did a great job!"
+msgstr ""
+
+#: model.py:208
+msgid "Congratulations, you finished your first exercise!"
+msgstr ""
+
+#: model.py:225
+#, python-format
+msgid "You made %s mistake, please keep trying until you can do it flawless."
+msgid_plural ""
+"You made %s mistakes, please keep trying until you can do it flawless."
+msgstr[0] ""
+msgstr[1] ""
+
+#: model.py:230
+#, python-format
+msgid "Too bad, you made %s mistake. Keep practising to get better!"
+msgid_plural "Too bad, you made %s mistakes. Keep practising to get better!"
+msgstr[0] ""
+msgstr[1] ""
+
+#: model.py:237
+msgid "To archieve that, you might try slowing down a bit."
+msgstr ""
+
+#: model.py:241
+msgid "You made zero mistakes. Now try to improve your typing speed a bit."
+msgstr ""
+
+#: model.py:247
+msgid ""
+"You made zero mistakes and are typing fast enough, so you can continue "
+"practising some new letter combinations. Keep up the good work!"
+msgstr ""
+
+#: model.py:248
+msgid ""
+"You did it flawlessly and fast! Continue practising some new letters "
+"combinations to get even better!"
+msgstr ""
+
+#: model.py:252
+msgid ""
+"You're now going to learn letters that aren't on the home row. To see which "
+"fingers you need to use, see the keyboard image on your screen. When you're "
+"not using a finger to type a letter, put it back on the home row directly."
+msgstr ""
+
+#: model.py:255
+msgid ""
+"The keys you're going to practise now are typed by the left and right index "
+"finger and further away from those fingers than the other keys we practised "
+"on the current row. Make sure you return your finger to its position on the "
+"home row when you're typing another letter."
+msgstr ""
+
+#: model.py:259
+msgid ""
+"You made zero mistakes and are typing fast enough, so you can continue "
+"practising with some new words. Keep up the good work!"
+msgstr ""
+
+#: model.py:260
+msgid ""
+"You did it flawlessly and fast! Continue practising with new words to get "
+"even better!"
+msgstr ""

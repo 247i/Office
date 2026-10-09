@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-mame-chd">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>MAME compressed hard disk image</comment>
+  <comment xml:lang="zh-Hant-TW">MAME 壓縮硬碟映像檔</comment>
+  <comment xml:lang="uk">стиснений образ жорсткого диска MAME</comment>
+  <comment xml:lang="tr">MAME sıkıştırmalı sabit disk kalıbı</comment>
+  <comment xml:lang="sv">MAME komprimerad hårddiskavbild</comment>
+  <comment xml:lang="sr-Cyrl">МАМЕ компресовани одраз диска</comment>
+  <comment xml:lang="sq">Pamje disku të ngurtë të ngjeshur MAME</comment>
+  <comment xml:lang="sl">Odtis trdega diska MAME (stisnjen)</comment>
+  <comment xml:lang="si">MAME සම්පීඩිත දෘඪ තැටි රූපය</comment>
+  <comment xml:lang="ru">Сжатый образ жесткого диска MAME</comment>
+  <comment xml:lang="ro">imagine de disc dur comprimată MAME</comment>
+  <comment xml:lang="pt-BR">Imagem de disco rígido compactado do MAME</comment>
+  <comment xml:lang="pl">Skompresowany obraz dysku twardego MAME</comment>
+  <comment xml:lang="oc">imatge disc dur compressat MAME</comment>
+  <comment xml:lang="nl">met MAME gecomprimeerd harde-schijfkopiebestand</comment>
+  <comment xml:lang="lt">MAME glaudintas standžiojo disko atvaizdis</comment>
+  <comment xml:lang="ko">MAME 압축된 하드 디스크 이미지</comment>
+  <comment xml:lang="kk-Cyrl">MAME сығылған қатты диск бейнесі</comment>
+  <comment xml:lang="ja">MAME 圧縮ハーディディスクイメージ</comment>
+  <comment xml:lang="it">Immagine disco MAME compressa</comment>
+  <comment xml:lang="is">Þjöppuð MAME diskmynd</comment>
+  <comment xml:lang="id">image hard disk MAME terkompresi</comment>
+  <comment xml:lang="hu">MAME tömörített merevlemezkép</comment>
+  <comment xml:lang="hr">MAME komprimirana slika tvrdog diska</comment>
+  <comment xml:lang="hi">MAME संपीड़ित हार्ड डिस्क छवि</comment>
+  <comment xml:lang="he">דמות כונן קשיח בדחיסת MAME</comment>
+  <comment xml:lang="gl">Imaxe de disco duro comprimido MAME</comment>
+  <comment xml:lang="fur">Imagjin di disc fis comprimût MAME</comment>
+  <comment xml:lang="fr">Image de disque dur compressé MAME</comment>
+  <comment xml:lang="fi">MAME-levykuva</comment>
+  <comment xml:lang="et">MAME'i pakitud kõvakettatõmmis</comment>
+  <comment xml:lang="es">imagen comprimida de disco duro de MAME</comment>
+  <comment xml:lang="en-GB">MAME compressed hard disk image</comment>
+  <comment xml:lang="de">MAME-komprimiertes Festplattenabbild</comment>
+  <comment xml:lang="da">MAME-komprimeret harddiskaftryk</comment>
+  <comment xml:lang="ca">imatge de disc dur MAME amb compressió</comment>
+  <comment xml:lang="bg">Твърд диск — MAME, компресиран</comment>
+  <comment xml:lang="be-Cyrl">сціснуты вобраз цвёрдага дыска MAME</comment>
+  <comment xml:lang="ar">صورة قرص صلب MAME مضغوطة</comment>
+  <generic-icon name="application-x-executable"/>
+  <glob pattern="*.chd"/>
+</mime-type>

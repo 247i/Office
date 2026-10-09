@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/x-opencl-c++src">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>C++ for OpenCL source code</comment>
+  <comment xml:lang="uk">початковий код мовою C++ OpenCL</comment>
+  <comment xml:lang="tr">OpenCL için C++ kaynak kodu</comment>
+  <comment xml:lang="sv">C++ för OpenCL-källkod</comment>
+  <comment xml:lang="sr-Cyrl">Це++ изворни код за ОпенЦЛ</comment>
+  <comment xml:lang="sq">Kod burim C++ për OpenCL</comment>
+  <comment xml:lang="sl">Izvorna koda C++ za OpenCL</comment>
+  <comment xml:lang="ru">Исходный код языка C++ для OpenCL</comment>
+  <comment xml:lang="ro">cod sursă C++ pentru OpenCL</comment>
+  <comment xml:lang="pt-BR">C++ para código-fonte OpenCL</comment>
+  <comment xml:lang="pl">Kod źródłowy C++ dla OpenCL</comment>
+  <comment xml:lang="oc">C+++ pel còdi font OpenCL</comment>
+  <comment xml:lang="ko">OpenCL용 C++ 소스 코드</comment>
+  <comment xml:lang="kk-Cyrl">OpenCL үшін C++ бастапқы коды</comment>
+  <comment xml:lang="hr">C++ za OpenCL izvorni kod</comment>
+  <comment xml:lang="fr">Code source C++ pour OpenCL</comment>
+  <comment xml:lang="fi">OpenCL C++ -lähdekoodi</comment>
+  <comment xml:lang="et">C++ OpenCL'i lähtekoodi jaoks</comment>
+  <comment xml:lang="es">código fuente en C++ para OpenCL</comment>
+  <comment xml:lang="en-GB">C++ for OpenCL source code</comment>
+  <comment xml:lang="de">OpenCL C++-Quelltext</comment>
+  <comment xml:lang="bg">Изходен код — C++ за OpenCL</comment>
+  <comment xml:lang="ar">شفرة مصدر سي++ لـ OpenCL</comment>
+  <acronym>OpenCL</acronym>
+  <expanded-acronym>Open Computing Language</expanded-acronym>
+  <sub-class-of type="text/x-c++src"/>
+  <glob pattern="*.clcpp"/>
+</mime-type>

@@ -1,0 +1,88 @@
+# Chinese (Traditional) translation for openteacher
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2013-05-29 15:58+0000\n"
+"Last-Translator: Louie Chen <louie23@gmail.com>\n"
+"Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:44+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: main.py:102
+msgid "That's a mistake :(."
+msgstr "錯誤了 :("
+
+#: main.py:144
+msgid "Please choose a user name and the keyboard layout you want to learn."
+msgstr "請選擇使用者名稱及想要學習的鍵盤配置"
+
+#: main.py:145
+msgid "Username:"
+msgstr "使用者名稱:"
+
+#: main.py:146
+msgid "Keyboard layout:"
+msgstr "鍵盤配置："
+
+#. TRANSLATORS: Split the line as closest to the middle as
+#. TRANSLATORS: possible, not necessarily between 'Keyboard
+#. TRANSLATORS: layout' and 'preview'. Thanks :)
+#: main.py:150
+msgid ""
+"Keyboard layout\n"
+"preview:"
+msgstr "鍵盤配置"
+
+#: main.py:205
+msgid "Welcome, please choose your account by clicking on it."
+msgstr "歡迎，請點擊來選擇您的帳號"
+
+#: main.py:206
+msgid "I am a new user"
+msgstr "我是新的使用者"
+
+#: main.py:275
+msgid "Level"
+msgstr "級別"
+
+#: main.py:276
+msgid "Speed (words per minute)"
+msgstr "速度（每分鐘幾個字）"
+
+#: main.py:277
+msgid "Amount of mistakes"
+msgstr "錯誤總數"
+
+#: main.py:278
+msgid "Start exercise"
+msgstr "開始練習"
+
+#: main.py:329
+msgid "Username empty"
+msgstr "使用者名稱空白"
+
+#: main.py:330
+msgid "The username should not be empty. Please try again."
+msgstr "使用者名稱不應為空白，請重試。"
+
+#: main.py:336
+msgid "Username taken"
+msgstr "使用者名稱已有人使用"
+
+#: main.py:337
+msgid "That username is already taken. Please try again."
+msgstr "使用者名稱已有人使用。請重試。"
+
+#: main.py:438 main.py:448
+msgid "Typing Tutor"
+msgstr "打字助教"

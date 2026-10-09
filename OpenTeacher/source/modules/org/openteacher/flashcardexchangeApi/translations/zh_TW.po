@@ -1,0 +1,63 @@
+# Chinese (Traditional) translation for openteacher
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2013-05-29 08:17+0000\n"
+"Last-Translator: Louie Chen <louie23@gmail.com>\n"
+"Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:44+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: flashcardexchangeApi.py:166
+msgid ""
+"Enter a search term and press the search button to search flashcardexchange."
+"com for sets. Then select the set or sets you want to import and click OK."
+msgstr ""
+"輸入搜尋字串並按搜尋按鈕來搜尋 flashcardexchange.com 結果。然後選擇您想要匯入"
+"的結果並按 OK"
+
+#: flashcardexchangeApi.py:167
+msgid "E.g.: spanish travel vocabulary"
+msgstr ""
+
+#: flashcardexchangeApi.py:168
+msgid "Search"
+msgstr "搜尋"
+
+#: flashcardexchangeApi.py:169
+msgid "Search flashcardexchange.com"
+msgstr "搜尋 flashcardexchange.com"
+
+#: flashcardexchangeApi.py:261
+msgid "Import from flashcardexchange.com"
+msgstr "從 flashcardexchange.com 滙入"
+
+#: flashcardexchangeApi.py:264
+msgid "flashcardexchange.com API client id"
+msgstr "flashcardexchange.com API client id"
+
+#: flashcardexchangeApi.py:291
+msgid "No flashcardexchange.com connection"
+msgstr "和 flashcardexchange.com 沒有連線"
+
+#: flashcardexchangeApi.py:292
+msgid ""
+"flashcardexchange.com didn't accept the connection. Are you sure that your "
+"internet connection works and flashcardexchange.com is online?"
+msgstr ""
+"flashcardexchange.com 沒有接受連線。您確定您的網路連線有正常，並且 "
+"flashcardexchange.com 在線上？"
+
+#: flashcardexchangeApi.py:326
+msgid "The word list was imported from flashcardexchange.com successfully."
+msgstr "從 flashcardexchange.com 匯入單字列表成功。"

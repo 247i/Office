@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/x-ssh-private-key">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>OpenSSH private key</comment>
+  <comment xml:lang="zh-Hant-TW">OpenSSH 私鑰</comment>
+  <comment xml:lang="uk">закритий ключ OpenSSH</comment>
+  <comment xml:lang="tr">OpenSSH özel anahtarı</comment>
+  <comment xml:lang="sv">Privat OpenSSH-nyckel</comment>
+  <comment xml:lang="sr-Cyrl">OpenSSH приватни кључ</comment>
+  <comment xml:lang="sq">Kyç privat OpenSSH</comment>
+  <comment xml:lang="sl">Zasebni ključ OpenSSH</comment>
+  <comment xml:lang="ru">Личный ключ OpenSSH</comment>
+  <comment xml:lang="ro">cheie privată OpenSSH</comment>
+  <comment xml:lang="pt-BR">Chave privada OpenSSH</comment>
+  <comment xml:lang="pl">Klucz prywatny OpenSSH</comment>
+  <comment xml:lang="oc">clau privada OpenSSH</comment>
+  <comment xml:lang="ko">OpenSSH 개인 키</comment>
+  <comment xml:lang="kk-Cyrl">OpenSSH құпия кілті</comment>
+  <comment xml:lang="hr">OpenSSH privatni ključ</comment>
+  <comment xml:lang="fr">Clé privée OpenSSH</comment>
+  <comment xml:lang="fi">OpenSSH yksityinen avain</comment>
+  <comment xml:lang="et">OpenSSH privaatvõti</comment>
+  <comment xml:lang="es">clave privada de OpenSSH</comment>
+  <comment xml:lang="en-GB">OpenSSH private key</comment>
+  <comment xml:lang="de">privater OpenSSH-Schlüssel</comment>
+  <comment xml:lang="bg">Ключ — OpenSSH, частен</comment>
+  <comment xml:lang="ar">مفتاح خاص OpenSSH</comment>
+  <sub-class-of type="text/plain"/>
+</mime-type>

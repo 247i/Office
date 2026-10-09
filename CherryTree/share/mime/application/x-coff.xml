@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-coff">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Windows object code</comment>
+  <comment xml:lang="uk">об'єктний код Windows</comment>
+  <comment xml:lang="tr">Windows nesnesi kodu</comment>
+  <comment xml:lang="sv">Windows-objektkod</comment>
+  <comment xml:lang="sr-Cyrl">Виндоуз објектни код</comment>
+  <comment xml:lang="sl">Predmetna koda Windows</comment>
+  <comment xml:lang="ru">Объектный код Windows</comment>
+  <comment xml:lang="ro">cod obiect Windows</comment>
+  <comment xml:lang="pt-BR">Código-objeto Windows</comment>
+  <comment xml:lang="pl">Kod obiektowy Windows</comment>
+  <comment xml:lang="oc">còdi objècte Windows</comment>
+  <comment xml:lang="ko">윈도우 오브젝트 코드</comment>
+  <comment xml:lang="kk-Cyrl">Windows объекттік коды</comment>
+  <comment xml:lang="fr">code objet Windows</comment>
+  <comment xml:lang="fi">Windows-objektikoodi</comment>
+  <comment xml:lang="et">Windowsi objektkood</comment>
+  <comment xml:lang="es">código objeto de Windows</comment>
+  <comment xml:lang="en-GB">Windows object code</comment>
+  <comment xml:lang="de">Windows-Objektcode</comment>
+  <comment xml:lang="ar">كود كائن ويندوز</comment>
+  <glob pattern="*.o" weight="40"/>
+  <glob pattern="*.obj"/>
+</mime-type>

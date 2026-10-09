@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/vnd.stardivision.mail">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>StarMail 5 email</comment>
+  <comment xml:lang="zh-Hant-TW">StarMail 5 郵件</comment>
+  <comment xml:lang="uk">поштове повідомлення StarMail 5</comment>
+  <comment xml:lang="tr">StarMail 5 e-postası</comment>
+  <comment xml:lang="sv">StarMail 5 e-post</comment>
+  <comment xml:lang="sr-Cyrl">StarMail 5 е-пошта</comment>
+  <comment xml:lang="sq">Email StarMail 5</comment>
+  <comment xml:lang="sl">Pošta StarMail 5</comment>
+  <comment xml:lang="ru">Почтовое сообщение StarMail 5</comment>
+  <comment xml:lang="ro">mesaj de poștă electronică StarMail 5</comment>
+  <comment xml:lang="pt-BR">E-mail do StarMail 5</comment>
+  <comment xml:lang="pl">E-mail StarMail 5</comment>
+  <comment xml:lang="oc">corrièl StarMail 5</comment>
+  <comment xml:lang="nn">StarMail 5-e-post</comment>
+  <comment xml:lang="ko">StarMail 5 전자메일</comment>
+  <comment xml:lang="kk-Cyrl">StarMail 5 эл. поштасы</comment>
+  <comment xml:lang="ja">StarMail 5 メール</comment>
+  <comment xml:lang="id">Surel StarMail 5</comment>
+  <comment xml:lang="hr">StarMail 5 e-mail</comment>
+  <comment xml:lang="fur">E-mail di StarMail 5</comment>
+  <comment xml:lang="fr">Courriel StarMail 5</comment>
+  <comment xml:lang="fi">StarMail 5 sähköposti</comment>
+  <comment xml:lang="et">StarMail 5 e-kiri</comment>
+  <comment xml:lang="es">correo electrónico de StarMail 5</comment>
+  <comment xml:lang="en-GB">StarMail 5 email</comment>
+  <comment xml:lang="de">StarMail-5-E-Mail</comment>
+  <comment xml:lang="da">StarMail 5-e-post</comment>
+  <comment xml:lang="ca">correu StarMail 5</comment>
+  <comment xml:lang="bg">Електронно писмо — StarMail 5</comment>
+  <comment xml:lang="be-Cyrl">пошта StarMail 5</comment>
+  <comment xml:lang="ar">بريد إلكتروني StarMail 5</comment>
+  <sub-class-of type="application/x-ole-storage"/>
+  <generic-icon name="emblem-mail"/>
+  <glob pattern="*.sdm"/>
+</mime-type>

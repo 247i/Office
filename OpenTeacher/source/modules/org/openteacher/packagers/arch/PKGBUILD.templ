@@ -1,0 +1,46 @@
+# Maintainer: @!authors!@ <@!email!@>
+pkgname="@!name.lower()!@"
+pkgver=@!version!@
+pkgrel=@!package_release!@
+pkgdesc="@!short_description!@"
+arch=('any')
+url="@!website!@"
+license=('GPL')
+depends=('python2' 'python2-pyqt4' 'phonon' 'python-opengl' 'python2-cherrypy' 'gettext' 'espeak' 'desktop-file-utils' 'hicolor-icon-theme' 'xdg-utils' 'python-docutils' 'python2-chardet' 'tesseract' 'python2-pyenchant')
+
+build() {
+  cd "$startdir"
+
+  #fix the shebang
+  sed -i 's,^#<!--(raw)-->!<!--(end)-->/usr/bin/env python,#<!--(raw)-->!<!--(end)-->/usr/bin/env python2,' bin/$pkgname
+
+  #copy the man pages
+  <!--(for source, dest in manpages)-->
+  mkdir -p $pkgdir@!dest!@
+  cp @!source!@ $pkgdir@!dest!@/$pkgname.1
+  <!--(end)-->
+
+  #install into pkgdir
+  python2 setup.py install --root=$pkgdir/ || return 1
+}
+
+check() {
+  cd "$startdir/openteacher"
+  python2 openteacher.py -p testsuite
+}
+
+post_install() {
+  update-desktop-database -q
+  gtk-update-icon-cache -q -t -f usr/share/icons/hicolor
+  xdg-icon-resource forceupdate --theme hicolor &> /dev/null
+}
+
+post_upgrade() {
+  #same function body
+  post_install
+}
+
+post_remove () {
+  #same function body
+  post_install
+}

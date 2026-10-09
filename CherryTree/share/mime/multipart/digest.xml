@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="multipart/digest">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Message digest</comment>
+  <comment xml:lang="zh-Hant-TW">訊息摘要</comment>
+  <comment xml:lang="uk">контрольна сума повідомлення</comment>
+  <comment xml:lang="tr">İleti özeti</comment>
+  <comment xml:lang="sv">Meddelandesamling</comment>
+  <comment xml:lang="sr-Cyrl">Сажетак поруке</comment>
+  <comment xml:lang="sq">Përmbledhje mesazhi</comment>
+  <comment xml:lang="sl">Izvleček sporočila</comment>
+  <comment xml:lang="ru">Дайджест сообщения</comment>
+  <comment xml:lang="ro">suma de control a mesajului</comment>
+  <comment xml:lang="pt-BR">Resumo de mensagem</comment>
+  <comment xml:lang="pl">Wiadomość przetwarzania</comment>
+  <comment xml:lang="oc">condensat de messatge</comment>
+  <comment xml:lang="ko">메시지 다이제스트</comment>
+  <comment xml:lang="kk-Cyrl">Мәлімдеме профилі</comment>
+  <comment xml:lang="ja">メッセージダイジェスト</comment>
+  <comment xml:lang="it">Digest di messaggi</comment>
+  <comment xml:lang="id">Digest pesan</comment>
+  <comment xml:lang="hr">Šifra poruke</comment>
+  <comment xml:lang="hi">संदेश संग्रह</comment>
+  <comment xml:lang="he">תקציר הודעות</comment>
+  <comment xml:lang="fur">Sunt di messaç</comment>
+  <comment xml:lang="fr">Condensé de message</comment>
+  <comment xml:lang="fi">Viestitiivistelmä</comment>
+  <comment xml:lang="et">E-kirjade kokkuvõte</comment>
+  <comment xml:lang="es">resumen de mensajes</comment>
+  <comment xml:lang="en-GB">Message digest</comment>
+  <comment xml:lang="de">Nachrichtensammlung</comment>
+  <comment xml:lang="ca">resum de missatge</comment>
+  <comment xml:lang="bg">Извадка на съобщение</comment>
+  <comment xml:lang="be-Cyrl">дайджэст паведамлення</comment>
+  <comment xml:lang="ar">خلاصة رسالة</comment>
+</mime-type>

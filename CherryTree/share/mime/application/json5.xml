@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/json5">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>JSON5 document</comment>
+  <comment xml:lang="zh-Hant-TW">JSON5 文件</comment>
+  <comment xml:lang="uk">документ JSON5</comment>
+  <comment xml:lang="tr">JSON5 belgesi</comment>
+  <comment xml:lang="sv">JSON5-dokument</comment>
+  <comment xml:lang="sr-Cyrl">JSON5 документ</comment>
+  <comment xml:lang="sq">Dokument JSON5</comment>
+  <comment xml:lang="sl">Dokument JSON5</comment>
+  <comment xml:lang="ru">Документ JSON5</comment>
+  <comment xml:lang="ro">document JSON5</comment>
+  <comment xml:lang="pt-BR">Documento JSON5</comment>
+  <comment xml:lang="pl">Dokument JSON5</comment>
+  <comment xml:lang="oc">document JSON5</comment>
+  <comment xml:lang="nn">JSON5-dokument</comment>
+  <comment xml:lang="lt">JSON5 dokumentas</comment>
+  <comment xml:lang="ko">JSON5 문서</comment>
+  <comment xml:lang="kk-Cyrl">JSON5 құжаты</comment>
+  <comment xml:lang="kab">Isemli JSON5</comment>
+  <comment xml:lang="ja">JSON5 ドキュメント</comment>
+  <comment xml:lang="it">Documento JSON5</comment>
+  <comment xml:lang="id">Dokumen JSON5</comment>
+  <comment xml:lang="hr">JSON5 dokument</comment>
+  <comment xml:lang="hi">JSON5 दस्तावेज़</comment>
+  <comment xml:lang="he">מסמך JSON5</comment>
+  <comment xml:lang="fur">Document JSON5</comment>
+  <comment xml:lang="fr">Document JSON5</comment>
+  <comment xml:lang="fi">JSON5</comment>
+  <comment xml:lang="eu">JSON5 dokumentua</comment>
+  <comment xml:lang="et">JSON5 dokument</comment>
+  <comment xml:lang="es">documento JSON5</comment>
+  <comment xml:lang="en-GB">JSON5 document</comment>
+  <comment xml:lang="de">JSON5-Dokument</comment>
+  <comment xml:lang="ca">document JSON5</comment>
+  <comment xml:lang="bg">Документ — JSON5</comment>
+  <comment xml:lang="be-Cyrl">дакумент JSON5</comment>
+  <comment xml:lang="ar">مستند JSON5</comment>
+  <acronym>JSON5</acronym>
+  <expanded-acronym>JavaScript Object Notation 5</expanded-acronym>
+  <sub-class-of type="application/ecmascript"/>
+  <generic-icon name="text-x-script"/>
+  <glob pattern="*.json5"/>
+</mime-type>

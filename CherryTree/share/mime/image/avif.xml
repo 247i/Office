@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="image/avif">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>AVIF image</comment>
+  <comment xml:lang="zh-Hant-TW">AVIF 影像</comment>
+  <comment xml:lang="zh-Hans-CN">AVIF 图像</comment>
+  <comment xml:lang="uk">зображення AVIF</comment>
+  <comment xml:lang="tr">AVIF görüntüsü</comment>
+  <comment xml:lang="sv">AVIF-bild</comment>
+  <comment xml:lang="sr-Cyrl">AVIF слика</comment>
+  <comment xml:lang="sq">Figurë AVIF</comment>
+  <comment xml:lang="sl">Slika AVIF</comment>
+  <comment xml:lang="si">AVIF රූපය</comment>
+  <comment xml:lang="ru">Изображение AVIF</comment>
+  <comment xml:lang="ro">imagine AVIF</comment>
+  <comment xml:lang="pt-BR">Imagem AVIF</comment>
+  <comment xml:lang="pl">Obraz AVIF</comment>
+  <comment xml:lang="oc">imatge AVIF</comment>
+  <comment xml:lang="nn">AVIF-bilete</comment>
+  <comment xml:lang="nl">AVIF-afbeelding</comment>
+  <comment xml:lang="ko">AVIF 이미지</comment>
+  <comment xml:lang="kk-Cyrl">AVIF суреті</comment>
+  <comment xml:lang="kab">Tugna AVIF</comment>
+  <comment xml:lang="ja">AVIF 画像</comment>
+  <comment xml:lang="it">Immagine AVIF</comment>
+  <comment xml:lang="id">Citra AVIF</comment>
+  <comment xml:lang="hr">AVIF slika</comment>
+  <comment xml:lang="hi">AVIF छवि</comment>
+  <comment xml:lang="he">תמונת AVIF</comment>
+  <comment xml:lang="fur">Imagjin AVIF</comment>
+  <comment xml:lang="fr">Image AVIF</comment>
+  <comment xml:lang="fi">AVIF-kuva</comment>
+  <comment xml:lang="eu">AVIF irudia</comment>
+  <comment xml:lang="et">AVIF pilt</comment>
+  <comment xml:lang="es">imagen AVIF</comment>
+  <comment xml:lang="en-GB">AVIF image</comment>
+  <comment xml:lang="de">AVIF-Bild</comment>
+  <comment xml:lang="ca">imatge AVIF</comment>
+  <comment xml:lang="bg">Изображение — AVIF</comment>
+  <comment xml:lang="be-Cyrl">відарыс AVIF</comment>
+  <comment xml:lang="ar">صورة AVIF</comment>
+  <acronym>AVIF</acronym>
+  <expanded-acronym>AV1 Image File Format</expanded-acronym>
+  <glob pattern="*.avif"/>
+  <glob pattern="*.avifs"/>
+  <alias type="image/avif-sequence"/>
+</mime-type>

@@ -1,0 +1,75 @@
+# Finnish translation for openteacher
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2012-08-09 00:13+0000\n"
+"Last-Translator: Teemu Paavola <tteeemu@gmail.com>\n"
+"Language-Team: Finnish <fi@li.org>\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:43+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: media.py:173
+msgid "Title:"
+msgstr ""
+
+#: media.py:175
+msgid "Remove"
+msgstr "Poista"
+
+#: media.py:176
+msgid "Add local media"
+msgstr "Lisää paikallista mediaa"
+
+#: media.py:177
+msgid "Add remote media"
+msgstr "Lisää etämediaa"
+
+#: media.py:179
+msgid "Name:"
+msgstr "Nimi:"
+
+#: media.py:180
+msgid "Question:"
+msgstr "Kysymys:"
+
+#: media.py:181
+msgid "Answer:"
+msgstr "Vastaus:"
+
+#: media.py:199
+msgid "Select file(s)"
+msgstr "Valitse tiedosto(t)"
+
+#: media.py:201
+msgid "Media"
+msgstr "Media"
+
+#: media.py:222
+msgid "File URL"
+msgstr "Tiedoston URL"
+
+#: media.py:223
+msgid ""
+"Enter the URL of your website or media item.\n"
+"Supported video sites: "
+msgstr ""
+"Anna linkki nettisivuillesi tai mediakohteelle.\n"
+"Tuetut videosivut: "
+
+#: media.py:274
+msgid "Unsupported file type"
+msgstr "Tiedostomuoto ei ole tuettu"
+
+#: media.py:275
+msgid "This type of file is not supported:\n"
+msgstr "Tämä tiedostotyyppi ei ole tuettu:\n"

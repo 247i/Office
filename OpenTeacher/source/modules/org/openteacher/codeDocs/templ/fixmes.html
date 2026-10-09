@@ -1,0 +1,80 @@
+#!	Copyright 2012, Marten de Vries
+#!
+#!	This file is part of OpenTeacher.
+#!
+#!	OpenTeacher is free software: you can redistribute it and/or modify
+#!	it under the terms of the GNU General Public License as published by
+#!	the Free Software Foundation, either version 3 of the License, or
+#!	(at your option) any later version.
+#!
+#!	OpenTeacher is distributed in the hope that it will be useful,
+#!	but WITHOUT ANY WARRANTY; without even the implied warranty of
+#!	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#!	GNU General Public License for more details.
+#!
+#!	You should have received a copy of the GNU General Public License
+#!	along with OpenTeacher.  If not, see <http://www.gnu.org/licenses/>.
+#!
+<!--(set_escape)-->
+    html
+<!--(end)-->
+<!doctype html>
+<html>
+	<head>
+		<title>FIXMEs and TODOs</title>
+		<link rel='stylesheet' type='text/css' href='style.css' />
+		<link rel="shortcut icon" type="image/png" href="resources/logo">
+		<style type='text/css'>
+			td {
+				vertical-align: top;
+			}
+			.fixme-table {
+				border-collapse:collapse;
+				width: 100%;
+			}
+			.fixme-table td {
+				border: 1px solid #333;
+			}
+			.spacer {
+				border: none !important;
+			}
+		</style>
+	</head>
+	<body>
+		<div id='header'>
+			<img id='logo' src='/resources/logo' />
+			<h1>FIXMEs and TODOs</h1>
+			<a id='nav' href='/'>&lt; Back to index</a><br />
+		</div>
+		<div id='page'>
+			<p>
+				Total amount of FIXMEs/TODOs: <strong>@!len(fixmes)!@</strong>.
+			</p>
+			<table class='fixme-table'>
+				<!--(for fixme in fixmes)-->
+				<tr>
+					<td>Location:</td>
+					<td><a href='@!fixme["path"].rsplit("/", 1)[0]!@.html#@!fixme["path"] + "-" + unicode(fixme["line_number"])!@'>@!fixme["path"]!@ (line @!fixme["line_number"]!@) &gt;</a></td>
+				</tr>
+				<tr>
+					<td>Relevant code:</td>
+					<td class='source'>$!fixme["relevant_code"]!$</td>
+				</tr>
+				<tr>
+					<td class='spacer' colspan='2'>&nbsp;</td>
+				</tr>
+				<!--(end)-->
+			</table>
+			<div class='figure' style='width:500px; margin: 0 auto;'>
+				<hr />
+				<img alt='fixme.jpg' style='width:500px;' src='/resources/fixme.jpg' />
+				<p style='text-align: center;' class='caption'>FIXME</p>
+				<hr />
+			</div>
+		</div>
+		<div id='footer'>
+			<a href='/'>&lt; Back to index</a><br />
+			<em>OpenTeacher code documentation</em>
+		</div>
+	</body>
+</html>

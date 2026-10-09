@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-desktop">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Desktop entry</comment>
+  <comment xml:lang="zh-Hant-TW">桌面項目</comment>
+  <comment xml:lang="uk">стільничний запис</comment>
+  <comment xml:lang="tr">Masaüstü girdisi</comment>
+  <comment xml:lang="sv">Skrivbordspost</comment>
+  <comment xml:lang="sr-Cyrl">Унос радне површи</comment>
+  <comment xml:lang="sq">Zë desktopi</comment>
+  <comment xml:lang="sl">Vnos za namizje</comment>
+  <comment xml:lang="ru">Запись рабочего стола</comment>
+  <comment xml:lang="ro">acces aplicație pe birou</comment>
+  <comment xml:lang="pt-BR">Entrada de desktop</comment>
+  <comment xml:lang="pl">Wpis środowiska</comment>
+  <comment xml:lang="oc">entrada pel burèu</comment>
+  <comment xml:lang="nn">Skrivebordsoppføring</comment>
+  <comment xml:lang="lt">Darbalaukio įrašas</comment>
+  <comment xml:lang="ko">바탕 화면 항목</comment>
+  <comment xml:lang="kk-Cyrl">Жұмыс үстел элементі</comment>
+  <comment xml:lang="ja">デスクトップエントリ</comment>
+  <comment xml:lang="it">Elemento desktop</comment>
+  <comment xml:lang="id">Entri desktop</comment>
+  <comment xml:lang="hr">Desktop entry</comment>
+  <comment xml:lang="hi">डेस्कटॉप प्रविष्टि</comment>
+  <comment xml:lang="he">רשומת שולחן עבודה</comment>
+  <comment xml:lang="gl">Entrada de escritorio</comment>
+  <comment xml:lang="fur">Vôs di scritori</comment>
+  <comment xml:lang="fr">Entrée de bureau</comment>
+  <comment xml:lang="fi">Työpöytämerkintä</comment>
+  <comment xml:lang="eu">Mahaigaineko sarrera</comment>
+  <comment xml:lang="et">Menüü- ja graafilise liidese kirje</comment>
+  <comment xml:lang="es">entrada de escritorio</comment>
+  <comment xml:lang="en-GB">Desktop entry</comment>
+  <comment xml:lang="de">Desktop-Datei</comment>
+  <comment xml:lang="da">Skrivebordselement</comment>
+  <comment xml:lang="ca">entrada «desktop»</comment>
+  <comment xml:lang="bg">Запис за работния плот</comment>
+  <comment xml:lang="be-Cyrl">запіс desktop</comment>
+  <comment xml:lang="ar">مدخلة سطح مكتب</comment>
+  <sub-class-of type="text/plain"/>
+  <generic-icon name="text-x-generic"/>
+  <glob pattern="*.desktop"/>
+  <glob pattern="*.kdelnk"/>
+  <alias type="application/x-gnome-app-info"/>
+</mime-type>

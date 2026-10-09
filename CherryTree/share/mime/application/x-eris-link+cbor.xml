@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-eris-link+cbor">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>ERIS Link</comment>
+  <comment xml:lang="zh-Hant-TW">ERIS 連結</comment>
+  <comment xml:lang="uk">посилання ERIS</comment>
+  <comment xml:lang="tr">ERIS bağlantısı</comment>
+  <comment xml:lang="sv">ERIS-länk</comment>
+  <comment xml:lang="sr-Cyrl">ERIS веза</comment>
+  <comment xml:lang="sq">Lidhje ERIS</comment>
+  <comment xml:lang="sl">Povezava ERIS</comment>
+  <comment xml:lang="ru">Ссылка ERIS</comment>
+  <comment xml:lang="ro">legătură ERIS</comment>
+  <comment xml:lang="pt-BR">Link ERIS</comment>
+  <comment xml:lang="pl">Dowiązanie ERIS</comment>
+  <comment xml:lang="oc">ligam ERIS</comment>
+  <comment xml:lang="ko">ERIS 연결</comment>
+  <comment xml:lang="kk-Cyrl">ERIS сілтемесі</comment>
+  <comment xml:lang="ja">ERIS リンク</comment>
+  <comment xml:lang="it">Collegamento ERIS</comment>
+  <comment xml:lang="id">Tautan ERIS</comment>
+  <comment xml:lang="hr">ERIS poveznica</comment>
+  <comment xml:lang="hi">ERIS लिंक</comment>
+  <comment xml:lang="fur">Colegament ERIS</comment>
+  <comment xml:lang="fr">Lien ERIS</comment>
+  <comment xml:lang="fi">ERIS-linkki</comment>
+  <comment xml:lang="et">ERISe link</comment>
+  <comment xml:lang="es">enlace ERIS</comment>
+  <comment xml:lang="en-GB">ERIS Link</comment>
+  <comment xml:lang="de">ERIS-Verknüpfung</comment>
+  <comment xml:lang="ca">enllaç ERIS</comment>
+  <comment xml:lang="bg">Връзка — ERIS</comment>
+  <comment xml:lang="be-Cyrl">спасылка ERIS</comment>
+  <comment xml:lang="ar">وصلة ERIS</comment>
+  <acronym>ERIS</acronym>
+  <expanded-acronym>Encoding for Robust Immutable Storage</expanded-acronym>
+  <sub-class-of type="application/cbor"/>
+  <glob pattern="*.eris"/>
+</mime-type>

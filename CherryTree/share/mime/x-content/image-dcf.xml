@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="x-content/image-dcf">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Digital photos</comment>
+  <comment xml:lang="zh-Hant-TW">數位相片</comment>
+  <comment xml:lang="uk">цифрові фотографії</comment>
+  <comment xml:lang="tr">Sayısal fotoğraflar</comment>
+  <comment xml:lang="sv">Digitalbilder</comment>
+  <comment xml:lang="sr-Cyrl">Дигиталне фотографије</comment>
+  <comment xml:lang="sq">Foto dixhitale</comment>
+  <comment xml:lang="sl">Digitalne fotografije</comment>
+  <comment xml:lang="ru">Цифровые фотографии</comment>
+  <comment xml:lang="ro">fotografii digitale</comment>
+  <comment xml:lang="pt-BR">Fotos digitais</comment>
+  <comment xml:lang="pl">Zdjęcia cyfrowe</comment>
+  <comment xml:lang="oc">fòtos numericas</comment>
+  <comment xml:lang="nn">Digitale foto</comment>
+  <comment xml:lang="lt">Skaitmeninės nuotraukos</comment>
+  <comment xml:lang="ko">디지털 사진</comment>
+  <comment xml:lang="kk-Cyrl">Цифрлық фотосуреттер</comment>
+  <comment xml:lang="ja">デジタルフォト</comment>
+  <comment xml:lang="it">Foto digitali</comment>
+  <comment xml:lang="id">Foto digital</comment>
+  <comment xml:lang="hr">Digitalne fotografije</comment>
+  <comment xml:lang="hi">डिजिटल फोटो</comment>
+  <comment xml:lang="he">תמונות דיגיטליות</comment>
+  <comment xml:lang="gl">Fotos dixitais</comment>
+  <comment xml:lang="fur">Fotos digjitâls</comment>
+  <comment xml:lang="fr">Photos numériques</comment>
+  <comment xml:lang="fi">Digikuvia</comment>
+  <comment xml:lang="eu">Argazki digitalak</comment>
+  <comment xml:lang="et">Digifotod</comment>
+  <comment xml:lang="es">fotografías digitales</comment>
+  <comment xml:lang="en-GB">Digital photos</comment>
+  <comment xml:lang="de">digitale Fotos</comment>
+  <comment xml:lang="ca">fotos digitals</comment>
+  <comment xml:lang="bg">Цифрови снимки</comment>
+  <comment xml:lang="be-Cyrl">лічбавыя фатаграфіі</comment>
+  <comment xml:lang="ar">صور رقمية</comment>
+  <comment xml:lang="af">Digitale foto’s</comment>
+</mime-type>

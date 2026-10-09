@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="multipart/report">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Mail system report</comment>
+  <comment xml:lang="zh-Hant-TW">郵件系統回報</comment>
+  <comment xml:lang="uk">звіт поштової системи</comment>
+  <comment xml:lang="tr">Posta sistemi raporu</comment>
+  <comment xml:lang="sv">E-postsystemrapport</comment>
+  <comment xml:lang="sr-Cyrl">Извештај поштанског система</comment>
+  <comment xml:lang="sq">Raport sistemi poste</comment>
+  <comment xml:lang="sl">Poročilo poštnega sistema</comment>
+  <comment xml:lang="ru">Отчёт почтовой системы</comment>
+  <comment xml:lang="ro">raport privind sistemul de poștă electronică</comment>
+  <comment xml:lang="pt-BR">Relatório do sistema de correspondência</comment>
+  <comment xml:lang="pl">Raport systemu pocztowego</comment>
+  <comment xml:lang="oc">rapòrt sistèma de corrièrs electronics</comment>
+  <comment xml:lang="ko">메일 시스템 보고서</comment>
+  <comment xml:lang="kk-Cyrl">Пошта жүйесінің есептемесі</comment>
+  <comment xml:lang="ja">メールシステムレポート</comment>
+  <comment xml:lang="it">Rapporto di sistema posta</comment>
+  <comment xml:lang="id">Laporan sistem surat</comment>
+  <comment xml:lang="hr">Izvještaj o sustavu e-pošte</comment>
+  <comment xml:lang="hi">मेल सिस्टम रिपोर्ट</comment>
+  <comment xml:lang="he">דוח מערכת דוא״ל</comment>
+  <comment xml:lang="fur">Rapuart dal sisteme de pueste</comment>
+  <comment xml:lang="fr">Rapport du système de messagerie</comment>
+  <comment xml:lang="fi">Viestijärjestelmän ilmoitus</comment>
+  <comment xml:lang="et">Teade e-kirja kättetoimetamise või oleku kohta</comment>
+  <comment xml:lang="es">informe del sistema de correo</comment>
+  <comment xml:lang="en-GB">Mail system report</comment>
+  <comment xml:lang="de">E-Mail-Systembericht</comment>
+  <comment xml:lang="ca">informe del sistema de correu</comment>
+  <comment xml:lang="bg">Доклад на пощенската система</comment>
+  <comment xml:lang="be-Cyrl">справаздача паштовай сістэмы</comment>
+  <comment xml:lang="ar">تقرير نظام بريد</comment>
+</mime-type>

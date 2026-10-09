@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x.sf3-text">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>SF3 Rich Text</comment>
+  <comment xml:lang="uk">форматований текст SF3</comment>
+  <comment xml:lang="tr">SF3 zengin metni</comment>
+  <comment xml:lang="sv">SF3-richtext</comment>
+  <comment xml:lang="sr-Cyrl">SF3 обогаћени текст</comment>
+  <comment xml:lang="sq">Tekst i Pasur SF3</comment>
+  <comment xml:lang="sl">Obogateno besedilo SF3</comment>
+  <comment xml:lang="ru">Форматированный текст SF3</comment>
+  <comment xml:lang="ro">text formatat SF3</comment>
+  <comment xml:lang="pt-BR">Rich text SF3</comment>
+  <comment xml:lang="pl">Dokument SF3</comment>
+  <comment xml:lang="oc">tèxte ric SF3</comment>
+  <comment xml:lang="ko">SF3 리치 텍스트</comment>
+  <comment xml:lang="kk-Cyrl">SF3 пішімделген мәтіні</comment>
+  <comment xml:lang="hr">SF3 formatirani tekst</comment>
+  <comment xml:lang="fr">Texte enrichi SF3</comment>
+  <comment xml:lang="fi">Muotoiltu SF3-teksti</comment>
+  <comment xml:lang="et">SF3 kujundatud tekst</comment>
+  <comment xml:lang="es">texto enriquecido SF3</comment>
+  <comment xml:lang="en-GB">SF3 Rich Text</comment>
+  <comment xml:lang="de">SF3-Rich-Text</comment>
+  <comment xml:lang="ar">نص غني SF3</comment>
+  <acronym>SF3</acronym>
+  <expanded-acronym>Simple File Format Family</expanded-acronym>
+  <glob pattern="*.txt.sf3"/>
+  <glob pattern="*.sf3"/>
+</mime-type>

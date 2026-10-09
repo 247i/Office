@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/vnd.sun.xml.writer.global">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>OpenOffice.org 1.0 Writer global document</comment>
+  <comment xml:lang="zh-Hant-TW">OpenOffice.org 1.0 Writer 主控文件</comment>
+  <comment xml:lang="uk">загальний документ OpenOffice.org Writer 1.0</comment>
+  <comment xml:lang="tr">OpenOffice.org 1.0 Writer global belgesi</comment>
+  <comment xml:lang="sv">OpenOffice.org 1.0 Writer globalt dokument</comment>
+  <comment xml:lang="sr-Cyrl">OpenOffice.org 1.0 Writer општи документ</comment>
+  <comment xml:lang="sq">Dokument global OpenOffice.org 1.0 Writer</comment>
+  <comment xml:lang="sl">Globalni dokument OpenOffice.org Writer 1.0</comment>
+  <comment xml:lang="ru">Документ OpenOffice.org 1.0 Writer global</comment>
+  <comment xml:lang="ro">document global OpenOffice.org 1.0 Writer</comment>
+  <comment xml:lang="pt-BR">Documento global do OpenOffice.org 1.0 Writer</comment>
+  <comment xml:lang="pl">Globalny dokument OpenOffice.org 1.0 Writer</comment>
+  <comment xml:lang="oc">document global OpenOffice.org 1.0 Writer</comment>
+  <comment xml:lang="ko">OpenOffice.org 1.0 Writer 글로벌 문서</comment>
+  <comment xml:lang="kk-Cyrl">OpenOffice.org 1.0 Writer глобалды құжаты</comment>
+  <comment xml:lang="ja">OpenOffice 1.0 Writer グローバルドキュメント</comment>
+  <comment xml:lang="id">Dokumen global OpenOffice.org 1.0 Writer</comment>
+  <comment xml:lang="hr">OpenOffice.org 1.0 Writer globalni dokument</comment>
+  <comment xml:lang="fur">Document globâl di OpenOffice.org 1.0 Writer</comment>
+  <comment xml:lang="fr">Document global OpenOffice.org 1.0 Writer</comment>
+  <comment xml:lang="fi">OpenOffice.org 1.0 Writer asiakirjapohja</comment>
+  <comment xml:lang="et">OpenOffice.org 1.0 Writeri globaalne dokument</comment>
+  <comment xml:lang="es">documento global de OpenOffice.org Writer 1.0</comment>
+  <comment xml:lang="en-GB">OpenOffice.org 1.0 Writer global document</comment>
+  <comment xml:lang="de">OpenOffice.org Writer-1.0-Globaldokument</comment>
+  <comment xml:lang="da">OpenOffice.org 1.0 Writer-globalt dokument</comment>
+  <comment xml:lang="ca">document global d'OpenOffice.org 1.0 Writer</comment>
+  <comment xml:lang="bg">Глобален документ — OpenOffice.org 1.0 Writer</comment>
+  <comment xml:lang="be-Cyrl">глабальны дакумент OpenOffice.org 1.0 Writer</comment>
+  <comment xml:lang="ar">مستند المكتب المفتوح Writer العالمي 1.0</comment>
+  <sub-class-of type="application/zip"/>
+  <generic-icon name="x-office-document"/>
+  <glob pattern="*.sxg"/>
+</mime-type>

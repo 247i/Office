@@ -1,0 +1,47 @@
+if not modules then modules = { } end modules ['spac-brk'] = {
+    version   = 1.001,
+    comment   = "companion to spac-brk.mkiv",
+    author    = "Hans Hagen, PRAGMA-ADE, Hasselt NL",
+    copyright = "PRAGMA ADE / ConTeXt Development Team",
+    license   = "see context related readme files"
+}
+
+-- This one is an outlier because the callback has several different calls all over
+-- the line break routine. It started out as a tracing feature but can also be used
+-- for adding functionality. For performance reasons we assume single usage but that
+-- might change. The steps kept the identifiers from tracing: initialize, start,
+-- list, stop, collect, line, delete, report, wrapup. The checks parameter is the
+-- value of the 'checklinebreaks' integer variable.
+--
+-- In addition to the overload and tracers usage we now also handle twins with this
+-- mechanism but that might change (for instance we could move that to the engine
+-- but keep a traced version here.
+
+local checklist                = { }
+nodes.handlers.linebreakchecks = checklist
+
+local report      = logs.reporter("linebreaks")
+local breakcodes  = tex.breakcodes
+
+checklist[-1] = function(what)
+    report("callback %i : %s",what,breakcodes[what])
+end
+
+local function break_checks_callback(what,checks,...)
+    local check = checklist[checks]
+    if check then
+        return check(what,checks,...)
+    else
+        -- invalid one, waste of overhead
+    end
+end
+
+callbacks.register {
+    name   = "linebreak_check",
+    action = break_checks_callback
+}
+
+callbacks.register {
+    name   = "balance_check",
+    action = break_checks_callback
+}

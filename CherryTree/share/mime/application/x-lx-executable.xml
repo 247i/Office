@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-lx-executable">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>32-bit DOS executable</comment>
+  <comment xml:lang="uk">32-бітовий виконуваний файл DOS</comment>
+  <comment xml:lang="tr">32 bit DOS yürütülebiliri</comment>
+  <comment xml:lang="sv">Körbar 32-bitars DOS-fil</comment>
+  <comment xml:lang="sr-Cyrl">32-битна ДОС извршна датотека</comment>
+  <comment xml:lang="sq">I ekzekutueshëm DOS 32-bit</comment>
+  <comment xml:lang="sl">Izvršljiva datoteka za 32-bitni DOS</comment>
+  <comment xml:lang="ru">Исполняемый файл 32-разрядной DOS</comment>
+  <comment xml:lang="ro">executabil DOS pe 32 de biți</comment>
+  <comment xml:lang="pt-BR">Executável de 32 bits DOS</comment>
+  <comment xml:lang="pl">32-bitowy program DOS</comment>
+  <comment xml:lang="oc">executable DOS 32-bits</comment>
+  <comment xml:lang="ko">32비트 DOS 실행 파일</comment>
+  <comment xml:lang="kk-Cyrl">32-bit DOS орындалатын файлы</comment>
+  <comment xml:lang="fr">exécutable DOS 32-bit</comment>
+  <comment xml:lang="fi">32bit DOS-suoritettava</comment>
+  <comment xml:lang="et">32-bitine DOS-i käivitusfail</comment>
+  <comment xml:lang="es">Ejecutable DOS de 32-bit</comment>
+  <comment xml:lang="en-GB">32-bit DOS executable</comment>
+  <comment xml:lang="de">32-Bit DOS-Programm</comment>
+  <comment xml:lang="ar">ملف DOS تنفيذي بنظام 32 بت</comment>
+  <acronym>DOS</acronym>
+  <expanded-acronym>Disk Operating System</expanded-acronym>
+  <sub-class-of type="application/x-msdownload"/>
+  <generic-icon name="application-x-executable"/>
+  <glob pattern="*.exe" weight="10"/>
+  <glob pattern="*.386" weight="10"/>
+  <glob pattern="*.dll" weight="10"/>
+  <glob pattern="*.sys" weight="10"/>
+  <glob pattern="*.vxd" weight="10"/>
+</mime-type>

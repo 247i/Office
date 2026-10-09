@@ -1,0 +1,86 @@
+%D \module
+%D   [       file=type-otf,
+%D        version=2007.07.30,
+%D          title=\CONTEXT\ Typescript Macros,
+%D       subtitle=Euler,
+%D         author=Hans Hagen,
+%D           date=\currentdate,
+%D      copyright={PRAGMA ADE \& \CONTEXT\ Development Team}]
+%C
+%C This module is part of the \CONTEXT\ macro||package and is
+%C therefore copyrighted by \PRAGMA. See mreadme.pdf for
+%C details.
+
+% Instead of euler.otf we now use euler-math.otf which is a copy of the version
+% that Daniel Flipo maintains now. We will also make an euler-regular.otf for
+% text usage (which might have slighty different metrics then).
+
+\loadtypescriptfile[texgyre]
+\loadtypescriptfile[dejavu]
+
+\definefontfeature[pagellaovereuler][pagellaovereuler=yes]
+\definefontfeature[euleroverpagella][euleroverpagella=yes]
+
+\definefontfeature[eulerregular]   [default][wipemath=no,compose=yes]
+\definefontfeature[eulerbold]      [default][wipemath=no,compose=yes,weight=.3]
+\definefontfeature[euleritalic]    [default][wipemath=no,compose=yes,slant=.2]
+\definefontfeature[eulerbolditalic][default][wipemath=no,compose=yes,slant=.2,weight=.3]
+
+\starttypescriptcollection[pagella-eulernova]
+
+  % \starttypescript [\s!serif] [eulernova] [\s!name]
+  %     \setups[\s!font:\s!fallback:\s!serif]
+  %     \definefontsynonym [\s!Serif] [\s!file:euler-math.otf] [\s!features=\s!default]
+  % \stoptypescript
+
+    \starttypescript [\s!serif] [eulernova] [\s!name]
+        \setups[\s!font:\s!fallback:\s!serif]
+        \definefontsynonym [\s!Serif]           [file:euler-math.otf] [features=eulerregular]
+        \definefontsynonym [\s!SerifBold]       [file:euler-math.otf] [features=eulerbold]
+        \definefontsynonym [\s!SerifItalic]     [file:euler-math.otf] [features=euleritalic]
+        \definefontsynonym [\s!SerifBoldItalic] [file:euler-math.otf] [features=eulerbolditalic]
+    \stoptypescript
+
+    \starttypescript [\s!math] [eulernova] [\s!name]
+        \definefontsynonym [\s!MathRoman] [\s!file:euler-math.otf] [\s!features={\s!math\mathsizesuffix,mathextra},\s!goodies=euler-math]
+    \stoptypescript
+
+    \starttypescript [pagella-eulernova]
+        \definetypeface [\typescriptone] [\s!rm] [\s!serif] [pagella]   [\s!default]
+        \definetypeface [\typescriptone] [\s!tt] [\s!mono]  [dejavu]    [\s!default] [\s!rscale=0.9]
+        \definetypeface [\typescriptone] [\s!mm] [\s!math]  [eulernova] [\s!default]
+        \quittypescriptscanning
+    \stoptypescript
+
+    \starttypescript [eulernova]
+        \definetypeface [\typescriptone] [\s!rm] [\s!serif] [eulernova] [\s!default]
+        \definetypeface [\typescriptone] [\s!tt] [\s!mono]  [dejavu]    [\s!default] [\s!rscale=0.9]
+        \definetypeface [\typescriptone] [\s!mm] [\s!math]  [eulernova] [\s!default]
+        \quittypescriptscanning
+    \stoptypescript
+
+    \starttypescript [\s!math] [euleroverpagella] [\s!name]
+        \definefontsynonym [\s!MathRoman] [texgyrepagella-math] [\s!features={\s!math\mathsizesuffix,euleroverpagella,mathextra},\s!fallbacks=euleroverpagella,\s!goodies=pagella-math]
+    \stoptypescript
+
+    \starttypescript [\s!math] [pagellaovereuler] [\s!name]
+        \definefontsynonym [\s!MathRoman] [\s!file:euler-math.otf] [\s!features={\s!math\mathsizesuffix,pagellaovereuler,mathextra},\s!fallbacks=pagellaovereuler,\s!goodies=euler-math]
+    \stoptypescript
+
+    \starttypescript [pagella-with-euler,euleroverpagella]
+        \definetypeface [\typescriptone] [\s!rm] [\s!serif] [pagella]          [\s!default]
+        \definetypeface [\typescriptone] [\s!ss] [\s!sans]  [dejavu]           [\s!default] [\s!rscale=0.85]
+        \definetypeface [\typescriptone] [\s!tt] [\s!mono]  [dejavu]           [\s!default] [\s!rscale=0.85]
+        \definetypeface [\typescriptone] [\s!mm] [\s!math]  [euleroverpagella] [\s!default]
+        \quittypescriptscanning
+    \stoptypescript
+
+    \starttypescript [euler-with-pagella,pagellaovereuler,euler]
+        \definetypeface [\typescriptone] [\s!rm] [\s!serif] [eulernova]        [\s!default]
+        \definetypeface [\typescriptone] [\s!ss] [\s!sans]  [dejavu]           [\s!default] [\s!rscale=0.85]
+        \definetypeface [\typescriptone] [\s!tt] [\s!mono]  [dejavu]           [\s!default] [\s!rscale=0.85]
+        \definetypeface [\typescriptone] [\s!mm] [\s!math]  [pagellaovereuler] [\s!default]
+        \quittypescriptscanning
+    \stoptypescript
+
+\stoptypescriptcollection

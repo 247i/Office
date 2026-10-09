@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="image/vnd.ms-dds">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>DirectDraw Surface</comment>
+  <comment xml:lang="uk">поверхня DirectDraw</comment>
+  <comment xml:lang="sv">DirectDraw-yta</comment>
+  <comment xml:lang="sl">Površina DirectDraw</comment>
+  <comment xml:lang="ro">suprafață DirectDraw</comment>
+  <comment xml:lang="pt-BR">DirectDraw Surface</comment>
+  <comment xml:lang="ko">DirectDraw 서피스</comment>
+  <comment xml:lang="kk-Cyrl">DirectDraw жазықтығы</comment>
+  <comment xml:lang="et">DirectDraw Surface'i konteiner</comment>
+  <comment xml:lang="de">DirectDraw-Oberfläche</comment>
+  <glob pattern="*.dds"/>
+  <alias type="image/x-dds"/>
+</mime-type>

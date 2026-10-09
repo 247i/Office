@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="image/jxl">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>JPEG XL image</comment>
+  <comment xml:lang="zh-Hant-TW">JPEG XL 影像</comment>
+  <comment xml:lang="zh-Hans-CN">JPEG XL 图像</comment>
+  <comment xml:lang="uk">зображення JPEG XL</comment>
+  <comment xml:lang="tr">JPEG XL görüntüsü</comment>
+  <comment xml:lang="sv">JPEG XL-bild</comment>
+  <comment xml:lang="sr-Cyrl">ЈПЕГ ИксЛ слика</comment>
+  <comment xml:lang="sq">Figurë JPEG XL</comment>
+  <comment xml:lang="sl">Slika JPEG XL</comment>
+  <comment xml:lang="si">JPEG XL රූපය</comment>
+  <comment xml:lang="ru">Изображение JPEG XL</comment>
+  <comment xml:lang="ro">imagine XL JPEG</comment>
+  <comment xml:lang="pt-BR">Imagem JPEG XL</comment>
+  <comment xml:lang="pl">Obraz JPEG XL</comment>
+  <comment xml:lang="oc">imatge JPEG XL</comment>
+  <comment xml:lang="nn">JPEG XL-bilete</comment>
+  <comment xml:lang="nl">JPEG XL-afbeelding</comment>
+  <comment xml:lang="ko">JPEG XL 이미지</comment>
+  <comment xml:lang="kk-Cyrl">JPEG XL суреті</comment>
+  <comment xml:lang="ka">JPEG-XL გამოსახულება</comment>
+  <comment xml:lang="kab">Tugna JPEG XL</comment>
+  <comment xml:lang="ja">JPEG XL 画像 </comment>
+  <comment xml:lang="it">Immagine JPEG XL</comment>
+  <comment xml:lang="id">Gambar JPEG XL</comment>
+  <comment xml:lang="hr">JPEG XL slika</comment>
+  <comment xml:lang="hi">JPEG XL छवि</comment>
+  <comment xml:lang="he">תמונת JPEG XL</comment>
+  <comment xml:lang="gl">Imaxe JPEG XL</comment>
+  <comment xml:lang="fur">Imagjin JPEG XL</comment>
+  <comment xml:lang="fr">Image JPEG XL</comment>
+  <comment xml:lang="fi">JPEG XL kuva</comment>
+  <comment xml:lang="eu">JPEG XL irudia</comment>
+  <comment xml:lang="et">JPEG XL pilt</comment>
+  <comment xml:lang="es">imagen JPEG XL</comment>
+  <comment xml:lang="en-GB">JPEG XL image</comment>
+  <comment xml:lang="de">JPEG-XL-Bild</comment>
+  <comment xml:lang="ca">imatge JPEG XL</comment>
+  <comment xml:lang="bg">Изображение — JPEG XL</comment>
+  <comment xml:lang="be-Cyrl">відарыс JPEG XL</comment>
+  <comment xml:lang="ar">صورة JPEG XL</comment>
+  <glob pattern="*.jxl"/>
+</mime-type>

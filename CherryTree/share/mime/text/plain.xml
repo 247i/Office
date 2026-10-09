@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/plain">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Plain text document</comment>
+  <comment xml:lang="zh-Hant-TW">純文字文件</comment>
+  <comment xml:lang="uk">простий текстовий документ</comment>
+  <comment xml:lang="tr">Düz metin belgesi</comment>
+  <comment xml:lang="sv">Vanligt textdokument</comment>
+  <comment xml:lang="sr-Cyrl">Обичан текстуални документ</comment>
+  <comment xml:lang="sq">Dokument tekst i thjeshtë</comment>
+  <comment xml:lang="sl">Dokument z navadnim besedilom</comment>
+  <comment xml:lang="ru">Текстовый документ</comment>
+  <comment xml:lang="ro">document de text simplu</comment>
+  <comment xml:lang="pt-BR">Documento de texto simples</comment>
+  <comment xml:lang="pl">Zwykły dokument tekstowy</comment>
+  <comment xml:lang="oc">document tèxte brut</comment>
+  <comment xml:lang="nn">Reintekst-dokument</comment>
+  <comment xml:lang="lt">Grynojo teksto dokumentas</comment>
+  <comment xml:lang="ko">일반 텍스트 문서</comment>
+  <comment xml:lang="kk-Cyrl">Мәтіндік құжат</comment>
+  <comment xml:lang="ja">プレーンテキストドキュメント</comment>
+  <comment xml:lang="it">Documento in testo semplice</comment>
+  <comment xml:lang="id">Dokumen teks polos</comment>
+  <comment xml:lang="hr">Neformatiran tekstualni dokument</comment>
+  <comment xml:lang="hi">सादा पाठ दस्तावेज़</comment>
+  <comment xml:lang="he">מסמך טקסט פשוט</comment>
+  <comment xml:lang="fur">Document di test sempliç</comment>
+  <comment xml:lang="fr">Document de texte brut</comment>
+  <comment xml:lang="fi">Puhdas tekstiasiakirja</comment>
+  <comment xml:lang="eu">Testu soileko dokumentua</comment>
+  <comment xml:lang="et">Lihttekstiga dokument</comment>
+  <comment xml:lang="es">documento de texto sin formato</comment>
+  <comment xml:lang="en-GB">Plain text document</comment>
+  <comment xml:lang="de">einfache Textdatei</comment>
+  <comment xml:lang="ca">document de text sense format</comment>
+  <comment xml:lang="bg">Документ — обикновен текст</comment>
+  <comment xml:lang="be-Cyrl">звычайны тэкст</comment>
+  <comment xml:lang="ar">مستند نصي مجرد</comment>
+  <glob pattern="*.txt"/>
+  <glob pattern="*.asc"/>
+  <glob pattern="*,v"/>
+</mime-type>

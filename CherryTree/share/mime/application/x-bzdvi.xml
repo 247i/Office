@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-bzdvi">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>TeX DVI document (bzip2-compressed)</comment>
+  <comment xml:lang="zh-Hant-TW">TeX DVI 文件 (bzip2 壓縮)</comment>
+  <comment xml:lang="uk">документ DVI TeX (стиснений bzip2)</comment>
+  <comment xml:lang="tr">TeX DVI belgesi (bzip2 sıkıştırmalı)</comment>
+  <comment xml:lang="sv">TeX DVI-dokument (bzip2-komprimerat)</comment>
+  <comment xml:lang="sr-Cyrl">TeX DVI документ (сажет Бзипом 2)</comment>
+  <comment xml:lang="sq">Dokument TeX DVI (ngjeshur me bzip2)</comment>
+  <comment xml:lang="sl">Dokument TeX DVI (stisnjen z bzip2)</comment>
+  <comment xml:lang="ru">Документ DVI издательской системы TeX (сжатый bzip2)</comment>
+  <comment xml:lang="ro">document DVI TeX (comprimat bzip2)</comment>
+  <comment xml:lang="pt-BR">Documento DVI TeX (compactado com bzip2)</comment>
+  <comment xml:lang="pl">Dokument TeX DVI (kompresja bzip2)</comment>
+  <comment xml:lang="oc">document DVI TeX (compressat amb bzip2)</comment>
+  <comment xml:lang="nn">TeX DVI-dokument (bzip2-komprimert)</comment>
+  <comment xml:lang="ko">TeX DVI 문서 (BZIP2 압축)</comment>
+  <comment xml:lang="kk-Cyrl">TeX DVI құжаты (bzip2-мен сығылған)</comment>
+  <comment xml:lang="ja">TeX DVI ドキュメント (bzip2 圧縮)</comment>
+  <comment xml:lang="it">Documento TeX DVI (compresso con bzip2)</comment>
+  <comment xml:lang="id">Dokumen TeX DVI (terkompresi bzip2)</comment>
+  <comment xml:lang="hr">TeX DVI dokument (bzip2 komprimirano)</comment>
+  <comment xml:lang="hi">TeX DVI दस्तावेज़ (bzip2-संपीड़ित)</comment>
+  <comment xml:lang="he">מסמך TeX DVI (דחוס ב־bzip2)</comment>
+  <comment xml:lang="fur">Document TeX DVI (comprimût cun bzip2)</comment>
+  <comment xml:lang="fr">Document TeX DVI (compression bzip2)</comment>
+  <comment xml:lang="fi">TeX DVI (bzip2-pakattu)</comment>
+  <comment xml:lang="et">TeX DVI dokument (pakitud bzip2iga)</comment>
+  <comment xml:lang="es">documento DVI de TeX (comprimido con BZIP2)</comment>
+  <comment xml:lang="en-GB">TeX DVI document (bzip2-compressed)</comment>
+  <comment xml:lang="de">TeX-DVI-Dokument (bzip2-komprimiert)</comment>
+  <comment xml:lang="da">TeX DVI-dokument (bzip2-komprimeret)</comment>
+  <comment xml:lang="ca">document DVI de TeX (comprimit amb bzip2)</comment>
+  <comment xml:lang="bg">Документ — TeX DVI, компресиран с bzip2</comment>
+  <comment xml:lang="be-Cyrl">дакумент TeX DVI (сцісканне bzip2)</comment>
+  <comment xml:lang="ar">مستند TeX DVI (مضغوط-bzip2)</comment>
+  <sub-class-of type="application/x-bzip2"/>
+  <generic-icon name="x-office-document"/>
+  <glob pattern="*.dvi.bz2"/>
+</mime-type>

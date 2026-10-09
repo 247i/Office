@@ -1,0 +1,478 @@
+if not modules then modules = { } end modules ['typo-drp'] = {
+    version   = 1.001,
+    comment   = "companion to typo-drp.mkiv",
+    author    = "Hans Hagen, PRAGMA-ADE, Hasselt NL",
+    copyright = "PRAGMA ADE / ConTeXt Development Team",
+    license   = "see context related readme files"
+}
+
+-- This one is sensitive for order (e.g. when combined with first line
+-- processing.
+
+-- todo: use isglyph
+
+local tonumber, type, next = tonumber, type, next
+local ceil = math.ceil
+local settings_to_hash = utilities.parsers.settings_to_hash
+
+local trace_initials    = false  trackers.register("typesetters.initials", function(v) trace_initials = v end)
+local report_initials   = logs.reporter("nodes","initials")
+
+local initials          = typesetters.initials or { }
+typesetters.initials    = initials or { }
+
+local nodes             = nodes
+
+local tasks             = nodes.tasks
+local enableaction      = tasks.enableaction
+local disableaction     = tasks.disableaction
+
+local nuts              = nodes.nuts
+local tonut             = nodes.tonut
+
+local getnext           = nuts.getnext
+local getprev           = nuts.getprev
+local getchar           = nuts.getchar
+local getid             = nuts.getid
+local getattr           = nuts.getattr
+local getwhd            = nuts.getwhd
+
+local getprop           = nuts.getprop
+local setprop           = nuts.setprop
+
+local setfield          = nuts.setfield
+local getfield          = nuts.getfield
+
+local setlink           = nuts.setlink
+local setprev           = nuts.setprev
+local setnext           = nuts.setnext
+local setfont           = nuts.setfont
+local setscale          = nuts.setscale
+local setwhd            = nuts.setwhd
+local setkern           = nuts.setkern
+local setoffsets        = nuts.setoffsets
+local setoptions        = nuts.setoptions
+local getdirection      = nuts.getdirection
+local setdirection      = nuts.setdirection
+local setglyphdata      = nuts.setglyphdata
+local getparstate       = nuts.getparstate
+local patchparshape     = nuts.patchparshape
+
+local hpack_nodes       = nuts.hpack
+
+local nodepool          = nuts.pool
+local new_kern          = nodepool.kern
+
+----- insertbefore      = nuts.insertbefore
+local insertafter       = nuts.insertafter
+local remove_node       = nuts.remove
+
+local startofpar        = nuts.startofpar
+
+local nextnode          = nuts.traversers.node
+local nextglyph         = nuts.traversers.glyph
+
+local setcoloring       = nuts.colors.set
+
+local variables         = interfaces.variables
+local v_default         <const> = variables.default
+local v_margin          <const> = variables.margin
+local v_auto            <const> = variables.auto
+local v_first           <const> = variables.first
+local v_keep            <const> = variables.keep
+local v_yes             <const> = variables.yes
+local v_last            <const> = variables.last
+
+local texget            = tex.get
+local texset            = tex.set
+
+local unsetvalue        <const> = attributes.unsetvalue
+
+local nodecodes         = nodes.nodecodes
+local glyph_code        <const> = nodecodes.glyph
+local hlist_code        <const> = nodecodes.hlist
+local glue_code         <const> = nodecodes.glue
+local kern_code         <const> = nodecodes.kern
+local par_code          <const> = nodecodes.par
+
+local righttoleft_code  <const> = tex.directioncodes.righttoleft
+
+local actions           = { }
+local busyactions       = { }
+initials.actions        = actions
+initials.busyactions    = actions
+
+local a_initial <const> = attributes.private("initial")
+
+local options   <const> = tex.glyphoptioncodes.noexpansion
+                        | tex.glyphoptioncodes.noprotrusion
+
+local category          = characters.category
+
+local levels            = { }
+local getlevel          = tex.getnestlevel or function() return tex.getnest("prv") end
+
+local function set(par,specification)
+    enableaction("processors","typesetters.initials.handler")
+    if trace_initials then
+        report_initials("enabling initials")
+    end
+    levels[getlevel()] = true
+    setprop(par,a_initial,specification)
+end
+
+function initials.set(specification)
+    nuts.setparproperty(set,specification)
+end
+
+interfaces.implement {
+    name      = "setinitial",
+    actions   = initials.set,
+    arguments = {
+        {
+            { "location" },
+            { "enabled", "boolean" },
+            { "method" },
+            { "continue" },
+            { "distance" ,"dimension" },
+            { "hoffset" ,"dimension" },
+            { "voffset" ,"dimension" },
+            { "font", "integer" },
+            { "glyphscale", "integer" },
+            { "dynamic", "integer" },
+            { "ca", "integer" },
+            { "ma", "integer" },
+            { "ta", "integer" },
+            { "n", "integer" },
+            { "m", "integer" },
+        }
+    }
+}
+
+-- todo: prevent linebreak .. but normally a initial ends up at the top of
+-- a page so this has a low priority
+
+local function updateshapestate(head,pdata,hangafter,hangindent)
+    local parshape = pdata.parshape
+setfield(head,"shapingpenalty",10000)
+setfield(head,"shapingpenaltiesmode",255)
+    if parshape then
+        local size = #parshape
+        if size > 0 then
+            local hang = -hangafter
+            local last = hang >= size and { parshape[size][1], parshape[size][2] } or false
+            for i=1,hang do
+                local p = parshape[i]
+                if p then
+                    p[1] = p[1] + hangindent
+                    p[2] = p[2] - hangindent
+                else
+                    parshape[i] = {
+                        last[1] + hangindent,
+                        last[2] - hangindent,
+                    }
+                end
+            end
+            if last then
+                parshape[hang+1] = last
+            end
+            patchparshape(head,parshape)
+            return
+        end
+    end
+    -- set in par node
+    texset("hangafter",hangafter,true)
+    texset("hangindent",hangindent,true)
+end
+
+actions[v_default] = function(head,settings)
+    local skip = false
+    local busy = false
+    -- begin of par
+    local first  = getnext(head)
+    local indent = false
+    -- parbox .. needs to be set at 0
+    if first and getid(first) == hlist_code then
+        first  = getnext(first)
+        indent = true
+    end
+    -- we need to skip over kerns and glues (signals)
+    while first and getid(first) ~= glyph_code do
+        first = getnext(first)
+    end
+    if first and getid(first) == glyph_code then
+        local ma        = settings.ma or 0
+        local ca        = settings.ca
+        local ta        = settings.ta
+        local last      = first
+        local distance  = settings.distance or 0
+        local voffset   = settings.voffset or 0
+        local hoffset   = settings.hoffset or 0
+        local parindent = texget("parindent")          -- todo: get from par node
+        local baseline  = texget("baselineskip",false) -- todo: get from par node
+     -- local parindent = getfield(head,"parindent")
+     -- local baseline  = getfield(head,"baselineskip")
+        local lines     = tonumber(settings.n) or 0
+        local dynamic   = settings.dynamic
+        local font      = settings.font
+        local scale     = settings.glyphscale
+        local method    = settings_to_hash(settings.method)
+        local length    = tonumber(settings.m) or 1
+        --
+        -- 1 char | n chars | skip first quote | ignore punct | keep punct
+        --
+        setoptions(first,options)
+        --
+        if getattr(first,a_initial) then
+            for current in nextnode, getnext(first) do
+                if getattr(current,a_initial) then
+                    last = current
+                else
+                    break
+                end
+            end
+        elseif method[v_auto] then
+            local char = getchar(first)
+            local kind = category(char)
+            if kind == "po" or kind == "pi" then
+                if method[v_first] then
+                    -- remove quote etc before initial
+                    local next = getnext(first)
+                    if not next then
+                        -- don't start with a quote or so
+                        return head
+                    end
+                    last = nil
+                    for current in nextglyph, next do
+                        head, first = remove_node(head,first,true)
+                        first = current
+                        last = first
+                        break
+                    end
+                    if not last then
+                        -- no following glyph or so
+                        return head
+                    end
+                else
+                    -- keep quote etc with initial
+                    local next = getnext(first)
+                    if next and method[v_keep] then
+                        skip = first
+                    end
+                    if not next then
+                        -- don't start with a quote or so
+                        return head
+                    end
+                    for current in nextglyph, next do
+                        last = current
+                        break
+                    end
+                    if last == first then
+                        return head
+                    end
+                end
+            elseif kind == "pf" then
+                -- error: final quote
+            else
+                -- okay
+            end
+            -- maybe also: get all A. B. etc
+            local next = getnext(first)
+            if next then
+                for current, char in nextglyph, next do
+                    local kind = category(char)
+                    if kind == "po" then
+                        if method[v_last] then
+                            -- remove period etc after initial
+                            remove_node(head,current,true)
+                        else
+                            -- keep period etc with initial
+                            last = current
+                        end
+                    end
+                    break
+                end
+            end
+        else
+            for current in nextglyph, first do
+                last = current
+                if length <= 1 then
+                    break
+                else
+                    length = length - 1
+                end
+            end
+        end
+        local current = first
+        while true do
+            local id = getid(current)
+            if id == kern_code then
+                setkern(current,0)
+            elseif id == glyph_code and skip ~= current then
+                local next = getnext(current)
+                if font then
+                    setfont(current,font)
+                end
+                if scale then
+                    setscale(current,scale)
+                end
+                if dynamic > 0 then
+                    setglyphdata(current,dynamic)
+                end
+                setcoloring(current,ma,ca,ta)
+            end
+            if current == last then
+                break
+            else
+                current = getnext(current)
+            end
+        end
+        -- We pack so that successive handling cannot touch the dropped cap. Packaging
+        -- in a hlist is also needed because we cannot locally adapt e.g. parindent (not
+        -- yet stored in with par).
+        local prev = getprev(first)
+        local next = getnext(last)
+        --
+        setprev(first)
+        setnext(last)
+        local dropper = hpack_nodes(first)
+        local width, height, depth = getwhd(dropper)
+        setwhd(dropper,0,0,0)
+        --
+        setlink(prev,dropper,next)
+        --
+        if getdirection(head) == righttoleft_code then
+            setdirection(dropper,righttoleft_code)
+        end
+        if next then
+            local current = next
+            while current do
+                local id = getid(current)
+                if id == glue_code or id == kern_code then
+                    local next = getnext(current)
+                 -- remove_node(current,current,true) -- created an invalid next link and dangling remains
+                    remove_node(head,current,true)
+                    current = next
+                else
+                    break
+                end
+            end
+        end
+        --
+        local hoffset = width + hoffset + distance + (indent and parindent or 0)
+        for current in nextglyph, first do
+            if skip == current then
+                setoffsets(current,-hoffset,0)
+            else
+                setoffsets(current,-hoffset,-voffset) -- no longer - height here
+            end
+            if current == last then
+                break
+            end
+        end
+        --
+        first = dropper
+        --
+        if settings.location == v_margin then
+            -- okay
+        else
+            if lines == 0 then -- safeguard, not too precise
+                lines = ceil((height+voffset) / baseline)
+            end
+            -- We cannot set parshape yet ... when we can I'll add a slope
+            -- option (positive and negative, in emwidth).
+            local hangafter  = - lines
+            local hangindent = width + distance
+            if trace_initials then
+                report_initials("setting hangafter to %i and hangindent to %p",hangafter,hangindent)
+            end
+            if settings.continue == v_yes then
+                local state = {
+                    lines      = lines,
+                    hangindent = hangindent,
+                    parindent  = indent and parindent,
+                }
+                busy = function(head)
+                    local lines = state.lines
+                    local pdata = getparstate(head,true)
+                    local done  = pdata.prevgraf or lines
+                    if done < lines then
+                        local hangafter  = -(lines - done)
+                        local hangindent = state.hangindent
+                        updateshapestate(head,pdata,hangafter,hangindent)
+                        if state.parindent then
+                            insertafter(first,first,new_kern(-state.parindent))
+                        end
+                        state.lines =  lines - done
+                        return busy
+                    else
+                        return false
+                    end
+                end
+            end
+            local pdata = getparstate(head,true)
+            updateshapestate(head,pdata,hangafter,hangindent)
+        end
+        if indent then
+            insertafter(first,first,new_kern(-parindent))
+        end
+    end
+    return head, busy
+end
+
+-- we can count ... when all done, we can disable ...
+
+-- function initials.handler(head,groupcode)
+--     if getid(head) == par_code and startofpar(head) then
+--         local settings = getprop(head,a_initial)
+--         if settings then
+--             disableaction("processors","typesetters.initials.handler")
+--             local alternative = settings.alternative or v_default
+--             local action = actions[alternative] or actions[v_default]
+--             if action then
+--                 if trace_initials then
+--                     report_initials("processing initials, alternative %a",alternative)
+--                 end
+--                 return action(head,settings)
+--             end
+--         end
+--     end
+--     return head
+-- end
+
+-- doesn't work well nested but no sane user will do that
+
+local busy = false
+
+function initials.handler(head,groupcode)
+    if getid(head) == par_code and startofpar(head) then
+        if busy then
+            busy = busy(head)
+        end
+        if not busy then
+            local settings = getprop(head,a_initial)
+            if not settings or settings.continue ~= v_yes then
+                levels[getlevel()] = nil
+                if not next(levels) then
+                    disableaction("processors","typesetters.initials.handler")
+                    if trace_initials then
+                        report_initials("disabling initials")
+                    end
+                end
+            end
+            if settings then
+                local alternative = settings.alternative or v_default
+                local action = actions[alternative] or actions[v_default]
+                if action then
+                    if trace_initials then
+                        report_initials("processing initials, alternative %a",alternative)
+                    end
+                    head, busy = action(head,settings)
+                    return head
+                end
+            end
+        end
+    end
+    return head
+end
+

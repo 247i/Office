@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="model/x.sf3-physics">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>SF3 Physics Model</comment>
+  <comment xml:lang="uk">фізична модель SF3 Physics Model</comment>
+  <comment xml:lang="tr">SF3 fizik modeli</comment>
+  <comment xml:lang="sv">SF3-fysikmodell</comment>
+  <comment xml:lang="sr-Cyrl">SF3 физички модел</comment>
+  <comment xml:lang="sq">Model Fizike SF3</comment>
+  <comment xml:lang="sl">Fizikalni model SF3</comment>
+  <comment xml:lang="ru">Физическая модель SF3</comment>
+  <comment xml:lang="ro">model fizic SF3 3D</comment>
+  <comment xml:lang="pt-BR">Modelo de física SF3</comment>
+  <comment xml:lang="pl">Model fizyczny SF3</comment>
+  <comment xml:lang="oc">modèl fisic SF3</comment>
+  <comment xml:lang="ko">SF3 물리 모델</comment>
+  <comment xml:lang="kk-Cyrl">SF3 физикалық моделі</comment>
+  <comment xml:lang="hr">SF3 fizički model</comment>
+  <comment xml:lang="fr">Modèle physique SF3</comment>
+  <comment xml:lang="fi">SF3 Physics -malli</comment>
+  <comment xml:lang="et">SF3 füüsilikamudel</comment>
+  <comment xml:lang="es">modelo de física SF3</comment>
+  <comment xml:lang="en-GB">SF3 Physics Model</comment>
+  <comment xml:lang="de">SF3-Physikmodell</comment>
+  <comment xml:lang="ar">نموذج فيزيائي SF3</comment>
+  <acronym>SF3</acronym>
+  <expanded-acronym>Simple File Format Family</expanded-acronym>
+  <glob pattern="*.phys.sf3"/>
+  <glob pattern="*.sf3"/>
+</mime-type>

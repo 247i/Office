@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--This is a Teach2000 document (http://teach2000.memtrain.com)-->
+<teach2000>
+	<version>831</version>
+	<description>Normal</description>
+	<message_data encrypted="N" mm_files_embedded="N">
+		<font_question>Arial</font_question>
+		<font_answer>Lucida Sans Unicode</font_answer>
+		<items>
+			<item id="0">
+				<questions>
+					<question id="0">een</question>
+				</questions>
+				<answers type="0">
+					<answer id="0">one</answer>
+				</answers>
+				<errors>0</errors>
+				<testcount>1</testcount>
+				<correctcount>1</correctcount>
+			</item>
+			<item id="1">
+				<questions>
+					<question id="0">twee</question>
+				</questions>
+				<answers type="0">
+					<answer id="0">two</answer>
+				</answers>
+				<errors>1</errors>
+				<testcount>1</testcount>
+				<correctcount>0</correctcount>
+			</item>
+		</items>
+		<testresults>
+			<testresult>
+				<score>5.5</score>
+				<diff>150</diff>
+				<comment />
+				<dt>2013-01-22T18:29:18.454968</dt>
+				<duration>1899-12-30T01:00:03.018602</duration>
+				<answerscorrect>1</answerscorrect>
+				<wrongonce>1</wrongonce>
+				<wrongtwice>0</wrongtwice>
+				<wrongmorethantwice>0</wrongmorethantwice>
+			</testresult>
+		</testresults>
+		<mapquizfile/>
+	</message_data>
+</teach2000>

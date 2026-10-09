@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/vnd.cyclonedx+json">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>CycloneDX BOM document</comment>
+  <comment xml:lang="zh-Hant-TW">CycloneDX BOM 文件</comment>
+  <comment xml:lang="uk">документ BOM CycloneDX</comment>
+  <comment xml:lang="tr">CycloneDX BOM belgesi</comment>
+  <comment xml:lang="sv">CycloneDX BOM-dokument</comment>
+  <comment xml:lang="sr-Cyrl">ЦиклонД-икс БОМ документ</comment>
+  <comment xml:lang="sq">Dokument CycloneDX BOM</comment>
+  <comment xml:lang="sl">Dokument CycloneDX BOM</comment>
+  <comment xml:lang="ru">Документ CycloneDX BOM</comment>
+  <comment xml:lang="ro">document CycloneDX BOM</comment>
+  <comment xml:lang="pt-BR">Documento BOM CycloneDX</comment>
+  <comment xml:lang="pt">Documento BOM do CycloneDX</comment>
+  <comment xml:lang="pl">Dokument BOM CycloneDX</comment>
+  <comment xml:lang="oc">document CycloneDX BOM</comment>
+  <comment xml:lang="ko">CycloneDX BOM 문서</comment>
+  <comment xml:lang="kk-Cyrl">CycloneDX BOM құжаты</comment>
+  <comment xml:lang="hr">CycloneDX BOM dokument</comment>
+  <comment xml:lang="fr">Document CycloneDX BOM</comment>
+  <comment xml:lang="fi">CycloneDX BOM asiakirja</comment>
+  <comment xml:lang="et">CycloneDX BOM dokument</comment>
+  <comment xml:lang="es">documento de BOM CycloneDX</comment>
+  <comment xml:lang="en-GB">CycloneDX BOM document</comment>
+  <comment xml:lang="de">CycloneDX BOM-Dokument</comment>
+  <comment xml:lang="da">CycloneDX BOM-dokument</comment>
+  <comment xml:lang="bg">Документ — CycloneDX BOM</comment>
+  <comment xml:lang="ar">مستند CycloneDX BOM</comment>
+  <acronym>BOM</acronym>
+  <expanded-acronym>Bill Of Materials</expanded-acronym>
+  <sub-class-of type="application/json"/>
+  <glob pattern="*.cdx.json"/>
+</mime-type>

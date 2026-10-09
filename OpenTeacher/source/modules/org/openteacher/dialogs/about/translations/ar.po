@@ -1,0 +1,49 @@
+# Arabic translation for openteacher
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2011-09-27 01:18+0000\n"
+"Last-Translator: El Achèche ANIS <elachecheanis@gmail.com>\n"
+"Language-Team: Arabic <ar@li.org>\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:42+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: about.py:43
+msgid "Project website"
+msgstr "موقع الويب الخاص بالمشروع"
+
+#: about.py:93
+msgid "Full license text"
+msgstr "نص الترخيص الكامل"
+
+#: about.py:199
+msgid "Thanks to all Launchpad contributors!"
+msgstr "شكرا لكل مستعملي Launchpad الذّين ساهموا في تطوير البرنامج"
+
+#: about.py:244 about.py:245
+msgid "About"
+msgstr "معلومات عن البرنامج"
+
+#: about.py:246
+msgid "License"
+msgstr "ترخيص"
+
+#: about.py:247
+msgid "Authors"
+msgstr "المؤلّفون"
+
+#~ msgid "About module"
+#~ msgstr "حول الوحدة"
+
+#~ msgid "OpenTeacher authors"
+#~ msgstr "مطوّروا OpenTeacher"

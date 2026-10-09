@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-cb7">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Comic book archive (7z container)</comment>
+  <comment xml:lang="zh-Hant-TW">漫畫書封存 (7z 容器)</comment>
+  <comment xml:lang="uk">архів коміксів (контейнер 7z)</comment>
+  <comment xml:lang="tr">Çizgi roman arşivi (7z kapsayıcısı)</comment>
+  <comment xml:lang="sv">Serietidningsarkiv (7z-behållare)</comment>
+  <comment xml:lang="sr-Cyrl">Архива стрипа (7z контејнер)</comment>
+  <comment xml:lang="sq">Arkiv librash me figura (kontejner 7z)</comment>
+  <comment xml:lang="sl">Stripovski arhiv (vsebnik 7z)</comment>
+  <comment xml:lang="ru">Архив комиксов (7z-контейнер)</comment>
+  <comment xml:lang="ro">arhivă carte Comic (container 7z)</comment>
+  <comment xml:lang="pt-BR">Arquivo de revista eletrônica (contêiner 7z)</comment>
+  <comment xml:lang="pl">Archiwum komiksu (kontener 7z)</comment>
+  <comment xml:lang="oc">archiu de benda dessenhada (contenedor 7z)</comment>
+  <comment xml:lang="ko">만화책 묶음 파일 (7Z 컨테이너)</comment>
+  <comment xml:lang="kk-Cyrl">Comic book архиві (7z-контейнері)</comment>
+  <comment xml:lang="ja">コミックブックアーカイブ (7z コンテナ)</comment>
+  <comment xml:lang="it">Archivio comic book (contenitore 7z)</comment>
+  <comment xml:lang="id">Arsip buku komik (kontainer 7z)</comment>
+  <comment xml:lang="hr">Arhiva stripova (7z spremnik)</comment>
+  <comment xml:lang="hi">कॉमिक बुक अभिलेख (7z कंटेनर)</comment>
+  <comment xml:lang="he">ארכיון ספר קומיקס (מעטפת 7z)</comment>
+  <comment xml:lang="gl">Arquivo de libro de banda deseñada (contedor 7z)</comment>
+  <comment xml:lang="fur">Archivi Comic book (contignidôr 7z)</comment>
+  <comment xml:lang="fr">Archive de bandes dessinées (conteneur 7z)</comment>
+  <comment xml:lang="fi">Sarjakuva-arkisto (7z)</comment>
+  <comment xml:lang="et">Koomiksivihiku arhiiv (7z-konteineris)</comment>
+  <comment xml:lang="es">archivador de libro de historietas (contenedor 7Z)</comment>
+  <comment xml:lang="en-GB">Comic book archive (7z container)</comment>
+  <comment xml:lang="de">Comic-Book-Archiv (7z-Container)</comment>
+  <comment xml:lang="da">Tegneseriearkiv (7z-container)</comment>
+  <comment xml:lang="ca">arxiu de còmic (contenidor 7z)</comment>
+  <comment xml:lang="bg">Архив за комикси, 7z контейнер</comment>
+  <comment xml:lang="be-Cyrl">архіў comic book (кантэйнер 7z)</comment>
+  <comment xml:lang="ar">أرشيف كتب مصورة (حاوية 7z)</comment>
+  <sub-class-of type="application/x-7z-compressed"/>
+  <generic-icon name="x-office-document"/>
+  <glob pattern="*.cb7"/>
+</mime-type>

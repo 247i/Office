@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-stardraw">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>StarDraw 4 drawing</comment>
+  <comment xml:lang="zh-Hant-TW">StarDraw 4 繪圖</comment>
+  <comment xml:lang="uk">малюнок StarDraw 4</comment>
+  <comment xml:lang="tr">StarDraw 4 çizimi</comment>
+  <comment xml:lang="sv">StarDraw 4-teckning</comment>
+  <comment xml:lang="sr-Cyrl">Стар-цртање 4 цртеж</comment>
+  <comment xml:lang="sq">Vizatim StarDraw 4</comment>
+  <comment xml:lang="sl">Risba StarDraw 4</comment>
+  <comment xml:lang="ru">Рисунок StarDraw 4</comment>
+  <comment xml:lang="ro">desen StarDraw 4</comment>
+  <comment xml:lang="pt-BR">Desenho do StarDraw 4</comment>
+  <comment xml:lang="pl">Rysunek StarDraw 4</comment>
+  <comment xml:lang="oc">dessenh StarDraw 4</comment>
+  <comment xml:lang="nn">StarDraw 4-teikning</comment>
+  <comment xml:lang="ko">StarDraw 4 그림</comment>
+  <comment xml:lang="kk-Cyrl">StarDraw 4 сызбасы</comment>
+  <comment xml:lang="ja">StarDraw 4 ドロー</comment>
+  <comment xml:lang="it">Disegno StarDraw 4</comment>
+  <comment xml:lang="id">Gambar StarDraw 4</comment>
+  <comment xml:lang="hr">StarDraw 4 crtež</comment>
+  <comment xml:lang="he">ציור StarDraw 4</comment>
+  <comment xml:lang="fur">Dissen di StarDraw 4</comment>
+  <comment xml:lang="fr">Dessin StarDraw 4</comment>
+  <comment xml:lang="fi">StarDraw 4 piirros</comment>
+  <comment xml:lang="et">StarDraw 4 joonistus</comment>
+  <comment xml:lang="es">dibujo de StarDraw 4</comment>
+  <comment xml:lang="en-GB">StarDraw 4 drawing</comment>
+  <comment xml:lang="de">StarDraw-4-Zeichnung</comment>
+  <comment xml:lang="da">StarDraw 4-tegning</comment>
+  <comment xml:lang="ca">dibuix de StarDraw 4</comment>
+  <comment xml:lang="bg">Чертеж — StarDraw 4</comment>
+  <comment xml:lang="be-Cyrl">рысунак StarDraw 4</comment>
+  <comment xml:lang="ar">تصميم StarDraw 4</comment>
+  <sub-class-of type="application/x-ole-storage"/>
+  <generic-icon name="image-x-generic"/>
+  <glob pattern="*.sda" weight="40"/>
+</mime-type>

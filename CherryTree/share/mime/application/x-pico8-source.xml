@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-pico8-source">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>PICO-8 editable code</comment>
+  <comment xml:lang="uk">редагований код PICO-8</comment>
+  <comment xml:lang="tr">PICO-8 düzenlenebilir kodu</comment>
+  <comment xml:lang="sv">PICO-8 redigerbar kod</comment>
+  <comment xml:lang="sr-Cyrl">PICO-8 измењиви код</comment>
+  <comment xml:lang="sq">Kod PICO-8 i përpunueshëm</comment>
+  <comment xml:lang="sl">Koda za urejanje PICO-8</comment>
+  <comment xml:lang="ru">Редактируемый блок кода PICO-8</comment>
+  <comment xml:lang="ro">cod editabil PICO-8</comment>
+  <comment xml:lang="pt-BR">Código editável PICO-8</comment>
+  <comment xml:lang="pl">Modyfikowalny kod PICO-8</comment>
+  <comment xml:lang="oc">còde modificable PICO-8</comment>
+  <comment xml:lang="ko">PICO-8 편집 가능 코드</comment>
+  <comment xml:lang="kk-Cyrl">PICO-8 түзетілетін коды</comment>
+  <comment xml:lang="fr">code éditable PICO-8</comment>
+  <comment xml:lang="fi">PICO-8 muokattava koodi</comment>
+  <comment xml:lang="et">PICO-8 muudetav kood</comment>
+  <comment xml:lang="es">Código editable PICO-8</comment>
+  <comment xml:lang="en-GB">PICO-8 editable code</comment>
+  <comment xml:lang="de">PICO-8-Quellcode</comment>
+  <sub-class-of type="text/plain"/>
+  <glob pattern="*.p8"/>
+</mime-type>

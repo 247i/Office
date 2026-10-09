@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-spectrum-hdf">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>ZX Spectrum HDF hard disk image</comment>
+  <comment xml:lang="uk">образ жорсткого диска ZX Spectrum HDF</comment>
+  <comment xml:lang="tr">ZX Spectrum HDF sabit disk kalıbı</comment>
+  <comment xml:lang="sv">ZX Spectrum HDF-hårddiskavbild</comment>
+  <comment xml:lang="sr-Cyrl">Одраз чврстог диска за Зет-Икс Спектрум ХДФ</comment>
+  <comment xml:lang="sq">Pamje disku ZX Spectrum HDF</comment>
+  <comment xml:lang="sl">Odtis trdega diska ZX Spectrum HDF</comment>
+  <comment xml:lang="ru">Образ жёсткого диска ZX Spectrum HDF</comment>
+  <comment xml:lang="ro">imagine de disc dur ZX Spectrum HDF</comment>
+  <comment xml:lang="pt-BR">Imagem de disco rígido ZX Spectrum HDF</comment>
+  <comment xml:lang="pl">Obraz dysku twardego ZX Spectrum HDF</comment>
+  <comment xml:lang="oc">imatge disc dur ZX Spectrum HDF</comment>
+  <comment xml:lang="ko">ZX Spectrum HDF 하드 디스크 이미지</comment>
+  <comment xml:lang="kk-Cyrl">ZX Spectrum HDF қатты диск бейнесі</comment>
+  <comment xml:lang="fr">image de disque dur ZX Spectrum HDF</comment>
+  <comment xml:lang="fi">ZX Spectrum HDF kiintolevykuva</comment>
+  <comment xml:lang="et">ZX Spectrum HDF kõvakettatõmmis</comment>
+  <comment xml:lang="es">imagen de disco duro HDF de ZX Spectrum</comment>
+  <comment xml:lang="en-GB">ZX Spectrum HDF hard disk image</comment>
+  <comment xml:lang="de">ZX-Spectrum-HDF-Festplattenabbild</comment>
+  <glob pattern="*.hdf"/>
+</mime-type>

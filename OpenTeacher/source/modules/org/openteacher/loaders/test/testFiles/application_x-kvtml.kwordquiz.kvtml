@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE kvtml PUBLIC "kvtml2.dtd" "http://edu.kde.org/kvtml/kvtml2.dtd">
+<kvtml version="2.0">
+  <information>
+    <generator>kwordquiz 0.9.2</generator>
+    <title>Untitled</title>
+    <date>2012-12-12</date>
+  </information>
+  <identifiers>
+    <identifier id="0">
+      <name>Column 1</name>
+      <locale>en</locale>
+    </identifier>
+    <identifier id="1">
+      <name>Column 2</name>
+      <locale>en</locale>
+    </identifier>
+  </identifiers>
+  <entries>
+    <entry id="0">
+      <translation id="0">
+        <text>een</text>
+      </translation>
+      <translation id="1">
+        <text>one</text>
+      </translation>
+    </entry>
+    <entry id="1">
+      <translation id="0">
+        <text>twee</text>
+        <image>home/marten/Documenten/Blender/snow.png</image>
+      </translation>
+      <translation id="1">
+        <text>two</text>
+      </translation>
+    </entry>
+    <entry id="2">
+      <translation id="0"/>
+      <translation id="1"/>
+    </entry>
+    <entry id="3">
+      <translation id="0"/>
+      <translation id="1"/>
+    </entry>
+    <entry id="4">
+      <translation id="0"/>
+      <translation id="1"/>
+    </entry>
+    <entry id="5">
+      <translation id="0"/>
+      <translation id="1"/>
+    </entry>
+    <entry id="6">
+      <translation id="0"/>
+      <translation id="1"/>
+    </entry>
+    <entry id="7">
+      <translation id="0"/>
+      <translation id="1"/>
+    </entry>
+    <entry id="8">
+      <translation id="0"/>
+      <translation id="1"/>
+    </entry>
+    <entry id="9">
+      <translation id="0"/>
+      <translation id="1"/>
+    </entry>
+    <entry id="10">
+      <translation id="0"/>
+      <translation id="1"/>
+    </entry>
+    <entry id="11">
+      <translation id="0"/>
+      <translation id="1"/>
+    </entry>
+    <entry id="12">
+      <translation id="0"/>
+      <translation id="1"/>
+    </entry>
+    <entry id="13">
+      <translation id="0"/>
+      <translation id="1"/>
+    </entry>
+    <entry id="14">
+      <translation id="0"/>
+      <translation id="1"/>
+    </entry>
+    <entry id="15">
+      <translation id="0"/>
+      <translation id="1"/>
+    </entry>
+    <entry id="16">
+      <translation id="0"/>
+      <translation id="1"/>
+    </entry>
+    <entry id="17">
+      <translation id="0"/>
+      <translation id="1"/>
+    </entry>
+    <entry id="18">
+      <translation id="0"/>
+      <translation id="1"/>
+    </entry>
+    <entry id="19">
+      <translation id="0"/>
+      <translation id="1"/>
+    </entry>
+  </entries>
+</kvtml>

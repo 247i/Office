@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/x-todo-txt">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Todo.txt file</comment>
+  <comment xml:lang="zh-Hant-TW">Todo.txt 檔案</comment>
+  <comment xml:lang="uk">файл Todo.txt</comment>
+  <comment xml:lang="tr">TODO.txt dosyası</comment>
+  <comment xml:lang="sv">Todo.txt-fil</comment>
+  <comment xml:lang="sr-Cyrl">Todo.txt датотека</comment>
+  <comment xml:lang="sq">Kartelë todo.txt</comment>
+  <comment xml:lang="sl">Datoteka todo.txt</comment>
+  <comment xml:lang="ru">Файл Todo.txt</comment>
+  <comment xml:lang="ro">fișier Todo.txt</comment>
+  <comment xml:lang="pt-BR">Arquivo todo.txt</comment>
+  <comment xml:lang="pl">Plik Todo.txt</comment>
+  <comment xml:lang="oc">fichièr Todo.txt</comment>
+  <comment xml:lang="nn">Todo.txt-fil</comment>
+  <comment xml:lang="ko">Todo.txt 파일</comment>
+  <comment xml:lang="kk-Cyrl">Todo.txt файлы</comment>
+  <comment xml:lang="kab">Afaylu Todo.txt</comment>
+  <comment xml:lang="ja">TODO文書</comment>
+  <comment xml:lang="it">File todo.txt</comment>
+  <comment xml:lang="id">Berkas Todo.txt</comment>
+  <comment xml:lang="hr">Todo.txt datoteka</comment>
+  <comment xml:lang="hi">Todo.txt फाइल</comment>
+  <comment xml:lang="he">קובץ Todo.txt</comment>
+  <comment xml:lang="fur">File Todo.txt</comment>
+  <comment xml:lang="fr">Fichier Todo.txt</comment>
+  <comment xml:lang="fi">Todo.txt-tiedosto</comment>
+  <comment xml:lang="eu">Egitekoak.txt fitxategia</comment>
+  <comment xml:lang="et">Todo.txt fail</comment>
+  <comment xml:lang="es">archivo Todo.txt</comment>
+  <comment xml:lang="en-GB">Todo.txt file</comment>
+  <comment xml:lang="de">Todo.txt-Datei</comment>
+  <comment xml:lang="ca">fitxer todo.txt</comment>
+  <comment xml:lang="bg">Файл — Todo.txt</comment>
+  <comment xml:lang="be-Cyrl">файл Todo.txt</comment>
+  <comment xml:lang="ar">ملف Todo.txt</comment>
+  <sub-class-of type="text/plain"/>
+  <glob pattern="todo.txt"/>
+</mime-type>

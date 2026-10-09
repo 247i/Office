@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="inode/blockdevice">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Block device</comment>
+  <comment xml:lang="zh-Hant-TW">區塊裝置</comment>
+  <comment xml:lang="uk">блоковий пристрій</comment>
+  <comment xml:lang="tr">Blok aygıtı</comment>
+  <comment xml:lang="sv">Blockenhet</comment>
+  <comment xml:lang="sr-Cyrl">Блок уређај</comment>
+  <comment xml:lang="sl">Blokovna naprava</comment>
+  <comment xml:lang="ru">Блочное устройство</comment>
+  <comment xml:lang="ro">dispozitiv de blocuri</comment>
+  <comment xml:lang="pt-BR">Dispositivo de bloco</comment>
+  <comment xml:lang="pl">Urządzenie blokowe</comment>
+  <comment xml:lang="oc">periferic de blòts</comment>
+  <comment xml:lang="nn">Blokkeining</comment>
+  <comment xml:lang="ko">블록 장치</comment>
+  <comment xml:lang="kk-Cyrl">Блоктық құрылғы</comment>
+  <comment xml:lang="ka">ბლოკური მოწყობილობა</comment>
+  <comment xml:lang="ja">区画様機器</comment>
+  <comment xml:lang="it">Device a blocchi</comment>
+  <comment xml:lang="id">Perangkat blok</comment>
+  <comment xml:lang="hr">Blokovski uređaj</comment>
+  <comment xml:lang="hi">ब्लॉक उपकरण</comment>
+  <comment xml:lang="he">התקן בלוק</comment>
+  <comment xml:lang="gl">Dispositivo de bloque</comment>
+  <comment xml:lang="fur">Dispositîf a blocs</comment>
+  <comment xml:lang="fr">Périphérique bloc</comment>
+  <comment xml:lang="fi">Lohkolaite</comment>
+  <comment xml:lang="eu">Bloke-gailua</comment>
+  <comment xml:lang="et">Plokkseade</comment>
+  <comment xml:lang="es">dispositivo de bloques</comment>
+  <comment xml:lang="en-GB">Block device</comment>
+  <comment xml:lang="de">blockorientiertes Gerät</comment>
+  <comment xml:lang="ca">dispositiu de blocs</comment>
+  <comment xml:lang="bg">Блоково устройство</comment>
+  <comment xml:lang="be-Cyrl">блокавая прылада</comment>
+  <comment xml:lang="ar">جهاز كتلي</comment>
+</mime-type>

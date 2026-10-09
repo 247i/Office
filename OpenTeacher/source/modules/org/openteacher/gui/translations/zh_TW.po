@@ -1,0 +1,139 @@
+# Chinese (Traditional) translation for openteacher
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:38+0200\n"
+"PO-Revision-Date: 2013-05-29 07:28+0000\n"
+"Last-Translator: Louie Chen <louie23@gmail.com>\n"
+"Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:42+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: gui.py:423
+msgid "Open from file"
+msgstr "從檔案開啟"
+
+#: ui.py:51
+msgid "Enter list"
+msgstr "輸入列表"
+
+#: ui.py:52
+msgid "Teach me!"
+msgstr "教我！"
+
+#: ui.py:53
+msgid "Show results"
+msgstr "顯示結果"
+
+#: ui.py:272
+msgid "&File"
+msgstr "檔案（&F）"
+
+#: ui.py:273
+msgid "&New"
+msgstr "新建(&N)..."
+
+#: ui.py:274
+msgid "&Open"
+msgstr "開啟 (&O)"
+
+#: ui.py:275
+msgid "Open &into current list"
+msgstr ""
+
+#: ui.py:276
+msgid "&Save"
+msgstr "儲存(&S)..."
+
+#: ui.py:277
+msgid "Save &As"
+msgstr "另存新檔(&A)"
+
+#: ui.py:278
+msgid "&Print"
+msgstr "列印(&P)"
+
+#: ui.py:279
+msgid "&Quit"
+msgstr "結束(&Q)"
+
+#: ui.py:281
+msgid "&Edit"
+msgstr "編輯 (&E)"
+
+#: ui.py:282
+msgid "&Reverse list"
+msgstr ""
+
+#: ui.py:283
+msgid "&Settings"
+msgstr "設置(&S)"
+
+#: ui.py:285
+msgid "&View"
+msgstr "檢視(&V)"
+
+#: ui.py:286
+msgid "Fullscreen"
+msgstr "全螢幕"
+
+#: ui.py:288
+msgid "&Help"
+msgstr "幫助(&H)"
+
+#: ui.py:289
+msgid "&Documentation"
+msgstr "說明文件(&D)"
+
+#: ui.py:290
+msgid "&About"
+msgstr "關於(&A)"
+
+#: ui.py:292
+msgid "Toolbar"
+msgstr "工具列"
+
+#~ msgid "Close Tab"
+#~ msgstr "關閉分頁"
+
+#~ msgid "Create lesson:"
+#~ msgstr "建立課程："
+
+#~ msgid "Choose file to save"
+#~ msgstr "選擇檔案儲存"
+
+#~ msgid "Choose file to open"
+#~ msgstr "選擇檔案開啟"
+
+#~ msgid "Recently opened:"
+#~ msgstr "最近開啟檔案："
+
+#~ msgid "Load lesson:"
+#~ msgstr "載入課程："
+
+#~ msgid "Ctrl+P"
+#~ msgstr "Ctrl+P"
+
+#~ msgid "Ctrl+S"
+#~ msgstr "Ctrl+S"
+
+#~ msgid "Ctrl+O"
+#~ msgstr "Ctrl+O"
+
+#~ msgid "Ctrl+N"
+#~ msgstr "Ctrl+N"
+
+#~ msgid "Ctrl+Shift+S"
+#~ msgstr "Ctrl+Shift+S"
+
+#~ msgid "Ctrl+Q"
+#~ msgstr "Ctrl+Q"

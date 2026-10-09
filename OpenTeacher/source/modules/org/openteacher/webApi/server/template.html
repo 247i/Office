@@ -1,0 +1,92 @@
+<!doctype html>
+<!--
+	Copyright 2012-2013, Marten de Vries
+
+	This file is part of OpenTeacher.
+
+	OpenTeacher is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 3 of the License, or
+	(at your option) any later version.
+
+	OpenTeacher is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with OpenTeacher.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!--FIXME: translations!-->
+<html>
+	<head>
+		<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+		<title>OpenTeacher Web - sign up</title>
+		<style type='text/css'>
+			body {
+				margin: 0 auto;
+				width: 600px;
+				font-family: sans-serif;
+
+				background-color: lightblue;
+			}
+
+			p {
+				text-align: justify;
+			}
+
+			h1, h2 {
+				text-align: center;
+				margin: 0;
+				margin-bottom: 10px;
+			}
+
+			#page {
+				background-color: white;
+				padding: 50px 100px;
+			}
+		</style>
+	</head>
+	<script>
+		var focus = function () {
+			document.getElementById("focusfield").focus();
+		}
+	</script>
+	<body onload='focus();'>
+		<div id='page'>
+			<h1>OpenTeacher Web</h1>
+			<h2>Sign up</h2>
+			<p>
+				Welcome to OpenTeacher Web! You can register an account below.
+			</p>
+			<form action='{{ url_for("api_post_register_send") }}' method='post'>
+				<input name='redirect' type='hidden' value='{{ redirect }}' />
+				<table>
+					<tr>
+						<td>Username:</td>
+						<td>
+							<input id='focusfield' type='text' name='username' />
+						</td>
+					</tr>
+					<tr>
+						<td>Password:</td>
+						<td>
+							<input type='password' name='password' />
+						</td>
+					</tr>
+					<tr>
+						<td colspan='2'>
+							{{ captcha }}
+						</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>
+							<input type='submit' value='Sign up!' />
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</body>
+</html>

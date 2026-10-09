@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="inode/socket">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Socket</comment>
+  <comment xml:lang="zh-Hant-TW">Socket</comment>
+  <comment xml:lang="uk">сокет</comment>
+  <comment xml:lang="tr">Yuva</comment>
+  <comment xml:lang="sv">Uttag</comment>
+  <comment xml:lang="sr-Cyrl">Утичница</comment>
+  <comment xml:lang="sl">Vtič</comment>
+  <comment xml:lang="ru">Сокет</comment>
+  <comment xml:lang="ro">soclu</comment>
+  <comment xml:lang="pt-BR">Socket</comment>
+  <comment xml:lang="pl">Gniazdo</comment>
+  <comment xml:lang="oc">connector ret</comment>
+  <comment xml:lang="nn">Socket</comment>
+  <comment xml:lang="lt">Lizdas</comment>
+  <comment xml:lang="ko">소켓</comment>
+  <comment xml:lang="kk-Cyrl">Сокет</comment>
+  <comment xml:lang="ka">სოკეტი</comment>
+  <comment xml:lang="ja">ソケット</comment>
+  <comment xml:lang="it">Socket</comment>
+  <comment xml:lang="id">Soket</comment>
+  <comment xml:lang="hr">Socket</comment>
+  <comment xml:lang="hi">सॉकेट</comment>
+  <comment xml:lang="he">שקע</comment>
+  <comment xml:lang="gl">Socket</comment>
+  <comment xml:lang="fur">Socket</comment>
+  <comment xml:lang="fr">Socket</comment>
+  <comment xml:lang="fi">Väylä</comment>
+  <comment xml:lang="eu">Socket-a</comment>
+  <comment xml:lang="et">Sokkel</comment>
+  <comment xml:lang="es">zócalo</comment>
+  <comment xml:lang="en-GB">Socket</comment>
+  <comment xml:lang="de">Socket</comment>
+  <comment xml:lang="ca">sòcol</comment>
+  <comment xml:lang="bg">Гнездо</comment>
+  <comment xml:lang="be-Cyrl">сокет</comment>
+  <comment xml:lang="ar">مقبس</comment>
+</mime-type>

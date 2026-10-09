@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/vnd.microsoft.portable-executable">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Windows or EFI program</comment>
+  <comment xml:lang="zh-Hant-TW">Windows 或 EFI 程式</comment>
+  <comment xml:lang="uk">програма Windows або EFI</comment>
+  <comment xml:lang="tr">Windows veya EFI programı</comment>
+  <comment xml:lang="sv">Windows- eller EFI-program</comment>
+  <comment xml:lang="sr-Cyrl">Виндоуз или ЕФИ програм</comment>
+  <comment xml:lang="sq">Program Windows ose EFI</comment>
+  <comment xml:lang="sl">Program za Windows ali EFI</comment>
+  <comment xml:lang="ru">Программа Windows или EFI</comment>
+  <comment xml:lang="ro">program EFI sau Windows</comment>
+  <comment xml:lang="pt-BR">Programa do Windows ou EFI</comment>
+  <comment xml:lang="pl">Program Windows lub EFI</comment>
+  <comment xml:lang="oc">programa Windows o EFI</comment>
+  <comment xml:lang="nn">Windows- eller EFI-program</comment>
+  <comment xml:lang="ko">윈도우/EFI 프로그램</comment>
+  <comment xml:lang="kk-Cyrl">Windows немесе EFI бағдарламасы</comment>
+  <comment xml:lang="ja">Windows または EFI プログラム</comment>
+  <comment xml:lang="it">Programma Windows o EFI</comment>
+  <comment xml:lang="id">Program Windows atau EFI</comment>
+  <comment xml:lang="hr">Windows ili EFI program</comment>
+  <comment xml:lang="hi">Windows or EFI प्रोग्राम</comment>
+  <comment xml:lang="fur">Program Windows o EFI</comment>
+  <comment xml:lang="fr">Programme Windows ou EFI</comment>
+  <comment xml:lang="fi">Windows tai EFI-ohjelma</comment>
+  <comment xml:lang="eu">Windows edo EFI programa</comment>
+  <comment xml:lang="et">Windowsi või EFI programm</comment>
+  <comment xml:lang="es">programa de Windows o EFI</comment>
+  <comment xml:lang="en-GB">Windows or EFI program</comment>
+  <comment xml:lang="de">Windows-/EFI-Programm</comment>
+  <comment xml:lang="ca">programa Windows o EFI</comment>
+  <comment xml:lang="bg">Програма — Windows или EFI</comment>
+  <comment xml:lang="be-Cyrl">праграма Windows або EFI</comment>
+  <comment xml:lang="ar">برنامج ويندوز أو EFI </comment>
+  <acronym>EFI</acronym>
+  <expanded-acronym>Extensible Firmware Interface</expanded-acronym>
+  <sub-class-of type="application/x-msdownload"/>
+  <generic-icon name="application-x-executable"/>
+  <glob pattern="*.exe" weight="40"/>
+  <glob pattern="*.dll" weight="40"/>
+  <glob pattern="*.cpl" weight="40"/>
+  <glob pattern="*.drv" weight="40"/>
+  <glob pattern="*.scr" weight="40"/>
+  <glob pattern="*.efi"/>
+  <glob pattern="*.ocx"/>
+  <glob pattern="*.sys"/>
+</mime-type>

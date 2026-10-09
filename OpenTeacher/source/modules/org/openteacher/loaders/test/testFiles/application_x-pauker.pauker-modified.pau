@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--This is a lesson file for Pauker (http://pauker.sourceforge.net)--><Lesson LessonFormat="1.7">
+  <Description/>
+  <Batch/>
+  <Batch/>
+  <Batch/>
+  <Batch>
+    <Card>
+      <FrontSide LearnedTimestamp="1355402305229" Orientation="LTR" RepeatByTyping="false">
+        <Text>éen</Text>
+        <Font Background="-1" Bold="false" Family="Dialog" Foreground="-16777216" Italic="false" Size="12"/>
+      </FrontSide>
+      <ReverseSide Orientation="LTR" RepeatByTyping="false">
+        <Text>oné</Text>
+        <Font Background="-1" Bold="false" Family="Dialog" Foreground="-16777216" Italic="false" Size="12"/>
+      </ReverseSide>
+    </Card>
+    <Card>
+      <FrontSide LearnedTimestamp="1355402306468" Orientation="LTR" RepeatByTyping="false">
+        <Text>twee</Text>
+        <Font Background="-1" Bold="false" Family="Dialog" Foreground="-16777216" Italic="false" Size="12"/>
+      </FrontSide>
+      <ReverseSide Orientation="LTR" RepeatByTyping="false">
+        <Text>two</Text>
+        <Font Background="-1" Bold="false" Family="Dialog" Foreground="-52378" Italic="false" Size="12"/>
+      </ReverseSide>
+    </Card>
+  </Batch>
+</Lesson>

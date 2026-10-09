@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-lmdb">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>LMDB database</comment>
+  <comment xml:lang="zh-Hant-TW">LMDB 資料庫</comment>
+  <comment xml:lang="uk">база даних LMDB</comment>
+  <comment xml:lang="tr">LMDB veri tabanı</comment>
+  <comment xml:lang="sv">LMDB-databas</comment>
+  <comment xml:lang="sr-Cyrl">ЛМДБ база података</comment>
+  <comment xml:lang="sq">Bazë të dhënash LMDB</comment>
+  <comment xml:lang="sl">Podatkovna zbirka LMDB</comment>
+  <comment xml:lang="ru">База данных LMDB</comment>
+  <comment xml:lang="ro">bază de date LMDB</comment>
+  <comment xml:lang="pt-BR">Banco de dados LMDB</comment>
+  <comment xml:lang="pt">base de dados LMDB</comment>
+  <comment xml:lang="pl">Baza danych LMDB</comment>
+  <comment xml:lang="oc">basa de donadas LMDB</comment>
+  <comment xml:lang="nn">LMDB-database</comment>
+  <comment xml:lang="lt">LMDB duomenų bazė</comment>
+  <comment xml:lang="ko">LMDB 데이터베이스</comment>
+  <comment xml:lang="kk-Cyrl">LMDB дерекқоры</comment>
+  <comment xml:lang="ja">LMDB データベース</comment>
+  <comment xml:lang="it">Database LMDB</comment>
+  <comment xml:lang="id">Basis data LMDB</comment>
+  <comment xml:lang="hr">LMDB baza podataka</comment>
+  <comment xml:lang="hi">LMDB डेटाबेस</comment>
+  <comment xml:lang="he">מסד נתונים מסוג LMDB</comment>
+  <comment xml:lang="gl">Base de datos LMDB</comment>
+  <comment xml:lang="fur">Base di dâts LMDB</comment>
+  <comment xml:lang="fr">Base de données LMDB</comment>
+  <comment xml:lang="fi">LMDB-tietokanta</comment>
+  <comment xml:lang="eu">LMDB datu-basea</comment>
+  <comment xml:lang="et">LMDB andmebaas</comment>
+  <comment xml:lang="es">base de datos LMDB</comment>
+  <comment xml:lang="en-GB">LMDB database</comment>
+  <comment xml:lang="de">LMDB-Datenbank</comment>
+  <comment xml:lang="da">LMDB-database</comment>
+  <comment xml:lang="ca">base de dades LMDB</comment>
+  <comment xml:lang="bg">База от данни — LMDB</comment>
+  <comment xml:lang="be-Cyrl">база даных LMDB</comment>
+  <comment xml:lang="ar">قاعدة بيانات LMDB</comment>
+  <acronym>LMDB</acronym>
+  <expanded-acronym>Lightning Memory-Mapped Database</expanded-acronym>
+  <generic-icon name="x-office-document"/>
+  <glob pattern="*.mdb"/>
+  <glob pattern="*.lmdb"/>
+</mime-type>

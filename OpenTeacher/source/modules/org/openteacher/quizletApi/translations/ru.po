@@ -1,0 +1,60 @@
+# Russian translation for openteacher
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2013-02-16 17:59+0000\n"
+"Last-Translator: Nkolay Parukhin <parukhin@gmail.com>\n"
+"Language-Team: Russian <ru@li.org>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:44+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: quizletApi.py:162
+msgid ""
+"Enter a search term and press the search button to search quizlet.com for "
+"sets. Then select the set or sets you want to import and click OK."
+msgstr ""
+"Введите слово и нажмите кнопку для поиска на quizlet.com наборов слов. Затем "
+"выберите один или несколько наборов, которые вы хотите импортировать и "
+"нажмите кнопку OK."
+
+#: quizletApi.py:163
+msgid "E.g.: german food vocabulary"
+msgstr "Например: словарь немецкой кухни"
+
+#: quizletApi.py:164
+msgid "Search"
+msgstr "Поиск"
+
+#: quizletApi.py:165
+msgid "Search quizlet.com"
+msgstr "Поиск на quizlet.com"
+
+#: quizletApi.py:248
+msgid "Import from quizlet.com"
+msgstr "Импорт с quizlet.com"
+
+#: quizletApi.py:274
+msgid "No Quizlet connection"
+msgstr "Отсутствует подключение к Quizlet"
+
+#: quizletApi.py:275
+msgid ""
+"Quizlet didn't accept the connection. Are you sure that your internet "
+"connection works and quizlet.com is online?"
+msgstr ""
+"Сайт Quizlet не отвечает. Вы уверены, что ваше интернет-соединение работает "
+"и quizlet.com доступен?"
+
+#: quizletApi.py:310
+msgid "The word list was imported from Quizlet successfully."
+msgstr "Список слов успешно импортирован с Quizlet."

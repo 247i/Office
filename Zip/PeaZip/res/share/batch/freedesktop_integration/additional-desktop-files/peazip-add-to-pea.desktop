@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=PeaZip, add to PEA
+NoDisplay=true
+Comment=Add files and folders to PEA archive with PeaZip
+Exec=peazip -add2pea %F
+TryExec=peazip
+Icon=peazip_add
+Type=Application
+Terminal=false
+Categories=Utility;Archiving;Compression;
+Keywords=zip;rar;tar;extract;unpack;
+MimeType=application/octet-stream;

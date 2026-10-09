@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="message/rfc822">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Email message</comment>
+  <comment xml:lang="zh-Hant-TW">電子郵件訊息</comment>
+  <comment xml:lang="uk">поштове повідомлення</comment>
+  <comment xml:lang="tr">E-posta iletisi</comment>
+  <comment xml:lang="sv">E-postmeddelande</comment>
+  <comment xml:lang="sr-Cyrl">Порука е-поште</comment>
+  <comment xml:lang="sq">Mesazh email</comment>
+  <comment xml:lang="sl">E-poštno sporočilo</comment>
+  <comment xml:lang="ru">Почтовое сообщение</comment>
+  <comment xml:lang="ro">mesaj de poștă electronică</comment>
+  <comment xml:lang="pt-BR">Mensagem de e-mail</comment>
+  <comment xml:lang="pl">Wiadomość e-mail</comment>
+  <comment xml:lang="oc">Messatge de corrièr electronic</comment>
+  <comment xml:lang="nn">E-postmelding</comment>
+  <comment xml:lang="lt">El. laiškas</comment>
+  <comment xml:lang="ko">전자메일 메시지</comment>
+  <comment xml:lang="kk-Cyrl">Электронды пошталық мәлімдеме</comment>
+  <comment xml:lang="kab">Izen n imayl</comment>
+  <comment xml:lang="ja">メール本文</comment>
+  <comment xml:lang="it">Messaggio email</comment>
+  <comment xml:lang="id">Pesan surel</comment>
+  <comment xml:lang="hr">E-mail poruka</comment>
+  <comment xml:lang="hi">ईमेल संदेश</comment>
+  <comment xml:lang="he">הודעת דוא״ל</comment>
+  <comment xml:lang="gl">Mensaxe de correo electrónico</comment>
+  <comment xml:lang="fur">Messaç e-mail</comment>
+  <comment xml:lang="fr">Message de courriel</comment>
+  <comment xml:lang="fi">Sähköposti</comment>
+  <comment xml:lang="et">E-kiri</comment>
+  <comment xml:lang="es">mensaje de correo electrónico</comment>
+  <comment xml:lang="en-GB">Email message</comment>
+  <comment xml:lang="de">E-Mail-Nachricht</comment>
+  <comment xml:lang="ca">missatge de correu</comment>
+  <comment xml:lang="bg">Електронно писмо</comment>
+  <comment xml:lang="be-Cyrl">электронны ліст</comment>
+  <comment xml:lang="ar">رسالة بريد إلكتروني</comment>
+  <comment xml:lang="af">E-posboodskap</comment>
+  <generic-icon name="emblem-mail"/>
+  <sub-class-of type="text/plain"/>
+  <glob pattern="*.eml"/>
+</mime-type>

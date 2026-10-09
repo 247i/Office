@@ -1,0 +1,99 @@
+# Slovak translation for openteacher
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:38+0200\n"
+"PO-Revision-Date: 2011-08-01 21:13+0000\n"
+"Last-Translator: Alexander Suchan <supersasho@gmail.com>\n"
+"Language-Team: Slovak <sk@li.org>\n"
+"Language: sk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:42+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: media.py:159
+msgid "Create media lesson"
+msgstr "Vytvoriť súbor lekcie"
+
+#: media.py:199
+msgid "Unnamed"
+msgstr ""
+
+#: media.py:200 media.py:239
+#, python-format
+msgid "Media lesson: %s"
+msgstr ""
+
+#: media.py:284
+msgid "Empty question or answer"
+msgstr ""
+
+#: media.py:285
+msgid "Please enter at least one question and one answer for every item."
+msgstr ""
+
+#~ msgid "Media"
+#~ msgstr "Súbory"
+
+#~ msgid ""
+#~ "Enter the URL of your website or media item.\n"
+#~ "Supported video sites: YouTube, Dailymotion, Vimeo."
+#~ msgstr ""
+#~ "Napíšte URL adresu vašej webstránky alebo vašeho súboru.\n"
+#~ "Podporované video stránky: YouTube, Dailymotion, Vimeo."
+
+#~ msgid "Warning"
+#~ msgstr "Varovanie"
+
+#~ msgid "File URL"
+#~ msgstr "URL súboru"
+
+#~ msgid "Add local media"
+#~ msgstr "Pridať lokálne súbory"
+
+#~ msgid "Remove"
+#~ msgstr "Odstrániť"
+
+#~ msgid "Name:"
+#~ msgstr "Názov:"
+
+#~ msgid "Add remote media"
+#~ msgstr "Pridať vzdialené súbory"
+
+#~ msgid "Select file(s)"
+#~ msgstr "Vyberte súbor(y)"
+
+#~ msgid "Description:"
+#~ msgstr "Popis:"
+
+#~ msgid "Lesson type:"
+#~ msgstr "Typ lekcie:"
+
+#~ msgid "Check"
+#~ msgstr "Skontrolovať"
+
+#~ msgid "Not enough items"
+#~ msgstr "Nedostatok položiek"
+
+#~ msgid "You need to add items to your test first"
+#~ msgstr "Najprv musíte pridať položky do testu"
+
+#~ msgid "Media lesson %s"
+#~ msgstr "Súbor lekcie %s"
+
+#~ msgid "Media Lesson"
+#~ msgstr "Súbor lekcie"
+
+#~ msgid ""
+#~ "Are you sure you want to go back to the enter tab? This will end your "
+#~ "lesson!"
+#~ msgstr ""
+#~ "Ste si istý že chcete isť späť do vstupnej záložky? Toto ukončí vašu "
+#~ "lekciu!"

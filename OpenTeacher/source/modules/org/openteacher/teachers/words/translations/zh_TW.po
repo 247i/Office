@@ -1,0 +1,55 @@
+# Chinese (Traditional) translation for openteacher
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2013-05-29 07:30+0000\n"
+"Last-Translator: Louie Chen <louie23@gmail.com>\n"
+"Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:42+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: words.py:62
+msgid "I'm ready, start the lesson!"
+msgstr "我已準備好，開始課程！"
+
+#: words.py:64 words.py:516
+msgid "Lesson settings"
+msgstr "課程設定"
+
+#: words.py:127
+msgid "Change lesson settings"
+msgstr "修改課程設定"
+
+#: words.py:128
+msgid "Word:"
+msgstr "單字："
+
+#: words.py:129
+msgid "Next"
+msgstr "下一個"
+
+#: words.py:508
+msgid "Lesson type"
+msgstr "課程類型"
+
+#: words.py:509
+msgid "Word list order and filters"
+msgstr "單字列表順序及過濾器"
+
+#: words.py:510
+msgid "Word modifications"
+msgstr "單字修改"
+
+#: words.py:515
+msgid "Words lesson"
+msgstr "單字課程"

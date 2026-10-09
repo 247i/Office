@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/x-mpsub">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>MPlayer subtitles</comment>
+  <comment xml:lang="zh-Hant-TW">MPlayer 字幕</comment>
+  <comment xml:lang="uk">субтитри MPlayer</comment>
+  <comment xml:lang="tr">MPlayer altyazıları</comment>
+  <comment xml:lang="sv">MPlayer-undertexter</comment>
+  <comment xml:lang="sr-Cyrl">MPlayer титлови</comment>
+  <comment xml:lang="sq">Titra Mplayer-i</comment>
+  <comment xml:lang="sl">Podnaslovi MPlayer</comment>
+  <comment xml:lang="ru">Субтитры MPlayer</comment>
+  <comment xml:lang="ro">subtitrare MPlayer</comment>
+  <comment xml:lang="pt-BR">Legendas MPlayer</comment>
+  <comment xml:lang="pl">Napisy MPlayer</comment>
+  <comment xml:lang="oc">sostítols MPlayer</comment>
+  <comment xml:lang="lt">MPlayer subtitrai</comment>
+  <comment xml:lang="ko">MPlayer 자막</comment>
+  <comment xml:lang="kk-Cyrl">MPlayer субтитрлары</comment>
+  <comment xml:lang="ja">MPlayer 字幕</comment>
+  <comment xml:lang="it">Sottotitoli MPlayer</comment>
+  <comment xml:lang="id">Subtitel MPlayer</comment>
+  <comment xml:lang="hr">MPlayer podnaslovi</comment>
+  <comment xml:lang="hi">MPlayer उपशीर्षक</comment>
+  <comment xml:lang="he">כתוביות MPlayer</comment>
+  <comment xml:lang="fur">Sottitui di MPlayer</comment>
+  <comment xml:lang="fr">Sous-titres MPlayer</comment>
+  <comment xml:lang="fi">MPlayer-tekstitykset</comment>
+  <comment xml:lang="et">MPlayeri subtiitrid</comment>
+  <comment xml:lang="es">subtítulos de MPlayer</comment>
+  <comment xml:lang="en-GB">MPlayer subtitles</comment>
+  <comment xml:lang="de">MPlayer-Untertitel</comment>
+  <comment xml:lang="ca">subtítols de MPlayer</comment>
+  <comment xml:lang="bg">Субтитри — MPlayer</comment>
+  <comment xml:lang="be-Cyrl">субцітры MPlayer</comment>
+  <comment xml:lang="ar">ترجمات MPlayer</comment>
+  <sub-class-of type="text/plain"/>
+  <glob pattern="*.sub"/>
+</mime-type>

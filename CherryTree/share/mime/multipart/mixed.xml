@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="multipart/mixed">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Compound documents</comment>
+  <comment xml:lang="zh-Hant-TW">複合文件</comment>
+  <comment xml:lang="uk">складні документи</comment>
+  <comment xml:lang="tr">Bileşik belgeler</comment>
+  <comment xml:lang="sv">Sammansatta dokument</comment>
+  <comment xml:lang="sr-Cyrl">Сложени документи</comment>
+  <comment xml:lang="sq">Dokumente të përbërë</comment>
+  <comment xml:lang="sl">Sestavljeni dokumenti</comment>
+  <comment xml:lang="ru">Составные документы</comment>
+  <comment xml:lang="ro">documente compuse</comment>
+  <comment xml:lang="pt-BR">Documentos compostos</comment>
+  <comment xml:lang="pl">Dokumenty złożone</comment>
+  <comment xml:lang="oc">documents compausats</comment>
+  <comment xml:lang="nn">Samansette dokument</comment>
+  <comment xml:lang="ko">화합물 문서</comment>
+  <comment xml:lang="kk-Cyrl">Құрама құжаттары</comment>
+  <comment xml:lang="ja">複合ドキュメント</comment>
+  <comment xml:lang="it">Documenti composti</comment>
+  <comment xml:lang="id">Dokumen majemuk</comment>
+  <comment xml:lang="hr">Sastavljeni dokumenti</comment>
+  <comment xml:lang="hi">संयुक्त दस्तावेज़</comment>
+  <comment xml:lang="fur">Documents composcj</comment>
+  <comment xml:lang="fr">Documents composés</comment>
+  <comment xml:lang="fi">Yhdistelmäasiakirjat</comment>
+  <comment xml:lang="et">Liitdokumendid</comment>
+  <comment xml:lang="es">documentos compuestos</comment>
+  <comment xml:lang="en-GB">Compound documents</comment>
+  <comment xml:lang="de">Verbunddokumente</comment>
+  <comment xml:lang="ca">documents compostos</comment>
+  <comment xml:lang="bg">Съставни документи</comment>
+  <comment xml:lang="be-Cyrl">складаныя дакументы</comment>
+  <comment xml:lang="ar">مستندات مركبة</comment>
+</mime-type>

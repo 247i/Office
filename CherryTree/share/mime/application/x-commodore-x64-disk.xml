@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-commodore-x64-disk">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Commodore C64 headered disk image</comment>
+  <comment xml:lang="uk">образ диска із заголовком Commodore C64</comment>
+  <comment xml:lang="tr">Commodore C64 üstbilgili disk kalıbı</comment>
+  <comment xml:lang="sv">Commodore C64-diskavbild med header</comment>
+  <comment xml:lang="sr-Cyrl">Одраз диска са заглављем за Комодор Ц64</comment>
+  <comment xml:lang="sl">Odtis diska z glavo Commodore C64</comment>
+  <comment xml:lang="ru">Образ диска с дополнительным заголовком для Commodore C64</comment>
+  <comment xml:lang="ro">imagine de disc cu antet Commodore C64</comment>
+  <comment xml:lang="pt-BR">Imagem de disco com cabeçalho Commodore C64</comment>
+  <comment xml:lang="pl">Nagłówkowy obraz dysku Commodore C64</comment>
+  <comment xml:lang="oc">imatge disc amb entèsta per Commodore C64</comment>
+  <comment xml:lang="ko">Commodore C64 헤더 지정 디스크 이미지</comment>
+  <comment xml:lang="kk-Cyrl">Commodore C64 тақырыптамасы бар диск бейнесі</comment>
+  <comment xml:lang="fr">Image disque Commodore C64 avec en-tête</comment>
+  <comment xml:lang="fi">Commodore C64 diskettikuva</comment>
+  <comment xml:lang="et">Commodore C64 päisega kettatõmmis</comment>
+  <comment xml:lang="es">imagen de disco encabezado de Commodore C64</comment>
+  <comment xml:lang="en-GB">Commodore C64 headered disk image</comment>
+  <comment xml:lang="de">Commodore-64-Diskettenabbild mit Header</comment>
+  <generic-icon name="application-x-executable"/>
+  <glob pattern="*.x64"/>
+</mime-type>

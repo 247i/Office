@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-spectrum-d80">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Didaktik D40/D80 floppy disk image</comment>
+  <comment xml:lang="uk">образ дискети Didaktik D40/D80</comment>
+  <comment xml:lang="tr">Didaktik D40/D80 disket kalıbı</comment>
+  <comment xml:lang="sv">Didaktik D40/D80-diskettavbild</comment>
+  <comment xml:lang="sr-Cyrl">Одраз дискете за Дидактик Д40/Д80</comment>
+  <comment xml:lang="sq">Pamje diskete Didaktik D40/D80</comment>
+  <comment xml:lang="sl">Odtis diskete Didaktik D40/D80</comment>
+  <comment xml:lang="ru">Образ гибкого диска Didaktik D40/D80</comment>
+  <comment xml:lang="ro">imagine de dischetă Didaktik D40/D80</comment>
+  <comment xml:lang="pt-BR">Imagem de disquete Didaktik D40/D80</comment>
+  <comment xml:lang="pl">Obraz dyskietki Didaktik D40/D80</comment>
+  <comment xml:lang="oc">imatge de disqueta Didaktik D40/D80</comment>
+  <comment xml:lang="ko">Didaktik D40/D80 플로피 디스크 이미지</comment>
+  <comment xml:lang="kk-Cyrl">Didaktik D40/D80 иілгіш диск бейнесі</comment>
+  <comment xml:lang="fr">image disquette Didaktik D40/D80</comment>
+  <comment xml:lang="fi">Didaktik D40/D80 diskettikuva</comment>
+  <comment xml:lang="et">Didaktik D40/D80 flopikettatõmmis</comment>
+  <comment xml:lang="es">imagen de disquete Didaktik D40/D80</comment>
+  <comment xml:lang="en-GB">Didaktik D40/D80 floppy disk image</comment>
+  <comment xml:lang="de">Didaktik-D40/D80-Diskettenabbild</comment>
+  <glob pattern="*.d80" weight="40"/>
+  <glob pattern="*.d40" weight="40"/>
+</mime-type>

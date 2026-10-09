@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="audio/x-med">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>OctaMED audio</comment>
+  <comment xml:lang="uk">звукові дані OctaMED</comment>
+  <comment xml:lang="tr">OctaMED sesi</comment>
+  <comment xml:lang="sv">OctaMED-ljud</comment>
+  <comment xml:lang="sr-Cyrl">МИДИ звук</comment>
+  <comment xml:lang="sq">Audio OctaMED</comment>
+  <comment xml:lang="sl">Zvok OctaMED</comment>
+  <comment xml:lang="ru">Аудио OctaMED</comment>
+  <comment xml:lang="ro">audio OctaMED</comment>
+  <comment xml:lang="pt-BR">Áudio OctaMED</comment>
+  <comment xml:lang="pl">Plik dźwiękowy OctaMED</comment>
+  <comment xml:lang="oc">àudio OctaMED</comment>
+  <comment xml:lang="ko">OctaMED 오디오</comment>
+  <comment xml:lang="kk-Cyrl">OctaMED аудиосы</comment>
+  <comment xml:lang="fr">audio OctaMED</comment>
+  <comment xml:lang="fi">OctaMED audio</comment>
+  <comment xml:lang="et">OctaMED-i helifail</comment>
+  <comment xml:lang="es">Sonido OctaMED</comment>
+  <comment xml:lang="en-GB">OctaMED audio</comment>
+  <comment xml:lang="de">OctaMED-Audio</comment>
+  <comment xml:lang="ar">صوت OctaMED</comment>
+  <glob pattern="*.med"/>
+</mime-type>

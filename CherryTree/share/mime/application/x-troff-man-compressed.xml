@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-troff-man-compressed">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Manual page (compressed)</comment>
+  <comment xml:lang="zh-Hant-TW">手冊頁面 (壓縮)</comment>
+  <comment xml:lang="zh-Hans-CN">手册页（压缩）</comment>
+  <comment xml:lang="uk">сторінка підручника (стиснена)</comment>
+  <comment xml:lang="tr">Kılavuz sayfası (sıkıştırmalı)</comment>
+  <comment xml:lang="sv">Manualsida (komprimerad)</comment>
+  <comment xml:lang="sr-Cyrl">Страница упутства (запакована)</comment>
+  <comment xml:lang="sq">Faqe doracaku (e ngjeshur)</comment>
+  <comment xml:lang="sl">Stran priročnika (stisnjena)</comment>
+  <comment xml:lang="si">අතින් පිටුව (සම්පීඩිත)</comment>
+  <comment xml:lang="ru">Страница руководства (сжатая)</comment>
+  <comment xml:lang="ro">pagină de manual (comprimată)</comment>
+  <comment xml:lang="pt-BR">Página de manual (compactada)</comment>
+  <comment xml:lang="pl">Strona podręcznika (skompresowana)</comment>
+  <comment xml:lang="oc">pagina de manual (compressada)</comment>
+  <comment xml:lang="nn">Manualside (komprimert)</comment>
+  <comment xml:lang="nl">Handleidingpagina (gecomprimeerd)</comment>
+  <comment xml:lang="ko">man 페이지 (압축)</comment>
+  <comment xml:lang="kk-Cyrl">Нұсқаулық парағы (сығылған)</comment>
+  <comment xml:lang="ja">マニュアルページ (圧縮)</comment>
+  <comment xml:lang="it">Pagina di manuale (compressa)</comment>
+  <comment xml:lang="id">Halaman manual (terkompresi)</comment>
+  <comment xml:lang="hr">Stranica priručnika (komprimirano)</comment>
+  <comment xml:lang="hi">नियमावली पृष्ठ (संपीड़ित)</comment>
+  <comment xml:lang="gl">Páxina de manual (comprimida)</comment>
+  <comment xml:lang="fur">Pagjine di manuâl (comprimude)</comment>
+  <comment xml:lang="fr">Page de manuel (compressée)</comment>
+  <comment xml:lang="fi">Manuaali (pakattu)</comment>
+  <comment xml:lang="eu">Eskuliburu-orria (konprimatua)</comment>
+  <comment xml:lang="et">Kasutusjuhend (pakitud)</comment>
+  <comment xml:lang="es">página de manual (comprimida)</comment>
+  <comment xml:lang="en-GB">Manual page (compressed)</comment>
+  <comment xml:lang="de">Handbuchseite (komprimiert)</comment>
+  <comment xml:lang="ca">pàgina de manual (comprimida)</comment>
+  <comment xml:lang="bg">Страница от ръководство (компресирано)</comment>
+  <comment xml:lang="be-Cyrl">старонка даведкі (сціснутая)</comment>
+  <comment xml:lang="ar">صفحة دليل (مضغوطة)</comment>
+  <generic-icon name="text-x-generic"/>
+</mime-type>

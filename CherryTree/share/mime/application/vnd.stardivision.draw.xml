@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/vnd.stardivision.draw">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>StarDraw 5 drawing</comment>
+  <comment xml:lang="zh-Hant-TW">StarDraw 5 繪圖</comment>
+  <comment xml:lang="uk">малюнок StarDraw 5</comment>
+  <comment xml:lang="tr">StarDraw 5 çizimi</comment>
+  <comment xml:lang="sv">Stardraw 5-teckning</comment>
+  <comment xml:lang="sr-Cyrl">StarDraw 5 цртеж</comment>
+  <comment xml:lang="sq">Vizatim StarDraw 5</comment>
+  <comment xml:lang="sl">Risba StarDraw 5</comment>
+  <comment xml:lang="ru">Рисунок StarDraw 5</comment>
+  <comment xml:lang="ro">desen StarDraw 5</comment>
+  <comment xml:lang="pt-BR">Desenho do StarDraw 5</comment>
+  <comment xml:lang="pl">Rysunek StarDraw 5</comment>
+  <comment xml:lang="oc">dessenh StarDraw 5</comment>
+  <comment xml:lang="nn">StarDraw 5-teikning</comment>
+  <comment xml:lang="ko">StarDraw 5 그림</comment>
+  <comment xml:lang="kk-Cyrl">StarDraw 5 сызбасы</comment>
+  <comment xml:lang="ja">StarDraw 5 ドロー</comment>
+  <comment xml:lang="id">Gambar StarDraw 5</comment>
+  <comment xml:lang="hr">StarDraw 5 crtež</comment>
+  <comment xml:lang="he">ציור StarDraw 5</comment>
+  <comment xml:lang="fur">Dissen di StarDraw 5</comment>
+  <comment xml:lang="fr">Dessin StarDraw 5</comment>
+  <comment xml:lang="fi">StarDraw 5 piirros</comment>
+  <comment xml:lang="et">StarDraw 5 joonistus</comment>
+  <comment xml:lang="es">dibujo de StarDraw 5</comment>
+  <comment xml:lang="en-GB">StarDraw 5 drawing</comment>
+  <comment xml:lang="de">StarDraw-5-Zeichnung</comment>
+  <comment xml:lang="da">StarDraw 5-tegning</comment>
+  <comment xml:lang="ca">dibuix de StarDraw 5</comment>
+  <comment xml:lang="bg">Чертеж — StarDraw 5</comment>
+  <comment xml:lang="be-Cyrl">рысунак StarDraw 5</comment>
+  <comment xml:lang="ar">مخطط StarDraw 5</comment>
+  <sub-class-of type="application/x-ole-storage"/>
+  <generic-icon name="image-x-generic"/>
+  <glob pattern="*.sda"/>
+</mime-type>

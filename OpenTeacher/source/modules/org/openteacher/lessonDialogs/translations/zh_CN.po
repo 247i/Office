@@ -1,0 +1,44 @@
+# Chinese (Simplified) translation for openteacher
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2013-06-19 01:22+0000\n"
+"Last-Translator: adam liu <xhiyua@gmail.com>\n"
+"Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-20 05:42+0000\n"
+"X-Generator: Launchpad (build 16673)\n"
+
+#: lessonDialogs.py:84
+msgid "Unsaved data"
+msgstr "没有保存的数据"
+
+#: lessonDialogs.py:85
+msgid "There are unsaved items or results. Are you sure you want to close?"
+msgstr "还有没有保存的项目或结果.你确定要关闭吗?"
+
+#: lessonDialogs.py:101
+msgid "Warning"
+msgstr "警告"
+
+#: lessonDialogs.py:103
+msgid ""
+"Are you sure you want to go back to the enter tab? This will end your lesson!"
+msgstr "你确定要回到开始页面吗?这样会结束你的课程."
+
+#: lessonDialogs.py:114
+msgid "Not enough items"
+msgstr "没有足够的选项"
+
+#: lessonDialogs.py:115
+msgid "You need to add items to your test first"
+msgstr "你需要先添加选项到你的测试"

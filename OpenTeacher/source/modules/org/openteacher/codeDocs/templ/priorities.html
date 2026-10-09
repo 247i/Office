@@ -1,0 +1,74 @@
+#!	Copyright 2012, Marten de Vries
+#!
+#!	This file is part of OpenTeacher.
+#!
+#!	OpenTeacher is free software: you can redistribute it and/or modify
+#!	it under the terms of the GNU General Public License as published by
+#!	the Free Software Foundation, either version 3 of the License, or
+#!	(at your option) any later version.
+#!
+#!	OpenTeacher is distributed in the hope that it will be useful,
+#!	but WITHOUT ANY WARRANTY; without even the implied warranty of
+#!	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#!	GNU General Public License for more details.
+#!
+#!	You should have received a copy of the GNU General Public License
+#!	along with OpenTeacher.  If not, see <http://www.gnu.org/licenses/>.
+#!
+<!--(set_escape)-->
+    html
+<!--(end)-->
+<!doctype html>
+<html>
+	<head>
+		<title>Modules</title>
+		<link rel='stylesheet' type='text/css' href='style.css' />
+		<link rel="shortcut icon" type="image/png" href="resources/logo">
+		<script src='resources/jquery.js' type='text/javascript'></script>
+		<script src='resources/jquery.tablesorter.js' type='text/javascript'></script>
+		<script type='text/javascript'>
+			$(function() {
+				$('.tablesorter').tablesorter({'widgets': ['zebra']});
+			});
+		</script>
+	</head>
+	<body>
+		<div id='header'>
+			<img id='logo' src='/resources/logo' />
+			<h1>Module priorities by profile</h1>
+			<a id='nav' href='/'>&lt; Back to index</a><br />
+		</div>
+		<div id='page'>
+			<!--(for profile in profiles)-->
+				<h2>@!profile!@</h2>
+				<table class='tablesorter'>
+						<thead>
+							<tr>
+								<th>Identifier</th>
+								<th>Priority (0-1000 high-low)</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!--(for key, mod in mods)-->
+								<!--(if profile in mod.priorities)-->
+									<tr>
+										<td>@!key!@</td>
+										<td>@!mod.priorities[profile]!@</td>
+									</tr>
+								<!--(end)-->
+							<!--(end)-->
+						</tbody>
+				</table>
+			<!--(end)-->
+			<div class='figure' style='width:500px; margin: 0 auto;'>
+				<hr />
+				<img alt='priority.jpg' style='width:500px;' src='/resources/priority.jpg' />
+				<hr />
+			</div>
+		</div>
+		<div id='footer'>
+			<a href='/'>&lt; Back to index</a><br />
+			<em>OpenTeacher code documentation</em>
+		</div>
+	</body>
+</html>

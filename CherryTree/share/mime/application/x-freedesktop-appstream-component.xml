@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-freedesktop-appstream-component">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>AppStream software component</comment>
+  <comment xml:lang="uk">компонент програмного забезпечення AppStream</comment>
+  <comment xml:lang="tr">AppStream yazılım bileşeni</comment>
+  <comment xml:lang="sv">AppStream-programkomponent</comment>
+  <comment xml:lang="sr-Cyrl">AppStream софтверска компонента</comment>
+  <comment xml:lang="sq">Përbërë software-i AppStream</comment>
+  <comment xml:lang="sl">Programska komponenta AppStream</comment>
+  <comment xml:lang="ru">Программный компонент AppStream</comment>
+  <comment xml:lang="ro">componentă software AppStream</comment>
+  <comment xml:lang="pt-BR">Componente de software AppStream</comment>
+  <comment xml:lang="pl">Składnik oprogramowania AppStream</comment>
+  <comment xml:lang="oc">compausant logicial AppStream</comment>
+  <comment xml:lang="ko">AppStream 소프트웨어 구성 요소</comment>
+  <comment xml:lang="kk-Cyrl">AppStream бағд. қамтама құрауышы</comment>
+  <comment xml:lang="hr">Komponenta AppStream softvera</comment>
+  <comment xml:lang="fr">Composant logiciel AppStream</comment>
+  <comment xml:lang="fi">AppStream-komponentti</comment>
+  <comment xml:lang="et">AppStreami tarkvarakomponent</comment>
+  <comment xml:lang="es">componente de sóftwer de AppStream</comment>
+  <comment xml:lang="en-GB">AppStream software component</comment>
+  <comment xml:lang="de">AppStream-Softwarekomponente</comment>
+  <comment xml:lang="ar">مكون برمجي AppStream</comment>
+  <sub-class-of type="application/xml"/>
+  <generic-icon name="text-x-generic"/>
+  <glob pattern="*.metainfo.xml"/>
+  <glob pattern="*.appdata.xml"/>
+</mime-type>

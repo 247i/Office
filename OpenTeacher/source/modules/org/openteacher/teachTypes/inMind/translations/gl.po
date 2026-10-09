@@ -1,0 +1,48 @@
+# Galician translation for openteacher
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:37+0200\n"
+"PO-Revision-Date: 2012-11-09 23:23+0000\n"
+"Last-Translator: ghas <Unknown>\n"
+"Language-Team: Galician <gl@li.org>\n"
+"Language: gl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:42+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: inMind.py:47
+msgid ""
+"Think about the answer, and press the 'View answer' button when you're done."
+msgstr "Pensa na resposta, e preme o botón 'Ver resposta' cando a saibas."
+
+#: inMind.py:48
+msgid "View answer"
+msgstr "Ver resposta"
+
+#: inMind.py:49
+msgid "Skip"
+msgstr "Omitir"
+
+#: inMind.py:70
+msgid "I was right"
+msgstr "Acertei"
+
+#: inMind.py:71
+msgid "I was wrong"
+msgstr "Fallei"
+
+#: inMind.py:135
+msgid "Translation: "
+msgstr "Tradución: "
+
+#: inMind.py:199
+msgid "Think answer"
+msgstr "Pensar resposta"

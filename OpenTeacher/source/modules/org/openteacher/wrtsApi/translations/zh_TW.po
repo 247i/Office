@@ -1,0 +1,133 @@
+# Chinese (Traditional) translation for openteacher
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
+# This file is distributed under the same license as the openteacher package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openteacher\n"
+"Report-Msgid-Bugs-To: openteachermaintainers@lists.launchpad.net\n"
+"POT-Creation-Date: 2013-06-27 15:38+0200\n"
+"PO-Revision-Date: 2012-09-11 09:22+0000\n"
+"Last-Translator: Louie Chen <louie23@gmail.com>\n"
+"Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-04 05:42+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
+
+#: wrtsApi.py:165
+msgid "Import from WRDS"
+msgstr "從 WRDS 匯入"
+
+#: wrtsApi.py:166
+msgid "Export to WRDS"
+msgstr "匯出到 WRDS"
+
+#: wrtsApi.py:169
+msgid "Email"
+msgstr "電子郵件"
+
+#: wrtsApi.py:170
+msgid "Password"
+msgstr "密碼"
+
+#: wrtsApi.py:172
+msgid "Input and output"
+msgstr "輸入及輸出"
+
+#: wrtsApi.py:173
+msgid "WRDS Login credentials"
+msgstr "WRDS 登入憑證"
+
+#: wrtsApi.py:186
+msgid "Invalid login credentials"
+msgstr "無效的登入憑證"
+
+#: wrtsApi.py:187
+msgid ""
+"WRDS didn't accept the login credentials. Are you sure you entered your e-"
+"mail and password correctly?"
+msgstr "WRDS 無法接受登入憑證。你確定你輸入正確的電子郵件和密碼？"
+
+#: wrtsApi.py:193
+msgid "No WRDS connection"
+msgstr "沒有 WRDS 連線"
+
+#: wrtsApi.py:194
+msgid ""
+"WRDS didn't accept the connection. Are you sure that your internet "
+"connection works and WRDS is online?"
+msgstr "WRDS 無法接受連線。你確定你的網際網路連線正常而且 WRDS 是在線的？"
+
+#: wrtsApi.py:269
+msgid "No word list metadata given."
+msgstr "沒有提供足夠的單字列表數據"
+
+#: wrtsApi.py:270
+msgid ""
+"Please fill in the wordlist title, question language and answer language "
+"first. Then try again."
+msgstr "請先填上單字列表標題，問題語言和答案語言。然後再試一次"
+
+#: wrtsApi.py:274
+msgid "Word list succesfully exported to WRDS."
+msgstr "單字列表成功匯出到 WRDS"
+
+#: wrtsApi.py:316
+msgid "Can't find the share"
+msgstr ""
+
+#: wrtsApi.py:317
+#, python-format
+msgid "Can't find the share you requested. ('%s') Are you sure it exists?"
+msgstr ""
+
+#: wrtsApi.py:334
+msgid "No list selected"
+msgstr "沒有選擇的列表"
+
+#: wrtsApi.py:335
+msgid "No list was selected. Please try again."
+msgstr "沒有選擇的列表。請再試一次"
+
+#: wrtsApi.py:354
+msgid "The word list was imported from WRDS successfully."
+msgstr "單字列表成功從 WRDS 匯入"
+
+#: ui.py:73
+msgid "WRDS - login please:"
+msgstr "WRDS - 請登入："
+
+#: ui.py:76
+msgid "Email:"
+msgstr "電子郵件："
+
+#: ui.py:79
+msgid "Password:"
+msgstr "密碼："
+
+#: ui.py:82
+msgid "Remember email address and password"
+msgstr "記住電子郵件及密碼"
+
+#: ui.py:115
+msgid "WRDS - Please choose a list:"
+msgstr "WRDS - 請選擇列表："
+
+#: ui.py:142
+msgid "WRDS Share:"
+msgstr ""
+
+#. TRANSLATORS: please only translate the 'share-name' part here,
+#. TRANSLATORS: unless you have a good reason to do something
+#. TRANSLATORS: else, of course ;).
+#: ui.py:146
+msgid "share-name.wrts.nl"
+msgstr ""
+
+#: ui.py:147
+msgid "Get from share"
+msgstr ""

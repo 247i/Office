@@ -1,0 +1,72 @@
+%D \module
+%D   [       file=strc-mat,
+%D        version=2008.10.20,
+%D          title=\CONTEXT\ Structure Macros,
+%D       subtitle=Math Numbering,
+%D         author=Hans Hagen,
+%D           date=\currentdate,
+%D      copyright={PRAGMA ADE \& \CONTEXT\ Development Team}]
+%C
+%C This module is part of the \CONTEXT\ macro||package and is
+%C therefore copyrighted by \PRAGMA. See mreadme.pdf for
+%C details.
+
+\writestatus{loading}{ConTeXt Structure Macros / Math Formulas}
+
+%D This module only provides the code for defining formulas and
+%D fetching parameters. The action takes place later.
+
+\unprotect
+
+%D \macros
+%D   {setupformulas,setupsubformulas,setupformulaframed}
+
+\installcorenamespace{formula}
+\installcorenamespace{subformula}
+\installcorenamespace{formulaframed}
+\installcorenamespace{formulaoption}
+
+\installcommandhandler       \??formula       {formula}       \??formula
+\installcommandhandler       \??subformula    {subformula}    \??subformula % maybe just setuphandler (no childs used yet)
+\installframedcommandhandler \??formulaframed {formulaframed} \??formulaframed
+
+\aliased\let\setupformulas   \setupformula
+\aliased\let\setupsubformulas\setupsubformula
+
+\appendtoks
+    \expanded{\defineformulaframed[\currentformula][\currentformulaparent]}%
+\to \everydefineformula
+
+%D Old stuff:
+
+\def\strc_formulas_option#1%
+  {\ifcsname\??formulaoption#1\endcsname
+     \lastnamedcs
+   \else
+     \font_basics_switchtobodyfont{#1}% for old time sake, might go away, only pt so maybe dimension and small test
+   \fi}
+
+\def\strc_math_set_options#1%
+  {\c_strc_formulas_tight \conditionalfalse
+   \c_strc_formulas_packed\conditionalfalse
+   \c_strc_formulas_depth \conditionalfalse
+   \ifempty{#1}%
+     \edef\p_option{\formulaparameter\c!option}%
+   \orelse\ifhastok={#1}% this is new, so that we can also set the grid
+     \setupcurrentformula[#1]%
+     \edef\p_option{\formulaparameter\c!option}%
+     \edef\p_mathematics{\formulaparameter\c!mathematics}%
+     \ifempty\p_mathematics
+     \orelse\ifcsname\??mathematics\p_mathematics:\s!parent\endcsname % \doifcommandhandler\??mathematics\p_mathematics
+       \let\currentmathematics\p_mathematics
+       \expand\everyswitchmathematics
+     \fi
+   \else
+     \edef\p_option{\formulaparameter\c!option}%
+     \edef\p_option{\ifempty\p_option\else\p_option,\fi#1}%
+   \fi
+   \ifempty\p_option \else
+     \rawprocesscommacommand[\p_option]\strc_formulas_option
+   \fi}
+
+\protect \endinput

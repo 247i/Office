@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/buildstream+yaml">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>BuildStream element</comment>
+  <comment xml:lang="zh-Hant-TW">BuildStream 元素</comment>
+  <comment xml:lang="uk">елемент BuildStream</comment>
+  <comment xml:lang="tr">BuildStream ögesi</comment>
+  <comment xml:lang="sv">BuildStream-element</comment>
+  <comment xml:lang="sr-Cyrl">BuildStream елемент</comment>
+  <comment xml:lang="sq">Element BuildStream</comment>
+  <comment xml:lang="sl">Element BuildStream</comment>
+  <comment xml:lang="ru">Элемент BuildStream</comment>
+  <comment xml:lang="ro">element BuildStream</comment>
+  <comment xml:lang="pt-BR">Elemento BuildStream</comment>
+  <comment xml:lang="pt">Elemento BuildStream</comment>
+  <comment xml:lang="pl">Element BuildStream</comment>
+  <comment xml:lang="oc">element BuildStream</comment>
+  <comment xml:lang="ko">BuildStream 요소</comment>
+  <comment xml:lang="kk-Cyrl">BuildStream элементі</comment>
+  <comment xml:lang="hr">BuildStream element</comment>
+  <comment xml:lang="fr">Élément BuiltStream</comment>
+  <comment xml:lang="fi">BuildStream elementti</comment>
+  <comment xml:lang="et">BuildStreami element</comment>
+  <comment xml:lang="es">elemento BuildStream</comment>
+  <comment xml:lang="en-GB">BuildStream element</comment>
+  <comment xml:lang="de">BuildStream-Element</comment>
+  <comment xml:lang="da">BuildStream-element</comment>
+  <comment xml:lang="bg">Елемент — BuildStream</comment>
+  <comment xml:lang="ar">عنصر BuildStream</comment>
+  <sub-class-of type="application/yaml"/>
+  <glob pattern="*.bst"/>
+</mime-type>

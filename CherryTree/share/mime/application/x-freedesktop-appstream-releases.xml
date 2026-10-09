@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-freedesktop-appstream-releases">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>AppStream releases information</comment>
+  <comment xml:lang="uk">відомості щодо випусків AppStream</comment>
+  <comment xml:lang="tr">AppStream yayım bilgisi</comment>
+  <comment xml:lang="sv">AppStream-utgåveinformation</comment>
+  <comment xml:lang="sr-Cyrl">AppStream подаци о издањима</comment>
+  <comment xml:lang="sq">Informacion hedhjeje në qarkullim AppStream</comment>
+  <comment xml:lang="sl">Podatki o izdaji AppStream</comment>
+  <comment xml:lang="ru">Информация о выпусках AppStream</comment>
+  <comment xml:lang="ro">informații despre lansările AppStream</comment>
+  <comment xml:lang="pt-BR">Informações de lançamentos AppStream</comment>
+  <comment xml:lang="pl">Informacje o wydaniach AppStream</comment>
+  <comment xml:lang="oc">informacion de publicacion AppStream</comment>
+  <comment xml:lang="ko">AppStream 릴리스 정보</comment>
+  <comment xml:lang="kk-Cyrl">AppStream шығарылым ақпараты</comment>
+  <comment xml:lang="hr">AppStream informacije o izanjima</comment>
+  <comment xml:lang="fr">Information de versions AppStream</comment>
+  <comment xml:lang="fi">AppStream julkaisutiedot</comment>
+  <comment xml:lang="et">AppStreami versiooniteave</comment>
+  <comment xml:lang="es">Información de la versión AppStream</comment>
+  <comment xml:lang="en-GB">AppStream releases information</comment>
+  <comment xml:lang="de">AppStream-Veröffentlichungsinformationen</comment>
+  <comment xml:lang="ar">معلومات إصدار AppStream</comment>
+  <sub-class-of type="application/xml"/>
+  <generic-icon name="text-x-generic"/>
+  <glob pattern="*.releases.xml"/>
+</mime-type>

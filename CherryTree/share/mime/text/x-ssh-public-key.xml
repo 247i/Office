@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/x-ssh-public-key">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>OpenSSH public key</comment>
+  <comment xml:lang="zh-Hant-TW">OpenSSH 公鑰</comment>
+  <comment xml:lang="uk">відкритий ключ OpenSSH</comment>
+  <comment xml:lang="tr">OpenSSH genel anahtarı</comment>
+  <comment xml:lang="sv">Öppen OpenSSH-nyckel</comment>
+  <comment xml:lang="sr-Cyrl">OpenSSH јавни кључ</comment>
+  <comment xml:lang="sq">Kyç publik OpenSSH</comment>
+  <comment xml:lang="sl">Javni ključ OpenSSH</comment>
+  <comment xml:lang="ru">Публичный ключ OpenSSH</comment>
+  <comment xml:lang="ro">cheie publică OpenSSH</comment>
+  <comment xml:lang="pt-BR">Chave pública OpenSSH</comment>
+  <comment xml:lang="pl">Klucz publiczny OpenSSH</comment>
+  <comment xml:lang="oc">clau publica OpenSSH</comment>
+  <comment xml:lang="ko">OpenSSH 공용 키</comment>
+  <comment xml:lang="kk-Cyrl">OpenSSH ашық кілті</comment>
+  <comment xml:lang="hr">OpenSSH javni ključ</comment>
+  <comment xml:lang="fr">Clé publique OpenSSH</comment>
+  <comment xml:lang="fi">OpenSSH julkinen avain</comment>
+  <comment xml:lang="et">OpenSSH avalik võti</comment>
+  <comment xml:lang="es">clave pública de OpenSSH</comment>
+  <comment xml:lang="en-GB">OpenSSH public key</comment>
+  <comment xml:lang="de">öffentlicher OpenSSH-Schlüssel</comment>
+  <comment xml:lang="bg">Ключ — OpenSSH, публичен</comment>
+  <comment xml:lang="ar">مفتاح عام OpenSSH</comment>
+  <sub-class-of type="text/plain"/>
+  <glob pattern="*.pub"/>
+</mime-type>

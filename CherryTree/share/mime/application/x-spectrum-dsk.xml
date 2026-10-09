@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-spectrum-dsk">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Amstrad CPC/ZX Spectrum DSK floppy disk image</comment>
+  <comment xml:lang="uk">образ дискети Amstrad CPC/ZX Spectrum DSK</comment>
+  <comment xml:lang="tr">Amstrad CPC/ZX Spectrum DSK disket kalıbı</comment>
+  <comment xml:lang="sv">Amstrad CPC/ZX Spectrum DSK-diskettavbild</comment>
+  <comment xml:lang="sr-Cyrl">Одраз дискете за Амстрад ЦПЦ / Зет-Икс Спектрум ДСК</comment>
+  <comment xml:lang="sq">Pamje diskete Amstrad CPC/ZX Spectrum DSK</comment>
+  <comment xml:lang="sl">Odtis diskete Amstrad CPC/ZX Spectrum DSK</comment>
+  <comment xml:lang="ru">Образ гибкого диска Amstrad CPC/ZX Spectrum DSK</comment>
+  <comment xml:lang="ro">imagine de dischetă Amstrad CPC/ZX Spectrum DSK</comment>
+  <comment xml:lang="pt-BR">Imagem de disquete Amstrad CPC/ZX Spectrum DSK</comment>
+  <comment xml:lang="pl">Obraz dyskietki Amstrad CPC/ZX Spectrum DSK</comment>
+  <comment xml:lang="oc">imatge de disqueta DSK per Amstrad CPC/ZX Spectrum</comment>
+  <comment xml:lang="ko">Amstrad CPC/ZX Spectrum DSK 플로피 디스크 이미지</comment>
+  <comment xml:lang="kk-Cyrl">Amstrad CPC/ZX Spectrum DSK иілгіш диск бейнесі</comment>
+  <comment xml:lang="fr">image disquette Amstrad CPC/ZX Spectrum DSK</comment>
+  <comment xml:lang="fi">Amstrad CPC/ZX Spectrum DSK diskettikuva</comment>
+  <comment xml:lang="et">Amstrad CPC/ZX Spectrum DSK flopikettatõmmis</comment>
+  <comment xml:lang="es">Imagen de disquete de Amstrad CPC/ZX Spectrum</comment>
+  <comment xml:lang="en-GB">Amstrad CPC/ZX Spectrum DSK floppy disk image</comment>
+  <comment xml:lang="de">Amstrad-CPC-/ZX-Spectrum-DSK-Diskettenabbild</comment>
+  <glob pattern="*.dsk"/>
+</mime-type>

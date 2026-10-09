@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-git-bundle">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Git bundle</comment>
+  <comment xml:lang="uk">комплект Git</comment>
+  <comment xml:lang="sv">Git-bunt</comment>
+  <comment xml:lang="sl">Paket Git</comment>
+  <comment xml:lang="ro">pachet Git</comment>
+  <comment xml:lang="ko">Git 번들</comment>
+  <comment xml:lang="kk-Cyrl">Git дестесі</comment>
+  <comment xml:lang="et">Giti kobar</comment>
+  <comment xml:lang="de">git-Paket</comment>
+  <generic-icon name="package-x-generic"/>
+  <glob pattern="*.bundle"/>
+  <glob pattern="*.gitbundle"/>
+  <glob pattern="*.bdl"/>
+</mime-type>

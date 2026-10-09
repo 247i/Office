@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-spectrum-slt">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>ZX Spectrum SLT multiload snapshot</comment>
+  <comment xml:lang="uk">знімок мультизавантаження ZX Spectrum SLT</comment>
+  <comment xml:lang="tr">ZX Spectrum SLT çok yüklemeli anlık görüntüsü</comment>
+  <comment xml:lang="sv">ZX Spectrum SLT-multiinläsningsögonblicksbild</comment>
+  <comment xml:lang="sr-Cyrl">Зет-Икс Спектрум СЛТ снимак стања са вишеструким учитавањем</comment>
+  <comment xml:lang="sl">Večnalagalni posnetek ZX Spectrum SLT</comment>
+  <comment xml:lang="ru">Снимок состояния для многозагрузочных игр ZX Spectrum SLT</comment>
+  <comment xml:lang="ro">instantanee multi-încărcare ZX Spectrum SLT</comment>
+  <comment xml:lang="pt-BR">Snapshot multicarga de ZX Spectrum SLT</comment>
+  <comment xml:lang="pl">Wielowczytywalna migawka ZX Spectrum SLT</comment>
+  <comment xml:lang="oc">instantanèu multicarga ZX Spectrum SLT</comment>
+  <comment xml:lang="ko">ZX Spectrum SLT 멀티로드 스냅샷</comment>
+  <comment xml:lang="kk-Cyrl">ZX Spectrum SLT көпжүктемелі снапшоты</comment>
+  <comment xml:lang="fr">Instantané multiload ZX Spectrum SLT</comment>
+  <comment xml:lang="fi">ZX Spectrum SLT latauskuva</comment>
+  <comment xml:lang="et">ZX Spectrum SLT mitmiklaadimise hetktõmmis</comment>
+  <comment xml:lang="es">Captura multicarga se SLT de ZX Spectrum</comment>
+  <comment xml:lang="en-GB">ZX Spectrum SLT multiload snapshot</comment>
+  <comment xml:lang="de">ZX-Spectrum-SLT-Speicherauszug (gebündelt)</comment>
+  <acronym>SLT</acronym>
+  <expanded-acronym>Super Level loader Trap</expanded-acronym>
+  <sub-class-of type="application/x-spectrum-z80"/>
+  <glob pattern="*.slt"/>
+</mime-type>

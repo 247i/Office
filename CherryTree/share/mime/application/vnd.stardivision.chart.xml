@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/vnd.stardivision.chart">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>StarChart 5 chart</comment>
+  <comment xml:lang="zh-Hant-TW">StarChart 5 圖表</comment>
+  <comment xml:lang="uk">діаграма StarChart 5</comment>
+  <comment xml:lang="tr">StarChart 5 çizelgesi</comment>
+  <comment xml:lang="sv">StarChart 5-diagram</comment>
+  <comment xml:lang="sr-Cyrl">Стар-графикон 5 графикон</comment>
+  <comment xml:lang="sq">Grafik StarChart 5</comment>
+  <comment xml:lang="sl">Grafikon StarChart 5</comment>
+  <comment xml:lang="ru">Диаграмма StarChart 5</comment>
+  <comment xml:lang="ro">diagramă StarChart 5</comment>
+  <comment xml:lang="pt-BR">Gráfico do StarChart 5</comment>
+  <comment xml:lang="pl">Wykres StarChart 5</comment>
+  <comment xml:lang="oc">grafic StarChart 5</comment>
+  <comment xml:lang="nn">StarChart 5-diagram</comment>
+  <comment xml:lang="ko">StarChart 5 차트</comment>
+  <comment xml:lang="kk-Cyrl">StarChart 5 диаграммасы</comment>
+  <comment xml:lang="ja">StarChart 5 チャート</comment>
+  <comment xml:lang="id">Bagan StarChart 5</comment>
+  <comment xml:lang="hr">StarChart 5 grafikon</comment>
+  <comment xml:lang="he">תרשים StarChart 5</comment>
+  <comment xml:lang="fur">Grafic di StarChart 5</comment>
+  <comment xml:lang="fr">Graphique StarChart 5</comment>
+  <comment xml:lang="fi">StarChart 5 kaavio</comment>
+  <comment xml:lang="et">StarChart 5 diagramm</comment>
+  <comment xml:lang="es">gráfico de StarChart 5</comment>
+  <comment xml:lang="en-GB">StarChart 5 chart</comment>
+  <comment xml:lang="de">StarChart-5-Diagramm</comment>
+  <comment xml:lang="da">StarChart 5-diagram</comment>
+  <comment xml:lang="ca">diagrama de StarChart 5</comment>
+  <comment xml:lang="bg">Диаграма — StarChart 5</comment>
+  <comment xml:lang="be-Cyrl">дыяграма StarChart 5</comment>
+  <comment xml:lang="ar">مخطط StarChart 5</comment>
+  <sub-class-of type="application/x-ole-storage"/>
+  <generic-icon name="x-office-spreadsheet"/>
+  <glob pattern="*.sds"/>
+</mime-type>

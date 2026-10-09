@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/x-nim">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Nim source code</comment>
+  <comment xml:lang="zh-Hant-TW">Nim 源碼</comment>
+  <comment xml:lang="uk">початковий код мовою Nim</comment>
+  <comment xml:lang="tr">Nim kaynak kodu</comment>
+  <comment xml:lang="sv">Nim-källkod</comment>
+  <comment xml:lang="sr-Cyrl">Ним изворни код</comment>
+  <comment xml:lang="sq">Kod burim Nim</comment>
+  <comment xml:lang="sl">Izvorna koda Nim</comment>
+  <comment xml:lang="ru">Исходный код Nim</comment>
+  <comment xml:lang="ro">cod sursă Nim</comment>
+  <comment xml:lang="pt-BR">Código-fonte Nim</comment>
+  <comment xml:lang="pl">Kod źródłowy Nim</comment>
+  <comment xml:lang="oc">còdi font Nim</comment>
+  <comment xml:lang="nn">Nim-kjeldekode</comment>
+  <comment xml:lang="lt">Nim pradinis kodas</comment>
+  <comment xml:lang="ko">Nim 소스 코드</comment>
+  <comment xml:lang="kk-Cyrl">Nim бастапқы коды</comment>
+  <comment xml:lang="ja">Nim ソースコード</comment>
+  <comment xml:lang="it">Codice sorgente Nim</comment>
+  <comment xml:lang="id">Kode sumber Nim</comment>
+  <comment xml:lang="hr">Nim izvorni kôd</comment>
+  <comment xml:lang="hi">Nim सोर्स कोड</comment>
+  <comment xml:lang="gl">Código fonte Nim</comment>
+  <comment xml:lang="fur">Codiç sorzint Nim</comment>
+  <comment xml:lang="fr">Code source Nim</comment>
+  <comment xml:lang="fi">Nim-lähdekoodi</comment>
+  <comment xml:lang="eu">Nim iturburu-kodea</comment>
+  <comment xml:lang="et">Nimi lähtekood</comment>
+  <comment xml:lang="es">código fuente en Nim</comment>
+  <comment xml:lang="en-GB">Nim source code</comment>
+  <comment xml:lang="de">Nim-Quelltext</comment>
+  <comment xml:lang="ca">codi font en Nim</comment>
+  <comment xml:lang="bg">Изходен код — Nim</comment>
+  <comment xml:lang="be-Cyrl">зыходны код Nim</comment>
+  <comment xml:lang="ar">شفرة مصدر Nim</comment>
+  <comment xml:lang="af">Nim-bronkode</comment>
+  <sub-class-of type="text/plain"/>
+  <glob pattern="*.nim"/>
+</mime-type>

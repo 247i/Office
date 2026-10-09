@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/x-devicetree-source">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Devicetree source code</comment>
+  <comment xml:lang="zh-Hant-TW">Devicetree 源碼</comment>
+  <comment xml:lang="uk">початковий код devicetree</comment>
+  <comment xml:lang="tr">Aygıt ağacı kaynak kodu</comment>
+  <comment xml:lang="sv">Enhetsträdskällkod</comment>
+  <comment xml:lang="sr-Cyrl">Devicetree изворни код</comment>
+  <comment xml:lang="sq">Kod burim Devicetree</comment>
+  <comment xml:lang="sl">Izvorna koda Devicetree</comment>
+  <comment xml:lang="ru">Исходный код Devicetree</comment>
+  <comment xml:lang="ro">cod sursă Devicetree</comment>
+  <comment xml:lang="pt-BR">Código-fonte Devicetree</comment>
+  <comment xml:lang="pl">Kod źródłowy DeviceTree</comment>
+  <comment xml:lang="oc">còdi font Devicetree</comment>
+  <comment xml:lang="nn">Devicetree-kjeldekode</comment>
+  <comment xml:lang="lt">Devicetree pradinis kodas</comment>
+  <comment xml:lang="ko">Devicetree 소스 코드</comment>
+  <comment xml:lang="kk-Cyrl">Devicetree бастапқы коды</comment>
+  <comment xml:lang="ja">Devicetree ソースコード</comment>
+  <comment xml:lang="it">Codice sorgente Devicetree</comment>
+  <comment xml:lang="id">Kode sumber devicetree</comment>
+  <comment xml:lang="hr">Devicetree izvorni kôd</comment>
+  <comment xml:lang="hi">Devicetree सोर्स कोड</comment>
+  <comment xml:lang="gl">Código fonte en Devicetree</comment>
+  <comment xml:lang="fur">Codiç sorzint Devicetree</comment>
+  <comment xml:lang="fr">Code source Devicetree</comment>
+  <comment xml:lang="fi">Laitepuun lähdekoodi</comment>
+  <comment xml:lang="et">Devicetree lähtekood</comment>
+  <comment xml:lang="es">código fuente de árbol de dispositivos</comment>
+  <comment xml:lang="en-GB">Devicetree source code</comment>
+  <comment xml:lang="de">Gerätebaum-Quelltext</comment>
+  <comment xml:lang="ca">codi font d'arbre de dispositius</comment>
+  <comment xml:lang="bg">Изходен код — Devicetree</comment>
+  <comment xml:lang="be-Cyrl">зыходны код Devicetree</comment>
+  <comment xml:lang="ar">شفرة مصدر شجرة الأجهزة</comment>
+  <acronym>DTS</acronym>
+  <expanded-acronym>Device Tree Source</expanded-acronym>
+  <sub-class-of type="text/plain"/>
+  <glob pattern="*.dts"/>
+  <glob pattern="*.dtsi"/>
+</mime-type>

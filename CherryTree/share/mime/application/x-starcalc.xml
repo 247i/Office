@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-starcalc">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>StarCalc 3-4 spreadsheet</comment>
+  <comment xml:lang="zh-Hant-TW">StarCalc 3-4 試算表</comment>
+  <comment xml:lang="uk">електронна таблиця StarCalc 3-4</comment>
+  <comment xml:lang="tr">StarCalc 3-4 hesap tablosu</comment>
+  <comment xml:lang="sv">StarCalc 3-4-kalkylblad</comment>
+  <comment xml:lang="sr-Cyrl">Стар-калкулатор 3-4 табела</comment>
+  <comment xml:lang="sq">Fletëllogaritje StarCalc 3-4</comment>
+  <comment xml:lang="sl">Razpredelnica StarCalc 3-4</comment>
+  <comment xml:lang="ru">Электронная таблица StarCalc 3-4</comment>
+  <comment xml:lang="ro">foaie de calcul StarCalc 3-4</comment>
+  <comment xml:lang="pt-BR">Planilha do StarCalc 3-4</comment>
+  <comment xml:lang="pt">Folha de cálculo StarCalc 3-4</comment>
+  <comment xml:lang="pl">Arkusz StarCalc 3-4</comment>
+  <comment xml:lang="oc">fuèlh de calcul StarCalc3-4</comment>
+  <comment xml:lang="nn">StarCalc 3-4-rekneark</comment>
+  <comment xml:lang="ko">StarCalc 3-4 스프레드시트</comment>
+  <comment xml:lang="kk-Cyrl">StarCalc 3-4 электрондық кестесі</comment>
+  <comment xml:lang="ja">StarCalc 3-4 スプレッドシート</comment>
+  <comment xml:lang="it">Foglio di calcolo StarCalc 3-4</comment>
+  <comment xml:lang="id">Lembar sebar StarCalc 3-4</comment>
+  <comment xml:lang="hr">StarCalc 3-4 proračunska tablica</comment>
+  <comment xml:lang="he">גיליון נתונים StarCalc 3-4</comment>
+  <comment xml:lang="fur">Sfuei di calcul di StarCalc 3-4</comment>
+  <comment xml:lang="fr">Feuille de calcul StarCalc 3-4</comment>
+  <comment xml:lang="fi">StarCalc 3-4 taulukko</comment>
+  <comment xml:lang="et">StarCalc 3-4 tabelarvutusfail</comment>
+  <comment xml:lang="es">hoja de cálculo de StarCalc 3-4</comment>
+  <comment xml:lang="en-GB">StarCalc 3-4 spreadsheet</comment>
+  <comment xml:lang="de">StarCalc-3-4-Tabelle</comment>
+  <comment xml:lang="da">StarCalc 3-4-regneark</comment>
+  <comment xml:lang="ca">full de càlcul de StarCalc 3-4</comment>
+  <comment xml:lang="bg">Таблица — StarCalc 3-4</comment>
+  <comment xml:lang="be-Cyrl">электронная табліца StarCalc 3-4</comment>
+  <comment xml:lang="ar">جدول StarCalc 3-4</comment>
+  <sub-class-of type="application/x-ole-storage"/>
+  <generic-icon name="x-office-spreadsheet"/>
+  <glob pattern="*.sdc" weight="40"/>
+</mime-type>

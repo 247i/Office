@@ -1,0 +1,1344 @@
+if not modules then modules = { } end modules ['math-ini'] = {
+    version   = 1.001,
+    comment   = "companion to math-ini.mkiv",
+    author    = "Hans Hagen, PRAGMA-ADE, Hasselt NL",
+    copyright = "PRAGMA ADE / ConTeXt Development Team",
+    license   = "see context related readme files"
+}
+
+-- The way we do math in \CONTEXT\ \MKIV\ differs from other macro packages so you
+-- should not mix the somewhat unique (and bit weird) approach here with the more
+-- traditional (\TEX) approach. Also, we use char-def.lua as starting point and that
+-- file is quite \CONTEXT\ specific. When we added math to that there was no
+-- interest (quite the contrary) so we didn't went generic there which in retrospect
+-- also gives us the freedom to add more information, something that happens
+-- occasionally. Because that file is shared between \MKIV\ and \LMTX\ some
+-- information is only used by \LMTX. We also have quite some runs over the math
+-- list but that has been so since we started and performance will not degrade much
+-- by it; after all math is not that demanding. More details can be found in the
+-- manuals that discuss math. Most code (and concepts) date from 2005 so maybe I
+-- will upgrade the lot some day, although it has been adapted on the way to the
+-- changes in the engine(s).
+
+local next, type = next, type
+local formatters, find, nospaces = string.formatters, string.find, string.nospaces
+local utfchar, utfbyte = utf.char, utf.byte
+local sortedhash = table.sortedhash
+local toboolean = toboolean
+
+local context               = context
+local implement             = interfaces.implement
+
+local ctx_doifelsesomething = commands.doifelsesomething
+
+local trace_defining        = false  trackers.register("math.defining", function(v) trace_defining = v end)
+
+local report_math           = logs.reporter("mathematics","initializing")
+
+mathematics                 = mathematics or { }
+local mathematics           = mathematics
+
+mathematics.extrabase       = fonts.privateoffsets.mathextrabase -- here we push some virtuals
+mathematics.privatebase     = fonts.privateoffsets.mathbase      -- here we push the ex
+
+local unsetvalue            <const> = attributes.unsetvalue
+
+local allocate              = utilities.storage.allocate
+local chardata              = characters.data
+
+local texsetattribute       = tex.setattribute
+local setmathcode           = tex.setmathcode
+----- setdelcode            = tex.setdelcode -- we no longer set these as the engine also accepts otherwise
+local texintegerdef         = tex.integerdef
+
+local getfontoffamily       = tex.getfontoffamily
+
+local fontdata              = fonts.hashes.identifiers
+local fontchardata          = fonts.hashes.characters
+
+-- These are different from mkiv with luatex.
+
+local classes          = allocate { unset = 64 } -- or -1
+local classnames       = allocate { }
+local maxengineclass   = 63
+local lastengineclass  = 0
+local lastprivateclass = maxengineclass
+
+for k, v in next, nodes.noadcodes do
+    if type(k) == "string" then
+        classes[k] = v
+--         local n = classnames[v]
+--         if not n or #k < #n then
+--             classnames[v] = k
+--         end
+    elseif k > lastengineclass then
+        lastengineclass = k
+    end
+end
+
+local ordinary_class    = classes.ordinary
+local operator_class    = classes.operator
+local binary_class      = classes.binary
+local relation_class    = classes.relation
+local open_class        = classes.open
+local close_class       = classes.close
+local variable_class    = classes.variable
+local punctuation_class = classes.punctuation
+local middle_class      = classes.middle
+local accent_class      = classes.accent
+local radical_class     = classes.radical
+local fraction_class    = classes.fraction
+local under_class       = classes.under
+local over_class        = classes.over
+local fenced_class      = classes.fenced
+local ghost_class       = classes.ghost
+
+-- these will go
+
+classes.ord             = ordinary_class
+classes.op              = operator_class
+classes.bin             = binary_class
+classes.rel             = relation_class
+classes.opening         = open_class         -- will go
+classes.closing         = close_class        -- will go
+classes.punct           = punctuation_class
+classes.frac            = fraction_class
+classes.rad             = radical_class
+classes.fen             = fenced_class
+classes.gst             = ghost_class
+
+-- these will go too
+
+classes.limop           = operator_class
+classes.limoperator     = operator_class
+classes.nolop           = operator_class
+classes.nolimoperator   = operator_class
+classes.large           = operator_class
+classes.largeoperator   = operator_class
+
+-- special in the engine : variable active inner vcenter
+
+local glyphcodes = nodes.glyphcodes
+
+local function registerengineclass(name,short)
+    local class = classes[name]
+    if not class then
+        if lastengineclass < maxengineclass then
+            lastengineclass = lastengineclass + 1
+            class = lastengineclass
+            classnames[class] = short or name
+        else
+            class = ordinary_class
+        end
+    else
+        classnames[class] = short or name
+    end
+    classes[class] = name
+    classes[name] = class
+    local subtype = class + 31 -- todo magic constant
+    glyphcodes[subtype] = name
+    glyphcodes[name] = subtype
+    return class
+end
+
+-- predefined classes
+
+registerengineclass("ordinary",    "ord")
+registerengineclass("operator",    "ope")
+registerengineclass("binary",      "bin")
+registerengineclass("relation",    "rel")
+registerengineclass("open",        "ope")
+registerengineclass("close",       "clo")
+registerengineclass("punctuation", "pun")
+registerengineclass("variable",    "var") -- not used
+registerengineclass("active",      "act") -- not used
+registerengineclass("inner",       "inn") -- not used
+registerengineclass("middle",      "mid")
+registerengineclass("accent",      "acc")
+registerengineclass("radical",     "rad")
+registerengineclass("fraction",    "fra")
+registerengineclass("under",       "und")
+registerengineclass("over",        "ove")
+registerengineclass("fenced",      "fen")
+registerengineclass("ghost",       "gho")
+registerengineclass("vcenter",     "vce") -- not used
+
+-- additional classes
+
+registerengineclass("explicit",        "xpl")
+registerengineclass("imaginary",       "img")
+registerengineclass("differential",    "dif")
+registerengineclass("exponential",     "exp")
+registerengineclass("integral",        "int")
+registerengineclass("ellipsis",        "ell")
+registerengineclass("function",        "fnc")
+registerengineclass("digit",           "dig")  local division_class =
+registerengineclass("division",        "div")
+registerengineclass("factorial",       "fac")
+registerengineclass("wrapped",         "wra")
+registerengineclass("construct",       "con")
+registerengineclass("dimension",       "dim")
+registerengineclass("unary",           "una")
+registerengineclass("textpunctuation", "tpu")
+registerengineclass("unspaced",        "uns")
+registerengineclass("experimental",    "exp")
+registerengineclass("fake",            "fak")
+registerengineclass("numbergroup",     "ngr")
+
+registerengineclass("maybeordinary",   "mor")
+registerengineclass("mayberelation",   "mre")
+registerengineclass("maybebinary",     "mbi")
+
+registerengineclass("chemicalbond",    "chb")
+registerengineclass("implication",     "imp")
+
+registerengineclass("continuation",    "ctn")
+
+local specialclasses = tex.specialmathclasscodes
+
+classes["all"]   = specialclasses["all"]    classnames[specialclasses["all"]  ] = "all"
+classes["begin"] = specialclasses["begin"]  classnames[specialclasses["begin"]] = "beg"
+classes["end"]   = specialclasses["end"]    classnames[specialclasses["end"]  ] = "end"
+
+local function get_noad_class_callback(n)
+    return classnames[n]
+end
+
+callbacks.register {
+    name    = "get_noad_class",
+    action  = get_noad_class_callback,
+    comment = "provide math class name",
+    frozen  = true,
+}
+
+-- inspect(classes) os.exit()
+
+local function registerprivateclass(name,parent)
+    local class = parent and classes[parent] or classes[name]
+    if not class then
+        lastprivateclass = lastprivateclass + 1
+        class = lastprivateclass
+        classes[name] = class
+        -- also setup
+    end
+    return class
+end
+
+local function toengineclass(class)
+    if type(class) == "string" then
+        return classes[class] or ordinary_class
+    elseif class > lastengineclass then
+        return ordinary_class
+    else
+        return class
+    end
+end
+
+implement {
+    name      = "registerengineclass",
+    public    = true,
+    protected = true,
+    arguments = { "optional", "optional" },
+    actions   = registerengineclass,
+}
+
+local topaccent_class    = registerprivateclass("topaccent")
+local bottomaccent_class = registerprivateclass("bottomaccent")
+local delimiter_class    = registerprivateclass("delimiter")
+local root_class         = registerprivateclass("root")
+----- prime_class        = registerprivateclass("prime")
+
+registerprivateclass("botaccent","bottomaccent")
+
+local accents = allocate {
+    accent       = true, -- some can be both
+    topaccent    = true,  [topaccent_class]    = true,
+    bottomaccent = true,  [bottomaccent_class] = true,
+    botaccent    = true,
+    under        = true,  [under_class]        = true,
+    over         = true,  [over_class]         = true,
+    unknown      = false,
+}
+
+local integer_value <const> = tokens.values.integer
+
+implement {
+    name      = "mathclassvalue",
+ -- usage     = "value",
+    public    = true,
+    arguments = "string", -- here we also accent \mathclassvalue foo so no {}
+    actions = function(name)
+     -- return integer_value, classes[name] or ordinary_class
+        context(tostring(classes[name] or ordinary_class))
+    end
+}
+
+-- used in math-tag: so there we need to make things ord etc to fit within
+-- mathml
+
+local codes = allocate {
+    variable       = variable_class,    [variable_class]    = "variable",
+    ordinary       = ordinary_class,    [ordinary_class]    = "ordinary",
+    largeoperator  = operator_class,    [operator_class]    = "largeoperator",
+    binaryoperator = binary_class,      [binary_class]      = "binaryoperator",
+    relation       = relation_class,    [relation_class]    = "relation",
+    openingsymbol  = open_class,        [open_class]        = "openingsymbol",
+    closingsymbol  = close_class,       [close_class]       = "closingsymbol",
+    punctuation    = punctuation_class, [punctuation_class] = "punctuation",
+    middlesymbol   = middle_class,      [middle_class]      = "middlesymbol",
+}
+
+local extensibles = allocate {
+           unknown    = 0,
+    l = 1, left       = 1,
+    r = 2, right      = 2,
+    h = 3, horizontal = 3,-- lr or rl
+    u = 5, up         = 4,
+    d = 5, down       = 5,
+    v = 6, vertical   = 6,-- ud or du
+    m = 7, mixed      = 7,
+}
+
+table.setmetatableindex(extensibles,function(t,k) t[k] = 0 return 0 end)
+
+local virtualized = allocate {
+}
+
+function mathematics.virtualize(unicode,virtual)
+
+    local function virtualize(k,v)
+        local c = virtualized[k]
+        if c == v then
+            report_math("character %C is already virtualized to %C",k,v)
+        elseif c then
+            report_math("character %C is already virtualized to %C, ignoring mapping to %C",k,c,v)
+        else
+            virtualized[k] = v
+        end
+    end
+
+    if type(unicode) == "table" then
+        for k, v in next, unicode do
+            virtualize(k,v)
+        end
+    elseif type(unicode) == "number" and type(virtual) == "number" then
+        virtualize(unicode,virtual)
+ -- else
+        -- error
+    end
+end
+
+mathematics.extensibles   = extensibles
+mathematics.classes       = classes
+mathematics.toengineclass = toengineclass
+mathematics.classnames    = classnames
+mathematics.codes         = codes
+-----------.accents       = codes
+mathematics.virtualized   = virtualized
+
+-- This is relatively new and experimental:
+
+do
+
+    local dictionaries       = mathematics.dictionaries or { }
+    mathematics.dictionaries = dictionaries
+
+    local names    = dictionaries.names    or utilities.storage.allocate()
+    local groups   = dictionaries.groups   or utilities.storage.allocate()
+    local data     = dictionaries.data     or utilities.storage.allocate()
+    local sets     = dictionaries.sets     or utilities.storage.allocate()
+    local variants = dictionaries.variants or utilities.storage.allocate() -- todo: get from char-def
+    local defaults = dictionaries.defaults or utilities.storage.allocate() -- todo: get from char-def
+
+    storage.register("mathematics/dictionaries/names",    names,    "mathematics.dictionaries.names")
+    storage.register("mathematics/dictionaries/groups",   groups,   "mathematics.dictionaries.groups")
+    storage.register("mathematics/dictionaries/data",     data,     "mathematics.dictionaries.data")
+    storage.register("mathematics/dictionaries/sets",     sets,     "mathematics.dictionaries.sets")
+    storage.register("mathematics/dictionaries/variants", variants, "mathematics.dictionaries.variants")
+    storage.register("mathematics/dictionaries/defaults", defaults, "mathematics.dictionaries.defaults")
+
+    dictionaries.names    = dictionaries.names    or names
+    dictionaries.groups   = dictionaries.groups   or groups
+    dictionaries.data     = dictionaries.data     or data
+    dictionaries.sets     = dictionaries.sets     or sets
+    dictionaries.variants = dictionaries.variants or variants
+    dictionaries.defaults = dictionaries.defaults or defaults
+
+    local i_everygroup <const> = 0xFFFF
+    local s_everygroup <const> = "everygroup"
+
+    names [s_everygroup] = i_everygroup
+    names [i_everygroup] = i_everygroup
+    groups[i_everygroup] = s_everygroup
+    data  [i_everygroup] = { }
+
+    if not sets.n then
+        sets.n = 0
+    end
+
+    function dictionaries.registergroup(name)
+        local group = rawget(names,name)
+        if not group then
+            group = #groups + 1
+            names[name]   = group
+            names[group]  = group -- hm
+            groups[group] = name
+            data[group]   = { }
+            local csname  = "math" .. nospaces(name) .. "dictionary"
+            texintegerdef(csname,group,"immutable")
+        end
+        return group
+    end
+
+    function dictionaries.registergroupset(name,set)
+        local s = sets[name]
+        if not s then
+            if set == "every" then
+                s = {
+                    group = i_everygroup,
+                }
+                sets[name] = s
+            else
+                local d = dictionaries.registergroup(name)
+                local n = sets.n + 1
+                local l = utilities.parsers.settings_to_array(set)
+                local g = { }
+                for i=1,#l do
+                    local n = names[l[i]]
+                    if n then
+                        g[#g+1] = n -- ordered
+                    end
+                end
+                s = {
+                    names  = l,
+                    groups = g,
+                    group  = d,
+                }
+                sets[name] = s
+                sets[d]    = s
+            end
+        end
+    end
+
+    -- TODO: check 'minus' as it reports true
+
+    function dictionaries.groupset(name)
+        return sets[name] or { }
+    end
+
+    function dictionaries.groupsetgroup(name)
+        if name == "every" or name == s_everygroup then
+            return i_everygroup
+        else
+            local s = sets[name]
+            if s then
+                return s.group
+            else
+                return names[name] or 0
+            end
+        end
+    end
+
+    function dictionaries.registercharacter(group,index,description,class,name) -- name is diagnostic
+        local d = names[group] -- can be number or string
+        if d then
+            data[d][index] = description or true
+            local v = variants[index]
+            if type(class) == "string" then
+                class = classes[class]
+            end
+            if not class then
+                class = true
+            end
+            if v then
+                v[d] = class
+            else
+                variants[index] = { [d] = class }
+            end
+            if not defaults[index] then
+                defaults[index] = d
+            end
+        end
+--         print(group,index,description,class,name)
+    end
+
+    function dictionaries.name(group,index) -- number, number
+        group = names[group] or i_everygroup
+        if group == i_everygroup then
+            for i=1,#groups do
+                local d = data[i]
+                local n = d[index]
+                if type(n) == "string" then
+                    return n
+                end
+            end
+        elseif group then
+            local d = data[group]
+            if d then
+                local n = d[index]
+                if type(n) == "string" then
+                    return n
+                end
+            end
+            local s = sets[group]
+            if s then
+                local g = s.groups
+                for i=1,#g do
+                    d = data[g[i]]
+                    local n = d[index]
+                    if type(n) == "string" then
+                        return n
+                    end
+                end
+            end
+        end
+        return false
+    end
+
+    implement {
+        name      = "registergroupset",
+        arguments = "2 arguments",
+        actions   = dictionaries.registergroupset,
+    }
+
+    implement {
+        name      = "groupsetgroup",
+        arguments = "argument",
+        actions   = { dictionaries.groupsetgroup, context },
+    }
+
+    local f_dictionary = false
+    local whatdetail   = "all"
+
+    local function get_math_dictionary_callback(n,properties,group,index,font,char)
+     -- local properties, group, index, font, char = nodes.nuts.getchardict(n)
+        if whatdetail and (properties ~= 0 or group ~= 0 or index ~= 0) then
+            local char = fontchardata[font][char]
+            if char or whatdetail == "all" then
+                local unicode = char and char.unicode
+                if unicode then
+                    local groupname = groups[group]
+                    local indexname = false
+                    if groupname then
+                        indexname = data[group][index] -- dictionaries.data
+                    else
+                        groupname = "unknown"
+                    end
+                    if not indexname or indexname == true then
+                        indexname = chardata[unicode]
+                        indexname = indexname and indexname.description or "unknown"
+                    end
+                    if not f_dictionary then
+                        f_dictionary = formatters["properties [%04X:%04X:%04X] [%s] %U : %s"]
+                    end
+                    return f_dictionary(properties,group,index,groupname,unicode,indexname)
+                end
+            end
+        end
+    end
+
+    trackers.register("math.dictionaries",function(v) whatdetail = v end)
+
+    callbacks.register {
+        name    = "get_math_dictionary",
+        action  = get_math_dictionary_callback,
+        comment = "provide math dictionary details",
+        frozen  = true,
+    }
+
+    -- This is experimental and a prelude to the long pending "relate math rendering to
+    -- some field" wish. In TeX characters and symbols are grouped by class but that is
+    -- mostly related to spacing etc. while we actually want to group by meaning. A
+    -- reasonable but incomplete starting point is:
+    --
+    -- https://www.w3.org/TR/MathML3/appendixa.html#parsing_DefEncAtt
+    --
+    -- But it has some weird short names mixed with long ones (and a strange suddenly
+    -- uppercase: Differential-Operator) but we are not bound to that at all. We will
+    -- probably remove and add categories anyway. This openmath stuff looks a bit
+    -- abandoned but we can use it as a start and playground anyway.
+    --
+    -- The char-def.lua file will have mathgroup entries reflecting this.
+    --
+    -- This is a good one (with nice roll-overs too):
+    --
+    -- https://en.wikipedia.org/wiki/List_of_mathematical_symbols_by_subject
+
+    if environment.initex then
+
+        local registergroup = mathematics.dictionaries.registergroup
+
+        registergroup("default")
+
+        registergroup("binary relation")
+        registergroup("binary set relation")
+        registergroup("integral")
+        registergroup("limit")
+        registergroup("number set")
+        registergroup("postfix operator")
+        registergroup("prime")
+        registergroup("binary operator")
+        registergroup("binary vector")
+        registergroup("binary arithmetic")     -- operator
+        registergroup("binary logical")
+        registergroup("binary set")
+        registergroup("constant arithmetic")
+        registergroup("constant set")
+        registergroup("differential")
+        registergroup("differential2")
+        registergroup("factorial")
+        registergroup("interval")
+        registergroup("quantifier")
+        registergroup("unary set")             -- check forall exists etc
+        registergroup("constant logical")      -- new one
+        registergroup("partial")               -- partial differential
+        registergroup("nary operator")         -- new one
+        registergroup("nary logical")
+        registergroup("specifier")
+        registergroup("specifier2")
+        registergroup("pause")
+        registergroup("punctuation")
+     -- registergroup("grouped")
+        registergroup("unary logical")
+        registergroup("whatever")
+        registergroup("whatever2")
+
+     -- registergroup("binary linear algebra")
+     -- registergroup("lambda")
+     -- registergroup("nary arithmetic")       -- see operator
+     -- registergroup("nary constructor")
+     -- registergroup("nary functional")
+     -- registergroup("nary linear algebra")
+     -- registergroup("nary minmax")
+     -- registergroup("nary relation")
+     -- registergroup("nary set list")
+     -- registergroup("nary set relation")
+     -- registergroup("nary set")
+     -- registergroup("nary statistics")
+     -- registergroup("product")
+     -- registergroup("unary arithmetic")      -- operator
+     -- registergroup("unary elementary")      -- sin cos ln sqrt
+     -- registergroup("unary functional")
+     -- registergroup("unary linear algebra")
+     -- registergroup("unary logical")
+     -- registergroup("unary vector")
+
+    end
+
+    -- \Umathdictdef\vdash 1 \mathbinarylogicaldictionary "22A2 \mathrelationcode 0 "22A2
+    --
+    -- \startluacode
+    --     mathematics.dictionaries.registercharacter("binary logical",0x22A2,"implies")
+    -- \stopluacode
+
+end
+
+do
+
+    local skip = {
+       [accent_class]       = true,
+       [topaccent_class]    = true,
+       [bottomaccent_class] = true,
+       [over_class]         = true,
+       [under_class]        = true,
+       [radical_class]      = true,
+       [root_class]         = true,
+    }
+
+    local registercharacter = mathematics.dictionaries.registercharacter
+    local groupnames        = mathematics.dictionaries.names
+
+    local i_everygroup <const> = 0xFFFF
+
+    local setmathcharacter = function(class,family,slot,unicode,mset,group,meaning)
+        if mset and class ~= ordinary_class then
+            setmathcode("global",slot,class,family,unicode)
+            mset = false
+        end
+        if group then
+            group = groupnames[group] or 0
+            if group ~= 0 then
+                -- which one
+                registercharacter(group,unicode,meaning,class)
+             -- registercharacter(group,slot,meaning,class)
+            end
+        end
+        return mset
+    end
+
+    local function report(class,family,unicode,name,group)
+        local nametype = type(name)
+        if not group then
+            group = "no group"
+        end
+        if nametype == "string" then
+            report_math("class %a, family %a, char %C, name %a, group %a",class,family,unicode,name,group)
+        elseif nametype == "number" then
+            report_math("class %a, family %a, char %C, number %U, group %a",class,family,unicode,name,group)
+        else
+            report_math("class %a, family %a, char %C, group %a",class,family,unicode,group)
+        end
+    end
+
+    local texmathchardef = tex.mathchardef
+
+    local setmathsymbol = function(name,class,family,slot,stretch,group,meaning) -- hex is nicer for tracing
+        if skip[class] then
+            return -- only in mkiv
+     -- elseif class == open_class or class == close_class or class == middle_class then
+        else
+            if class == delimiter_class then -- open close or middle (bars)
+                class = ordinary_class
+            end
+            if group then
+                group = groupnames[group] or 0
+                if group ~= 0 then
+                    texmathchardef(name,class,family,slot,"permanent",0x1,group,slot)
+                    registercharacter(group,slot,meaning,class,name)
+                    return
+                end
+            end
+            texmathchardef(name,class,family,slot,"permanent")
+        end
+    end
+
+    mathematics.setmathsymbol = setmathsymbol
+
+    function mathematics.define()
+        if trace_defining then
+            logs.startfilelogging(report_math,"math defined from character definitions")
+        end
+        local family = 0
+        local data   = characters.data
+        --
+        local function remap(first,last)
+            for unicode=utfbyte(first),utfbyte(last) do
+                setmathcode("global",unicode,ordinary_class,family,unicode)
+            end
+        end
+        remap("0","9")
+        remap("A","Z")
+        remap("a","z")
+        --
+     -- setdelcode("global",0x2E,0,0,0,0) -- period is special -- still?
+        --
+        for unicode, character in sortedhash(data) do
+            local symbol  = character.mathsymbol
+            local mset    = true
+            local class   = character.mathclass
+            local spec    = character.mathspec
+            local name    = character.mathname
+            local stretch = character.mathstretch
+            local group   = character.mathgroup
+            local meaning = character.mathmeaning
+            if symbol then
+                local other = data[symbol]
+                local class = other.mathclass
+                if class then
+                    local engine = toengineclass(class)
+                    if trace_defining then
+                        report(engine,family,unicode,symbol,group)
+                    end
+                    mset = setmathcharacter(engine,family,unicode,symbol,mset,group,meaning)
+                end
+                local spec = other.mathspec
+                if spec then
+                    for i=1,#spec do
+                        local m = spec[i]
+                        local class = m.class
+                        if class then
+                            local engine = toengineclass(class)
+                            -- todo: trace
+                            mset = setmathcharacter(engine,family,unicode,symbol,mset,group,meaning)
+                        end
+                    end
+                end
+            end
+            if spec then
+                local done = false
+                if class then
+                    if name then
+                        report_math("fatal error, conflicting mathclass and mathspec for %C",unicode)
+                        os.exit()
+                    else
+                        class = classes[class] or ordinary_class
+                        local engine = toengineclass(class)
+                        if trace_defining then
+                            report(engine,family,unicode,nil,group)
+                        end
+                        mset = setmathcharacter(engine,family,unicode,unicode,mset,group,meaning)
+                        done = true
+                    end
+                end
+                for i=1,#spec do
+                    local m       = spec[i]
+                    local name    = m.name
+                    local class   = m.class   or class
+                    local group   = m.group   or group
+                    local stretch = m.stretch or stretch
+                    local meaning = m.meaning or meaning
+                    if class then
+                        class = classes[class] or ordinary_class
+                    else
+                        class = ordinary_class
+                    end
+                    if class then
+                        local engine = toengineclass(class)
+                        if name then
+                            if trace_defining then
+                                report(engine,family,unicode,name,group)
+                            end
+                            setmathsymbol(name,engine,family,unicode,stretch,group,meaning)
+                        else
+                            name = (class == classes.ordinary or class == classes.digit) and "no name" -- character.adobename -- bad
+                            if name and trace_defining then
+                                report(engine,family,unicode,name,group)
+                            end
+                        end
+                        if not done then
+                            mset = setmathcharacter(engine,family,unicode,m.unicode or unicode,mset,group,meaning) -- see solidus
+                            done = true
+                        end
+                    end
+                end
+            else
+                if class then
+                    class = classes[class] or ordinary_class
+                else
+                    class = ordinary_class
+                end
+                if name ~= nil then
+                    local engine = toengineclass(class)
+                    if name == false then
+                        if trace_defining then
+                            report(engine,family,unicode,name,group)
+                        end
+                        mset = setmathcharacter(engine,family,unicode,unicode,mset,group,meaning)
+                    else
+                     -- if not name then
+                     --     name = character.contextname -- too dangerous, we loose textslash and a few more
+                     -- end
+                        if name then
+                            if trace_defining then
+                                report(engine,family,unicode,name,group)
+                            end
+                            if not group then
+                                if class == variable_class then
+                                 -- happens with greek where have a name but don't set a group .. somewhat messy
+                                    group = i_everygroup
+                                else
+                                 -- report(engine,family,unicode,name) -- character.adobename)
+                                end
+                            end
+                            setmathsymbol(name,engine,family,unicode,stretch,group,meaning)
+                        else
+                            if trace_defining then
+                                report(engine,family,unicode,"no name",group) -- character.adobename)
+                            end
+                        end
+                        mset = setmathcharacter(engine,family,unicode,unicode,mset,group,meaning)
+                    end
+                elseif class ~= ordinary_class then
+                    local engine = toengineclass(class)
+                    if trace_defining then
+                        report(engine,family,unicode,"no name",group) -- character.adobename)
+                    end
+                    mset = setmathcharacter(engine,family,unicode,unicode,mset,group,meaning)
+                end
+            end
+        end
+        --
+        if trace_defining then
+            logs.stopfilelogging()
+        end
+    end
+
+end
+
+-- needed for mathml analysis
+-- string with # > 1 are invalid
+-- we could cache
+
+do
+
+    local lpegmatch = lpeg.match
+    local utf8byte  = lpeg.patterns.utf8byte * lpeg.P(-1)
+
+    -- function somechar(c)
+    --     local b = lpegmatch(utf8byte,c)
+    --     return b and chardata[b]
+    -- end
+
+    local somechar = table.setmetatableindex(function(t,k)
+        if k then
+            local b = lpegmatch(utf8byte,k)
+            local v = b and chardata[b] or false
+            t[k] = v
+            return v
+        end
+    end)
+
+    local function utfmathclass(chr, default)
+        local cd = somechar[chr]
+        return cd and cd.mathclass or default or "unknown"
+    end
+
+    local function utfmathlimop(chr)
+        local cd = somechar[chr]
+        return cd and (cd.mathclass == "operator" or cd.mathclass == "integral") or false
+    end
+
+    local function utfmathaccent(chr,default,asked1,asked2)
+        local cd = somechar[chr]
+        if not cd then
+            return default or false
+        end
+        if asked1 and asked1 ~= "" then
+            local mc = cd.mathclass
+            if mc and (mc == asked1 or mc == asked2) then
+                return true
+            end
+            local ms = cd.mathspec
+            if not ms then
+                local mp = cd.mathparent
+                if mp then
+                    ms = chardata[mp].mathspec
+                end
+            end
+            if ms then
+                for i=1,#ms do
+                    local msi = ms[i]
+                    local mc = msi.class
+                    if mc and (mc == asked1 or mc == asked2) then
+                        return true
+                    end
+                end
+            end
+        else
+            local mc = cd.mathclass
+            if mc then
+                return accents[mc] or default or false
+            end
+            local ms = cd.mathspec
+            if ms then
+                for i=1,#ms do
+                    local msi = ms[i]
+                    local mc = msi.class
+                    if mc then
+                        return accents[mc] or default or false
+                    end
+                end
+            end
+        end
+        return default or false
+    end
+
+    local function utfmathstretch(chr,default) -- "h", "v", "b", ""
+        local cd = somechar[chr]
+        return cd and cd.mathstretch or default or ""
+    end
+
+    local function utfmathcommand(chr,default,asked1,asked2)
+        local cd = somechar[chr]
+        if not cd then
+            return default or ""
+        end
+        if asked1 then
+            local mn = cd.mathname
+            local mc = cd.mathclass
+            if mn and mc and (mc == asked1 or mc == asked2) then
+                return mn
+            end
+            local ms = cd.mathspec
+            if not ms then
+                local mp = cd.mathparent
+                if mp then
+                    ms = chardata[mp].mathspec
+                end
+            end
+            if ms then
+                for i=1,#ms do
+                    local msi = ms[i]
+                    local mn = msi.name
+                    if mn then
+                        local mc = msi.class
+                        if mc == asked1 or mc == asked2 then
+                            return mn
+                        end
+                    end
+                end
+            end
+        else
+            local mn = cd.mathname
+            if mn then
+                return mn
+            end
+            local ms = cd.mathspec
+            if ms then
+                for i=1,#ms do
+                    local msi = ms[i]
+                    local mn = msi.name
+                    if mn then
+                        return mn
+                    end
+                end
+            end
+        end
+        return default or ""
+    end
+
+    local function utfmathfiller(chr, default)
+        local cd = somechar[chr]
+        local cmd = cd and cd.mathfiller -- or cd.mathname
+        return cmd or default or ""
+    end
+
+    mathematics.utfmathclass   = utfmathclass
+    mathematics.utfmathstretch = utfmathstretch
+    mathematics.utfmathcommand = utfmathcommand
+    mathematics.utfmathfiller  = utfmathfiller
+    mathematics.utfmathaccent  = utfmathaccent
+
+    -- interfaced
+
+    implement {
+        name      = "utfmathclass",
+        public    = true,
+        actions   = { utfmathclass, context },
+        arguments = "argument"
+    }
+
+    implement {
+        name      = "utfmathstretch",
+        public    = true,
+        actions   = { utfmathstretch, context },
+        arguments = "argument"
+    }
+
+    implement {
+        name      = "utfmathcommand",
+        public    = true,
+        actions   = { utfmathcommand, context },
+        arguments = "argument"
+    }
+
+    implement {
+        name      = "utfmathfiller",
+        public    = true,
+        actions   = { utfmathfiller, context },
+        arguments = "argument"
+    }
+
+    implement {
+        name      = "utfmathcommandabove",
+        public    = true,
+        actions   = { utfmathcommand, context },
+        arguments = { "argument", false, "'topaccent'","'over'" }
+    }
+
+    implement {
+        name      = "utfmathcommandbelow",
+        public    = true,
+        actions   = { utfmathcommand, context },
+        arguments = { "argument", false, "'bottomaccent'","'under'" }
+    }
+
+    implement {
+        name      = "utfmathcommandfiller",
+        public    = true,
+        actions   = { utfmathfiller, context },
+        arguments = "argument"
+    }
+
+    -- todo: make this a helper:
+
+    implement {
+        name      = "doifelseutfmathabove",
+        public    = true,
+        actions   = { utfmathaccent, ctx_doifelsesomething },
+        arguments = { "argument", false, "'topaccent'", "'over'" }
+    }
+
+    implement {
+        name      = "doifelseutfmathbelow",
+        public    = true,
+        actions   = { utfmathaccent, ctx_doifelsesomething },
+        arguments = { "argument", false, "'bottomaccent'", "'under'" }
+    }
+
+    implement {
+        name      = "doifelseutfmathaccent",
+        public    = true,
+        actions   = { utfmathaccent, ctx_doifelsesomething },
+        arguments = "argument",
+    }
+
+    implement {
+        name      = "doifelseutfmathfiller",
+        public    = true,
+        actions   = { utfmathfiller, ctx_doifelsesomething },
+        arguments = "argument",
+    }
+
+    implement {
+        name      = "doifelseutfmathlimop",
+        public    = true,
+        actions   = { utfmathlimop, ctx_doifelsesomething },
+        arguments = "argument"
+    }
+
+end
+
+do
+
+    -- 1: step 1
+    -- 2: step 2
+    -- 3: htdp * 1.33^n
+    -- 4: size * 1.33^n
+    -- 5: use lfg
+
+    implement {
+        name      = "mathvariantslot",
+        public    = true,
+        usage     = "value",
+        arguments = "2 integers",
+        actions   = function(fam,n)
+            local b = fontdata[getfontoffamily(fam)].bigslots
+            if b then
+                n = (n > #b and b[#b]) or b[n] or n
+            end
+            return integer_value, n + 1
+        end
+    }
+
+    -- will go away:
+
+    function mathematics.big(tfmdata,unicode,n,method)
+        local t = tfmdata.characters
+        local c = t[unicode]
+        if c and n > 0 then
+            if method == 1 or method == 2 or method == 5 then
+                if method == 5 then
+                    local b = tfmdata.bigslots
+                    if b then
+                        n = (n > #b and b[#b]) or b[n] or n
+                    end
+                elseif method == 2 then -- large steps
+                    n = n * 2
+                end
+                local next = c.next
+                while next do
+                    if n <= 1 then
+                        return next
+                    else
+                        n = n - 1
+                        local tn = t[next].next
+                        if tn then
+                            next = tn
+                        else
+                            return next
+                        end
+                    end
+                end
+            elseif method >= 3 then
+                local size = 1.33^n
+                if method == 4 then
+                    size = tfmdata.parameters.size * size
+                else -- if method == 3 then
+                    size = (c.height + c.depth) * size
+                end
+                local next = c.next
+                while next do
+                    local cn = t[next]
+                    if (cn.height + cn.depth) >= size then
+                        return next
+                    else
+                        local tn = cn.next
+                        if tn then
+                            next = tn
+                        else
+                            return next
+                        end
+                    end
+                end
+            end
+        end
+        return unicode
+    end
+
+end
+
+do -- experimental, not stored in the format
+
+    local categories       = { }
+    mathematics.categories = categories
+
+    local a_mathcategory   <const> = attributes.private("mathcategory")
+    local a_mathstack      <const> = attributes.private("mathstack")
+
+    local functions        = storage.allocate()
+    categories.functions   = functions
+    local noffunctions     = 0
+
+    local function identify(kind,tag,method)
+        local n = functions[tag]
+        if n then
+            n = n.index
+        else
+            n = noffunctions + 1 ---
+            local t = {
+                kind   = kind,
+                tag    = tag,
+                method = method,
+                index  = n,
+            }
+            functions[n] = t
+            functions[tag] = t
+            noffunctions = n
+        end
+        return n
+    end
+
+    implement {
+        name      = "tagmfunctionlab", -- this one will be replaced by the next
+        arguments = { "integer", "argument", "argument" },
+        actions   = function(kind,tag,method)
+            texsetattribute(a_mathcategory,identify(kind,tag,method))
+        end
+    }
+
+    implement {
+        name      = "tagmfunctionlabattribute",
+        usage     = "value",
+        arguments = { "integer", "argument", "argument" },
+        actions   = function(kind,tag,method)
+            return integer_value, identify(kind,tag,method)
+        end
+    }
+
+    function mathematics.functiontype(n)
+        local func = n and functions[n]
+        local kind = func and func.kind or 0
+        if kind == 1 then
+            return "function"
+        elseif kind == 2 then
+            return "accent"
+        elseif kind == 3 then
+            return "fence"
+        else
+            return "unknown"
+        end
+    end
+
+end
+
+do
+
+    local list
+
+    function mathematics.resetattributes()
+        if not list then
+            list = { }
+            for k, v in next, attributes.numbers do
+                if find(k,"^math") then
+                    list[#list+1] = v
+                end
+            end
+        end
+        for i=1,#list do
+            texsetattribute(list[i],unsetvalue)
+        end
+    end
+
+end
+
+implement {
+    name      = "resetmathattributes",
+    public    = true,
+    protected = true,
+    actions   = mathematics.resetattributes
+}
+
+-- weird to do this here but it's a side affect of math anyway
+
+implement {
+    name     = "enableasciimode",
+    onlyonce = true,
+    actions  = resolvers.macros.enablecomment,
+}
+
+implement {
+    name      = "nofmathvariants",
+    public    = true,
+    usage     = "value",
+    arguments = "integer",
+    actions   = function(n)
+        local char = fontchardata[getfontoffamily(0)]
+        local data = char[n]
+        local size = 1
+        while data do
+            local next = data.next
+            if next then
+                size = size + 1
+                data = char[next]
+            else
+                break
+            end
+        end
+        return integer_value, size
+    end,
+}
+
+implement {
+    name      = "getmathvariant",
+    public    = true,
+    usage     = "value",
+    arguments = "2 integers",
+    actions   = function(m,n)
+        local char = fontchardata[getfontoffamily(0)]
+        local data = char[n]
+        local slot = n
+        if data then
+            while data and m > 1 do
+                local next = data.next
+                if next then
+                    m = m - 1
+                    data = char[next]
+                    slot = next
+                else
+                    break
+                end
+            end
+        end
+        return integer_value, slot
+    end,
+}
+
+implement {
+    name      = "getmathcharone",
+    public    = true,
+    usage     = "value",
+    arguments = "integer",
+    actions   = function(n)
+        local char = fontchardata[getfontoffamily(0)]
+        local data = char[n]
+        return integer_value, data and data.smaller or n
+    end,
+}
+
+implement {
+    name      = "getmathchartwo",
+    public    = true,
+    usage     = "value",
+    arguments = "integer",
+    actions   = function(n)
+        local char = fontchardata[getfontoffamily(0)]
+        local data = char[n]
+        local slot = data and data.smaller
+        if slot then
+            data = char[slot]
+            n = slot
+        end
+        return integer_value, data and data.smaller or n
+    end,
+}

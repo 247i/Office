@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teach2000>
+  <version>760</version>
+  <description>Normal</description>
+  <message_data mm_files_embedded="0">
+    <font_question>Arial</font_question>
+    <font_answer>Arial</font_answer>
+    <items>
+      <item id="0">
+        <question>een</question>
+        <answer>one</answer>
+        <errors>0</errors>
+        <testcount>0</testcount>
+        <is_multiplechoice>N</is_multiplechoice>
+      </item>
+      <item id="1">
+        <question>twee</question>
+        <answer>two</answer>
+        <errors>0</errors>
+        <testcount>0</testcount>
+        <is_multiplechoice>N</is_multiplechoice>
+      </item>
+      <item id="2">
+        <question>drie</question>
+        <answer>three</answer>
+        <errors>0</errors>
+        <testcount>0</testcount>
+        <is_multiplechoice>N</is_multiplechoice>
+      </item>
+    </items>
+    <testresults/>
+  </message_data>
+</teach2000>

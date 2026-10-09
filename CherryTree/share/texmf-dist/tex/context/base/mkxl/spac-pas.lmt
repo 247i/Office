@@ -1,0 +1,292 @@
+if not modules then modules = { } end modules ['spac-pas'] = {
+    version   = 1.001,
+    comment   = "companion to spac-pas.mkxl",
+    author    = "Hans Hagen, PRAGMA-ADE, Hasselt NL",
+    copyright = "PRAGMA ADE / ConTeXt Development Team",
+    license   = "see context related readme files"
+}
+
+-- My usual usical timestamp: early September 2024, Albion live in Alphen NL
+-- (as impressive as expected).
+
+local rawget, tonumber, type, unpack = rawget, tonumber, type, unpack
+local sortedhash = table.sortedhash
+local formatters = string.formatters
+
+local report         = logs.reporter("linebreak","quality")
+
+local currentfile    = luatex.currentfile
+
+local integer_value  <const> = tokens.values.integer
+
+local toobad         <const> = 20
+local tracing        = false
+
+----- passnames      = { }
+----- nofidentifiers = 0
+
+builders.passnames   = utilities.storage.mark(builders.passnames or { [0] = "traditional" })
+local passnames      = builders.passnames
+local nofidentifiers = #passnames
+
+storage.register("builders/passnames", passnames, "builders.passnames")
+
+table.setmetatableindex(passnames,function(t,k)
+    if type(k) == "number" and k >= 0 then
+        return k
+    else
+        local i = rawget(t,k)
+        if i then
+            return i
+        else
+            nofidentifiers = nofidentifiers + 1
+            t[k] = nofidentifiers
+            t[nofidentifiers] = k
+            return nofidentifiers
+        end
+    end
+end)
+
+interfaces.implement {
+    name      = "parpassidentifier",
+    public    = true,
+ -- protected = true,
+    usage     = "value",
+    arguments = "string",
+    actions   = function(s)
+        return integer_value, passnames[s]
+    end,
+}
+
+local function parpassidentifier(n)
+    return rawget(passnames,n) or n
+end
+
+builders.parpassidentifier = parpassidentifier
+
+local nuts            = nodes.nuts
+local insertafter     = nuts.insertafter
+
+local linebreakstates = tex.linebreakstatecodes
+local content_state   <const> = linebreakstates.content
+local text_state      <const> = linebreakstates.text
+local disc_state      <const> = linebreakstates.disc
+local math_state      <const> = linebreakstates.math
+
+local function tostate(state)
+    return
+        ((state & text_state ~= 0) and "t" or "-") ..
+        ((state & disc_state ~= 0) and "d" or "-") ..
+        ((state & math_state ~= 0) and "m" or "-")
+end
+
+local visualizepasses = false
+local summary         = { }
+local f_3             = false
+
+local noffirst     = 0
+local nofsecond    = 0
+local nofthird     = 0
+local nofsubpasses = 0
+local nofsubdone   = 0
+
+local function marker(par,pass,subpass,subpasses,state,identifier,name,collect)
+    if not visualizepasses then
+        visualizepasses = nodes.visualizers.register("passes","trace:dr","trace:dr",-1.5)
+        nodes.visualizers.definelayer("passes")
+        f_3 = formatters["subpass %02i"]
+    end
+    if pass == 1 then
+        pass = "pretolerance"
+    elseif pass == 2 then
+        pass = "tolerance"
+    elseif pass == 3 then
+     -- pass = "emergency"
+        pass = "final"
+    elseif subpass == -2 then
+        pass = "subpass pre"
+    elseif subpass == -1 then
+        pass = "subpass tol"
+    else
+        pass = f_3(subpass)
+    end
+    if collect then
+        local s = summary[identifier]
+        if not s then
+            s = {
+                nofpasses = subpasses,
+                name      = name,
+                passes    = { },
+                states    = table.setmetatableindex("table"),
+            }
+            summary[identifier] = s
+        end
+        local p = s.passes ; p[pass] = (p[pass] or 0) + 1
+        local s = s.states ; s[pass][state] = (s[pass][state] or 0) + 1
+    end
+    if type(name) == "string" or name > 0 then
+        pass = name .. ":" .. pass
+    end
+    return visualizepasses(pass)
+end
+
+local function linebreak_quality_console(par,id,pass,subpass,subpasses,state,overfull,underfull,verdict,classified,line)
+    if (state & content_state) ~= 0 then
+        local filename = currentfile()
+        local passname = parpassidentifier(id)
+        report("file %a, line %i, pass %i, subpass %i of %i, state %s, id %a, overfull %p, underfull %p, verdict %i, classified 0x%X",filename,line,pass,subpass,subpasses,tostate(state),passname,overfull,underfull,verdict,classified)
+        return marker(par,pass,subpass,subpasses,state,id,passname,false)
+    end
+end
+
+local function linebreak_quality_simple(par,id,pass,subpass,subpasses,state,overfull,underfull,verdict,classified,line)
+    if (state & content_state) ~= 0 then
+        local passname = parpassidentifier(id)
+        return marker(par,pass,subpass,subpasses,state,id,passname,false)
+    end
+end
+
+local function linebreak_quality_summary(par,id,pass,subpass,subpasses,state,overfull,underfull,verdict,classified,line)
+    if (state & content_state) ~= 0 then
+        local passname = parpassidentifier(id)
+        if pass == 1 then
+            noffirst = noffirst + 1
+        elseif pass == 2 then
+            nofsecond = nofsecond + 1
+        elseif pass == 3 then
+            nofthird = nofthird + 1
+        else
+            nofsubpasses = nofsubpasses + 1
+            nofsubdone   = nofsubdone   + subpass
+        end
+        return marker(par,pass,subpass,subpasses,state,id,passname,true)
+    end
+end
+
+logs.registerfinalactions(function()
+    if tracing and next(summary) then
+        logs.startfilelogging(report,"linebreak passes")
+        report("")
+        for identifier, s in sortedhash(summary) do
+            local name      = s.name or ""
+            local nofpasses = s.nofpasses or 0
+            local passes    = s.passes
+            local states    = s.states
+            for pass, final in sortedhash(passes) do
+                local t = { }
+                for state, n in sortedhash(states[pass]) do
+                    t[#t+1] = n .. ":" .. tostate(state)
+                end
+                report("  identifier %i, name %a, pass %a, passes %i, count %04i, states % t",identifier,name,pass,nofpasses,final,t)
+            end
+        end
+        report("")
+        logs.stopfilelogging()
+    end
+end)
+
+statistics.register("linebreak quality",function()
+    if tracing then
+        return string.formatters["%i first, %i second, %i third, %i subpasses, %i subruns"](noffirst, nofsecond, nofthird,nofsubpasses,nofsubdone)
+    end
+end)
+
+local registercallback = callbacks.register
+
+trackers.register("paragraphs.passes", function(v)
+    if not v then
+        tracing = nil
+    elseif v == "summary" then
+        tracing = linebreak_quality_summary
+    elseif v == "console" then
+        tracing = linebreak_quality_console
+    else
+        tracing = linebreak_quality_simple
+    end
+    registercallback {
+        name   = "linebreak_quality",
+        action = tracing,
+    }
+end)
+
+-- trackers.register("paragraphs.passes.console", function(v)
+--     tracing = v and linebreak_quality_console or nil
+--     registercallback {
+--         name   = "linebreak_quality",
+--         action = tracing,
+--     }
+-- end)
+
+-- trackers.register("paragraphs.passes.summary", function(v)
+--     tracing = v and linebreak_quality_summary or nil
+--     registercallback {
+--         name   = "linebreak_quality",
+--         action = tracing,
+--     }
+-- end)
+
+-- -- -- --
+
+local nuts    = nodes.nuts
+local setprop = nuts.setprop
+local getprop = nuts.getprop
+
+local trace_callbacks = false
+
+trackers.register("paragraphs.passes.callbacks", function(v)
+    trace_callbacks = v
+end)
+
+local actions = { }
+
+local function paragraph_pass_callback(
+    head,identifier,subpass,callback,
+    overfull,underfull,verdict,classified,
+    threshold,badness,classes
+)
+    local action = actions[callback]
+    if action then
+        local step = getprop(head,"par_pass_done") or 1
+        setprop(head,"par_pass_done",step+1)
+        local result, again = action(
+            head,parpassidentifier(identifier) or identifier,callback,step,
+            overfull,underfull,verdict,classified,
+            threshold,badness,classes
+        )
+        if trace_callbacks then
+            if type(result) == "table" then
+                report("identifier %a, subpass %i, callback %a, %s",identifier,subpass,callback,"process with data")
+            elseif result then
+                report("identifier %a, subpass %i, callback %a, %s",identifier,subpass,callback,"process")
+            else
+                report("identifier %a, subpass %i, callback %a, %s",identifier,subpass,callback,"quit")
+            end
+        end
+        return result, again
+    else
+        report("identifier %a, subpass %i, unknown callback %a",identifier,subpass,callback)
+        return false
+    end
+end
+
+registercallback {
+    name   = "paragraph_pass",
+    action = paragraph_pass_callback,
+}
+
+function builders.registerpaspasscallback(identifier,action)
+    local index = parpassidentifier(identifier)
+    actions[index] = action
+    return index
+end
+
+interfaces.implement {
+    name      = "parpasscallback",
+    public    = true,
+    usage     = "value",
+    arguments = "string",
+    actions   = function(s)
+        return integer_value, passnames[s]
+    end,
+}
+

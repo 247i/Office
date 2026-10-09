@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="image/apng">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Animated PNG image</comment>
+  <comment xml:lang="zh-Hant-TW">動態 PNG 影像</comment>
+  <comment xml:lang="uk">анімоване зображення PNG</comment>
+  <comment xml:lang="tr">Hareketli PNG görüntüsü</comment>
+  <comment xml:lang="sv">Animerad PNG-bild</comment>
+  <comment xml:lang="sr-Cyrl">Анимирана PNG слика</comment>
+  <comment xml:lang="sq">Figurë PNG e animuar</comment>
+  <comment xml:lang="sl">Animacija PNG</comment>
+  <comment xml:lang="ru">Анимированное изображение  PNG</comment>
+  <comment xml:lang="ro">imagine PNG animată</comment>
+  <comment xml:lang="pt-BR">Imagem PNG animada</comment>
+  <comment xml:lang="pl">Animowany obraz PNG</comment>
+  <comment xml:lang="oc">imatge animat PNG</comment>
+  <comment xml:lang="nn">Animert PNG-bilete</comment>
+  <comment xml:lang="ko">애니메이션 PNG 이미지</comment>
+  <comment xml:lang="kk-Cyrl">Анимацияланған PNG суреті</comment>
+  <comment xml:lang="ja">PNG動画</comment>
+  <comment xml:lang="it">Immagine PNG animata</comment>
+  <comment xml:lang="id">Gambar PNG animasi</comment>
+  <comment xml:lang="hr">Animirana PNG slika</comment>
+  <comment xml:lang="hi">एनिमेटेड PNG छवि</comment>
+  <comment xml:lang="he">תמונת PNG מונפשת</comment>
+  <comment xml:lang="gl">Imaxe de PNG animado</comment>
+  <comment xml:lang="fur">Imagjin PNG animade </comment>
+  <comment xml:lang="fr">Image animée PNG</comment>
+  <comment xml:lang="fi">Animoitu PNG</comment>
+  <comment xml:lang="eu">PNG irudi animatua</comment>
+  <comment xml:lang="et">Liikuv PNG pilt</comment>
+  <comment xml:lang="es">imagen PNG animada</comment>
+  <comment xml:lang="en-GB">Animated PNG image</comment>
+  <comment xml:lang="de">animiertes PNG-Bild</comment>
+  <comment xml:lang="ca">imatge animada PNG</comment>
+  <comment xml:lang="bg">Изображение с анимация — SVG</comment>
+  <comment xml:lang="be-Cyrl">анімаваны відарыс PNG</comment>
+  <comment xml:lang="ar">صورة PNG متحركة</comment>
+  <acronym>PNG</acronym>
+  <expanded-acronym>Portable Network Graphics</expanded-acronym>
+  <sub-class-of type="image/png"/>
+  <glob pattern="*.apng"/>
+  <glob pattern="*.png" weight="40"/>
+  <alias type="image/vnd.mozilla.apng"/>
+</mime-type>

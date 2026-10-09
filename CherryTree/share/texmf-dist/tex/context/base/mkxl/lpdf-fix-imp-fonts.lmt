@@ -1,0 +1,1326 @@
+if not modules then modules = { } end modules ['lpdf-fix-imp-fonts'] = {
+    version   = 1.001,
+    comment   = "companion to lpdf-ini.mkiv",
+    author    = "Hans Hagen, PRAGMA-ADE, Hasselt NL",
+    copyright = "PRAGMA ADE / ConTeXt Development Team",
+    license   = "see context related readme files"
+}
+
+-- In LMTX we have to do this different than in MkIV. We also prepare ourselves
+-- variable fonts and such. In LuaTeX we use the original index but in LMTX we
+-- use a decent sequence which means that we need to resolve the original. This
+-- kind of hackery is fragile anyway, so we only merge files that are produced
+-- by ConTeXt.
+--
+-- It's a stepwise process to get this done and it will never be perfect for all
+-- inclusions. After BT 2024 I managed to handle some of the awfully bad pdf
+-- files that VRWS had to deal with merged and cleaned up. After that I rewarded
+-- myself by watching Camille Bigeault's Mental Web drumming video (which makes
+-- the usual musical timestamp).
+
+local next, type, getmetatable, unpack = next, type, getmetatable, unpack
+local gsub, format, match, find, gmatch = string.gsub, string.format, string.match, string.find, string.gmatch
+local setmetatableindex, sortedhash, sequenced = table.setmetatableindex, table.sortedhash, table.sequenced
+local nameonly, basename = file.nameonly, file.basename
+local hextointeger, chrtointeger = string.hextointeger, string.chrtointeger
+local f6 = string.f6
+local concat, insert, remove = table.concat, table.insert, table.remove
+
+local pdfe             = lpdf.epdf
+local pdfreference     = lpdf.reference
+local pdfreserveobject = lpdf.reserveobject
+
+local trace_merge      = false  trackers.register("graphics.fonts",        function(v) trace_merge   = v end)
+local trace_details    = false  trackers.register("graphics.fonts.details",function(v) trace_details = v end)
+local report_merge     = logs.reporter("graphics","fonts")
+
+local expanded         = pdfe.expanded
+local contenttostring  = pdfe.contenttostring
+local getpagecontent   = pdfe.getpagecontent
+local parsecontent     = pdfe.parsecontent
+
+----- definefont       = fonts.definers.internal
+local definefont       = fonts.definers.define
+local getstreamhash    = fonts.handlers.otf.getstreamhash
+local loadstreamdata   = fonts.handlers.otf.loadstreamdata
+local cleanfontname    = fonts.names.cleanname
+local chardata         = fonts.hashes.characters
+
+local defined = setmetatableindex(function(t,filename)
+    local v = setmetatableindex(function(t,subfont)
+        local v = { }
+        t[subfont] = v
+        return v
+    end)
+    t[filename] = v
+    return v
+end)
+
+local function toinstance(instance)
+    if type(instance) == "table" then
+        return nil, "axis={" .. sequenced(instance.__raw__,",") .. "}"
+    elseif instance and instance ~= "" then
+        return instance, nil
+    else
+        return nil, nil
+    end
+end
+
+-- This is a bit of a hack ... we need to be able to set the instance directly
+-- on a file.
+
+local function isdefinedlmtx(filename,subfont,instance,hash,version,glyphcount)
+    local fontname = "file:" .. filename
+    local instance, features = toinstance(instance)
+    if instance then
+        fontname = "name:" .. nameonly(filename) .. instance -- not ok as it's not fontname
+        instance = nil
+    end
+    local id = defined[fontname][subfont][instance or features or false]
+    if not id then
+        -- we can try to avoid this
+        id = definefont {
+            name     = fontname,
+            instance = instance,
+            detail   = features,
+        }
+        if id > 0 then
+            local dummy = lpdf.usedcharacters[id] -- force embedding
+        else
+            id = false
+        end
+        defined[fontname][subfont][instance or features or false] = id
+    end
+    if id then
+        -- We double check here!
+        local shash, sdata = getstreamhash(id)
+        if hash ~= shash then
+            report_merge("inconsistent %s in %a","hashes",filename)
+            return false
+        end
+        sdata = loadstreamdata(sdata)
+        if not sdata then
+            report_merge("inconsistent %s in %a","streamdata",filename)
+            return false
+        end
+        local fontheader = sdata.fontheader
+        if version and fontheader and version ~= fontheader.fontversion then
+            report_merge("inconsistent %s in %a","versions",filename)
+            return false
+        end
+        local streams = sdata.streams
+        if glyphcount and streams and glyphcount ~= (#streams + (streams[0] and 1 or 0)) then
+            report_merge("inconsistent %s in %a","glyphcount",filename)
+            return false
+        end
+        return id
+    end
+    return false
+end
+
+-- todo: check some more
+
+local cleanname = fonts.names.cleanname
+
+local remap = { }
+
+local function registerfont(specification)
+    local source = specification.source
+    if source then
+        remap[cleanfontname(source)] = specification
+    end
+end
+
+backends.codeinjections.registerfont = registerfont
+
+function graphics.registerpdffont(...)
+    -- todo: message
+    registerfont(...)
+end
+
+local function isdefinedunknown(fontname,remap)
+    local c = cleanfontname(fontname)
+    local m = remap[c]
+    local r = m and m.target
+    if r then
+        report_merge("remapping %a to %a",fontname,r)
+        name = r
+    else
+        name = "name:" .. fontname
+    end
+    local id = definefont {
+        name = name,
+    }
+    if id > 0 then
+        local dummy = lpdf.usedcharacters[id] -- force embedding
+    else
+        id = false
+    end
+    if id then
+        local shash, sdata = getstreamhash(id)
+     -- sdata = loadstreamdata(sdata) -- no checking here
+-- print(fontname,c,shash,sdata)
+        return shash, id
+    end
+    return false
+end
+
+-- todo: we can share the map within a pdfdoc .. using the object number
+
+local status = {
+    files     = { },
+    pages     = 0,
+    xobjects  = 0,
+    charprocs = 0,
+    merged    = 0,
+    notmerged = 0,
+    indices   = 0,
+}
+
+statistics.register("compact font inclusion", function()
+    if status.pages > 0 or status.xobjects > 0 or status.charprocs > 0 then
+        return string.format(
+            "%i files, %i pages, %i indices, %i xobjects, %i chrprocs, %i times merged, %i times not merged",
+            table.count(status.files),
+            status.pages,
+            status.indices,
+            status.xobjects,
+            status.charprocs,
+            status.merged,
+            status.notmerged
+        )
+    end
+end)
+
+local function checkedfontreference(k,v,key,value,o)
+    if key ~= k then
+-- print("different keys",key,k)
+        return value -- different keys
+    elseif v[1] ~= 10 or value[1] ~= 10 then
+-- print("different objects",key,k)
+        return value -- different objects
+    elseif v[3] ~= value[3] then
+-- print("different values",key,k)
+        return value -- different values
+    else
+        return pdfreference(o)
+    end
+end
+
+local getstates, getindexstate_composite, getindexstate_simple  do
+
+    local fromunicode16 = fonts.mappings.fromunicode16
+    local expandwidths  = pdfe.expandwidths
+    local mergewidths   = pdfe.mergewidths
+
+    local function initialize(t,k)
+        local v = {
+            unicodes = { },
+            widths   = { },
+            fontname = k,
+        }
+        t[k] = v
+        return v
+    end
+
+    getstates = function(pdfdoc)
+        local states = pdfdoc.fontstates
+        if not states then
+            states = {
+                Type1    = setmetatableindex(initialize), -- simple fonts, 1 byte index
+                Type3    = setmetatableindex(initialize), -- idem
+                TrueType = setmetatableindex(initialize), -- idem
+                OpenType = setmetatableindex(initialize), -- composite fonts, 2 byte index
+            }
+            pdfdoc.fontstates = states
+        end
+        return states
+    end
+
+ -- local splitsixteen  do
+ --
+ --     local lpegmatch = lpeg.match
+ --
+ --     local more = 0
+ --
+ --  -- local pattern = lpeg.P(true) / function() more = 0 end * (
+ --     local pattern = (
+ --         lpeg.C(4) / function(s) -- needs checking !
+ --             local now = hextointeger(s)
+ --             if more > 0 then
+ --                 now = (more-0xD800)*0x400 + (now-0xDC00) + 0x10000
+ --                 more = 0
+ --                 return now
+ --             elseif now >= 0xD800 and now <= 0xDBFF then
+ --                 more = now
+ --             else
+ --                 return now
+ --             end
+ --         end
+ --     )^0 -- todo: split ligatures has more than one
+ --
+ --     splitsixteen = function(str)
+ --         if str and str ~= "" then
+ --             more = 0
+ --             return lpegmatch(pattern,str)
+ --         end
+ --     end
+ --
+ -- end
+
+    local splitsixteen = lpdf.splitsixteen
+
+    -- This could be an lpeg but there is not that much to gain here.
+
+    local function register1(pdfdoc,unicodes,index,uni,fontname)
+        local old = unicodes[index]
+        if not old then
+            unicodes[index] = uni
+        elseif old ~= uni then
+            report_merge("inconsistent unicode file %a, font %a, index 0x%04X, old %U, new %U, %s",
+                pdfdoc.filename,fontname,index,old,uni,"bfrange")
+        end
+    end
+
+    local function register2(pdfdoc,unicodes,index,uni,fontname)
+        local old = unicodes[index]   -- unicode
+        local new, more = splitsixteen(uni) -- unicode16 or ligature .. todo: more ligature components
+        if more then
+            if not old then
+                unicodes[index] = uni -- string
+            elseif old ~= uni then
+                report_merge("inconsistent unicode file %a, font %a, index 0x%04X, old %a, new %a, %s",
+                    pdfdoc.filename,fontname,index,old,uni,"bfchar")
+            end
+        else
+            if not old then
+                unicodes[index] = new
+            elseif old ~= new then
+                report_merge("inconsistent unicode file %a, font %a, index 0x%04X, old %U, new %U, %s",
+                    pdfdoc.filename,fontname,index,old,uni,"bfchar")
+            end
+        end
+    end
+
+    local function getunicodes(pdfdoc,fontname,str,unicodes)
+        -- <0000> <005E> <0020> : first index, last index, first unicode
+        for s in gmatch(str,"beginbfrange%s*(.-)%s*endbfrange") do
+            for first, last, offset in gmatch(s,"<([^>]+)>%s*<([^>]+)>%s*<([^>]+)>") do
+                local first = tonumber(first,16)    -- index
+                local last  = tonumber(last,16)     -- index
+                local uni   = fromunicode16(offset) -- unicode16
+                for index=first,last do
+                    register1(pdfdoc,unicodes,index,uni,fontname)
+                    uni = uni + 1
+                end
+            end
+        end
+        -- <005F> <0061> [<00660066> <00660069> <00660066006C>] -- untested as not seen yet
+        for s in gmatch(str,"beginbfrange%s*(.-)%s*endbfrange") do
+            for first, last, offset in gmatch(s,"<([^>]+)>%s*<([^>]+)>%s*%[([^%]]+)%]") do
+                local index = tonumber(first,16) -- index
+                for uni in gmatch("%s*<([^>]+)>") do
+                    register2(pdfdoc,unicodes,index,uni,fontname)
+                    index = index + 1
+                end
+            end
+        end
+        -- <0000> <0020>     : index, single
+        -- <005F> <00660066> : index, ligature
+        for s in gmatch(str,"beginbfchar%s*(.-)%s*endbfchar") do
+            for idx, uni in gmatch(s,"<([^>]+)>%s*<([^>]+)>") do
+                local index = tonumber(idx,16)  -- index
+                register2(pdfdoc,unicodes,index,uni,fontname)
+            end
+        end
+    end
+
+    local function isembedded(descriptor)
+        return descriptor and (descriptor.FontFile or descriptor.FontFile2 or descriptor.FontFile3) and true or false
+    end
+
+    getindexstate_composite = function(pdfdoc,somefont,descendant,states)
+        local basefont = somefont.BaseFont
+        if basefont then
+            local fontname = match(basefont,"^[A-Z]+%+(.+)$")
+            if fontname then
+                local descriptor = descendant.FontDescriptor
+                if descriptor then
+                    local widths    = descendant.W
+                    local tounicode = somefont.ToUnicode
+                    -- todo: when no tounicode, maybe just use the index
+                    if widths and tounicode then
+                        local fontstate  = states[fontname]
+                        local f_widths   = fontstate.widths
+                        local f_unicodes = fontstate.unicodes
+                        expandwidths(widths,f_widths)
+                        getunicodes(pdfdoc,fontname,tounicode(),f_unicodes)
+                        fontstate.embedded = isembedded(descriptor)
+                        return fontstate
+                    end
+                end
+            end
+        end
+    end
+
+    getindexstate_simple = function(pdfdoc,somefont,states,kind,remap)
+        local basefont = somefont.BaseFont
+        if basefont then
+            local fontname = match(basefont,"^[A-Z]+%+(.+)$") or basefont
+            if fontname then
+                local descriptor = somefont.FontDescriptor
+-- maybe encoding should win
+                if descriptor then
+                    local widths    = somefont.Widths
+                    local tounicode = somefont.ToUnicode
+                    if widths and tounicode then
+                        local fontstate  = states[fontname]
+                        local f_widths   = fontstate.widths
+                        local f_unicodes = fontstate.unicodes
+                        fontstate.narrow = true
+                        mergewidths(widths,f_widths)
+                        getunicodes(pdfdoc,fontname,tounicode(),f_unicodes)
+                        fontstate.embedded = isembedded(descriptor)
+                        return fontstate
+                    end
+                end
+                -- tricky when we have the same fontname twice, once as type 1 or truetype
+                -- and once as opentype .. it really happens
+                local encoding = somefont.Encoding
+                if encoding == "WinAnsiEncoding" then
+                    local r = table.load(resolvers.findfile("regi-cp1252.lua"))
+                    local fontstate  = states[fontname]
+                    fontstate.unicodes = r
+                    fontstate.narrow = true
+                    fontstate.embedded = isembedded(descriptor)
+                    return fontstate
+                elseif descriptor then
+                    local fontfile = descriptor.FontFile
+                    if fontfile then
+                        local data  = fontfile()
+                        local first = fontfile.Length1
+                        if first and data then
+                            data = string.sub(data,1,first)
+                            local metadata = fonts.handlers.pfb.filtermetadata(data)
+                            if metadata then
+                                local fullname  = metadata.fullname
+                                if fontname == fullname then
+                                    local encoding = fonts.handlers.pfb.filterencoding(data)
+                                    if encoding then
+                                        local name, id = isdefinedunknown(fullname,remap)
+                                        if id > 0 then
+                                            local unicodes = { }
+                                            local nametoslot = fonts.helpers.nametoslot
+                                            for index, name in next, encoding do
+                                                -- todo: check for missing hits
+                                                unicodes[index] = nametoslot(name,id)
+                                            end
+                                            local fontstate = states[fontname]
+                                            fontstate.custom   = encoding
+                                            fontstate.fullname = fullname
+                                            fontstate.narrow   = true
+                                            fontstate.unicodes = unicodes
+                                            fontstate.embedded = isembedded(descriptor)
+                                            return fontstate
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end
+                else
+                    report_merge("no encoding or descriptor in file %a for font %a",pdfdoc.filename,fontname)
+                end
+           end
+        end
+    end
+
+end
+
+local function makemap(fontname,id,state,unicode)
+    local map = { }
+    local r = remap[cleanfontname(fontname)]
+    if r and r.unicode ~= nil then
+        unicode = r.unicode
+    end
+    if unicode then
+        local chr = chardata[id]
+        for k, v in next, state.unicodes do
+            local d = chr[v]
+            if d then
+-- print(string.formatters["index in pdf %i unicode %C index in font %i"](k,v,d.index))
+                map[k] = d.index
+            else
+                -- issue
+            end
+        end
+    else
+        for k, v in next, state.unicodes do
+            map[k] = k
+        end
+    end
+    return map
+end
+
+local function dontembed(basefont,state,embedding)
+    if not state.embedded then
+        report_merge("font %a is not embedded",basefont)
+    end
+    if embedding then
+        return false
+    elseif not state.embedded then
+        return false
+    else
+        return true
+    end
+end
+
+local function getstate_OpenType(pdfdoc,v,d,embedding,remap)
+    local state = getindexstate_composite(pdfdoc,v,d,getstates(pdfdoc).OpenType)
+    if state then
+        local basefont = d.BaseFont
+        if basefont then
+            if dontembed(basefont,state,embedding) then
+                return false
+            end
+            local fontname = match(basefont,"^[A-Z]+%+(.+)$") or basefont
+            local cleanname = cleanfontname(fontname)
+            local streamhash, id = isdefinedunknown(fontname,remap)
+            if streamhash then
+                return {
+                    id         = id,
+                    map        = makemap(fontname,id,state,false),
+                    streamhash = streamhash,
+                    filename   = fontname,
+                 -- subfont    = subfont,
+                 -- instance   = instance,
+                    used       = lpdf.usedindices[streamhash],
+                }
+            end
+        end
+    end
+end
+
+local function getstate_TrueType(pdfdoc,v,embedding,remap)
+    local state = getindexstate_simple(pdfdoc,v,getstates(pdfdoc).TrueType,"truetype",remap)
+    if state then
+     -- needs checking when unicode ... NOT OK
+        local basefont = v.BaseFont
+        if basefont then
+            if dontembed(basefont,state,embedding) then
+                return false
+            end
+            local fontname = match(basefont,"^[A-Z]+%+(.+)$") or basefont
+            local cleanname = cleanfontname(fontname)
+            local streamhash, id = isdefinedunknown(fontname,remap)
+            if streamhash then
+                return {
+                    id         = id,
+                    map        = makemap(fontname,id,state,true),
+                    narrow     = state.narrow,
+                    streamhash = streamhash,
+                    filename   = fontname,
+                 -- subfont    = subfont,
+                 -- instance   = instance,
+                    used       = lpdf.usedindices[streamhash],
+                }
+            end
+        end
+    end
+end
+
+local function getstate_Type1(pdfdoc,v,embedding,remap)
+    local state = getindexstate_simple(pdfdoc,v,getstates(pdfdoc).Type1,"type1",remap)
+    if state then
+        local basefont = v.BaseFont
+        if basefont then
+            if dontembed(basefont,state,embedding) then
+                return false
+            end
+            local fontname = match(basefont,"^[A-Z]+%+(.+)$") or basefont
+            local cleanname = cleanfontname(fontname)
+            local streamhash, id = isdefinedunknown(fontname,remap)
+            if streamhash then
+                local map = makemap(fontname,id,state,true)
+                if next(map) then
+                    return {
+                        id         = id,
+                        map        = map,
+                        narrow     = state.narrow,
+                        streamhash = streamhash,
+                        filename   = fontname,
+                     -- subfont    = subfont,
+                     -- instance   = instance,
+                        used       = lpdf.usedindices[streamhash],
+                    }
+                end
+            end
+        end
+    end
+end
+
+local function getstate_LMTX(pdfdoc,r)
+    local indexmap   = r.IndexMap
+    local streamhash = r.StreamHash
+    local filename   = r.FileName
+    local subfont    = r.SubFont or 1
+    local instance   = r.Instance or ""
+    local version    = r.Version or "0"
+    local glyphcount = r.GlyphCount or 0
+    if indexmap then
+        local index = -1
+        local map   = { }
+        for i=1,#indexmap do
+            local li = indexmap[i]
+            if type(li) == "number" then
+                index = li
+            else
+                for j=1,#li do
+                    map[index] = li[j]
+                    index = index + 1
+                end
+            end
+        end
+        if isdefinedlmtx(filename,subfont,instance,streamhash,version,glyphcount) then
+            return {
+                map        = map,
+                streamhash = streamhash,
+                filename   = filename,
+                subfont    = subfont,
+                instance   = instance,
+                used       = lpdf.usedindices[streamhash],
+            }
+        end
+    end
+end
+
+-- yes    : merge when we have a context file
+-- always : merge and assume original indices
+-- embed  : add missing fonts
+-- fix    : convert decimal into hexadecimal
+
+do
+
+    local h_hex_2 = lpdf.h_hex_2
+    local h_hex_4 = lpdf.h_hex_4
+
+    local function report_sharing(pdfdoc,what,v,shared,pagenumber,lmtx)
+        local encoding = v.Encoding
+        report_merge("page %i of %a, font %a, type %a, encoding %a, %sshared%s",
+            pagenumber,
+            basename(pdfdoc.filename),
+            v.BaseFont or "?",
+            what,
+            type(encoding) == "string" and encoding or "custom",
+            shared and "" or "not ",
+            lmtx and ", lmtx registry found" or ""
+        )
+    end
+
+    local function plugin_Type0(pdfdoc,k,v,sharedfonts,data,compactor,pagenumber,remap,depth)
+        -- The v table is unique and can be shared
+        local shared = sharedfonts[v]
+        if type(shared) == "table" then
+            data[k] = shared
+        elseif shared == nil then
+            shared = false
+            if v.Encoding == "Identity-H"  then
+                local d = v.DescendantFonts[1] -- how about more
+                if d and d.Subtype == "CIDFontType0" or d.Subtype == "CIDFontType2" then
+                    local r = d.LMTX_Registry or d.LMTXRegistry
+                    if r then
+                     -- if compactor.merge and (compactor.merge.lmtx or compactor.merge.LMTX) then
+                        if compactor.merge.lmtx or compactor.merge.LMTX then
+                            shared = getstate_LMTX(pdfdoc,r)
+                            data[k] = shared
+                        end
+                    elseif find(pdfe.producer(pdfdoc),"^LuaMetaTeX") then
+                        -- This is a no go because for sure we have a different index order. Older
+                        -- versions append the version to the producer string.
+                    elseif compactor.merge.type0 or compactor.embed.type0 then
+                        shared = getstate_OpenType(pdfdoc,v,d,compactor.merge.type0,remap)
+                        data[k] = shared
+                    end
+                    if trace_merge then
+                        report_sharing(pdfdoc,"type0",v,shared,pagenumber,r and true or false)
+                    end
+                end
+                sharedfonts[v] = shared
+            end
+        else
+            -- what ...
+         -- print("case 1",encoding)
+        end
+    end
+
+    local function plugin_TrueType(pdfdoc,k,v,sharedfonts,data,compactor,pagenumber,remap,depth)
+        local shared = sharedfonts[v]
+        if type(shared) == "table" then
+            data[k] = shared
+        elseif shared == nil then
+            shared = false
+            if compactor.embed.truetype or compactor.merge.truetype then
+                shared = getstate_TrueType(pdfdoc,v,compactor.merge.truetype,remap)
+                data[k] = shared
+            end
+            if trace_merge then
+                report_sharing(pdfdoc,"truetype",v,shared,pagenumber)
+            end
+            sharedfonts[v] = shared
+        end
+    end
+
+    local function plugin_Type1(pdfdoc,k,v,sharedfonts,data,compactor,pagenumber,remap,depth)
+        local shared = sharedfonts[v]
+        if type(shared) == "table" then
+            data[k] = shared
+        elseif shared == nil then
+            shared = false
+            if compactor.embed.type1 or compactor.merge.type1 then
+                shared = getstate_Type1(pdfdoc,v,compactor.merge.type1,remap)
+                data[k] = shared
+            end
+            if trace_merge then
+                report_sharing(pdfdoc,"type1",v,shared,pagenumber)
+            end
+        end
+        sharedfonts[v] = shared
+    end
+
+    local plugin -- defined after the next one
+
+    local function plugin_Type3(pdfdoc,k,v,sharedfonts,data,compactor,pagenumber,remap,depth)
+        local charprocs = v.CharProcs
+        if charprocs then
+            local resources = v.Resources
+            if resources then
+                local fonts    = resources.Font
+                local xobjects = resources.XObject
+                if fonts or xobjects then
+                    for k, object in expanded(charprocs) do
+                        if not object.__fonts_remapped__ then
+                            local contents = object()
+                            contents = parsecontent(contents,true)
+                            if plugin(pdfdoc,contents,fonts,xobjects,pagenumber,compactor,{},depth+1) then
+                                contents = contenttostring(contents)
+                                object.__raw__.Length = #contents -- nil
+                                object.__raw__.Filter = nil
+                                getmetatable(object).__call = function() return contents end
+                            end
+                            object.__fonts_remapped__ = true
+                         -- v.resources = resources
+                         -- resources.Font    = fonts
+                         -- resources.XObject = xobjects
+                            status.charprocs = status.charprocs + 1
+                            status.indices   = status.indices + 1 -- was indices (kind of weird), needs checking
+                        end
+                    end
+                end
+            end
+        end
+    end
+
+    local handlers = {
+        Type0    = plugin_Type0,
+        TrueType = plugin_TrueType,
+        Type1    = plugin_Type1,
+        Type3    = plugin_Type3,
+    }
+
+    -- not always ok .. every page can have different font references but let's
+    -- assume it for now
+
+    -- ... Tw : what a mess, why not via tounicode ...
+    --
+    -- Word spacing shall be applied to every occurrence of the single-byte character code 32 in a string
+    -- when using a simple font (including Type 3) or a composite font that defines code 32 as a single-byte
+    -- code. It shall not apply to occurrences of the byte value 32 in multiple-byte codes.
+
+    local mainplugin = function(pdfdoc,contents,fonts,xobjects,pagenumber,compactor,adapted,depth,objtag)
+
+        local data    = { }
+        local indices = 0
+        local remap   = compactor.files or remap
+
+        local sharedfonts  = pdfdoc.sharedfonts or { }
+        pdfdoc.sharedfonts = sharedfonts
+        if fonts or xobjects then
+
+            if fonts then
+
+                -- check if ref for k is the same
+                for k, v in expanded(fonts) do
+                    local subtype = v.Subtype
+                    local handler = subtype and handlers[subtype]
+                    if handler then
+                        handler(pdfdoc,k,v,sharedfonts,data,compactor,pagenumber,remap,depth)
+                    else
+                        -- weird
+                    end
+                end
+
+            end
+
+            local r = false
+            local f = false
+            local n = false
+            local m = false
+            local u = false
+
+            local new     = { }
+            local old     = { }
+
+            local process_hex = false
+
+            -- if we move h and m outside the function we can use lpegs .. todo
+
+            local function process_hex_hexified(h)
+                local b = hextointeger(h)
+                local i = m[b]
+                if i then
+                    local n = h_hex_4[u[i]]
+                    if h ~= n then
+                        indices = indices + 1
+                    end
+                    return n
+                else
+                    return h_hex_4[b]
+                end
+            end
+
+            local function process_hex_narrow(s) return (gsub(s,"..",  process_hex_hexified)) end
+            local function process_hex_wide  (s) return (gsub(s,"....",process_hex_hexified)) end
+
+            local Tw     = false -- a horrible pdf feature
+            local spaces = { }
+            local stack  = { }   -- Q q stack for fonts
+
+            -- if we have Tw then we also have 0x20 as space
+
+            for i=1,#contents do
+                local ti = contents[i]
+                local op = ti[#ti]
+                if op == "Tf" then
+                    -- maybe use /R<N> for replacement
+                    f = ti[1][2]
+                    d = data[f]
+                    if d then
+                        m = d.map
+                        u = d.used
+                        r = i
+                        new[f] = d.streamhash
+                        if d.narrow then
+                            process_hex = process_hex_narrow
+                        else
+                            process_hex = process_hex_wide
+                        end
+                        if not spaces[f] then
+                            spaces[f] = process_hex_wide("0020")
+                        end
+                    else
+                        if d == false then
+                            old[f] = true
+                        end
+                        f = false
+                    end
+                elseif op == "q" then
+                    -- This happens seldom but we need to be prepares (one of VS's documents).
+                    insert(stack, { f, d, m, u, r, process_hex, Tw })
+                elseif op == "Q" then
+                    f, d, m, u, r, process_hex, Tw = unpack(remove(stack))
+                elseif op == "Tj" then
+                    if f then
+                        local ci = ti[1]
+                        if type(ci) == "table" then
+                            local tp = ci[1]
+                            if tp == "hex" then
+                                ci[2] = process_hex(ci[2])
+                            end
+                        end
+                    end
+                elseif op == "TJ" then
+                     if f then
+                        local c = ti[1][2]
+                        if c then
+                            for i=1,#c do
+                                local ci = c[i]
+                                if type(ci) == "table" then
+                                    local tp = ci[1]
+                                    if tp == "hex" then
+                                        ci[2] = process_hex(ci[2])
+                                    end
+                                end
+                            end
+                        end
+                    end
+                elseif op == "Tw" then
+                    Tw = true
+                elseif xobjects and op == "Do" then
+                    -- can be recursive
+                    local objtag = ti[1][2]
+                    local object = xobjects[objtag]
+                    if object and object.Subtype == "Form" then
+                        local r = object.Resources
+                        if r then
+                            if not object.__fonts_remapped__ then
+                                local contents = object()
+                                local fonts    = r.Font
+                                local xobjects = r.XObject
+                                contents = parsecontent(contents,true)
+                                if plugin(pdfdoc,contents,fonts,xobjects,pagenumber,compactor,adapted,depth+1,objtag) then
+                                    contents = contenttostring(contents)
+                                    object.__raw__.Length = #contents
+                                    object.__raw__.Filter = nil
+                                    getmetatable(object).__call = function() return contents end
+                                    object.__fonts_remapped__ = true
+                                    status.xobjects = status.xobjects + 1
+                                    r.Font = fonts -- really needed
+                                    object.Resources = r     -- really needed
+                                    if trace_details then
+                                        for k, v in next, fonts.__raw__ do -- we need the raw values here
+                                            local d = fonts.__raw__[k]
+                                            if d[1] == pdfe.objectcodes.lpdf then
+                                                report_merge("updated font, object %a, font id %a, object %a",objtag,k,d[2][1])
+                                            end
+                                        end
+                                    end
+                                end
+                            else
+                            end
+                        end
+                    end
+                end
+            end
+
+--             if Tw then -- can be optimized
+            if f and Tw and Tw ~= 0 then -- can be optimized
+                local value
+                local space
+                local hexed = setmetatableindex(function(t,k)
+                    local v = { "hex", k }
+                    t[k] = v
+                    return v
+                end)
+
+                local function collapse(cc)
+                    local c = { }
+                    local n = 0
+                    local t = { }
+                    local m = 0
+                    for i=1,#cc do
+                        local ci = cc[i]
+                        if type(ci) == "table" then
+                            m = m + 1 ; t[m] = ci[2]
+                        else
+                            if m > 0 then
+                                n = n + 1 ; c[n] = { "hex", concat(t,"",1,m) }
+                                m = 0
+                            end
+                            n = n + 1 ; c[n] = ci
+                        end
+                    end
+                    if m > 0 then
+                        n = n + 1 ; c[n] = { "hex", concat(t,"",1,m) }
+                    end
+                    return c
+                end
+
+                local scale = 1
+
+                for i=1,#contents do
+                    local ti = contents[i]
+                    local op = ti[#ti]
+                    if op == "Tf" then
+                        scale = tonumber(ti[2]) or 1
+                        f = ti[1][2]
+                        space = spaces[f]
+                    elseif op == "Tj" then
+                        if value and space then
+                            local ci = ti[1]
+                            local tp = ci[1]
+                            if tp == "hex" then
+                                local cc = { }
+                                local nn = 0
+                                local ok = false
+                                local ci2 = ci[2]
+                                for s in gmatch(ci2,"....") do -- todo: narrow
+                                    nn = nn + 1 ; cc[nn] = hexed[s]
+                                    if s == space then
+                                        nn = nn + 1 ; cc[nn]  = f6(value/scale)
+                                        ok = true
+                                    end
+                                end
+                                if ok then
+                                    contents[i] = { { "array", collapse(cc) }, "TJ" }
+                                end
+                            end
+                        end
+                    elseif op == "TJ" then
+                        if value and space then
+                            local c = ti[1][2]
+                            if c then
+                                local cc = { }
+                                local nn = 0
+                                local nm = false
+                                local ok = false
+                                -- combine these loops
+                                for i=1,#c do
+                                    local ci = c[i]
+                                    if type(ci) == "table" then
+                                        local tp = ci[1]
+                                        if tp == "hex" then
+                                            local ci2 = ci[2]
+                                            for s in gmatch(ci2,"....") do -- todo: narrow
+                                                nn = nn + 1 ; cc[nn]  = { "hex", s } -- cache this
+                                                if s == space then
+                                                    nn = nn + 1 ; cc[nn]  = f6(value/scale)
+                                                    nm = true
+                                                    ok = true
+                                                else
+                                                    nm = false
+                                                end
+                                            end
+                                        else
+                                            -- can't happen
+                                            nn = nn + 1 ; cc[nn] = ci
+                                            nm = false
+                                        end
+                                    elseif nm then
+                                     -- print("collapse")
+                                        cc[nn] = f6(tonumber(ci) + tonumber(cc[nn]))
+                                    else
+                                        nn = nn + 1 ; cc[nn] = ci
+                                    end
+                                end
+                                if ok then
+                                 -- ti[1][2] = cc
+                                    ti[1][2] = collapse(cc)
+                                end
+                            end
+                        end
+                    elseif op == "Tw" then
+                        value = ti[1] * -1000
+                        if value == 0 then
+                            value = false
+                        end
+                        contents[i] = { } -- constant
+--                     elseif op == "BT" or op == "ET" then
+--                         value = false
+                    end
+                end
+
+
+            end
+
+            local state = trace_merge and { } or false
+
+            if fonts then
+                for k, v in next, fonts.__raw__ do -- we need the raw values here
+             -- for k, v in expanded(fonts) do -- we need the raw values here
+
+-- -- goes wrong on nested objects
+--                     if adapted[k] then
+--                         -- already done
+--                     else
+-- local trace_details = true
+                    if new[k] then
+                        local x = fonts.__raw__[k][3]
+                        local o = lpdf.getfontobjectnumber(new[k])
+                        fonts.__raw__[k] = { pdfe.objectcodes.lpdf, pdfreference(o) }
+                        if trace_details then
+                            report_merge(
+                                "%s %a, font id %a, old object %a, new object %a, name %a",
+                                depth > 1 and "object" or "page",depth > 1 and objtag or pagenumber,k,x,o,data[k].filename
+                            )
+                        end
+                        adapted[k] = true
+                     -- adapted[k] = function(_,_,_,key,value)
+                     --     local ref = checkedfontreference(k,v,key,value,o)
+                     --     return ref
+                     -- end
+                        if state then
+                            state[k] = true
+                        end
+                    elseif old[k] then
+                        if trace_details then
+                            local x = fonts.__raw__[k][3]
+                            report_merge(
+                                "%s %a, font id %a, kept object %a, name %a",
+                                depth > 1 and "object" or "page",depth > 1 and objtag or pagenumber,k,x,data[k].filename
+                            )
+                        end
+                        if state then
+                            state[k] = false
+                        end
+                    else
+                        if trace_details then
+                            local x = fonts.__raw__[k][3]
+                            report_merge(
+                                "%s %a, font id %a, weird object %a",
+                                depth > 1 and "object" or "page",depth > 1 and objtag or pagenumber,k,x
+                            )
+                        end
+                    end
+                end
+            end
+
+            if state then
+                local filename = basename(pdfdoc.filename)
+                for k, v in sortedhash(state) do
+                    if v then
+                        local d = data[k]
+                        report_merge(
+                            "page %i of %a, font reference %a to %a, subfont %a, instance %a, merged",
+                            pagenumber,filename,k,d.filename,d.subfont,toinstance(d.instance)
+                        )
+                        status.merged = status.merged + 1
+                    else
+                        report_merge(
+                            "page %i of %a, font reference %a, not merged",
+                            pagenumber,filename,k
+                        )
+                        status.notmerged = status.notmerged + 1
+                    end
+                end
+            end
+
+            status.indices = status.indices + indices
+
+        end
+
+        return indices ~= 0
+    end
+
+    -- faster one, for context files --
+
+    local lmtxplugin = function(pdfdoc,contents,fonts,xobjects,pagenumber,compactor,adapted,depth,objtag)
+
+        local data    = { }
+        local indices = 0
+        local remap   = compactor.files or remap -- not relevant
+
+        local sharedfonts  = pdfdoc.sharedfonts or { }
+        pdfdoc.sharedfonts = sharedfonts
+        if fonts or xobjects then
+
+            if fonts then
+
+                for k, v in expanded(fonts) do
+                    local subtype = v.Subtype
+                    local handler = subtype and handlers[subtype]
+                    if handler then
+                        handler(pdfdoc,k,v,sharedfonts,data,compactor,pagenumber,remap,depth)
+                    else
+                        -- weird
+                    end
+                end
+
+            end
+
+            local r = false
+            local f = false
+            local n = false
+            local m = false
+            local u = false
+
+            local new = { }
+
+            local process_hex = false
+
+            local function process_hex_hexified(h)
+                local b = hextointeger(h)
+                local i = m[b]
+                if i then
+                    local n = h_hex_4[u[i]]
+                    if h ~= n then
+                        indices = indices + 1
+                    end
+                    return n
+                else
+                    return h_hex_4[b]
+                end
+            end
+
+            local function process_hex_narrow(s) return (gsub(s,"..",  process_hex_hexified)) end
+            local function process_hex_wide  (s) return (gsub(s,"....",process_hex_hexified)) end
+
+            local spaces = { }
+
+            -- if we have Tw then we also have 0x20 as space
+
+            for i=1,#contents do
+                local ti = contents[i]
+                local op = ti[#ti]
+                if op == "Tf" then
+                    -- maybe use /R<N> for replacement
+                    f = ti[1][2]
+                    local d = data[f]
+                    if d then
+                        m = d.map
+                        u = d.used
+                        r = i
+                        new[f] = d.streamhash
+                        if d.narrow then
+                            process_hex = process_hex_narrow
+                        else
+                            process_hex = process_hex_wide
+                        end
+                        if not spaces[f] then
+                            spaces[f] = process_hex_wide("0020")
+                        end
+                    else
+                        if d == false then
+                            old[f] = true
+                        end
+                        f = false
+                    end
+                elseif op == "TJ" then
+                     if f then
+                        local c = ti[1][2]
+                        if c then
+                            for i=1,#c do
+                                local ci = c[i]
+                                if type(ci) == "table" then
+                                    local tp = ci[1]
+                                    if tp == "hex" then
+                                        ci[2] = process_hex(ci[2])
+                                    end
+                                end
+                            end
+                        end
+                    end
+                elseif xobjects and op == "Do" then
+                    -- can be recursive
+                    local objtag = ti[1][2]
+                    local object = xobjects[objtag]
+                    if object and object.Subtype == "Form" then
+                        local r = object.Resources
+                        if r then
+                            if not object.__fonts_remapped__ then
+                                local contents = object()
+                                local fonts    = r.Font
+                                local xobjects = r.XObject
+                                contents = parsecontent(contents,true)
+                                if plugin(pdfdoc,contents,fonts,xobjects,pagenumber,compactor,adapted,depth+1,objtag) then
+                                    contents = contenttostring(contents)
+                                    object.__raw__.Length = #contents
+                                    object.__raw__.Filter = nil
+                                    getmetatable(object).__call = function() return contents end
+                                    object.__fonts_remapped__ = true
+                                    status.xobjects = status.xobjects + 1
+                                    r.Font           = fonts -- really needed
+                                    object.Resources = r     -- really needed
+                                    if trace_details then
+                                        for k, v in next, fonts.__raw__ do -- we need the raw values here
+                                            local d = fonts.__raw__[k]
+                                            if d[1] == pdfe.objectcodes.lpdf then
+                                                report_merge("updated font, object %a, font id %a, object %a",objtag,k,d[2][1])
+                                            end
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+
+            if fonts then
+                for k, v in next, fonts.__raw__ do -- we need the raw values here
+                    if new[k] then
+                        local x = fonts.__raw__[k][3]
+                        local o = lpdf.getfontobjectnumber(new[k])
+                        fonts.__raw__[k] = { pdfe.objectcodes.lpdf, pdfreference(o) }
+                        adapted[k] = true
+                    end
+                end
+            end
+
+            status.indices = status.indices + indices
+
+        end
+
+        return indices ~= 0
+    end
+
+    -- done --
+
+    local function hasfonts(xobject)
+        if xobject then
+            for k, v in expanded(xobject) do
+                local r = v.Resources
+                if r then
+                    if r.Font then
+                        return true
+                    end
+                    local x = r.Xobject
+                    if x then
+                        return hasfonts(x)
+                    end
+                end
+            end
+        end
+    end
+
+    local function onlylmtx(compactor)
+        if next(compactor.embed) then
+            return false
+        else
+            local lmtx  = false
+            for k, v in next, compactor.merge do
+                if k == "lmtx" then
+                    lmtx = true
+                else
+                    return false
+                end
+            end
+            return lmtx
+        end
+    end
+
+    local function noregistries(pdfdoc)
+        local statistics = pdfdoc.Catalog.LMTX_Statistics
+        if not statistics then
+            return false
+        end
+        local registries = statistics.FontRegistries
+        if not registries then
+            return false
+        end
+        return registries == 0
+    end
+
+
+    function pdfe.fontplugin(pdfdoc,page,pagenumber,resources,compactor)
+        if next(compactor.merge) or next(compactor.embed) then
+            local fonts    = resources.Font
+            local xobjects = resources.XObject
+            if fonts or hasfonts(xobjects) then
+                if not onlylmtx(compactor) then
+                    -- we check all fonts
+                    plugin = mainplugin
+                elseif noregistries(pdfdoc) then
+                    -- we don't need to check
+                    plugin = false
+                else
+                    -- we need to check
+                    plugin = lmtxplugin
+                end
+                if plugin then
+                    local contents = pdfdoc.getcontents()
+                    if contents then
+                        plugin(pdfdoc,contents,fonts,xobjects,pagenumber,compactor,{},1)
+                        resources.Font = fonts -- really needed
+                    end
+                end
+                status.pages = status.pages + 1
+                status.files[pdfdoc.filename] = (status.files[pdfdoc.filename] or 0) + 1
+            end
+            plugin = mainplugin -- just to be sure
+        end
+    end
+
+    utilities.sequencers.appendaction("pdfcontentmanipulators","system","lpdf.epdf.fontplugin")
+    utilities.sequencers.enableaction("pdfcontentmanipulators","lpdf.epdf.fontplugin")
+
+end

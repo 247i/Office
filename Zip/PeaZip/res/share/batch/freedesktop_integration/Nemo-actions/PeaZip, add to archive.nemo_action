@@ -1,0 +1,9 @@
+[Nemo Action]
+
+Name=PeaZip, add to archive
+Comment=Send items to new archive with PeaZip
+Exec=peazip -add2archive %F
+Selection=notnone
+Extensions=any;
+Terminal=false
+Icon-Name=peazip_add

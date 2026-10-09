@@ -1,0 +1,468 @@
+if not modules then modules = { } end modules ['mlib-ptr'] = {
+    version   = 1.001,
+    optimize  = true,
+    comment   = "companion to mlib-ctx.mkiv",
+    author    = "Hans Hagen, PRAGMA-ADE, Hasselt NL",
+    copyright = "PRAGMA ADE / ConTeXt Development Team",
+    license   = "see context related readme files",
+}
+
+-- This is experimental.
+
+-- too: use string.packrowsandcolumns
+
+local formatters, gsub, sub = string.formatters, string.gsub, string.sub
+local concat, setmetatableindex = table.concat, table.setmetatableindex
+
+local trace_result = false  trackers.register("potrace.results", function(v) trace_result = v end)
+
+local report = logs.reporter("metapost","potrace")
+
+local potracefromfile -- implemented later on
+
+local function potracefrompng(filename,parameters)
+    local nx, ny, nz, bytes = bitmaps.load(filename,parameters)
+    return bytes, nx, ny
+end
+
+local potracecontourplot, potracegetbitmap, potracesetbitmap, potraceconcat do
+
+    local luastrings = { }
+
+    potracecontourplot = function(nx,ny,f)
+        local yx = setmetatableindex("table")
+        local my = ny + 1
+        for y=1,ny do
+            local dy = yx[my-y]
+            for x=1,nx do
+                dy[x] = f(x,y)
+            end
+        end
+        return yx
+    end
+
+    potraceconcat = function(t)
+        for i=1,#t do
+            t[i] = concat(t[i])
+        end
+        return concat(t," ")
+    end
+
+    potracesetbitmap = function(name,str)
+        luastrings[name] = type(str) == "table" and potraceconcat(str) or str
+    end
+
+    potracegetbitmap = function(name)
+        return luastrings[name] or ""
+    end
+
+end
+
+local potracestripped, potracecount do
+
+    local lpegmatch    = lpeg.match
+
+    local sp = lpeg.patterns.whitespace^1
+    local n  = 0
+    local p  = (lpeg.Cmt((1-sp) * (sp + lpeg.P(-1)), function() n = n + 1 end) + lpeg.P(1))^0
+
+    potracecount = function(s)
+        n = 0
+        lpegmatch(p,s)
+        return n
+    end
+
+    potracestripped = function(s)
+        s = gsub(s,"%s","")
+        return s
+    end
+
+end
+
+local potraceflush, potracechecked, potraceconvert do
+
+    local potracenew     = potrace.new
+    local potracefree    = potrace.free
+    local potracetotable = potrace.totable
+    local potraceprocess = potrace.process
+
+    function potrace.trace(t,polygon)
+        local p = potracenew(t)
+        if p and potraceprocess(p) then
+            local r = potracetotable(p,polygon)
+            potracefree(p)
+            return r
+        end
+    end
+
+    local getparameterset = metapost.getparameterset
+    ----- getparameter    = metapost.getparameter
+    ----- setparameter    = metapost.setparameter
+    local mpprint         = mp.print
+
+    local f_moveto  = formatters["(%N,%N)"]
+    local f_lineto  = formatters["--(%N,%N)"]
+    local f_curveto = formatters["..controls(%N,%N)and(%N,%N)..(%N,%N)"]
+
+    potraceflush = function(t,alternative,polygon)
+        local result, r, add
+        if alternative == "draw" or alternative == "fill" then
+            alternative = alternative .. "("
+        else
+            alternative = false
+        end
+        if t then
+            result, r = { }, 0
+            if polygon then
+                add = function(before,ti,after)
+                    r = r + 1 ; result[r] = before
+                    r = r + 1 ; result[r] = f_moveto(ti[1],ti[2])
+                    for i=3,#ti,2 do
+                        r = r + 1 ; result[r] = f_lineto(ti[i],ti[i+1])
+                    end
+                    r = r + 1 ; result[r] = after
+                end
+            else
+                add = function(before,ti,after)
+                    r = r + 1 ; result[r] = before
+                    r = r + 1 ; result[r] = f_moveto(ti[1][1],ti[1][2])
+                    for i=2,#ti do
+                        local ti = ti[i]
+                        local ni = #ti
+                        if ni == 2 then
+                            r = r + 1 ; result[r] = f_lineto(ti[1],ti[2])
+                        elseif ni == 6 then
+                            r = r + 1 ; result[r] = f_curveto(ti[3],ti[4],ti[5],ti[6],ti[1],ti[2])
+                        end
+                    end
+                    r = r + 1 ; result[r] = after
+                end
+            end
+            if alternative then
+                r = r + 1 ; result[r] = "image(\n"
+                for i=1,#t do
+                    add(alternative,t[i],"&cycle);\n")
+                end
+                r = r + 1 ; result[r] = ")"
+            else
+                for i=1,#t do
+                    if i > 1 then
+                        r = r + 1 ; result[r] = "&&&&\n"
+                    end
+                    add("(",t[i],"&cycle)")
+                end
+                if #t > 1 then
+                    r = r + 1 ; result[r] = "\n&&&&cycle"
+                end
+            end
+            result = concat(result)
+        elseif alternative then
+            result = "nullpicture"
+        else
+            result = "origin--cycle"
+        end
+        if trace_result then
+            inspect(t)
+            inspect(result)
+        end
+        mpprint(result)
+    end
+
+    potracechecked = function(b,width,height)
+        if b and type(b) == "string" and b ~= "" then
+            local bytes = potracestripped(b)
+            if not width or width == 0 then
+                if not height or height == 0 then
+                    height = potracecount(b)
+                end
+                width = #bytes // height
+            elseif not height or height == 0 then
+                height = #bytes // width
+            end
+            return bytes, width, height
+        else
+            return false, width, height
+        end
+    end
+
+    potraceconvert = function(bytes,settings,w,h)
+        if not w or not h then
+            bytes, w, h = potracechecked(bytes)
+        end
+        local s = { bytes = bytes, width = w, height = h }
+        local p = potracenew(setmetatableindex(s,settings or { }))
+        if p then
+            potraceprocess(p, { value = "1" })
+            local t = potracetotable(p)
+            potracefree(p)
+            return t
+        end
+    end
+
+    local instance = false
+
+    local bytes    = false
+    local width    = 0
+    local height   = 0
+    local nx       = 1
+    local ny       = 1
+
+    local function potracepattern()
+        local b = { }
+        local n = 0
+        local f = 1
+        local t = width
+        for i=1,height do
+            n = n + 1 ; b[n] = sub(bytes,f,t)
+            n = n + 1 ; b[n] = "\\par"
+            f = t + 1
+            t = t + width
+        end
+        mpprint(formatters
+            ['textext.urt("\\potracebitmap{%t}")xysized(last_potraced_width,last_potraced_height)']
+            (b)
+        )
+    end
+
+    local loaddata   = io.loaddata
+    local filesuffix = file.suffix
+    local getbuffer  = buffers.getcontent
+
+    local function potracefromtxt(filename,parameters)
+        local bytes = loaddata(filename)
+        if bytes and bytes ~= 0 then
+            return potracechecked(bytes,0,0)
+        end
+    end
+
+    -- cache ?
+
+    local function potracefrompk(filename,parameters)
+        local index = parameters.index
+        if type(index) == "number" and filename and filename ~= "" then
+            filename = file.removesuffix(filename)
+            local r = math.tointeger(parameters.resolution or 7200) -- get rid of 7200.0
+            local f = fonts.handlers.tfm.readers.loadpk(resolvers.findpk(filename,r) or "")
+            if f then
+                local g = f.glyphs[index]
+                if g then
+                    local xsize = g.xsize
+                    local ysize = g.ysize
+                    parameters.xsize   = xsize
+                    parameters.ysize   = ysize
+                    parameters.xoffset = g.xoffset
+                    parameters.yoffset = g.yoffset
+--                     local b = fonts.handlers.tfm.readers.showpk(g,xsize,ysize) or ""
+--                     return potracechecked(b,0,0)
+                    return fonts.handlers.tfm.readers.showpk(g,xsize,ysize,true)
+                end
+            end
+        end
+    end
+
+    local filehandles = {
+        png = potracefrompng,
+        txt = potracefromtxt,
+        pk  = potracefrompk,
+    }
+
+    potracefromfile = function(parameters)
+        local filename = parameters.filename
+        if filename and filename ~= "" then
+            local handle = filehandles[filesuffix(filename)]
+            if handle then
+                return handle(filename,parameters)
+            end
+        end
+    end
+
+    local function potracefrombuffer(parameters,width,height)
+        local buffer = parameters.buffer
+        if buffer and buffer ~= "" then
+            local bytes = getbuffer(buffer)
+            if bytes and bytes ~= "" then
+                return potracechecked(bytes,width,height)
+            end
+        end
+    end
+
+    local function potracefrombytemap(parameters,width,height)
+        local bytemap = parameters.bytemap
+        if tonumber(bytemap) then
+            local nx, ny, nz, bytes = mp.getbytemapdata(bytemap)
+            if bytes and nz == 1 then -- todo: gray
+                return bytes, nx, ny
+            end
+        end
+    end
+
+    local function potracefromstring(parameters,width,height)
+        local name = parameters.stringname
+        if name and name ~= "" then
+            local bytes = potracegetbitmap(name)
+            if bytes and #bytes ~= "" then
+                return potracechecked(bytes,width,height)
+            end
+        end
+    end
+
+    function mp.lmt_start_potrace()
+        bytes  = false
+
+        local parameters = getparameterset("potraced")
+        width  = parameters.width or 0
+        height = parameters.height or 0
+        nx     = (parameters.nx or 1 // 1)
+        ny     = (parameters.ny or 1 // 1)
+        if parameters.explode then
+            nx = 3
+            ny = 3
+        end
+        if not bytes then
+            local b, w, h = potracefromfile(parameters)
+            if b then
+                bytes, width, height = b, w, h
+            end
+        end
+        if not bytes then
+            local b, w, h = potracefromstring(parameters,width,height)
+            if b then
+                bytes, width, height = b, w, h
+            end
+        end
+        if not bytes then
+            local b, w, h = potracefrombuffer(parameters,width,height)
+            if b then
+                bytes, width, height = b, w, h
+            end
+        end
+        if not bytes then
+            local b, w, h = potracefrombytemap(parameters,width,height)
+            if b then
+                bytes, width, height = b, w, h
+            end
+        end
+        if not bytes then
+            local b, w, h = potracechecked(parameters.bytes,width,height)
+            if b then
+                bytes, width, height = b, w, h
+            end
+        end
+        if not bytes then
+            bytes, width, height = potracechecked("010 111 010",width,height)
+        end
+-- report("width : %i",width)
+-- report("height: %i",height)
+-- report("bytes : %i",#bytes)
+-- report("length: %i",width*height)
+        instance = potracenew {
+            bytes     = bytes,
+            width     = width,
+            height    = height,
+            nx        = nx,
+            ny        = ny,
+            value     = parameters.value,
+            negate    = parameters.negate,
+            size      = parameters.size,      -- turdsize
+            optimize  = parameters.optimize,  -- opticurve
+            swap      = parameters.swap,
+            threshold = parameters.threshold, -- alphamax
+            policy    = parameters.policy,    -- turnpolicy
+            tolerance = parameters.tolerance, -- opttolerance
+        }
+        -- we keep bytes for tracing, maybe keep option
+        parameters.width  = width *nx
+        parameters.height = height*ny
+        parameters.count  = 0
+    end
+
+    function mp.lmt_stop_potrace()
+        if instance then
+            potracefree(instance)
+        end
+        instance = false
+        bytes    = false
+    end
+
+    function mp.lmt_step_potrace()
+        if instance then
+            local parameters  = getparameterset("potraced")
+            local result      = false
+            local alternative = parameters.alternative
+            local polygon     = parameters.polygon or false
+            local index       = parameters.index
+            local first       = parameters.first or 0
+            local last        = parameters.last  or 0
+            if index then
+                first = index
+                last = index
+            end
+            if alternative == "text" then
+                potracepattern()
+            else
+                -- we can return a count
+                local okay = potraceprocess(instance, {
+                    value     = parameters.value,
+                    negate    = parameters.negate,
+                    size      = parameters.size,
+                    optimize  = parameters.optimize,  -- opticurve
+                    swap      = parameters.swap,
+                    threshold = parameters.threshold, -- alphamax
+                    policy    = parameters.policy,    -- turnpolicy
+                    tolerance = parameters.tolerance, -- opttolerance
+                } )
+                if okay then
+                    result = potracetotable(instance,polygon,first,last)
+                    potraceflush(result,alternative,polygon)
+                    parameters.count = #result
+                else
+                    parameters.count = 0
+                end
+            end
+            parameters.first = nil
+            parameters.last  = nil
+            parameters.index = nil
+        end
+    end
+
+end
+
+potrace.stripped    = potracestripped
+potrace.count       = potracecount
+potrace.concat      = potraceconcat
+potrace.setbitmap   = potracesetbitmap
+potrace.getbitmap   = potracegetbitmap
+potrace.flush       = potraceflush
+potrace.fromfile    = potracefromfile
+potrace.contourplot = potracecontourplot
+potrace.checked     = potracechecked
+potrace.convert     = potraceconvert
+
+-- For now we put this here. Timestamp: bytemaps were added in March 2025, around the time I
+-- enjoyed attending Pineapple Thief (good view on the drums) and Rendezvous Point (perfect,
+-- also sound-wise for all instruments) concerts as a reward.
+
+function mp.loadbytemapfile(index,filename)
+    local fullname = figures.exists(filename,nil,true)
+    if fullname then
+        local nx, ny, nz, bytes = graphics.bitmaps.load(fullname, {
+            raw        = true, -- no potrace 0/1
+            colordepth = 8,
+        })
+        if bytes then
+            mp.newbytemap(index,nx,ny,nz,bytes)
+            return nx, ny, nz
+        end
+    end
+    mp.newbytemap(index,1,1)
+    return 1, 1, 1
+end
+
+function mp.bytemap_load_from_file(index,filename)
+    local nx, ny, nz = mp.loadbytemapfile(index,filename)
+    return mp.color(nx, ny, nz)
+end
+
+function mp.loadbytemap(index,filename)
+    mp.loadbytemapfile(index,filename) -- returns nothing
+end

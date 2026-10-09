@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-alpine-package-keeper-package">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Alpine Package Keeper package</comment>
+  <comment xml:lang="zh-Hant-TW">Alpine Package Keeper 軟體包</comment>
+  <comment xml:lang="uk">пакунок Alpine Package Keeper</comment>
+  <comment xml:lang="tr">Alpine Package Keeper paketi</comment>
+  <comment xml:lang="sv">Alpine Package Keeper-paket</comment>
+  <comment xml:lang="sr-Cyrl">Alpine Package Keeper пакет</comment>
+  <comment xml:lang="sq">Paketë Alpine Package Keeper</comment>
+  <comment xml:lang="sl">Paket Alpine Package Keeper</comment>
+  <comment xml:lang="ru">Пакет Alpine Package Keeper</comment>
+  <comment xml:lang="ro">pachet Alpine Package Keeper</comment>
+  <comment xml:lang="pt-BR">Pacote do Alpine Package Keeper</comment>
+  <comment xml:lang="pl">Pakiet Alpine Package Keeper</comment>
+  <comment xml:lang="oc">paquet del gestionari de paquets d’Alpine</comment>
+  <comment xml:lang="ko">알파인 패키지 키퍼 패키지</comment>
+  <comment xml:lang="kk-Cyrl">Alpine Package Keeper дестесі</comment>
+  <comment xml:lang="hr">Alpine Package Keeper paket</comment>
+  <comment xml:lang="fr">Paquet Alpine Package Keeper</comment>
+  <comment xml:lang="fi">Alpine Package Keeper paketti</comment>
+  <comment xml:lang="et">Alpine Linuxi paketihalduse pakett</comment>
+  <comment xml:lang="es">paquete de Alpine Package Keeper</comment>
+  <comment xml:lang="en-GB">Alpine Package Keeper package</comment>
+  <comment xml:lang="de">Alpine-Paketverwaltungspaket</comment>
+  <comment xml:lang="da">Alpine Package Keeper-pakke</comment>
+  <comment xml:lang="ar">حزمة Alpine Package Keeper</comment>
+  <generic-icon name="package-x-generic"/>
+  <sub-class-of type="application/x-compressed-tar"/>
+  <glob pattern="*.apk" weight="40"/>
+</mime-type>

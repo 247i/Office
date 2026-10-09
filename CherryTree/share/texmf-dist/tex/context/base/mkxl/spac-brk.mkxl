@@ -1,0 +1,73 @@
+%D \module
+%D   [       file=spac-brk,
+%D        version=2023.05.23,
+%D          title=\CONTEXT\ Spacing Macros,
+%D       subtitle=Breaking lines,
+%D         author=Hans Hagen,
+%D           date=\currentdate,
+%D      copyright={PRAGMA ADE \& \CONTEXT\ Development Team}]
+%C
+%C This module is part of the \CONTEXT\ macro||package and is
+%C therefore copyrighted by \PRAGMA. See mreadme.pdf for
+%C details.
+
+\ifdefined\tracinglousiness \endinput \fi
+
+\writestatus{loading}{ConTeXt Spacing Macros / Breakpoints}
+
+\newcount\tracinglousiness
+
+\newcount\twinslimit \twinslimit\maxcount
+
+\registerctxluafile{spac-brk}{}
+\registerctxluafile{spac-ovl}{}
+\registerctxluafile{spac-twi}{}
+
+\unprotect
+
+\cccode \periodasciicode          \ignoretwincharactercontrolcode
+\cccode \commaasciicode           \ignoretwincharactercontrolcode
+\cccode \exclamationmarkasciicode \ignoretwincharactercontrolcode
+\cccode \questionmarkasciicode    \ignoretwincharactercontrolcode
+\cccode \colonasciicode           \ignoretwincharactercontrolcode
+\cccode \semicolonasciicode       \ignoretwincharactercontrolcode
+
+\installtexexperiment
+  {parbuilder.twins}
+  {\bitwiseflip\glyphoptions-\checktwinglyphoptioncode
+   \lefttwindemerits 7500
+   \righttwindemerits7500
+   \linebreakchecks\plustwo}
+  {\bitwiseflip\glyphoptions\checktwinglyphoptioncode
+   \lefttwindemerits \zerocount
+   \righttwindemerits\zerocount
+   \linebreakchecks\zerocount}
+
+% \lefttwindemerits 7500
+% \righttwindemerits7500
+%
+% \permanent\protected\def\dopermittwins{\ifnum\linebreakchecks=\plustwo\linebreakchecks\zerocount\fi}
+% \permanent\protected\def\doavoidtwins {\linebreakchecks\plusone}
+%
+% \defcsname\??aligncommand permittwins\endcsname{\toksapp\t_spac_align_collected{\dopermittwins}}
+% \defcsname\??aligncommand  avoidtwins\endcsname{\toksapp\t_spac_align_collected{\doavoidtwins }}
+
+%D This is a very experimental feature and a by product of improving inline math
+%D crossing lines. As it might evolve: use with care.
+
+\fetchmodulecommand \startshowbreakpoints   {trac-brk} % {s-lines-show.mkxl}
+\fetchmodulecommand \startshowbalancepoints {trac-brk} % {s-lines-show.mkxl}
+
+% \starttext
+%     \setupalign[verytolerant]
+%     \tracinglousiness1
+%   % \tracinglousiness2
+%     \hsize8cm \lousiness 0      \samplefile{ward} \blank
+%     {\tt \the\lousiness} \blank
+%     \hsize8cm \lousiness 1 11 0 \samplefile{ward} \blank
+%     \hsize8cm \silliness   11   \samplefile{ward} \blank
+% \stoptext
+
+%D These macros are defined a the \LUA\ end.
+
+\protect \endinput

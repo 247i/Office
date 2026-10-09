@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="image/x-sct">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Scitex CT</comment>
+  <comment xml:lang="uk">Scitex CT</comment>
+  <comment xml:lang="tr">Scitex CT</comment>
+  <comment xml:lang="sv">Scitex CT</comment>
+  <comment xml:lang="sr-Cyrl">Scitex CT</comment>
+  <comment xml:lang="sl">Scitex CT</comment>
+  <comment xml:lang="ru">Scitex CT</comment>
+  <comment xml:lang="ro">CT Scitex</comment>
+  <comment xml:lang="pt-BR">Scitex CT</comment>
+  <comment xml:lang="pl">Scitex CT</comment>
+  <comment xml:lang="oc">Scitex CT</comment>
+  <comment xml:lang="ko">Scitex CT</comment>
+  <comment xml:lang="kk-Cyrl">Scitex CT</comment>
+  <comment xml:lang="ja">Scitex CT</comment>
+  <comment xml:lang="hr">Scitex CT</comment>
+  <comment xml:lang="fr">Scitex CT</comment>
+  <comment xml:lang="fi">Scitex CT</comment>
+  <comment xml:lang="et">Scitex CT pilt</comment>
+  <comment xml:lang="es">Scitex CT</comment>
+  <comment xml:lang="en-GB">Scitex CT</comment>
+  <comment xml:lang="de">Scitex CT-Datei</comment>
+  <comment xml:lang="ca">Scitex CT</comment>
+  <comment xml:lang="bg">Изображение — Scitex CT</comment>
+  <comment xml:lang="be-Cyrl">відарыс Scitex CT</comment>
+  <comment xml:lang="ar">صورة Scitex CT</comment>
+  <acronym>CT</acronym>
+  <expanded-acronym>Continuous Tone</expanded-acronym>
+  <glob pattern="*.sct"/>
+</mime-type>

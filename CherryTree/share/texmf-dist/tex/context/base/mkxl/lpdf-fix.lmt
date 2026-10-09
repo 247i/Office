@@ -1,0 +1,147 @@
+if not modules then modules = { } end modules ['lpdf-fix'] = {
+    version   = 1.001,
+    comment   = "companion to lpdf-ini.mkiv",
+    author    = "Hans Hagen, PRAGMA-ADE, Hasselt NL",
+    copyright = "PRAGMA ADE / ConTeXt Development Team",
+    license   = "see context related readme files"
+}
+
+local next, dofile = next, dofile
+local splitup = string.splitup
+
+-- see compactors-preset.lua for details
+
+local report = logs.reporter("graphics","compactors")
+
+do
+
+    local pdfbackend        = backends.registered.pdf
+    local codeinjections    = pdfbackend.codeinjections
+    local setmetatableindex = table.setmetatableindex
+
+    local compactors = setmetatableindex(function(t,prefix)
+        local c = nil
+        local n = "compactors-" .. prefix .. ".lua"
+        local f = resolvers.findfile(n) or ""
+        if f ~= "" then
+            c = table.load(f)
+            if c then
+                c = c.compactors
+                if c then
+                    for name, data in next, c do
+                        data.name = nil
+                        local strip = data.strip
+                        if not strip then
+                            data.strip = { marked = true }
+                        elseif strip.marked == nil then
+                            strip.marked = true
+                        end
+                        for tag, d in next, data do
+                            for k, v in next, d do
+                                if not v then
+                                    d[k] = nil
+                                end
+                            end
+                        end
+                        setmetatableindex(data,"table")
+                    end
+                    report("registered: %s : % | t",prefix,table.sortedkeys(c))
+                end
+            end
+        end
+        if not c then
+            report("unknown or invalid file: %s",n)
+            c = { }
+        end
+        t[prefix] = c
+        return c
+    end)
+
+    function codeinjections.validcompactor(name)
+        if name then
+            local prefix, name = splitup(name,":")
+            if not name then
+                prefix, name = "preset", prefix
+            end
+            local compactor = prefix and compactors[prefix][name] or false
+            if compactor then
+                if not compactor.status then
+                    compactor.status = { }
+                end
+                if not compactor.status.reported then
+                    report("using: %s : %s",prefix,name)
+                    compactor.status.reported = true
+                end
+            end
+            return compactor
+        end
+    end
+
+    function graphics.registerpdfcompactor(name,compactor)
+        if type(name )== "string" and type(compactor) == "table" then
+            local prefix, name = splitup(name,":")
+            if not name then
+                prefix, name = "preset", prefix
+            end
+            compactors[prefix][name] = compactor
+            setmetatableindex(compactor,"table")
+        end
+    end
+
+end
+
+do
+
+    local sequencers  = utilities.sequencers
+    local appendgroup = sequencers.appendgroup
+
+    local pdfcontentmanipulators = sequencers.new {
+        name      = "pdfcontentmanipulators",
+        arguments = "pdfdoc,page,pagenumber,resources,compactor",
+    }
+
+    appendgroup(pdfcontentmanipulators,"before")
+    appendgroup(pdfcontentmanipulators,"system")
+    appendgroup(pdfcontentmanipulators,"after" )
+
+    function lpdf.epdf.contentplugin(pdfdoc,page,pagenumber,resources,compactor)
+        local runner = pdfcontentmanipulators.runner
+        if runner then
+            runner(pdfdoc,page,pagenumber,resources,compactor)
+        end
+    end
+
+    -- todo: contents: table first time, concat last time .. automatic .. when
+    -- performance becomes an issue
+
+    local pdfpagemanipulators = sequencers.new {
+        name      = "pdfpagemanipulators",
+        arguments = "pdfdoc,page,pagenumber,resources,compactor",
+    }
+
+    appendgroup(pdfpagemanipulators,"before")
+    appendgroup(pdfpagemanipulators,"system")
+    appendgroup(pdfpagemanipulators,"after" )
+
+    sequencers.appendaction("pdfpagemanipulators","system","lpdf.epdf.contentplugin")
+    sequencers.enableaction("pdfpagemanipulators",         "lpdf.epdf.contentplugin")
+
+    local count = 0
+
+    function lpdf.epdf.pageplugin(pdfdoc,page,pagenumber,resources,compactor)
+        local runner = pdfpagemanipulators.runner
+        if runner then
+            count = count + 1
+            statistics.starttiming(pdfpagemanipulators)
+            runner(pdfdoc,page,pagenumber,resources,compactor)
+            statistics.stoptiming(pdfpagemanipulators)
+        end
+    end
+
+    statistics.register("pdf compacting", function()
+        if count > 0 then
+            return string.format("%s seconds for %s inclusions",statistics.elapsedtime(pdfpagemanipulators),count)
+        end
+    end)
+
+end

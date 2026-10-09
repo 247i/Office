@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="image/x-compressed-xcf">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Compressed GIMP image</comment>
+  <comment xml:lang="zh-Hant-TW">壓縮 GIMP 影像</comment>
+  <comment xml:lang="uk">стиснене зображення GIMP</comment>
+  <comment xml:lang="tr">Sıkıştırılmış GIMP görüntüsü</comment>
+  <comment xml:lang="sv">Komprimerad GIMP-bild</comment>
+  <comment xml:lang="sr-Cyrl">Сажета GIMP слика</comment>
+  <comment xml:lang="sq">Figurë GIMP e ngjeshur</comment>
+  <comment xml:lang="sl">Slika GIMP (stisnjena)</comment>
+  <comment xml:lang="ru">Сжатое изображение GIMP</comment>
+  <comment xml:lang="ro">imagine GIMP comprimată</comment>
+  <comment xml:lang="pt-BR">Imagem do GIMP compactada</comment>
+  <comment xml:lang="pl">Skompresowany obraz GIMP</comment>
+  <comment xml:lang="oc">imatge GIMP compressat</comment>
+  <comment xml:lang="nn">GIMP-bilete (komprimert)</comment>
+  <comment xml:lang="ko">압축 GIMP 이미지</comment>
+  <comment xml:lang="kk-Cyrl">GIMP сығылған суреті</comment>
+  <comment xml:lang="ja">GIMP画像（圧縮）</comment>
+  <comment xml:lang="it">Immagine GIMP compressa</comment>
+  <comment xml:lang="id">Gambar GIMP terkompresi</comment>
+  <comment xml:lang="hr">Komprimirana GIMP slika</comment>
+  <comment xml:lang="hi">संपीड़ित GIMP छवि</comment>
+  <comment xml:lang="he">תמונת GIMP דחוסה</comment>
+  <comment xml:lang="gl">Imaxe GIMP comprimida</comment>
+  <comment xml:lang="fur">Imagjin GIMP comprimude</comment>
+  <comment xml:lang="fr">Image GIMP compressée</comment>
+  <comment xml:lang="fi">Pakattu GIMP</comment>
+  <comment xml:lang="eu">GIMP irudi konprimatua</comment>
+  <comment xml:lang="et">Pakitud GIMPi pilt</comment>
+  <comment xml:lang="es">imagen de GIMP comprimida</comment>
+  <comment xml:lang="en-GB">Compressed GIMP image</comment>
+  <comment xml:lang="de">komprimiertes GIMP-Bild</comment>
+  <comment xml:lang="ca">imatge comprimida del GIMP</comment>
+  <comment xml:lang="bg">Изображение — GIMP, компресирано</comment>
+  <comment xml:lang="be-Cyrl">сціснуты відарыс GIMP</comment>
+  <comment xml:lang="ar">صورة GIMP مضغوطة</comment>
+  <glob pattern="*.xcf.gz"/>
+  <glob pattern="*.xcf.bz2"/>
+</mime-type>

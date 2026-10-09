@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="image/vnd.fpx">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>FlashPix image</comment>
+  <comment xml:lang="zh-Hant-TW">FlashPix 影像</comment>
+  <comment xml:lang="uk">зображення FlashPix</comment>
+  <comment xml:lang="tr">FlashPix görüntüsü</comment>
+  <comment xml:lang="sv">FlashPix-bild</comment>
+  <comment xml:lang="sr-Cyrl">FlashPix слика</comment>
+  <comment xml:lang="sq">Figurë FlashPix</comment>
+  <comment xml:lang="sl">Slika FlashPix</comment>
+  <comment xml:lang="ru">Изображение FlashPix</comment>
+  <comment xml:lang="ro">imagine FlashPix</comment>
+  <comment xml:lang="pt-BR">Imagem FlashPix</comment>
+  <comment xml:lang="pl">Obraz FlashPix</comment>
+  <comment xml:lang="oc">imatge FlashPix</comment>
+  <comment xml:lang="nn">FlashPix-bilete</comment>
+  <comment xml:lang="ko">FlashPix 이미지</comment>
+  <comment xml:lang="kk-Cyrl">FlashPix суреті</comment>
+  <comment xml:lang="ja">FlashPix 画像</comment>
+  <comment xml:lang="id">Gambar FlashPix</comment>
+  <comment xml:lang="hr">FlashPix slika</comment>
+  <comment xml:lang="he">תמונת FlashPix</comment>
+  <comment xml:lang="fur">Imagjin FlashPix</comment>
+  <comment xml:lang="fr">Image FlashPix</comment>
+  <comment xml:lang="fi">FlashPix</comment>
+  <comment xml:lang="et">FlashPixi pilt</comment>
+  <comment xml:lang="es">imagen FlashPix</comment>
+  <comment xml:lang="en-GB">FlashPix image</comment>
+  <comment xml:lang="de">FlashPix-Bild</comment>
+  <comment xml:lang="ca">imatge FlashPix</comment>
+  <comment xml:lang="bg">Изображение — FlashPix</comment>
+  <comment xml:lang="be-Cyrl">відарыс FlashPix</comment>
+  <comment xml:lang="ar">صورة FlashPix</comment>
+  <sub-class-of type="application/x-ole-storage"/>
+  <glob pattern="*.fpx"/>
+  <alias type="image/x-fpx"/>
+</mime-type>

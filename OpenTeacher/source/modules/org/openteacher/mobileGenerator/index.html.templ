@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<!--
+	Copyright 2012, Marten de Vries
+	Copyright 2012, Milan Boers
+
+	This file is part of OpenTeacher.
+
+	OpenTeacher is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 3 of the License, or
+	(at your option) any later version.
+
+	OpenTeacher is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with OpenTeacher.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<html>
+	<head>
+		<meta charset='UTF-8' />
+
+		<meta name='viewport' content='width=device-width, initial-scale=1' />
+		<meta name='apple-mobile-web-app-capable' content='yes' />
+		<title>OpenTeacher Mobile</title>
+		<link rel='icon' type='image/png' href='icon.png' />
+		<link rel='apple-touch-icon' href='icon.png' />
+		<link type='text/css' rel='stylesheet' href='css/themes/default/jquery.mobile-1.2.0.css' />
+		<link type='text/css' rel='stylesheet' href='css/main.css' />
+
+		<script type='text/javascript' src='translations/index.js'></script>
+		<script type='text/javascript' src='cordova.js'></script>
+		<!--(for script in scripts)-->
+		<script type='text/javascript' src='scr/@!script!@'></script>
+		<!--(end)-->
+	</head>
+	<body>
+		<!-- enter page -->
+		<div data-role='page' id='enter-page'>
+			$!enterTabHeader!$
+			<div data-role='content'>
+				<textarea id='list-textarea' spellcheck='false'></textarea>
+			</div>
+			<div id='missing-separator-popup' data-role='popup'>
+				<div data-role='header'>
+					<h1 id='missing-separator-header'></h1>
+				</div>
+				<div data-role='content'>
+					<strong id='missing-separator-title'></strong>
+					<p id='missing-separator-msg'></p>
+					<div class='ui-grid-b'>
+						<div class='ui-block-a'></div>
+						<div class='ui-block-b'></div>
+						<div class='ui-block-c'>
+							<button id='missing-separator-ok-button'></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- practising mode choice dialog -->
+		<div data-role='dialog' id='practising-mode-choice-dialog'>
+			<div data-role='header'>
+				<h1 id='practising-mode-choice-header'></h1>
+			</div>
+			<div data-role='content'>
+				<label id='practising-mode-choice-label'></label>
+				<button id='think-answer-button'></button>
+				<button id='type-answer-button'></button>
+				<p id='practising-mode-choice-explanation'></p>
+			</div>
+		</div>
+
+		<!-- teach page -->
+		<div data-role='page' id='teach-page'>
+			$!teachTabHeader!$
+			<div data-role='content'>
+				<label id='question-label-label'></label><br />
+				<label id='question-label'></label><br />
+
+				<div id='think-answer-practising-mode'>
+					<div id='thinking-controls'>
+						<label id='think-answer-explanation'></label>
+						<button id='view-answer-button'></button>
+						<button class='skip-button' data-mini='true'></button>
+					</div>
+					<div id='answering-controls'>
+						<label id='translation-label-label'></label><br />
+						<label id='translation-label'></label>
+						<div class='ui-grid-a'>
+							<div class='ui-block-a'>
+								<button id='i-was-right-button'></button>
+							</div>
+							<div class='ui-block-b'>
+								<button id='i-was-wrong-button'></button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id='type-answer-practising-mode'>
+					<label id='answer-box-label' for='answer-box'></label>
+					<label id='correction-label'></label>
+					<input id='answer-box' type='text' />
+					<button id='check-button'></button>
+
+					<div class='ui-grid-a'>
+						<div class='ui-block-a'>
+							<button class='skip-button' data-mini='true'></button>
+						</div>
+						<div class='ui-block-b'>
+							<button id='correct-anyway-button' data-mini='true'></button>
+						</div>
+					</div>
+				</div>
+				<!-- hackish progress bar -->
+				<input id='progress-bar' type='range' value='0' min='0' max='100' data-highlight='true' />
+			</div>
+		</div>
+
+		<!-- result dialog -->
+		<div data-role='dialog' id='result-dialog'>
+			<div data-role='header'>
+				<h1 id='result-header'></h1>
+			</div>
+			<div data-role='content'>
+				<strong id='result-title'></strong><br />
+				<span id='result-msg'></span>
+				<button id='result-ok-button'></button>
+			</div>
+		</div>
+
+		<!-- save dialog -->
+		<div data-role='dialog' id='save-dialog'>
+			<div data-role='header'>
+				<h1 id='save-header'></h1>
+			</div>
+			<div data-role='content'>
+				<p id='save-explanation'></p>
+				<label id='save-name-box-label' for='save-name-box'></label>
+				<input type='text' id='save-name-box' />
+				<button id='save-done-button'></button>
+			</div>
+			<div data-role='popup' id='overwrite-popup'>
+				<div data-role='content'>
+					<strong id='overwrite-title'></strong>
+					<p id='overwrite-msg'></p>
+					<div class='ui-grid-b'>
+						<div class='ui-block-a'></div>
+						<div class='ui-block-b'>
+							<button data-theme='b' id='overwrite-yes-button'></button>
+						</div>
+						<div class='ui-block-c'>
+							<button id='overwrite-no-button'></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- load dialog -->
+		<div data-role='dialog' id='load-dialog'>
+			<div data-role='header'>
+				<h1 id='load-header'></h1>
+			</div>
+			<div data-role='content'>
+				<p id='load-explanation'></p>
+				<ul id='load-listview' data-filter='true' data-role='listview'>
+				</ul>
+			</div>
+		</div>
+
+		<!-- remove dialog -->
+		<div data-role='dialog' id='remove-dialog'>
+			<div data-role='header'>
+				<h1 id='remove-header'></h1>
+			</div>
+			<div data-role='content'>
+				<p id='remove-explanation'></p>
+				<ul id='remove-listview' data-filter='true' data-role='listview'>
+				</ul>
+			</div>
+		</div>
+
+		<!-- options dialog -->
+		<div data-role='dialog' id='options-dialog'>
+			<div data-role='header'>
+				<h1 id='options-header'></h1>
+			</div>
+			<div data-role='content'>
+				<label id='language-select-label' for='language-select'></label>
+				<select id='language-select'>
+				</select>
+				<label id='practising-mode-select-label' for='practising-mode-select'></label>
+				<select id='practising-mode-select'>
+					<option id='think-answer-option' value='think-answer'></option>
+					<option id='type-answer-option' value='type-answer'></option>
+				</select>
+				<a href='#copyright-info-dialog' id='copyright-info-link'></a>
+			</div>
+		</div>
+
+		<!-- copyright info dialog -->
+		<div data-role='dialog' id='copyright-info-dialog'>
+				<div data-role='header'>
+					<h1 id='copyright-info-header'></h1>
+				</div>
+				<div data-role='content'>
+					<pre id='copyright-info-text'></pre>
+				</div>
+		</div>
+
+		<!-- menu dialog -->
+		<div data-role='dialog' id='menu-dialog'>
+			<div data-role='header'>
+				<h1 id='menu-header'></h1>
+			</div>
+			<div data-role='content'>
+				<button id='new-list-button'></button>
+				<button id='load-list-button'></button>
+				<button id='save-list-button'></button>
+				<button id='remove-list-button'></button>
+				<a href='#options-dialog' id='options-button' data-role='button'></a>
+			</div>
+		</div>
+	</body>
+</html>

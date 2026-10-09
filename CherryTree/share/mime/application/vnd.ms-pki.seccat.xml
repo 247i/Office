@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/vnd.ms-pki.seccat">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Windows security catalog</comment>
+  <comment xml:lang="uk">каталог захисту Windows</comment>
+  <comment xml:lang="sv">Windows-säkerhetskatalog</comment>
+  <comment xml:lang="sl">Varnostni katalog za Windows</comment>
+  <comment xml:lang="ro">catalog de securitate Windows</comment>
+  <comment xml:lang="ko">윈도우 보안 카탈로그</comment>
+  <comment xml:lang="kk-Cyrl">Windows қауіпсіздік каталогы</comment>
+  <comment xml:lang="et">Windowsi turvakataloog</comment>
+  <comment xml:lang="de">Windows-Sicherheitskatalog</comment>
+  <glob pattern="*.cat"/>
+</mime-type>

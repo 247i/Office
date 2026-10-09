@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/cbor">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>CBOR Data</comment>
+  <comment xml:lang="zh-Hant-TW">CBOR 資料</comment>
+  <comment xml:lang="uk">дані CBOR</comment>
+  <comment xml:lang="tr">CBOR verisi</comment>
+  <comment xml:lang="sv">CBOR-data</comment>
+  <comment xml:lang="sr-Cyrl">CBOR подаци</comment>
+  <comment xml:lang="sq">Të dhëna CBOR</comment>
+  <comment xml:lang="sl">Podatki CBOR</comment>
+  <comment xml:lang="ru">Данные CBOR</comment>
+  <comment xml:lang="ro">date CBOR</comment>
+  <comment xml:lang="pt-BR">Dados CBOR</comment>
+  <comment xml:lang="pl">Dane CBOR</comment>
+  <comment xml:lang="oc">donadas CBOR</comment>
+  <comment xml:lang="nn">CBOR-data</comment>
+  <comment xml:lang="lt">CBOR duomenys</comment>
+  <comment xml:lang="ko">CBOR 데이터</comment>
+  <comment xml:lang="kk-Cyrl">CBOR деректері</comment>
+  <comment xml:lang="ja">CBOR データ</comment>
+  <comment xml:lang="it">Dati CBOR</comment>
+  <comment xml:lang="id">Data CBOR</comment>
+  <comment xml:lang="hr">CBOR podaci</comment>
+  <comment xml:lang="hi">CBOR डेटा</comment>
+  <comment xml:lang="he">נתוני CBOR</comment>
+  <comment xml:lang="fur">Dâts CBOR</comment>
+  <comment xml:lang="fr">Données CBOR</comment>
+  <comment xml:lang="fi">CBOR-tiedot</comment>
+  <comment xml:lang="et">CBOR andmed</comment>
+  <comment xml:lang="es">datos CBOR</comment>
+  <comment xml:lang="en-GB">CBOR Data</comment>
+  <comment xml:lang="de">CBOR-Daten</comment>
+  <comment xml:lang="ca">dades CBOR</comment>
+  <comment xml:lang="bg">Данни — CBOR</comment>
+  <comment xml:lang="be-Cyrl">даныя CBOR</comment>
+  <comment xml:lang="ar">بيانات CBOR</comment>
+  <acronym>CBOR</acronym>
+  <expanded-acronym>Concise Binary Object Representation</expanded-acronym>
+  <glob pattern="*.cbor"/>
+</mime-type>
