@@ -17,7 +17,7 @@ Mozilla Firefox
 
 https://www.google.com/search?q=
 notepad.exe
-C:\Program Files\VideoLAN\VLC\vlc.exe
+D:\Z\Apps\Media\VLC\vlc.exe
 
 mspaint.exe
 
